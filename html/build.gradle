@@ -7,8 +7,8 @@ gwt {
     minHeapSize="1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
-    modules 'com.jnv.Bertrayal.GdxDefinition'
-    devModules 'com.jnv.Bertrayal.GdxDefinitionSuperdev'
+    modules 'com.jnv.Betrayal.GdxDefinition'
+    devModules 'com.jnv.Betrayal.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
     compiler {

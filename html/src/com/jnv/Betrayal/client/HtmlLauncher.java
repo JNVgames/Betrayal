@@ -1,9 +1,9 @@
-package com.jnv.Bertrayal.client;
+package com.jnv.Betrayal.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.jnv.Bertrayal.Betrayal;
+import com.jnv.Betrayal.Betrayal;
 
 public class HtmlLauncher extends GwtApplication {
 
