@@ -45,6 +45,6 @@ public class Content {
     }
 
     public static void loadAll() {
-        Betrayal.res.loadTexture("about/splash_screen720x1280.jpg", "splash");
+        Betrayal.res.loadTexture("about/jnv720x1280.png", "splash");
     }
 }
