@@ -46,6 +46,7 @@ public class Betrayal extends Game {
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		batch.draw(Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
 		batch.end();
