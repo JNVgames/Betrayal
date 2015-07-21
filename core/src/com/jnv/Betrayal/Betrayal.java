@@ -3,7 +3,6 @@ package com.jnv.Betrayal;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -15,6 +14,18 @@ public class Betrayal extends Game {
 	public static int HEIGHT = 1280;
 	FitViewport fitViewport;
 	public static Content res;
+
+	public GameStateManager gsm;
+
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
+
+	public FitViewport getFitViewport() { return fitViewport; }
 	
 	public void create () {
 		camera = new OrthographicCamera();
@@ -25,6 +36,9 @@ public class Betrayal extends Game {
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		res = new Content();
 		res.loadAll();
+
+		gsm = new GameStateManager(this);
+		gsm.setState(GameStateManager.SPLASH);
 	}
 
 	@Override
@@ -44,12 +58,10 @@ public class Betrayal extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		batch.draw(Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
-		batch.end();
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render();
 	}
 
 	@Override
