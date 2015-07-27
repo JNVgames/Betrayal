@@ -1,18 +1,16 @@
-package com.jnv.Betrayal;
+package com.jnv.Betrayal.GameStates;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Timer;
+import com.jnv.Betrayal.Handlers.GameStateManager;
 
-/**
- * Created by jarnin on 7/20/15.
- */
 public class SplashScreen extends GameState {
 
     final int SPLASH_SCREEN_DELAY = 2;
 
-    protected SplashScreen(GameStateManager gsm) {
+    public SplashScreen(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
+        cam.setToOrtho(false, com.jnv.Betrayal.Main.Betrayal.WIDTH, com.jnv.Betrayal.Main.Betrayal.HEIGHT);
         Timer.schedule(new Timer.Task() {
 
             @Override
@@ -23,37 +21,32 @@ public class SplashScreen extends GameState {
         }, SPLASH_SCREEN_DELAY);
     }
 
-    @Override
     public void update(float dt) {
 
     }
 
-    @Override
     public void handleInput() {
 
     }
 
-    @Override
     public void render() {
 
         cam.update();
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
-        game.getBatch().draw(Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
+        game.getBatch().draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
         game.getBatch().end();
     }
 
-    @Override
     public void dispose() {
 
     }
 
-    @Override
     public OrthographicCamera getCam() {
         return super.getCam();
     }
 
     private void movetoMenuScreen() {
-        gsm.setState(GameStateManager.MENU);
+        gsm.setState(GameStateManager.State.MENU);
     }
 }

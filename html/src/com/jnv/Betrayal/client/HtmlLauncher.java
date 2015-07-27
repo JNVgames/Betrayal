@@ -3,7 +3,7 @@ package com.jnv.Betrayal.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.jnv.Betrayal.Betrayal;
+import com.jnv.Betrayal.Main.Betrayal;
 
 public class HtmlLauncher extends GwtApplication {
 

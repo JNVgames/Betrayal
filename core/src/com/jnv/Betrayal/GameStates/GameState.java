@@ -1,13 +1,13 @@
-package com.jnv.Betrayal;
+package com.jnv.Betrayal.GameStates;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.jnv.Betrayal.Handlers.GameStateManager;
+import com.jnv.Betrayal.Main.Betrayal;
 
-/**
- * Created by jarnin on 7/20/15.
- */
 public abstract class GameState  {
+
     protected GameStateManager gsm;
     protected Betrayal game;
     protected SpriteBatch sb;
