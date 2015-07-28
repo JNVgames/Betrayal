@@ -1,8 +1,9 @@
 package com.jnv.Betrayal.Handlers;
 
 import com.badlogic.gdx.Gdx;
+import com.jnv.Betrayal.GameStates.CharacterSelection;
 import com.jnv.Betrayal.GameStates.GameState;
-import com.jnv.Betrayal.GameStates.MenuState;
+import com.jnv.Betrayal.GameStates.Menu;
 import com.jnv.Betrayal.GameStates.SplashScreen;
 import com.jnv.Betrayal.Main.Betrayal;
 
@@ -17,7 +18,8 @@ public class GameStateManager {
 
     public enum State {
         SPLASH,
-        MENU
+        MENU,
+        CHARACTER_SELECTION
     }
 
     public GameStateManager(Betrayal game) {
@@ -26,22 +28,24 @@ public class GameStateManager {
         pushState(State.SPLASH);
     }
 
-    public void setState(State state) {
-        popState();
-        pushState(state);
+    public void update(float dt) {
+        gameStates.peek().update(dt);
+    }
+    public void render () {
+        gameStates.peek().render();
     }
 
+    // Helpers
     public void pushState(State state) {
         gameStates.push(getState(state));
     }
-
     public void popState() {
         GameState g = gameStates.pop();
         g.dispose();
     }
 
-    public com.jnv.Betrayal.Main.Betrayal game() { return game; }
-
+    // Getters
+    public Betrayal getGame() { return game; }
     private GameState getState(State state) {
         currentState = state;
         switch (state) {
@@ -49,7 +53,10 @@ public class GameStateManager {
                 return new SplashScreen(this);
 
             case MENU:
-                return new MenuState(this);
+                return new Menu(this);
+
+            case CHARACTER_SELECTION:
+                return new CharacterSelection(this);
 
          //   case INFO:
          //      return new InfoState(this);
@@ -59,17 +66,14 @@ public class GameStateManager {
                 return null;
         }
     }
-
     public GameState state() {
         return gameStates.peek();
     }
 
-    public void update(float dt) {
-        gameStates.peek().update(dt);
-    }
-
-    public void render () {
-        gameStates.peek().render();
+    // Setters
+    public void setState(State state) {
+        popState();
+        pushState(state);
     }
 
 }

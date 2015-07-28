@@ -2,6 +2,7 @@ package com.jnv.Betrayal.GameStates;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.jnv.Betrayal.Handlers.GameStateManager;
 import com.jnv.Betrayal.Main.Betrayal;
@@ -13,15 +14,16 @@ public abstract class GameState  {
     protected SpriteBatch sb;
     protected OrthographicCamera cam;
     protected FitViewport fitViewport;
+    protected Stage stage;
 
     protected GameState(GameStateManager gsm) {
-
         this.gsm = gsm;
-        game = gsm.game();
+        game = gsm.getGame();
         sb = game.getBatch();
         cam = game.getCamera();
         fitViewport = game.getFitViewport();
-
+        stage = game.getStage();
+        stage.clear();
     }
 
     public abstract void update(float dt);

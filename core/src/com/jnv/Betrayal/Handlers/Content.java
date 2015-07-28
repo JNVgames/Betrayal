@@ -18,9 +18,9 @@ public class Content {
         textures.put(key, t);
     }
 
+    // Getters
     public Texture getTexture(String key) {
         return textures.get(key);
     }
-
 
 }

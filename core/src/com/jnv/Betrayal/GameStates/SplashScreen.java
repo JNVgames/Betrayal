@@ -24,11 +24,9 @@ public class SplashScreen extends GameState {
     public void update(float dt) {
 
     }
-
     public void handleInput() {
 
     }
-
     public void render() {
 
         cam.update();
@@ -37,16 +35,17 @@ public class SplashScreen extends GameState {
         game.getBatch().draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
         game.getBatch().end();
     }
-
     public void dispose() {
 
     }
 
-    public OrthographicCamera getCam() {
-        return super.getCam();
-    }
-
+    // Helpers
     private void movetoMenuScreen() {
         gsm.setState(GameStateManager.State.MENU);
+    }
+
+    // Getters
+    public OrthographicCamera getCam() {
+        return super.getCam();
     }
 }

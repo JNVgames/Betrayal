@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.jnv.Betrayal.Handlers.Content;
 import com.jnv.Betrayal.Handlers.GameStateManager;
@@ -17,16 +18,19 @@ public class Betrayal extends Game {
 	public static int WIDTH = 720;
 	public static int HEIGHT = 1280;
 	private FitViewport fitViewport;
+	private Stage stage;
 
 	public static Content res;
 
 	public GameStateManager gsm;
 	
-	public void create () {
+	public void create() {
 		worldCam = new OrthographicCamera();
 		fitViewport = new FitViewport(WIDTH, HEIGHT, worldCam);
 		fitViewport.apply();
 		sb = new SpriteBatch();
+        stage = new Stage(fitViewport, sb);
+		Gdx.input.setInputProcessor(stage);
 
         worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 
@@ -38,6 +42,7 @@ public class Betrayal extends Game {
 	}
 	public void dispose() {
 		super.dispose();
+		stage.dispose();
 	}
 	public void pause() {
 		super.pause();
@@ -68,6 +73,7 @@ public class Betrayal extends Game {
     public Screen getScreen() {
         return super.getScreen();
     }
+	public Stage getStage() { return stage; }
 
     // Setters
     public void setScreen(Screen screen) {
