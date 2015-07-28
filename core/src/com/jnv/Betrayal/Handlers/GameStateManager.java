@@ -51,6 +51,9 @@ public class GameStateManager {
             case MENU:
                 return new MenuState(this);
 
+         //   case INFO:
+         //      return new InfoState(this);
+
             default:
                 Gdx.app.log("GameStateManager", "getState() returns null: ERROR");
                 return null;
