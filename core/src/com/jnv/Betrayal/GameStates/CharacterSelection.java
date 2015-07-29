@@ -1,13 +1,9 @@
-package com.jnv.Betrayal.GameStates;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.Betrayal.Handlers.GameStateManager;
-import com.jnv.Betrayal.Main.Betrayal;
-import com.jnv.Betrayal.Utilities.CharacterSelectionScreen;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.utilities.CharacterSelectionScreen;
 
 public class CharacterSelection extends GameState {
 
