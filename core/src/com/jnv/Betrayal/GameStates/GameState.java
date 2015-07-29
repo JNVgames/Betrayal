@@ -1,11 +1,11 @@
-package com.jnv.Betrayal.GameStates;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.jnv.Betrayal.Handlers.GameStateManager;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
 
 public abstract class GameState  {
 

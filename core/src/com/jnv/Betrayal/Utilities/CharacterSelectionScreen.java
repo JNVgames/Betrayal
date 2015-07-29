@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.Utilities;
+package com.jnv.betrayal.utilities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.main.Betrayal;
 
 public class CharacterSelectionScreen {
 
@@ -49,7 +49,10 @@ public class CharacterSelectionScreen {
         // Removes keyboard focus if tap isn't on a TextField
         stage.getRoot().addCaptureListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (!(event.getTarget() instanceof TextField)) stage.setKeyboardFocus(null);
+                if (!(event.getTarget() instanceof TextField)) {
+                    stage.setKeyboardFocus(null);
+                    Gdx.input.setOnscreenKeyboardVisible(false);
+                }
                 return false;
             }
         });

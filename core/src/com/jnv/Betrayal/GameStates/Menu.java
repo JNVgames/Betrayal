@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.GameStates;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.Betrayal.Handlers.GameStateManager;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
 
 public class Menu extends GameState {
 
     public Menu(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, com.jnv.Betrayal.Main.Betrayal.WIDTH, com.jnv.Betrayal.Main.Betrayal.HEIGHT);
+        cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
         Gdx.app.log("Menu", "Menu constructor");
 
         loadMenuButtons();
@@ -32,10 +32,10 @@ public class Menu extends GameState {
         cam.update();
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("start_background"), 0, 0, 720, 1280);
-        sb.draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("new"), 104, 800, 512, 144);
-        sb.draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("load"), 104, 600, 512, 144);
-        sb.draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("options"), 104, 400, 512, 144);
+        sb.draw(Betrayal.res.getTexture("start_background"), 0, 0, 720, 1280);
+        sb.draw(Betrayal.res.getTexture("new"), 104, 800, 512, 144);
+        sb.draw(Betrayal.res.getTexture("load"), 104, 600, 512, 144);
+        sb.draw(Betrayal.res.getTexture("options"), 104, 400, 512, 144);
         sb.end();
     }
     public void dispose() {

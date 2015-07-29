@@ -1,12 +1,9 @@
-package com.jnv.Betrayal.Handlers.ScreenTouch;
+package com.jnv.betrayal.handlers.screentouch;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.main.Betrayal;
 
-/**
- * Created by jphan on 7/28/2015.
- */
 public class BetrayalInputProcessor {
     private OrthographicCamera camera;
     private Vector3 touch;

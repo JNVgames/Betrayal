@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.main.Betrayal;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.Utilities;
+package com.jnv.betrayal.utilities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;

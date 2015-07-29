@@ -1,15 +1,15 @@
-package com.jnv.Betrayal.GameStates;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
-import com.jnv.Betrayal.Handlers.GameStateManager;
-import com.jnv.Betrayal.Handlers.ScreenTouch.BetrayalGestureProcessor;
-import com.jnv.Betrayal.Handlers.ScreenTouch.BetrayalInput;
-import com.jnv.Betrayal.Main.Betrayal;
-import com.jnv.Betrayal.Utilities.SimpleButton;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
+import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.utilities.SimpleButton;
 
 /**
  * Copyright 2015, JNV Games, All rights reserved.

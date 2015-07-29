@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.Handlers.ScreenTouch;
+package com.jnv.betrayal.handlers.screentouch;
 
 /**
  * Copyright 2015, JNV Games, All rights reserved.

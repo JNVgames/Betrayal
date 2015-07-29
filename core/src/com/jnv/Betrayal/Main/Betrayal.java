@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.Main;
+package com.jnv.betrayal.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.jnv.Betrayal.Handlers.Content;
-import com.jnv.Betrayal.Handlers.GameStateManager;
-import com.jnv.Betrayal.Utilities.TextureLoader;
+import com.jnv.betrayal.handlers.Content;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.utilities.TextureLoader;
 
 public class Betrayal extends Game {
 

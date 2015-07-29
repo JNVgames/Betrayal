@@ -1,9 +1,8 @@
-package com.jnv.Betrayal.Handlers.ScreenTouch;
+package com.jnv.betrayal.handlers.screentouch;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.jnv.Betrayal.Main.Betrayal;
 
 /**
  * Copyright 2015, JNV Games, All rights reserved.

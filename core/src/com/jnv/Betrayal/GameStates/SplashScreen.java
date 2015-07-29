@@ -1,8 +1,9 @@
-package com.jnv.Betrayal.GameStates;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Timer;
-import com.jnv.Betrayal.Handlers.GameStateManager;
+import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
 
 public class SplashScreen extends GameState {
 
@@ -10,7 +11,7 @@ public class SplashScreen extends GameState {
 
     public SplashScreen(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, com.jnv.Betrayal.Main.Betrayal.WIDTH, com.jnv.Betrayal.Main.Betrayal.HEIGHT);
+        cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
         Timer.schedule(new Timer.Task() {
 
             @Override
@@ -32,7 +33,7 @@ public class SplashScreen extends GameState {
         cam.update();
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
-        game.getBatch().draw(com.jnv.Betrayal.Main.Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
+        game.getBatch().draw(Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
         game.getBatch().end();
     }
     public void dispose() {

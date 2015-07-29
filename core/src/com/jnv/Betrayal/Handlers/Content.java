@@ -1,4 +1,4 @@
-package com.jnv.Betrayal.Handlers;
+package com.jnv.betrayal.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

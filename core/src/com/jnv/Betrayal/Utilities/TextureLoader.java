@@ -1,6 +1,6 @@
-package com.jnv.Betrayal.Utilities;
+package com.jnv.betrayal.utilities;
 
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.main.Betrayal;
 
 //WE"RE GONNA keep this bAby ORGANIZED MOTEHr FKErS
 public class TextureLoader {

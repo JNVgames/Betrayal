@@ -1,11 +1,11 @@
-package com.jnv.Betrayal.Handlers;
+package com.jnv.betrayal.handlers;
 
 import com.badlogic.gdx.Gdx;
-import com.jnv.Betrayal.GameStates.CharacterSelection;
-import com.jnv.Betrayal.GameStates.GameState;
-import com.jnv.Betrayal.GameStates.Menu;
-import com.jnv.Betrayal.GameStates.SplashScreen;
-import com.jnv.Betrayal.Main.Betrayal;
+import com.jnv.betrayal.gamestates.CharacterSelection;
+import com.jnv.betrayal.gamestates.GameState;
+import com.jnv.betrayal.gamestates.Menu;
+import com.jnv.betrayal.gamestates.SplashScreen;
+import com.jnv.betrayal.main.Betrayal;
 
 import java.util.Stack;
 
