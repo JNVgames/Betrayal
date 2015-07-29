@@ -15,23 +15,21 @@ import com.jnv.Betrayal.Utilities.SimpleButton;
  * Copyright 2015, JNV Games, All rights reserved.
  */
 
-public class Instructions {
-
-    public class FirstInfoScreen extends GameState {
+public class Instructions extends GameState {
 
         private Texture infoPic1;
         private SimpleButton exitButton;
         private BetrayalGestureProcessor gp;
 
-        public FirstInfoScreen(GameStateManager gsm) {
+        public Instructions(GameStateManager gsm) {
             super(gsm);
 
             cam = new OrthographicCamera();
             cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
 
-            infoPic1 = new Texture(Gdx.files.internal("game_images/info_first_page1280x2880.png"));
+           // infoPic1 = new Texture(Gdx.files.internal("game_images/info_first_page1280x2880.png"));
             exitButton = new SimpleButton(Betrayal.res.getTexture("x"),
-                    1180, 620, 100, 100);
+                    620, 1180, 100, 100);
             gp = new BetrayalGestureProcessor();
             GestureDetector gd = new GestureDetector(gp);
             Gdx.input.setInputProcessor(gd);
