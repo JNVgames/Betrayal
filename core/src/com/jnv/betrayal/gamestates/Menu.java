@@ -32,7 +32,7 @@ public class Menu extends GameState {
         cam.update();
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(Betrayal.res.getTexture("start_background"), 0, 0, 720, 1280);
+        sb.draw(Betrayal.res.getTexture("start-background"), 0, 0, 720, 1280);
         sb.end();
 
         stage.draw();
@@ -48,7 +48,7 @@ public class Menu extends GameState {
         loadOptionsButton();
     }
     private void loadNewGameButton() {
-        Image button_newGame = new Image(Betrayal.res.getTexture("new game"));
+        Image button_newGame = new Image(Betrayal.res.getTexture("new-game"));
         button_newGame.layout();
         button_newGame.setBounds((Betrayal.WIDTH - button_newGame.getImageWidth()) / 2,
                 800, 512, 144);
@@ -67,7 +67,7 @@ public class Menu extends GameState {
         stage.addActor(button_newGame);
     }
     private void loadLoadGameButton() {
-        Image button_loadGame = new Image(Betrayal.res.getTexture("load game"));
+        Image button_loadGame = new Image(Betrayal.res.getTexture("load-game"));
         button_loadGame.layout();
         button_loadGame.setBounds((Betrayal.WIDTH - button_loadGame.getImageWidth()) / 2,
                 600, 512, 144);
@@ -86,7 +86,7 @@ public class Menu extends GameState {
         stage.addActor(button_loadGame);
     }
     private void loadOptionsButton() {
-        Image button_options = new Image(Betrayal.res.getTexture("options"));
+        Image button_options = new Image(Betrayal.res.getTexture("instructions"));
         button_options.layout();
         button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth()) / 2,
                 400, 512, 144);

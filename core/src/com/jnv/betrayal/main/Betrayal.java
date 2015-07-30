@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.handlers.Content;
@@ -57,7 +58,7 @@ public class Betrayal extends Game {
 	public void resume() {
 		super.resume();
 	}
-	public void render () {
+	public void render() {
 		worldCam.update();
 		sb.setProjectionMatrix(worldCam.combined);
 		gsm.update(Gdx.graphics.getDeltaTime());
@@ -81,7 +82,13 @@ public class Betrayal extends Game {
         return super.getScreen();
     }
 	public Stage getStage() { return stage; }
-	public static FreeTypeFontGenerator getHurtmoldFontGenerator() { return generator; }
+	public static Label.LabelStyle getHurtmoldFontLabelStyle() {
+		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		fontDetails.size = 60;
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
+		labelStyle.font = generator.generateFont(fontDetails);
+		return labelStyle;
+	}
 
     // Setters
     public void setScreen(Screen screen) {
