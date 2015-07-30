@@ -34,9 +34,9 @@ public class TextureLoader {
         Betrayal.res.loadTexture("armor/black_cloak.png", "armor-cloak-black");
         Betrayal.res.loadTexture("armor/black_helmet.png", "helmet-black");
         Betrayal.res.loadTexture("armor/black_hero.png", "armor-hero-black");
-        Betrayal.res.loadTexture("armor/blue-armor.png", "armor-blue");
+        Betrayal.res.loadTexture("armor/blue_armor.png", "armor-blue");
         Betrayal.res.loadTexture("armor/blue_helmet.png", "helmet-blue");
-        Betrayal.res.loadTexture("armor/blue-hero.png", "armor-blue-hero");
+        Betrayal.res.loadTexture("armor/blue_hero.png", "armor-blue-hero");
         Betrayal.res.loadTexture("armor/brown_cloak.png", "armor-cloak-brown");
         Betrayal.res.loadTexture("armor/gold_helmet.png", "helmet-gold");
         Betrayal.res.loadTexture("armor/gold_hero.png", "armor-hero-gold");
@@ -54,13 +54,12 @@ public class TextureLoader {
         Betrayal.res.loadTexture("armor/silver_armor.png", "armor-silver");
 
         // Icon
-        Betrayal.res.loadTexture("icon/attack250x250", "attack");
-        Betrayal.res.loadTexture("icon/defense250x250", "defense");
-        Betrayal.res.loadTexture("icon/health250x250", "health");
-
-        Betrayal.res.loadTexture("icon/heal250x250", "heal");
-        Betrayal.res.loadTexture("icon/damage250x250", "damage");
-        Betrayal.res.loadTexture("icon/block250x250", "block");
+        Betrayal.res.loadTexture("icon/attack250x250.png", "attack");
+        Betrayal.res.loadTexture("icon/defense250x250.png", "defense");
+        Betrayal.res.loadTexture("icon/health250x250.png", "health");
+        Betrayal.res.loadTexture("icon/heal250x250.png", "heal");
+        Betrayal.res.loadTexture("icon/damage250x250.png", "damage");
+        Betrayal.res.loadTexture("icon/block250x250.png", "block");
 
         // Items
 
@@ -69,13 +68,13 @@ public class TextureLoader {
         // Characters
         for (int i = 1; i <= 9; i++) {
             //heads
-            Betrayal.res.loadTexture("character/head" + i + "a", "head" + i + "1");
-            Betrayal.res.loadTexture("character/head" + i + "b", "head" + i + "2");
-            Betrayal.res.loadTexture("character/head" + i + "c", "head" + i + "3");
-            Betrayal.res.loadTexture("character/head" + i + "d", "head" + i + "4");
-            Betrayal.res.loadTexture("character/head" + i + "e", "head" + i + "5");
-            Betrayal.res.loadTexture("character/head" + i + "f", "head" + i + "6");
-            Betrayal.res.loadTexture("character/head" + i + "g", "head" + i + "7");
+            Betrayal.res.loadTexture("character/head" + i + "a.png", "head" + i + "1");
+            Betrayal.res.loadTexture("character/head" + i + "b.png", "head" + i + "2");
+            Betrayal.res.loadTexture("character/head" + i + "c.png", "head" + i + "3");
+            Betrayal.res.loadTexture("character/head" + i + "d.png", "head" + i + "4");
+            Betrayal.res.loadTexture("character/head" + i + "e.png", "head" + i + "5");
+            Betrayal.res.loadTexture("character/head" + i + "f.png", "head" + i + "6");
+            Betrayal.res.loadTexture("character/head" + i + "g.png", "head" + i + "7");
 
         }
 
@@ -102,8 +101,8 @@ public class TextureLoader {
         Betrayal.res.loadTexture("character/armor2d.png", "char-armor-blue" );
         Betrayal.res.loadTexture("character/armor2e.png", "char-armor-green" );
         Betrayal.res.loadTexture("character/armor2f.png", "char-armor-purple" );
-        Betrayal.res.loadTexture("character/cloack1a.png", "char-cloak-brown" );
-        Betrayal.res.loadTexture("character/cloack1b.png", "char-cloak-black" );
+        Betrayal.res.loadTexture("character/cloak1a.png", "char-cloak-brown" );
+        Betrayal.res.loadTexture("character/cloak1b.png", "char-cloak-black" );
 
 
     }
