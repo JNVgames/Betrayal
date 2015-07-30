@@ -20,7 +20,7 @@ public class Menu extends GameState {
     }
 
     public void update(float dt) {
-
+        stage.act(dt);
     }
     public void handleInput() {
 
@@ -33,10 +33,9 @@ public class Menu extends GameState {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(Betrayal.res.getTexture("start_background"), 0, 0, 720, 1280);
-        sb.draw(Betrayal.res.getTexture("new"), 104, 800, 512, 144);
-        sb.draw(Betrayal.res.getTexture("load"), 104, 600, 512, 144);
-        sb.draw(Betrayal.res.getTexture("options"), 104, 400, 512, 144);
         sb.end();
+
+        stage.draw();
     }
     public void dispose() {
 
@@ -44,11 +43,16 @@ public class Menu extends GameState {
 
     // Helpers
     private void loadMenuButtons() {
-        Image button_new = new Image(Betrayal.res.getTexture("new"));
-        button_new.layout();
-        button_new.setBounds((Betrayal.WIDTH - button_new.getImageWidth()) / 2,
+        loadNewGameButton();
+        loadLoadGameButton();
+        loadOptionsButton();
+    }
+    private void loadNewGameButton() {
+        Image button_newGame = new Image(Betrayal.res.getTexture("new game"));
+        button_newGame.layout();
+        button_newGame.setBounds((Betrayal.WIDTH - button_newGame.getImageWidth()) / 2,
                 800, 512, 144);
-        button_new.addListener(new InputListener() {
+        button_newGame.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -60,7 +64,45 @@ public class Menu extends GameState {
                 gsm.setState(GameStateManager.State.CHARACTER_SELECTION);
             }
         });
-        stage.addActor(button_new);
+        stage.addActor(button_newGame);
+    }
+    private void loadLoadGameButton() {
+        Image button_loadGame = new Image(Betrayal.res.getTexture("load game"));
+        button_loadGame.layout();
+        button_loadGame.setBounds((Betrayal.WIDTH - button_loadGame.getImageWidth()) / 2,
+                600, 512, 144);
+        button_loadGame.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.setState(GameStateManager.State.MENU);
+            }
+        });
+        stage.addActor(button_loadGame);
+    }
+    private void loadOptionsButton() {
+        Image button_options = new Image(Betrayal.res.getTexture("options"));
+        button_options.layout();
+        button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth()) / 2,
+                400, 512, 144);
+        button_options.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.setState(GameStateManager.State.MENU);
+            }
+        });
+        stage.addActor(button_options);
     }
 
     // Getters
