@@ -1,4 +1,4 @@
-package com.jnv.Betrayal;
+package com.jnv.betrayal;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;

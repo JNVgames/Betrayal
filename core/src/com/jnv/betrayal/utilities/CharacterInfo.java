@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.main.Betrayal;
 
+import java.io.File;
+import java.nio.file.attribute.FileOwnerAttributeView;
+
 /**
  * Holds information regarding a game character's traits
  * @author Vincent Wang
@@ -43,6 +46,10 @@ public class CharacterInfo {
         skinTone = 1;
         updateHeadSprites();
         updateArmorSprites();
+    }
+
+    public void saveInfo() {
+        File characterInfo = new File("");
     }
 
     // Helpers

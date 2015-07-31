@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -49,7 +50,6 @@ public class CharacterSelection extends GameState {
 
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
-        Gdx.app.log("log", "CharacterSelection constructor");
 
         image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
         image_leftArrow.flip(true, false);
@@ -73,12 +73,6 @@ public class CharacterSelection extends GameState {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
-        sb.begin();
-        sb.draw(characterInfo.getArmorPreview(), field_armorPreview.getX(), field_armorPreview.getY(),
-                field_armorPreview.getWidth(), field_armorPreview.getHeight());
-        sb.draw(characterInfo.getHeadPreview(), field_headPreview.getX(), field_headPreview.getY(),
-                field_headPreview.getWidth(), field_headPreview.getHeight());
-        sb.end();
     }
     public void dispose() {
 
@@ -88,6 +82,7 @@ public class CharacterSelection extends GameState {
     private void loadFont() {
         labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
     }
+    /** Calls the appropriate functions to create the character selection screen */
     private void loadActors() {
         loadBackButton();
         loadUsernameField();
@@ -242,7 +237,13 @@ public class CharacterSelection extends GameState {
         reference.setHeight(60);
     }
     private void loadHeadPreview() {
-        field_headPreview = new Actor();
+        field_headPreview = new Actor() {
+            public void draw(Batch batch, float parentAlpha) {
+                sb.draw(characterInfo.getArmorPreview(), field_armorPreview.getX(),
+                        field_armorPreview.getY(), field_armorPreview.getWidth(),
+                        field_armorPreview.getHeight());
+            }
+        };
         field_headPreview.setWidth(384);
         field_headPreview.setHeight(576);
         field_headPreview.setX(field_framePreview.getX());
@@ -250,7 +251,13 @@ public class CharacterSelection extends GameState {
         stage.addActor(field_headPreview);
     }
     private void loadArmorPreview() {
-        field_armorPreview = new Actor();
+        field_armorPreview = new Actor() {
+            public void draw(Batch batch, float parentAlpha) {
+                sb.draw(characterInfo.getHeadPreview(), field_headPreview.getX(),
+                        field_headPreview.getY(), field_headPreview.getWidth(),
+                        field_headPreview.getHeight());
+            }
+        };
         field_armorPreview.setWidth(384);
         field_armorPreview.setHeight(576);
         field_armorPreview.setX(field_framePreview.getX());

@@ -14,8 +14,6 @@ public class Menu extends GameState {
     public Menu(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
-        Gdx.app.log("Menu", "Menu constructor");
-
         loadMenuButtons();
     }
 
