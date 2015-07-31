@@ -2,6 +2,7 @@ package com.jnv.betrayal.utilities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.main.Betrayal;
 
 /**
@@ -29,6 +30,8 @@ public class CharacterInfo {
     private TextureRegion armor_left_left, armor_left_still, armor_left_right;
     private TextureRegion armor_back_left, armor_back_still, armor_back_right;
 
+    private boolean spritesInitialized = false;
+
     /** Creates character with default values */
     public CharacterInfo() {
         gender = Gender.MALE;
@@ -38,6 +41,7 @@ public class CharacterInfo {
         skinTone = 1;
         updateHeadSprites();
         updateArmorSprites();
+        spritesInitialized = true;
     }
 
     // Helpers
@@ -84,63 +88,87 @@ public class CharacterInfo {
     /** Called when character trait is changed */
     private void spriteChanged() {
         updateHeadSprites();
-        updateArmorSprites(); // TODO change for different armors
     }
 
     // Getters
     public TextureRegion getHeadPreview() {
-        return head_front_still; // stub
+        return head_front_still;
     }
     public TextureRegion getArmorPreview() {
         return armor_front_still;
     }
-    public String getGender() {
-        if (gender == Gender.MALE) return "M";
-        else return "F";
+    public String getTrait(CharacterSelection.Trait trait) {
+        switch (trait) {
+            case GENDER:
+                if (gender == Gender.MALE) return "M";
+                else return "F";
+            case HAIR_STYLE:
+                if (gender == Gender.MALE) return Integer.toString(hair_male);
+                else return Integer.toString(hair_female);
+            case HAIR_COLOR:
+                if (gender == Gender.MALE) return Integer.toString(hairColor);
+                else return Integer.toString(hairColor);
+            default:
+                return null;
+        }
     }
 
     // Setters
-    /** Called when switching genders */
-    public void setGender() {
-        if (gender == Gender.MALE) gender = Gender.FEMALE;
-        else gender = Gender.MALE;
-        spriteChanged();
-    }
-    /** Set hairstyle to the next choice */
-    public void setNextHairStyle() {
-        if (gender == Gender.MALE) {
-            if (hair_male == 5) {
-                hair_male = 1;
-            } else hair_male++;
-        } else {
-            if (hair_female == 5) {
-                hair_female = 1;
-            } else hair_female++;
+    public void setPreviousTrait(CharacterSelection.Trait trait) {
+        switch (trait) {
+            case GENDER:
+                if (gender == Gender.MALE) gender = Gender.FEMALE;
+                else gender = Gender.MALE;
+                spriteChanged();
+                break;
+            case HAIR_STYLE:
+                if (gender == Gender.MALE) {
+                    if (hair_male == 1) {
+                        hair_male = 5;
+                    } else hair_male--;
+                } else {
+                    if (hair_female == 1) {
+                        hair_female = 4;
+                    } else hair_female--;
+                }
+                spriteChanged();
+                break;
+            case HAIR_COLOR:
+                if (hairColor == 1) hairColor = 7;
+                else hairColor--;
+                spriteChanged();
+                break;
+            default:
+                break;
         }
-        spriteChanged();
     }
-    /** Set hairstyle to the previous choice */
-    public void setPreviousHairStyle() {
-        if (gender == Gender.MALE) {
-            if (hair_male == 1) {
-                hair_male = 5;
-            } else hair_male--;
-        } else {
-            if (hair_female == 1) {
-                hair_female = 5;
-            } else hair_female--;
+    public void setNextTrait(CharacterSelection.Trait trait) {
+        switch (trait) {
+            case GENDER:
+                if (gender == Gender.MALE) gender = Gender.FEMALE;
+                else gender = Gender.MALE;
+                spriteChanged();
+                break;
+            case HAIR_STYLE:
+                if (gender == Gender.MALE) {
+                    if (hair_male == 5) {
+                        hair_male = 1;
+                    } else hair_male++;
+                } else {
+                    if (hair_female == 4) {
+                        hair_female = 1;
+                    } else hair_female++;
+                }
+                spriteChanged();
+                break;
+            case HAIR_COLOR:
+                if (hairColor == 7) hairColor = 1;
+                else hairColor++;
+                spriteChanged();
+                break;
+            default:
+                break;
         }
-        spriteChanged();
-    }
-    public void setNextHairColor() {
-        if (hairColor == 4) hairColor = 1;
-        else hairColor++;
-        spriteChanged();
-    }
-    public void setPreviousHairColor() {
-        if (hairColor == 1) hairColor = 4;
-        else hairColor--;
-        spriteChanged();
     }
 
 }
