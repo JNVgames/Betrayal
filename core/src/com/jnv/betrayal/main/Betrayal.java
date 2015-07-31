@@ -82,9 +82,9 @@ public class Betrayal extends Game {
         return super.getScreen();
     }
 	public Stage getStage() { return stage; }
-	public static Label.LabelStyle getHurtmoldFontLabelStyle() {
+	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		fontDetails.size = 60;
+		fontDetails.size = fontSize;
 		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = generator.generateFont(fontDetails);
 		return labelStyle;
