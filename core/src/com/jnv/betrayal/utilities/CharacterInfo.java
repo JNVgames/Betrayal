@@ -11,6 +11,10 @@ import com.jnv.betrayal.main.Betrayal;
  */
 public class CharacterInfo {
 
+    /** Contains rotation value for character preview
+     * front = 0, right side = 1, back = 2, left side = 3 */
+    private int rotation = 0;
+
     /** Holds character trait values */
     private int hair_male, hair_female, hairColor, skinTone;
 
@@ -30,8 +34,6 @@ public class CharacterInfo {
     private TextureRegion armor_left_left, armor_left_still, armor_left_right;
     private TextureRegion armor_back_left, armor_back_still, armor_back_right;
 
-    private boolean spritesInitialized = false;
-
     /** Creates character with default values */
     public CharacterInfo() {
         gender = Gender.MALE;
@@ -41,7 +43,6 @@ public class CharacterInfo {
         skinTone = 1;
         updateHeadSprites();
         updateArmorSprites();
-        spritesInitialized = true;
     }
 
     // Helpers
@@ -92,10 +93,32 @@ public class CharacterInfo {
 
     // Getters
     public TextureRegion getHeadPreview() {
-        return head_front_still;
+        switch (rotation) {
+            case 0:
+                return head_front_still;
+            case 1:
+                return head_right_still;
+            case 2:
+                return head_back_still;
+            case 3:
+                return head_left_still;
+            default:
+                return null;
+        }
     }
     public TextureRegion getArmorPreview() {
-        return armor_front_still;
+        switch (rotation) {
+            case 0:
+                return armor_front_still;
+            case 1:
+                return armor_right_still;
+            case 2:
+                return armor_back_still;
+            case 3:
+                return armor_left_still;
+            default:
+                return null;
+        }
     }
     public String getTrait(CharacterSelection.Trait trait) {
         switch (trait) {
@@ -114,6 +137,14 @@ public class CharacterInfo {
     }
 
     // Setters
+    public void rotateLeft() {
+        if (rotation == 0) rotation = 3;
+        else rotation--;
+    }
+    public void rotateRight() {
+        rotation++;
+        rotation &= 3;
+    }
     public void setPreviousTrait(CharacterSelection.Trait trait) {
         switch (trait) {
             case GENDER:

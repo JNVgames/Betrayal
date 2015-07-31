@@ -31,7 +31,6 @@ public class CharacterSelection extends GameState {
 
     private Label.LabelStyle labelStyle;
 
-    private Group group_button_back;
     private Actor reference;
     private Actor field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
     private Image button_back, field_framePreview;
@@ -93,6 +92,7 @@ public class CharacterSelection extends GameState {
         loadBackButton();
         loadUsernameField();
         loadImagePreview();
+        loadPreviewRotators();
 
         gender = new SelectionField("Gender", Trait.GENDER);
         hairStyle = new SelectionField("Hair Style", Trait.HAIR_STYLE);
@@ -104,8 +104,9 @@ public class CharacterSelection extends GameState {
         hairColor.addToStage();
         //skinTone.addToStage();
     }
+
     private void loadBackButton() {
-        group_button_back = new Group();
+        Group group_button_back = new Group();
 
         button_back = new Image(image_leftArrow);
         button_back.setHeight(60);
@@ -171,6 +172,7 @@ public class CharacterSelection extends GameState {
             }
         });
     }
+
     private void loadImagePreview() {
         loadPreviewFrame();
         loadReferenceActor();
@@ -186,6 +188,52 @@ public class CharacterSelection extends GameState {
                 - field_framePreview.getHeight());
         stage.addActor(field_framePreview);
     }
+    private void loadPreviewRotators() {
+        int gap = 60, padding = 30;
+        Group group_previewRotators = new Group();
+
+        Image previewRotators_leftArrow = new Image(image_leftArrow);
+        previewRotators_leftArrow.setHeight(60);
+        previewRotators_leftArrow.setWidth((field_framePreview.getWidth() - gap - padding * 2) / 2);
+        previewRotators_leftArrow.setX(field_framePreview.getX() + padding);
+        previewRotators_leftArrow.setY(field_framePreview.getY()
+                - previewRotators_leftArrow.getHeight() - 10);
+        previewRotators_leftArrow.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                characterInfo.rotateLeft();
+            }
+        });
+        group_previewRotators.addActor(previewRotators_leftArrow);
+
+        Image previewRotators_rightArrow = new Image(image_rightArrow);
+        previewRotators_rightArrow.setHeight(previewRotators_leftArrow.getHeight());
+        previewRotators_rightArrow.setWidth(previewRotators_leftArrow.getWidth());
+        previewRotators_rightArrow.setX(previewRotators_leftArrow.getX()
+                + previewRotators_leftArrow.getWidth() + gap);
+        previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
+        group_previewRotators.addActor(previewRotators_rightArrow);
+        previewRotators_rightArrow.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                characterInfo.rotateRight();
+            }
+        });
+        stage.addActor(group_previewRotators);
+    }
+
     private void loadReferenceActor() {
         reference = new Actor();
         reference.setX(field_framePreview.getX() + field_framePreview.getWidth() + 20);
