@@ -2,7 +2,6 @@ package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
 import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
-import com.jnv.betrayal.handlers.screentouch.BetrayalInputProcessor;
 import com.jnv.betrayal.main.Betrayal;
 
 public class HallOfFame extends GameState {
@@ -43,7 +41,6 @@ public class HallOfFame extends GameState {
         Image exitButton = new Image(Betrayal.res.getTexture("x"));
         exitButton.layout();
         exitButton.setBounds(620, 1180, 100, 100);
-        Gdx.app.log("halloffame", "xlistenerbefore");
         exitButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -55,7 +52,6 @@ public class HallOfFame extends GameState {
                 gsm.setState(GameStateManager.State.MENU);
             }
         });
-        Gdx.app.log("halloffame", "xlistenerafter");
         stage.addActor(exitButton);
     }
     public void update(float dt) {

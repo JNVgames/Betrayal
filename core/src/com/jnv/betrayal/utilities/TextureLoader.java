@@ -11,6 +11,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("about/jnv720x1280.png", "splash");
         Betrayal.res.loadTexture("about/start_screen720x1280.png", "start-background");
         Betrayal.res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
+        Betrayal.res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
 
         // Buttons
         Betrayal.res.loadTexture("button/load_game_button512x144.png", "load-game");

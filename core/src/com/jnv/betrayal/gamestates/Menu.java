@@ -101,8 +101,7 @@ public class Menu extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.MENU);
-                //gsm.setState(GameStateManager.State.INSTRUCTIONS1);
+                new Instructions(game);
             }
         });
         stage.addActor(button_instructions);

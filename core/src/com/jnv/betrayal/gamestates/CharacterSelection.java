@@ -73,7 +73,7 @@ public class CharacterSelection extends GameState {
 
     // Helpers
     private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle();
+        labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
     }
     private void loadActors() {
         loadUsernameField();
