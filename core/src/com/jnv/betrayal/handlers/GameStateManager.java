@@ -3,6 +3,7 @@ package com.jnv.betrayal.handlers;
 import com.badlogic.gdx.Gdx;
 import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.gamestates.GameState;
+import com.jnv.betrayal.gamestates.HallOfFame;
 import com.jnv.betrayal.gamestates.Menu;
 import com.jnv.betrayal.gamestates.SplashScreen;
 import com.jnv.betrayal.main.Betrayal;
@@ -19,7 +20,14 @@ public class GameStateManager {
     public enum State {
         SPLASH,
         MENU,
-        CHARACTER_SELECTION
+        CHARACTER_SELECTION,
+        INSTRUCTIONS1,
+        INSTRUCTIONS2,
+        INSTRUCTIONS3,
+        HALL_OF_FAME,
+        OPTIONS,
+        LOBBY,
+        DUNGEON
     }
 
     public GameStateManager(Betrayal game) {
@@ -57,6 +65,9 @@ public class GameStateManager {
 
             case CHARACTER_SELECTION:
                 return new CharacterSelection(this);
+
+            case HALL_OF_FAME:
+                return new HallOfFame(this);
 
          //   case INFO:
          //      return new InfoState(this);

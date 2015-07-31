@@ -45,6 +45,8 @@ public class Menu extends GameState {
     private void loadMenuButtons() {
         loadNewGameButton();
         loadLoadGameButton();
+        loadInstructionsButton();
+        loadHallOfFameButton();
         loadOptionsButton();
     }
     private void loadNewGameButton() {
@@ -73,6 +75,25 @@ public class Menu extends GameState {
                 600, 512, 144);
         button_loadGame.addListener(new InputListener() {
 
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    gsm.setState(GameStateManager.State.MENU);
+                }
+        });
+        stage.addActor(button_loadGame);
+    }
+    private void loadInstructionsButton() {
+        Image button_instructions = new Image(Betrayal.res.getTexture("instructions"));
+        button_instructions.layout();
+        button_instructions.setBounds((Betrayal.WIDTH - button_instructions.getImageWidth()) / 2,
+                400, 512, 144);
+        button_instructions.addListener(new InputListener() {
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -81,15 +102,17 @@ public class Menu extends GameState {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 gsm.setState(GameStateManager.State.MENU);
+                //gsm.setState(GameStateManager.State.INSTRUCTIONS1);
             }
         });
-        stage.addActor(button_loadGame);
+        stage.addActor(button_instructions);
     }
+
     private void loadOptionsButton() {
-        Image button_options = new Image(Betrayal.res.getTexture("instructions"));
+        Image button_options = new Image(Betrayal.res.getTexture("options"));
         button_options.layout();
-        button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth()) / 2,
-                400, 512, 144);
+        button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth()/2) / 2,
+                272, 256, 72);
         button_options.addListener(new InputListener() {
 
             @Override
@@ -100,13 +123,29 @@ public class Menu extends GameState {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 gsm.setState(GameStateManager.State.MENU);
+                // gsm.setState(GameStateManager.State.OPTIONS);
             }
         });
         stage.addActor(button_options);
     }
 
-    // Getters
-    public OrthographicCamera getCam() {
-        return super.getCam();
+    private void loadHallOfFameButton() {
+        Image button_hallOfFame = new Image(Betrayal.res.getTexture("hall-of-fame"));
+        button_hallOfFame.layout();
+        button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth()/2) / 2,
+                172, 256, 72);
+        button_hallOfFame.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.setState(GameStateManager.State.HALL_OF_FAME);
+            }
+        });
+        stage.addActor(button_hallOfFame);
     }
 }

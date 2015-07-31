@@ -10,6 +10,7 @@ public class TextureLoader {
         // About
         Betrayal.res.loadTexture("about/jnv720x1280.png", "splash");
         Betrayal.res.loadTexture("about/start_screen720x1280.png", "start-background");
+        Betrayal.res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
 
         // Buttons
         Betrayal.res.loadTexture("button/load_game_button512x144.png", "load-game");
@@ -20,7 +21,7 @@ public class TextureLoader {
 
 
         Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
-        Betrayal.res.loadTexture("button/circle_x150x150.png", "circle x");
+        Betrayal.res.loadTexture("button/circle_x150x150.png", "x");
         Betrayal.res.loadTexture("button/buy360x144.png", "buy");
         Betrayal.res.loadTexture("button/cancel360x144.png", "cancel");
         Betrayal.res.loadTexture("button/color360x144.png", "color");
@@ -151,7 +152,7 @@ public class TextureLoader {
 
         // Dungeon Background
         for (int i = 0; i < 5; i++) {
-            Betrayal.res.loadTexture("map/dungeon_map"+i+".png", "map"+i);
+           // Betrayal.res.loadTexture("map/dungeon_map"+i+".png", "map"+i);
         }
     }
 }
