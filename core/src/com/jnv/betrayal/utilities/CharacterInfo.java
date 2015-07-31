@@ -24,6 +24,10 @@ public class CharacterInfo {
     private TextureRegion head_right_left, head_right_still, head_right_right;
     private TextureRegion head_left_left, head_left_still, head_left_right;
     private TextureRegion head_back_left, head_back_still, head_back_right;
+    private TextureRegion armor_front_left, armor_front_still, armor_front_right;
+    private TextureRegion armor_right_left, armor_right_still, armor_right_right;
+    private TextureRegion armor_left_left, armor_left_still, armor_left_right;
+    private TextureRegion armor_back_left, armor_back_still, armor_back_right;
 
     /** Creates character with default values */
     public CharacterInfo() {
@@ -33,6 +37,7 @@ public class CharacterInfo {
         hairColor = 1;
         skinTone = 1;
         updateHeadSprites();
+        updateArmorSprites();
     }
 
     // Helpers
@@ -60,41 +65,34 @@ public class CharacterInfo {
         head_back_still = head_split[3][1];
         head_back_right = head_split[3][2];
     }
+    private void updateArmorSprites() {
+        Texture armor_all = Betrayal.res.getTexture("char-armor-peasant");
+        TextureRegion[][] armor_split = TextureRegion.split(armor_all, 32, 48);
+        armor_front_left = armor_split[0][0];
+        armor_front_still = armor_split[0][1];
+        armor_front_right = armor_split[0][2];
+        armor_right_left = armor_split[1][0];
+        armor_right_still = armor_split[1][1];
+        armor_right_right = armor_split[1][2];
+        armor_left_left = armor_split[2][0];
+        armor_left_still = armor_split[2][1];
+        armor_left_right = armor_split[2][2];
+        armor_back_left = armor_split[3][0];
+        armor_back_still = armor_split[3][1];
+        armor_back_right = armor_split[3][2];
+    }
     /** Called when character trait is changed */
     private void spriteChanged() {
         updateHeadSprites();
-        // Update other sprites
-    }
-    /** Duplicate of texture region's split because the textureRegion function doesn't work
-     *
-     * @param texture texture to be split
-     * @param tileWidth tile width
-     * @param tileHeight tile height
-     * @return returns split texture in textureRegion[][]
-     */
-    private TextureRegion[][] splitSpriteSheet(Texture texture, int tileWidth, int tileHeight) {
-        TextureRegion t = new TextureRegion(texture);
-        int x = 0;
-        int y = 0;
-        int width = texture.getWidth();
-        int height = texture.getHeight();
-
-        int rows = height / tileHeight;
-        int cols = width / tileWidth;
-
-        TextureRegion[][] tiles = new TextureRegion[rows][cols];
-        for (int row = 0; row < rows; row++, y += tileHeight) {
-            for (int col = 0; col < cols; col++, x += tileWidth) {
-                tiles[row][col] = new TextureRegion(texture, x, y, tileWidth, tileHeight);
-            }
-        }
-
-        return tiles;
+        updateArmorSprites(); // TODO change for different armors
     }
 
     // Getters
-    public Texture getFullBodyPreview() {
-        return head_front_still.getTexture(); // stub
+    public TextureRegion getHeadPreview() {
+        return head_front_still; // stub
+    }
+    public TextureRegion getArmorPreview() {
+        return armor_front_still;
     }
     public String getGender() {
         if (gender == Gender.MALE) return "M";

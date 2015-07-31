@@ -27,7 +27,7 @@ public class CharacterSelection extends GameState {
 
     private Label.LabelStyle labelStyle;
 
-    private Image field_characterPreview;
+    private Image field_framePreview, field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
     private Label field_usernameLabel;
     private SelectionField gender, hairStyle, hairColor, skinTone;
     private CharacterInfo characterInfo;
@@ -77,6 +77,7 @@ public class CharacterSelection extends GameState {
     }
     private void loadActors() {
         loadUsernameField();
+        loadArmorPreview();
         loadImagePreview();
 
         gender = new SelectionField("Gender", Trait.GENDER);
@@ -124,13 +125,36 @@ public class CharacterSelection extends GameState {
     }
     private void loadImagePreview() {
         // Create image preview box
-        field_characterPreview = new Image(characterInfo.getFullBodyPreview());
-        field_characterPreview.setWidth(384);
-        field_characterPreview.setHeight(576);
-        field_characterPreview.setX(10);
-        field_characterPreview.setY(Betrayal.HEIGHT - 30 - field_usernameLabel.getHeight() * 3 -
-                field_characterPreview.getHeight());
-        stage.addActor(field_characterPreview);
+        loadPreviewFrame();
+        loadHeadPreview();
+
+    }
+    private void loadPreviewFrame() {
+        field_framePreview = new Image(characterInfo.getHeadPreview());
+        field_framePreview.setWidth(384);
+        field_framePreview.setHeight(576);
+        field_framePreview.setX(10);
+        field_framePreview.setY(Betrayal.HEIGHT - 30 - field_usernameLabel.getHeight() * 3 -
+                field_framePreview.getHeight());
+        stage.addActor(field_framePreview);
+    }
+    private void loadHeadPreview() {
+        field_headPreview = new Image(characterInfo.getHeadPreview());
+        field_headPreview.setWidth(384);
+        field_headPreview.setHeight(576);
+        field_headPreview.setX(10);
+        field_headPreview.setY(Betrayal.HEIGHT - 30 - field_usernameLabel.getHeight() * 3 -
+                field_headPreview.getHeight());
+        stage.addActor(field_headPreview);
+    }
+    private void loadArmorPreview() {
+        field_armorPreview = new Image(characterInfo.getArmorPreview());
+        field_armorPreview.setWidth(384);
+        field_armorPreview.setHeight(576);
+        field_armorPreview.setX(10);
+        field_armorPreview.setY(Betrayal.HEIGHT - 30 - field_usernameLabel.getHeight() * 3 -
+                field_armorPreview.getHeight());
+        stage.addActor(field_armorPreview);
     }
 
     // Classes
@@ -150,10 +174,10 @@ public class CharacterSelection extends GameState {
 
             // Create label
             field_selection_label = new Label(label, labelStyle);
-            field_selection_label.setX(field_characterPreview.getX()
-                    + field_characterPreview.getWidth() + 20);
-            field_selection_label.setY(field_characterPreview.getY()
-                    + field_characterPreview.getHeight() - field_selection_label.getHeight());
+            field_selection_label.setX(field_framePreview.getX()
+                    + field_framePreview.getWidth() + 20);
+            field_selection_label.setY(field_framePreview.getY()
+                    + field_framePreview.getHeight() - field_selection_label.getHeight());
             field_selection_label.setWidth(Betrayal.WIDTH - field_selection_label.getX() - 20);
             field_selection_label.setAlignment(Align.center);
 
@@ -161,11 +185,11 @@ public class CharacterSelection extends GameState {
             field_selection_leftArrow = new Image(image_leftArrow);
             field_selection_leftArrow.setBounds(field_selection_label.getX(),
                     field_selection_label.getY() - 10 - field_selection_label.getHeight(),
-                    (Betrayal.WIDTH - 160 - field_characterPreview.getWidth()
-                            - field_characterPreview.getX()) / 2, field_selection_label.getHeight());
+                    (Betrayal.WIDTH - 160 - field_framePreview.getWidth()
+                            - field_framePreview.getX()) / 2, field_selection_label.getHeight());
 
             // Create serial number
-            field_selection_serialNumber = new Label("F", labelStyle);
+            field_selection_serialNumber = new Label(characterInfo.getGender(), labelStyle);
             field_selection_serialNumber.setX(field_selection_leftArrow.getX()
                     + field_selection_leftArrow.getWidth() + 30);
             field_selection_serialNumber.setY(field_selection_leftArrow.getY());
@@ -190,8 +214,8 @@ public class CharacterSelection extends GameState {
 
             // Create label
             field_selection_label = new Label(label, labelStyle);
-            field_selection_label.setX(field_characterPreview.getX()
-                    + field_characterPreview.getWidth() + 20);
+            field_selection_label.setX(field_framePreview.getX()
+                    + field_framePreview.getWidth() + 20);
             field_selection_label.setY(positionReference.getY() -
                     positionReference.getHeight() - 30);
             field_selection_label.setWidth(Betrayal.WIDTH - positionReference.getX() - 20);
@@ -200,8 +224,8 @@ public class CharacterSelection extends GameState {
             // Create left arrow
             field_selection_leftArrow = new Image(image_leftArrow);
             field_selection_leftArrow.setWidth((Betrayal.WIDTH - 160
-                    - field_characterPreview.getWidth() -
-                    field_characterPreview.getX()) / 2);
+                    - field_framePreview.getWidth() -
+                    field_framePreview.getX()) / 2);
             field_selection_leftArrow.setHeight(field_selection_label.getHeight());
             field_selection_leftArrow.setX(field_selection_label.getX());
             field_selection_leftArrow.setY(field_selection_label.getY() - 10
