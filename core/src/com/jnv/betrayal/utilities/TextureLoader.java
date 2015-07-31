@@ -21,6 +21,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/hall_of_fame512x144.png", "hall-of-fame");
 
 
+
         Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
         Betrayal.res.loadTexture("button/circle_x150x150.png", "x");
         Betrayal.res.loadTexture("button/buy360x144.png", "buy");

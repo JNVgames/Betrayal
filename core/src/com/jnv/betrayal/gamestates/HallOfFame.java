@@ -16,7 +16,7 @@ import com.jnv.betrayal.main.Betrayal;
 
 public class HallOfFame extends GameState {
 
-    private Texture hallOfFameBackground ;
+    private Texture hallOfFameBackground;
     private InputMultiplexer im;
     private BetrayalGestureProcessor gp;
 
@@ -37,7 +37,7 @@ public class HallOfFame extends GameState {
         loadXButton();
     }
 
-    private void loadXButton (){
+    private void loadXButton() {
         Image exitButton = new Image(Betrayal.res.getTexture("x"));
         exitButton.layout();
         exitButton.setBounds(620, 1180, 100, 100);
@@ -54,6 +54,7 @@ public class HallOfFame extends GameState {
         });
         stage.addActor(exitButton);
     }
+
     public void update(float dt) {
         stage.act(dt);
 
@@ -61,15 +62,15 @@ public class HallOfFame extends GameState {
         float newPosY = cam.position.y + gp.getFlingVelocityY() * dt;
         handleInput();
         gp.flingDecelerate(dt);
-        if(newPosY < 640 && newPosY > -80) {
+        if (newPosY < 640 && newPosY > -80) {
             cam.position.y += gp.getFlingVelocityY() * dt;
         }
         cam.update();
     }
 
     public void handleInput() {
-        if(BetrayalInput.pannedDown || BetrayalInput.pannedUp) {
-            if((cam.position.y + BetrayalInput.deltaY) < 640 &&
+        if (BetrayalInput.pannedDown || BetrayalInput.pannedUp) {
+            if ((cam.position.y + BetrayalInput.deltaY) < 640 &&
                     (cam.position.y + BetrayalInput.deltaY) > -80) {
                 cam.position.set(cam.position.x, cam.position.y + BetrayalInput.deltaY, 0);
                 cam.update();
@@ -88,9 +89,12 @@ public class HallOfFame extends GameState {
 
         stage.draw();
     }
+
     public void dispose() {
     }
 
     // Helpers
-    private void goToMenu() { gsm.setState(GameStateManager.State.MENU); }
+    private void goToMenu() {
+        gsm.setState(GameStateManager.State.MENU);
+    }
 }

@@ -21,11 +21,8 @@ public class GameStateManager {
         SPLASH,
         MENU,
         CHARACTER_SELECTION,
-        INSTRUCTIONS,
         HALL_OF_FAME,
-        OPTIONS,
         LOBBY,
-        DUNGEON
     }
 
     public GameStateManager(Betrayal game) {
