@@ -170,7 +170,6 @@ public class Instructions {
     private void setContent4(){
         content4 = new Label(" Shop:" +
                 "\n Spend all your money!", labelStyle);
-        content4.setHeight(20);
         content4.setX(100);
         content4.setY(Betrayal.HEIGHT - content4.getHeight() - 250);
         stage.addActor(content4);
