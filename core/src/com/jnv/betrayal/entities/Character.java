@@ -1,18 +1,22 @@
-package com.jnv.betrayal.utilities;
+package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.main.Betrayal;
 
-import java.io.File;
-import java.nio.file.attribute.FileOwnerAttributeView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Holds information regarding a game character's traits
  * @author Vincent Wang
  */
-public class CharacterInfo {
+public class Character {
 
     /** Contains rotation value for character preview
      * front = 0, right side = 1, back = 2, left side = 3 */
@@ -21,11 +25,22 @@ public class CharacterInfo {
     /** Holds character trait values */
     private int hair_male, hair_female, hairColor, skinTone;
 
+    public enum Trait {
+        GENDER,
+        HAIR_STYLE,
+        HAIR_COLOR,
+        JOB
+    }
+
     /** Holds gender trait values, male or female */
     private enum Gender {
         MALE, FEMALE
     }
     private Gender gender;
+
+    public enum Jobs {
+        WARRIOR, THIEF, KNIGHT, PRIEST
+    }
 
     /** Textures for character head, format: head_side_walkAnimation */
     private TextureRegion head_front_left, head_front_still, head_front_right;
@@ -37,19 +52,36 @@ public class CharacterInfo {
     private TextureRegion armor_left_left, armor_left_still, armor_left_right;
     private TextureRegion armor_back_left, armor_back_still, armor_back_right;
 
+    private Job job;
+    private Equips equips;
+    private Inventory inventory;
+    private Stats stats;
+
     /** Creates character with default values */
-    public CharacterInfo() {
+    public Character() {
+        equips = new Equips();
+        job = new Job();
+        inventory = new Inventory();
+        stats = new Stats();
+
         gender = Gender.MALE;
         hair_male = 1;
         hair_female = 1;
         hairColor = 1;
         skinTone = 1;
+        job.setJob(Jobs.WARRIOR);
+        update();
+    }
+
+    public void createCharacter(Jobs job) {
+        this.job.setJob(job);
+    }
+    private void update() {
         updateHeadSprites();
         updateArmorSprites();
     }
-
     public void saveInfo() {
-        File characterInfo = new File("");
+
     }
 
     // Helpers
@@ -95,7 +127,7 @@ public class CharacterInfo {
     }
     /** Called when character trait is changed */
     private void spriteChanged() {
-        updateHeadSprites();
+        update();
     }
 
     // Getters
@@ -127,7 +159,7 @@ public class CharacterInfo {
                 return null;
         }
     }
-    public String getTrait(CharacterSelection.Trait trait) {
+    public String getTrait(Trait trait) {
         switch (trait) {
             case GENDER:
                 if (gender == Gender.MALE) return "M";
@@ -138,12 +170,33 @@ public class CharacterInfo {
             case HAIR_COLOR:
                 if (gender == Gender.MALE) return Integer.toString(hairColor);
                 else return Integer.toString(hairColor);
+            case JOB:
+                return getJob(job.getJob());
             default:
                 return null;
         }
     }
+    private String getJob(Jobs job) {
+        switch (job) {
+            case WARRIOR:
+                return "W";
+            case KNIGHT:
+                return "K";
+            case PRIEST:
+                return "P";
+            case THIEF:
+                return "T";
+            default:
+                return null;
+        }
+    }
+    public Job getJobClass() { return job; }
+    public Equips getEquipsClass() { return equips; }
+    public Inventory getInventoryClass() { return inventory; }
+    public Stats getStatsClass() { return stats; }
 
     // Setters
+    /** Functions for rotating character preview image */
     public void rotateLeft() {
         if (rotation == 0) rotation = 3;
         else rotation--;
@@ -152,7 +205,7 @@ public class CharacterInfo {
         rotation++;
         rotation &= 3;
     }
-    public void setPreviousTrait(CharacterSelection.Trait trait) {
+    public void setPreviousTrait(Trait trait) {
         switch (trait) {
             case GENDER:
                 if (gender == Gender.MALE) gender = Gender.FEMALE;
@@ -176,11 +229,13 @@ public class CharacterInfo {
                 else hairColor--;
                 spriteChanged();
                 break;
+            case JOB:
+                job.setPreviousJob();
             default:
                 break;
         }
     }
-    public void setNextTrait(CharacterSelection.Trait trait) {
+    public void setNextTrait(Trait trait) {
         switch (trait) {
             case GENDER:
                 if (gender == Gender.MALE) gender = Gender.FEMALE;
@@ -204,9 +259,138 @@ public class CharacterInfo {
                 else hairColor++;
                 spriteChanged();
                 break;
+            case JOB:
+                job.setNextJob();
             default:
                 break;
         }
     }
 
+    // Classes
+    public class Equips {
+
+        public Equips() {}
+
+        public void equipWeapon(Weapon weapon) {}
+        public void equipHeadArmor() {}
+        public void equipBodyArmor() {}
+        public void equipShield() {}
+
+        public void unequipWeapon() {}
+        public void unequipHeadArmor() {}
+        public void unequipBodyArmor() {}
+        public void unequipShield() {}
+
+    }
+    public class Inventory {
+
+        private int gold, items_max;
+        private Map<Item, Integer> items;
+
+        public Inventory() {
+            gold = 0;
+            items_max = 20;
+
+            items = new LinkedHashMap<Item, Integer>();
+        }
+
+        // Getters
+        public int getGold() { return gold; }
+
+        // Setters
+        /** Adds an item to inventory and return true, if inventory is filled,
+         * do nothing and return false.
+         * @param item item to be added
+         * @return true if item was successfully added. false if inv was full */
+        public boolean addItem(Item item) {
+            return addItem(item, 1);
+        }
+        /** Adds the specific amount of items to inventory and return true.
+         * If inventory is filled, do nothing and return false.
+         * @param i item to be added
+         * @param amount how many items to be added
+         * @return true if item was successfully added. false if inv was full */
+        public boolean addItem(Item i, int amount) {
+            if (items.size() < items_max) {
+                if (items.containsKey(i)) {
+                    items.put(i, items.get(i) + amount);
+                } else items.put(i, amount);
+                return true;
+            } else return false;
+        }
+        /** Sorts the inventory */
+        public void sortItems() {
+            if (items != null) {
+                Map<Item, Integer> items_sorted =
+                        new TreeMap<Item, Integer>(new Item.ItemComparator());
+                items_sorted.putAll(items);
+                items = new LinkedHashMap<Item, Integer>(items_sorted);
+            }
+        }
+
+    }
+    public class Stats {
+
+        private int health, defense, attack, agility;
+
+        public Stats() {
+            health = 25;
+            defense = 5;
+            attack = 5;
+            agility = 5;
+        }
+    }
+    public class Job {
+
+        private Jobs job;
+
+        public Job() {}
+        public Job(Jobs job) {
+            this.job = job;
+        }
+
+        // Getters
+        public Jobs getJob() { return job; }
+
+        // Setters
+        public void setJob(Jobs job) {
+            this.job = job;
+        }
+        public void setPreviousJob() {
+            switch (job) {
+                case WARRIOR:
+                    this.job = Jobs.THIEF;
+                    break;
+                case KNIGHT:
+                    this.job = Jobs.WARRIOR;
+                    break;
+                case PRIEST:
+                    this.job = Jobs.KNIGHT;
+                    break;
+                case THIEF:
+                    this.job = Jobs.PRIEST;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void setNextJob() {
+            switch (job) {
+                case WARRIOR:
+                    this.job = Jobs.KNIGHT;
+                    break;
+                case KNIGHT:
+                    this.job = Jobs.PRIEST;
+                    break;
+                case PRIEST:
+                    this.job = Jobs.THIEF;
+                    break;
+                case THIEF:
+                    this.job = Jobs.WARRIOR;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

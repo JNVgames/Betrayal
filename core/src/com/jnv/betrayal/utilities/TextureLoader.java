@@ -15,9 +15,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("about/shop_background720x1280.png", "shop-background");
         Betrayal.res.loadTexture("about/game_over720x1280.png", "game-over-background");
 
-
         // Buttons
-        //Main Menu
         Betrayal.res.loadTexture("button/load_game_button512x144.png", "load-game");
         Betrayal.res.loadTexture("button/new_game_button512x144.png", "new-game");
         Betrayal.res.loadTexture("button/options_button512x144.png", "options");
@@ -27,7 +25,6 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/play_now_pressed512x144.png", "play-now-pressed");
         Betrayal.res.loadTexture("button/main_menu512x144.png", "main-menu");
         Betrayal.res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
-
 
         Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
         Betrayal.res.loadTexture("button/circle_x150x150.png", "x");

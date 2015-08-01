@@ -4,11 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,10 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.utilities.CharacterInfo;
+import com.jnv.betrayal.entities.Character;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -32,21 +28,15 @@ public class CharacterSelection extends GameState {
 
     private Label.LabelStyle labelStyle;
 
-    private Actor reference;
+    private Actor reference, button_play_now;
     private Actor field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
-    private Image button_back,button_play_now, field_framePreview;
-    private Label field_usernameLabel;
-    private SelectionField gender, hairStyle, hairColor, skinTone;
-    private CharacterInfo characterInfo;
+    private Image button_back, field_framePreview;
+    private Label field_usernameLabel, label_jobDescription;
+    private SelectionField gender, hairStyle, hairColor, job;
+    private static Character character;
 
     private TextureRegion image_leftArrow, image_rightArrow;
-
-    public enum Trait {
-        GENDER,
-        HAIR_STYLE,
-        HAIR_COLOR,
-        SKIN_TONE
-    }
+    private Texture image_button_play;
 
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
@@ -55,14 +45,15 @@ public class CharacterSelection extends GameState {
         image_leftArrow.flip(true, false);
         image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
 
-        characterInfo = new CharacterInfo();
+        character = new Character();
 
         loadFont();
-        loadActors();
+        loadStage();
     }
 
     public void update(float dt) {
         updateTraits();
+        updateJobDescription();
         stage.act(dt);
     }
     public void handleInput() {
@@ -83,22 +74,24 @@ public class CharacterSelection extends GameState {
         labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
     }
     /** Calls the appropriate functions to create the character selection screen */
-    private void loadActors() {
+    private void loadStage() {
         loadBackButton();
         loadPlayNowButton();
         loadUsernameField();
         loadImagePreview();
         loadPreviewRotators();
 
-        gender = new SelectionField("Gender", Trait.GENDER);
-        hairStyle = new SelectionField("Hair Style", Trait.HAIR_STYLE);
-        hairColor = new SelectionField("Hair Color", Trait.HAIR_COLOR);
-        //skinTone = new SelectionField("Skin Tone", hairColor.getActorReference(), Trait.SKIN_TONE);
+        gender = new SelectionField("Gender", Character.Trait.GENDER);
+        hairStyle = new SelectionField("Hair Style", Character.Trait.HAIR_STYLE);
+        hairColor = new SelectionField("Hair Color", Character.Trait.HAIR_COLOR);
+        job = new SelectionField("Job", Character.Trait.JOB);
 
         gender.addToStage();
         hairStyle.addToStage();
         hairColor.addToStage();
-        //skinTone.addToStage();
+        job.addToStage();
+
+        loadJobDescription();
     }
 
     private void loadBackButton() {
@@ -137,25 +130,37 @@ public class CharacterSelection extends GameState {
 
         stage.addActor(group_button_back);
     }
-
     private void loadPlayNowButton() {
-        button_play_now= new Image(Betrayal.res.getTexture("play-now"));
-        button_play_now.layout();
-        button_play_now.setBounds((Betrayal.WIDTH-button_play_now.getWidth())/2,0, 512, 144);
-        button_play_now.addListener(new InputListener() {
+        image_button_play = Betrayal.res.getTexture("play-now");
+        button_play_now = new Actor() {
             @Override
+            public void draw(Batch batch, float parentAlpha) {
+                batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
+                        button_play_now.getWidth(), button_play_now.getHeight());
+            }
+        };
+        button_play_now.setWidth(512);
+        button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
+        button_play_now.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                image_button_play = Betrayal.res.getTexture("play-now-pressed");
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.LOBBY);
+                if (x >= button_play_now.getX()
+                        && x <= button_play_now.getX() + button_play_now.getWidth()
+                        && y >= button_play_now.getY()
+                        && y <= button_play_now.getY() + button_play_now.getHeight())
+
+                    gsm.setState(GameStateManager.State.LOBBY);
+                else image_button_play = Betrayal.res.getTexture("play-now");
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                image_button_play = Betrayal.res.getTexture("play-now");
             }
         });
         stage.addActor(button_play_now);
     }
-
     private void loadUsernameField() {
         // Username "Name:" text
         field_usernameLabel = new Label("Name: ", labelStyle);
@@ -199,7 +204,7 @@ public class CharacterSelection extends GameState {
         field_framePreview.setWidth(384);
         field_framePreview.setHeight(576);
         field_framePreview.setX(10);
-        field_framePreview.setY(field_usernameLabel.getY() - field_usernameLabel.getHeight() * 2
+        field_framePreview.setY(field_usernameLabel.getY() - field_usernameLabel.getHeight()
                 - field_framePreview.getHeight());
         stage.addActor(field_framePreview);
     }
@@ -222,7 +227,7 @@ public class CharacterSelection extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                characterInfo.rotateLeft();
+                character.rotateLeft();
             }
         });
         group_previewRotators.addActor(previewRotators_leftArrow);
@@ -243,7 +248,7 @@ public class CharacterSelection extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                characterInfo.rotateRight();
+                character.rotateRight();
             }
         });
         stage.addActor(group_previewRotators);
@@ -259,7 +264,7 @@ public class CharacterSelection extends GameState {
     private void loadHeadPreview() {
         field_headPreview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                sb.draw(characterInfo.getArmorPreview(), field_armorPreview.getX(),
+                sb.draw(character.getArmorPreview(), field_armorPreview.getX(),
                         field_armorPreview.getY(), field_armorPreview.getWidth(),
                         field_armorPreview.getHeight());
             }
@@ -273,7 +278,7 @@ public class CharacterSelection extends GameState {
     private void loadArmorPreview() {
         field_armorPreview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                sb.draw(characterInfo.getHeadPreview(), field_headPreview.getX(),
+                sb.draw(character.getHeadPreview(), field_headPreview.getX(),
                         field_headPreview.getY(), field_headPreview.getWidth(),
                         field_headPreview.getHeight());
             }
@@ -284,16 +289,51 @@ public class CharacterSelection extends GameState {
         field_armorPreview.setY(field_framePreview.getY());
         stage.addActor(field_armorPreview);
     }
+
+    private void loadJobDescription() {
+        Label.LabelStyle font_jobDescription = Betrayal.getHurtmoldFontLabelStyle(30);
+        label_jobDescription = new Label("", font_jobDescription);
+        label_jobDescription.setHeight(field_framePreview.getY() - 80
+                - label_jobDescription.getHeight()
+                - (button_play_now.getY() + button_play_now.getHeight() + 10));
+        label_jobDescription.setWidth(Betrayal.WIDTH - 20);
+        label_jobDescription.setX(field_framePreview.getX());
+        label_jobDescription.setY(field_framePreview.getY() - 80 - label_jobDescription.getHeight());
+        label_jobDescription.setAlignment(Align.topLeft);
+        stage.addActor(label_jobDescription);
+    }
+
     private void updateTraits() {
         gender.update();
         hairStyle.update();
         hairColor.update();
+        job.update();
+    }
+    private void updateJobDescription() {
+        switch (character.getJobClass().getJob()) {
+            case WARRIOR:
+                label_jobDescription.setText("Warrior:\n- (Passive) Shits dicks");
+                break;
+            case KNIGHT:
+                label_jobDescription.setText("Knight:\n- (Passive) Dicks shits");
+                break;
+            case PRIEST:
+                label_jobDescription.setText("Priest:\n- (Passive) Jarnin is a fatass");
+                break;
+            case THIEF:
+                label_jobDescription.setText("Thief:\n- (Passive) Joey is a gayass");
+                break;
+            default:
+                break;
+        }
     }
 
+    // Getters
+    public static Character getCharacter() { return character; }
     // Classes
     private class SelectionField {
 
-        private Trait trait;
+        private Character.Trait trait;
 
         private Group group_selectionField;
         private Label field_selection_label, field_selection_serialNumber;
@@ -303,7 +343,7 @@ public class CharacterSelection extends GameState {
          *
          * @param label name of character trait to be edited
          * @param t specifies character trait to be edited */
-        public SelectionField(String label, Trait t) {
+        public SelectionField(String label, Character.Trait t) {
             this.trait = t;
             group_selectionField = new Group();
 
@@ -370,18 +410,18 @@ public class CharacterSelection extends GameState {
         }
 
         public void update() {
-            field_selection_serialNumber.setText(characterInfo.getTrait(trait));
+            field_selection_serialNumber.setText(character.getTrait(trait));
         }
 
         // Helpers
         public void addToStage() {
             stage.addActor(group_selectionField);
         }
-        private void setPreviousTrait(Trait trait) {
-            characterInfo.setPreviousTrait(trait);
+        private void setPreviousTrait(Character.Trait trait) {
+            character.setPreviousTrait(trait);
         }
-        private void setNextTrait(Trait trait) {
-            characterInfo.setNextTrait(trait);
+        private void setNextTrait(Character.Trait trait) {
+            character.setNextTrait(trait);
         }
     }
 }
