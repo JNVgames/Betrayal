@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.gamestates.GameState;
 import com.jnv.betrayal.gamestates.HallOfFame;
+import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.gamestates.Menu;
 import com.jnv.betrayal.gamestates.SplashScreen;
 import com.jnv.betrayal.main.Betrayal;
@@ -64,8 +65,8 @@ public class GameStateManager {
             case HALL_OF_FAME:
                 return new HallOfFame(this);
 
-         //   case INFO:
-         //      return new InfoState(this);
+            case LOBBY:
+                return new Lobby(this);
 
             default:
                 Gdx.app.log("GameStateManager", "getState() returns null: ERROR");

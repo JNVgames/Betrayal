@@ -34,7 +34,7 @@ public class CharacterSelection extends GameState {
 
     private Actor reference;
     private Actor field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
-    private Image button_back, field_framePreview;
+    private Image button_back,button_play_now, field_framePreview;
     private Label field_usernameLabel;
     private SelectionField gender, hairStyle, hairColor, skinTone;
     private CharacterInfo characterInfo;
@@ -85,6 +85,7 @@ public class CharacterSelection extends GameState {
     /** Calls the appropriate functions to create the character selection screen */
     private void loadActors() {
         loadBackButton();
+        loadPlayNowButton();
         loadUsernameField();
         loadImagePreview();
         loadPreviewRotators();
@@ -136,6 +137,25 @@ public class CharacterSelection extends GameState {
 
         stage.addActor(group_button_back);
     }
+
+    private void loadPlayNowButton() {
+        button_play_now= new Image(Betrayal.res.getTexture("play-now"));
+        button_play_now.layout();
+        button_play_now.setBounds((Betrayal.WIDTH-button_play_now.getWidth())/2,0, 512, 144);
+        button_play_now.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.setState(GameStateManager.State.LOBBY);
+            }
+        });
+        stage.addActor(button_play_now);
+    }
+
     private void loadUsernameField() {
         // Username "Name:" text
         field_usernameLabel = new Label("Name: ", labelStyle);

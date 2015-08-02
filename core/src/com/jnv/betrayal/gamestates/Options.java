@@ -16,10 +16,10 @@ import com.jnv.betrayal.main.Betrayal;
 public class Options {
     private Stage stage;
 
-    private Image background;
+    private Image background, mainMenuButton;
     private Actor mask;
     private Label.LabelStyle labelStyle;
-    private Label options, mainMenu;
+    private Label title;
     private int currentContent, totalContent;
 
 
@@ -46,10 +46,10 @@ public class Options {
         stage.addActor(mask);
     }
     private void loadMainMenuButton() {
-        mainMenu = new Label("Main Menu", labelStyle);
-        mainMenu.setX((Betrayal.WIDTH - mainMenu.getWidth()) / 2);
-        mainMenu.setY(Betrayal.HEIGHT - mainMenu.getHeight() - 1000);
-        mainMenu.addListener(new InputListener() {
+        mainMenuButton = new Image(Betrayal.res.getTexture("main-menu"));
+        mainMenuButton.layout();
+        mainMenuButton.setBounds((Betrayal.WIDTH - mainMenuButton.getWidth()) / 2 + 100, 200, 312, 100);
+        mainMenuButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -60,15 +60,15 @@ public class Options {
                 removeOptions();
             }
         });
-        stage.addActor(mainMenu);
+        stage.addActor(mainMenuButton);
     }
 
-    private void loadOptions() {
-        options = new Label("Options", labelStyle);
-        options.setHeight(100);
-        options.setX((Betrayal.WIDTH - options.getWidth()) / 2);
-        options.setY(Betrayal.HEIGHT - 300);
-        stage.addActor(options);
+    private void loadTitle() {
+        title = new Label("Options", labelStyle);
+        title.setHeight(100);
+        title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
+        title.setY(Betrayal.HEIGHT - 300);
+        stage.addActor(title);
     }
 
     private void loadBackground() {
@@ -81,8 +81,8 @@ public class Options {
     private void removeCurrentContent() {
         switch (currentContent) {
             case 0:
-                mainMenu.remove();
-                options.remove();
+                mainMenuButton.remove();
+                title.remove();
                 break;
             case 1:
                 break;
@@ -96,7 +96,7 @@ public class Options {
         switch (currentContent) {
             case 0:
                 loadMainMenuButton();
-                loadOptions();
+                loadTitle();
                 break;
             case 1:
                 break;
@@ -109,8 +109,8 @@ public class Options {
     private void removeOptions() {
         removeCurrentContent();
         mask.remove();
-        mainMenu.remove();
-        options.remove();
+        mainMenuButton.remove();
+        title.remove();
         background.remove();
     }
 }

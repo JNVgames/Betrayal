@@ -21,7 +21,7 @@ public class Instructions {
     private TextureRegion leftArrow;
     private Image image_rightArrow, image_leftArrow, exitButton, background;
     private Label.LabelStyle labelStyle;
-    private Label instructions, content0, content1, content2, content3, content4;
+    private Label title, content0, content1, content2, content3, content4;
     private Menu menu;
     private int currentContent, totalContent;
 
@@ -44,15 +44,15 @@ public class Instructions {
         loadRightArrow();
         loadContent();
         loadXButton();
-        loadInstructions();
+        loadTitle();
     }
 
-    private void loadInstructions() {
-        instructions = new Label("Instructions", labelStyle);
-        instructions.setHeight(100);
-        instructions.setX((Betrayal.WIDTH - instructions.getWidth()) / 2);
-        instructions.setY(Betrayal.HEIGHT - 200);
-        stage.addActor(instructions);
+    private void loadTitle() {
+        title = new Label("Instructions", labelStyle);
+        title.setHeight(100);
+        title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
+        title.setY(Betrayal.HEIGHT - 200);
+        stage.addActor(title);
     }
 
     private void loadXButton() {
@@ -229,7 +229,7 @@ public class Instructions {
         removeCurrentContent();
         image_leftArrow.remove();
         image_rightArrow.remove();
-        instructions.remove();
+        title.remove();
         background.remove();
         exitButton.remove();
     }

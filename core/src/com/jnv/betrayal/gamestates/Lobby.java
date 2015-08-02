@@ -15,18 +15,23 @@ import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
 import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
 import com.jnv.betrayal.main.Betrayal;
-
+/**
+ * Copyright 2015, JNV Games, All rights reserved.
+ */
 public class Lobby extends GameState {
 
-    private Image lobbyBackground, shopButton, settingsButton,statsButton,partyButton;
+    private Image lobbyBackground, shopButton, settingsButton,statsButton,partyButton, inventoryButton;
     private Label.LabelStyle labelStyle;
-    private Label lobby, content0, content1, content2, content3, content4;
-    private Menu menu;
-    private int currentContent, totalContent;
+    private Label lobby;
+    private int buttonWidth,buttonHeight,spacing;
 
     public Lobby(GameStateManager gsm) {
         super(gsm);
+        buttonHeight=150;
+        buttonWidth=144;
+        spacing=5;
         loadContent();
+        loadFont();
     }
 
     private void loadContent(){
@@ -35,28 +40,37 @@ public class Lobby extends GameState {
             loadSettingsButton();
             loadPartyButton();
             loadStatsButton();
-            loadLobbyLabel();
+            loadInventoryButton();
+     //       loadLobbyLabel(); ERror>/ FIX later
+
+    }
+
+    private void loadFont() {
+        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadBackground() {
         lobbyBackground = new Image(Betrayal.res.getTexture("instructions-background"));
         lobbyBackground.layout();
-        lobbyBackground.setBounds(0,0, Betrayal.WIDTH, Betrayal.HEIGHT);
+        lobbyBackground.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         stage.addActor(lobbyBackground);
     }
+
+    /*
     private void loadLobbyLabel() {
         lobby = new Label("Lobby", labelStyle);
-        lobby.setHeight(100);
-        lobby.setX((Betrayal.WIDTH - lobby.getWidth()) / 2);
-        lobby.setY(Betrayal.HEIGHT - 200);
+        lobby.setX(0);
+        lobby.setY(Betrayal.HEIGHT - buttonHeight-lobby.getHeight());
         stage.addActor(lobby);
     }
 
-    private void loadSettingsButton() {
-        Image exitButton = new Image(Betrayal.res.getTexture("x"));
-        exitButton.layout();
-        exitButton.setBounds(620, 1180, 100, 100);
-        exitButton.addListener(new InputListener() {
+   */
+
+    private void loadShopButton() {
+        shopButton = new Image(Betrayal.res.getTexture("lobby-shop"));
+        shopButton.layout();
+        shopButton.setBounds(0, Betrayal.HEIGHT-buttonHeight-5, buttonWidth, buttonHeight);
+        shopButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -64,16 +78,71 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.MENU);
+               new Shop(game);
             }
         });
-        stage.addActor(exitButton);
+        stage.addActor(shopButton);
+    }
+    private void loadInventoryButton() {
+        inventoryButton = new Image(Betrayal.res.getTexture("lobby-inventory"));
+        inventoryButton.layout();
+        inventoryButton.setBounds(buttonWidth, Betrayal.HEIGHT-buttonHeight-spacing,
+                buttonWidth, buttonHeight);
+        inventoryButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                new Inventory(game);
+            }
+        });
+        stage.addActor(inventoryButton);
+    }
+    private void loadStatsButton() {
+        statsButton = new Image(Betrayal.res.getTexture("lobby-stats"));
+        statsButton.layout();
+        statsButton.setBounds(buttonWidth*2, Betrayal.HEIGHT-buttonHeight-spacing,
+                buttonWidth, buttonHeight);
+        statsButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                new Stats(game);
+            }
+        });
+        stage.addActor(statsButton);
     }
 
-    private void loadShopButton() {
-        settingsButton = new Image(Betrayal.res.getTexture("x"));
+    private void loadPartyButton() {
+        partyButton = new Image(Betrayal.res.getTexture("lobby-party"));
+        partyButton.layout();
+        partyButton.setBounds(buttonWidth*3, Betrayal.HEIGHT-buttonHeight-spacing,
+                buttonWidth, buttonHeight);
+        partyButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(partyButton);
+    }
+
+    private void loadSettingsButton() {
+        settingsButton = new Image(Betrayal.res.getTexture("lobby-settings"));
         settingsButton.layout();
-        settingsButton.setBounds(620, 1180, 100, 100);
+        settingsButton.setBounds(buttonWidth*4,Betrayal.HEIGHT-buttonHeight-spacing,
+                buttonWidth, buttonHeight);
         settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -82,46 +151,10 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
+                new LobbyOptions(game);
             }
         });
         stage.addActor(settingsButton);
-    }
-
-    private void loadStatsButton() {
-        Image exitButton = new Image(Betrayal.res.getTexture("x"));
-        exitButton.layout();
-        exitButton.setBounds(620, 1180, 100, 100);
-        exitButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.MENU);
-            }
-        });
-        stage.addActor(exitButton);
-    }
-
-    private void loadPartyButton() {
-        Image exitButton = new Image(Betrayal.res.getTexture("x"));
-        exitButton.layout();
-        exitButton.setBounds(620, 1180, 100, 100);
-        exitButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.MENU);
-            }
-        });
-        stage.addActor(exitButton);
     }
     public void update(float dt) {
         stage.act(dt);
@@ -132,10 +165,6 @@ public class Lobby extends GameState {
     }
 
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.end();
 

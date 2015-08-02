@@ -12,14 +12,21 @@ public class TextureLoader {
         Betrayal.res.loadTexture("about/start_screen720x1280.png", "start-background");
         Betrayal.res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
         Betrayal.res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
+        Betrayal.res.loadTexture("about/shop_background720x1280.png", "shop-background");
+        Betrayal.res.loadTexture("about/game_over720x1280.png", "game-over-background");
+
 
         // Buttons
+        //Main Menu
         Betrayal.res.loadTexture("button/load_game_button512x144.png", "load-game");
         Betrayal.res.loadTexture("button/new_game_button512x144.png", "new-game");
         Betrayal.res.loadTexture("button/options_button512x144.png", "options");
         Betrayal.res.loadTexture("button/instructions512x144.png", "instructions");
         Betrayal.res.loadTexture("button/hall_of_fame512x144.png", "hall-of-fame");
-
+        Betrayal.res.loadTexture("button/play_now512x144.png", "play-now");
+        Betrayal.res.loadTexture("button/play_now_pressed512x144.png", "play-now-pressed");
+        Betrayal.res.loadTexture("button/main_menu512x144.png", "main-menu");
+        Betrayal.res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
 
 
         Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
@@ -30,6 +37,24 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/equip360x144.png", "equip");
         Betrayal.res.loadTexture("button/sell360x144.png", "sell");
         Betrayal.res.loadTexture("button/preview360x144.png", "preview");
+
+        Betrayal.res.loadTexture("button/lobby/floor.png", "lobby-floor");
+        Betrayal.res.loadTexture("button/lobby/inventory.png", "lobby-inventory");
+        Betrayal.res.loadTexture("button/lobby/party.png", "lobby-party");
+        Betrayal.res.loadTexture("button/lobby/settings.png", "lobby-settings");
+        Betrayal.res.loadTexture("button/lobby/shop.png", "lobby-shop");
+        Betrayal.res.loadTexture("button/lobby/stats.png", "lobby-stats");
+
+        Betrayal.res.loadTexture("button/shop/armor.png", "shop-armor");
+        Betrayal.res.loadTexture("button/shop/armor_pressed.png", "shop-armor-pressed");
+        Betrayal.res.loadTexture("button/shop/extra.png", "shop-extra");
+        Betrayal.res.loadTexture("button/shop/Extra_pressed.png", "shop-extra-pressed");
+        Betrayal.res.loadTexture("button/shop/item.png", "shop-item");
+        Betrayal.res.loadTexture("button/shop/item_pressed.png", "shop-item-pressed");
+        Betrayal.res.loadTexture("button/shop/weapons.png", "shop-weapons");
+        Betrayal.res.loadTexture("button/shop/weapons_pressed.png", "shop-weapons-pressed");
+        Betrayal.res.loadTexture("button/shop/money.png", "shop-money");
+        Betrayal.res.loadTexture("button/shop/money_pressed.png", "shop-money-pressed");
 
         // Weapons
 
