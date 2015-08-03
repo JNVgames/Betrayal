@@ -17,9 +17,9 @@ import com.jnv.betrayal.main.Betrayal;
 public class Shop {
     private Stage stage;
     private Image lobbyButton, background, weapons, armors, extras, items, money;
-    private Image[] potions, sword, shield, headgear, armor1, armor2, ring1, ring2;
+    private Image[] potions, sword1, sword2, shield1,shield2, headgear, armor1, armor2, ring1, ring2;
     private Label.LabelStyle labelStyle;
-    private Label title, titleWeapons, titleShields, titleRing1, titleRing2;
+    private Label title, titleSword1,titleSword2,titleShield1, titleShield2, titleRing1, titleRing2;
     private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
     private int currentContent, buttonHeight, buttonWidth, itemSize;
     private Actor mask;
@@ -32,15 +32,18 @@ public class Shop {
         buttonHeight = 100;
         buttonWidth = 104;
         itemSize = (Betrayal.WIDTH - 200) / 6;
-        loadButtons();
         potions = new Image[12];
-        sword = new Image[6];
-        shield = new Image[6];
+        sword1 = new Image[6];
+        sword2 = new Image[6];
+        shield1 = new Image[6];
+        shield2 = new Image[6];
         headgear = new Image[6];
         armor1 = new Image[6];
         armor2 = new Image[6];
         ring1 = new Image[6];
         ring2 = new Image[6];
+        loadButtons();
+
     }
 
     private void loadFont() {
@@ -212,12 +215,11 @@ public class Shop {
 
     private void loadWeaponsAndShields() {
         for (int i = 1; i <= 6; i++) {
-
-            shield[i - 1] = new Image(Betrayal.res.getTexture("shield" + i));
-            shield[i - 1].layout();
-            shield[i - 1].setBounds(100 + itemSize * (i - 1),
+            sword1[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
+            sword1[i - 1].layout();
+            sword1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-            shield[i - 1].addListener(new InputListener() {
+            sword1[i - 1].addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
@@ -227,14 +229,13 @@ public class Shop {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 }
             });
-            stage.addActor(shield[i - 1]);
+            stage.addActor(sword1[i - 1]);
 
-
-            sword[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
-            sword[i - 1].layout();
-            sword[i - 1].setBounds(100 + itemSize * (i - 1),
-                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-            sword[i - 1].addListener(new InputListener() {
+            sword2[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
+            sword2[i - 1].layout();
+            sword2[i - 1].setBounds(100 + itemSize * (i - 1),
+                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize*3, itemSize, itemSize);
+            sword2[i - 1].addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
@@ -244,22 +245,64 @@ public class Shop {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 }
             });
-            stage.addActor(sword[i - 1]);
+            stage.addActor(sword2[i - 1]);
+
+            shield1[i - 1] = new Image(Betrayal.res.getTexture("shield" + i));
+            shield1[i - 1].layout();
+            shield1[i - 1].setBounds(100 + itemSize * (i - 1),
+                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize*5, itemSize, itemSize);
+            shield1[i - 1].addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                }
+            });
+            stage.addActor(shield1[i - 1]);
+
+            shield2[i - 1] = new Image(Betrayal.res.getTexture("shield" + i));
+            shield2[i - 1].layout();
+            shield2[i - 1].setBounds(100 + itemSize * (i - 1),
+                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize*7, itemSize, itemSize);
+            shield2[i - 1].addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                }
+            });
+            stage.addActor(shield2[i - 1]);
 
         }
     }
 
 
     private void loadWeaponAndShieldsTitles() {
-        titleWeapons = new Label("Weapons", labelStyle);
-        titleWeapons.setX(110);
-        titleWeapons.setY(Betrayal.HEIGHT - 250);
-        stage.addActor(titleWeapons);
+        titleSword1 = new Label("Swords(Tier 1)", labelStyle);
+        titleSword1.setX(110);
+        titleSword1.setY(Betrayal.HEIGHT - 250);
+        stage.addActor(titleSword1);
 
-        titleShields = new Label("Shields", labelStyle);
-        titleShields.setX(110);
-        titleShields.setY(Betrayal.HEIGHT - 422);
-        stage.addActor(titleShields);
+        titleSword2 = new Label("Swords(Tier 2)", labelStyle);
+        titleSword2.setX(110);
+        titleSword2.setY(Betrayal.HEIGHT - 422);
+        stage.addActor( titleSword2);
+
+        titleShield1 = new Label("Shields(Tier 1)", labelStyle);
+        titleShield1.setX(110);
+        titleShield1.setY(Betrayal.HEIGHT - 594);
+        stage.addActor(  titleShield1);
+
+        titleShield2 = new Label("Shield(Tier 2)", labelStyle);
+        titleShield2.setX(110);
+        titleShield2.setY(Betrayal.HEIGHT - 766);
+        stage.addActor(  titleShield2);
     }
 
     private void loadRings() {
@@ -440,11 +483,15 @@ public class Shop {
     }
 
     private void removeContent0() {
-        titleShields.remove();
-        titleWeapons.remove();
+        titleShield1.remove();
+        titleShield2.remove();
+        titleSword1.remove();
+        titleSword2.remove();
         for (int i = 0; i < 6; i++) {
-            sword[i].remove();
-            shield[i].remove();
+            sword1[i].remove();
+            sword2[i].remove();
+            shield1[i].remove();
+            shield2[i].remove();
         }
 
     }
