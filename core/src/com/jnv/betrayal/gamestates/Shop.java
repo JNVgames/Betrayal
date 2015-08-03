@@ -24,10 +24,12 @@ public class Shop {
     private Image headgear1, headgear2, headgear3, headgear4, headgear5, headgear6;
     private Image armor1a, armor1b, armor1c, armor1d, armor1e, armor1f;
     private Image armor2a, armor2b, armor2c, armor2d, armor2e, armor2f;
+    private Image potion1, potion2, potion3, potion4, potion5, potion6;
+    private Image potion7, potion8, potion9, potion10, potion11, potion12;
     private Label.LabelStyle labelStyle;
     private Label title, titleWeapons, titleShields, titleRing1, titleRing2;
-    private Label titleHeadgear, titleArmor1, titleArmor2;
-    private int currentContent, rowSpacing, columnSpacing, buttonHeight, buttonWidth, itemSize;
+    private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
+    private int currentContent, buttonHeight, buttonWidth, itemSize;
     private Actor mask;
 
 
@@ -38,8 +40,6 @@ public class Shop {
         buttonHeight = 100;
         buttonWidth = 104;
         itemSize = (Betrayal.WIDTH - 200) / 6;
-        rowSpacing = 100;
-        columnSpacing = 100;
         loadButtons();
     }
 
@@ -71,7 +71,7 @@ public class Shop {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-               removeShop();
+                removeShop();
             }
         });
         stage.addActor(mask);
@@ -314,7 +314,7 @@ public class Shop {
         // Shield1
         shield1 = new Image(Betrayal.res.getTexture("shield1"));
         shield1.layout();
-        shield1.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        shield1.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         shield1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -330,7 +330,7 @@ public class Shop {
         // Shield2
         shield2 = new Image(Betrayal.res.getTexture("shield2"));
         shield2.layout();
-        shield2.setBounds(100 + itemSize * 1, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        shield2.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         shield2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -425,7 +425,7 @@ public class Shop {
         // Ring1a
         ring1a = new Image(Betrayal.res.getTexture("ring-1-red"));
         ring1a.layout();
-        ring1a.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        ring1a.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
         ring1a.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -441,7 +441,7 @@ public class Shop {
         // Ring1b
         ring1b = new Image(Betrayal.res.getTexture("ring-1-black"));
         ring1b.layout();
-        ring1b.setBounds(100 + itemSize * 1, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        ring1b.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
         ring1b.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -521,7 +521,7 @@ public class Shop {
         // Ring2a
         ring2a = new Image(Betrayal.res.getTexture("ring-2-red"));
         ring2a.layout();
-        ring2a.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        ring2a.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         ring2a.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -537,7 +537,7 @@ public class Shop {
         // Ring2b
         ring2b = new Image(Betrayal.res.getTexture("ring-2-black"));
         ring2b.layout();
-        ring2b.setBounds(100 + itemSize * 1, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        ring2b.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         ring2b.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -728,7 +728,7 @@ public class Shop {
         // armor1a
         armor1a = new Image(Betrayal.res.getTexture("armor-red"));
         armor1a.layout();
-        armor1a.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        armor1a.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         armor1a.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -744,7 +744,7 @@ public class Shop {
         // armor1b
         armor1b = new Image(Betrayal.res.getTexture("armor-black"));
         armor1b.layout();
-        armor1b.setBounds(100 + itemSize * 1, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        armor1b.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
         armor1b.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -824,7 +824,7 @@ public class Shop {
         // armor2a
         armor2a = new Image(Betrayal.res.getTexture("armor-hero-red"));
         armor2a.layout();
-        armor2a.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
+        armor2a.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
         armor2a.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -840,7 +840,7 @@ public class Shop {
         // armor2b
         armor2b = new Image(Betrayal.res.getTexture("armor-hero-black"));
         armor2b.layout();
-        armor2b.setBounds(100 + itemSize * 1, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
+        armor2b.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
         armor2b.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -935,6 +935,208 @@ public class Shop {
         stage.addActor(titleArmor2);
     }
 
+    private void loadItemsTitle(){
+        titleItems = new Label("Items", labelStyle);
+        titleItems.setX(110);
+        titleItems.setY(Betrayal.HEIGHT - 250);
+        stage.addActor(titleItems);
+    }
+
+    private void loadItems(){
+        // potion1
+        potion1 = new Image(Betrayal.res.getTexture("potion1"));
+        potion1.layout();
+        potion1.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion1.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion1);
+
+        // potion1
+        potion2 = new Image(Betrayal.res.getTexture("potion2"));
+        potion2.layout();
+        potion2.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion2.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion2);
+
+        // potion3
+        potion3 = new Image(Betrayal.res.getTexture("potion3"));
+        potion3.layout();
+        potion3.setBounds(100 + itemSize * 2, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion3.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion3);
+
+        // potion4
+        potion4 = new Image(Betrayal.res.getTexture("potion4"));
+        potion4.layout();
+        potion4.setBounds(100 + itemSize * 3, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion4.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion4);
+
+        // potion5
+        potion5 = new Image(Betrayal.res.getTexture("potion5"));
+        potion5.layout();
+        potion5.setBounds(100 + itemSize * 4, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion5.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion5);
+
+        // potion6
+        potion6 = new Image(Betrayal.res.getTexture("potion6"));
+        potion6.layout();
+        potion6.setBounds(100 + itemSize * 5, Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+        potion6.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion6);
+
+        // potion7
+        potion7 = new Image(Betrayal.res.getTexture("potion7"));
+        potion7.layout();
+        potion7.setBounds(100, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion7.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion7);
+
+        // potion8
+        potion8 = new Image(Betrayal.res.getTexture("potion8"));
+        potion8.layout();
+        potion8.setBounds(100 + itemSize, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion8.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion8);
+
+        // potion8
+        potion9 = new Image(Betrayal.res.getTexture("potion9"));
+        potion9.layout();
+        potion9.setBounds(100 + itemSize * 2, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion9.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion9);
+
+        // potion10
+        potion10 = new Image(Betrayal.res.getTexture("potion10"));
+        potion10.layout();
+        potion10.setBounds(100 + itemSize * 3, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion10.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion10);
+
+        // potion11
+        potion11 = new Image(Betrayal.res.getTexture("potion11"));
+        potion11.layout();
+        potion11.setBounds(100 + itemSize * 4, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion11.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion11);
+
+        // potion12
+        potion12 = new Image(Betrayal.res.getTexture("potion12"));
+        potion12.layout();
+        potion12.setBounds(100 + itemSize * 5, Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+        potion12.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+        });
+        stage.addActor(potion12);
+
+    }
+
     private void setContent0() {
         loadWeapons();
         loadShields();
@@ -1011,9 +1213,24 @@ public class Shop {
     }
 
     private void setContent3() { // extras
+        loadItemsTitle();
+        loadItems();
     }
 
     private void removeContent3() {
+        titleItems.remove();
+        potion1.remove();
+        potion2.remove();
+        potion3.remove();
+        potion4.remove();
+        potion5.remove();
+        potion6.remove();
+        potion7.remove();
+        potion8.remove();
+        potion9.remove();
+        potion10.remove();
+        potion11.remove();
+        potion12.remove();
     }
 
     private void setContent4() { // money
