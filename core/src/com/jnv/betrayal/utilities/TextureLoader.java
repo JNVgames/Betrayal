@@ -270,7 +270,12 @@ public class TextureLoader {
         Betrayal.res.loadTexture("monster/monster16.png", "monster-tier0-0");
         // Dungeon Background
         for (int i = 1; i <= 5; i++) {
-            Betrayal.res.loadTexture("map/dungeon_map" + i + ".png", "map" + i);
+            Betrayal.res.loadTexture("map/dungeon_map" + i + ".png", "map-" + i);
+        }
+
+        // Monsters
+        for (int i = 1; i <= 50; i++) {
+            Betrayal.res.loadTexture("monster/monster" + i + ".png", "monster-" + i);
         }
     }
 }
