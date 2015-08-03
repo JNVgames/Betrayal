@@ -84,7 +84,7 @@ public class CharacterSelection extends GameState {
         gender = new SelectionField("Gender", Character.Trait.GENDER);
         hairStyle = new SelectionField("Hair Style", Character.Trait.HAIR_STYLE);
         hairColor = new SelectionField("Hair Color", Character.Trait.HAIR_COLOR);
-        job = new SelectionField("Job", Character.Trait.JOB);
+        job = new SelectionField("Class", Character.Trait.JOB);
 
         gender.addToStage();
         hairStyle.addToStage();
@@ -312,16 +312,28 @@ public class CharacterSelection extends GameState {
     private void updateJobDescription() {
         switch (character.getJobClass().getJob()) {
             case WARRIOR:
-                label_jobDescription.setText("Warrior:\n- (Passive) Shits dicks");
+                label_jobDescription.setText("Warrior:" +
+                        "\n (Passive) +25% Attack" +
+                        "\n (Team Passive) +10% Attack" +
+                        "\n (Ability) 150% strike ");
                 break;
             case KNIGHT:
-                label_jobDescription.setText("Knight:\n- (Passive) Dicks shits");
+                label_jobDescription.setText("Knight:" +
+                        "\n (Passive) +25% Defense" +
+                        "\n (Team Passive) +10% Defense" +
+                        "\n (Ability) Grants Shield ");
                 break;
             case PRIEST:
-                label_jobDescription.setText("Priest:\n- (Passive) Jarnin is a fatass");
+                label_jobDescription.setText("Priest:" +
+                        "\n (Passive) +25% Health" +
+                        "\n (Team Passive) +10% Health" +
+                        "\n (Ability) Buffs  ");
                 break;
             case THIEF:
-                label_jobDescription.setText("Thief:\n- (Passive) Joey is a gayass");
+                label_jobDescription.setText("Thief:" +
+                        "\n (Passive) +50% Gold" +
+                        "\n (Team Passive) +25% Gold" +
+                        "\n (Ability) 25% Chance to Steal ");
                 break;
             default:
                 break;

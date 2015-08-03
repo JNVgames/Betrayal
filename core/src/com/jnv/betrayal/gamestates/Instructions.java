@@ -3,6 +3,7 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,7 +23,7 @@ public class Instructions {
     private Image image_rightArrow, image_leftArrow, exitButton, background;
     private Label.LabelStyle labelStyle;
     private Label title, content0, content1, content2, content3, content4;
-    private Menu menu;
+    private Actor mask;
     private int currentContent, totalContent;
 
 
@@ -39,6 +40,7 @@ public class Instructions {
     }
 
     private void loadButtons() {
+        loadMask();
         loadBackground();
         loadLeftArrow();
         loadRightArrow();
@@ -46,7 +48,22 @@ public class Instructions {
         loadXButton();
         loadTitle();
     }
+    private void loadMask() {
+        mask = new Actor();
+        mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
+        mask.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
 
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                removeInstructions();
+            }
+        });
+        stage.addActor(mask);
+    }
     private void loadTitle() {
         title = new Label("Instructions", labelStyle);
         title.setHeight(100);
@@ -226,6 +243,7 @@ public class Instructions {
     }
 
     private void removeInstructions() {
+        mask.remove();
         removeCurrentContent();
         image_leftArrow.remove();
         image_rightArrow.remove();

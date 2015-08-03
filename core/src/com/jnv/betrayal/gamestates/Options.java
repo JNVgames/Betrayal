@@ -43,6 +43,17 @@ public class Options {
     private void loadMask(){
         mask = new Actor();
         mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
+        mask.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                removeOptions();
+            }
+        });
         stage.addActor(mask);
     }
     private void loadMainMenuButton() {

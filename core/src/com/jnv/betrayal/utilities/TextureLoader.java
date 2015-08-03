@@ -3,7 +3,7 @@ package com.jnv.betrayal.utilities;
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.main.Betrayal;
 
-//WE"RE GONNA keep this bAby ORGANIZED MOTEHr FKErS
+
 public class TextureLoader {
 
     public static void loadAll() {
@@ -53,8 +53,41 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/shop/money.png", "shop-money");
         Betrayal.res.loadTexture("button/shop/money_pressed.png", "shop-money-pressed");
 
-        // Weapons
+        // Icon
+        Betrayal.res.loadTexture("icon/attack250x250.png", "attack");
+        Betrayal.res.loadTexture("icon/defense250x250.png", "defense");
+        Betrayal.res.loadTexture("icon/health250x250.png", "health");
+        Betrayal.res.loadTexture("icon/heal250x250.png", "heal");
+        Betrayal.res.loadTexture("icon/damage250x250.png", "damage");
+        Betrayal.res.loadTexture("icon/block250x250.png", "block");
 
+        // Items
+        // Swords
+        for(int i=1;i<=6; i++ ){
+            Betrayal.res.loadTexture("item/sword"+i+".png", "sword"+i);
+        }
+        // Shields
+        for(int i=1;i<=6; i++ ){
+            Betrayal.res.loadTexture("item/shield"+i+".png", "shield"+i);
+        }
+        // Potions
+        for(int i=1;i<=12; i++ ){
+            Betrayal.res.loadTexture("item/potion"+i+".png", "potion"+i);
+        }
+        // Rings
+        Betrayal.res.loadTexture("rings/ring1a.png", "ring-1-red");
+        Betrayal.res.loadTexture("rings/ring1b.png", "ring-1-black");
+        Betrayal.res.loadTexture("rings/ring1c.png", "ring-1-blue");
+        Betrayal.res.loadTexture("rings/ring1d.png", "ring-1-green");
+        Betrayal.res.loadTexture("rings/ring1e.png", "ring-1-purple");
+        Betrayal.res.loadTexture("rings/ring1f.png", "ring-1-gold");
+        Betrayal.res.loadTexture("rings/ring2a.png", "ring-2-red");
+        Betrayal.res.loadTexture("rings/ring2b.png", "ring-2-black");
+        Betrayal.res.loadTexture("rings/ring2c.png", "ring-2-blue");
+        Betrayal.res.loadTexture("rings/ring2d.png", "ring-2-green");
+        Betrayal.res.loadTexture("rings/ring2e.png", "ring-2-purple");
+        Betrayal.res.loadTexture("rings/ring2f.png", "ring-2-gold");
+        Betrayal.res.loadTexture("rings/ring3.png", "ring-3");
         // Armor
         Betrayal.res.loadTexture("armor/black_armor.png", "armor-black");
         Betrayal.res.loadTexture("armor/black_cloak.png", "armor-cloak-black");
@@ -62,10 +95,11 @@ public class TextureLoader {
         Betrayal.res.loadTexture("armor/black_hero.png", "armor-hero-black");
         Betrayal.res.loadTexture("armor/blue_armor.png", "armor-blue");
         Betrayal.res.loadTexture("armor/blue_helmet.png", "helmet-blue");
-        Betrayal.res.loadTexture("armor/blue_hero.png", "armor-blue-hero");
+        Betrayal.res.loadTexture("armor/blue_hero.png", "armor-hero-blue");
         Betrayal.res.loadTexture("armor/brown_cloak.png", "armor-cloak-brown");
         Betrayal.res.loadTexture("armor/gold_helmet.png", "helmet-gold");
         Betrayal.res.loadTexture("armor/gold_hero.png", "armor-hero-gold");
+        Betrayal.res.loadTexture("armor/gold_armor.png", "armor-gold");
         Betrayal.res.loadTexture("armor/green_armor.png", "armor-green");
         Betrayal.res.loadTexture("armor/green_helmet.png", "helmet-green");
         Betrayal.res.loadTexture("armor/green_hero.png", "armor-hero-green");
@@ -78,18 +112,6 @@ public class TextureLoader {
         Betrayal.res.loadTexture("armor/red_helmet.png", "helmet-red");
         Betrayal.res.loadTexture("armor/red_hero.png", "armor-hero-red");
         Betrayal.res.loadTexture("armor/silver_armor.png", "armor-silver");
-
-        // Icon
-        Betrayal.res.loadTexture("icon/attack250x250.png", "attack");
-        Betrayal.res.loadTexture("icon/defense250x250.png", "defense");
-        Betrayal.res.loadTexture("icon/health250x250.png", "health");
-        Betrayal.res.loadTexture("icon/heal250x250.png", "heal");
-        Betrayal.res.loadTexture("icon/damage250x250.png", "damage");
-        Betrayal.res.loadTexture("icon/block250x250.png", "block");
-
-        // Items
-
-        // Monsters
 
         // Heads
         /** Format for loading: hair-gender-hairStyle-hairColor-all */
@@ -161,19 +183,70 @@ public class TextureLoader {
         Betrayal.res.loadTexture("shields/shield2e.png", "shield-2-green");
         Betrayal.res.loadTexture("shields/shield2f.png", "shield-2-purple");
 
-        // Rings
-        Betrayal.res.loadTexture("rings/ring1a.png", "ring-1-red");
-        Betrayal.res.loadTexture("rings/ring1b.png", "ring-1-black");
-        Betrayal.res.loadTexture("rings/ring1c.png", "ring-1-blue");
-        Betrayal.res.loadTexture("rings/ring1d.png", "ring-1-green");
-        Betrayal.res.loadTexture("rings/ring1e.png", "ring-1-purple");
-        Betrayal.res.loadTexture("rings/ring2a.png", "ring-2-red");
-        Betrayal.res.loadTexture("rings/ring2b.png", "ring-2-black");
-        Betrayal.res.loadTexture("rings/ring2c.png", "ring-2-blue");
-        Betrayal.res.loadTexture("rings/ring2d.png", "ring-2-green");
-        Betrayal.res.loadTexture("rings/ring2e.png", "ring-2-purple");
-        Betrayal.res.loadTexture("rings/ring3.png", "ring-3");
+        // Monster
 
+        // Tier 1
+        Betrayal.res.loadTexture("monster/monster1.png", "monster-tier1-0");
+        Betrayal.res.loadTexture("monster/monster2.png", "monster-tier1-1");
+        Betrayal.res.loadTexture("monster/monster3.png", "monster-tier1-2");
+        Betrayal.res.loadTexture("monster/monster4.png", "monster-tier1-3");
+        Betrayal.res.loadTexture("monster/monster5.png", "monster-tier1-4");
+        Betrayal.res.loadTexture("monster/monster43.png", "monster-tier1-5");
+        Betrayal.res.loadTexture("monster/monster44.png", "monster-tier1-6");
+        Betrayal.res.loadTexture("monster/monster45.png", "monster-tier1-7");
+        Betrayal.res.loadTexture("monster/monster46.png", "monster-tier1-8");
+        Betrayal.res.loadTexture("monster/monster47.png", "monster-tier1-9");
+
+        //Tier 2
+        Betrayal.res.loadTexture("monster/monster6.png", "monster-tier2-0");
+        Betrayal.res.loadTexture("monster/monster7.png", "monster-tier2-1");
+        Betrayal.res.loadTexture("monster/monster8.png", "monster-tier2-2");
+        Betrayal.res.loadTexture("monster/monster9.png", "monster-tier2-3");
+        Betrayal.res.loadTexture("monster/monster11.png", "monster-tier2-4");
+        Betrayal.res.loadTexture("monster/monster12.png", "monster-tier2-5");
+        Betrayal.res.loadTexture("monster/monster17.png", "monster-tier2-6");
+        Betrayal.res.loadTexture("monster/monster18.png", "monster-tier2-7");
+        Betrayal.res.loadTexture("monster/monster25.png", "monster-tier2-8");
+        Betrayal.res.loadTexture("monster/monster14.png", "monster-tier2-9");
+
+        //Tier 3
+        Betrayal.res.loadTexture("monster/monster15.png", "monster-tier3-0");
+        Betrayal.res.loadTexture("monster/monster19.png", "monster-tier3-1");
+        Betrayal.res.loadTexture("monster/monster26.png", "monster-tier3-2");
+        Betrayal.res.loadTexture("monster/monster27.png", "monster-tier3-3");
+        Betrayal.res.loadTexture("monster/monster38.png", "monster-tier3-4");
+        Betrayal.res.loadTexture("monster/monster24.png", "monster-tier3-5");
+        Betrayal.res.loadTexture("monster/monster36.png", "monster-tier3-6");
+
+        //Tier 4
+        Betrayal.res.loadTexture("monster/monster10.png", "monster-tier4-0");
+        Betrayal.res.loadTexture("monster/monster13.png", "monster-tier4-1");
+        Betrayal.res.loadTexture("monster/monster28.png", "monster-tier4-2");
+        Betrayal.res.loadTexture("monster/monster29.png", "monster-tier4-3");
+        Betrayal.res.loadTexture("monster/monster37.png", "monster-tier4-4");
+        //Tier4 mob
+        Betrayal.res.loadTexture("monster/monster20.png", "monster-tier4-5");
+        Betrayal.res.loadTexture("monster/monster21.png", "monster-tier4-6");
+        Betrayal.res.loadTexture("monster/monster22.png", "monster-tier4-7");
+        Betrayal.res.loadTexture("monster/monster23.png", "monster-tier4-8");
+        //Tier 4 mob
+        Betrayal.res.loadTexture("monster/monster30.png", "monster-tier4-9");
+        Betrayal.res.loadTexture("monster/monster31.png", "monster-tier4-10");
+        Betrayal.res.loadTexture("monster/monster32.png", "monster-tier4-11");
+        Betrayal.res.loadTexture("monster/monster33.png", "monster-tier4-12");
+        Betrayal.res.loadTexture("monster/monster34.png", "monster-tier4-13");
+        Betrayal.res.loadTexture("monster/monster35.png", "monster-tier4-14");
+
+        //Tier 5
+        Betrayal.res.loadTexture("monster/monster39.png", "monster-tier5-0");
+        Betrayal.res.loadTexture("monster/monster40.png", "monster-tier5-1");
+        Betrayal.res.loadTexture("monster/monster41.png", "monster-tier5-2");
+        Betrayal.res.loadTexture("monster/monster48.png", "monster-tier5-3");
+        Betrayal.res.loadTexture("monster/monster49.png", "monster-tier5-4");
+        Betrayal.res.loadTexture("monster/monster50.png", "monster-tier5-5");
+
+        //Other
+        Betrayal.res.loadTexture("monster/monster16.png", "monster-tier0-0");
         // Dungeon Background
         for (int i = 1; i <= 5; i++) {
             Betrayal.res.loadTexture("map/dungeon_map" + i + ".png", "map" + i);
