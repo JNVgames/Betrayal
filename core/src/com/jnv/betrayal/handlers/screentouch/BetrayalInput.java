@@ -1,12 +1,8 @@
-package com.jnv.betrayal.handlers.screentouch;
-
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- *
- * Class Name: BetrayalInput
- * Description:
- * - Records screen input information
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
  */
+
+package com.jnv.betrayal.handlers.screentouch;
 
 public class BetrayalInput {
     public static float x, y, px, py;

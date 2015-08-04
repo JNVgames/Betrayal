@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.utilities;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -71,6 +75,9 @@ public class TextureLoader {
         Betrayal.res.loadTexture("item/sword5.png", "sword5");
         Betrayal.res.loadTexture("item/sword6.png", "sword6");
 
+        for (int i = 0; i < 6; i++) {
+            Betrayal.res.loadItem(i + 1, "sword" + (i + 1));
+        }
 
         //Shield
         Betrayal.res.loadTexture("item/shield1.png", "shield1");
@@ -79,6 +86,10 @@ public class TextureLoader {
         Betrayal.res.loadTexture("item/shield4.png", "shield4");
         Betrayal.res.loadTexture("item/shield5.png", "shield5");
         Betrayal.res.loadTexture("item/shield6.png", "shield6");
+
+        for (int i = 0; i < 6; i++) {
+            Betrayal.res.loadItem(i + 7, "shield" + (i + 1));
+        }
 
         //Headgear
         Betrayal.res.loadTexture("item/helmet1.png", "headgear1");

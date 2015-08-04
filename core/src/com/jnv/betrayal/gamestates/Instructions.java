@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -11,10 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
 
-
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- */
 
 public class Instructions {
     private Stage stage;

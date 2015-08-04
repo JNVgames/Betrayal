@@ -1,14 +1,13 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.handlers.screentouch;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- * <p/>
- * Class Name: BetrayalGestureProcessor
- */
 public class BetrayalGestureProcessor implements GestureDetector.GestureListener {
 
     float initialScale = 1;

@@ -1,18 +1,21 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.handlers.Content;
 import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.utilities.ItemCosts;
 import com.jnv.betrayal.utilities.TextureLoader;
 
 public class Betrayal extends Game {
@@ -36,12 +39,13 @@ public class Betrayal extends Game {
 		sb = new SpriteBatch();
         stage = new Stage(stretchViewport, sb);
 		Gdx.input.setInputProcessor(stage);
-		stage.setDebugAll(true);
+        stage.setDebugAll(true);
 
         worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 
         res = new Content();
         TextureLoader.loadAll();
+		ItemCosts.setItemCosts();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 

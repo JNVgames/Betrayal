@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2015. JNV Games, All rights reserved.
+  -->
+
 <config>
   <executableName>${app.executable}</executableName>
   <mainClass>${app.mainclass}</mainClass>

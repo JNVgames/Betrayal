@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;

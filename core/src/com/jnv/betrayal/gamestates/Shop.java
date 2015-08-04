@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -8,18 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.main.Betrayal;
-
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- */
 
 public class Shop {
     private Stage stage;
     private Image lobbyButton, background, weapons, armors, extras, items, money;
-    private Image[] potions, sword1, sword2, shield1,shield2, headgear, armor1, armor2, ring1, ring2;
+    private Image[] potions, sword1, sword2, shield1, shield2, headgear, armor1, armor2, ring1, ring2;
     private Label.LabelStyle labelStyle;
-    private Label title, titleSword1,titleSword2,titleShield1, titleShield2, titleRing1, titleRing2;
+    private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
     private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
     private int currentContent, buttonHeight, buttonWidth, itemSize;
     private Actor mask;
@@ -215,7 +216,8 @@ public class Shop {
 
     private void loadWeaponsAndShields() {
         for (int i = 1; i <= 6; i++) {
-            sword1[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
+            final String item = "sword" + i;
+            sword1[i - 1] = new Image(Betrayal.res.getTexture(item));
             sword1[i - 1].layout();
             sword1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
@@ -227,6 +229,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    CharacterSelection.getCharacter().getInventoryClass().addItem(item);
                 }
             });
             stage.addActor(sword1[i - 1]);
@@ -234,7 +237,7 @@ public class Shop {
             sword2[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
             sword2[i - 1].layout();
             sword2[i - 1].setBounds(100 + itemSize * (i - 1),
-                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize*3, itemSize, itemSize);
+                    Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
             sword2[i - 1].addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -282,7 +285,6 @@ public class Shop {
         }
     }
 
-
     private void loadWeaponAndShieldsTitles() {
         titleSword1 = new Label("Swords(Tier 1)", labelStyle);
         titleSword1.setX(110);
@@ -299,7 +301,7 @@ public class Shop {
         titleShield1.setY(Betrayal.HEIGHT - 594);
         stage.addActor(  titleShield1);
 
-        titleShield2 = new Label("Shield(Tier 2)", labelStyle);
+        titleShield2 = new Label("Shields(Tier 2)", labelStyle);
         titleShield2.setX(110);
         titleShield2.setY(Betrayal.HEIGHT - 766);
         stage.addActor(  titleShield2);

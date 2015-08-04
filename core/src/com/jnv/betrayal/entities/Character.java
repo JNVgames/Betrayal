@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -7,6 +11,7 @@ import com.jnv.betrayal.main.Betrayal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
@@ -18,6 +23,22 @@ import java.util.TreeMap;
  */
 public class Character {
 
+    public enum Trait {
+        GENDER,
+        HAIR_STYLE,
+        HAIR_COLOR,
+        JOB
+    }
+    private enum Gender {
+        MALE, FEMALE
+    }
+    public enum Jobs {
+        WARRIOR, THIEF, KNIGHT, PRIEST
+    }
+    public enum Stat {
+        FLOOR, HEALTH, DEFENSE, ATTACK
+    }
+
     private String name;
 
     /** Contains rotation value for character preview
@@ -27,22 +48,7 @@ public class Character {
     /** Holds character trait values */
     private int hair_male, hair_female, hairColor, skinTone;
 
-    public enum Trait {
-        GENDER,
-        HAIR_STYLE,
-        HAIR_COLOR,
-        JOB
-    }
-
-    /** Holds gender trait values, male or female */
-    private enum Gender {
-        MALE, FEMALE
-    }
     private Gender gender;
-
-    public enum Jobs {
-        WARRIOR, THIEF, KNIGHT, PRIEST
-    }
 
     /** Textures for character head, format: head_side_walkAnimation */
     private TextureRegion head_front_left, head_front_still, head_front_right;
@@ -293,46 +299,61 @@ public class Character {
     public class Inventory {
 
         private int gold, items_max;
-        private Map<Item, Integer> items;
+        private List<Item> items;
 
         public Inventory() {
             gold = 0;
-            items_max = 20;
+            items_max = 30;
 
-            items = new LinkedHashMap<Item, Integer>();
+            items = new ArrayList<Item>();
         }
 
         // Getters
         public int getGold() { return gold; }
+        public Item[][] getItems(int rows, int cols) {
+            Item[][] itemArray = new Item[rows][cols];
+            int counter = 0;
+            for (int row = 0; row < itemArray.length; row++) {
+                for (int col = 0; col < itemArray[row].length; col++) {
+                    if (counter < items.size()) itemArray[row][col] = items.get(counter++);
+                }
+            }
+            return itemArray;
+        }
 
         // Setters
         /** Adds an item to inventory and return true, if inventory is filled,
          * do nothing and return false.
-         * @param item item to be added
-         * @return true if item was successfully added. false if inv was full */
-        public boolean addItem(Item item) {
-            return addItem(item, 1);
+         * @param itemName name of item to be added */
+        public void addItem(String itemName) {
+            addItem(itemName, 1);
         }
         /** Adds the specific amount of items to inventory and return true.
          * If inventory is filled, do nothing and return false.
-         * @param i item to be added
-         * @param amount how many items to be added
-         * @return true if item was successfully added. false if inv was full */
-        public boolean addItem(Item i, int amount) {
-            if (items.size() < items_max) {
-                if (items.containsKey(i)) {
-                    items.put(i, items.get(i) + amount);
-                } else items.put(i, amount);
-                return true;
-            } else return false;
+         * @param name name of item to be added
+         * @param amount how many items to be added */
+        public void addItem(String name, int amount) {
+            for (Item item : items) {
+                if (item.getName().equals(name) && !item.isItemFull()) {
+                    // item in list, not full
+                    int extra = item.addAmount(amount);
+                    if (extra > 0) {
+                        if (items.size() < items_max) {
+                            // item in list, overflow, list not full
+                            items.add(new Item(name, extra));
+                        }
+                        // item in list, overflow, list full
+                    }
+                    return;
+                }
+            }
+            // item not in list, list not full
+            if (items.size() < items_max) items.add(new Item(name, amount));
         }
         /** Sorts the inventory */
         public void sortItems() {
             if (items != null) {
-                Map<Item, Integer> items_sorted =
-                        new TreeMap<Item, Integer>(new Item.ItemComparator());
-                items_sorted.putAll(items);
-                items = new LinkedHashMap<Item, Integer>(items_sorted);
+                items.sort(new Item.ItemComparator());
             }
         }
 
@@ -345,22 +366,44 @@ public class Character {
     }
     public class Stats {
 
-        private int health, defense, attack, agility, floor;
+        private int health, defense, attack, floor;
 
         public Stats() {
             health = 25;
             defense = 5;
             attack = 5;
-            agility = 5;
             floor = 1;
         }
 
         // Getters
-        public int getHealth() { return health; }
-        public int getDefense() { return defense; }
-        public int getAttack() { return attack; }
-        public int getAgility() { return agility; }
-        public int getFloor() { return floor; }
+        public int getStat(Stat stat) {
+            switch (stat) {
+                case FLOOR:
+                    return floor;
+                case HEALTH:
+                    return health;
+                case ATTACK:
+                    return attack;
+                case DEFENSE:
+                    return defense;
+                default:
+                    return -1;
+            }
+        }
+        public String toString(Stat stat) {
+            switch (stat) {
+                case FLOOR:
+                    return "Floor: " + floor;
+                case HEALTH:
+                    return "Health: " + health;
+                case ATTACK:
+                    return "Attack: " + attack;
+                case DEFENSE:
+                    return "Defense: " + defense;
+                default:
+                    return null;
+            }
+        }
 
         // Setters
         public void advanceFloor() { floor++; }

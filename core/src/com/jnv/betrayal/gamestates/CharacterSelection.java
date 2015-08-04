@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -61,7 +65,7 @@ public class CharacterSelection extends GameState {
 
     }
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0); // Set background to black
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
@@ -334,8 +338,8 @@ public class CharacterSelection extends GameState {
                 break;
             case THIEF:
                 label.setText("Thief:" +
-                        "\n (Passive) +50% Gold" +
-                        "\n (Team Passive) +25% Gold" +
+                        "\n (Passive) +50% Gold drop rate" +
+                        "\n (Team Passive) +25% Gold drop rate" +
                         "\n (Ability) 25% Chance to Steal ");
                 break;
             default:
@@ -401,9 +405,9 @@ public class CharacterSelection extends GameState {
 
             // Create serial number
             field_selection_serialNumber = new Label("", labelStyle);
-            field_selection_serialNumber.setBounds(field_selection_leftArrow.getX() +
-                            field_selection_leftArrow.getWidth() + 30, field_selection_leftArrow.getY(), 60,
-                    field_selection_leftArrow.getHeight());
+            field_selection_serialNumber.setBounds(field_selection_leftArrow.getX()
+                    + field_selection_leftArrow.getWidth() + 30, field_selection_leftArrow.getY(),
+                    60, field_selection_leftArrow.getHeight());
             field_selection_serialNumber.setAlignment(Align.center);
             group_selectionField.addActor(field_selection_serialNumber);
 

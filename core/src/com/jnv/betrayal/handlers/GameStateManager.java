@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.jnv.betrayal.gamestates.CharacterSelection;
+import com.jnv.betrayal.gamestates.Dungeon;
 import com.jnv.betrayal.gamestates.GameState;
 import com.jnv.betrayal.gamestates.HallOfFame;
 import com.jnv.betrayal.gamestates.LoadGame;
@@ -26,6 +31,7 @@ public class GameStateManager {
         LOAD_GAME,
         HALL_OF_FAME,
         LOBBY,
+        DUNGEON
     }
 
     public GameStateManager(Betrayal game) {
@@ -57,21 +63,18 @@ public class GameStateManager {
         switch (state) {
             case SPLASH:
                 return new SplashScreen(this);
-
             case MENU:
                 return new Menu(this);
-
             case CHARACTER_SELECTION:
                 return new CharacterSelection(this);
-
             case LOAD_GAME:
                 return new LoadGame(this);
-
             case HALL_OF_FAME:
                 return new HallOfFame(this);
-
             case LOBBY:
                 return new Lobby(this);
+            case DUNGEON:
+                return new Dungeon(this);
 
             default:
                 Gdx.app.log("GameStateManager", "getState() returns null: ERROR");

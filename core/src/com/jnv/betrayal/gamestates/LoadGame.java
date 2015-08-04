@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -73,7 +77,7 @@ public class LoadGame extends GameState {
     }
     private void loadUsername() {
         // Username "Name:" text
-        field_username = new Label("Name: " + CharacterSelection.getCharacter().getName(), labelStyle);
+        field_username = new Label(CharacterSelection.getCharacter().getName(), labelStyle);
         field_username.setX(10);
         field_username.setY(button_back.getY() - button_back.getHeight() - 10);
         stage.addActor(field_username);

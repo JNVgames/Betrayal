@@ -1,16 +1,18 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
-
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- */
 
 public class Stats {
     private Stage stage;
@@ -19,6 +21,8 @@ public class Stats {
     private Label title;
     private Actor mask;
 
+    // VINCENTS VARIABLE
+    private Group characterStats;
 
     public Stats(Betrayal game) {
         stage = game.getStage();
@@ -35,6 +39,7 @@ public class Stats {
         loadBackground();
         loadTitle();
         loadContent();
+        loadCharacterStats();
         loadReturnToLobbyButton();
     }
 
@@ -73,7 +78,7 @@ public class Stats {
     private void loadReturnToLobbyButton() {
         lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
         lobbyButton.layout();
-        lobbyButton.setBounds((Betrayal.WIDTH-lobbyButton.getWidth())/2+100, 110, 312, 100);
+        lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
         lobbyButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -97,5 +102,32 @@ public class Stats {
         title.remove();
         background.remove();
         lobbyButton.remove();
+
+        // vincents variable
+        characterStats.remove();
+    }
+
+    // VINCENTS STUFF. DISPLAYS THE CHARACTERS STATS ON THE STATS PAGE
+    private void loadCharacterStats() {
+        characterStats = new Group();
+        float yReference = title.getY();
+
+        yReference = characterStatsLabel(characterStats, Character.Stat.FLOOR, yReference).getY();
+        yReference = characterStatsLabel(characterStats, Character.Stat.HEALTH, yReference).getY();
+        yReference = characterStatsLabel(characterStats, Character.Stat.DEFENSE, yReference).getY();
+        characterStatsLabel(characterStats, Character.Stat.ATTACK, yReference).getY();
+        stage.addActor(characterStats);
+    }
+    private Label characterStatsLabel(Group group, Character.Stat stat, float yReference) {
+        int fontSize = 40;
+        Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
+        statsText.setText(CharacterSelection.getCharacter().getStatsClass().toString(stat));
+        statsText.layout();
+        statsText.setX(background.getX() + 30);
+        statsText.setY(yReference - fontSize - 60);
+        statsText.setWidth(statsText.getPrefWidth());
+        statsText.setHeight(fontSize);
+        group.addActor(statsText);
+        return statsText;
     }
 }

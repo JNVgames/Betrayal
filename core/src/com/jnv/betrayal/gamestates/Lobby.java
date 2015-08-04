@@ -1,16 +1,19 @@
+/*
+ * Copyright (c) 2015. JNV Games, All rights reserved.
+ */
+
 package com.jnv.betrayal.gamestates;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-/**
- * Copyright 2015, JNV Games, All rights reserved.
- */
 public class Lobby extends GameState {
 
     private Image lobbyBackground, shopButton, settingsButton,
@@ -20,6 +23,10 @@ public class Lobby extends GameState {
     private int buttonWidth, buttonHeight, spacing;
 
     private Character character;
+
+    // VINCENTS VARIABLES. LOOK AT SECOND NOTE TO SEE WHY ITS HERE
+    private Texture image_button_play;
+    private Actor button_play_now;
 
     public Lobby(GameStateManager gsm) {
         super(gsm);
@@ -155,6 +162,9 @@ public class Lobby extends GameState {
         loadInventoryButton();
         //loadLobbyLabel(); ERror>/ FIX later
 
+        // VINECNTS SHIT DELETE LOOK AT BOTTOM TO SEE WHY
+        loadPlayNowButton();
+
     }
 
     /*
@@ -166,5 +176,39 @@ public class Lobby extends GameState {
     }
 
    */
+
+    // VINCENTS SHIT. LOADS THE PLAY BUTTON FOR DUNGEON TESTING. YOU CAN DELETE WHENEVER
+    private void loadPlayNowButton() {
+        image_button_play = Betrayal.res.getTexture("play-now");
+        button_play_now = new Actor() {
+            @Override
+            public void draw(Batch batch, float parentAlpha) {
+                batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
+                        button_play_now.getWidth(), button_play_now.getHeight());
+            }
+        };
+        button_play_now.setWidth(512);
+        button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
+        button_play_now.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                image_button_play = Betrayal.res.getTexture("play-now-pressed");
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (x >= button_play_now.getX()
+                        && x <= button_play_now.getX() + button_play_now.getWidth()
+                        && y >= button_play_now.getY()
+                        && y <= button_play_now.getY() + button_play_now.getHeight()) {
+                    gsm.setState(GameStateManager.State.DUNGEON);
+                }
+                else image_button_play = Betrayal.res.getTexture("play-now");
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                image_button_play = Betrayal.res.getTexture("play-now");
+            }
+        });
+        stage.addActor(button_play_now);
+    }
+
 
 }
