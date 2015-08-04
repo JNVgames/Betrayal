@@ -18,6 +18,8 @@ import java.util.TreeMap;
  */
 public class Character {
 
+    private String name;
+
     /** Contains rotation value for character preview
      * front = 0, right side = 1, back = 2, left side = 3 */
     private int rotation = 0;
@@ -51,6 +53,10 @@ public class Character {
     private TextureRegion armor_right_left, armor_right_still, armor_right_right;
     private TextureRegion armor_left_left, armor_left_still, armor_left_right;
     private TextureRegion armor_back_left, armor_back_still, armor_back_right;
+
+    private TextureRegion headgear_front_still, headgear_right_still, headgear_left_still, headgear_back_still;
+    private TextureRegion shield_front_still, shield_right_still, shield_left_still, shield_back_still;
+    private TextureRegion sword_front_still, sword_right_still, sword_left_still, sword_back_still;
 
     private Job job;
     private Equips equips;
@@ -131,6 +137,7 @@ public class Character {
     }
 
     // Getters
+    public String getName() { return name; }
     public TextureRegion getHeadPreview() {
         switch (rotation) {
             case 0:
@@ -196,6 +203,7 @@ public class Character {
     public Stats getStatsClass() { return stats; }
 
     // Setters
+    public void setName(String name) { this.name = name; }
     /** Functions for rotating character preview image */
     public void rotateLeft() {
         if (rotation == 0) rotation = 3;
@@ -328,17 +336,35 @@ public class Character {
             }
         }
 
+        /** Adds specified amount of gold to inventory
+         * @param amount amount of gold to be added */
+        public void addGold(int amount) {
+            gold += amount;
+        }
+
     }
     public class Stats {
 
-        private int health, defense, attack, agility;
+        private int health, defense, attack, agility, floor;
 
         public Stats() {
             health = 25;
             defense = 5;
             attack = 5;
             agility = 5;
+            floor = 1;
         }
+
+        // Getters
+        public int getHealth() { return health; }
+        public int getDefense() { return defense; }
+        public int getAttack() { return attack; }
+        public int getAgility() { return agility; }
+        public int getFloor() { return floor; }
+
+        // Setters
+        public void advanceFloor() { floor++; }
+        public void setFloor(int floor) { this.floor = floor; }
     }
     public class Job {
 

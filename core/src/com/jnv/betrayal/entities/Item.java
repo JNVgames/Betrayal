@@ -11,7 +11,6 @@ public class Item {
     private int id, cost_buy, cost_sell;
 
     /** Creates an item with the specified id with other default values
-     *
      * @param id item id number */
     public Item(int id) {
         this.id = id;
@@ -20,7 +19,6 @@ public class Item {
         itemImage = Betrayal.res.getTexture("item-id-" + id);
     }
     /** Creates an item with the specified id and shop values
-     *
      * @param id item id number
      * @param cost_buy gold it costs to buy from the shop
      * @param cost_sell gold it takes to sell to the shop */
@@ -45,4 +43,7 @@ public class Item {
     public int getSellCost() { return cost_sell; }
     public Texture getItemImage() { return itemImage; }
 
+    // Setters
+    public void setBuyCost(int new_cost) { cost_buy = new_cost; }
+    public void setSellCost(int new_cost) { cost_sell = new_cost; }
 }

@@ -3,13 +3,20 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Menu extends GameState {
+
+    private Group group_dialog_warning;
 
     public Menu(GameStateManager gsm) {
         super(gsm);
@@ -24,7 +31,7 @@ public class Menu extends GameState {
 
     }
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0); // Set background to black
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         cam.update();
@@ -67,10 +74,19 @@ public class Menu extends GameState {
         stage.addActor(button_newGame);
     }
     private void loadLoadGameButton() {
-        Image button_loadGame = new Image(Betrayal.res.getTexture("load-game"));
-        button_loadGame.layout();
-        button_loadGame.setBounds((Betrayal.WIDTH - button_loadGame.getImageWidth()) / 2,
+        Actor button_loadGame = new Actor() {
+            public void draw(Batch batch, float parentAlpha) {
+                if (LoadGame.previouslyPlayed()) {
+                    batch.draw(Betrayal.res.getTexture("load-game"),
+                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
+                            600, 512, 144);
+                } // TODO else load opacity mask
+            }
+        };
+        button_loadGame.setBounds((Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
                 600, 512, 144);
+        if (!LoadGame.previouslyPlayed()) button_loadGame.setTouchable(Touchable.disabled);
+
         button_loadGame.addListener(new InputListener() {
 
                 @Override
@@ -80,7 +96,7 @@ public class Menu extends GameState {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    gsm.setState(GameStateManager.State.MENU);
+                    gsm.setState(GameStateManager.State.LOAD_GAME);
                 }
         });
         stage.addActor(button_loadGame);
@@ -104,7 +120,6 @@ public class Menu extends GameState {
         });
         stage.addActor(button_instructions);
     }
-
     private void loadOptionsButton() {
         Image button_options = new Image(Betrayal.res.getTexture("options"));
         button_options.layout();
@@ -124,7 +139,6 @@ public class Menu extends GameState {
         });
         stage.addActor(button_options);
     }
-
     private void loadHallOfFameButton() {
         Image button_hallOfFame = new Image(Betrayal.res.getTexture("hall-of-fame"));
         button_hallOfFame.layout();
@@ -144,4 +158,5 @@ public class Menu extends GameState {
         });
         stage.addActor(button_hallOfFame);
     }
+
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.jnv.betrayal.gamestates.CharacterSelection;
 import com.jnv.betrayal.gamestates.GameState;
 import com.jnv.betrayal.gamestates.HallOfFame;
+import com.jnv.betrayal.gamestates.LoadGame;
 import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.gamestates.Menu;
 import com.jnv.betrayal.gamestates.SplashScreen;
@@ -22,6 +23,7 @@ public class GameStateManager {
         SPLASH,
         MENU,
         CHARACTER_SELECTION,
+        LOAD_GAME,
         HALL_OF_FAME,
         LOBBY,
     }
@@ -61,6 +63,9 @@ public class GameStateManager {
 
             case CHARACTER_SELECTION:
                 return new CharacterSelection(this);
+
+            case LOAD_GAME:
+                return new LoadGame(this);
 
             case HALL_OF_FAME:
                 return new HallOfFame(this);

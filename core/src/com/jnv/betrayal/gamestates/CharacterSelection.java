@@ -32,6 +32,7 @@ public class CharacterSelection extends GameState {
     private Actor field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
     private Image button_back, field_framePreview;
     private Label field_usernameLabel, label_jobDescription;
+    private TextField field_usernameEnter;
     private SelectionField gender, hairStyle, hairColor, job;
     private static Character character;
 
@@ -53,7 +54,7 @@ public class CharacterSelection extends GameState {
 
     public void update(float dt) {
         updateTraits();
-        updateJobDescription();
+        updateJobDescription(label_jobDescription);
         stage.act(dt);
     }
     public void handleInput() {
@@ -123,6 +124,7 @@ public class CharacterSelection extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                character = null;
                 gsm.setState(GameStateManager.State.MENU);
             }
         });
@@ -150,9 +152,10 @@ public class CharacterSelection extends GameState {
                 if (x >= button_play_now.getX()
                         && x <= button_play_now.getX() + button_play_now.getWidth()
                         && y >= button_play_now.getY()
-                        && y <= button_play_now.getY() + button_play_now.getHeight())
-
+                        && y <= button_play_now.getY() + button_play_now.getHeight()) {
+                    character.setName(field_usernameEnter.getText());
                     gsm.setState(GameStateManager.State.LOBBY);
+                }
                 else image_button_play = Betrayal.res.getTexture("play-now");
             }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
@@ -174,7 +177,7 @@ public class CharacterSelection extends GameState {
         tfs.messageFont = tfs.font;
         tfs.fontColor = Color.LIGHT_GRAY;
         tfs.messageFontColor = Color.GRAY;
-        TextField field_usernameEnter = new TextField("", tfs);
+        field_usernameEnter = new TextField("", tfs);
         field_usernameEnter.setMessageText("Enter name here");
         field_usernameEnter.setBounds(10 + field_usernameLabel.getWidth() + 10, field_usernameLabel.getY(),
                 Betrayal.WIDTH - 20 - field_usernameLabel.getWidth(), field_usernameLabel.getHeight());
@@ -309,28 +312,28 @@ public class CharacterSelection extends GameState {
         hairColor.update();
         job.update();
     }
-    private void updateJobDescription() {
+    public static void updateJobDescription(Label label) {
         switch (character.getJobClass().getJob()) {
             case WARRIOR:
-                label_jobDescription.setText("Warrior:" +
+                label.setText("Warrior:" +
                         "\n (Passive) +25% Attack" +
                         "\n (Team Passive) +10% Attack" +
                         "\n (Ability) 150% strike ");
                 break;
             case KNIGHT:
-                label_jobDescription.setText("Knight:" +
+                label.setText("Knight:" +
                         "\n (Passive) +25% Defense" +
                         "\n (Team Passive) +10% Defense" +
                         "\n (Ability) Grants Shield ");
                 break;
             case PRIEST:
-                label_jobDescription.setText("Priest:" +
+                label.setText("Priest:" +
                         "\n (Passive) +25% Health" +
                         "\n (Team Passive) +10% Health" +
                         "\n (Ability) Buffs  ");
                 break;
             case THIEF:
-                label_jobDescription.setText("Thief:" +
+                label.setText("Thief:" +
                         "\n (Passive) +50% Gold" +
                         "\n (Team Passive) +25% Gold" +
                         "\n (Ability) 25% Chance to Steal ");
@@ -342,6 +345,9 @@ public class CharacterSelection extends GameState {
 
     // Getters
     public static Character getCharacter() { return character; }
+
+    // Setters
+    public static void setCharacterNull() { character = null; }
     // Classes
     private class SelectionField {
 
