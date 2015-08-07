@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.handlers.Content;
 import com.jnv.betrayal.handlers.GameStateManager;
-import com.jnv.betrayal.utilities.ItemCosts;
+import com.jnv.betrayal.utilities.ItemLoader;
 import com.jnv.betrayal.utilities.TextureLoader;
 
 public class Betrayal extends Game {
@@ -45,7 +45,7 @@ public class Betrayal extends Game {
 
         res = new Content();
         TextureLoader.loadAll();
-		ItemCosts.setItemCosts();
+		ItemLoader.loadAll();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 

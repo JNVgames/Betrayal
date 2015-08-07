@@ -6,9 +6,11 @@ package com.jnv.betrayal.utilities;
 
 import com.jnv.betrayal.entities.Item;
 
-public class ItemCosts {
+public class ItemLoader {
 
-    public static void setItemCosts() {
-        Item.setCosts("sword1", 10, 10);
+    public static void loadAll() {
+        for (int i = 1; i <= 6; i++) {
+            new Item(i, "sword" + i);
+        }
     }
 }
