@@ -18,12 +18,15 @@ import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.utilities.ItemLoader;
 import com.jnv.betrayal.utilities.TextureLoader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Betrayal extends Game {
 
 	private SpriteBatch sb;
 	private OrthographicCamera worldCam;
-	public static int WIDTH = 720;
-	public static int HEIGHT = 1280;
+	public final static int WIDTH = 720;
+	public final static int HEIGHT = 1280;
 	private StretchViewport stretchViewport;
 	private Stage stage;
 	private static FreeTypeFontGenerator generator;

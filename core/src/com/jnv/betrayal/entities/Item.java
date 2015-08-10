@@ -44,7 +44,6 @@ public class Item {
             int item2 = o2.getID();
             return item1 - item2;
         }
-
     }
 
     // Getters

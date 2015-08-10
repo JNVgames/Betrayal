@@ -6,22 +6,22 @@ package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.Queue;
 
 /**
  * Holds information regarding a game character's traits
  * @author Vincent Wang
  */
 public class Character {
+
+    /* If array this was private, a getter would get this array and other classes would
+     * still be able to edit it. Either way, this array will function as a public array */
+    public static List<Character> characters = new ArrayList<Character>();
 
     public enum Trait {
         GENDER,
@@ -46,7 +46,7 @@ public class Character {
     private int rotation = 0;
 
     /** Holds character trait values */
-    private int hair_male, hair_female, hairColor, skinTone;
+    private int hair_male, hair_female, hairColor;
 
     private Gender gender;
 
@@ -80,7 +80,6 @@ public class Character {
         hair_male = 1;
         hair_female = 1;
         hairColor = 1;
-        skinTone = 1;
         job.setJob(Jobs.WARRIOR);
         update();
     }
@@ -122,8 +121,7 @@ public class Character {
         head_back_right = head_split[3][2];
     }
     private void updateArmorSprites() {
-        Texture armor_all = Betrayal.res.getTexture("char-armor-peasant");
-        TextureRegion[][] armor_split = TextureRegion.split(armor_all, 32, 48);
+        TextureRegion[][] armor_split = TextureRegion.split(equips.armor_all, 32, 48);
         armor_front_left = armor_split[0][0];
         armor_front_still = armor_split[0][1];
         armor_front_right = armor_split[0][2];
@@ -137,6 +135,9 @@ public class Character {
         armor_back_still = armor_split[3][1];
         armor_back_right = armor_split[3][2];
     }
+    private void updateShieldSprites() {
+        //Texture shield_all = Betrayal.res.getTexture()
+    }
     /** Called when character trait is changed */
     private void spriteChanged() {
         update();
@@ -144,33 +145,41 @@ public class Character {
 
     // Getters
     public String getName() { return name; }
-    public TextureRegion getHeadPreview() {
+    public List<TextureRegion> getFullPreview() {
+        List<TextureRegion> preview = new ArrayList<TextureRegion>();
         switch (rotation) {
             case 0:
-                return head_front_still;
+                preview.add(armor_front_still);
+                //preview.add(sword_front_still);
+                preview.add(head_front_still);
+                //preview.add(shield_front_still);
+                break;
             case 1:
-                return head_right_still;
+                preview.add(armor_right_still);
+                //preview.add(sword_right_still);
+                preview.add(head_right_still);
+                //preview.add(shield_right_still);
+                break;
             case 2:
-                return head_back_still;
+                preview.add(armor_back_still);
+                //preview.add(sword_front_still);
+                preview.add(head_back_still);
+                //preview.add(shield_front_still);
+                break;
             case 3:
-                return head_left_still;
+                preview.add(armor_left_still);
+                //preview.add(sword_front_still);
+                preview.add(head_left_still);
+                //preview.add(shield_front_still);
+                break;
             default:
-                return null;
+                break;
         }
+        return preview;
     }
-    public TextureRegion getArmorPreview() {
-        switch (rotation) {
-            case 0:
-                return armor_front_still;
-            case 1:
-                return armor_right_still;
-            case 2:
-                return armor_back_still;
-            case 3:
-                return armor_left_still;
-            default:
-                return null;
-        }
+    public List<TextureRegion> getFullPreview(int rotation) {
+        this.rotation = rotation;
+        return getFullPreview();
     }
     public String getTrait(Trait trait) {
         switch (trait) {
@@ -207,6 +216,9 @@ public class Character {
     public Equips getEquipsClass() { return equips; }
     public Inventory getInventoryClass() { return inventory; }
     public Stats getStatsClass() { return stats; }
+    public Group toLoadPreview() {
+        return null;
+    }
 
     // Setters
     public void setName(String name) { this.name = name; }
@@ -283,10 +295,16 @@ public class Character {
     // Classes
     public class Equips {
 
-        public Equips() {}
+        private Texture armor_all;
 
-        public void equipWeapon(Weapon weapon) {}
-        public void equipHeadArmor() {}
+        public Equips() {
+            armor_all = Betrayal.res.getTexture("char-armor-peasant");
+        }
+
+        public void equipWeapon(Weapon weapon) {
+
+        }
+        public void equipHeadArmor(Equip equip) {}
         public void equipBodyArmor() {}
         public void equipShield() {}
 
@@ -420,6 +438,20 @@ public class Character {
 
         // Getters
         public Jobs getJob() { return job; }
+        public String toString() {
+            switch (job) {
+                case WARRIOR:
+                    return "Warrior";
+                case KNIGHT:
+                    return "Knight";
+                case PRIEST:
+                    return "Priest";
+                case THIEF:
+                    return "Thief";
+                default:
+                    return null;
+            }
+        }
 
         // Setters
         public void setJob(Jobs job) {

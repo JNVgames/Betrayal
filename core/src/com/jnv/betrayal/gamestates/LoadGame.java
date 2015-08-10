@@ -18,15 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.entities.*;
+import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
+import java.util.List;
+
 public class LoadGame extends GameState {
 
-    private Label.LabelStyle labelStyle;
-
-    private Actor field_headPreview, field_armorPreview, button_play_now;
-    private Label field_username, label_jobDescription;
     private Image button_back, field_framePreview;
     private TextureRegion image_leftArrow, image_rightArrow;
     private Texture image_button_play;
@@ -38,12 +38,10 @@ public class LoadGame extends GameState {
         image_leftArrow.flip(true, false);
         image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
 
-        loadFont();
         loadStage();
     }
 
     public void update(float dt) {
-        CharacterSelection.updateJobDescription(label_jobDescription);
         stage.act(dt);
     }
     public void handleInput() {
@@ -59,117 +57,15 @@ public class LoadGame extends GameState {
 
     }
 
-    public static boolean previouslyPlayed() {
-        return !(CharacterSelection.getCharacter() == null);
-    }
-
     // Helpers
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
+    private Label.LabelStyle loadFont(int fontSize) {
+        return Betrayal.getHurtmoldFontLabelStyle(fontSize);
     }
     private void loadStage() {
         loadBackButton();
-        loadPlayNowButton();
-        loadUsername();
-        loadImagePreview();
-        loadPreviewRotators();
-        loadJobDescription();
-    }
-    private void loadUsername() {
-        // Username "Name:" text
-        field_username = new Label(CharacterSelection.getCharacter().getName(), labelStyle);
-        field_username.setX(10);
-        field_username.setY(button_back.getY() - button_back.getHeight() - 10);
-        stage.addActor(field_username);
+        loadSavedSessions();
     }
 
-    private void loadImagePreview() {
-        loadPreviewFrame();
-        loadHeadPreview();
-        loadArmorPreview();
-    }
-    private void loadPreviewFrame() {
-        field_framePreview = new Image();
-        field_framePreview.setWidth(384);
-        field_framePreview.setHeight(576);
-        field_framePreview.setX(10);
-        field_framePreview.setY(field_username.getY() - field_username.getHeight()
-                - field_framePreview.getHeight());
-        stage.addActor(field_framePreview);
-    }
-    private void loadHeadPreview() {
-        field_headPreview = new Actor() {
-            public void draw(Batch batch, float parentAlpha) {
-                sb.draw(CharacterSelection.getCharacter().getArmorPreview(), field_armorPreview.getX(),
-                        field_armorPreview.getY(), field_armorPreview.getWidth(),
-                        field_armorPreview.getHeight());
-            }
-        };
-        field_headPreview.setWidth(384);
-        field_headPreview.setHeight(576);
-        field_headPreview.setX(field_framePreview.getX());
-        field_headPreview.setY(field_framePreview.getY());
-        stage.addActor(field_headPreview);
-    }
-    private void loadArmorPreview() {
-        field_armorPreview = new Actor() {
-            public void draw(Batch batch, float parentAlpha) {
-                sb.draw(CharacterSelection.getCharacter().getHeadPreview(), field_headPreview.getX(),
-                        field_headPreview.getY(), field_headPreview.getWidth(),
-                        field_headPreview.getHeight());
-            }
-        };
-        field_armorPreview.setWidth(384);
-        field_armorPreview.setHeight(576);
-        field_armorPreview.setX(field_framePreview.getX());
-        field_armorPreview.setY(field_framePreview.getY());
-        stage.addActor(field_armorPreview);
-    }
-    private void loadPreviewRotators() {
-        int gap = 60, padding = 30;
-        Group group_previewRotators = new Group();
-
-        Image previewRotators_leftArrow = new Image(image_leftArrow);
-        previewRotators_leftArrow.setHeight(60);
-        previewRotators_leftArrow.setWidth((field_framePreview.getWidth() - gap - padding * 2) / 2);
-        previewRotators_leftArrow.setX(field_framePreview.getX() + padding);
-        previewRotators_leftArrow.setY(field_framePreview.getY()
-                - previewRotators_leftArrow.getHeight() - 10);
-        previewRotators_leftArrow.addListener(new InputListener() {
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                CharacterSelection.getCharacter().rotateLeft();
-            }
-        });
-        group_previewRotators.addActor(previewRotators_leftArrow);
-
-        Image previewRotators_rightArrow = new Image(image_rightArrow);
-        previewRotators_rightArrow.setHeight(previewRotators_leftArrow.getHeight());
-        previewRotators_rightArrow.setWidth(previewRotators_leftArrow.getWidth());
-        previewRotators_rightArrow.setX(previewRotators_leftArrow.getX()
-                + previewRotators_leftArrow.getWidth() + gap);
-        previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
-        group_previewRotators.addActor(previewRotators_rightArrow);
-        previewRotators_rightArrow.addListener(new InputListener() {
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                CharacterSelection.getCharacter().rotateRight();
-            }
-        });
-        stage.addActor(group_previewRotators);
-    }
     private void loadBackButton() {
         Group group_button_back = new Group();
 
@@ -180,7 +76,7 @@ public class LoadGame extends GameState {
         button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
         group_button_back.addActor(button_back);
 
-        Label button_text_back = new Label("Back", labelStyle);
+        Label button_text_back = new Label("Back", loadFont(60));
         button_text_back.setX(button_back.getX() + button_back.getWidth() + 10);
         button_text_back.setY(button_back.getY());
         group_button_back.addActor(button_text_back);
@@ -206,49 +102,68 @@ public class LoadGame extends GameState {
 
         stage.addActor(group_button_back);
     }
-    private void loadJobDescription() {
-        Label.LabelStyle font_jobDescription = Betrayal.getHurtmoldFontLabelStyle(30);
-        label_jobDescription = new Label("", font_jobDescription);
-        label_jobDescription.setHeight(field_framePreview.getY() - 80
-                - label_jobDescription.getHeight()
-                - (button_play_now.getY() + button_play_now.getHeight() + 10));
-        label_jobDescription.setWidth(Betrayal.WIDTH - 20);
-        label_jobDescription.setX(field_framePreview.getX());
-        label_jobDescription.setY(field_framePreview.getY() - 80 - label_jobDescription.getHeight());
-        label_jobDescription.setAlignment(Align.topLeft);
-        stage.addActor(label_jobDescription);
-    }
-    private void loadPlayNowButton() {
-        image_button_play = Betrayal.res.getTexture("play-now");
-        button_play_now = new Actor() {
-            @Override
-            public void draw(Batch batch, float parentAlpha) {
-                batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
-                        button_play_now.getWidth(), button_play_now.getHeight());
-            }
-        };
-        button_play_now.setWidth(512);
-        button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
-        button_play_now.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                image_button_play = Betrayal.res.getTexture("play-now-pressed");
-                return true;
-            }
+    private void loadSavedSessions() {
+        int counter = 1;
 
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (x >= button_play_now.getX()
-                        && x <= button_play_now.getX() + button_play_now.getWidth()
-                        && y >= button_play_now.getY()
-                        && y <= button_play_now.getY() + button_play_now.getHeight()) {
+        for (Character c : Character.characters) {
+            Group preview = new Group();
+
+            final List<TextureRegion> preview_charPics = c.getFullPreview(0);
+            final int i = counter;
+            Actor preview_charPrev = new Actor() {
+                public void draw(Batch sb, float pa) {
+                    for (TextureRegion tr : preview_charPics) {
+                        sb.draw(tr, 5, 5, 32 * 4, 48 * 4);
+                    }
+                }
+            };
+            preview_charPrev.setBounds(5, 5, 32 * 4, 48 * 4);
+            preview.addActor(preview_charPrev);
+
+            Label preview_name = new Label(c.getName(), loadFont(60));
+            preview_name.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
+            preview_name.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
+                    - preview_name.getPrefHeight());
+            preview_name.setColor(Color.WHITE);
+            preview.addActor(preview_name);
+
+            Label preview_class = new Label(c.getJobClass().toString(), loadFont(50));
+            preview_class.setX(preview_name.getX());
+            preview_class.setY(preview_name.getY() - 10 - preview_class.getPrefHeight());
+            preview_class.setColor(Color.LIGHT_GRAY);
+            preview.addActor(preview_class);
+
+            Label preview_floor = new Label("FLOOR", loadFont(40));
+            preview_floor.setX(Betrayal.WIDTH - 15 - preview_floor.getPrefWidth());
+            preview_floor.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
+                    - preview_floor.getPrefHeight());
+            preview_floor.setColor(Color.WHITE);
+            preview.addActor(preview_floor);
+
+            Label preview_floorNum =
+                    new Label(Integer.toString(c.getStatsClass().getStat(Character.Stat.FLOOR)),
+                            loadFont(100));
+            preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
+                    preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());
+            preview_floorNum.setColor(Color.LIGHT_GRAY);
+            preview_floorNum.setAlignment(Align.center);
+            preview.addActor(preview_floorNum);
+/*
+            preview.setBounds(5, button_back.getY() - 230 * i, Betrayal.WIDTH - 10,
+                    preview_charPrev.getHeight() + 10);
+            preview.addListener(new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     gsm.setState(GameStateManager.State.LOBBY);
-                } else image_button_play = Betrayal.res.getTexture("play-now");
-            }
+                }
+            }); */
 
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                image_button_play = Betrayal.res.getTexture("play-now");
-            }
-        });
-        stage.addActor(button_play_now);
+            stage.addActor(preview);
+
+            counter++;
+        }
     }
 
 }

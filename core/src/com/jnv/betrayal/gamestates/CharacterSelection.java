@@ -17,12 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.entities.Character;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -33,7 +31,6 @@ public class CharacterSelection extends GameState {
     private Label.LabelStyle labelStyle;
 
     private Actor reference, button_play_now;
-    private Actor field_headPreview, field_armorPreview, field_weaponPreview, field_shieldPreview;
     private Image button_back, field_framePreview;
     private Label field_usernameLabel, label_jobDescription;
     private TextField field_usernameEnter;
@@ -158,6 +155,7 @@ public class CharacterSelection extends GameState {
                         && y >= button_play_now.getY()
                         && y <= button_play_now.getY() + button_play_now.getHeight()) {
                     character.setName(field_usernameEnter.getText());
+                    Character.characters.add(character);
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
                 else image_button_play = Betrayal.res.getTexture("play-now");
@@ -185,7 +183,7 @@ public class CharacterSelection extends GameState {
         field_usernameEnter.setMessageText("Enter name here");
         field_usernameEnter.setBounds(10 + field_usernameLabel.getWidth() + 10, field_usernameLabel.getY(),
                 Betrayal.WIDTH - 20 - field_usernameLabel.getWidth(), field_usernameLabel.getHeight());
-        field_usernameEnter.setMaxLength(16);
+        field_usernameEnter.setMaxLength(10);
         stage.addActor(field_usernameEnter);
 
         // Removes keyboard focus if tap isn't on a TextField
@@ -203,8 +201,7 @@ public class CharacterSelection extends GameState {
     private void loadImagePreview() {
         loadPreviewFrame();
         loadReferenceActor();
-        loadHeadPreview();
-        loadArmorPreview();
+        loadPreview();
     }
     private void loadPreviewFrame() {
         field_framePreview = new Image();
@@ -268,38 +265,25 @@ public class CharacterSelection extends GameState {
         reference.setWidth(Betrayal.WIDTH - reference.getX() - 20);
         reference.setHeight(60);
     }
-    private void loadHeadPreview() {
-        field_headPreview = new Actor() {
+    private void loadPreview() {
+        Actor field_preview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                sb.draw(character.getArmorPreview(), field_armorPreview.getX(),
-                        field_armorPreview.getY(), field_armorPreview.getWidth(),
-                        field_armorPreview.getHeight());
+                for (TextureRegion preview : character.getFullPreview()) {
+                    sb.draw(preview, field_framePreview.getX(),
+                            field_framePreview.getY(), field_framePreview.getWidth(),
+                            field_framePreview.getHeight());
+                }
             }
         };
-        field_headPreview.setWidth(384);
-        field_headPreview.setHeight(576);
-        field_headPreview.setX(field_framePreview.getX());
-        field_headPreview.setY(field_framePreview.getY());
-        stage.addActor(field_headPreview);
-    }
-    private void loadArmorPreview() {
-        field_armorPreview = new Actor() {
-            public void draw(Batch batch, float parentAlpha) {
-                sb.draw(character.getHeadPreview(), field_headPreview.getX(),
-                        field_headPreview.getY(), field_headPreview.getWidth(),
-                        field_headPreview.getHeight());
-            }
-        };
-        field_armorPreview.setWidth(384);
-        field_armorPreview.setHeight(576);
-        field_armorPreview.setX(field_framePreview.getX());
-        field_armorPreview.setY(field_framePreview.getY());
-        stage.addActor(field_armorPreview);
+        field_preview.setWidth(384);
+        field_preview.setHeight(576);
+        field_preview.setX(field_framePreview.getX());
+        field_preview.setY(field_framePreview.getY());
+        stage.addActor(field_preview);
     }
 
     private void loadJobDescription() {
-        Label.LabelStyle font_jobDescription = Betrayal.getHurtmoldFontLabelStyle(30);
-        label_jobDescription = new Label("", font_jobDescription);
+        label_jobDescription = new Label("", Betrayal.getHurtmoldFontLabelStyle(45));
         label_jobDescription.setHeight(field_framePreview.getY() - 80
                 - label_jobDescription.getHeight()
                 - (button_play_now.getY() + button_play_now.getHeight() + 10));
@@ -339,8 +323,9 @@ public class CharacterSelection extends GameState {
             case THIEF:
                 label.setText("Thief:" +
                         "\n (Passive) +50% Gold drop rate" +
-                        "\n (Team Passive) +25% Gold drop rate" +
-                        "\n (Ability) 25% Chance to Steal ");
+                        "\n (*TP) +25% Gold drop rate" +
+                        "\n (Ability) 25% Chance to Steal " +
+                        "\n *TP is Team Passive");
                 break;
             default:
                 break;
@@ -352,6 +337,7 @@ public class CharacterSelection extends GameState {
 
     // Setters
     public static void setCharacterNull() { character = null; }
+
     // Classes
     private class SelectionField {
 
@@ -418,12 +404,9 @@ public class CharacterSelection extends GameState {
                     field_selection_serialNumber.getY(),
                     field_selection_leftArrow.getWidth(), field_selection_leftArrow.getHeight());
             field_selection_rightArrow.addListener(new InputListener() {
-                @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
                 }
-
-                @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     setNextTrait(trait);
                 }
