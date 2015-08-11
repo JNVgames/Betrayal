@@ -460,6 +460,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    new ShopRingPurchase(game);
                 }
             });
             stage.addActor(potions[i - 1]);

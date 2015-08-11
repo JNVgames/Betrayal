@@ -42,7 +42,7 @@ public class Betrayal extends Game {
 		sb = new SpriteBatch();
         stage = new Stage(stretchViewport, sb);
 		Gdx.input.setInputProcessor(stage);
-        stage.setDebugAll(true);
+        stage.setDebugUnderMouse(true);
 
         worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 

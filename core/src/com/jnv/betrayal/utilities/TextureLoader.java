@@ -14,6 +14,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("about/start_screen720x1280.png", "start-background");
         Betrayal.res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
         Betrayal.res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
+        Betrayal.res.loadTexture("about/confirmation_background720x1280.png", "confirmation-background");
         Betrayal.res.loadTexture("about/shop_background720x1280.png", "shop-background");
         Betrayal.res.loadTexture("about/shop_purchase_background720x1280.png", "shop-purchase-background");
         Betrayal.res.loadTexture("about/game_over720x1280.png", "game-over-background");
@@ -32,6 +33,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
 
         Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
+        Betrayal.res.loadTexture("button/arrow_left256x256.png", "arrow-left");
         Betrayal.res.loadTexture("button/circle_x150x150.png", "x");
         Betrayal.res.loadTexture("button/buy360x144.png", "buy");
         Betrayal.res.loadTexture("button/back360x144.png", "back");
@@ -40,6 +42,8 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/equip360x144.png", "equip");
         Betrayal.res.loadTexture("button/sell360x144.png", "sell");
         Betrayal.res.loadTexture("button/preview360x144.png", "preview");
+        Betrayal.res.loadTexture("button/yes360x144.png", "yes");
+        Betrayal.res.loadTexture("button/no360x144.png", "no");
 
         Betrayal.res.loadTexture("button/lobby/floor.png", "lobby-floor");
         Betrayal.res.loadTexture("button/lobby/inventory.png", "lobby-inventory");

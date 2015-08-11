@@ -20,13 +20,10 @@ public class ShopRingPurchase {
     private Label price, description;
     private Actor mask;
     private Betrayal game;
-    private com.jnv.betrayal.entities.Character character;
 
-
-    public ShopRingPurchase(Betrayal game, Character character) {
+    public ShopRingPurchase(Betrayal game) {
 
         this.game = game;
-        this.character = character;
         stage = game.getStage();
         loadFont();
         loadButtons();
@@ -39,12 +36,10 @@ public class ShopRingPurchase {
     private void loadButtons() {
         loadMask();
         loadBackground();
-        loadContent();
+        loadDescription();
         loadReturnToShopButton();
         loadBuyButton();
         loadGoldIcon();
-        loadPreview();
-        loadDescription();
         loadPrice();
     }
 
@@ -59,7 +54,7 @@ public class ShopRingPurchase {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                removeRingShopPurchase();
+                removeShopPurchase();
             }
         });
         stage.addActor(mask);
@@ -68,33 +63,55 @@ public class ShopRingPurchase {
     private void loadBackground() {
         background = new Image(Betrayal.res.getTexture("shop-purchase-background"));
         background.layout();
-        background.setBounds(200, 300, Betrayal.WIDTH - 400, Betrayal.HEIGHT - 600);
+        background.setBounds(150, 400, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 800);
         stage.addActor(background);
     }
 
-    private void loadBuyButton() {
-
-    }
-
     private void loadGoldIcon() {
-        backButton = new Image(Betrayal.res.getTexture("gold-icon"));
-        backButton.layout();
-        backButton.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 200, 50, 50);
-        stage.addActor(backButton);
+        goldIcon = new Image(Betrayal.res.getTexture("icon-gold"));
+        goldIcon.layout();
+        goldIcon.setBounds(410, 500, 40, 40);
+        stage.addActor(goldIcon);
     }
 
     private void loadPrice() {
-        price = new Label("[xxxx]", labelStyle);
-        price.setHeight(100);
-        price.setX((Betrayal.WIDTH - price.getWidth()) / 2);
-        price.setY(Betrayal.HEIGHT - 250);
+        price = new Label("$$$$$", labelStyle);
+        price.setHeight(50);
+        price.setX(450);
+        price.setY(500);
         stage.addActor(price);
     }
 
+    private void loadDescription() {
+        description = new Label("+5 Attack", labelStyle);
+        description.setHeight(50);
+        description.setX(300);
+        description.setY(700);
+        stage.addActor(description);
+    }
+
+    private void loadBuyButton() {
+        buyButton = new Image(Betrayal.res.getTexture("buy"));
+        buyButton.layout();
+        buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 420, 100, 50);
+        buyButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
+                new Confirmation(game);
+            }
+        });
+        stage.addActor(buyButton);
+    }
     private void loadReturnToShopButton() {
         backButton = new Image(Betrayal.res.getTexture("back"));
         backButton.layout();
-        backButton.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 350, 312, 100);
+        backButton.setBounds(Betrayal.WIDTH / 2 - 150, 420, 100, 50);
         backButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -103,32 +120,19 @@ public class ShopRingPurchase {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                removeRingShopPurchase();
+                removeShopPurchase();
             }
         });
         stage.addActor(backButton);
     }
 
-    private void loadContent() {
-
-    }
-
-    private void loadPreview() {
-        //show the ring or item
-    }
-    private void loadDescription(){
-        description = new Label("[desription]", labelStyle);
-        description.setX((Betrayal.WIDTH - price.getWidth()) / 2);
-        description.setY(Betrayal.HEIGHT - 250);
-        stage.addActor(description);
-    }
-
-    private void removeRingShopPurchase() {
+    private void removeShopPurchase() {
         mask.remove();
         background.remove();
         backButton.remove();
         buyButton.remove();
         goldIcon.remove();
-
+        price.remove();
+        description.remove();
     }
 }

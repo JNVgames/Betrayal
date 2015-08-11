@@ -12,27 +12,19 @@ import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
-/**
- * Created by jphan on 8/11/2015.
- */
 public class ShopPurchase {
     private Stage stage;
-    private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow, field_framePreview;
-    private TextureRegion image_leftArrow, image_rightArrow;
+    private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
     private Label.LabelStyle labelStyle;
-    private Label price;
+    private Label price,description;
     private Actor mask;
     private Betrayal game;
     private Character character;
     private int currentSide;
 
     public ShopPurchase(Betrayal game) {
-        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
-        image_leftArrow.flip(true, false);
-        image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
 
         this.game = game;
-        character = Character.currentCharacter;
         stage = game.getStage();
         currentSide = 0;
         loadFont();
@@ -50,6 +42,7 @@ public class ShopPurchase {
         loadReturnToShopButton();
         loadBuyButton();
         loadGoldIcon();
+        loadDescription();
         loadPreview();
         loadPrice();
         loadArrows();
@@ -75,15 +68,37 @@ public class ShopPurchase {
     private void loadBackground() {
         background = new Image(Betrayal.res.getTexture("shop-purchase-background"));
         background.layout();
-        background.setBounds(200, 200, Betrayal.WIDTH - 400, Betrayal.HEIGHT - 400);
+        background.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
         stage.addActor(background);
     }
 
+    private void loadGoldIcon() {
+        goldIcon = new Image(Betrayal.res.getTexture("icon-gold"));
+        goldIcon.layout();
+        goldIcon.setBounds(410, 850, 40, 40);
+        stage.addActor(goldIcon);
+    }
+
+    private void loadPrice() {
+        price = new Label("xxxxx", labelStyle);
+        price.setHeight(50);
+        price.setX(450);
+        price.setY(850);
+        stage.addActor(price);
+    }
+    private void loadDescription() {
+        description = new Label("+5 Attack", labelStyle);
+        description.setHeight(50);
+        description.setX(250);
+        description.setY(900);
+        stage.addActor(description);
+    }
+
     private void loadBuyButton() {
-        backButton = new Image(Betrayal.res.getTexture("buy"));
-        backButton.layout();
-        backButton.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 350, 312, 100);
-        backButton.addListener(new InputListener() {
+        buyButton = new Image(Betrayal.res.getTexture("buy"));
+        buyButton.layout();
+        buyButton.setBounds(Betrayal.WIDTH/ 2 + 50, 220, 100, 50);
+        buyButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -92,30 +107,15 @@ public class ShopPurchase {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
+                new Confirmation(game);
             }
         });
-        stage.addActor(backButton);
+        stage.addActor(buyButton);
     }
-
-    private void loadGoldIcon() {
-        backButton = new Image(Betrayal.res.getTexture("gold-icon"));
-        backButton.layout();
-        backButton.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 200, 50, 50);
-        stage.addActor(backButton);
-    }
-
-    private void loadPrice() {
-        price = new Label("[xxxx]", labelStyle);
-        price.setHeight(100);
-        price.setX((Betrayal.WIDTH - price.getWidth()) / 2);
-        price.setY(Betrayal.HEIGHT - 250);
-        stage.addActor(price);
-    }
-
     private void loadReturnToShopButton() {
         backButton = new Image(Betrayal.res.getTexture("back"));
         backButton.layout();
-        backButton.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 350, 312, 100);
+        backButton.setBounds(Betrayal.WIDTH / 2 - 150, 220, 100, 50);
         backButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -154,9 +154,9 @@ public class ShopPurchase {
     }
 
     private void loadArrows() {
-        leftArrow = new Image(Betrayal.res.getTexture("back"));
+        leftArrow = new Image(Betrayal.res.getTexture("arrow-left"));
         leftArrow.layout();
-        leftArrow.setBounds((Betrayal.WIDTH -leftArrow.getWidth()) / 2 + 100, 350, 312, 100);
+        leftArrow.setBounds(Betrayal.WIDTH / 2 -150, 300, 100, 50);
         leftArrow.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -171,9 +171,9 @@ public class ShopPurchase {
         });
         stage.addActor(leftArrow);
 
-        rightArrow = new Image(Betrayal.res.getTexture("back"));
+        rightArrow = new Image(Betrayal.res.getTexture("arrow"));
         rightArrow.layout();
-        rightArrow.setBounds((Betrayal.WIDTH - backButton.getWidth()) / 2 + 100, 350, 312, 100);
+        rightArrow.setBounds(Betrayal.WIDTH / 2 +50, 300, 100, 50);
         rightArrow.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -189,11 +189,15 @@ public class ShopPurchase {
     }
 
     private void removeShopPurchase() {
+        rightArrow.remove();
+        leftArrow.remove();
         mask.remove();
         background.remove();
         backButton.remove();
         buyButton.remove();
         goldIcon.remove();
+        price.remove();
+        description.remove();
 
     }
 }
