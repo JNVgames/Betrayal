@@ -25,9 +25,11 @@ public class Shop {
     private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
     private int currentContent, buttonHeight, buttonWidth, itemSize;
     private Actor mask;
+    private Betrayal game;
 
 
     public Shop(Betrayal game) {
+        this.game=game;
         stage = game.getStage();
         loadFont();
         currentContent = 0;
@@ -230,6 +232,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    new ShopPurchase(game);
                     Character.currentCharacter.getInventoryClass().addItem(item);
                 }
             });

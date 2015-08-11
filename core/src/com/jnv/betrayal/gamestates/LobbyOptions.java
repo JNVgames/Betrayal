@@ -21,7 +21,6 @@ public class LobbyOptions {
     private Actor mask;
     private Betrayal game;
 
-
     public LobbyOptions(Betrayal game) {
         this.game=game;
         stage = game.getStage();
