@@ -4,6 +4,10 @@
 
 package com.jnv.betrayal.utilities;
 
+import com.jnv.betrayal.entities.BodyArmor;
+import com.jnv.betrayal.entities.Item;
+import com.jnv.betrayal.entities.Ring;
+import com.jnv.betrayal.entities.Shield;
 import com.jnv.betrayal.entities.Weapon;
 
 public class ItemLoader {
@@ -13,7 +17,7 @@ public class ItemLoader {
             new Weapon(i, "sword" + i);
         }
 
-        /* VINCENT U BETCH
+        /*
         for (int i = 1; i <= 6; i++) {
             new Shield(i, "sword" + i);
         }
@@ -31,7 +35,8 @@ public class ItemLoader {
         }
         */
 
-    }
+        new BodyArmor(0, "char-armor-peasant");
 
+    }
 
 }

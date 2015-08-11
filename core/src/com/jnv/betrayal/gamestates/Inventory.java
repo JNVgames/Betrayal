@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.gamestates;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -119,7 +120,7 @@ public class Inventory {
     // VINCENTS STUFF
     private void loadInventory() {
         inventory = new Group();
-        Item[][] items = Character.currentCharacter.getInventoryClass().getItems(6, 5);
+        Item[][] items = Character.currentCharacter.inventory.getItems(6, 5);
         Actor[][] itemsDisplay = new Actor[items.length][items[0].length];
 
         float padding = 10;
@@ -150,7 +151,7 @@ public class Inventory {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Character.currentCharacter.getInventoryClass().sortItems();
+                Character.currentCharacter.inventory.sortItems();
                 inventory.remove();
                 loadInventory();
             }
@@ -158,7 +159,7 @@ public class Inventory {
         stage.addActor(button_sort);
     }
     private Actor loadInventoryBox(float x, float topY, final float sideLength, final Item item) {
-        final TextureRegion itemImage = item.getItemImage();
+        final Texture itemImage = item.getItemImage();
         Actor invBox = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 batch.draw(itemImage, this.getX(), this.getY(),

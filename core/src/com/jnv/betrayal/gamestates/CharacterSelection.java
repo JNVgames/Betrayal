@@ -232,7 +232,7 @@ public class CharacterSelection extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                character.rotateLeft();
+                character.preview.rotateLeft();
             }
         });
         group_previewRotators.addActor(previewRotators_leftArrow);
@@ -253,7 +253,7 @@ public class CharacterSelection extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                character.rotateRight();
+                character.preview.rotateRight();
             }
         });
         stage.addActor(group_previewRotators);
@@ -269,7 +269,7 @@ public class CharacterSelection extends GameState {
     private void loadPreview() {
         Actor field_preview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                for (TextureRegion preview : character.getFullPreview()) {
+                for (TextureRegion preview : character.preview.getFullPreview()) {
                     sb.draw(preview, field_framePreview.getX(),
                             field_framePreview.getY(), field_framePreview.getWidth(),
                             field_framePreview.getHeight());
@@ -302,7 +302,7 @@ public class CharacterSelection extends GameState {
         job.update();
     }
     public static void updateJobDescription(Label label) {
-        switch (character.getJobClass().getJob()) {
+        switch (character.job.getJob()) {
             case WARRIOR:
                 label.setText("Warrior:" +
                         "\n (Passive) +25% Attack" +
@@ -413,7 +413,7 @@ public class CharacterSelection extends GameState {
         }
 
         public void update() {
-            field_selection_serialNumber.setText(character.getTrait(trait));
+            field_selection_serialNumber.setText(character.preview.getTrait(trait));
         }
 
         // Helpers
@@ -421,10 +421,10 @@ public class CharacterSelection extends GameState {
             stage.addActor(group_selectionField);
         }
         private void setPreviousTrait(Character.Trait trait) {
-            character.setPreviousTrait(trait);
+            character.preview.setPreviousTrait(trait);
         }
         private void setNextTrait(Character.Trait trait) {
-            character.setNextTrait(trait);
+            character.preview.setNextTrait(trait);
         }
     }
 }

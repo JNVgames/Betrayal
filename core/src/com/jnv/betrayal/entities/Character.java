@@ -13,6 +13,7 @@ import com.jnv.betrayal.main.Betrayal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Holds information regarding a game character's traits
@@ -43,45 +44,22 @@ public class Character {
 
     private String name;
 
-    /** Contains rotation value for character preview
-     * front = 0, right side = 1, back = 2, left side = 3 */
-    private int rotation = 0;
-
-    /** Holds character trait values */
-    private int hair_male, hair_female, hairColor;
-
     private Gender gender;
 
-    /** Textures for character head, format: head_side_walkAnimation */
-    private TextureRegion head_front_left, head_front_still, head_front_right;
-    private TextureRegion head_right_left, head_right_still, head_right_right;
-    private TextureRegion head_left_left, head_left_still, head_left_right;
-    private TextureRegion head_back_left, head_back_still, head_back_right;
-    private TextureRegion armor_front_left, armor_front_still, armor_front_right;
-    private TextureRegion armor_right_left, armor_right_still, armor_right_right;
-    private TextureRegion armor_left_left, armor_left_still, armor_left_right;
-    private TextureRegion armor_back_left, armor_back_still, armor_back_right;
-
-    private TextureRegion headgear_front_still, headgear_right_still, headgear_left_still, headgear_back_still;
-    private TextureRegion shield_front_still, shield_right_still, shield_left_still, shield_back_still;
-    private TextureRegion sword_front_still, sword_right_still, sword_left_still, sword_back_still;
-
-    private Job job;
-    private Equips equips;
-    private Inventory inventory;
-    private Stats stats;
+    public Preview preview;
+    public Job job;
+    public Equips equips;
+    public Inventory inventory;
+    public Stats stats;
 
     /** Creates character with default values */
     public Character() {
         equips = new Equips();
+        preview = new Preview();
         job = new Job();
         inventory = new Inventory();
         stats = new Stats();
 
-        gender = Gender.MALE;
-        hair_male = 1;
-        hair_female = 1;
-        hairColor = 1;
         job.setJob(Jobs.WARRIOR);
         update();
     }
@@ -90,116 +68,15 @@ public class Character {
         this.job.setJob(job);
     }
     private void update() {
-        updateHeadSprites();
-        updateArmorSprites();
+        preview.updateHeadSprites();
+        preview.updateArmorSprites();
     }
     public void saveInfo() {
 
     }
 
-    // Helpers
-    /** Update and split the sprite sheet into appropriate sprites */
-    private void updateHeadSprites() {
-        Texture head_all;
-        if (gender == Gender.MALE) {
-            head_all = Betrayal.res.getTexture("hair-male-"
-                    + hair_male + "-" + hairColor + "-all");
-        } else {
-            head_all = Betrayal.res.getTexture("hair-female-"
-                    + hair_female + "-" + hairColor + "-all");
-        }
-        TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
-        head_front_left = head_split[0][0];
-        head_front_still = head_split[0][1];
-        head_front_right = head_split[0][2];
-        head_right_left = head_split[1][0];
-        head_right_still = head_split[1][1];
-        head_right_right = head_split[1][2];
-        head_left_left = head_split[2][0];
-        head_left_still = head_split[2][1];
-        head_left_right = head_split[2][2];
-        head_back_left = head_split[3][0];
-        head_back_still = head_split[3][1];
-        head_back_right = head_split[3][2];
-    }
-    private void updateArmorSprites() {
-        TextureRegion[][] armor_split = TextureRegion.split(equips.armor_all, 32, 48);
-        armor_front_left = armor_split[0][0];
-        armor_front_still = armor_split[0][1];
-        armor_front_right = armor_split[0][2];
-        armor_right_left = armor_split[1][0];
-        armor_right_still = armor_split[1][1];
-        armor_right_right = armor_split[1][2];
-        armor_left_left = armor_split[2][0];
-        armor_left_still = armor_split[2][1];
-        armor_left_right = armor_split[2][2];
-        armor_back_left = armor_split[3][0];
-        armor_back_still = armor_split[3][1];
-        armor_back_right = armor_split[3][2];
-    }
-    private void updateShieldSprites() {
-        //Texture shield_all = Betrayal.res.getTexture()
-    }
-    /** Called when character trait is changed */
-    private void spriteChanged() {
-        update();
-    }
-
     // Getters
     public String getName() { return name; }
-    public SnapshotArray<TextureRegion> getFullPreview() {
-        SnapshotArray<TextureRegion> preview = new SnapshotArray<TextureRegion>();
-        switch (rotation) {
-            case 0:
-                preview.add(armor_front_still);
-                //preview.add(sword_front_still);
-                preview.add(head_front_still);
-                //preview.add(shield_front_still);
-                break;
-            case 1:
-                preview.add(armor_right_still);
-                //preview.add(sword_right_still);
-                preview.add(head_right_still);
-                //preview.add(shield_right_still);
-                break;
-            case 2:
-                preview.add(armor_back_still);
-                //preview.add(sword_front_still);
-                preview.add(head_back_still);
-                //preview.add(shield_front_still);
-                break;
-            case 3:
-                preview.add(armor_left_still);
-                //preview.add(sword_front_still);
-                preview.add(head_left_still);
-                //preview.add(shield_front_still);
-                break;
-            default:
-                break;
-        }
-        return preview;
-    }
-    public SnapshotArray<TextureRegion> getFullPreview(int rotation) {
-        this.rotation = rotation;
-        return getFullPreview();
-    }
-    public String getTrait(Trait trait) {
-        switch (trait) {
-            case GENDER:
-                if (gender == Gender.MALE) return "M";
-                else return "F";
-            case HAIR_STYLE:
-                if (gender == Gender.MALE) return Integer.toString(hair_male);
-                else return Integer.toString(hair_female);
-            case HAIR_COLOR:
-                if (gender == Gender.MALE) return Integer.toString(hairColor);
-                else return Integer.toString(hairColor);
-            case JOB:
-                return getJob(job.getJob());
-            default:
-                return null;
-        }
-    }
     private String getJob(Jobs job) {
         switch (job) {
             case WARRIOR:
@@ -214,106 +91,329 @@ public class Character {
                 return null;
         }
     }
-    public Job getJobClass() { return job; }
-    public Equips getEquipsClass() { return equips; }
-    public Inventory getInventoryClass() { return inventory; }
-    public Stats getStatsClass() { return stats; }
-    public Group toLoadPreview() {
-        return null;
-    }
 
     // Setters
     public void setName(String name) { this.name = name; }
-    /** Functions for rotating character preview image */
-    public void rotateLeft() {
-        if (rotation == 0) rotation = 3;
-        else rotation--;
-    }
-    public void rotateRight() {
-        rotation++;
-        rotation &= 3;
-    }
-    public void setPreviousTrait(Trait trait) {
-        switch (trait) {
-            case GENDER:
-                if (gender == Gender.MALE) gender = Gender.FEMALE;
-                else gender = Gender.MALE;
-                spriteChanged();
-                break;
-            case HAIR_STYLE:
-                if (gender == Gender.MALE) {
-                    if (hair_male == 1) {
-                        hair_male = 5;
-                    } else hair_male--;
-                } else {
-                    if (hair_female == 1) {
-                        hair_female = 4;
-                    } else hair_female--;
-                }
-                spriteChanged();
-                break;
-            case HAIR_COLOR:
-                if (hairColor == 1) hairColor = 7;
-                else hairColor--;
-                spriteChanged();
-                break;
-            case JOB:
-                job.setPreviousJob();
-            default:
-                break;
-        }
-    }
-    public void setNextTrait(Trait trait) {
-        switch (trait) {
-            case GENDER:
-                if (gender == Gender.MALE) gender = Gender.FEMALE;
-                else gender = Gender.MALE;
-                spriteChanged();
-                break;
-            case HAIR_STYLE:
-                if (gender == Gender.MALE) {
-                    if (hair_male == 5) {
-                        hair_male = 1;
-                    } else hair_male++;
-                } else {
-                    if (hair_female == 4) {
-                        hair_female = 1;
-                    } else hair_female++;
-                }
-                spriteChanged();
-                break;
-            case HAIR_COLOR:
-                if (hairColor == 7) hairColor = 1;
-                else hairColor++;
-                spriteChanged();
-                break;
-            case JOB:
-                job.setNextJob();
-            default:
-                break;
-        }
-    }
 
     // Classes
+    public class Preview {
+
+        /** Textures for character head, format: head_side_walkAnimation */
+        private TextureRegion head_front_left, head_front_still, head_front_right;
+        private TextureRegion head_right_left, head_right_still, head_right_right;
+        private TextureRegion head_left_left, head_left_still, head_left_right;
+        private TextureRegion head_back_left, head_back_still, head_back_right;
+        private TextureRegion armor_front_left, armor_front_still, armor_front_right;
+        private TextureRegion armor_right_left, armor_right_still, armor_right_right;
+        private TextureRegion armor_left_left, armor_left_still, armor_left_right;
+        private TextureRegion armor_back_left, armor_back_still, armor_back_right;
+
+        private TextureRegion headgear_front_still, headgear_right_still, headgear_left_still, headgear_back_still;
+        private TextureRegion shield_front_still, shield_right_still, shield_left_still, shield_back_still;
+        private TextureRegion sword_front_still, sword_right_still, sword_left_still, sword_back_still;
+
+        /** Contains rotation value for character preview
+         * front = 0, right side = 1, back = 2, left side = 3 */
+        private int rotation = 0;
+
+        /** Holds character trait values */
+        private int hair_male, hair_female, hairColor;
+
+        public Preview() {
+            gender = Gender.MALE;
+            hair_male = 1;
+            hair_female = 1;
+            hairColor = 1;
+
+            updateHeadSprites();
+            updateArmorSprites();
+        }
+
+        /** Update and split the sprite sheet into appropriate sprites */
+        private void updateHeadSprites() {
+            Texture head_all;
+            if (gender == Gender.MALE) {
+                head_all = Betrayal.res.getTexture("hair-male-"
+                        + hair_male + "-" + hairColor + "-all");
+            } else {
+                head_all = Betrayal.res.getTexture("hair-female-"
+                        + hair_female + "-" + hairColor + "-all");
+            }
+            TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
+            head_front_left = head_split[0][0];
+            head_front_still = head_split[0][1];
+            head_front_right = head_split[0][2];
+            head_right_left = head_split[1][0];
+            head_right_still = head_split[1][1];
+            head_right_right = head_split[1][2];
+            head_left_left = head_split[2][0];
+            head_left_still = head_split[2][1];
+            head_left_right = head_split[2][2];
+            head_back_left = head_split[3][0];
+            head_back_still = head_split[3][1];
+            head_back_right = head_split[3][2];
+        }
+        private void updateArmorSprites() {
+            TextureRegion[][] armor_split = TextureRegion.split(equips.getBodyArmorPrev(), 32, 48);
+            armor_front_left = armor_split[0][0];
+            armor_front_still = armor_split[0][1];
+            armor_front_right = armor_split[0][2];
+            armor_right_left = armor_split[1][0];
+            armor_right_still = armor_split[1][1];
+            armor_right_right = armor_split[1][2];
+            armor_left_left = armor_split[2][0];
+            armor_left_still = armor_split[2][1];
+            armor_left_right = armor_split[2][2];
+            armor_back_left = armor_split[3][0];
+            armor_back_still = armor_split[3][1];
+            armor_back_right = armor_split[3][2];
+        }
+        private void updateShieldSprites() {
+            //Texture shield_all = Betrayal.res.getTexture()
+        }
+
+        // Getters
+        public SnapshotArray<TextureRegion> getFullPreview() {
+            SnapshotArray<TextureRegion> preview = new SnapshotArray<TextureRegion>();
+            switch (rotation) {
+                case 0:
+                    preview.add(armor_front_still);
+                    //preview.add(sword_front_still);
+                    preview.add(head_front_still);
+                    //preview.add(shield_front_still);
+                    break;
+                case 1:
+                    preview.add(armor_right_still);
+                    //preview.add(sword_right_still);
+                    preview.add(head_right_still);
+                    //preview.add(shield_right_still);
+                    break;
+                case 2:
+                    preview.add(armor_back_still);
+                    //preview.add(sword_front_still);
+                    preview.add(head_back_still);
+                    //preview.add(shield_front_still);
+                    break;
+                case 3:
+                    preview.add(armor_left_still);
+                    //preview.add(sword_front_still);
+                    preview.add(head_left_still);
+                    //preview.add(shield_front_still);
+                    break;
+                default:
+                    break;
+            }
+            return preview;
+        }
+        public SnapshotArray<TextureRegion> getFullPreview(int rotation) {
+            this.rotation = rotation;
+            return getFullPreview();
+        }
+        public String getTrait(Trait trait) {
+            switch (trait) {
+                case GENDER:
+                    if (gender == Gender.MALE) return "M";
+                    else return "F";
+                case HAIR_STYLE:
+                    if (gender == Gender.MALE) return Integer.toString(hair_male);
+                    else return Integer.toString(hair_female);
+                case HAIR_COLOR:
+                    if (gender == Gender.MALE) return Integer.toString(hairColor);
+                    else return Integer.toString(hairColor);
+                case JOB:
+                    return getJob(job.getJob());
+                default:
+                    return null;
+            }
+        }
+
+        // Setters
+        /** Functions for rotating character preview image */
+        public void rotateLeft() {
+            if (rotation == 0) rotation = 3;
+            else rotation--;
+        }
+        public void rotateRight() {
+            rotation++;
+            rotation &= 3;
+        }
+        public void setPreviousTrait(Trait trait) {
+            switch (trait) {
+                case GENDER:
+                    if (gender == Gender.MALE) gender = Gender.FEMALE;
+                    else gender = Gender.MALE;
+                    update();
+                    break;
+                case HAIR_STYLE:
+                    if (gender == Gender.MALE) {
+                        if (hair_male == 1) {
+                            hair_male = 5;
+                        } else hair_male--;
+                    } else {
+                        if (hair_female == 1) {
+                            hair_female = 4;
+                        } else hair_female--;
+                    }
+                    update();
+                    break;
+                case HAIR_COLOR:
+                    if (hairColor == 1) hairColor = 7;
+                    else hairColor--;
+                    update();
+                    break;
+                case JOB:
+                    job.setPreviousJob();
+                default:
+                    break;
+            }
+        }
+        public void setNextTrait(Trait trait) {
+            switch (trait) {
+                case GENDER:
+                    if (gender == Gender.MALE) gender = Gender.FEMALE;
+                    else gender = Gender.MALE;
+                    update();
+                    break;
+                case HAIR_STYLE:
+                    if (gender == Gender.MALE) {
+                        if (hair_male == 5) {
+                            hair_male = 1;
+                        } else hair_male++;
+                    } else {
+                        if (hair_female == 4) {
+                            hair_female = 1;
+                        } else hair_female++;
+                    }
+                    update();
+                    break;
+                case HAIR_COLOR:
+                    if (hairColor == 7) hairColor = 1;
+                    else hairColor++;
+                    update();
+                    break;
+                case JOB:
+                    job.setNextJob();
+                default:
+                    break;
+            }
+        }
+
+    }
     public class Equips {
 
-        private Texture armor_all;
+        private Item slot_armor_head, slot_armor_body, slot_shield, slot_weapon, slot_ring_1, slot_ring_2;
 
         public Equips() {
-            armor_all = Betrayal.res.getTexture("char-armor-peasant");
+            slot_armor_body = new BodyArmor("char-armor-peasant");
         }
 
+        // Getters
+        public boolean isHeadSlotEmpty() {
+            return slot_armor_head == null;
+        }
+        public boolean isBodySlotEmpty() {
+            return slot_armor_body == null;
+        }
+        public boolean isShieldSlotEmpty() {
+            return slot_shield == null;
+        }
+        public boolean isWeaponSlotEmpty() {
+            return slot_weapon == null;
+        }
+        public boolean isRingSlot1Empty() {
+            return slot_ring_1 == null;
+        }
+        public boolean isRingSlot2Empty() {
+            return slot_ring_2 == null;
+        }
+        public Texture getBodyArmorPrev() {
+            return slot_armor_body.getItemImage();
+        }
+
+        // Setters
         public void equipWeapon(Weapon weapon) {
-
+            inventory.removeItem(weapon);
+            if (!isWeaponSlotEmpty()) inventory.addItem(slot_weapon);
+            slot_weapon = weapon;
         }
-        public void equipHeadArmor(Equip equip) {}
-        public void equipBodyArmor() {}
-        public void equipShield() {}
+        public void equipHeadArmor(HeadGear gear) {
+            inventory.removeItem(gear);
+            if (!isHeadSlotEmpty()) inventory.addItem(slot_armor_head);
+            slot_armor_head = gear;
+        }
+        public void equipBodyArmor(BodyArmor armor) {
+            inventory.removeItem(armor);
+            if (!isBodySlotEmpty()) inventory.addItem(slot_armor_body);
+            slot_armor_body = armor;
+        }
+        public void equipShield(Shield shield) {
+            inventory.removeItem(shield);
+            if (!isShieldSlotEmpty()) inventory.addItem(slot_shield);
+            slot_shield = shield;
+        }
+        public void equipRing(Ring ring) {
+            inventory.removeItem(ring);
+            if (isRingSlot1Empty()) {
+                slot_ring_1 = ring;
+            } else if (isRingSlot2Empty()) {
+                slot_ring_2 = ring;
+            } else {
+                inventory.addItem(slot_ring_2);
+                slot_ring_2 = ring;
+            }
+        }
 
-        public void unequipWeapon() {}
-        public void unequipHeadArmor() {}
-        public void unequipBodyArmor() {}
-        public void unequipShield() {}
+        /** List of functions that unequip equips from the character. If inventory is full and
+         * a unequip action is attempted, the unequip will fail and return false.
+         * @return true if unequip was successful, false if not */
+        public boolean unequipWeapon() {
+            if (!isWeaponSlotEmpty() && !inventory.isFull()) {
+                inventory.addItem(slot_weapon);
+                slot_weapon = null;
+                return true;
+            }
+            return false;
+        }
+        public boolean unequipHeadArmor() {
+            if (!isHeadSlotEmpty() && !inventory.isFull()) {
+                inventory.addItem(slot_armor_head);
+                slot_armor_head = null;
+                return true;
+            }
+            return false;
+        }
+        public boolean unequipBodyArmor() {
+            if (!isBodySlotEmpty() && !inventory.isFull()) {
+                inventory.addItem(slot_armor_body);
+                slot_armor_body = null;
+                return true;
+            }
+            return false;
+        }
+        public boolean unequipShield() {
+            if (!isShieldSlotEmpty() && !inventory.isFull()) {
+                inventory.addItem(slot_shield);
+                slot_shield = null;
+                return true;
+            }
+            return false;
+        }
+        public boolean unequipRing1() {
+            if (!isRingSlot1Empty() && !inventory.isFull()) {
+                inventory.addItem(slot_ring_1);
+                slot_ring_1 = null;
+                return true;
+            }
+            return false;
+        }
+        public boolean unequipRing2() {
+            if (!isRingSlot2Empty() && !inventory.isFull()) {
+                inventory.addItem(slot_ring_2);
+                slot_ring_2 = null;
+                return true;
+            }
+            return false;
+        }
 
     }
     public class Inventory {
@@ -340,6 +440,7 @@ public class Character {
             }
             return itemArray;
         }
+        public boolean isFull() { return items.size() == items_max; }
 
         // Setters
         /** Adds an item to inventory and return true, if inventory is filled,
@@ -353,22 +454,16 @@ public class Character {
          * @param name name of item to be added
          * @param amount how many items to be added */
         public void addItem(String name, int amount) {
-            for (Item item : items) {
-                if (item.getName().equals(name) && !item.isItemFull()) {
-                    // item in list, not full
-                    int extra = item.addAmount(amount);
-                    if (extra > 0) {
-                        if (items.size() < items_max) {
-                            // item in list, overflow, list not full
-                            items.add(new Item(name, extra));
-                        }
-                        // item in list, overflow, list full
-                    }
-                    return;
-                }
-            }
-            // item not in list, list not full
-            if (items.size() < items_max) items.add(new Item(name, amount));
+            for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(new Item(name));
+        }
+        public void addItem(Item item) {
+            addItem(item.getName(), 1);
+        }
+        public void addItem(Item item, int amount) {
+            addItem(item.getName(), amount);
+        }
+        public void removeItem(Item item) {
+            items.remove(item);
         }
         /** Sorts the inventory */
         public void sortItems() {
@@ -376,7 +471,6 @@ public class Character {
                 items.sort(new Item.ItemComparator());
             }
         }
-
         /** Adds specified amount of gold to inventory
          * @param amount amount of gold to be added */
         public void addGold(int amount) {

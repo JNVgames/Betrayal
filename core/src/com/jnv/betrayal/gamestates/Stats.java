@@ -107,6 +107,7 @@ public class Stats {
         characterStats.remove();
     }
 
+    // TODO @JOEYPHAN PLS MERGE MAH CODE
     // VINCENTS STUFF. DISPLAYS THE CHARACTERS STATS ON THE STATS PAGE
     private void loadCharacterStats() {
         characterStats = new Group();
@@ -121,7 +122,7 @@ public class Stats {
     private Label characterStatsLabel(Group group, Character.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
-        statsText.setText(Character.currentCharacter.getStatsClass().toString(stat));
+        statsText.setText(Character.currentCharacter.stats.toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);
         statsText.setY(yReference - fontSize - 60);

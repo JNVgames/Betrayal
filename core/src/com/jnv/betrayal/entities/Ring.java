@@ -4,13 +4,13 @@
 
 package com.jnv.betrayal.entities;
 
-public class Weapon extends Equip {
+public class Ring extends Equip{
 
-    public Weapon(int id, String name) {
+    public Ring(int id, String name) {
         super(id, name);
     }
 
-    public Weapon(String name) {
+    public Ring(String name) {
         super(name);
     }
 }

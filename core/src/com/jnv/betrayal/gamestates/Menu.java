@@ -84,7 +84,7 @@ public class Menu extends GameState {
                             600, 512, 144);
                 } else {
                     batch.draw(Betrayal.res.getTexture("load-game-grey"),
-                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
+                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game-grey").getWidth()) / 2,
                             600, 512, 144);
                 }
             }

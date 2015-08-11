@@ -111,7 +111,7 @@ public class LoadGame extends GameState {
             final Character character = c;
             Group preview = new Group();
 
-            final SnapshotArray<TextureRegion> preview_charPics = c.getFullPreview(0);
+            final SnapshotArray<TextureRegion> preview_charPics = c.preview.getFullPreview(0);
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
@@ -130,7 +130,7 @@ public class LoadGame extends GameState {
             preview_name.setColor(Color.WHITE);
             preview.addActor(preview_name);
 
-            Label preview_class = new Label(c.getJobClass().toString(), loadFont(50));
+            Label preview_class = new Label(c.job.toString(), loadFont(50));
             preview_class.setX(preview_name.getX());
             preview_class.setY(preview_name.getY() - 10 - preview_class.getPrefHeight());
             preview_class.setColor(Color.LIGHT_GRAY);
@@ -144,7 +144,7 @@ public class LoadGame extends GameState {
             preview.addActor(preview_floor);
 
             Label preview_floorNum =
-                    new Label(Integer.toString(c.getStatsClass().getStat(Character.Stat.FLOOR)),
+                    new Label(Integer.toString(c.stats.getStat(Character.Stat.FLOOR)),
                             loadFont(100));
             preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
                     preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());

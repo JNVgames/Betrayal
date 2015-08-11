@@ -6,13 +6,11 @@ package com.jnv.betrayal.entities;
 
 public class Equip extends Item {
 
-    final int maxAmount = 1;
-
-    public Equip(int id, String name) {
+    protected Equip(int id, String name) {
         super(id, name);
     }
 
-    public Equip(String name, int amount) {
-        super(name, amount);
+    public Equip(String name) {
+        super(name);
     }
 }
