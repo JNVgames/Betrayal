@@ -12,7 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.Item;
+import com.jnv.betrayal.entities.*;
+import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Shop {
@@ -229,7 +230,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    CharacterSelection.getCharacter().getInventoryClass().addItem(item);
+                    Character.currentCharacter.getInventoryClass().addItem(item);
                 }
             });
             stage.addActor(sword1[i - 1]);

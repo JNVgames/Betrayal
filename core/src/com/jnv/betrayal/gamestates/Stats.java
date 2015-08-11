@@ -121,7 +121,7 @@ public class Stats {
     private Label characterStatsLabel(Group group, Character.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
-        statsText.setText(CharacterSelection.getCharacter().getStatsClass().toString(stat));
+        statsText.setText(Character.currentCharacter.getStatsClass().toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);
         statsText.setY(yReference - fontSize - 60);

@@ -7,6 +7,7 @@ package com.jnv.betrayal.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Character {
     /* If array this was private, a getter would get this array and other classes would
      * still be able to edit it. Either way, this array will function as a public array */
     public static List<Character> characters = new ArrayList<Character>();
+    public static Character currentCharacter;
 
     public enum Trait {
         GENDER,
@@ -145,8 +147,8 @@ public class Character {
 
     // Getters
     public String getName() { return name; }
-    public List<TextureRegion> getFullPreview() {
-        List<TextureRegion> preview = new ArrayList<TextureRegion>();
+    public SnapshotArray<TextureRegion> getFullPreview() {
+        SnapshotArray<TextureRegion> preview = new SnapshotArray<TextureRegion>();
         switch (rotation) {
             case 0:
                 preview.add(armor_front_still);
@@ -177,7 +179,7 @@ public class Character {
         }
         return preview;
     }
-    public List<TextureRegion> getFullPreview(int rotation) {
+    public SnapshotArray<TextureRegion> getFullPreview(int rotation) {
         this.rotation = rotation;
         return getFullPreview();
     }

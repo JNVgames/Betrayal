@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
@@ -103,21 +104,23 @@ public class LoadGame extends GameState {
         stage.addActor(group_button_back);
     }
     private void loadSavedSessions() {
+        // TODO @vincent loads kinda slow and code is kinda long
         int counter = 1;
 
         for (Character c : Character.characters) {
+            final Character character = c;
             Group preview = new Group();
 
-            final List<TextureRegion> preview_charPics = c.getFullPreview(0);
+            final SnapshotArray<TextureRegion> preview_charPics = c.getFullPreview(0);
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
                     for (TextureRegion tr : preview_charPics) {
-                        sb.draw(tr, 5, 5, 32 * 4, 48 * 4);
+                        sb.draw(tr, 10, button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
                     }
                 }
             };
-            preview_charPrev.setBounds(5, 5, 32 * 4, 48 * 4);
+            preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
             preview.addActor(preview_charPrev);
 
             Label preview_name = new Label(c.getName(), loadFont(60));
@@ -134,7 +137,7 @@ public class LoadGame extends GameState {
             preview.addActor(preview_class);
 
             Label preview_floor = new Label("FLOOR", loadFont(40));
-            preview_floor.setX(Betrayal.WIDTH - 15 - preview_floor.getPrefWidth());
+            preview_floor.setX(Betrayal.WIDTH - 10 - preview_floor.getPrefWidth());
             preview_floor.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
                     - preview_floor.getPrefHeight());
             preview_floor.setColor(Color.WHITE);
@@ -148,17 +151,20 @@ public class LoadGame extends GameState {
             preview_floorNum.setColor(Color.LIGHT_GRAY);
             preview_floorNum.setAlignment(Align.center);
             preview.addActor(preview_floorNum);
-/*
-            preview.setBounds(5, button_back.getY() - 230 * i, Betrayal.WIDTH - 10,
+
+            Actor preview_frame = new Actor();
+            preview_frame.setBounds(5, button_back.getY() - 230 * i, Betrayal.WIDTH - 10,
                     preview_charPrev.getHeight() + 10);
-            preview.addListener(new InputListener() {
+            preview_frame.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
                 }
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    Character.currentCharacter = character;
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
-            }); */
+            });
+            preview.addActor(preview_frame);
 
             stage.addActor(preview);
 

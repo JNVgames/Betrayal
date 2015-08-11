@@ -31,7 +31,7 @@ public class Lobby extends GameState {
     public Lobby(GameStateManager gsm) {
         super(gsm);
 
-        character = CharacterSelection.getCharacter();
+        character = Character.currentCharacter;
         buttonHeight = 150;
         buttonWidth = 144;
         spacing = 5;

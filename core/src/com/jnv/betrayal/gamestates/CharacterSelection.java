@@ -156,6 +156,7 @@ public class CharacterSelection extends GameState {
                         && y <= button_play_now.getY() + button_play_now.getHeight()) {
                     character.setName(field_usernameEnter.getText());
                     Character.characters.add(character);
+                    Character.currentCharacter = character;
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
                 else image_button_play = Betrayal.res.getTexture("play-now");
@@ -331,9 +332,6 @@ public class CharacterSelection extends GameState {
                 break;
         }
     }
-
-    // Getters
-    public static Character getCharacter() { return character; }
 
     // Setters
     public static void setCharacterNull() { character = null; }
