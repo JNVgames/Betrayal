@@ -82,7 +82,11 @@ public class Menu extends GameState {
                     batch.draw(Betrayal.res.getTexture("load-game"),
                             (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
                             600, 512, 144);
-                } // TODO else load opacity mask
+                } else {
+                    batch.draw(Betrayal.res.getTexture("load-game-grey"),
+                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
+                            600, 512, 144);
+                }
             }
         };
         button_loadGame.setBounds((Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
