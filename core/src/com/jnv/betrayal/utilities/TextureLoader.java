@@ -74,13 +74,19 @@ public class TextureLoader {
 
         // Items
         // Swords Shields Helemt
-        //Sword
-        Betrayal.res.loadTexture("item/sword1.png", "sword1");
-        Betrayal.res.loadTexture("item/sword2.png", "sword2");
-        Betrayal.res.loadTexture("item/sword3.png", "sword3");
-        Betrayal.res.loadTexture("item/sword4.png", "sword4");
-        Betrayal.res.loadTexture("item/sword5.png", "sword5");
-        Betrayal.res.loadTexture("item/sword6.png", "sword6");
+        // Sword Tier 1 ICONS
+        Betrayal.res.loadTexture("item/sword1.png", "sword11");
+        Betrayal.res.loadTexture("item/sword2.png", "sword12");
+        Betrayal.res.loadTexture("item/sword3.png", "sword13");
+        Betrayal.res.loadTexture("item/sword4.png", "sword14");
+        Betrayal.res.loadTexture("item/sword5.png", "sword15");
+        Betrayal.res.loadTexture("item/sword6.png", "sword16");
+        Betrayal.res.loadTexture("item/sword1.png", "sword21");
+        Betrayal.res.loadTexture("item/sword2.png", "sword22");
+        Betrayal.res.loadTexture("item/sword3.png", "sword23");
+        Betrayal.res.loadTexture("item/sword4.png", "sword24");
+        Betrayal.res.loadTexture("item/sword5.png", "sword25");
+        Betrayal.res.loadTexture("item/sword6.png", "sword26");
 
         //Shield
         Betrayal.res.loadTexture("item/shield1.png", "shield1");
@@ -199,6 +205,14 @@ public class TextureLoader {
         Betrayal.res.loadTexture("character/armor2f.png", "char-armor-purple");
         Betrayal.res.loadTexture("character/cloak1a.png", "char-cloak-brown");
         Betrayal.res.loadTexture("character/cloak1b.png", "char-cloak-black");
+
+        // Character swords
+        for (int tiers = 1; tiers <= 2; tiers++) {
+            for (int colors = 1; colors <= 6; colors++) {
+                Betrayal.res.loadTexture("character/sword" + tiers + colors + ".png",
+                        "char-sword" + tiers + colors);
+            }
+        }
 
         // Shields
         Betrayal.res.loadTexture("shields/shield1a.png", "shield-1-red");

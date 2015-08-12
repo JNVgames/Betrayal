@@ -219,7 +219,7 @@ public class Shop {
 
     private void loadWeaponsAndShields() {
         for (int i = 1; i <= 6; i++) {
-            final String item = "sword" + i;
+            final String item = "sword1" + i;
             sword1[i - 1] = new Image(Betrayal.res.getTexture(item));
             sword1[i - 1].layout();
             sword1[i - 1].setBounds(100 + itemSize * (i - 1),
@@ -234,11 +234,12 @@ public class Shop {
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     new ShopPurchase(game);
                     Character.currentCharacter.inventory.addItem(item);
+                    Character.currentCharacter.equips.equipWeapon(new Weapon(item));
                 }
             });
             stage.addActor(sword1[i - 1]);
 
-            sword2[i - 1] = new Image(Betrayal.res.getTexture("sword" + i));
+            sword2[i - 1] = new Image(Betrayal.res.getTexture("sword2" + i));
             sword2[i - 1].layout();
             sword2[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);

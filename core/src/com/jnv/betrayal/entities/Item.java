@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Item {
 
-    private static HashMap<String, Item> allItems = new HashMap<String, Item>();
+    protected static HashMap<String, Item> allItems = new HashMap<String, Item>();
 
     protected Texture itemImage;
     protected String itemName;

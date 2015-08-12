@@ -14,7 +14,7 @@ public class ItemLoader {
 
     public static void loadAll() {
         for (int i = 1; i <= 6; i++) {
-            new Weapon(i, "sword" + i);
+            new Weapon(i, "sword1" + i);
         }
 
         /*
@@ -27,13 +27,10 @@ public class ItemLoader {
         for (int i = 1; i <= 6; i++) {
             new Item(i, "sword" + i);
         }
-        for (int i = 1; i <= 6; i++) {
-            new Weapon(i, "sword" + i);
-        }
-        for (int i = 1; i <= 6; i++) {
-            new Weapon(i, "sword" + i);
-        }
         */
+        for (int i = 1; i <= 6; i++) {
+            new Weapon(i + 6, "sword2" + i);
+        }
 
         new BodyArmor(0, "char-armor-peasant");
 

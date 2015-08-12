@@ -6,14 +6,11 @@ package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  * Holds information regarding a game character's traits
@@ -70,6 +67,7 @@ public class Character {
     private void update() {
         preview.updateHeadSprites();
         preview.updateArmorSprites();
+        preview.updateShieldSprites();
     }
     public void saveInfo() {
 
@@ -99,18 +97,18 @@ public class Character {
     public class Preview {
 
         /** Textures for character head, format: head_side_walkAnimation */
-        private TextureRegion head_front_left, head_front_still, head_front_right;
-        private TextureRegion head_right_left, head_right_still, head_right_right;
-        private TextureRegion head_left_left, head_left_still, head_left_right;
-        private TextureRegion head_back_left, head_back_still, head_back_right;
-        private TextureRegion armor_front_left, armor_front_still, armor_front_right;
-        private TextureRegion armor_right_left, armor_right_still, armor_right_right;
-        private TextureRegion armor_left_left, armor_left_still, armor_left_right;
-        private TextureRegion armor_back_left, armor_back_still, armor_back_right;
+        private TextureRegion[] front_left, front_still, front_right;
+        private TextureRegion[] right_left, right_still, right_right;
+        private TextureRegion[] left_left, left_still, left_right;
+        private TextureRegion[] back_left, back_still, back_right;
 
-        private TextureRegion headgear_front_still, headgear_right_still, headgear_left_still, headgear_back_still;
-        private TextureRegion shield_front_still, shield_right_still, shield_left_still, shield_back_still;
-        private TextureRegion sword_front_still, sword_right_still, sword_left_still, sword_back_still;
+        public final static int SLOTS = 6;
+        public final static int HEAD = 0;
+        public final static int BODY = 1;
+        public final static int SHIELD = 2;
+        public final static int WEAPON = 3;
+        public final static int RING1 = 4;
+        public final static int RING2 = 5;
 
         /** Contains rotation value for character preview
          * front = 0, right side = 1, back = 2, left side = 3 */
@@ -125,10 +123,30 @@ public class Character {
             hair_female = 1;
             hairColor = 1;
 
-            updateHeadSprites();
-            updateArmorSprites();
+            initArrays();
+            this.update();
         }
 
+        private void initArrays() {
+            front_left = new TextureRegion[SLOTS];
+            front_still = new TextureRegion[SLOTS];
+            front_right = new TextureRegion[SLOTS];
+            right_left = new TextureRegion[SLOTS];
+            right_still = new TextureRegion[SLOTS];
+            right_right = new TextureRegion[SLOTS];
+            left_left = new TextureRegion[SLOTS];
+            left_still = new TextureRegion[SLOTS];
+            left_right = new TextureRegion[SLOTS];
+            back_left = new TextureRegion[SLOTS];
+            back_still = new TextureRegion[SLOTS];
+            back_right = new TextureRegion[SLOTS];
+        }
+        private void update() {
+            updateHeadSprites();
+            updateArmorSprites();
+            updateShieldSprites();
+            updateWeaponSprites();
+        }
         /** Update and split the sprite sheet into appropriate sprites */
         private void updateHeadSprites() {
             Texture head_all;
@@ -140,72 +158,80 @@ public class Character {
                         + hair_female + "-" + hairColor + "-all");
             }
             TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
-            head_front_left = head_split[0][0];
-            head_front_still = head_split[0][1];
-            head_front_right = head_split[0][2];
-            head_right_left = head_split[1][0];
-            head_right_still = head_split[1][1];
-            head_right_right = head_split[1][2];
-            head_left_left = head_split[2][0];
-            head_left_still = head_split[2][1];
-            head_left_right = head_split[2][2];
-            head_back_left = head_split[3][0];
-            head_back_still = head_split[3][1];
-            head_back_right = head_split[3][2];
+            front_left[HEAD] = head_split[0][0];
+            front_still[HEAD] = head_split[0][1];
+            front_right[HEAD] = head_split[0][2];
+            right_left[HEAD] = head_split[1][0];
+            right_still[HEAD] = head_split[1][1];
+            right_right[HEAD] = head_split[1][2];
+            left_left[HEAD] = head_split[2][0];
+            left_still[HEAD] = head_split[2][1];
+            left_right[HEAD] = head_split[2][2];
+            back_left[HEAD] = head_split[3][0];
+            back_still[HEAD] = head_split[3][1];
+            back_right[HEAD] = head_split[3][2];
         }
         private void updateArmorSprites() {
-            TextureRegion[][] armor_split = TextureRegion.split(equips.getBodyArmorPrev(), 32, 48);
-            armor_front_left = armor_split[0][0];
-            armor_front_still = armor_split[0][1];
-            armor_front_right = armor_split[0][2];
-            armor_right_left = armor_split[1][0];
-            armor_right_still = armor_split[1][1];
-            armor_right_right = armor_split[1][2];
-            armor_left_left = armor_split[2][0];
-            armor_left_still = armor_split[2][1];
-            armor_left_right = armor_split[2][2];
-            armor_back_left = armor_split[3][0];
-            armor_back_still = armor_split[3][1];
-            armor_back_right = armor_split[3][2];
+            TextureRegion[][] armor_split = TextureRegion.split(equips.getBodyArmorPreview(), 32, 48);
+            front_left[BODY] = armor_split[0][0];
+            front_still[BODY] = armor_split[0][1];
+            front_right[BODY] = armor_split[0][2];
+            right_left[BODY] = armor_split[1][0];
+            right_still[BODY] = armor_split[1][1];
+            right_right[BODY] = armor_split[1][2];
+            left_left[BODY] = armor_split[2][0];
+            left_still[BODY] = armor_split[2][1];
+            left_right[BODY] = armor_split[2][2];
+            back_left[BODY] = armor_split[3][0];
+            back_still[BODY] = armor_split[3][1];
+            back_right[BODY] = armor_split[3][2];
         }
         private void updateShieldSprites() {
-            //Texture shield_all = Betrayal.res.getTexture()
+            if (!equips.isShieldSlotEmpty()) {
+                TextureRegion[][] shield_split = TextureRegion.split(equips.getShieldPreview(), 32, 48);
+            }
+        }
+        private void updateWeaponSprites() {
+            if (!equips.isWeaponSlotEmpty()) {
+                TextureRegion[][] weapon_split = TextureRegion.split(equips.getWeaponPreview(), 32, 48);
+                front_left[WEAPON] = weapon_split[0][0];
+                front_still[WEAPON] = weapon_split[0][1];
+                front_right[WEAPON] = weapon_split[0][2];
+                right_left[WEAPON] = weapon_split[1][0];
+                right_still[WEAPON] = weapon_split[1][1];
+                right_right[WEAPON] = weapon_split[1][2];
+                left_left[WEAPON] = weapon_split[2][0];
+                left_still[WEAPON] = weapon_split[2][1];
+                left_right[WEAPON] = weapon_split[2][2];
+                back_left[WEAPON] = weapon_split[3][0];
+                back_still[WEAPON] = weapon_split[3][1];
+                back_right[WEAPON] = weapon_split[3][2];
+            }
         }
 
         // Getters
-        public SnapshotArray<TextureRegion> getFullPreview() {
-            SnapshotArray<TextureRegion> preview = new SnapshotArray<TextureRegion>();
+        public SnapshotArray<TextureRegion[]> getFullPreview() {
+            SnapshotArray<TextureRegion[]> preview = new SnapshotArray<TextureRegion[]>();
             switch (rotation) {
                 case 0:
-                    preview.add(armor_front_still);
-                    //preview.add(sword_front_still);
-                    preview.add(head_front_still);
-                    //preview.add(shield_front_still);
+                    toBackOfPreview(WEAPON, front_still);
+                    preview.add(front_still);
                     break;
                 case 1:
-                    preview.add(armor_right_still);
-                    //preview.add(sword_right_still);
-                    preview.add(head_right_still);
-                    //preview.add(shield_right_still);
+                    preview.add(right_still);
                     break;
                 case 2:
-                    preview.add(armor_back_still);
-                    //preview.add(sword_front_still);
-                    preview.add(head_back_still);
-                    //preview.add(shield_front_still);
+                    preview.add(back_still);
                     break;
                 case 3:
-                    preview.add(armor_left_still);
-                    //preview.add(sword_front_still);
-                    preview.add(head_left_still);
-                    //preview.add(shield_front_still);
+                    preview.add(left_still);
                     break;
                 default:
                     break;
             }
             return preview;
         }
-        public SnapshotArray<TextureRegion> getFullPreview(int rotation) {
+        public SnapshotArray<TextureRegion[]> getFullPreview(int rotation) {
             this.rotation = rotation;
             return getFullPreview();
         }
@@ -297,11 +323,19 @@ public class Character {
                     break;
             }
         }
+        private void toBackOfPreview(int index, TextureRegion[] src) {
+            TextureRegion tmp = src[index];
+            while (index > 0) {
+                src[index] = src[--index];
+            }
+            src[0] = tmp;
+        }
 
     }
     public class Equips {
 
-        private Item slot_armor_head, slot_armor_body, slot_shield, slot_weapon, slot_ring_1, slot_ring_2;
+        private Item slot_armor_head, slot_armor_body, slot_shield, slot_ring_1, slot_ring_2;
+        private Weapon slot_weapon;
 
         public Equips() {
             slot_armor_body = new BodyArmor("char-armor-peasant");
@@ -326,8 +360,23 @@ public class Character {
         public boolean isRingSlot2Empty() {
             return slot_ring_2 == null;
         }
-        public Texture getBodyArmorPrev() {
+        public Texture getHeadArmorPreview() {
+            return slot_armor_head.getItemImage();
+        }
+        public Texture getBodyArmorPreview() {
             return slot_armor_body.getItemImage();
+        }
+        public Texture getShieldPreview() {
+            return slot_shield.getItemImage();
+        }
+        public Texture getWeaponPreview() {
+            return slot_weapon.getPreview();
+        }
+        public Texture getRing1Preview() {
+            return slot_ring_1.getItemImage();
+        }
+        public Texture getRing2Preview() {
+            return slot_ring_2.getItemImage();
         }
 
         // Setters
@@ -335,6 +384,7 @@ public class Character {
             inventory.removeItem(weapon);
             if (!isWeaponSlotEmpty()) inventory.addItem(slot_weapon);
             slot_weapon = weapon;
+            preview.update();
         }
         public void equipHeadArmor(HeadGear gear) {
             inventory.removeItem(gear);

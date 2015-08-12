@@ -111,12 +111,17 @@ public class LoadGame extends GameState {
             final Character character = c;
             Group preview = new Group();
 
-            final SnapshotArray<TextureRegion> preview_charPics = c.preview.getFullPreview(0);
+            final SnapshotArray<TextureRegion[]> preview_charPics = c.preview.getFullPreview(0);
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
-                    for (TextureRegion tr : preview_charPics) {
-                        sb.draw(tr, 10, button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
+                    for (TextureRegion[] tr : preview_charPics) {
+                        for (TextureRegion textureRegion : tr) {
+                            if (textureRegion != null) {
+                                sb.draw(textureRegion, 10,
+                                        button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
+                            }
+                        }
                     }
                 }
             };
