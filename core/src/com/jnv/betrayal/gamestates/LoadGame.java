@@ -28,14 +28,19 @@ import com.jnv.betrayal.main.Betrayal;
 
 public class LoadGame extends GameState {
 
+    private Group[] savedSessions;
     private Image button_back;
     private TextureRegion image_leftArrow;
+
+    private boolean mode_delete = false;
 
     public LoadGame(GameStateManager gsm) {
         super(gsm);
 
         image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
         image_leftArrow.flip(true, false);
+
+        savedSessions = new Group[Character.characters.size()];
 
         loadStage();
     }
@@ -56,13 +61,15 @@ public class LoadGame extends GameState {
 
     }
 
-    // Helpers
-    private Label.LabelStyle loadFont(int fontSize) {
-        return Betrayal.getHurtmoldFontLabelStyle(fontSize);
-    }
     private void loadStage() {
         loadBackButton();
         loadSavedSessions();
+        loadDeleteButton();
+    }
+
+    // Helpers
+    private Label.LabelStyle loadFont(int fontSize) {
+        return Betrayal.getHurtmoldFontLabelStyle(fontSize);
     }
 
     private void loadBackButton() {
@@ -106,7 +113,6 @@ public class LoadGame extends GameState {
         int counter = 1, scale = 4;
 
         for (Character c : Character.characters) {
-            final Character character = c;
             Group preview = new Group();
 
             final Actor preview_frame = new Actor();
@@ -172,8 +178,43 @@ public class LoadGame extends GameState {
 
             stage.addActor(preview);
 
+            savedSessions[counter - 1] = preview;
             counter++;
         }
+    }
+    private void loadDeleteButton() {
+        final Label button_delete = new Label("Delete tmp", loadFont(60));
+        button_delete.setBounds(Betrayal.WIDTH - 30 - button_delete.getPrefWidth(),
+                50, button_delete.getPrefWidth(), button_delete.getPrefHeight());
+        button_delete.layout();
+        button_delete.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                mode_delete = true;
+                button_delete.remove();
+                loadCancelButton();
+            }
+        });
+        stage.addActor(button_delete);
+    }
+    private void loadCancelButton() {
+        final Label button_cancel = new Label("Cancel tmp", loadFont(60));
+        button_cancel.setBounds(Betrayal.WIDTH - 30 - button_cancel.getPrefWidth(),
+                50, button_cancel.getPrefWidth(), button_cancel.getPrefHeight());
+        button_cancel.layout();
+        button_cancel.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                mode_delete = false;
+                button_cancel.remove();
+                loadDeleteButton();
+            }
+        });
+        stage.addActor(button_cancel);
     }
 
     private void addPreviewListener(final Group preview,
@@ -188,13 +229,21 @@ public class LoadGame extends GameState {
                 bool_pressed = true;
                 return true;
             }
+
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
                         && y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
-                    Character.currentCharacter = character;
-                    gsm.setState(GameStateManager.State.LOBBY);
+                    if (!mode_delete) {
+                        Character.currentCharacter = character;
+                        gsm.setState(GameStateManager.State.LOBBY);
+                    } else { // mode_delete == true
+                        removeSavedSessions();
+                        Character.characters.remove(character);
+                        loadSavedSessions();
+                    }
                 }
             }
+
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 if (bool_pressed) {
                     for (Actor actor : preview.getChildren()) {
@@ -204,6 +253,11 @@ public class LoadGame extends GameState {
                 }
             }
         });
+    }
+    private void removeSavedSessions() {
+        for (Group group : savedSessions) {
+            group.remove();
+        }
     }
 
 }
