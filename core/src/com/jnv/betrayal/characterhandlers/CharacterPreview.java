@@ -6,6 +6,11 @@ package com.jnv.betrayal.characterhandlers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
@@ -74,6 +79,7 @@ public class CharacterPreview {
         updateWeaponSprites();
 
         toBackOfPreview(WEAPON, front_still);
+        toFrontOfPreview(WEAPON, back_still);
     }
     /** Update and split the sprite sheet into appropriate sprites */
     private void updateHeadSprites() {
@@ -193,6 +199,7 @@ public class CharacterPreview {
         rotation++;
         rotation &= 3;
     }
+    public void setRotation(int rotation) { this.rotation = rotation; }
     public void setPreviousTrait(Character.Trait trait) {
         switch (trait) {
             case GENDER:
@@ -263,6 +270,51 @@ public class CharacterPreview {
             src[index] = src[--index];
         }
         src[0] = tmp;
+    }
+    private void toFrontOfPreview(int index, TextureRegion[] src) {
+        TextureRegion tmp = src[index];
+        while (index < src.length - 1) {
+            src[index] = src[++index];
+        }
+        src[src.length - 1] = tmp;
+    }
+
+    // Static convenience methods
+    public static Group createRotators(float x, float topY, float width, float gap) {
+        Texture image_leftArrow = Betrayal.res.getTexture("arrow-left");
+        Texture image_rightArrow = Betrayal.res.getTexture("arrow-right");
+        Group group_previewRotators = new Group();
+
+        Image previewRotators_leftArrow = new Image(image_leftArrow);
+        previewRotators_leftArrow.setBounds(x, topY - 60, width, 60);
+        previewRotators_leftArrow.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Character.currentCharacter.preview.rotateLeft();
+            }
+        });
+        group_previewRotators.addActor(previewRotators_leftArrow);
+
+        Image previewRotators_rightArrow = new Image(image_rightArrow);
+        previewRotators_rightArrow.setHeight(previewRotators_leftArrow.getHeight());
+        previewRotators_rightArrow.setWidth(previewRotators_leftArrow.getWidth());
+        previewRotators_rightArrow.setX(previewRotators_leftArrow.getX()
+                + previewRotators_leftArrow.getWidth() + gap);
+        previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
+        group_previewRotators.addActor(previewRotators_rightArrow);
+        previewRotators_rightArrow.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Character.currentCharacter.preview.rotateRight();
+            }
+        });
+
+        return group_previewRotators;
     }
 
 }

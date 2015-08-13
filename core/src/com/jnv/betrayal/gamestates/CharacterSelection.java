@@ -43,9 +43,9 @@ public class CharacterSelection extends GameState {
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
 
-        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
+        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
         image_leftArrow.flip(true, false);
-        image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
+        image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
 
         character = new Character();
 
@@ -225,13 +225,9 @@ public class CharacterSelection extends GameState {
         previewRotators_leftArrow.setY(field_framePreview.getY()
                 - previewRotators_leftArrow.getHeight() - 10);
         previewRotators_leftArrow.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 character.preview.rotateLeft();
             }
@@ -246,13 +242,9 @@ public class CharacterSelection extends GameState {
         previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
         group_previewRotators.addActor(previewRotators_rightArrow);
         previewRotators_rightArrow.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 character.preview.rotateRight();
             }

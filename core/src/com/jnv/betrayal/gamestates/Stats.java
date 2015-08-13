@@ -4,6 +4,8 @@
 
 package com.jnv.betrayal.gamestates;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.characterhandlers.CharacterPreview;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.characterhandlers.CharacterStats;
 import com.jnv.betrayal.main.Betrayal;
@@ -24,9 +27,12 @@ public class Stats {
 
     // VINCENTS VARIABLE
     private Group characterStats;
+    private float yRef;
+    private Actor charPreview;
 
     public Stats(Betrayal game) {
         stage = game.getStage();
+        characterStats = new Group();
         loadFont();
         loadButtons();
     }
@@ -94,10 +100,6 @@ public class Stats {
         stage.addActor(lobbyButton);
     }
 
-    private void loadContent() {
-
-    }
-
     private void removeStats() {
         mask.remove();
         title.remove();
@@ -110,26 +112,55 @@ public class Stats {
 
     // TODO @JOEYPHAN PLS MERGE MAH CODE
     // VINCENTS STUFF. DISPLAYS THE CHARACTERS STATS ON THE STATS PAGE
-    private void loadCharacterStats() {
-        characterStats = new Group();
-        float yReference = title.getY();
-
-        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yReference).getY();
-        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yReference).getY();
-        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yReference).getY();
-        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yReference).getY();
+    private void loadContent() {
+        int rotatorIndent = 20;
+        loadCharacterStats();
+        loadCharacterPreview();
+        characterStats.addActor(CharacterPreview.createRotators(charPreview.getX() + rotatorIndent,
+                charPreview.getY() - 20, (charPreview.getWidth() - rotatorIndent * 2 + 30) / 2, 30));
         stage.addActor(characterStats);
     }
-    private Label characterStatsLabel(Group group, CharacterStats.Stat stat, float yReference) {
+    private void loadCharacterStats() {
+        yRef = title.getY();
+
+        characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yRef);
+    }
+    private void characterStatsLabel(Group group, CharacterStats.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
         statsText.setText(Character.currentCharacter.stats.toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);
-        statsText.setY(yReference - fontSize - 60);
+        statsText.setY(yReference - fontSize - 30);
+        yRef = statsText.getY();
         statsText.setWidth(statsText.getPrefWidth());
         statsText.setHeight(fontSize);
         group.addActor(statsText);
-        return statsText;
+    }
+    private void loadCharacterPreview() {
+        int scale = 8;
+        Character.currentCharacter.preview.setRotation(0);
+        charPreview = new Actor() {
+            public void draw(Batch batch, float parentAlpha) {
+                drawPreview(batch);
+            }
+        };
+        charPreview.setBounds(background.getX() + (background.getWidth() - 32 * scale) / 2,
+                yRef - 48 * scale - 30,
+                32 * scale, 48 * scale);
+        characterStats.addActor(charPreview);
+    }
+    private void drawPreview(Batch batch) {
+        for (TextureRegion[] tr : Character.currentCharacter.preview.getFullPreview()) {
+            for (int layers = 0; layers < CharacterPreview.SLOTS; layers++) {
+                if (tr[layers] != null) {
+                    batch.draw(tr[layers], charPreview.getX(), charPreview.getY(),
+                            charPreview.getWidth(), charPreview.getHeight());
+                }
+            }
+        }
     }
 }

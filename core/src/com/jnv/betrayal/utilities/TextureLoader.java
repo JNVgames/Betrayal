@@ -32,7 +32,7 @@ public class TextureLoader {
         Betrayal.res.loadTexture("button/main_menu512x144.png", "main-menu");
         Betrayal.res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
 
-        Betrayal.res.loadTexture("button/arrow256x256.png", "arrow");
+        Betrayal.res.loadTexture("button/arrow256x256.png", "arrow-right");
         Betrayal.res.loadTexture("button/arrow_left256x256.png", "arrow-left");
         Betrayal.res.loadTexture("button/circle_x150x150.png", "x");
         Betrayal.res.loadTexture("button/buy360x144.png", "buy");

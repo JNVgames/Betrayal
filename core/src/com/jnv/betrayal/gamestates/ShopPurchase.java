@@ -166,12 +166,12 @@ public class ShopPurchase {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 currentSide--;
-                if (currentSide<0){currentSide=3;}
+                if (currentSide < 0) { currentSide = 3; }
             }
         });
         stage.addActor(leftArrow);
 
-        rightArrow = new Image(Betrayal.res.getTexture("arrow"));
+        rightArrow = new Image(Betrayal.res.getTexture("arrow-right"));
         rightArrow.layout();
         rightArrow.setBounds(Betrayal.WIDTH / 2 +50, 300, 100, 50);
         rightArrow.addListener(new InputListener() {
@@ -182,7 +182,7 @@ public class ShopPurchase {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                currentSide= (currentSide+1)%4;
+                currentSide = (currentSide + 1) % 4;
             }
         });
         stage.addActor(rightArrow);

@@ -37,8 +37,7 @@ public class LoadGame extends GameState {
     public LoadGame(GameStateManager gsm) {
         super(gsm);
 
-        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
-        image_leftArrow.flip(true, false);
+        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-left"));
 
         savedSessions = new Group[Character.characters.size()];
 
@@ -216,6 +215,11 @@ public class LoadGame extends GameState {
         });
         stage.addActor(button_cancel);
     }
+    private void removeSavedSessions() {
+        for (Group group : savedSessions) {
+            group.remove();
+        }
+    }
 
     private void addPreviewListener(final Group preview,
                                     final Actor frame, final Character character) {
@@ -253,11 +257,6 @@ public class LoadGame extends GameState {
                 }
             }
         });
-    }
-    private void removeSavedSessions() {
-        for (Group group : savedSessions) {
-            group.remove();
-        }
     }
 
 }

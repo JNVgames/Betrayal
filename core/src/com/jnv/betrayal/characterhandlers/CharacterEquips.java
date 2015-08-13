@@ -7,6 +7,7 @@ package com.jnv.betrayal.characterhandlers;
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.main.Betrayal;
 
 public class CharacterEquips {
 
@@ -21,8 +22,6 @@ public class CharacterEquips {
 
     public CharacterEquips(Character character) {
         this.character = character;
-
-        slot_armor_body = new BodyArmor("char-armor-peasant");
     }
 
     // Getters
@@ -45,13 +44,14 @@ public class CharacterEquips {
         return slot_ring_2 == null;
     }
     public Texture getHeadArmorPreview() {
-        return slot_armor_head.getItemImage();
+        return slot_armor_head.getPreview();
     }
     public Texture getBodyArmorPreview() {
-        return slot_armor_body.getItemImage();
+        if (isBodySlotEmpty()) return Betrayal.res.getTexture("char-armor-peasant");
+        else return slot_armor_body.getPreview();
     }
     public Texture getShieldPreview() {
-        return slot_shield.getItemImage();
+        return slot_shield.getPreview();
     }
     public Texture getWeaponPreview() {
         return slot_weapon.getPreview();
@@ -64,6 +64,13 @@ public class CharacterEquips {
     }
 
     // Setters
+    public void equip(Equip equip) {
+        if (equip instanceof Weapon) equipWeapon((Weapon) equip);
+        else if (equip instanceof HeadGear) equipHeadArmor((HeadGear) equip);
+        else if (equip instanceof BodyArmor) equipBodyArmor((BodyArmor) equip);
+        else if (equip instanceof Shield) equipShield((Shield) equip);
+        else if (equip instanceof Ring) equipRing((Ring) equip);
+    }
     public void equipWeapon(Weapon weapon) {
         character.inventory.removeItem(weapon);
         if (!isWeaponSlotEmpty()) character.inventory.addItem(slot_weapon);
