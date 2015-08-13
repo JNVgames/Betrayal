@@ -324,6 +324,10 @@ public class Character {
                     break;
             }
         }
+        /** Sends the specified character preview frame (ex: SWORD, HEAD, SHIELD) to the
+         * back of the character preview
+         * @param index specified character preview frame
+         * @param src character preview frame */
         private void toBackOfPreview(int index, TextureRegion[] src) {
             TextureRegion tmp = src[index];
             while (index > 0) {
