@@ -146,6 +146,8 @@ public class Character {
             updateArmorSprites();
             updateShieldSprites();
             updateWeaponSprites();
+
+            toBackOfPreview(WEAPON, front_still);
         }
         /** Update and split the sprite sheet into appropriate sprites */
         private void updateHeadSprites() {
@@ -214,7 +216,6 @@ public class Character {
             SnapshotArray<TextureRegion[]> preview = new SnapshotArray<TextureRegion[]>();
             switch (rotation) {
                 case 0:
-                    toBackOfPreview(WEAPON, front_still);
                     preview.add(front_still);
                     break;
                 case 1:
