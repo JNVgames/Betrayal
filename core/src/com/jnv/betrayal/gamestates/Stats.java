@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.characterhandlers.CharacterStats;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Stats {
@@ -113,13 +114,13 @@ public class Stats {
         characterStats = new Group();
         float yReference = title.getY();
 
-        yReference = characterStatsLabel(characterStats, Character.Stat.FLOOR, yReference).getY();
-        yReference = characterStatsLabel(characterStats, Character.Stat.HEALTH, yReference).getY();
-        yReference = characterStatsLabel(characterStats, Character.Stat.DEFENSE, yReference).getY();
-        characterStatsLabel(characterStats, Character.Stat.ATTACK, yReference).getY();
+        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yReference).getY();
+        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yReference).getY();
+        yReference = characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yReference).getY();
+        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yReference).getY();
         stage.addActor(characterStats);
     }
-    private Label characterStatsLabel(Group group, Character.Stat stat, float yReference) {
+    private Label characterStatsLabel(Group group, CharacterStats.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
         statsText.setText(Character.currentCharacter.stats.toString(stat));

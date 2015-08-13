@@ -233,8 +233,6 @@ public class Shop {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     new ShopPurchase(game);
-                    Character.currentCharacter.inventory.addItem(item);
-                    Character.currentCharacter.equips.equipWeapon(new Weapon(item));
                 }
             });
             stage.addActor(sword1[i - 1]);

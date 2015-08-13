@@ -16,15 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.SnapshotArray;
-import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-
-import java.util.List;
 
 public class LoadGame extends GameState {
 
@@ -149,7 +145,7 @@ public class LoadGame extends GameState {
             preview.addActor(preview_floor);
 
             Label preview_floorNum =
-                    new Label(Integer.toString(c.stats.getStat(Character.Stat.FLOOR)),
+                    new Label(Integer.toString(c.stats.getStat(com.jnv.betrayal.characterhandlers.CharacterStats.Stat.FLOOR)),
                             loadFont(100));
             preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
                     preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());

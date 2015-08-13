@@ -19,13 +19,13 @@ public class Item {
     protected String itemName;
     protected int id, cost_buy, cost_sell;
 
-    protected Item(int id, String name) {
+    public Item(int id, String name) {
         this.id = id;
         itemName = name;
         itemImage = Betrayal.res.getTexture(name);
         allItems.put(name, this);
     }
-    protected Item(String name) {
+    public Item(String name) {
         Item src = allItems.get(name);
         id = src.getID();
         itemName = name;
