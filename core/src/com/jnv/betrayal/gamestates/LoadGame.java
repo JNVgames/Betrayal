@@ -10,10 +10,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RemoveAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
@@ -24,16 +28,14 @@ import com.jnv.betrayal.main.Betrayal;
 
 public class LoadGame extends GameState {
 
-    private Image button_back, field_framePreview;
-    private TextureRegion image_leftArrow, image_rightArrow;
-    private Texture image_button_play;
+    private Image button_back;
+    private TextureRegion image_leftArrow;
 
     public LoadGame(GameStateManager gsm) {
         super(gsm);
 
         image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
         image_leftArrow.flip(true, false);
-        image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
 
         loadStage();
     }
@@ -101,11 +103,24 @@ public class LoadGame extends GameState {
     }
     private void loadSavedSessions() {
         // TODO @vincent loads kinda slow and code is kinda long
-        int counter = 1;
+        int counter = 1, scale = 4;
 
         for (Character c : Character.characters) {
             final Character character = c;
             Group preview = new Group();
+
+            final Actor preview_frame = new Actor();
+            preview_frame.setBounds(5, button_back.getY() - 230 * counter, Betrayal.WIDTH - 10,
+                    48 * scale + 10);
+            preview_frame.addListener(new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                }
+            });
+            preview.addActor(preview_frame);
 
             final SnapshotArray<TextureRegion[]> preview_charPics = c.preview.getFullPreview(0);
             final int i = counter;
@@ -114,14 +129,14 @@ public class LoadGame extends GameState {
                     for (TextureRegion[] tr : preview_charPics) {
                         for (TextureRegion textureRegion : tr) {
                             if (textureRegion != null) {
-                                sb.draw(textureRegion, 10,
-                                        button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
+                                sb.draw(textureRegion, preview_frame.getX() + 5,
+                                        preview_frame.getY() + 5, 32 * 4, 48 * 4);
                             }
                         }
                     }
                 }
             };
-            preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * 4, 48 * 4);
+            preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);
             preview.addActor(preview_charPrev);
 
             Label preview_name = new Label(c.getName(), loadFont(60));
@@ -153,24 +168,42 @@ public class LoadGame extends GameState {
             preview_floorNum.setAlignment(Align.center);
             preview.addActor(preview_floorNum);
 
-            Actor preview_frame = new Actor();
-            preview_frame.setBounds(5, button_back.getY() - 230 * i, Betrayal.WIDTH - 10,
-                    preview_charPrev.getHeight() + 10);
-            preview_frame.addListener(new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    Character.currentCharacter = character;
-                    gsm.setState(GameStateManager.State.LOBBY);
-                }
-            });
-            preview.addActor(preview_frame);
+            addPreviewListener(preview, preview_frame, c);
 
             stage.addActor(preview);
 
             counter++;
         }
+    }
+
+    private void addPreviewListener(final Group preview,
+                                    final Actor frame, final Character character) {
+        preview.addListener(new InputListener() {
+            private boolean bool_pressed = false;
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                for (Actor actor : preview.getChildren()) {
+                    actor.addAction(Actions.moveBy(5, -5));
+                }
+                bool_pressed = true;
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
+                        && y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
+                    Character.currentCharacter = character;
+                    gsm.setState(GameStateManager.State.LOBBY);
+                }
+            }
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                if (bool_pressed) {
+                    for (Actor actor : preview.getChildren()) {
+                        actor.addAction(Actions.moveBy(-5, 5));
+                    }
+                    bool_pressed = false;
+                }
+            }
+        });
     }
 
 }

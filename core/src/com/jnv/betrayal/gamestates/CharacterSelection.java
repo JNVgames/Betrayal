@@ -134,6 +134,7 @@ public class CharacterSelection extends GameState {
         stage.addActor(group_button_back);
     }
     private void loadPlayNowButton() {
+        // if layout() is used, the inputlistener x, y field becomes relative to the actor position
         image_button_play = Betrayal.res.getTexture("play-now");
         button_play_now = new Actor() {
             @Override
