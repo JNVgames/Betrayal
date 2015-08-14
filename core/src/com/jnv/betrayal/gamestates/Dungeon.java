@@ -16,9 +16,10 @@ import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
+import java.util.Random;
+
 public class Dungeon extends GameState {
 
-    private MonsterGenerator mg;
     private Texture monster;
 
     private Group field_UI;
@@ -170,11 +171,32 @@ public class Dungeon extends GameState {
         });
     }
 
-    /** Generates a random mob based on the floor the highest player in the party is currently on */
-    public class MonsterGenerator {
-
-        public MonsterGenerator() {
-
+    /**
+     * Generates a random mob based on the floor the highest player in the party is currently on
+     */
+    public Monster MonsterGenerator(int tier) {
+        //FOR VINCENT
+        Random randomNumberGenerator = new Random();
+        int x;
+        switch (tier) {
+            case 1:
+                x = randomNumberGenerator.nextInt(11);
+            case 2:
+                x = randomNumberGenerator.nextInt(11);
+                break;
+            case 3:
+                x = randomNumberGenerator.nextInt(11);
+                break;
+            case 4:
+                x = randomNumberGenerator.nextInt(11);
+                break;
+            case 5:
+                x = randomNumberGenerator.nextInt(11);
+                break;
+            default:
+                x = randomNumberGenerator.nextInt(11);
+                break;
         }
+        return new Monster("monster-tier1-" + x);
     }
 }

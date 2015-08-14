@@ -107,7 +107,7 @@ public class ShopPurchase {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
-                new Confirmation(game, "fuck you");
+                new Confirmation(game,"Confirm Purchase");
             }
         });
         stage.addActor(buyButton);
