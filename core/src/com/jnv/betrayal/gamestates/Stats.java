@@ -19,6 +19,7 @@ import com.jnv.betrayal.characterhandlers.CharacterStats;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Stats {
+
     private Stage stage;
     private Image lobbyButton, background;
     private Label.LabelStyle labelStyle;
@@ -40,7 +41,16 @@ public class Stats {
     private void loadFont() {
         labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
+    private void loadContent() {
+        int rotatorIndent = 20;
+        loadCharacterStats();
+        loadCharacterPreview();
+        characterStats.addActor(CharacterPreview.createRotators(charPreview.getX() + rotatorIndent,
+                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
+        stage.addActor(characterStats);
+    }
 
+    // Helpers
     private void loadButtons() {
         loadMask();
         loadBackground();
@@ -49,7 +59,6 @@ public class Stats {
         loadCharacterStats();
         loadReturnToLobbyButton();
     }
-
     private void loadMask() {
         mask = new Actor();
         mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
@@ -66,14 +75,12 @@ public class Stats {
         });
         stage.addActor(mask);
     }
-
     private void loadBackground() {
         background = new Image(Betrayal.res.getTexture("shop-background"));
         background.layout();
         background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
         stage.addActor(background);
     }
-
     private void loadTitle() {
         title = new Label(" My Stats", labelStyle);
         title.setHeight(100);
@@ -81,7 +88,14 @@ public class Stats {
         title.setY(Betrayal.HEIGHT - 200);
         stage.addActor(title);
     }
+    private void loadCharacterStats() {
+        yRef = title.getY();
 
+        characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yRef);
+        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yRef);
+    }
     private void loadReturnToLobbyButton() {
         lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
         lobbyButton.layout();
@@ -99,7 +113,6 @@ public class Stats {
         });
         stage.addActor(lobbyButton);
     }
-
     private void removeStats() {
         mask.remove();
         title.remove();
@@ -108,25 +121,6 @@ public class Stats {
 
         // vincents variable
         characterStats.remove();
-    }
-
-    // TODO @JOEYPHAN PLS MERGE MAH CODE
-    // VINCENTS STUFF. DISPLAYS THE CHARACTERS STATS ON THE STATS PAGE
-    private void loadContent() {
-        int rotatorIndent = 20;
-        loadCharacterStats();
-        loadCharacterPreview();
-        characterStats.addActor(CharacterPreview.createRotators(charPreview.getX() + rotatorIndent,
-                charPreview.getY() - 20, (charPreview.getWidth() - rotatorIndent * 2 + 30) / 2, 30));
-        stage.addActor(characterStats);
-    }
-    private void loadCharacterStats() {
-        yRef = title.getY();
-
-        characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yRef);
     }
     private void characterStatsLabel(Group group, CharacterStats.Stat stat, float yReference) {
         int fontSize = 40;
@@ -149,18 +143,12 @@ public class Stats {
             }
         };
         charPreview.setBounds(background.getX() + (background.getWidth() - 32 * scale) / 2,
-                yRef - 48 * scale - 30,
+                yRef - 48 * scale - 50,
                 32 * scale, 48 * scale);
         characterStats.addActor(charPreview);
     }
     private void drawPreview(Batch batch) {
-        for (TextureRegion[] tr : Character.currentCharacter.preview.getFullPreview()) {
-            for (int layers = 0; layers < CharacterPreview.SLOTS; layers++) {
-                if (tr[layers] != null) {
-                    batch.draw(tr[layers], charPreview.getX(), charPreview.getY(),
-                            charPreview.getWidth(), charPreview.getHeight());
-                }
-            }
-        }
+        Character.currentCharacter.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
+                charPreview.getWidth(), charPreview.getHeight());
     }
 }

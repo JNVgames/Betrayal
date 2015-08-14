@@ -262,15 +262,9 @@ public class CharacterSelection extends GameState {
     private void loadPreview() {
         Actor field_preview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                for (TextureRegion[] preview : character.preview.getFullPreview()) {
-                    for (TextureRegion tr : preview) {
-                        if (tr != null) {
-                            sb.draw(tr, field_framePreview.getX(),
-                                    field_framePreview.getY(), field_framePreview.getWidth(),
-                                    field_framePreview.getHeight());
-                        }
-                    }
-                }
+                character.preview.drawPreview(batch, field_framePreview.getX(),
+                        field_framePreview.getY(), field_framePreview.getWidth(),
+                        field_framePreview.getHeight());
             }
         };
         field_preview.setWidth(384);
@@ -329,9 +323,6 @@ public class CharacterSelection extends GameState {
                 break;
         }
     }
-
-    // Setters
-    public static void setCharacterNull() { character = null; }
 
     // Classes
     private class SelectionField {

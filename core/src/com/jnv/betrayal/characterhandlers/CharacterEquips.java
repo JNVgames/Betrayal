@@ -11,7 +11,7 @@ import com.jnv.betrayal.main.Betrayal;
 
 public class CharacterEquips {
 
-    private com.jnv.betrayal.entities.Character character;
+    private Character character;
 
     // todo @vincent add getPreview() for equip class
     private HeadGear slot_armor_head;

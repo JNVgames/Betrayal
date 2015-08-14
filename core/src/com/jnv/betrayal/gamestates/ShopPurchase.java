@@ -19,7 +19,6 @@ public class ShopPurchase {
     private Label price,description;
     private Actor mask;
     private Betrayal game;
-    private Character character;
     private int currentSide;
 
     public ShopPurchase(Betrayal game) {
@@ -99,15 +98,17 @@ public class ShopPurchase {
         buyButton.layout();
         buyButton.setBounds(Betrayal.WIDTH/ 2 + 50, 220, 100, 50);
         buyButton.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
-                new Confirmation(game,"Confirm Purchase");
+                new Confirmation(game, "Confirm purchase") {
+                    @Override
+                    public void doSomething() {
+                        Character.currentCharacter.inventory.addItem(new Weapon("sword11"));
+                    }
+                };
             }
         });
         stage.addActor(buyButton);
@@ -158,12 +159,9 @@ public class ShopPurchase {
         leftArrow.layout();
         leftArrow.setBounds(Betrayal.WIDTH / 2 -150, 300, 100, 50);
         leftArrow.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 currentSide--;
                 if (currentSide < 0) { currentSide = 3; }
@@ -173,14 +171,11 @@ public class ShopPurchase {
 
         rightArrow = new Image(Betrayal.res.getTexture("arrow-right"));
         rightArrow.layout();
-        rightArrow.setBounds(Betrayal.WIDTH / 2 +50, 300, 100, 50);
+        rightArrow.setBounds(Betrayal.WIDTH / 2 + 50, 300, 100, 50);
         rightArrow.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 currentSide = (currentSide + 1) % 4;
             }

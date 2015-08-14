@@ -7,12 +7,19 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.entities.*;
+import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
@@ -20,7 +27,7 @@ import java.util.Random;
 
 public class Dungeon extends GameState {
 
-    private Texture monster;
+    private Monster monster;
 
     private Group field_UI;
 
@@ -28,9 +35,8 @@ public class Dungeon extends GameState {
     private float button_height = 150, button_width = Betrayal.WIDTH / 2;
 
     private enum Menu {
-        MAIN(), ATTACK, ITEMS, EVENT_LOG
+        MAIN, ATTACK, ITEMS, EVENT_LOG
     }
-    private Menu menu = Menu.MAIN;
 
     private Label.LabelStyle font;
 
@@ -40,6 +46,7 @@ public class Dungeon extends GameState {
         //this.floor = floor;
         //this.numPlayers = numPlayers;
 
+        monster = generateMonster(1);
         loadStage();
     }
 
@@ -64,6 +71,7 @@ public class Dungeon extends GameState {
         font = loadFont(70);
         loadTimer();
         loadMainMenu();
+        loadMonster();
         loadPlayers();
     }
     private void changeUI(Menu m) {
@@ -99,9 +107,30 @@ public class Dungeon extends GameState {
         label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
         stage.addActor(label);
     }
-    private void loadPlayers() {
-        Vector2[] playerCoords = new Vector2[5];
+    private void loadMonster() {
+        float width = 300, height = 300;
+        Vector2 center = new Vector2(Betrayal.WIDTH / 2, Betrayal.HEIGHT - 300);
 
+        Image image_monster = new Image(monster.getMonsterTexture());
+        image_monster.layout();
+        image_monster.setBounds(center.x - width / 2, center.y - height / 2, 300, 300);
+        image_monster.addAction(Actions.alpha(0));
+        image_monster.addAction(Actions.delay(1, Actions.fadeIn(2)));
+        stage.addActor(image_monster);
+    }
+    private void loadPlayers() {
+        final Vector2[] playerCoords = new Vector2[5];
+        playerCoords[0] = new Vector2(50f, 700f);
+
+        Actor actor_player = new Actor() {
+            private int scale = 2;
+
+            public void draw(Batch batch, float parentAlpha) {
+                Character.currentCharacter.preview.drawPreview(batch, 1, playerCoords[0].x,
+                        playerCoords[0].y, 32 * scale, 48 * scale);
+            }
+        };
+        stage.addActor(actor_player);
     }
     private void loadMainMenu() {
         Label field_UI_eventLog = new Label("Event Log", loadFont(67));
@@ -171,30 +200,31 @@ public class Dungeon extends GameState {
         });
     }
 
-    /**
-     * Generates a random mob based on the floor the highest player in the party is currently on
-     */
-    public Monster MonsterGenerator(int tier) {
-        //FOR VINCENT
+    /** Generates a random mob based on the floor the highest player in the party is currently on
+     * @param tier
+     * @return */
+    public Monster generateMonster(int tier) { // MonsterGenerator(int floor)
+        // todo @joey change tier parameter to floor
         Random randomNumberGenerator = new Random();
         int x;
         switch (tier) {
             case 1:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
+                break;
             case 2:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
                 break;
             case 3:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
                 break;
             case 4:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
                 break;
             case 5:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
                 break;
             default:
-                x = randomNumberGenerator.nextInt(11);
+                x = randomNumberGenerator.nextInt(10);
                 break;
         }
         return new Monster("monster-tier1-" + x);

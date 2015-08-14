@@ -84,9 +84,6 @@ public class Betrayal extends Game {
         return worldCam;
     }
     public StretchViewport getStretchViewport() { return stretchViewport; }
-    public Screen getScreen() {
-        return super.getScreen();
-    }
 	public Stage getStage() { return stage; }
 	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -95,10 +92,5 @@ public class Betrayal extends Game {
 		labelStyle.font = generator.generateFont(fontDetails);
 		return labelStyle;
 	}
-
-    // Setters
-    public void setScreen(Screen screen) {
-        super.setScreen(screen);
-    }
 
 }

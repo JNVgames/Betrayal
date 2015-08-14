@@ -127,18 +127,11 @@ public class LoadGame extends GameState {
             });
             preview.addActor(preview_frame);
 
-            final SnapshotArray<TextureRegion[]> preview_charPics = c.preview.getFullPreview(0);
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
-                    for (TextureRegion[] tr : preview_charPics) {
-                        for (TextureRegion textureRegion : tr) {
-                            if (textureRegion != null) {
-                                sb.draw(textureRegion, preview_frame.getX() + 5,
-                                        preview_frame.getY() + 5, 32 * 4, 48 * 4);
-                            }
-                        }
-                    }
+                    Character.currentCharacter.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
+                            preview_frame.getY() + 5, 32 * 4, 48 * 4);
                 }
             };
             preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);

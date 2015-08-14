@@ -12,17 +12,16 @@ import com.jnv.betrayal.main.Betrayal;
 //TODO; add boolean
 //TODO: GET THE @FANGOT BACK TO WORK 8/11
 public class Confirmation {
+
     private Stage stage;
-    private Image lobbyButton, yesButton,noButton, background;
+    private Image yesButton, noButton, background;
     private Label.LabelStyle labelStyle;
     private Label title;
     private Actor mask;
-    private Betrayal game;
     private String string;
 
     public Confirmation(Betrayal game, String string) {
-        this.game=game;
-        this.string= string;
+        this.string = string;
         stage = game.getStage();
         loadFont();
         loadButtons();
@@ -63,8 +62,8 @@ public class Confirmation {
     private void loadAnswer() {
         yesButton = new Image(Betrayal.res.getTexture("yes"));
         yesButton.layout();
-        yesButton.setBounds(Betrayal.WIDTH/2-175,
-                Betrayal.HEIGHT/2-100, 150, 75);
+        yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
+                Betrayal.HEIGHT / 2 - 100, 150, 75);
         yesButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -81,8 +80,8 @@ public class Confirmation {
 
         noButton = new Image(Betrayal.res.getTexture("no"));
         noButton.layout();
-        noButton.setBounds(Betrayal.WIDTH/2+25,
-                Betrayal.HEIGHT/2-100,150, 75);
+        noButton.setBounds(Betrayal.WIDTH / 2 + 25,
+                Betrayal.HEIGHT / 2 - 100, 150, 75);
         noButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -104,7 +103,7 @@ public class Confirmation {
         yesButton.remove();
         noButton.remove();
     }
-    private void doSomething(){
 
+    public void doSomething() {
     }
 }

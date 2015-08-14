@@ -5,6 +5,7 @@
 package com.jnv.betrayal.characterhandlers;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -147,7 +148,20 @@ public class CharacterPreview {
     }
 
     // Getters
-    public SnapshotArray<TextureRegion[]> getFullPreview() {
+    public void drawPreview(Batch batch, float x, float y, float width, float height) {
+        drawPreview(batch, rotation, x, y, width, height);
+    }
+    public void drawPreview(Batch batch, int rotation, float x, float y, float width, float height) {
+        this.rotation = rotation;
+        for (TextureRegion[] preview : character.preview.getFullPreview(rotation)) {
+            for (TextureRegion tr : preview) {
+                if (tr != null) {
+                    batch.draw(tr, x, y, width, height);
+                }
+            }
+        }
+    }
+    private SnapshotArray<TextureRegion[]> getFullPreview() {
         SnapshotArray<TextureRegion[]> preview = new SnapshotArray<TextureRegion[]>();
         switch (rotation) {
             case 0:
@@ -167,7 +181,7 @@ public class CharacterPreview {
         }
         return preview;
     }
-    public SnapshotArray<TextureRegion[]> getFullPreview(int rotation) {
+    private SnapshotArray<TextureRegion[]> getFullPreview(int rotation) {
         this.rotation = rotation;
         return getFullPreview();
     }
