@@ -18,9 +18,11 @@ public class Confirmation {
     private Label title;
     private Actor mask;
     private Betrayal game;
+    private String string;
 
-    public Confirmation(Betrayal game) {
+    public Confirmation(Betrayal game, String string) {
         this.game=game;
+        this.string= string;
         stage = game.getStage();
         loadFont();
         loadButtons();
@@ -51,7 +53,7 @@ public class Confirmation {
     }
 
     private void loadTitle() {
-        title = new Label("Are You Sure?", labelStyle);
+        title = new Label(string, labelStyle);
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT / 2 + 50);
@@ -71,6 +73,7 @@ public class Confirmation {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                doSomething();
                 removeConfirmation();
             }
         });
@@ -100,5 +103,8 @@ public class Confirmation {
         background.remove();
         yesButton.remove();
         noButton.remove();
+    }
+    private void doSomething(){
+
     }
 }
