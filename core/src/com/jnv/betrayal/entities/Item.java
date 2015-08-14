@@ -5,7 +5,6 @@
 package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.Comparator;
@@ -81,5 +80,29 @@ public class Item {
      *         the value 1 if this item > item */
     public int compareTo(Item item) {
         return this.id < item.getID() ? -1 : ((this.id == item.getID()) ? 0 : 1);
+    }
+
+    public static void loadAll() {
+        for (int i = 1; i <= 6; i++) {
+            new Weapon(i, "sword1" + i);
+        }
+
+        /*
+        for (int i = 1; i <= 6; i++) {
+            new Shield(i, "sword" + i);
+        }
+        for (int i = 1; i <= 6; i++) {
+            new Ring(i, "sword" + i);
+        }
+        for (int i = 1; i <= 6; i++) {
+            new Item(i, "sword" + i);
+        }
+        */
+        for (int i = 1; i <= 6; i++) {
+            new Weapon(i + 6, "sword2" + i);
+        }
+
+        new BodyArmor(0, "char-armor-peasant");
+
     }
 }

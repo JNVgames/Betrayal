@@ -16,7 +16,7 @@ public class CharacterStats {
         health = 25;
         defense = 5;
         attack = 5;
-        floor = 1;
+        floor = 0;
     }
 
     // Getters

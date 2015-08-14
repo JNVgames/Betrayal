@@ -103,7 +103,7 @@ public class ShopRingPurchase {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
-                new Confirmation(game);
+                new Confirmation(game, "Buy");
             }
         });
         stage.addActor(buyButton);

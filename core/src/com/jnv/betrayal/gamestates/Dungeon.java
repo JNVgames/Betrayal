@@ -23,7 +23,7 @@ public class Dungeon extends GameState {
 
     private Group field_UI;
 
-    private int floor, numPlayers;
+    private int floor, numPlayers, strongestPlayer;
     private float button_height = 150, button_width = Betrayal.WIDTH / 2;
 
     private enum Menu {
