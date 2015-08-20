@@ -2,18 +2,15 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.*;
-import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Shop {
@@ -232,7 +229,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    new ShopPurchase(game);
+                    new com.jnv.betrayal.popup.ShopPurchase(game);
                 }
             });
             stage.addActor(sword1[i - 1]);
@@ -459,7 +456,7 @@ public class Shop {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    new ShopRingPurchase(game);
+                    new com.jnv.betrayal.popup.ShopRingPurchase(game);
                 }
             });
             stage.addActor(potions[i - 1]);

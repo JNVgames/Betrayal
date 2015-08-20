@@ -2,19 +2,19 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.characterhandlers;
+package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.entities.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterInventory {
+public class Inventory {
 
     private int gold, items_max;
     private List<Item> items;
 
-    public CharacterInventory() {
+    public Inventory() {
         gold = 0;
         items_max = 30;
 

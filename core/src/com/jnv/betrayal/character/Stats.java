@@ -2,9 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.characterhandlers;
+package com.jnv.betrayal.character;
 
-public class CharacterStats {
+public class Stats {
 
     public enum Stat {
         FLOOR, HEALTH, DEFENSE, ATTACK
@@ -12,7 +12,7 @@ public class CharacterStats {
 
     private int health, defense, attack, floor;
 
-    public CharacterStats() {
+    public Stats() {
         health = 25;
         defense = 5;
         attack = 5;

@@ -2,14 +2,14 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.characterhandlers;
+package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
-public class CharacterEquips {
+public class Equips {
 
     private Character character;
 
@@ -20,7 +20,7 @@ public class CharacterEquips {
     private Ring slot_ring_1, slot_ring_2;
     private Weapon slot_weapon;
 
-    public CharacterEquips(Character character) {
+    public Equips(Character character) {
         this.character = character;
     }
 

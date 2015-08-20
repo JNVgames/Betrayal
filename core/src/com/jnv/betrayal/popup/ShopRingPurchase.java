@@ -1,16 +1,12 @@
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.popup;
 
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.*;
-import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 public class ShopRingPurchase {
@@ -103,7 +99,7 @@ public class ShopRingPurchase {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
-                new Confirmation(game, "Buy");
+                new com.jnv.betrayal.popup.Confirmation(game, "Buy");
             }
         });
         stage.addActor(buyButton);

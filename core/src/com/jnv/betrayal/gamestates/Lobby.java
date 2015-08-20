@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+
 public class Lobby extends GameState {
 
     private Image lobbyBackground, shopButton, settingsButton,
@@ -78,7 +79,7 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new Shop(game);
+                new com.jnv.betrayal.popup.Shop(game);
             }
         });
         stage.addActor(shopButton);
@@ -96,7 +97,7 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new Inventory(game);
+                new com.jnv.betrayal.popup.Inventory(game);
             }
         });
         stage.addActor(inventoryButton);
@@ -114,7 +115,7 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new Stats(game);
+                new com.jnv.betrayal.popup.Stats(game);
             }
         });
         stage.addActor(statsButton);
@@ -149,7 +150,7 @@ public class Lobby extends GameState {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new LobbyOptions(game);
+                new com.jnv.betrayal.popup.LobbyOptions(game);
             }
         });
         stage.addActor(settingsButton);

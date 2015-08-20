@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.gamestates;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,19 +12,32 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-public class GameOver {
-    private Stage stage;
-    private Betrayal game;
+
+public class GameOver extends GameState {
+
     private Image background;
     private Actor mask;
     private Label.LabelStyle labelStyle;
     private Label rip, touchAnywhere;
 
-    public GameOver(Betrayal game) {
-        this.game=game;
-        stage = game.getStage();
+    public GameOver(GameStateManager gsm) {
+        super(gsm);
         loadFont();
         loadButtons();
+    }
+
+    public void update(float dt) {
+        stage.act(dt);
+    }
+    public void handleInput() {
+
+    }
+    public void render() {
+        stage.draw();
+    }
+
+    public void dispose() {
+
     }
 
     private void loadFont() {

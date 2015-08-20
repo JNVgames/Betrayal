@@ -1,9 +1,8 @@
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.main.Betrayal;
 
-import java.util.Comparator;
 import java.util.HashMap;
 
 public class Monster {

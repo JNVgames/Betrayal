@@ -6,7 +6,6 @@ package com.jnv.betrayal.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -14,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.entities.Item;
-import com.jnv.betrayal.gamestates.Monster;
+import com.jnv.betrayal.entities.Monster;
 import com.jnv.betrayal.handlers.Content;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.utilities.TextureLoader;

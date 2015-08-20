@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.Gdx;
 
@@ -19,7 +19,6 @@ import com.jnv.betrayal.main.Betrayal;
 public class Instructions {
     private Stage stage;
 
-    private TextureRegion leftArrow;
     private Image image_rightArrow, image_leftArrow, exitButton, background;
     private Label.LabelStyle labelStyle;
     private Label title, content0, content1, content2, content3, content4;
@@ -98,7 +97,7 @@ public class Instructions {
     }
 
     private void loadLeftArrow() {
-        leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow"));
+        TextureRegion leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
         leftArrow.flip(true, false);
         image_leftArrow = new Image(leftArrow);
 
@@ -106,12 +105,9 @@ public class Instructions {
         image_leftArrow.layout();
         image_leftArrow.setBounds(210, 150, 125, 62);
         image_leftArrow.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 removeCurrentContent();
                 currentContent--;
@@ -125,16 +121,13 @@ public class Instructions {
     }
 
     private void loadRightArrow() {
-        image_rightArrow = new Image(Betrayal.res.getTexture("arrow"));
+        image_rightArrow = new Image(Betrayal.res.getTexture("arrow-right"));
         image_rightArrow.layout();
         image_rightArrow.setBounds(385, 150, 125, 62);
         image_rightArrow.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 removeCurrentContent();
                 currentContent++;

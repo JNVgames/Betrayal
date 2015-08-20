@@ -2,17 +2,17 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.characterhandlers;
+package com.jnv.betrayal.character;
 
-public class CharacterJob {
+public class Job {
 
     public enum Jobs {
         WARRIOR, THIEF, KNIGHT, PRIEST
     }
     private Jobs job;
 
-    public CharacterJob() {}
-    public CharacterJob(Jobs job) {
+    public Job() {}
+    public Job(Jobs job) {
         this.job = job;
     }
 

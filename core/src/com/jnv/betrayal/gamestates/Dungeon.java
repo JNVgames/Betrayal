@@ -5,8 +5,8 @@
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,12 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.entities.Monster;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
@@ -27,7 +26,7 @@ import java.util.Random;
 
 public class Dungeon extends GameState {
 
-    private Monster monster;
+    private com.jnv.betrayal.entities.Monster monster;
 
     private Group field_UI;
 
@@ -119,17 +118,18 @@ public class Dungeon extends GameState {
         stage.addActor(image_monster);
     }
     private void loadPlayers() {
+        final int scale = 2;
         final Vector2[] playerCoords = new Vector2[5];
         playerCoords[0] = new Vector2(50f, 700f);
 
         Actor actor_player = new Actor() {
-            private int scale = 2;
-
             public void draw(Batch batch, float parentAlpha) {
-                Character.currentCharacter.preview.drawPreview(batch, 1, playerCoords[0].x,
+                batch.setColor(Color.WHITE);
+                Character.currentCharacter.preview.drawPreview(batch, 2, playerCoords[0].x,
                         playerCoords[0].y, 32 * scale, 48 * scale);
             }
         };
+        actor_player.setBounds(playerCoords[0].x, playerCoords[0].y, 32 * scale, 48 * scale);
         stage.addActor(actor_player);
     }
     private void loadMainMenu() {
@@ -193,7 +193,6 @@ public class Dungeon extends GameState {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if (x > 0 && x < button_width && y > 0 && y < button_height) changeUI(menu);
             }
@@ -203,7 +202,7 @@ public class Dungeon extends GameState {
     /** Generates a random mob based on the floor the highest player in the party is currently on
      * @param tier
      * @return */
-    public Monster generateMonster(int tier) { // MonsterGenerator(int floor)
+    public com.jnv.betrayal.entities.Monster generateMonster(int tier) { // MonsterGenerator(int floor)
         // todo @joey change tier parameter to floor
         Random randomNumberGenerator = new Random();
         int x;

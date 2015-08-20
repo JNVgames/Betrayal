@@ -2,10 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,9 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.characterhandlers.CharacterPreview;
+import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.entities.Character;
-import com.jnv.betrayal.characterhandlers.CharacterStats;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Stats {
@@ -45,7 +43,7 @@ public class Stats {
         int rotatorIndent = 20;
         loadCharacterStats();
         loadCharacterPreview();
-        characterStats.addActor(CharacterPreview.createRotators(charPreview.getX() + rotatorIndent,
+        characterStats.addActor(Preview.createRotators(charPreview.getX() + rotatorIndent,
                 charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
         stage.addActor(characterStats);
     }
@@ -91,10 +89,10 @@ public class Stats {
     private void loadCharacterStats() {
         yRef = title.getY();
 
-        characterStatsLabel(characterStats, CharacterStats.Stat.FLOOR, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.HEALTH, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.DEFENSE, yRef);
-        characterStatsLabel(characterStats, CharacterStats.Stat.ATTACK, yRef);
+        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.FLOOR, yRef);
+        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.HEALTH, yRef);
+        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.DEFENSE, yRef);
+        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.ATTACK, yRef);
     }
     private void loadReturnToLobbyButton() {
         lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
@@ -122,7 +120,7 @@ public class Stats {
         // vincents variable
         characterStats.remove();
     }
-    private void characterStatsLabel(Group group, CharacterStats.Stat stat, float yReference) {
+    private void characterStatsLabel(Group group, com.jnv.betrayal.character.Stats.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
         statsText.setText(Character.currentCharacter.stats.toString(stat));

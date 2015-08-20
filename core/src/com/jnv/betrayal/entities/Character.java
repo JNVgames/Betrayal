@@ -4,11 +4,11 @@
 
 package com.jnv.betrayal.entities;
 
-import com.jnv.betrayal.characterhandlers.CharacterInventory;
-import com.jnv.betrayal.characterhandlers.CharacterJob;
-import com.jnv.betrayal.characterhandlers.CharacterPreview;
-import com.jnv.betrayal.characterhandlers.CharacterStats;
-import com.jnv.betrayal.characterhandlers.CharacterEquips;
+import com.jnv.betrayal.character.Inventory;
+import com.jnv.betrayal.character.Job;
+import com.jnv.betrayal.character.Preview;
+import com.jnv.betrayal.character.Stats;
+import com.jnv.betrayal.character.Equips;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,25 +33,25 @@ public class Character {
 
     private String name;
 
-    public CharacterPreview preview;
-    public CharacterJob job;
-    public CharacterEquips equips;
-    public CharacterInventory inventory;
-    public CharacterStats stats;
+    public Preview preview;
+    public Job job;
+    public Equips equips;
+    public Inventory inventory;
+    public Stats stats;
 
     /** Creates character with default values */
     public Character() {
-        equips = new CharacterEquips(this);
-        preview = new CharacterPreview(this);
-        job = new CharacterJob();
-        inventory = new CharacterInventory();
-        stats = new CharacterStats();
+        equips = new Equips(this);
+        preview = new Preview(this);
+        job = new Job();
+        inventory = new Inventory();
+        stats = new Stats();
 
-        job.setJob(CharacterJob.Jobs.WARRIOR);
+        job.setJob(Job.Jobs.WARRIOR);
         update();
     }
 
-    public void createCharacter(CharacterJob.Jobs job) {
+    public void createCharacter(Job.Jobs job) {
         this.job.setJob(job);
     }
     private void update() {
@@ -63,7 +63,7 @@ public class Character {
 
     // Getters
     public String getName() { return name; }
-    public String getJob(CharacterJob.Jobs job) {
+    public String getJob(Job.Jobs job) {
         switch (job) {
             case WARRIOR:
                 return "W";

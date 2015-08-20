@@ -7,21 +7,17 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RemoveAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.SnapshotArray;
+import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -158,7 +154,7 @@ public class LoadGame extends GameState {
             preview.addActor(preview_floor);
 
             Label preview_floorNum =
-                    new Label(Integer.toString(c.stats.getStat(com.jnv.betrayal.characterhandlers.CharacterStats.Stat.FLOOR)),
+                    new Label(Integer.toString(c.stats.getStat(Stats.Stat.FLOOR)),
                             loadFont(100));
             preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
                     preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());

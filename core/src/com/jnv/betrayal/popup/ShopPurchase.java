@@ -1,7 +1,5 @@
-package com.jnv.betrayal.gamestates;
+package com.jnv.betrayal.popup;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -22,7 +20,6 @@ public class ShopPurchase {
     private int currentSide;
 
     public ShopPurchase(Betrayal game) {
-
         this.game = game;
         stage = game.getStage();
         currentSide = 0;
