@@ -2,11 +2,11 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.utilities;
+package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.main.Betrayal;
 
-public class TextureLoader {
+public class ResourceLoader {
 
     public static void loadAll() {
         // About

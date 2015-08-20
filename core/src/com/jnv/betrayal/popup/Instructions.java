@@ -17,14 +17,13 @@ import com.jnv.betrayal.main.Betrayal;
 
 
 public class Instructions {
-    private Stage stage;
 
+    private Stage stage;
     private Image image_rightArrow, image_leftArrow, exitButton, background;
     private Label.LabelStyle labelStyle;
     private Label title, content0, content1, content2, content3, content4;
     private Actor mask;
     private int currentContent, totalContent;
-
 
     public Instructions(Betrayal game) {
         stage = game.getStage();

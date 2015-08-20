@@ -12,8 +12,6 @@ import java.util.HashMap;
 
 public class Item {
 
-    protected static HashMap<String, Item> allItems = new HashMap<String, Item>();
-
     protected Texture itemImage;
     protected String itemName;
     protected int id, cost_buy, cost_sell;
@@ -22,10 +20,10 @@ public class Item {
         this.id = id;
         itemName = name;
         itemImage = Betrayal.res.getTexture(name);
-        allItems.put(name, this);
+        Betrayal.res.loadItem(name, this);
     }
     public Item(String name) {
-        Item src = allItems.get(name);
+        Item src = Betrayal.res.getItem(name);
         id = src.getID();
         itemName = name;
         cost_buy = src.getBuyCost();
@@ -53,7 +51,7 @@ public class Item {
     // Setters
     public void setName(String name) { itemName = name; }
     public static void setCosts(String name, int newBuyCost, int newSellCost) {
-        Item src = allItems.get(name);
+        Item src = Betrayal.res.getItem(name);
         src.setBuyCost(newBuyCost);
         src.setSellCost(newSellCost);
     }

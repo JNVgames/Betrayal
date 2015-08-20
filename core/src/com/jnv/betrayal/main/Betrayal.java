@@ -14,9 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.entities.Monster;
-import com.jnv.betrayal.handlers.Content;
+import com.jnv.betrayal.resources.Resources;
 import com.jnv.betrayal.handlers.GameStateManager;
-import com.jnv.betrayal.utilities.TextureLoader;
+import com.jnv.betrayal.resources.ResourceLoader;
 
 public class Betrayal extends Game {
 
@@ -25,10 +25,12 @@ public class Betrayal extends Game {
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 1280;
 	private StretchViewport stretchViewport;
-	private Stage stage;
+	private static Stage stage;
+    private static GameStateManager.State state;
+    private static boolean gamePaused;
 	private static FreeTypeFontGenerator generator;
 
-	public static Content res;
+	public static Resources res;
 
 	public GameStateManager gsm;
 	
@@ -43,25 +45,30 @@ public class Betrayal extends Game {
 
         worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 
-        res = new Content();
-        TextureLoader.loadAll();
+        res = new Resources();
+        ResourceLoader.loadAll();
 		Item.loadAll();
 		Monster.loadMonsters();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 
 		gsm = new GameStateManager(this);
-		gsm.setState(GameStateManager.State.SPLASH);
+		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
+        resume();
 	}
 	public void dispose() {
-		super.dispose();
 		stage.dispose();
+        res.removeAll();
 	}
 	public void pause() {
-		super.pause();
+        gamePaused = true;
+        state = gsm.currentState;
 	}
 	public void resume() {
-		super.resume();
+        if (gamePaused) {
+            gamePaused = false;
+            gsm.setState(state);
+        }
 	}
 	public void render() {
 		worldCam.update();
@@ -85,7 +92,8 @@ public class Betrayal extends Game {
     public StretchViewport getStretchViewport() { return stretchViewport; }
 	public Stage getStage() { return stage; }
 	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
-		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
+				new FreeTypeFontGenerator.FreeTypeFontParameter();
 		fontDetails.size = fontSize;
 		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = generator.generateFont(fontDetails);

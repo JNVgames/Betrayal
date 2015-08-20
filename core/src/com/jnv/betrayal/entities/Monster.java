@@ -7,9 +7,6 @@ import java.util.HashMap;
 
 public class Monster {
 
-
-    protected static HashMap<String, Monster> allMonsters = new HashMap<String, Monster>();
-
     protected Texture monsterTexture;
     protected String MonsterName;
     protected int id, health, attack, defense;
@@ -18,10 +15,10 @@ public class Monster {
         this.id = id;
         MonsterName = name;
         monsterTexture = Betrayal.res.getTexture(name);
-        allMonsters.put(name, this);
+        Betrayal.res.loadMonster(name, this);
     }
     public Monster(String name) {
-        Monster src = allMonsters.get(name);
+        Monster src = Betrayal.res.getMonster(name);
         id = src.getID();
         MonsterName = name;
         health = src.getHealth();
@@ -43,7 +40,7 @@ public class Monster {
     // Setters
     public void setName(String name) { MonsterName = name; }
     public static void setData(String name, int newHealth, int newAttack, int newDefense) {
-        Monster src = allMonsters.get(name);
+        Monster src = Betrayal.res.getMonster(name);
         src.setHealth(newHealth);
         src.setAttack(newAttack);
         src.setDefense(newDefense);

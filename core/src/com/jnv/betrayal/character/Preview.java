@@ -172,28 +172,29 @@ public class Preview {
     }
     public void drawPreview(Batch batch, int rotation, float x, float y, float width, float height) {
         this.rotation = rotation;
-        for (TextureRegion preview : character.preview.getFullPreview(rotation)) {
-            if (preview != null) {
-                batch.draw(preview, x, y, width, height);
+        TextureRegion[] preview = getFullPreview();
+        for (int i = 0; i < SLOTS; i++) {
+            if (preview[i] != null) {
+                batch.draw(preview[i], x, y, width, height);
             }
         }
     }
-    private SnapshotArray<TextureRegion> getFullPreview() {
+    private TextureRegion[] getFullPreview() {
         update();
         switch (rotation) {
             case 0:
-                return new SnapshotArray<TextureRegion>(front_still);
+                return front_still;
             case 1:
-                return new SnapshotArray<TextureRegion>(right_still);
+                return right_still;
             case 2:
-                return new SnapshotArray<TextureRegion>(back_still);
+                return back_still;
             case 3:
-                return new SnapshotArray<TextureRegion>(left_still);
+                return left_still;
             default:
                 return null;
         }
     }
-    private SnapshotArray<TextureRegion> getFullPreview(int rotation) {
+    private TextureRegion[] getFullPreview(int rotation) {
         this.rotation = rotation;
         return getFullPreview();
     }
@@ -291,19 +292,23 @@ public class Preview {
      * @param index specified character preview frame
      * @param src character preview frame */
     private void toBackOfPreview(int index, TextureRegion[][] src) {
+        int counter;
         for (int i = 0; i < 3; i++) {
+            counter = index;
             TextureRegion tmp = src[i][index];
-            while (index > 0) {
-                src[i][index] = src[i][--index];
+            while (counter > 0) {
+                src[i][counter] = src[i][--counter];
             }
             src[i][0] = tmp;
         }
     }
     private void toFrontOfPreview(int index, TextureRegion[][] src) {
+        int counter;
         for (int i = 0; i < 3; i++) {
+            counter = index;
             TextureRegion tmp = src[i][index];
-            while (index < src[i].length - 1) {
-                src[i][index] = src[i][++index];
+            while (counter < src[i].length - 1) {
+                src[i][counter] = src[i][++counter];
             }
             src[i][src.length - 1] = tmp;
         }

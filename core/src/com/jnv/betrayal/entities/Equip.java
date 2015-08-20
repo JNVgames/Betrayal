@@ -18,7 +18,7 @@ public abstract class Equip extends Item {
 
     public Equip(String name) {
         super(name);
-        Equip src = (Equip) allItems.get(name);
+        Equip src = (Equip) Betrayal.res.getItem(name);
         weapon_preview = src.getPreview();
     }
 

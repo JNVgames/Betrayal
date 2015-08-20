@@ -37,7 +37,6 @@ public class GameStateManager {
     public GameStateManager(Betrayal game) {
         this.game = game;
         gameStates = new Stack<GameState>();
-        pushState(State.SPLASH);
     }
 
     public void update(float dt) {
@@ -87,8 +86,11 @@ public class GameStateManager {
 
     // Setters
     public void setState(State state) {
-        popState();
-        pushState(state);
+        if (gameStates.isEmpty()) pushState(state);
+        else {
+            popState();
+            pushState(state);
+        }
     }
 
 }
