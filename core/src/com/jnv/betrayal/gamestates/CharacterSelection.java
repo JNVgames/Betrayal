@@ -31,7 +31,7 @@ public class CharacterSelection extends GameState {
     private Label.LabelStyle labelStyle;
 
     private Actor reference, button_play_now;
-    private Image button_back, field_framePreview;
+    private Image background, button_back, field_framePreview;
     private Label field_usernameLabel, label_jobDescription;
     private TextField field_usernameEnter;
     private SelectionField gender, hairStyle, hairColor, job;
@@ -77,6 +77,7 @@ public class CharacterSelection extends GameState {
     }
     /** Calls the appropriate functions to create the character selection screen */
     private void loadStage() {
+        loadBackground();
         loadBackButton();
         loadPlayNowButton();
         loadUsernameField();
@@ -95,7 +96,12 @@ public class CharacterSelection extends GameState {
 
         loadJobDescription();
     }
-
+    private void loadBackground(){
+        background = new Image(Betrayal.res.getTexture("instructions-background"));
+        background.layout();
+        background.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
+        stage.addActor(background);
+    }
     private void loadBackButton() {
         Group group_button_back = new Group();
 
