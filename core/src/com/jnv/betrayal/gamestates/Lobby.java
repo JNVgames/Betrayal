@@ -19,8 +19,8 @@ import com.jnv.betrayal.main.Betrayal;
 
 public class Lobby extends GameState {
 
-    private Image lobbyBackground, shopButton, settingsButton,
-            statsButton, partyButton, inventoryButton;
+    private Image lobbyBackground, shopButton, settingsButton, tower,
+            statsButton, partyButton, inventoryButton, allPlayersBackground, chatBackground;
     private Label.LabelStyle labelStyle;
     private Label lobby;
     private int buttonWidth, buttonHeight, spacing;
@@ -155,13 +155,35 @@ public class Lobby extends GameState {
         });
         stage.addActor(settingsButton);
     }
+    private void loadAllPlayersBackground(){
+        allPlayersBackground = new Image(Betrayal.res.getTexture("lobby-screen"));
+        allPlayersBackground.layout();
+        allPlayersBackground.setBounds(Betrayal.WIDTH * 2 / 5, 510, Betrayal.WIDTH * 3 / 5 - 10, Betrayal.HEIGHT / 3 + 175);
+        stage.addActor(allPlayersBackground);
+    }
+    private void loadChatBackground(){
+        chatBackground = new Image(Betrayal.res.getTexture("lobby-screen"));
+        chatBackground.layout();
+        chatBackground.setBounds(10,175,Betrayal.WIDTH-20, Betrayal.HEIGHT/4);
+        stage.addActor(chatBackground);
+    }
+    private void loadTower(){
+        tower = new Image(Betrayal.res.getTexture("lobby-tower"));
+        tower.layout();
+        tower.setBounds(20,510, 175, Betrayal.HEIGHT / 3 + 175);
+        stage.addActor(tower);
+    }
     private void loadContent() {
         loadBackground();
+        loadAllPlayersBackground();
+        loadChatBackground();
+        loadTower();
         loadShopButton();
         loadSettingsButton();
         loadPartyButton();
         loadStatsButton();
         loadInventoryButton();
+
         //loadLobbyLabel(); ERror>/ FIX later
 
         // VINECNTS SHIT DELETE LOOK AT BOTTOM TO SEE WHY

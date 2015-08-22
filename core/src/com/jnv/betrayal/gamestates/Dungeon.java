@@ -24,12 +24,14 @@ import com.jnv.betrayal.main.Betrayal;
 
 import java.util.Random;
 
+import javax.swing.Timer;
+
 public class Dungeon extends GameState {
 
     private com.jnv.betrayal.entities.Monster monster;
 
     private Group field_UI;
-
+    private Timer timer;
     private int floor, numPlayers, strongestPlayer;
     private float button_height = 150, button_width = Betrayal.WIDTH / 2;
 

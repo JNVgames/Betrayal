@@ -15,9 +15,12 @@ public class ResourceLoader {
         Betrayal.res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
         Betrayal.res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
         Betrayal.res.loadTexture("about/confirmation_background720x1280.png", "confirmation-background");
+        Betrayal.res.loadTexture("about/lobby720x1280.png", "lobby-screen");
         Betrayal.res.loadTexture("about/shop_background720x1280.png", "shop-background");
         Betrayal.res.loadTexture("about/shop_purchase_background720x1280.png", "shop-purchase-background");
         Betrayal.res.loadTexture("about/game_over720x1280.png", "game-over-background");
+        Betrayal.res.loadTexture("about/tower.png", "tower");
+        Betrayal.res.loadTexture("about/lobby-tower.png", "lobby-tower");
 
 
         // Buttons
