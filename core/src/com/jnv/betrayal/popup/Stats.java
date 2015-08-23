@@ -44,7 +44,7 @@ public class Stats {
         loadCharacterStats();
         loadCharacterPreview();
         characterStats.addActor(Preview.createRotators(charPreview.getX() + rotatorIndent,
-                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
+                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 40)) / 2, 40));
         stage.addActor(characterStats);
     }
 

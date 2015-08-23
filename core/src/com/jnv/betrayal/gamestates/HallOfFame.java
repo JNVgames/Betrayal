@@ -96,9 +96,4 @@ public class HallOfFame extends GameState {
 
     public void dispose() {
     }
-
-    // Helpers
-    private void goToMenu() {
-        gsm.setState(GameStateManager.State.MENU);
-    }
 }
