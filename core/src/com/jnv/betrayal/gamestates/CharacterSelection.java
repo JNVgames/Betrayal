@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -28,6 +29,7 @@ import com.jnv.betrayal.main.Betrayal;
  */
 public class CharacterSelection extends GameState {
 
+    private Player player;
     private Label.LabelStyle labelStyle;
 
     private Actor reference, button_play_now;
@@ -42,6 +44,8 @@ public class CharacterSelection extends GameState {
 
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
+
+        player = gsm.getGame().player;
 
         image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
         image_leftArrow.flip(true, false);
@@ -156,8 +160,8 @@ public class CharacterSelection extends GameState {
                         && y >= button_play_now.getY()
                         && y <= button_play_now.getY() + button_play_now.getHeight()) {
                     character.setName(field_usernameEnter.getText());
-                    Character.characters.add(character);
-                    Character.currentCharacter = character;
+                    player.characters.add(character);
+                    player.currentCharacter = character;
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
                 else image_button_play = Betrayal.res.getTexture("play-now");

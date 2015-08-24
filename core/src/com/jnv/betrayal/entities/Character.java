@@ -4,25 +4,17 @@
 
 package com.jnv.betrayal.entities;
 
+import com.jnv.betrayal.character.Equips;
 import com.jnv.betrayal.character.Inventory;
 import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.character.Stats;
-import com.jnv.betrayal.character.Equips;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Holds information regarding a game character's traits
  * @author Vincent Wang
  */
 public class Character {
-
-    /* If array this was private, a getter would get this array and other classes would
-     * still be able to edit it. Either way, this array will function as a public array */
-    public static List<Character> characters = new ArrayList<Character>();
-    public static Character currentCharacter;
 
     public enum Trait {
         GENDER,
@@ -76,6 +68,10 @@ public class Character {
             default:
                 return null;
         }
+    }
+
+    public Preview getPreview() {
+        return this.preview;
     }
 
     // Setters

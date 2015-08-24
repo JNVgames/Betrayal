@@ -17,13 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 public class LoadGame extends GameState {
-
+    public Player player;
     private Group[] savedSessions;
     private Image button_back;
     private TextureRegion image_leftArrow;
@@ -35,7 +36,7 @@ public class LoadGame extends GameState {
 
         image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-left"));
 
-        savedSessions = new Group[Character.characters.size()];
+        savedSessions = new Group[player.characters.size()];
 
         loadStage();
     }
@@ -107,7 +108,7 @@ public class LoadGame extends GameState {
         // TODO @vincent loads kinda slow and code is kinda long
         int counter = 1, scale = 4;
 
-        for (Character c : Character.characters) {
+        for (Character c : player.characters) {
             Group preview = new Group();
 
             final Actor preview_frame = new Actor();
@@ -126,7 +127,7 @@ public class LoadGame extends GameState {
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
-                    Character.currentCharacter.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
+                    player.currentCharacter.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
                             preview_frame.getY() + 5, 32 * 4, 48 * 4);
                 }
             };
@@ -227,11 +228,11 @@ public class LoadGame extends GameState {
                 if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
                         && y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
                     if (!mode_delete) {
-                        Character.currentCharacter = character;
+                        player.currentCharacter = character;
                         gsm.setState(GameStateManager.State.LOBBY);
                     } else { // mode_delete == true
                         removeSavedSessions();
-                        Character.characters.remove(character);
+                        player.characters.remove(character);
                         loadSavedSessions();
                     }
                 }

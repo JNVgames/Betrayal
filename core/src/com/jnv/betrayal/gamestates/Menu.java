@@ -13,16 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Menu extends GameState {
 
     private Group group_dialog_warning;
-
+    private Player player;
     public Menu(GameStateManager gsm) {
         super(gsm);
+        player = gsm.getGame().player;
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
         loadMenuButtons();
     }
@@ -75,7 +76,7 @@ public class Menu extends GameState {
     private void loadLoadGameButton() {
         Actor button_loadGame = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
-                if (!Character.characters.isEmpty()) {
+                if (!player.characters.isEmpty()) {
                     batch.draw(Betrayal.res.getTexture("load-game"),
                             (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
                             600, 512, 144);
@@ -88,7 +89,7 @@ public class Menu extends GameState {
         };
         button_loadGame.setBounds((Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
                 600, 512, 144);
-        if (Character.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
+        if (player.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
 
         button_loadGame.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

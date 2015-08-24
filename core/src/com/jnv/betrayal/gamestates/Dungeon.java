@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Monster;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -39,9 +39,11 @@ public class Dungeon extends GameState {
 
     private Label.LabelStyle font;
 
+    private Player player;
     public Dungeon(GameStateManager gsm) {
-        super(gsm);
 
+        super(gsm);
+        player = gsm.getGame().player;
         //this.floor = floor;
         //this.numPlayers = numPlayers;
 
@@ -125,7 +127,7 @@ public class Dungeon extends GameState {
         Actor actor_player = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 batch.setColor(Color.WHITE);
-                Character.currentCharacter.preview.drawPreview(batch, 2, playerCoords[0].x,
+                player.currentCharacter.preview.drawPreview(batch, 2, playerCoords[0].x,
                         playerCoords[0].y, 32 * scale, 48 * scale);
             }
         };

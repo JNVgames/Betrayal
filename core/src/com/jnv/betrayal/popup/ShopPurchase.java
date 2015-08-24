@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.*;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.Network.Player;
+import com.jnv.betrayal.entities.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 
 public class ShopPurchase {
@@ -18,11 +18,13 @@ public class ShopPurchase {
     private Actor mask;
     private Betrayal game;
     private int currentSide;
+    private Player player;
 
     public ShopPurchase(Betrayal game) {
         this.game = game;
         stage = game.getStage();
         currentSide = 0;
+        player = game.player;
         loadFont();
         loadButtons();
     }
@@ -103,7 +105,7 @@ public class ShopPurchase {
                 new Confirmation(game, "Confirm purchase") {
                     @Override
                     public void doSomething() {
-                        Character.currentCharacter.inventory.addItem(new Weapon("sword11"));
+                        player.currentCharacter.inventory.addItem(new Weapon("sword11"));
                     }
                 };
             }

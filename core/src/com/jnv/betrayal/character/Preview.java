@@ -7,19 +7,19 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.SnapshotArray;
-import com.jnv.betrayal.entities.*;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Preview {
 
     private com.jnv.betrayal.entities.Character character;
+    private Player player;
 
     public enum Gender {
         MALE, FEMALE
@@ -310,7 +310,7 @@ public class Preview {
     }
 
     // Static convenience methods
-    public static Group createRotators(float x, float topY, float width, float gap) {
+    public Group createRotators(float x, float topY, float width, float gap) {
         Texture image_leftArrow = Betrayal.res.getTexture("arrow-left");
         Texture image_rightArrow = Betrayal.res.getTexture("arrow-right");
         Group group_previewRotators = new Group();
@@ -323,7 +323,7 @@ public class Preview {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Character.currentCharacter.preview.rotateLeft();
+                player.currentCharacter.preview.rotateLeft();
             }
         });
         group_previewRotators.addActor(previewRotators_leftArrow);
@@ -340,7 +340,7 @@ public class Preview {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Character.currentCharacter.preview.rotateRight();
+                player.currentCharacter.preview.rotateRight();
             }
         });
 
