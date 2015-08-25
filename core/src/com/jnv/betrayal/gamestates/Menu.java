@@ -21,9 +21,8 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 public class Menu extends GameState {
 
     private BetrayalAssetManager res;
-
-    private Group group_dialog_warning;
     private Player player;
+
     public Menu(GameStateManager gsm) {
         super(gsm);
         player = gsm.getGame().player;

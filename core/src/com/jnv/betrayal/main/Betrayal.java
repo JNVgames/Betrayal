@@ -45,6 +45,7 @@ public class Betrayal extends Game {
 
         res = new BetrayalAssetManager();
         loader = new ResourceLoader(res);
+		player = new Player();
         //loader.loadAll();
 		//Item.loadAll();
 		//Monster.loadMonsters();
