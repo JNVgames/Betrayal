@@ -4,11 +4,12 @@
 
 package com.jnv.betrayal.entities;
 
-import com.jnv.betrayal.character.Equips;
 import com.jnv.betrayal.character.Inventory;
 import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.character.Stats;
+import com.jnv.betrayal.character.Equips;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
  * Holds information regarding a game character's traits
@@ -32,9 +33,9 @@ public class Character {
     public Stats stats;
 
     /** Creates character with default values */
-    public Character() {
-        equips = new Equips(this);
-        preview = new Preview(this);
+    public Character(BetrayalAssetManager res) {
+        equips = new Equips(this, res);
+        preview = new Preview(this, res);
         job = new Job();
         inventory = new Inventory();
         stats = new Stats();

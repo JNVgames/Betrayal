@@ -18,8 +18,11 @@ import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.FriendsList;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Lobby extends GameState {
+
+    private BetrayalAssetManager res;
 
     private Image lobbyBackground, shopButton, settingsButton, tower,
             statsButton, partyButton, inventoryButton, allPlayersBackground, chatBackground;
@@ -36,6 +39,7 @@ public class Lobby extends GameState {
 
     public Lobby(GameStateManager gsm) {
         super(gsm);
+        res = gsm.getGame().res;
         player = gsm.getGame().player;
         character = player.currentCharacter;
         buttonHeight = 150;
@@ -64,14 +68,14 @@ public class Lobby extends GameState {
         labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
     private void loadBackground() {
-        lobbyBackground = new Image(Betrayal.res.getTexture("instructions-background"));
+        lobbyBackground = new Image(res.getTexture("instructions-background"));
         lobbyBackground.layout();
         lobbyBackground.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         stage.addActor(lobbyBackground);
     }
 
     private void loadShopButton() {
-        shopButton = new Image(Betrayal.res.getTexture("lobby-shop"));
+        shopButton = new Image(res.getTexture("lobby-shop"));
         shopButton.layout();
         shopButton.setBounds(0, Betrayal.HEIGHT - buttonHeight - 5, buttonWidth, buttonHeight);
         shopButton.addListener(new InputListener() {
@@ -88,7 +92,7 @@ public class Lobby extends GameState {
         stage.addActor(shopButton);
     }
     private void loadInventoryButton() {
-        inventoryButton = new Image(Betrayal.res.getTexture("lobby-inventory"));
+        inventoryButton = new Image(res.getTexture("lobby-inventory"));
         inventoryButton.layout();
         inventoryButton.setBounds(buttonWidth, Betrayal.HEIGHT - buttonHeight - spacing,
                 buttonWidth, buttonHeight);
@@ -106,7 +110,7 @@ public class Lobby extends GameState {
         stage.addActor(inventoryButton);
     }
     private void loadStatsButton() {
-        statsButton = new Image(Betrayal.res.getTexture("lobby-stats"));
+        statsButton = new Image(res.getTexture("lobby-stats"));
         statsButton.layout();
         statsButton.setBounds(buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - spacing,
                 buttonWidth, buttonHeight);
@@ -124,7 +128,7 @@ public class Lobby extends GameState {
         stage.addActor(statsButton);
     }
     private void loadPartyButton() {
-        partyButton = new Image(Betrayal.res.getTexture("lobby-party"));
+        partyButton = new Image(res.getTexture("lobby-party"));
         partyButton.layout();
         partyButton.setBounds(buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - spacing,
                 buttonWidth, buttonHeight);
@@ -142,7 +146,7 @@ public class Lobby extends GameState {
         stage.addActor(partyButton);
     }
     private void loadSettingsButton() {
-        settingsButton = new Image(Betrayal.res.getTexture("lobby-settings"));
+        settingsButton = new Image(res.getTexture("lobby-settings"));
         settingsButton.layout();
         settingsButton.setBounds(buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - spacing,
                 buttonWidth, buttonHeight);
@@ -160,19 +164,19 @@ public class Lobby extends GameState {
         stage.addActor(settingsButton);
     }
     private void loadAllPlayersBackground(){
-        allPlayersBackground = new Image(Betrayal.res.getTexture("lobby-screen"));
+        allPlayersBackground = new Image(res.getTexture("lobby-screen"));
         allPlayersBackground.layout();
         allPlayersBackground.setBounds(Betrayal.WIDTH * 2 / 5, 510, Betrayal.WIDTH * 3 / 5 - 10, Betrayal.HEIGHT / 3 + 175);
         stage.addActor(allPlayersBackground);
     }
     private void loadChatBackground(){
-        chatBackground = new Image(Betrayal.res.getTexture("lobby-screen"));
+        chatBackground = new Image(res.getTexture("lobby-screen"));
         chatBackground.layout();
         chatBackground.setBounds(10,175,Betrayal.WIDTH-20, Betrayal.HEIGHT/4);
         stage.addActor(chatBackground);
     }
     private void loadTower(){
-        tower = new Image(Betrayal.res.getTexture("lobby-tower"));
+        tower = new Image(res.getTexture("lobby-tower"));
         tower.layout();
         tower.setBounds(20,510, 175, Betrayal.HEIGHT / 3 + 175);
         stage.addActor(tower);
@@ -207,7 +211,7 @@ public class Lobby extends GameState {
 
     // VINCENTS SHIT. LOADS THE PLAY BUTTON FOR DUNGEON TESTING. YOU CAN DELETE WHENEVER
     private void loadPlayNowButton() {
-        image_button_play = Betrayal.res.getTexture("play-now");
+        image_button_play = res.getTexture("play-now");
         button_play_now = new Actor() {
             @Override
             public void draw(Batch batch, float parentAlpha) {
@@ -219,7 +223,7 @@ public class Lobby extends GameState {
         button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
         button_play_now.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                image_button_play = Betrayal.res.getTexture("play-now-pressed");
+                image_button_play = res.getTexture("play-now-pressed");
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -229,10 +233,10 @@ public class Lobby extends GameState {
                         && y <= button_play_now.getY() + button_play_now.getHeight()) {
                     gsm.setState(GameStateManager.State.DUNGEON);
                 }
-                else image_button_play = Betrayal.res.getTexture("play-now");
+                else image_button_play = res.getTexture("play-now");
             }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                image_button_play = Betrayal.res.getTexture("play-now");
+                image_button_play = res.getTexture("play-now");
             }
         });
         stage.addActor(button_play_now);

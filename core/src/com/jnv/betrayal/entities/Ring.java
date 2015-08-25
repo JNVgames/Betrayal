@@ -4,10 +4,12 @@
 
 package com.jnv.betrayal.entities;
 
+import com.jnv.betrayal.resources.BetrayalAssetManager;
+
 public class Ring extends Equip{
 
-    public Ring(int id, String name) {
-        super(id, name);
+    public Ring(int id, String name, BetrayalAssetManager res) {
+        super(id, name, res);
     }
 
     public Ring(String name) {

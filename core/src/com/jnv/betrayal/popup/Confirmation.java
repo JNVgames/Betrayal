@@ -8,10 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 //TODO; add boolean
 //TODO: GET THE @FANGOT BACK TO WORK 8/11
 public class Confirmation {
+    private BetrayalAssetManager res;
 
     private Stage stage;
     private Image yesButton, noButton, background;
@@ -21,6 +23,7 @@ public class Confirmation {
     private String string;
 
     public Confirmation(Betrayal game, String string) {
+        res = game.res;
         this.string = string;
         stage = game.getStage();
         loadFont();
@@ -45,7 +48,7 @@ public class Confirmation {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("confirmation-background"));
+        background = new Image(res.getTexture("confirmation-background"));
         background.layout();
         background.setBounds(150, 500, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 1000);
         stage.addActor(background);
@@ -60,7 +63,7 @@ public class Confirmation {
     }
 
     private void loadAnswer() {
-        yesButton = new Image(Betrayal.res.getTexture("yes"));
+        yesButton = new Image(res.getTexture("yes"));
         yesButton.layout();
         yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
                 Betrayal.HEIGHT / 2 - 100, 150, 75);
@@ -78,7 +81,7 @@ public class Confirmation {
         });
         stage.addActor(yesButton);
 
-        noButton = new Image(Betrayal.res.getTexture("no"));
+        noButton = new Image(res.getTexture("no"));
         noButton.layout();
         noButton.setBounds(Betrayal.WIDTH / 2 + 25,
                 Betrayal.HEIGHT / 2 - 100, 150, 75);

@@ -22,8 +22,12 @@ import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class LoadGame extends GameState {
+
+    private BetrayalAssetManager res;
+
     public Player player;
     private Group[] savedSessions;
     private Image button_back;
@@ -33,8 +37,8 @@ public class LoadGame extends GameState {
 
     public LoadGame(GameStateManager gsm) {
         super(gsm);
-
-        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-left"));
+        res = gsm.getGame().res;
+        image_leftArrow = new TextureRegion(res.getTexture("arrow-left"));
 
         savedSessions = new Group[player.characters.size()];
 

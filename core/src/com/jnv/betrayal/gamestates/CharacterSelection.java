@@ -22,6 +22,7 @@ import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -30,6 +31,7 @@ import com.jnv.betrayal.main.Betrayal;
 public class CharacterSelection extends GameState {
 
     private Player player;
+    private BetrayalAssetManager res;
     private Label.LabelStyle labelStyle;
 
     private Actor reference, button_play_now;
@@ -44,14 +46,15 @@ public class CharacterSelection extends GameState {
 
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
+        this.res = gsm.getGame().res;
 
         player = gsm.getGame().player;
 
-        image_leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
+        image_leftArrow = new TextureRegion(res.getTexture("arrow-right"));
         image_leftArrow.flip(true, false);
-        image_rightArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
+        image_rightArrow = new TextureRegion(res.getTexture("arrow-right"));
 
-        character = new Character();
+        character = new Character(res);
 
         loadFont();
         loadStage();
@@ -101,7 +104,7 @@ public class CharacterSelection extends GameState {
         loadJobDescription();
     }
     private void loadBackground(){
-        background = new Image(Betrayal.res.getTexture("instructions-background"));
+        background = new Image(res.getTexture("instructions-background"));
         background.layout();
         background.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         stage.addActor(background);
@@ -145,7 +148,7 @@ public class CharacterSelection extends GameState {
     }
     private void loadPlayNowButton() {
         // if layout() is used, the inputlistener x, y field becomes relative to the actor position
-        image_button_play = Betrayal.res.getTexture("play-now");
+        image_button_play = res.getTexture("play-now");
         button_play_now = new Actor() {
             @Override
             public void draw(Batch batch, float parentAlpha) {
@@ -157,7 +160,7 @@ public class CharacterSelection extends GameState {
         button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
         button_play_now.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                image_button_play = Betrayal.res.getTexture("play-now-pressed");
+                image_button_play = res.getTexture("play-now-pressed");
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -170,10 +173,10 @@ public class CharacterSelection extends GameState {
                     player.currentCharacter = character;
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
-                else image_button_play = Betrayal.res.getTexture("play-now");
+                else image_button_play = res.getTexture("play-now");
             }
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                image_button_play = Betrayal.res.getTexture("play-now");
+                image_button_play = res.getTexture("play-now");
             }
         });
         stage.addActor(button_play_now);

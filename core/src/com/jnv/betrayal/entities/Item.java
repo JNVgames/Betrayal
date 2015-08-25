@@ -6,24 +6,27 @@ package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.Comparator;
 import java.util.HashMap;
 
 public class Item {
+    private BetrayalAssetManager res;
 
     protected Texture itemImage;
     protected String itemName;
     protected int id, cost_buy, cost_sell;
 
-    public Item(int id, String name) {
+    public Item(int id, String name, BetrayalAssetManager res) {
+        this.res = res;
         this.id = id;
         itemName = name;
-        itemImage = Betrayal.res.getTexture(name);
-        Betrayal.res.loadItem(name, this);
+        itemImage = res.getTexture(name);
+        res.loadItem(name, this);
     }
     public Item(String name) {
-        Item src = Betrayal.res.getItem(name);
+        Item src = res.getItem(name);
         id = src.getID();
         itemName = name;
         cost_buy = src.getBuyCost();
@@ -50,11 +53,12 @@ public class Item {
 
     // Setters
     public void setName(String name) { itemName = name; }
+    /*
     public static void setCosts(String name, int newBuyCost, int newSellCost) {
-        Item src = Betrayal.res.getItem(name);
+        Item src = res.getItem(name);
         src.setBuyCost(newBuyCost);
         src.setSellCost(newSellCost);
-    }
+    } */
     public void setBuyCost(int new_cost) { cost_buy = new_cost; }
     public void setSellCost(int new_cost) { cost_sell = new_cost; }
 
@@ -81,11 +85,11 @@ public class Item {
     }
 
     public static void loadAll() {
+        /*
         for (int i = 1; i <= 6; i++) {
             new Weapon(i, "sword1" + i);
         }
 
-        /*
         for (int i = 1; i <= 6; i++) {
             new Shield(i, "sword" + i);
         }
@@ -95,12 +99,13 @@ public class Item {
         for (int i = 1; i <= 6; i++) {
             new Item(i, "sword" + i);
         }
-        */
+
         for (int i = 1; i <= 6; i++) {
             new Weapon(i + 6, "sword2" + i);
         }
 
         new BodyArmor(0, "char-armor-peasant");
+        */
 
     }
 }

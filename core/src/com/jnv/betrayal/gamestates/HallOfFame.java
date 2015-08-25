@@ -17,8 +17,10 @@ import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
 import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class HallOfFame extends GameState {
+    private BetrayalAssetManager res;
 
     private Texture hallOfFameBackground;
     private InputMultiplexer im;
@@ -26,11 +28,11 @@ public class HallOfFame extends GameState {
 
     public HallOfFame(GameStateManager gsm) {
         super(gsm);
-
+        res = gsm.getGame().res;
         cam = new OrthographicCamera();
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
 
-        hallOfFameBackground = Betrayal.res.getTexture("hall-of-fame-background");
+        hallOfFameBackground = res.getTexture("hall-of-fame-background");
 
         im = new InputMultiplexer();
         gp = new BetrayalGestureProcessor();
@@ -42,7 +44,7 @@ public class HallOfFame extends GameState {
     }
 
     private void loadXButton() {
-        Image exitButton = new Image(Betrayal.res.getTexture("x"));
+        Image exitButton = new Image(res.getTexture("x"));
         exitButton.layout();
         exitButton.setBounds(620, 1180, 100, 100);
         exitButton.addListener(new InputListener() {

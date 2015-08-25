@@ -2,23 +2,27 @@ package com.jnv.betrayal.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.HashMap;
 
 public class Monster {
 
+    private BetrayalAssetManager res;
+
     protected Texture monsterTexture;
     protected String MonsterName;
     protected int id, health, attack, defense;
 
-    public Monster(int id, String name) {
+    public Monster(int id, String name, BetrayalAssetManager res) {
         this.id = id;
         MonsterName = name;
-        monsterTexture = Betrayal.res.getTexture(name);
-        Betrayal.res.loadMonster(name, this);
+        this.res = res;
+        monsterTexture = res.getTexture(name);
+        res.loadMonster(name, this);
     }
     public Monster(String name) {
-        Monster src = Betrayal.res.getMonster(name);
+        Monster src = res.getMonster(name);
         id = src.getID();
         MonsterName = name;
         health = src.getHealth();
@@ -39,8 +43,8 @@ public class Monster {
 
     // Setters
     public void setName(String name) { MonsterName = name; }
-    public static void setData(String name, int newHealth, int newAttack, int newDefense) {
-        Monster src = Betrayal.res.getMonster(name);
+    public void setData(String name, int newHealth, int newAttack, int newDefense) {
+        Monster src = res.getMonster(name);
         src.setHealth(newHealth);
         src.setAttack(newAttack);
         src.setDefense(newDefense);
@@ -49,9 +53,10 @@ public class Monster {
     public void setAttack(int new_attack) { attack = new_attack; }
     public void setDefense(int new_defense) { defense = new_defense; }
 
-    public static void loadMonsters() {
+    /*
+    public void loadMonsters() {
         // Tier1
-        new Monster(1,"monster-tier1-0");
+        new Monster(1,"monster-tier1-0", res);
         Monster.setData("monster-tier1-0", 25, 10, 1);
         new Monster(1,"monster-tier1-1");
         Monster.setData("monster-tier1-1", 25, 10, 1);
@@ -79,4 +84,5 @@ public class Monster {
 
         // Tier 2
     }
+    */
 }

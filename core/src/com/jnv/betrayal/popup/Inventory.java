@@ -16,8 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Inventory {
+    private BetrayalAssetManager res;
 
     private Stage stage;
     private Image lobbyButton, background;
@@ -32,6 +34,7 @@ public class Inventory {
     private Player player;
 
     public Inventory(Betrayal game) {
+        res = game.res;
         stage = game.getStage();
         loadFont();
         loadButtons();
@@ -72,7 +75,7 @@ public class Inventory {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-background"));
+        background = new Image(res.getTexture("shop-background"));
         background.layout();
         background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
         stage.addActor(background);
@@ -87,7 +90,7 @@ public class Inventory {
     }
 
     private void loadReturnToLobbyButton() {
-        lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
+        lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
         lobbyButton.addListener(new InputListener() {

@@ -14,9 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 
 public class Instructions {
+    private BetrayalAssetManager res;
 
     private Stage stage;
     private Image image_rightArrow, image_leftArrow, exitButton, background;
@@ -26,6 +28,7 @@ public class Instructions {
     private int currentContent, totalContent;
 
     public Instructions(Betrayal game) {
+        res = game.res;
         stage = game.getStage();
         loadFont();
         currentContent = 0;
@@ -71,7 +74,7 @@ public class Instructions {
     }
 
     private void loadXButton() {
-        exitButton = new Image(Betrayal.res.getTexture("x"));
+        exitButton = new Image(res.getTexture("x"));
         exitButton.layout();
         exitButton.setBounds(520, 1080, 100, 100);
         exitButton.addListener(new InputListener() {
@@ -89,14 +92,14 @@ public class Instructions {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("instructions-background"));
+        background = new Image(res.getTexture("instructions-background"));
         background.layout();
         background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
         stage.addActor(background);
     }
 
     private void loadLeftArrow() {
-        TextureRegion leftArrow = new TextureRegion(Betrayal.res.getTexture("arrow-right"));
+        TextureRegion leftArrow = new TextureRegion(res.getTexture("arrow-right"));
         leftArrow.flip(true, false);
         image_leftArrow = new Image(leftArrow);
 
@@ -120,7 +123,7 @@ public class Instructions {
     }
 
     private void loadRightArrow() {
-        image_rightArrow = new Image(Betrayal.res.getTexture("arrow-right"));
+        image_rightArrow = new Image(res.getTexture("arrow-right"));
         image_rightArrow.layout();
         image_rightArrow.setBounds(385, 150, 125, 62);
         image_rightArrow.addListener(new InputListener() {

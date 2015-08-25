@@ -4,10 +4,12 @@
 
 package com.jnv.betrayal.entities;
 
+import com.jnv.betrayal.resources.BetrayalAssetManager;
+
 public class Shield extends Equip{
 
-    public Shield(int id, String name) {
-        super(id, name);
+    public Shield(int id, String name, BetrayalAssetManager res) {
+        super(id, name, res);
     }
 
     public Shield(String name) {

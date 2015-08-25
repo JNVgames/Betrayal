@@ -15,53 +15,50 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.entities.Monster;
-import com.jnv.betrayal.resources.Resources;
 import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
 public class Betrayal extends Game {
 
-	private SpriteBatch sb;
-	private OrthographicCamera worldCam;
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 1280;
+
+	private SpriteBatch sb;
+	private OrthographicCamera worldCam;
 	private StretchViewport stretchViewport;
 	private static Stage stage;
+
+    public BetrayalAssetManager res;
+    private ResourceLoader loader;
+
     private static GameStateManager.State state;
     private static boolean gamePaused;
 	private static FreeTypeFontGenerator generator;
-
-	public static Resources res;
 
 	public GameStateManager gsm;
 
 	public Player player;
 	
 	public void create() {
-		worldCam = new OrthographicCamera();
-		stretchViewport = new StretchViewport(WIDTH, HEIGHT, worldCam);
-		stretchViewport.apply();
-		sb = new SpriteBatch();
-        stage = new Stage(stretchViewport, sb);
-		Gdx.input.setInputProcessor(stage);
-        stage.setDebugUnderMouse(true);
+		init();
 
-        worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
-
-        res = new Resources();
-        ResourceLoader.loadAll();
-		Item.loadAll();
-		Monster.loadMonsters();
+        res = new BetrayalAssetManager();
+        loader = new ResourceLoader(res);
+        //loader.loadAll();
+		//Item.loadAll();
+		//Monster.loadMonsters();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 
 		gsm = new GameStateManager(this);
 		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
+
         resume();
 	}
 	public void dispose() {
 		stage.dispose();
-        res.removeAll();
+        res.clear();
 	}
 	public void pause() {
         gamePaused = true;
@@ -84,6 +81,18 @@ public class Betrayal extends Game {
 		stretchViewport.update(width, height);
 		worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 	}
+
+    // Helpers
+    private void init() {
+        worldCam = new OrthographicCamera();
+        stretchViewport = new StretchViewport(WIDTH, HEIGHT, worldCam);
+        stretchViewport.apply();
+        sb = new SpriteBatch();
+        stage = new Stage(stretchViewport, sb);
+        Gdx.input.setInputProcessor(stage);
+        stage.setDebugUnderMouse(true);
+        worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
+    }
 
     // Getters
     public SpriteBatch getBatch() {

@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.entities.*;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Equips {
 
     private Character character;
+    private BetrayalAssetManager res;
 
     // todo @vincent add getPreview() for equip class
     private HeadGear slot_armor_head;
@@ -20,8 +22,9 @@ public class Equips {
     private Ring slot_ring_1, slot_ring_2;
     private Weapon slot_weapon;
 
-    public Equips(Character character) {
+    public Equips(Character character, BetrayalAssetManager res) {
         this.character = character;
+        this.res = res;
     }
 
     // Getters
@@ -47,7 +50,7 @@ public class Equips {
         return slot_armor_head.getPreview();
     }
     public Texture getBodyArmorPreview() {
-        if (isBodySlotEmpty()) return Betrayal.res.getTexture("char-armor-peasant");
+        if (isBodySlotEmpty()) return res.getTexture("char-armor-peasant");
         else return slot_armor_body.getPreview();
     }
     public Texture getShieldPreview() {

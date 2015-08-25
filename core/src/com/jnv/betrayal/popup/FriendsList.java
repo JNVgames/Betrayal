@@ -8,8 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class FriendsList {
+    private BetrayalAssetManager res;
+
     private Stage stage;
     private Image lobbyButton, background, background2;
     private Label.LabelStyle labelStyle;
@@ -21,6 +24,7 @@ public class FriendsList {
     private Label button_sort;
 
     public FriendsList(Betrayal game) {
+        res = game.res;
         stage = game.getStage();
         loadFont();
         loadButtons();
@@ -54,12 +58,12 @@ public class FriendsList {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-background"));
+        background = new Image(res.getTexture("shop-background"));
         background.layout();
         background.setBounds(35, 100, Betrayal.WIDTH/2-45, Betrayal.HEIGHT -250);
         stage.addActor(background);
 
-        background2 = new Image(Betrayal.res.getTexture("shop-background"));
+        background2 = new Image(res.getTexture("shop-background"));
         background2.layout();
         background2.setBounds(Betrayal.WIDTH/2 +10, 100, Betrayal.WIDTH/2-45, Betrayal.HEIGHT - 250);
         stage.addActor(background2);
@@ -80,7 +84,7 @@ public class FriendsList {
     }
 
     private void loadReturnToLobbyButton() {
-        lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
+        lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 390, 110, 180, 60);
         lobbyButton.addListener(new InputListener() {

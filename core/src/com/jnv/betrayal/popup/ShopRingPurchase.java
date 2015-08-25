@@ -8,8 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class ShopRingPurchase {
+    private BetrayalAssetManager res;
+
     private Stage stage;
     private Image backButton, background, goldIcon, buyButton;
     private Label.LabelStyle labelStyle;
@@ -18,7 +21,7 @@ public class ShopRingPurchase {
     private Betrayal game;
 
     public ShopRingPurchase(Betrayal game) {
-
+        res = game.res;
         this.game = game;
         stage = game.getStage();
         loadFont();
@@ -57,14 +60,14 @@ public class ShopRingPurchase {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-purchase-background"));
+        background = new Image(res.getTexture("shop-purchase-background"));
         background.layout();
         background.setBounds(150, 400, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 800);
         stage.addActor(background);
     }
 
     private void loadGoldIcon() {
-        goldIcon = new Image(Betrayal.res.getTexture("icon-gold"));
+        goldIcon = new Image(res.getTexture("icon-gold"));
         goldIcon.layout();
         goldIcon.setBounds(410, 500, 40, 40);
         stage.addActor(goldIcon);
@@ -87,7 +90,7 @@ public class ShopRingPurchase {
     }
 
     private void loadBuyButton() {
-        buyButton = new Image(Betrayal.res.getTexture("buy"));
+        buyButton = new Image(res.getTexture("buy"));
         buyButton.layout();
         buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 420, 100, 50);
         buyButton.addListener(new InputListener() {
@@ -105,7 +108,7 @@ public class ShopRingPurchase {
         stage.addActor(buyButton);
     }
     private void loadReturnToShopButton() {
-        backButton = new Image(Betrayal.res.getTexture("back"));
+        backButton = new Image(res.getTexture("back"));
         backButton.layout();
         backButton.setBounds(Betrayal.WIDTH / 2 - 150, 420, 100, 50);
         backButton.addListener(new InputListener() {

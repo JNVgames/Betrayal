@@ -7,29 +7,34 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.ResourceLoader;
 
 public class SplashScreen extends GameState {
-
-    final int SPLASH_SCREEN_DELAY = 2;
+    private BetrayalAssetManager res;
+    private float time;
+    private BitmapFont font;
 
     public SplashScreen(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
-        Timer.schedule(new Timer.Task() {
-
-            @Override
-            public void run() {
-                movetoMenuScreen();
-            }
-
-        }, SPLASH_SCREEN_DELAY);
+        res = gsm.getGame().res;
+        ResourceLoader resourceLoader = new ResourceLoader(res);
+        resourceLoader.loadLoadingScreen();
+        res.finishLoading();
+        resourceLoader.loadAll();
+        font = new BitmapFont();
     }
 
     public void update(float dt) {
-
+        time += dt;
+        if (res.update()) {
+            gsm.setState(GameStateManager.State.MENU);
+        }
     }
     public void handleInput() {
 
@@ -41,7 +46,8 @@ public class SplashScreen extends GameState {
         cam.update();
         game.getBatch().setProjectionMatrix(cam.combined);
         game.getBatch().begin();
-        game.getBatch().draw(Betrayal.res.getTexture("splash"), 0, 0, 720, 1280);
+        game.getBatch().draw(res.getTexture("splash"), 0, 0, 720, 1280);
+        font.draw(sb, Float.toString(res.getProgress()), 100, 100);
         game.getBatch().end();
     }
     public void dispose() {

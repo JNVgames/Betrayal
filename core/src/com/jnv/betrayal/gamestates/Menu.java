@@ -16,14 +16,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Menu extends GameState {
+
+    private BetrayalAssetManager res;
 
     private Group group_dialog_warning;
     private Player player;
     public Menu(GameStateManager gsm) {
         super(gsm);
         player = gsm.getGame().player;
+        res = gsm.getGame().res;
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
         loadMenuButtons();
     }
@@ -41,7 +45,7 @@ public class Menu extends GameState {
         cam.update();
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(Betrayal.res.getTexture("start-background"), 0, 0, 720, 1280);
+        sb.draw(res.getTexture("start-background"), 0, 0, 720, 1280);
         sb.end();
 
         stage.draw();
@@ -59,7 +63,7 @@ public class Menu extends GameState {
         loadOptionsButton();
     }
     private void loadNewGameButton() {
-        Image button_newGame = new Image(Betrayal.res.getTexture("new-game"));
+        Image button_newGame = new Image(res.getTexture("new-game"));
         button_newGame.layout();
         button_newGame.setBounds((Betrayal.WIDTH - button_newGame.getImageWidth()) / 2,
                 800, 512, 144);
@@ -77,17 +81,17 @@ public class Menu extends GameState {
         Actor button_loadGame = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 if (!player.characters.isEmpty()) {
-                    batch.draw(Betrayal.res.getTexture("load-game"),
-                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
+                    batch.draw(res.getTexture("load-game"),
+                            (Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
                             600, 512, 144);
                 } else {
-                    batch.draw(Betrayal.res.getTexture("load-game-grey"),
-                            (Betrayal.WIDTH - Betrayal.res.getTexture("load-game-grey").getWidth()) / 2,
+                    batch.draw(res.getTexture("load-game-grey"),
+                            (Betrayal.WIDTH - res.getTexture("load-game-grey").getWidth()) / 2,
                             600, 512, 144);
                 }
             }
         };
-        button_loadGame.setBounds((Betrayal.WIDTH - Betrayal.res.getTexture("load-game").getWidth()) / 2,
+        button_loadGame.setBounds((Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
                 600, 512, 144);
         if (player.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
 
@@ -102,7 +106,7 @@ public class Menu extends GameState {
         stage.addActor(button_loadGame);
     }
     private void loadInstructionsButton() {
-        Image button_instructions = new Image(Betrayal.res.getTexture("instructions"));
+        Image button_instructions = new Image(res.getTexture("instructions"));
         button_instructions.layout();
         button_instructions.setBounds((Betrayal.WIDTH - button_instructions.getImageWidth()) / 2,
                 400, 512, 144);
@@ -121,7 +125,7 @@ public class Menu extends GameState {
         stage.addActor(button_instructions);
     }
     private void loadOptionsButton() {
-        Image button_options = new Image(Betrayal.res.getTexture("options"));
+        Image button_options = new Image(res.getTexture("options"));
         button_options.layout();
         button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth()/2) / 2,
                 272, 256, 72);
@@ -140,7 +144,7 @@ public class Menu extends GameState {
         stage.addActor(button_options);
     }
     private void loadHallOfFameButton() {
-        Image button_hallOfFame = new Image(Betrayal.res.getTexture("hall-of-fame"));
+        Image button_hallOfFame = new Image(res.getTexture("hall-of-fame"));
         button_hallOfFame.layout();
         button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth()/2) / 2,
                 172, 256, 72);

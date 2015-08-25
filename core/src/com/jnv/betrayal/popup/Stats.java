@@ -15,8 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Stats {
+
+    private BetrayalAssetManager res;
 
     private Stage stage;
     private Image lobbyButton, background;
@@ -31,6 +34,7 @@ public class Stats {
     private Player player;
 
     public Stats(Betrayal game) {
+        res = game.res;
         stage = game.getStage();
         characterStats = new Group();
         loadFont();
@@ -46,11 +50,10 @@ public class Stats {
         loadCharacterStats();
         loadCharacterPreview();
 
-        Preview preview = new Preview(player.currentCharacter);
-        characterStats.addActor(preview.createRotators(charPreview.getX() + rotatorIndent,
-                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
+        //characterStats.addActor(preview.createRotators(charPreview.getX() + rotatorIndent,
+        //        charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
 
-        stage.addActor(characterStats);
+        //stage.addActor(characterStats);
     }
 
     // Helpers
@@ -79,7 +82,7 @@ public class Stats {
         stage.addActor(mask);
     }
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-background"));
+        background = new Image(res.getTexture("shop-background"));
         background.layout();
         background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
         stage.addActor(background);
@@ -100,7 +103,7 @@ public class Stats {
         characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.ATTACK, yRef);
     }
     private void loadReturnToLobbyButton() {
-        lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
+        lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
         lobbyButton.addListener(new InputListener() {

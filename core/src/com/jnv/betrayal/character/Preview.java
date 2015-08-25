@@ -15,11 +15,13 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Preview {
+    private BetrayalAssetManager res;
 
-    private com.jnv.betrayal.entities.Character character;
     private Player player;
+    private Character character;
 
     public enum Gender {
         MALE, FEMALE
@@ -48,7 +50,8 @@ public class Preview {
     /** Holds character trait values */
     private int hair_male, hair_female, hairColor;
 
-    public Preview(Character character) {
+    public Preview(Character character, BetrayalAssetManager res) {
+        this.res = res;
         this.character = character;
 
         gender = Gender.MALE;
@@ -105,10 +108,10 @@ public class Preview {
     private void updateHeadSprites() {
         Texture head_all;
         if (gender == Gender.MALE) {
-            head_all = Betrayal.res.getTexture("hair-male-"
+            head_all = res.getTexture("hair-male-"
                     + hair_male + "-" + hairColor + "-all");
         } else {
-            head_all = Betrayal.res.getTexture("hair-female-"
+            head_all = res.getTexture("hair-female-"
                     + hair_female + "-" + hairColor + "-all");
         }
         TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
@@ -316,8 +319,8 @@ public class Preview {
 
     // Static convenience methods
     public Group createRotators(float x, float topY, float width, float gap) {
-        Texture image_leftArrow = Betrayal.res.getTexture("arrow-left");
-        Texture image_rightArrow = Betrayal.res.getTexture("arrow-right");
+        Texture image_leftArrow = res.getTexture("arrow-left");
+        Texture image_rightArrow = res.getTexture("arrow-right");
         Group group_previewRotators = new Group();
 
         Image previewRotators_leftArrow = new Image(image_leftArrow);

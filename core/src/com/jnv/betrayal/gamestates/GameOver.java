@@ -12,9 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class GameOver extends GameState {
 
+    private BetrayalAssetManager res;
     private Image background;
     private Actor mask;
     private Label.LabelStyle labelStyle;
@@ -22,6 +24,7 @@ public class GameOver extends GameState {
 
     public GameOver(GameStateManager gsm) {
         super(gsm);
+        this.res = gsm.getGame().res;
         loadFont();
         loadButtons();
     }
@@ -84,7 +87,7 @@ public class GameOver extends GameState {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("game-over-background"));
+        background = new Image(res.getTexture("game-over-background"));
         background.layout();
         background.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         stage.addActor(background);

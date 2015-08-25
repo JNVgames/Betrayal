@@ -12,8 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Options {
+    private BetrayalAssetManager res;
+
     private Stage stage;
 
     private Image background, mainMenuButton;
@@ -24,6 +27,7 @@ public class Options {
 
 
     public Options(Betrayal game) {
+        res = game.res;
         stage = game.getStage();
         loadFont();
         currentContent = 0;
@@ -57,7 +61,7 @@ public class Options {
         stage.addActor(mask);
     }
     private void loadMainMenuButton() {
-        mainMenuButton = new Image(Betrayal.res.getTexture("main-menu"));
+        mainMenuButton = new Image(res.getTexture("main-menu"));
         mainMenuButton.layout();
         mainMenuButton.setBounds((Betrayal.WIDTH - mainMenuButton.getWidth()) / 2 + 100, 200, 312, 100);
         mainMenuButton.addListener(new InputListener() {
@@ -83,7 +87,7 @@ public class Options {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("instructions-background"));
+        background = new Image(res.getTexture("instructions-background"));
         background.layout();
         background.setBounds(150, 150, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 300);
         stage.addActor(background);

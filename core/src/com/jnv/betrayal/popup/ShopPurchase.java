@@ -9,8 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class ShopPurchase {
+    private BetrayalAssetManager res;
+
     private Stage stage;
     private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
     private Label.LabelStyle labelStyle;
@@ -21,6 +24,7 @@ public class ShopPurchase {
     private Player player;
 
     public ShopPurchase(Betrayal game) {
+        res = game.res;
         this.game = game;
         stage = game.getStage();
         currentSide = 0;
@@ -64,14 +68,14 @@ public class ShopPurchase {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-purchase-background"));
+        background = new Image(res.getTexture("shop-purchase-background"));
         background.layout();
         background.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
         stage.addActor(background);
     }
 
     private void loadGoldIcon() {
-        goldIcon = new Image(Betrayal.res.getTexture("icon-gold"));
+        goldIcon = new Image(res.getTexture("icon-gold"));
         goldIcon.layout();
         goldIcon.setBounds(410, 850, 40, 40);
         stage.addActor(goldIcon);
@@ -93,7 +97,7 @@ public class ShopPurchase {
     }
 
     private void loadBuyButton() {
-        buyButton = new Image(Betrayal.res.getTexture("buy"));
+        buyButton = new Image(res.getTexture("buy"));
         buyButton.layout();
         buyButton.setBounds(Betrayal.WIDTH/ 2 + 50, 220, 100, 50);
         buyButton.addListener(new InputListener() {
@@ -113,7 +117,7 @@ public class ShopPurchase {
         stage.addActor(buyButton);
     }
     private void loadReturnToShopButton() {
-        backButton = new Image(Betrayal.res.getTexture("back"));
+        backButton = new Image(res.getTexture("back"));
         backButton.layout();
         backButton.setBounds(Betrayal.WIDTH / 2 - 150, 220, 100, 50);
         backButton.addListener(new InputListener() {
@@ -154,7 +158,7 @@ public class ShopPurchase {
     }
 
     private void loadArrows() {
-        leftArrow = new Image(Betrayal.res.getTexture("arrow-left"));
+        leftArrow = new Image(res.getTexture("arrow-left"));
         leftArrow.layout();
         leftArrow.setBounds(Betrayal.WIDTH / 2 -150, 300, 100, 50);
         leftArrow.addListener(new InputListener() {
@@ -168,7 +172,7 @@ public class ShopPurchase {
         });
         stage.addActor(leftArrow);
 
-        rightArrow = new Image(Betrayal.res.getTexture("arrow-right"));
+        rightArrow = new Image(res.getTexture("arrow-right"));
         rightArrow.layout();
         rightArrow.setBounds(Betrayal.WIDTH / 2 + 50, 300, 100, 50);
         rightArrow.addListener(new InputListener() {

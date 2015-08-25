@@ -12,8 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Shop {
+    private BetrayalAssetManager res;
+
     private Stage stage;
     private Image lobbyButton, background, weapons, armors, extras, items, money;
     private Image[] potions, sword1, sword2, shield1, shield2, headgear, armor1, armor2, ring1, ring2;
@@ -26,6 +29,7 @@ public class Shop {
 
 
     public Shop(Betrayal game) {
+        res = game.res;
         this.game=game;
         stage = game.getStage();
         loadFont();
@@ -82,7 +86,7 @@ public class Shop {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-background"));
+        background = new Image(res.getTexture("shop-background"));
         background.layout();
         background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
         stage.addActor(background);
@@ -97,7 +101,7 @@ public class Shop {
     }
 
     private void loadReturnToLobbyButton() {
-        lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
+        lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
         lobbyButton.addListener(new InputListener() {
@@ -115,7 +119,7 @@ public class Shop {
     }
 
     private void loadWeaponsButton() {
-        weapons = new Image(Betrayal.res.getTexture("shop-weapons"));
+        weapons = new Image(res.getTexture("shop-weapons"));
         weapons.layout();
         weapons.setBounds(100, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
         weapons.addListener(new InputListener() {
@@ -135,7 +139,7 @@ public class Shop {
     }
 
     private void loadArmorButton() {
-        armors = new Image(Betrayal.res.getTexture("shop-armor"));
+        armors = new Image(res.getTexture("shop-armor"));
         armors.layout();
         armors.setBounds(100 + buttonWidth, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
         armors.addListener(new InputListener() {
@@ -155,7 +159,7 @@ public class Shop {
     }
 
     private void loadExtrasButton() {
-        extras = new Image(Betrayal.res.getTexture("shop-extra"));
+        extras = new Image(res.getTexture("shop-extra"));
         extras.layout();
         extras.setBounds(100 + buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
         extras.addListener(new InputListener() {
@@ -175,7 +179,7 @@ public class Shop {
     }
 
     private void loadItemsButton() {
-        items = new Image(Betrayal.res.getTexture("shop-item"));
+        items = new Image(res.getTexture("shop-item"));
         items.layout();
         items.setBounds(100 + buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
         items.addListener(new InputListener() {
@@ -195,7 +199,7 @@ public class Shop {
     }
 
     private void loadMoneyButton() {
-        money = new Image(Betrayal.res.getTexture("shop-money"));
+        money = new Image(res.getTexture("shop-money"));
         money.layout();
         money.setBounds(100 + buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
         money.addListener(new InputListener() {
@@ -217,7 +221,7 @@ public class Shop {
     private void loadWeaponsAndShields() {
         for (int i = 1; i <= 6; i++) {
             final String item = "sword1" + i;
-            sword1[i - 1] = new Image(Betrayal.res.getTexture(item));
+            sword1[i - 1] = new Image(res.getTexture(item));
             sword1[i - 1].layout();
             sword1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
@@ -234,7 +238,7 @@ public class Shop {
             });
             stage.addActor(sword1[i - 1]);
 
-            sword2[i - 1] = new Image(Betrayal.res.getTexture("sword2" + i));
+            sword2[i - 1] = new Image(res.getTexture("sword2" + i));
             sword2[i - 1].layout();
             sword2[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
@@ -250,7 +254,7 @@ public class Shop {
             });
             stage.addActor(sword2[i - 1]);
 
-            shield1[i - 1] = new Image(Betrayal.res.getTexture("shield" + i));
+            shield1[i - 1] = new Image(res.getTexture("shield" + i));
             shield1[i - 1].layout();
             shield1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize*5, itemSize, itemSize);
@@ -266,7 +270,7 @@ public class Shop {
             });
             stage.addActor(shield1[i - 1]);
 
-            shield2[i - 1] = new Image(Betrayal.res.getTexture("shield" + i));
+            shield2[i - 1] = new Image(res.getTexture("shield" + i));
             shield2[i - 1].layout();
             shield2[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize*7, itemSize, itemSize);
@@ -309,7 +313,7 @@ public class Shop {
 
     private void loadRings() {
         for (int i = 1; i <= 6; i++) {
-            ring1[i - 1] = new Image(Betrayal.res.getTexture("ring1-" + i));
+            ring1[i - 1] = new Image(res.getTexture("ring1-" + i));
             ring1[i - 1].layout();
             ring1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
@@ -325,7 +329,7 @@ public class Shop {
             });
             stage.addActor(ring1[i - 1]);
 
-            ring2[i - 1] = new Image(Betrayal.res.getTexture("ring2-" + i));
+            ring2[i - 1] = new Image(res.getTexture("ring2-" + i));
             ring2[i - 1].layout();
             ring2[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
@@ -360,7 +364,7 @@ public class Shop {
         // Headgear
         for (int i = 1; i <= 6; i++) {
 
-            headgear[i - 1] = new Image(Betrayal.res.getTexture("headgear" + i));
+            headgear[i - 1] = new Image(res.getTexture("headgear" + i));
             headgear[i - 1].layout();
             headgear[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
@@ -380,7 +384,7 @@ public class Shop {
         //Armor1
         for (int i = 1; i <= 6; i++) {
 
-            armor1[i - 1] = new Image(Betrayal.res.getTexture("armor1-" + i));
+            armor1[i - 1] = new Image(res.getTexture("armor1-" + i));
             armor1[i - 1].layout();
             armor1[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
@@ -400,7 +404,7 @@ public class Shop {
         //Armor2
         for (int i = 1; i <= 6; i++) {
 
-            armor2[i - 1] = new Image(Betrayal.res.getTexture("armor2-" + i));
+            armor2[i - 1] = new Image(res.getTexture("armor2-" + i));
             armor2[i - 1].layout();
             armor2[i - 1].setBounds(100 + itemSize * (i - 1),
                     Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
@@ -445,7 +449,7 @@ public class Shop {
 
     private void loadItems() {
         for (int i = 1; i <= 6; i++) {
-            potions[i - 1] = new Image(Betrayal.res.getTexture("potion" + i));
+            potions[i - 1] = new Image(res.getTexture("potion" + i));
             potions[i - 1].layout();
             potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
             potions[i - 1].addListener(new InputListener() {
@@ -462,7 +466,7 @@ public class Shop {
             stage.addActor(potions[i - 1]);
         }
         for (int i = 7; i <= 12; i++) {
-            potions[i - 1] = new Image(Betrayal.res.getTexture("potion" + i));
+            potions[i - 1] = new Image(res.getTexture("potion" + i));
             potions[i - 1].layout();
             potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
             potions[i - 1].addListener(new InputListener() {

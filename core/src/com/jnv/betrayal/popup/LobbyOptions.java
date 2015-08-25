@@ -12,8 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class LobbyOptions {
+    private BetrayalAssetManager res;
+
     private Stage stage;
     private Image lobbyButton, mainMenuButton, background,instructions, options;
     private Label.LabelStyle labelStyle;
@@ -22,6 +25,7 @@ public class LobbyOptions {
     private Betrayal game;
 
     public LobbyOptions(Betrayal game) {
+        res = game.res;
         this.game=game;
         stage = game.getStage();
         loadFont();
@@ -61,7 +65,7 @@ public class LobbyOptions {
     }
 
     private void loadBackground() {
-        background = new Image(Betrayal.res.getTexture("shop-background"));
+        background = new Image(res.getTexture("shop-background"));
         background.layout();
         background.setBounds(175, 300, Betrayal.WIDTH - 350, Betrayal.HEIGHT - 550);
         stage.addActor(background);
@@ -75,7 +79,7 @@ public class LobbyOptions {
         stage.addActor(title);
     }
     private void loadInstructionsButton() {
-        instructions = new Image(Betrayal.res.getTexture("instructions"));
+        instructions = new Image(res.getTexture("instructions"));
         instructions.layout();
         instructions.setBounds((Betrayal.WIDTH - instructions.getImageWidth()) / 2 + 100,
                 800, 312, 100);
@@ -94,7 +98,7 @@ public class LobbyOptions {
         stage.addActor(instructions);
     }
     private void loadOptionsButton() {
-        options = new Image(Betrayal.res.getTexture("options"));
+        options = new Image(res.getTexture("options"));
         options.layout();
         options.setBounds((Betrayal.WIDTH - options.getImageWidth()) / 2+100,
                 650, 312, 100);
@@ -113,7 +117,7 @@ public class LobbyOptions {
         stage.addActor(options);
     }
     private void loadReturnToLobbyButton() {
-        lobbyButton = new Image(Betrayal.res.getTexture("back-to-lobby"));
+        lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH-lobbyButton.getWidth())/2+100, 350, 312, 100);
         lobbyButton.addListener(new InputListener() {
@@ -130,7 +134,7 @@ public class LobbyOptions {
         stage.addActor(lobbyButton);
     }
     private void loadReturnToMainMenuButton() {
-        mainMenuButton = new Image(Betrayal.res.getTexture("main-menu"));
+        mainMenuButton = new Image(res.getTexture("main-menu"));
         mainMenuButton.layout();
         mainMenuButton.setBounds((Betrayal.WIDTH-mainMenuButton.getWidth())/2+100, 500, 312, 100);
         mainMenuButton.addListener(new InputListener() {
