@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Player {
     private PlayerID playerID;
-    private static final String GET_PLAYER_ID_URL = "";
+    private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/get_player";
 
     /*
      * If array this was private, a getter would get this array and other classes would
@@ -62,6 +62,13 @@ public class Player {
 
                     }
                 };
+            } else {
+                //If the file does not exist, send nothing to the backend and backend will return
+                //with a new ID for the user. Write it to the local file
+                Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
+                request.setUrl(GET_PLAYER_ID_URL);
+                request.setContent(""); //Send empty string literal
+                Gdx.net.sendHttpRequest(request, FindPlayerID.this);
             }
 
         }
@@ -79,7 +86,7 @@ public class Player {
             }
 
             else {
-                Gdx.app.error("Player.java", "Error in Http Response!");
+                Gdx.app.log("Player.java", "http response = " + httpResponse.getResultAsString());
             }
         }
 
