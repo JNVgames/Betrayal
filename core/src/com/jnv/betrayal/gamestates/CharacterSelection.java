@@ -23,6 +23,7 @@ import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.JobDescription;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -32,14 +33,12 @@ public class CharacterSelection extends GameState {
 
     private Player player;
     private BetrayalAssetManager res;
-    private Label.LabelStyle labelStyle;
-
     private Actor reference, button_play_now;
-    private Image background, button_back, field_framePreview;
+    private Image button_back, field_framePreview;
     private Label field_usernameLabel, label_jobDescription;
     private TextField field_usernameEnter;
     private SelectionField gender, hairStyle, hairColor, job;
-    private static Character character;
+    private Character character;
 
     private TextureRegion image_leftArrow, image_rightArrow;
     private Texture image_button_play;
@@ -56,7 +55,6 @@ public class CharacterSelection extends GameState {
 
         character = new Character(res);
 
-        loadFont();
         loadStage();
     }
 
@@ -79,9 +77,6 @@ public class CharacterSelection extends GameState {
     }
 
     // Helpers
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
-    }
     /** Calls the appropriate functions to create the character selection screen */
     private void loadStage() {
         loadBackground();
@@ -104,7 +99,7 @@ public class CharacterSelection extends GameState {
         loadJobDescription();
     }
     private void loadBackground(){
-        background = new Image(res.getTexture("instructions-background"));
+        Image background = new Image(res.getTexture("instructions-background"));
         background.layout();
         background.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         stage.addActor(background);
@@ -119,7 +114,7 @@ public class CharacterSelection extends GameState {
         button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
         group_button_back.addActor(button_back);
 
-        Label button_text_back = new Label("Back", labelStyle);
+        Label button_text_back = new Label("Back", Betrayal.getFont(60));
         button_text_back.setX(button_back.getX() + button_back.getWidth() + 10);
         button_text_back.setY(button_back.getY());
         group_button_back.addActor(button_text_back);
@@ -183,14 +178,14 @@ public class CharacterSelection extends GameState {
     }
     private void loadUsernameField() {
         // Username "Name:" text
-        field_usernameLabel = new Label("Name: ", labelStyle);
+        field_usernameLabel = new Label("Name: ", Betrayal.getFont(60));
         field_usernameLabel.setX(10);
         field_usernameLabel.setY(button_back.getY() - button_back.getHeight() - 10);
         stage.addActor(field_usernameLabel);
 
         // Username input text field
         TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
-        tfs.font = labelStyle.font;
+        tfs.font = Betrayal.getFont(60).font;
         tfs.messageFont = tfs.font;
         tfs.fontColor = Color.LIGHT_GRAY;
         tfs.messageFontColor = Color.GRAY;
@@ -288,7 +283,7 @@ public class CharacterSelection extends GameState {
     }
 
     private void loadJobDescription() {
-        label_jobDescription = new Label("", Betrayal.getHurtmoldFontLabelStyle(45));
+        label_jobDescription = new Label("", Betrayal.getFont(45));
         label_jobDescription.setHeight(field_framePreview.getY() - 80
                 - label_jobDescription.getHeight()
                 - (button_play_now.getY() + button_play_now.getHeight() + 10));
@@ -305,32 +300,19 @@ public class CharacterSelection extends GameState {
         hairColor.update();
         job.update();
     }
-    public static void updateJobDescription(Label label) {
+    public void updateJobDescription(Label label) {
         switch (character.job.getJob()) {
             case WARRIOR:
-                label.setText("Warrior:" +
-                        "\n (Passive) +25% Attack" +
-                        "\n (Team Passive) +10% Attack" +
-                        "\n (Ability) 150% strike ");
+                label.setText(JobDescription.getWarriorDescription());
                 break;
             case KNIGHT:
-                label.setText("Knight:" +
-                        "\n (Passive) +25% Defense" +
-                        "\n (Team Passive) +10% Defense" +
-                        "\n (Ability) Grants Shield ");
+                label.setText(JobDescription.getKnightDescription());
                 break;
             case PRIEST:
-                label.setText("Priest:" +
-                        "\n (Passive) +25% Health" +
-                        "\n (Team Passive) +10% Health" +
-                        "\n (Ability) Buffs  ");
+                label.setText(JobDescription.getPriestDescription());
                 break;
             case THIEF:
-                label.setText("Thief:" +
-                        "\n (Passive) +50% Gold drop rate" +
-                        "\n (*TP) +25% Gold drop rate" +
-                        "\n (Ability) 25% Chance to Steal " +
-                        "\n *TP is Team Passive");
+                label.setText(JobDescription.getThiefDescription());
                 break;
             default:
                 break;
@@ -355,7 +337,7 @@ public class CharacterSelection extends GameState {
             group_selectionField = new Group();
 
             // Create label
-            field_selection_label = new Label(label, labelStyle);
+            field_selection_label = new Label(label, Betrayal.getFont(60));
             field_selection_label.setWidth(Betrayal.WIDTH - reference.getX() - 20);
             field_selection_label.setHeight(60);
             field_selection_label.setX(field_framePreview.getX()
@@ -389,7 +371,7 @@ public class CharacterSelection extends GameState {
             group_selectionField.addActor(field_selection_leftArrow);
 
             // Create serial number
-            field_selection_serialNumber = new Label("", labelStyle);
+            field_selection_serialNumber = new Label("", Betrayal.getFont(60));
             field_selection_serialNumber.setBounds(field_selection_leftArrow.getX()
                     + field_selection_leftArrow.getWidth() + 30, field_selection_leftArrow.getY(),
                     60, field_selection_leftArrow.getHeight());

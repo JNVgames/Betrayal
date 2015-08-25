@@ -31,7 +31,6 @@ public class Dungeon extends GameState {
     private com.jnv.betrayal.entities.Monster monster;
 
     private Group field_UI;
-    private Timer timer;
     private int floor, numPlayers, strongestPlayer;
     private float button_height = 150, button_width = Betrayal.WIDTH / 2;
 
@@ -71,7 +70,7 @@ public class Dungeon extends GameState {
 
     private void loadStage() {
         field_UI = new Group();
-        font = loadFont(70);
+        font = Betrayal.getFont(70);
         loadTimer();
         loadMainMenu();
         loadMonster();
@@ -98,14 +97,8 @@ public class Dungeon extends GameState {
     }
 
     // Helpers
-    /** Returns the Hurtmold font with the specified font size
-     * @param fontSize font size of hurtmold font
-     * @return Hurtmold font with the specified font size */
-    private Label.LabelStyle loadFont(int fontSize) {
-        return Betrayal.getHurtmoldFontLabelStyle(fontSize);
-    }
     private void loadTimer() {
-        Label label = new Label("0:25", loadFont(70));
+        Label label = new Label("0:25", Betrayal.getFont(70));
         label.setX((Betrayal.WIDTH - label.getWidth()) / 2);
         label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
         stage.addActor(label);
@@ -137,7 +130,7 @@ public class Dungeon extends GameState {
         stage.addActor(actor_player);
     }
     private void loadMainMenu() {
-        Label field_UI_eventLog = new Label("Event Log", loadFont(67));
+        Label field_UI_eventLog = new Label("Event Log", Betrayal.getFont(67));
         field_UI_eventLog.setBounds(0, 0, button_width, button_height);
         field_UI_eventLog.setAlignment(Align.center);
         addButtonListener(field_UI_eventLog, Menu.EVENT_LOG);
@@ -155,7 +148,7 @@ public class Dungeon extends GameState {
         addButtonListener(field_UI_items, Menu.ITEMS);
         field_UI.addActor(field_UI_items);
 
-        Label tmp = new Label("Lobby (tmp)", loadFont(50));
+        Label tmp = new Label("Lobby (tmp)", Betrayal.getFont(50));
         tmp.setBounds(button_width, 0, button_width, button_height);
         tmp.setAlignment(Align.center);
         tmp.layout();
@@ -173,7 +166,7 @@ public class Dungeon extends GameState {
         stage.addActor(field_UI);
     }
     private void loadAttackMenu() {
-        Label field_UI_normalAttack = new Label("Normal Attack", loadFont(50));
+        Label field_UI_normalAttack = new Label("Normal Attack", Betrayal.getFont(50));
         field_UI_normalAttack.setBounds(0, button_height, button_width, button_height);
         field_UI_normalAttack.setAlignment(Align.center);
         field_UI.addActor(field_UI_normalAttack);

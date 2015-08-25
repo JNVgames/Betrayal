@@ -10,9 +10,6 @@ import com.jnv.betrayal.entities.Character;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jarnin on 8/20/15.
- */
 public class Player {
     private PlayerID playerID;
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/get_player";

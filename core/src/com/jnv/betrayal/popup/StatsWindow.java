@@ -13,38 +13,30 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.character.Preview;
+import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Stats {
+public class StatsWindow {
 
     private BetrayalAssetManager res;
-
     private Stage stage;
     private Image lobbyButton, background;
-    private Label.LabelStyle labelStyle;
     private Label title;
     private Actor mask;
-
-    // VINCENTS VARIABLE
     private Group characterStats;
     private float yRef;
     private Actor charPreview;
     private Player player;
 
-    public Stats(Betrayal game) {
+    public StatsWindow(Betrayal game) {
         res = game.res;
         stage = game.getStage();
         characterStats = new Group();
-        loadFont();
         loadButtons();
         player = game.player;
     }
 
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
-    }
     private void loadContent() {
         int rotatorIndent = 20;
         loadCharacterStats();
@@ -69,12 +61,9 @@ public class Stats {
         mask = new Actor();
         mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
         mask.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 removeStats();
             }
@@ -88,7 +77,7 @@ public class Stats {
         stage.addActor(background);
     }
     private void loadTitle() {
-        title = new Label(" My Stats", labelStyle);
+        title = new Label("My Stats", Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT - 200);
@@ -97,22 +86,19 @@ public class Stats {
     private void loadCharacterStats() {
         yRef = title.getY();
 
-        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.FLOOR, yRef);
-        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.HEALTH, yRef);
-        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.DEFENSE, yRef);
-        characterStatsLabel(characterStats, com.jnv.betrayal.character.Stats.Stat.ATTACK, yRef);
+        characterStatsLabel(characterStats, Stats.Stat.FLOOR, yRef);
+        characterStatsLabel(characterStats, Stats.Stat.HEALTH, yRef);
+        characterStatsLabel(characterStats, Stats.Stat.DEFENSE, yRef);
+        characterStatsLabel(characterStats, Stats.Stat.ATTACK, yRef);
     }
     private void loadReturnToLobbyButton() {
         lobbyButton = new Image(res.getTexture("back-to-lobby"));
         lobbyButton.layout();
         lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
         lobbyButton.addListener(new InputListener() {
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 removeStats();
             }
@@ -128,9 +114,9 @@ public class Stats {
         // vincents variable
         characterStats.remove();
     }
-    private void characterStatsLabel(Group group, com.jnv.betrayal.character.Stats.Stat stat, float yReference) {
+    private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
         int fontSize = 40;
-        Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
+        Label statsText = new Label("", Betrayal.getFont(fontSize));
         statsText.setText(player.currentCharacter.stats.toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);

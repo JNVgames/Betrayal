@@ -44,7 +44,7 @@ public class GameOver extends GameState {
     }
 
     private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
+        labelStyle = Betrayal.getFont(60);
     }
 
     private void loadButtons() {

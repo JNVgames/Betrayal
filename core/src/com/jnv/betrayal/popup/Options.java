@@ -8,35 +8,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Options {
-    private BetrayalAssetManager res;
-
-    private Stage stage;
+public class Options extends Popup {
 
     private Image background, mainMenuButton;
     private Actor mask;
-    private Label.LabelStyle labelStyle;
     private Label title;
     private int currentContent, totalContent;
 
 
     public Options(Betrayal game) {
-        res = game.res;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         currentContent = 0;
         totalContent = 3;
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(60);
     }
 
     private void loadButtons() {
@@ -79,7 +67,7 @@ public class Options {
     }
 
     private void loadTitle() {
-        title = new Label("Options", labelStyle);
+        title = new Label("Options", Betrayal.getFont(60));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT - 300);

@@ -4,32 +4,19 @@ package com.jnv.betrayal.popup;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class ShopRingPurchase {
-    private BetrayalAssetManager res;
+public class ShopRingPurchase extends Popup {
 
-    private Stage stage;
     private Image backButton, background, goldIcon, buyButton;
-    private Label.LabelStyle labelStyle;
     private Label price, description;
     private Actor mask;
-    private Betrayal game;
 
     public ShopRingPurchase(Betrayal game) {
-        res = game.res;
-        this.game = game;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -74,7 +61,7 @@ public class ShopRingPurchase {
     }
 
     private void loadPrice() {
-        price = new Label("$$$$$", labelStyle);
+        price = new Label("$$$$$", Betrayal.getFont(40));
         price.setHeight(50);
         price.setX(450);
         price.setY(500);
@@ -82,7 +69,7 @@ public class ShopRingPurchase {
     }
 
     private void loadDescription() {
-        description = new Label("+5 Attack", labelStyle);
+        description = new Label("+5 Attack", Betrayal.getFont(40));
         description.setHeight(50);
         description.setX(300);
         description.setY(700);

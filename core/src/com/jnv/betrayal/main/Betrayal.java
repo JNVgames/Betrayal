@@ -104,7 +104,7 @@ public class Betrayal extends Game {
     }
     public StretchViewport getStretchViewport() { return stretchViewport; }
 	public Stage getStage() { return stage; }
-	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
+	public static Label.LabelStyle getFont(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
 				new FreeTypeFontGenerator.FreeTypeFontParameter();
 		fontDetails.size = fontSize;
@@ -112,5 +112,6 @@ public class Betrayal extends Game {
 		labelStyle.font = generator.generateFont(fontDetails);
 		return labelStyle;
 	}
+    public ResourceLoader getResourceLoader() { return loader; }
 
 }

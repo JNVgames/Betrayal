@@ -26,8 +26,6 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class LoadGame extends GameState {
 
-    private BetrayalAssetManager res;
-
     public Player player;
     private Group[] savedSessions;
     private Image button_back;
@@ -69,7 +67,7 @@ public class LoadGame extends GameState {
 
     // Helpers
     private Label.LabelStyle loadFont(int fontSize) {
-        return Betrayal.getHurtmoldFontLabelStyle(fontSize);
+        return Betrayal.getFont(fontSize);
     }
 
     private void loadBackButton() {

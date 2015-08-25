@@ -17,13 +17,10 @@ import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
 import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class HallOfFame extends GameState {
-    private BetrayalAssetManager res;
 
     private Texture hallOfFameBackground;
-    private InputMultiplexer im;
     private BetrayalGestureProcessor gp;
 
     public HallOfFame(GameStateManager gsm) {
@@ -34,7 +31,7 @@ public class HallOfFame extends GameState {
 
         hallOfFameBackground = res.getTexture("hall-of-fame-background");
 
-        im = new InputMultiplexer();
+        InputMultiplexer im = new InputMultiplexer();
         gp = new BetrayalGestureProcessor();
         im.addProcessor(stage);
         im.addProcessor(new GestureDetector(gp));

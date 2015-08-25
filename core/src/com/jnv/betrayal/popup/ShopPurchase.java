@@ -11,12 +11,9 @@ import com.jnv.betrayal.entities.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class ShopPurchase {
-    private BetrayalAssetManager res;
+public class ShopPurchase extends Popup {
 
-    private Stage stage;
     private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
-    private Label.LabelStyle labelStyle;
     private Label price,description;
     private Actor mask;
     private Betrayal game;
@@ -24,17 +21,10 @@ public class ShopPurchase {
     private Player player;
 
     public ShopPurchase(Betrayal game) {
-        res = game.res;
-        this.game = game;
-        stage = game.getStage();
+        super(game);
         currentSide = 0;
         player = game.player;
-        loadFont();
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -82,14 +72,14 @@ public class ShopPurchase {
     }
 
     private void loadPrice() {
-        price = new Label("xxxxx", labelStyle);
+        price = new Label("xxxxx", Betrayal.getFont(40));
         price.setHeight(50);
         price.setX(450);
         price.setY(850);
         stage.addActor(price);
     }
     private void loadDescription() {
-        description = new Label("+5 Attack", labelStyle);
+        description = new Label("+5 Attack", Betrayal.getFont(40));
         description.setHeight(50);
         description.setX(250);
         description.setY(900);

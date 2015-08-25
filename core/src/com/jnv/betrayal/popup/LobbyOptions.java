@@ -14,26 +14,15 @@ import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class LobbyOptions {
-    private BetrayalAssetManager res;
+public class LobbyOptions extends Popup {
 
-    private Stage stage;
     private Image lobbyButton, mainMenuButton, background,instructions, options;
-    private Label.LabelStyle labelStyle;
     private Label title;
     private Actor mask;
-    private Betrayal game;
 
     public LobbyOptions(Betrayal game) {
-        res = game.res;
-        this.game=game;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -72,7 +61,7 @@ public class LobbyOptions {
     }
 
     private void loadTitle() {
-        title = new Label("Options", labelStyle);
+        title = new Label("Options", Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT - 350);
@@ -84,15 +73,11 @@ public class LobbyOptions {
         instructions.setBounds((Betrayal.WIDTH - instructions.getImageWidth()) / 2 + 100,
                 800, 312, 100);
         instructions.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                new com.jnv.betrayal.popup.Instructions(game);
+                new Instructions(game);
             }
         });
         stage.addActor(instructions);

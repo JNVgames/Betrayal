@@ -1,37 +1,21 @@
 package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class FriendsList {
-    private BetrayalAssetManager res;
+public class FriendsList extends Popup {
 
-    private Stage stage;
     private Image lobbyButton, background, background2;
-    private Label.LabelStyle labelStyle;
     private Label title, title2;
     private Actor mask;
 
-    // VINCENTS VARRIES
-    private Group inventory;
-    private Label button_sort;
-
     public FriendsList(Betrayal game) {
-        res = game.res;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     public void loadButtons(){
@@ -70,13 +54,13 @@ public class FriendsList {
     }
 
     private void loadTitle() {
-        title = new Label("Party", labelStyle);
+        title = new Label("Party", Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 4);
         title.setY(Betrayal.HEIGHT - 250);
         stage.addActor(title);
 
-        title2 = new Label("Friends", labelStyle);
+        title2 = new Label("Friends", Betrayal.getFont(40));
         title2.setHeight(100);
         title2.setX((Betrayal.WIDTH - title.getWidth()) / 4 * 3);
         title2.setY(Betrayal.HEIGHT - 250);

@@ -8,31 +8,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Shop {
-    private BetrayalAssetManager res;
+public class Shop extends Popup {
 
-    private Stage stage;
     private Image lobbyButton, background, weapons, armors, extras, items, money;
     private Image[] potions, sword1, sword2, shield1, shield2, headgear, armor1, armor2, ring1, ring2;
-    private Label.LabelStyle labelStyle;
     private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
     private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
     private int currentContent, buttonHeight, buttonWidth, itemSize;
     private Actor mask;
-    private Betrayal game;
-
 
     public Shop(Betrayal game) {
-        res = game.res;
-        this.game=game;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         currentContent = 0;
         buttonHeight = 100;
         buttonWidth = 104;
@@ -48,11 +38,6 @@ public class Shop {
         ring1 = new Image[6];
         ring2 = new Image[6];
         loadButtons();
-
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -93,7 +78,7 @@ public class Shop {
     }
 
     private void loadTitle() {
-        title = new Label("Shop", labelStyle);
+        title = new Label("Shop", Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT - 200);
@@ -290,22 +275,22 @@ public class Shop {
     }
 
     private void loadWeaponAndShieldsTitles() {
-        titleSword1 = new Label("Swords(Tier 1)", labelStyle);
+        titleSword1 = new Label("Swords(Tier 1)", Betrayal.getFont(40));
         titleSword1.setX(110);
         titleSword1.setY(Betrayal.HEIGHT - 250);
         stage.addActor(titleSword1);
 
-        titleSword2 = new Label("Swords(Tier 2)", labelStyle);
+        titleSword2 = new Label("Swords(Tier 2)", Betrayal.getFont(40));
         titleSword2.setX(110);
         titleSword2.setY(Betrayal.HEIGHT - 422);
         stage.addActor( titleSword2);
 
-        titleShield1 = new Label("Shields(Tier 1)", labelStyle);
+        titleShield1 = new Label("Shields(Tier 1)", Betrayal.getFont(40));
         titleShield1.setX(110);
         titleShield1.setY(Betrayal.HEIGHT - 594);
         stage.addActor(  titleShield1);
 
-        titleShield2 = new Label("Shields(Tier 2)", labelStyle);
+        titleShield2 = new Label("Shields(Tier 2)", Betrayal.getFont(40));
         titleShield2.setX(110);
         titleShield2.setY(Betrayal.HEIGHT - 766);
         stage.addActor(  titleShield2);
@@ -349,12 +334,12 @@ public class Shop {
     }
 
     private void loadRingTitle() {
-        titleRing1 = new Label("Rings(Tier 1)", labelStyle);
+        titleRing1 = new Label("Rings(Tier 1)", Betrayal.getFont(40));
         titleRing1.setX(110);
         titleRing1.setY(Betrayal.HEIGHT - 250);
         stage.addActor(titleRing1);
 
-        titleRing2 = new Label("Rings(Tier 2)", labelStyle);
+        titleRing2 = new Label("Rings(Tier 2)", Betrayal.getFont(40));
         titleRing2.setX(110);
         titleRing2.setY(Betrayal.HEIGHT - 422);
         stage.addActor(titleRing2);
@@ -424,24 +409,24 @@ public class Shop {
     }
 
     private void loadArmorTitle() {
-        titleHeadgear = new Label("Headgear", labelStyle);
+        titleHeadgear = new Label("Headgear", Betrayal.getFont(40));
         titleHeadgear.setX(110);
         titleHeadgear.setY(Betrayal.HEIGHT - 250);
         stage.addActor(titleHeadgear);
 
-        titleArmor1 = new Label("Armor(tier 1)", labelStyle);
+        titleArmor1 = new Label("Armor(tier 1)", Betrayal.getFont(40));
         titleArmor1.setX(110);
         titleArmor1.setY(Betrayal.HEIGHT - 422);
         stage.addActor(titleArmor1);
 
-        titleArmor2 = new Label("Armor(tier 2)", labelStyle);
+        titleArmor2 = new Label("Armor(tier 2)", Betrayal.getFont(40));
         titleArmor2.setX(110);
         titleArmor2.setY(Betrayal.HEIGHT - 594);
         stage.addActor(titleArmor2);
     }
 
     private void loadItemsTitle() {
-        titleItems = new Label("Items", labelStyle);
+        titleItems = new Label("Items", Betrayal.getFont(40));
         titleItems.setX(110);
         titleItems.setY(Betrayal.HEIGHT - 250);
         stage.addActor(titleItems);

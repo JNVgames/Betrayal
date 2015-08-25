@@ -18,31 +18,20 @@ import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Inventory {
-    private BetrayalAssetManager res;
+public class Inventory extends Popup {
 
-    private Stage stage;
     private Image lobbyButton, background;
-    private Label.LabelStyle labelStyle;
     private Label title;
     private Actor mask;
-
-    // VINCENTS VARRIES
     private Group inventory;
     private Label button_sort;
 
     private Player player;
 
     public Inventory(Betrayal game) {
-        res = game.res;
-        stage = game.getStage();
-        loadFont();
+        super(game);
         loadButtons();
         player = game.player;
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -82,7 +71,7 @@ public class Inventory {
     }
 
     private void loadTitle() {
-        title = new Label("Inventory", labelStyle);
+        title = new Label("Inventory", Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT - 200);
@@ -147,7 +136,7 @@ public class Inventory {
         stage.addActor(inventory);
     }
     private void loadSortButton() {
-        button_sort = new Label("Sort", Betrayal.getHurtmoldFontLabelStyle(40));
+        button_sort = new Label("Sort", Betrayal.getFont(40));
         button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
                 lobbyButton.getY() + lobbyButton.getHeight() + 30, button_sort.getPrefWidth(),
                 button_sort.getPrefHeight());

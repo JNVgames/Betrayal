@@ -3,35 +3,23 @@ package com.jnv.betrayal.popup;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 //TODO; add boolean
 //TODO: GET THE @FANGOT BACK TO WORK 8/11
-public class Confirmation {
-    private BetrayalAssetManager res;
+public class Confirmation extends Popup {
 
-    private Stage stage;
     private Image yesButton, noButton, background;
-    private Label.LabelStyle labelStyle;
     private Label title;
     private Actor mask;
     private String string;
 
     public Confirmation(Betrayal game, String string) {
-        res = game.res;
+        super(game);
         this.string = string;
-        stage = game.getStage();
-        loadFont();
         loadButtons();
-    }
-
-    private void loadFont() {
-        labelStyle = Betrayal.getHurtmoldFontLabelStyle(40);
     }
 
     private void loadButtons() {
@@ -55,7 +43,7 @@ public class Confirmation {
     }
 
     private void loadTitle() {
-        title = new Label(string, labelStyle);
+        title = new Label(string, Betrayal.getFont(40));
         title.setHeight(100);
         title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
         title.setY(Betrayal.HEIGHT / 2 + 50);
