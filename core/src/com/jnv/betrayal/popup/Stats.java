@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Preview;
-import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Stats {
@@ -28,12 +28,14 @@ public class Stats {
     private Group characterStats;
     private float yRef;
     private Actor charPreview;
+    private Player player;
 
     public Stats(Betrayal game) {
         stage = game.getStage();
         characterStats = new Group();
         loadFont();
         loadButtons();
+        player = game.player;
     }
 
     private void loadFont() {
@@ -43,8 +45,11 @@ public class Stats {
         int rotatorIndent = 20;
         loadCharacterStats();
         loadCharacterPreview();
-        characterStats.addActor(Preview.createRotators(charPreview.getX() + rotatorIndent,
-                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 40)) / 2, 40));
+
+        Preview preview = new Preview(player.currentCharacter);
+        characterStats.addActor(preview.createRotators(charPreview.getX() + rotatorIndent,
+                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
+
         stage.addActor(characterStats);
     }
 
@@ -123,7 +128,7 @@ public class Stats {
     private void characterStatsLabel(Group group, com.jnv.betrayal.character.Stats.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getHurtmoldFontLabelStyle(fontSize));
-        statsText.setText(Character.currentCharacter.stats.toString(stat));
+        statsText.setText(player.currentCharacter.stats.toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);
         statsText.setY(yReference - fontSize - 30);
@@ -134,7 +139,7 @@ public class Stats {
     }
     private void loadCharacterPreview() {
         int scale = 8;
-        Character.currentCharacter.preview.setRotation(0);
+        player.currentCharacter.preview.setRotation(0);
         charPreview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 drawPreview(batch);
@@ -146,7 +151,7 @@ public class Stats {
         characterStats.addActor(charPreview);
     }
     private void drawPreview(Batch batch) {
-        Character.currentCharacter.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
+        player.currentCharacter.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
                 charPreview.getWidth(), charPreview.getHeight());
     }
 }

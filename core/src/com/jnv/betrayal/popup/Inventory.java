@@ -6,7 +6,6 @@ package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.entities.*;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.Network.Player;
+import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Inventory {
@@ -30,10 +29,13 @@ public class Inventory {
     private Group inventory;
     private Label button_sort;
 
+    private Player player;
+
     public Inventory(Betrayal game) {
         stage = game.getStage();
         loadFont();
         loadButtons();
+        player = game.player;
     }
 
     private void loadFont() {
@@ -120,7 +122,7 @@ public class Inventory {
     // VINCENTS STUFF
     private void loadInventory() {
         inventory = new Group();
-        Item[][] items = Character.currentCharacter.inventory.getItems(6, 5);
+        Item[][] items = player.currentCharacter.inventory.getItems(6, 5);
         Actor[][] itemsDisplay = new Actor[items.length][items[0].length];
 
         float padding = 10;
@@ -151,7 +153,7 @@ public class Inventory {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Character.currentCharacter.inventory.sortItems();
+                player.currentCharacter.inventory.sortItems();
                 inventory.remove();
                 loadInventory();
             }

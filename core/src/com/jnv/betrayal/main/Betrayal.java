@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.entities.Item;
 import com.jnv.betrayal.entities.Monster;
 import com.jnv.betrayal.resources.Resources;
@@ -33,6 +34,8 @@ public class Betrayal extends Game {
 	public static Resources res;
 
 	public GameStateManager gsm;
+
+	public Player player;
 	
 	public void create() {
 		worldCam = new OrthographicCamera();
