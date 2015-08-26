@@ -18,17 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Monster;
+import com.jnv.betrayal.item.Monster;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.Random;
 
-import javax.swing.Timer;
-
 public class Dungeon extends GameState {
 
-    private com.jnv.betrayal.entities.Monster monster;
+    private Monster monster;
 
     private Group field_UI;
     private int floor, numPlayers, strongestPlayer;
@@ -199,7 +197,7 @@ public class Dungeon extends GameState {
     /** Generates a random mob based on the floor the highest player in the party is currently on
      * @param tier
      * @return */
-    public com.jnv.betrayal.entities.Monster generateMonster(int tier) { // MonsterGenerator(int floor)
+    public Monster generateMonster(int tier) { // MonsterGenerator(int floor)
         // todo @joey change tier parameter to floor
         Random randomNumberGenerator = new Random();
         int x;
@@ -223,6 +221,6 @@ public class Dungeon extends GameState {
                 x = randomNumberGenerator.nextInt(10);
                 break;
         }
-        return new Monster("monster-tier1-" + x);
+        return new Monster("monster-tier1-" + x, res);
     }
 }

@@ -18,8 +18,8 @@ public class Confirmation extends Popup {
 
     public Confirmation(Betrayal game, String string) {
         super(game);
-        this.string = string;
         loadButtons();
+        this.string = string;
     }
 
     private void loadButtons() {

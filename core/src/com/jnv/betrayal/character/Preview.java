@@ -11,16 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.SnapshotArray;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Character;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Preview {
-    private BetrayalAssetManager res;
 
-    private Player player;
+    private BetrayalAssetManager res;
     private Character character;
 
     public enum Gender {
@@ -329,9 +324,8 @@ public class Preview {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                player.currentCharacter.preview.rotateLeft();
+                rotateLeft();
             }
         });
         group_previewRotators.addActor(previewRotators_leftArrow);
@@ -348,7 +342,7 @@ public class Preview {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                player.currentCharacter.preview.rotateRight();
+                rotateRight();
             }
         });
 

@@ -12,14 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.FriendsList;
 import com.jnv.betrayal.popup.StatsWindow;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Lobby extends GameState {
 
@@ -29,8 +25,6 @@ public class Lobby extends GameState {
 
     public Lobby(GameStateManager gsm) {
         super(gsm);
-        res = gsm.getGame().res;
-        player = gsm.getGame().player;
         buttonHeight = 150;
         buttonWidth = 144;
         spacing = 5;

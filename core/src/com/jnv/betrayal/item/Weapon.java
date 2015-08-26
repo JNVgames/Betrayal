@@ -2,10 +2,8 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.item;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Weapon extends Equip {
@@ -14,8 +12,8 @@ public class Weapon extends Equip {
         super(id, name, res);
     }
 
-    public Weapon(String name) {
-        super(name);
+    public Weapon(String name, BetrayalAssetManager res) {
+        super(name, res);
     }
 
 }

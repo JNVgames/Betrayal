@@ -19,10 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Stats;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class LoadGame extends GameState {
 

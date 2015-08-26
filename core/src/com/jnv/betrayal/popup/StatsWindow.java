@@ -9,32 +9,27 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Stats;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class StatsWindow {
+public class StatsWindow extends Popup {
 
-    private BetrayalAssetManager res;
-    private Stage stage;
     private Image lobbyButton, background;
     private Label title;
     private Actor mask;
     private Group characterStats;
     private float yRef;
     private Actor charPreview;
-    private Player player;
+    private Character character;
 
     public StatsWindow(Betrayal game) {
-        res = game.res;
-        stage = game.getStage();
+        super(game);
         characterStats = new Group();
+        character = game.player.currentCharacter;
         loadButtons();
-        player = game.player;
     }
 
     private void loadContent() {
@@ -42,10 +37,8 @@ public class StatsWindow {
         loadCharacterStats();
         loadCharacterPreview();
 
-        //characterStats.addActor(preview.createRotators(charPreview.getX() + rotatorIndent,
-        //        charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
-
-        //stage.addActor(characterStats);
+        characterStats.addActor(character.preview.createRotators(charPreview.getX() + rotatorIndent,
+                charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
     }
 
     // Helpers
@@ -56,6 +49,7 @@ public class StatsWindow {
         loadContent();
         loadCharacterStats();
         loadReturnToLobbyButton();
+        stage.addActor(characterStats);
     }
     private void loadMask() {
         mask = new Actor();
@@ -117,7 +111,7 @@ public class StatsWindow {
     private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
         int fontSize = 40;
         Label statsText = new Label("", Betrayal.getFont(fontSize));
-        statsText.setText(player.currentCharacter.stats.toString(stat));
+        statsText.setText(character.stats.toString(stat));
         statsText.layout();
         statsText.setX(background.getX() + 30);
         statsText.setY(yReference - fontSize - 30);
@@ -128,7 +122,7 @@ public class StatsWindow {
     }
     private void loadCharacterPreview() {
         int scale = 8;
-        player.currentCharacter.preview.setRotation(0);
+        character.preview.setRotation(0);
         charPreview = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 drawPreview(batch);
@@ -140,7 +134,7 @@ public class StatsWindow {
         characterStats.addActor(charPreview);
     }
     private void drawPreview(Batch batch) {
-        player.currentCharacter.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
+        character.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
                 charPreview.getWidth(), charPreview.getHeight());
     }
 }

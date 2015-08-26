@@ -7,12 +7,8 @@ package com.jnv.betrayal.resources;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.jnv.betrayal.entities.Item;
-import com.jnv.betrayal.entities.Monster;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.jnv.betrayal.item.Item;
+import com.jnv.betrayal.item.Monster;
 
 public class BetrayalAssetManager extends AssetManager {
 

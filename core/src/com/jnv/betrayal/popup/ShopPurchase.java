@@ -3,27 +3,24 @@ package com.jnv.betrayal.popup;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Weapon;
+import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.item.Weapon;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class ShopPurchase extends Popup {
 
     private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
     private Label price,description;
     private Actor mask;
-    private Betrayal game;
     private int currentSide;
-    private Player player;
+    private Character character;
 
     public ShopPurchase(Betrayal game) {
         super(game);
         currentSide = 0;
-        player = game.player;
+        character = game.player.currentCharacter;
         loadButtons();
     }
 
@@ -97,9 +94,8 @@ public class ShopPurchase extends Popup {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //CharacterSelection.getCharacter().getInventoryClass().addItem(item);
                 new Confirmation(game, "Confirm purchase") {
-                    @Override
                     public void doSomething() {
-                        player.currentCharacter.inventory.addItem(new Weapon("sword11"));
+                        character.inventory.addItem(new Weapon("sword11", res));
                     }
                 };
             }

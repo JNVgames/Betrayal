@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.item;
 
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
@@ -12,7 +12,7 @@ public class HeadGear extends Equip {
         super(id, name, res);
     }
 
-    public HeadGear(String name) {
-        super(name);
+    public HeadGear(String name, BetrayalAssetManager res) {
+        super(name, res);
     }
 }

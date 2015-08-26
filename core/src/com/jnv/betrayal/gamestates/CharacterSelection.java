@@ -18,11 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.JobDescription;
 
 /**
@@ -31,23 +29,17 @@ import com.jnv.betrayal.resources.JobDescription;
  */
 public class CharacterSelection extends GameState {
 
-    private Player player;
-    private BetrayalAssetManager res;
     private Actor reference, button_play_now;
     private Image button_back, field_framePreview;
     private Label field_usernameLabel, label_jobDescription;
     private TextField field_usernameEnter;
     private SelectionField gender, hairStyle, hairColor, job;
     private Character character;
-
     private TextureRegion image_leftArrow, image_rightArrow;
     private Texture image_button_play;
 
     public CharacterSelection(GameStateManager gsm) {
         super(gsm);
-        this.res = gsm.getGame().res;
-
-        player = gsm.getGame().player;
 
         image_leftArrow = new TextureRegion(res.getTexture("arrow-right"));
         image_leftArrow.flip(true, false);
@@ -125,13 +117,9 @@ public class CharacterSelection extends GameState {
         button_back_clickArea.setX(button_back.getX());
         button_back_clickArea.setY(button_back.getY());
         button_back_clickArea.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 character = null;
                 gsm.setState(GameStateManager.State.MENU);
@@ -145,7 +133,6 @@ public class CharacterSelection extends GameState {
         // if layout() is used, the inputlistener x, y field becomes relative to the actor position
         image_button_play = res.getTexture("play-now");
         button_play_now = new Actor() {
-            @Override
             public void draw(Batch batch, float parentAlpha) {
                 batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
                         button_play_now.getWidth(), button_play_now.getHeight());
@@ -164,8 +151,7 @@ public class CharacterSelection extends GameState {
                         && y >= button_play_now.getY()
                         && y <= button_play_now.getY() + button_play_now.getHeight()) {
                     character.setName(field_usernameEnter.getText());
-                    player.characters.add(character);
-                    player.currentCharacter = character;
+                    player.addCharacter(character);
                     gsm.setState(GameStateManager.State.LOBBY);
                 }
                 else image_button_play = res.getTexture("play-now");

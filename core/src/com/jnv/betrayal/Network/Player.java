@@ -5,7 +5,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
-import com.jnv.betrayal.entities.Character;
+import com.jnv.betrayal.character.Character;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,10 @@ public class Player {
 
     public Character getCurrentCharacter() {
         return this.currentCharacter;
+    }
+    public void addCharacter(Character character) {
+        characters.add(character);
+        currentCharacter = character;
     }
 
     /*

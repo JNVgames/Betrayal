@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.Inventory;
 import com.jnv.betrayal.character.Job;
@@ -25,7 +25,6 @@ public class Character {
     }
 
     private String name;
-
     public Preview preview;
     public Job job;
     public Equips equips;
@@ -37,7 +36,7 @@ public class Character {
         equips = new Equips(this, res);
         preview = new Preview(this, res);
         job = new Job();
-        inventory = new Inventory();
+        inventory = new Inventory(res);
         stats = new Stats();
 
         job.setJob(Job.Jobs.WARRIOR);

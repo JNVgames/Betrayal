@@ -4,6 +4,9 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.item.Monster;
+import com.jnv.betrayal.item.Weapon;
+
 public class ResourceLoader {
 
     private BetrayalAssetManager res;
@@ -17,7 +20,28 @@ public class ResourceLoader {
     }
 
     public void loadAll() {
-        // About
+        loadBackgrounds();
+        loadButtons();
+        loadLobbyButtons();
+        loadShopButtons();
+        loadCombatIcons();
+        loadItems();
+        loadCharacterPreviewsImages();
+        loadMonsters();
+    }
+    public void loadAllData() {
+        loadWeaponData();
+        loadMonsterData();
+    }
+    private void loadItems() {
+        loadSwordTier1();
+        loadShields();
+        loadHeadGear();
+        loadPotions();
+        loadRings();
+        loadArmor();
+    }
+    private void loadBackgrounds() {
         res.loadTexture("about/start_screen720x1280.png", "start-background");
         res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
         res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
@@ -29,8 +53,12 @@ public class ResourceLoader {
         res.loadTexture("about/tower.png", "tower");
         res.loadTexture("about/lobby-tower.png", "lobby-tower");
 
-
-        // Buttons
+        // Dungeon backgrounds
+        for (int i = 1; i <= 5; i++) {
+            res.loadTexture("map/dungeon_map" + i + ".png", "map-" + i);
+        }
+    }
+    private void loadButtons() {
         res.loadTexture("button/load_game_button512x144.png", "load-game");
         res.loadTexture("button/load_game_grey512x144.png", "load-game-grey");
         res.loadTexture("button/new_game_button512x144.png", "new-game");
@@ -41,7 +69,6 @@ public class ResourceLoader {
         res.loadTexture("button/play_now_pressed512x144.png", "play-now-pressed");
         res.loadTexture("button/main_menu512x144.png", "main-menu");
         res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
-
         res.loadTexture("button/arrow256x256.png", "arrow-right");
         res.loadTexture("button/arrow_left256x256.png", "arrow-left");
         res.loadTexture("button/circle_x150x150.png", "x");
@@ -54,14 +81,16 @@ public class ResourceLoader {
         res.loadTexture("button/preview360x144.png", "preview");
         res.loadTexture("button/yes360x144.png", "yes");
         res.loadTexture("button/no360x144.png", "no");
-
+    }
+    private void loadLobbyButtons() {
         res.loadTexture("button/lobby/floor.png", "lobby-floor");
         res.loadTexture("button/lobby/inventory.png", "lobby-inventory");
         res.loadTexture("button/lobby/party.png", "lobby-party");
         res.loadTexture("button/lobby/settings.png", "lobby-settings");
         res.loadTexture("button/lobby/shop.png", "lobby-shop");
         res.loadTexture("button/lobby/stats.png", "lobby-stats");
-
+    }
+    private void loadShopButtons() {
         res.loadTexture("button/shop/armor.png", "shop-armor");
         res.loadTexture("button/shop/armor_pressed.png", "shop-armor-pressed");
         res.loadTexture("button/shop/extra.png", "shop-extra");
@@ -72,8 +101,8 @@ public class ResourceLoader {
         res.loadTexture("button/shop/weapons_pressed.png", "shop-weapons-pressed");
         res.loadTexture("button/shop/money.png", "shop-money");
         res.loadTexture("button/shop/money_pressed.png", "shop-money-pressed");
-
-        // Icon
+    }
+    private void loadCombatIcons() {
         res.loadTexture("icon/icon_gold34x32.png", "icon-gold");
         res.loadTexture("icon/attack250x250.png", "attack");
         res.loadTexture("icon/defense250x250.png", "defense");
@@ -81,10 +110,8 @@ public class ResourceLoader {
         res.loadTexture("icon/heal250x250.png", "heal");
         res.loadTexture("icon/damage250x250.png", "damage");
         res.loadTexture("icon/block250x250.png", "block");
-
-        // Items
-        // Swords Shields Helemt
-        // Sword Tier 1 ICONS
+    }
+    private void loadSwordTier1() {
         res.loadTexture("item/sword1.png", "sword11");
         res.loadTexture("item/sword2.png", "sword12");
         res.loadTexture("item/sword3.png", "sword13");
@@ -97,25 +124,24 @@ public class ResourceLoader {
         res.loadTexture("item/sword4.png", "sword24");
         res.loadTexture("item/sword5.png", "sword25");
         res.loadTexture("item/sword6.png", "sword26");
-
-        //Shield
+    }
+    private void loadShields() {
         res.loadTexture("item/shield1.png", "shield1");
         res.loadTexture("item/shield2.png", "shield2");
         res.loadTexture("item/shield3.png", "shield3");
         res.loadTexture("item/shield4.png", "shield4");
         res.loadTexture("item/shield5.png", "shield5");
         res.loadTexture("item/shield6.png", "shield6");
-
-        //Headgear
+    }
+    private void loadHeadGear() {
         res.loadTexture("item/helmet1.png", "headgear1");
         res.loadTexture("item/helmet2.png", "headgear2");
         res.loadTexture("item/helmet3.png", "headgear3");
         res.loadTexture("item/helmet4.png", "headgear4");
         res.loadTexture("item/helmet5.png", "headgear5");
         res.loadTexture("item/helmet6.png", "headgear6");
-
-
-        // Potions
+    }
+    private void loadPotions() {
         res.loadTexture("item/potion1.png", "potion1");
         res.loadTexture("item/potion2.png", "potion2");
         res.loadTexture("item/potion3.png", "potion3");
@@ -128,8 +154,8 @@ public class ResourceLoader {
         res.loadTexture("item/potion10.png", "potion10");
         res.loadTexture("item/potion11.png", "potion11");
         res.loadTexture("item/potion12.png", "potion12");
-
-        // Rings
+    }
+    private void loadRings() {
         res.loadTexture("rings/ring1a.png", "ring1-1");
         res.loadTexture("rings/ring1b.png", "ring1-2");
         res.loadTexture("rings/ring1c.png", "ring1-4");
@@ -143,7 +169,8 @@ public class ResourceLoader {
         res.loadTexture("rings/ring2e.png", "ring2-6");
         res.loadTexture("rings/ring2f.png", "ring2-3");
         res.loadTexture("rings/ring3.png", "ring3");
-        // Armor
+    }
+    private void loadArmor() {
         res.loadTexture("armor/red_armor.png", "armor1-1");
         res.loadTexture("armor/black_armor.png", "armor1-2");
         res.loadTexture("armor/gold_armor.png", "armor1-3");
@@ -160,7 +187,14 @@ public class ResourceLoader {
 
         res.loadTexture("armor/brown_cloak.png", "armor-cloak-brown");
         res.loadTexture("armor/black_cloak.png", "armor-cloak-black");
-        // Heads
+    }
+    private void loadCharacterPreviewsImages() {
+        loadHeads();
+        loadHeadGearPreview();
+        loadArmorPreview();
+        loadSwordsAndShieldPreviews();
+    }
+    private void loadHeads() {
         /** Format for loading: hair-gender-hairStyle-hairColor-all */
         for (int i = 1; i <= 5; i++) {
             // Male heads
@@ -189,8 +223,8 @@ public class ResourceLoader {
             res.loadTexture("character/head" + i + "g.png",
                     "hair-female-" + (i - 5) + "-7-all");
         }
-
-        // Character headgear
+    }
+    private void loadHeadGearPreview() {
         res.loadTexture("character/headgear1a.png", "char-headgear-normal");
         res.loadTexture("character/headgear1b.png", "char-headgear-red");
         res.loadTexture("character/headgear1c.png", "char-headgear-black");
@@ -198,8 +232,8 @@ public class ResourceLoader {
         res.loadTexture("character/headgear1e.png", "char-headgear-blue");
         res.loadTexture("character/headgear1f.png", "char-headgear-green");
         res.loadTexture("character/headgear1g.png", "char-headgear-purple");
-
-        // Character armor
+    }
+    private void loadArmorPreview() {
         res.loadTexture("character/armor0.png", "char-armor-peasant");
         res.loadTexture("character/armor1a.png", "char-armor-grey");
         res.loadTexture("character/armor1b.png", "char-armor-red");
@@ -215,7 +249,8 @@ public class ResourceLoader {
         res.loadTexture("character/armor2f.png", "char-armor-purple");
         res.loadTexture("character/cloak1a.png", "char-cloak-brown");
         res.loadTexture("character/cloak1b.png", "char-cloak-black");
-
+    }
+    private void loadSwordsAndShieldPreviews() {
         // Character swords
         for (int tiers = 1; tiers <= 2; tiers++) {
             for (int colors = 1; colors <= 6; colors++) {
@@ -237,9 +272,8 @@ public class ResourceLoader {
         res.loadTexture("shields/shield2d.png", "shield-2-blue");
         res.loadTexture("shields/shield2e.png", "shield-2-green");
         res.loadTexture("shields/shield2f.png", "shield-2-purple");
-
-        // Monster
-
+    }
+    private void loadMonsters() {
         // Tier 1
         res.loadTexture("monster/monster1.png", "monster-tier1-0");
         res.loadTexture("monster/monster2.png", "monster-tier1-1");
@@ -302,14 +336,43 @@ public class ResourceLoader {
 
         //Other
         res.loadTexture("monster/monster16.png", "monster-tier0-0");
-            // Dungeon Background
-            for (int i = 1; i <= 5; i++) {
-                res.loadTexture("map/dungeon_map" + i + ".png", "map-" + i);
+    }
+    private void loadWeaponData() {
+        for (int i = 1; i <= 6; i++) {
+            new Weapon(i, "sword1" + i, res);
+        }
+        /*
+
+        for (int i = 1; i <= 6; i++) {
+            new Shield(i, "sword" + i);
+        }
+        for (int i = 1; i <= 6; i++) {
+            new Ring(i, "sword" + i);
+        }
+        for (int i = 1; i <= 6; i++) {
+            new Item(i, "sword" + i);
         }
 
-        // Monsters
-        for (int i = 1; i <= 50; i++) {
-            res.loadTexture("monster/monster" + i + ".png", "monster-" + i);
+        for (int i = 1; i <= 6; i++) {
+            new Weapon(i + 6, "sword2" + i);
         }
+
+        new BodyArmor(0, "char-armor-peasant");
+        */
+    }
+    private void loadMonsterData() {
+        // Tier1
+        new Monster(1, "monster-tier1-0", res).setData("monster-tier1-0", 25, 10, 1);
+        new Monster(1,"monster-tier1-1", res).setData("monster-tier1-1", 25, 10, 1);
+        new Monster(1, "monster-tier1-2", res).setData("monster-tier1-2", 25, 10, 1);
+        new Monster(1,"monster-tier1-3", res).setData("monster-tier1-3", 25, 10, 1);
+        new Monster(1, "monster-tier1-4", res).setData("monster-tier1-4", 25, 10, 1);
+        new Monster(1,"monster-tier1-5", res).setData("monster-tier1-5", 25, 10, 1);
+        new Monster(1, "monster-tier1-6", res).setData("monster-tier1-6", 25, 10, 1);
+        new Monster(1,"monster-tier1-7", res).setData("monster-tier1-7", 25, 10, 1);
+        new Monster(1, "monster-tier1-8", res).setData("monster-tier1-8", 25, 10, 1);
+        new Monster(1,"monster-tier1-9", res).setData("monster-tier1-9", 25, 10, 1);
+
+        // Tier 2
     }
 }

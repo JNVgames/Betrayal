@@ -13,9 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Item;
-import com.jnv.betrayal.entities.Monster;
 import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.item.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
@@ -46,9 +45,6 @@ public class Betrayal extends Game {
         res = new BetrayalAssetManager();
         loader = new ResourceLoader(res);
 		player = new Player();
-        //loader.loadAll();
-		//Item.loadAll();
-		//Monster.loadMonsters();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 

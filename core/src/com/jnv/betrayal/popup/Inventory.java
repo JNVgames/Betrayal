@@ -10,13 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.entities.Item;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Inventory extends Popup {
 
@@ -25,13 +22,12 @@ public class Inventory extends Popup {
     private Actor mask;
     private Group inventory;
     private Label button_sort;
-
-    private Player player;
+    private Character character;
 
     public Inventory(Betrayal game) {
         super(game);
+        character = game.player.currentCharacter;
         loadButtons();
-        player = game.player;
     }
 
     private void loadButtons() {
@@ -111,10 +107,9 @@ public class Inventory extends Popup {
         button_sort.remove();
     }
 
-    // VINCENTS STUFF
     private void loadInventory() {
         inventory = new Group();
-        Item[][] items = player.currentCharacter.inventory.getItems(6, 5);
+        com.jnv.betrayal.item.Item[][] items = character.inventory.getItems(6, 5);
         Actor[][] itemsDisplay = new Actor[items.length][items[0].length];
 
         float padding = 10;
@@ -145,15 +140,15 @@ public class Inventory extends Popup {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                player.currentCharacter.inventory.sortItems();
+                character.inventory.sortItems();
                 inventory.remove();
                 loadInventory();
             }
         });
         stage.addActor(button_sort);
     }
-    private Actor loadInventoryBox(float x, float topY, final float sideLength, final Item item) {
-        final Texture itemImage = item.getItemImage();
+    private Actor loadInventoryBox(float x, float topY, final float sideLength, final com.jnv.betrayal.item.Item item) {
+        final Texture itemImage = item.getItemIcon();
         Actor invBox = new Actor() {
             public void draw(Batch batch, float parentAlpha) {
                 batch.draw(itemImage, this.getX(), this.getY(),

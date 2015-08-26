@@ -17,12 +17,13 @@ import java.text.DecimalFormat;
 
 public class SplashScreen extends GameState {
 
+    private ResourceLoader loader;
     private Label text_percent;
     private DecimalFormat format;
 
     public SplashScreen(GameStateManager gsm) {
         super(gsm);
-        ResourceLoader loader = game.getResourceLoader();
+        loader = game.getResourceLoader();
 
         loader.loadLoadingScreen();
         res.finishLoading();
@@ -36,6 +37,7 @@ public class SplashScreen extends GameState {
     public void update(float dt) {
         stage.act(dt);
         if (res.update()) {
+            loader.loadAllData();
             gsm.setState(GameStateManager.State.MENU);
         }
         text_percent.setText("Loading... " + format.format(res.getProgress() * 100) + "%");

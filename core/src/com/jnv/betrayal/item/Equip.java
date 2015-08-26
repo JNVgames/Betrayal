@@ -2,16 +2,14 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public abstract class Equip extends Item {
 
-    private BetrayalAssetManager res;
-    private Texture weapon_preview;
+    protected Texture weapon_preview;
 
     protected Equip(int id, String name, BetrayalAssetManager res) {
         super(id, name, res);
@@ -19,8 +17,8 @@ public abstract class Equip extends Item {
         weapon_preview = res.getTexture("char-" + name);
     }
 
-    public Equip(String name) {
-        super(name);
+    public Equip(String name, BetrayalAssetManager res) {
+        super(name, res);
         Equip src = (Equip) res.getItem(name);
         weapon_preview = src.getPreview();
     }

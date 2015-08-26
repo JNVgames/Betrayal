@@ -2,19 +2,17 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.Comparator;
-import java.util.HashMap;
 
-public class Item {
-    private BetrayalAssetManager res;
+public abstract class Item {
 
-    protected Texture itemImage;
+    protected BetrayalAssetManager res;
+    protected Texture itemIcon;
     protected String itemName;
     protected int id, cost_buy, cost_sell;
 
@@ -22,16 +20,16 @@ public class Item {
         this.res = res;
         this.id = id;
         itemName = name;
-        itemImage = res.getTexture(name);
+        itemIcon = res.getTexture(name);
         res.loadItem(name, this);
     }
-    public Item(String name) {
+    public Item(String name, BetrayalAssetManager res) {
         Item src = res.getItem(name);
         id = src.getID();
         itemName = name;
         cost_buy = src.getBuyCost();
         cost_sell = src.getSellCost();
-        itemImage = src.getItemImage();
+        itemIcon = src.getItemIcon();
     }
 
     public static class ItemComparator implements Comparator<Item> {
@@ -47,8 +45,8 @@ public class Item {
     public String getName() { return itemName; }
     public int getBuyCost() { return cost_buy; }
     public int getSellCost() { return cost_sell; }
-    public Texture getItemImage() {
-        return itemImage;
+    public Texture getItemIcon() {
+        return itemIcon;
     }
 
     // Setters
@@ -82,30 +80,5 @@ public class Item {
      *         the value 1 if this item > item */
     public int compareTo(Item item) {
         return this.id < item.getID() ? -1 : ((this.id == item.getID()) ? 0 : 1);
-    }
-
-    public static void loadAll() {
-        /*
-        for (int i = 1; i <= 6; i++) {
-            new Weapon(i, "sword1" + i);
-        }
-
-        for (int i = 1; i <= 6; i++) {
-            new Shield(i, "sword" + i);
-        }
-        for (int i = 1; i <= 6; i++) {
-            new Ring(i, "sword" + i);
-        }
-        for (int i = 1; i <= 6; i++) {
-            new Item(i, "sword" + i);
-        }
-
-        for (int i = 1; i <= 6; i++) {
-            new Weapon(i + 6, "sword2" + i);
-        }
-
-        new BodyArmor(0, "char-armor-peasant");
-        */
-
     }
 }

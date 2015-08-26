@@ -4,17 +4,20 @@
 
 package com.jnv.betrayal.character;
 
-import com.jnv.betrayal.entities.Item;
+import com.jnv.betrayal.item.Item;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
 
+    private BetrayalAssetManager res;
     private int gold, items_max;
     private List<Item> items;
 
-    public Inventory() {
+    public Inventory(BetrayalAssetManager res) {
+        this.res = res;
         gold = 0;
         items_max = 30;
 
@@ -36,24 +39,15 @@ public class Inventory {
     public boolean isFull() { return items.size() == items_max; }
 
     // Setters
-    /** Adds an item to inventory and return true, if inventory is filled,
-     * do nothing and return false.
-     * @param itemName name of item to be added */
-    public void addItem(String itemName) {
-        addItem(itemName, 1);
-    }
     /** Adds the specific amount of items to inventory and return true.
      * If inventory is filled, do nothing and return false.
-     * @param name name of item to be added
+     * @param item item to be added
      * @param amount how many items to be added */
-    public void addItem(String name, int amount) {
-        for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(new Item(name));
+    public void addItem(Item item, int amount) {
+        for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(item);
     }
     public void addItem(Item item) {
-        addItem(item.getName(), 1);
-    }
-    public void addItem(Item item, int amount) {
-        addItem(item.getName(), amount);
+        addItem(item, 1);
     }
     public void removeItem(Item item) {
         items.remove(item);

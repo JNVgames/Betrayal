@@ -5,9 +5,6 @@
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.entities.*;
-import com.jnv.betrayal.entities.Character;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Equips {
@@ -16,11 +13,11 @@ public class Equips {
     private BetrayalAssetManager res;
 
     // todo @vincent add getPreview() for equip class
-    private HeadGear slot_armor_head;
-    private BodyArmor slot_armor_body;
-    private Shield slot_shield;
-    private Ring slot_ring_1, slot_ring_2;
-    private Weapon slot_weapon;
+    private com.jnv.betrayal.item.HeadGear slot_armor_head;
+    private com.jnv.betrayal.item.BodyArmor slot_armor_body;
+    private com.jnv.betrayal.item.Shield slot_shield;
+    private com.jnv.betrayal.item.Ring slot_ring_1, slot_ring_2;
+    private com.jnv.betrayal.item.Weapon slot_weapon;
 
     public Equips(Character character, BetrayalAssetManager res) {
         this.character = character;
@@ -60,42 +57,42 @@ public class Equips {
         return slot_weapon.getPreview();
     }
     public Texture getRing1Preview() {
-        return slot_ring_1.getItemImage();
+        return slot_ring_1.getItemIcon();
     }
     public Texture getRing2Preview() {
-        return slot_ring_2.getItemImage();
+        return slot_ring_2.getItemIcon();
     }
 
     // Setters
-    public void equip(Equip equip) {
-        if (equip instanceof Weapon) equipWeapon((Weapon) equip);
-        else if (equip instanceof HeadGear) equipHeadArmor((HeadGear) equip);
-        else if (equip instanceof BodyArmor) equipBodyArmor((BodyArmor) equip);
-        else if (equip instanceof Shield) equipShield((Shield) equip);
-        else if (equip instanceof Ring) equipRing((Ring) equip);
+    public void equip(com.jnv.betrayal.item.Equip equip) {
+        if (equip instanceof com.jnv.betrayal.item.Weapon) equipWeapon((com.jnv.betrayal.item.Weapon) equip);
+        else if (equip instanceof com.jnv.betrayal.item.HeadGear) equipHeadArmor((com.jnv.betrayal.item.HeadGear) equip);
+        else if (equip instanceof com.jnv.betrayal.item.BodyArmor) equipBodyArmor((com.jnv.betrayal.item.BodyArmor) equip);
+        else if (equip instanceof com.jnv.betrayal.item.Shield) equipShield((com.jnv.betrayal.item.Shield) equip);
+        else if (equip instanceof com.jnv.betrayal.item.Ring) equipRing((com.jnv.betrayal.item.Ring) equip);
     }
-    public void equipWeapon(Weapon weapon) {
+    public void equipWeapon(com.jnv.betrayal.item.Weapon weapon) {
         character.inventory.removeItem(weapon);
         if (!isWeaponSlotEmpty()) character.inventory.addItem(slot_weapon);
         slot_weapon = weapon;
         character.preview.update();
     }
-    public void equipHeadArmor(HeadGear gear) {
+    public void equipHeadArmor(com.jnv.betrayal.item.HeadGear gear) {
         character.inventory.removeItem(gear);
         if (!isHeadSlotEmpty()) character.inventory.addItem(slot_armor_head);
         slot_armor_head = gear;
     }
-    public void equipBodyArmor(BodyArmor armor) {
+    public void equipBodyArmor(com.jnv.betrayal.item.BodyArmor armor) {
         character.inventory.removeItem(armor);
         if (!isBodySlotEmpty()) character.inventory.addItem(slot_armor_body);
         slot_armor_body = armor;
     }
-    public void equipShield(Shield shield) {
+    public void equipShield(com.jnv.betrayal.item.Shield shield) {
         character.inventory.removeItem(shield);
         if (!isShieldSlotEmpty()) character.inventory.addItem(slot_shield);
         slot_shield = shield;
     }
-    public void equipRing(Ring ring) {
+    public void equipRing(com.jnv.betrayal.item.Ring ring) {
         character.inventory.removeItem(ring);
         if (isRingSlot1Empty()) {
             slot_ring_1 = ring;

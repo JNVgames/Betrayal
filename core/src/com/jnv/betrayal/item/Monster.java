@@ -1,15 +1,11 @@
-package com.jnv.betrayal.entities;
+package com.jnv.betrayal.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-
-import java.util.HashMap;
 
 public class Monster {
 
     private BetrayalAssetManager res;
-
     protected Texture monsterTexture;
     protected String MonsterName;
     protected int id, health, attack, defense;
@@ -21,7 +17,7 @@ public class Monster {
         monsterTexture = res.getTexture(name);
         res.loadMonster(name, this);
     }
-    public Monster(String name) {
+    public Monster(String name, BetrayalAssetManager res) {
         Monster src = res.getMonster(name);
         id = src.getID();
         MonsterName = name;
@@ -52,37 +48,4 @@ public class Monster {
     public void setHealth(int new_health) { health = new_health;}
     public void setAttack(int new_attack) { attack = new_attack; }
     public void setDefense(int new_defense) { defense = new_defense; }
-
-    /*
-    public void loadMonsters() {
-        // Tier1
-        new Monster(1,"monster-tier1-0", res);
-        Monster.setData("monster-tier1-0", 25, 10, 1);
-        new Monster(1,"monster-tier1-1");
-        Monster.setData("monster-tier1-1", 25, 10, 1);
-        new Monster(1,"monster-tier1-2");
-        Monster.setData("monster-tier1-2", 25, 10, 1);
-        new Monster(1,"monster-tier1-3");
-        Monster.setData("monster-tier1-3", 25, 10, 1);
-        new Monster(1,"monster-tier1-4");
-        Monster.setData("monster-tier1-4", 25, 10, 1);
-        new Monster(1,"monster-tier1-5");
-        Monster.setData("monster-tier1-5", 25, 10, 1);
-        new Monster(1,"monster-tier1-6");
-        Monster.setData("monster-tier1-6", 25, 10, 1);
-        new Monster(1,"monster-tier1-7");
-        Monster.setData("monster-tier1-7", 25, 10, 1);
-        new Monster(1,"monster-tier1-8");
-        Monster.setData("monster-tier1-8", 25, 10, 1);
-        new Monster(1,"monster-tier1-9");
-        Monster.setData("monster-tier1-9", 25, 10, 1);
-        new Monster(1,"monster-tier1-10");
-        Monster.setData("monster-tier1-10", 25, 10, 1);
-        new Monster(1,"monster-tier1-11");
-        Monster.setData("monster-tier1-11", 25, 10, 1);
-        new Monster(1,"monster-tier1-11");
-
-        // Tier 2
-    }
-    */
 }
