@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.item.Monster;
-import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.Random;

@@ -13,8 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.handlers.GameStateManager;
-import com.jnv.betrayal.item.Monster;
+import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
@@ -31,7 +30,6 @@ public class Betrayal extends Game {
     public BetrayalAssetManager res;
     private ResourceLoader loader;
 
-    private static GameStateManager.State state;
     private static boolean gamePaused;
 	private static FreeTypeFontGenerator generator;
 
@@ -59,12 +57,12 @@ public class Betrayal extends Game {
 	}
 	public void pause() {
         gamePaused = true;
-        state = gsm.currentState;
+        gsm.pause();
 	}
 	public void resume() {
         if (gamePaused) {
             gamePaused = false;
-            gsm.setState(state);
+            gsm.resume();
         }
 	}
 	public void render() {

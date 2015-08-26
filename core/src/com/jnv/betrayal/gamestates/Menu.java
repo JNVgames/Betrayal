@@ -13,20 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.handlers.GameStateManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Menu extends GameState {
 
-    private BetrayalAssetManager res;
-    private Player player;
-
     public Menu(GameStateManager gsm) {
         super(gsm);
-        player = gsm.getGame().player;
-        res = gsm.getGame().res;
         cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
         loadMenuButtons();
     }
@@ -62,7 +56,7 @@ public class Menu extends GameState {
         loadOptionsButton();
     }
     private void loadNewGameButton() {
-        Image button_newGame = new Image(res.getTexture("new-game"));
+        final Image button_newGame = new Image(res.getTexture("new-game"));
         button_newGame.layout();
         button_newGame.setBounds((Betrayal.WIDTH - button_newGame.getImageWidth()) / 2,
                 800, 512, 144);
@@ -71,7 +65,12 @@ public class Menu extends GameState {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.setState(GameStateManager.State.CHARACTER_SELECTION);
+                if (x >= 0 && x <= button_newGame.getWidth() && y >= 0 && y <= button_newGame.getHeight()
+                        && player.characters.size() < 4)
+                    gsm.setState(GameStateManager.State.CHARACTER_SELECTION);
+                else { // if (players.character.size() == 4
+                    displayCharactersFullDialog();
+                }
             }
         });
         stage.addActor(button_newGame);
@@ -110,13 +109,9 @@ public class Menu extends GameState {
         button_instructions.setBounds((Betrayal.WIDTH - button_instructions.getImageWidth()) / 2,
                 400, 512, 144);
         button_instructions.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 new com.jnv.betrayal.popup.Instructions(game);
             }
@@ -145,7 +140,7 @@ public class Menu extends GameState {
     private void loadHallOfFameButton() {
         Image button_hallOfFame = new Image(res.getTexture("hall-of-fame"));
         button_hallOfFame.layout();
-        button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth()/2) / 2,
+        button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth() / 2) / 2,
                 172, 256, 72);
         button_hallOfFame.addListener(new InputListener() {
 
@@ -160,6 +155,43 @@ public class Menu extends GameState {
             }
         });
         stage.addActor(button_hallOfFame);
+    }
+    private void displayCharactersFullDialog() {
+        Group dialog_characterSlotsFull = new Group();
+        Label dialog_text = new Label("Character slots are full. " +
+                "\nPlease delete a character slot.", Betrayal.getFont(45));
+        dialog_text.setBounds((Betrayal.WIDTH - dialog_text.getPrefWidth()) / 2,
+                (Betrayal.HEIGHT - dialog_text.getPrefHeight()) / 2,dialog_text.getPrefWidth(),
+                dialog_text.getPrefHeight());
+        dialog_text.setAlignment(Align.center);
+
+        Image dialog_background = new Image(res.getTexture("confirmation-background"));
+        dialog_background.setBounds((Betrayal.WIDTH - dialog_text.getWidth() - 40) / 2,
+                (Betrayal.HEIGHT - dialog_text.getHeight() - 40) / 2, dialog_text.getPrefWidth() + 40,
+                dialog_text.getPrefHeight() + 40);
+
+        dialog_characterSlotsFull.addActor(dialog_background);
+        dialog_characterSlotsFull.addActor(dialog_text);
+        stage.addActor(dialog_characterSlotsFull);
+        createMask(dialog_characterSlotsFull);
+    }
+    /** Creates a mask for a popup. When the mask is touched,
+     * the mask disappears along with the actor
+     * @param actor popup to be assigned with mask */
+    private void createMask(final Actor actor) {
+        final Actor mask = new Actor();
+        mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
+        mask.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                mask.remove();
+                actor.remove();
+            }
+        });
+        stage.addActor(mask);
     }
 
 }

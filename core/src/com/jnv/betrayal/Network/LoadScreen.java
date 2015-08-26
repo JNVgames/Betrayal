@@ -2,7 +2,7 @@ package com.jnv.betrayal.Network;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.jnv.betrayal.gamestates.GameState;
-import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.gamestates.GameStateManager;
 
 /**
  * Created by jarnin on 8/20/15.

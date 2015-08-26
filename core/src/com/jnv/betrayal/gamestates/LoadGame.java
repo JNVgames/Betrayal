@@ -17,15 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 
 public class LoadGame extends GameState {
 
-    public Player player;
     private Group[] savedSessions;
     private Image button_back;
     private TextureRegion image_leftArrow;
@@ -34,7 +31,6 @@ public class LoadGame extends GameState {
 
     public LoadGame(GameStateManager gsm) {
         super(gsm);
-        res = gsm.getGame().res;
         image_leftArrow = new TextureRegion(res.getTexture("arrow-left"));
 
         savedSessions = new Group[player.characters.size()];
@@ -68,7 +64,6 @@ public class LoadGame extends GameState {
     private Label.LabelStyle loadFont(int fontSize) {
         return Betrayal.getFont(fontSize);
     }
-
     private void loadBackButton() {
         Group group_button_back = new Group();
 
@@ -90,13 +85,9 @@ public class LoadGame extends GameState {
         button_back_clickArea.setX(button_back.getX());
         button_back_clickArea.setY(button_back.getY());
         button_back_clickArea.addListener(new InputListener() {
-
-            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
-
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 gsm.setState(GameStateManager.State.MENU);
             }
@@ -110,25 +101,18 @@ public class LoadGame extends GameState {
         int counter = 1, scale = 4;
 
         for (Character c : player.characters) {
+            final Character character = c;
             Group preview = new Group();
 
             final Actor preview_frame = new Actor();
             preview_frame.setBounds(5, button_back.getY() - 230 * counter, Betrayal.WIDTH - 10,
                     48 * scale + 10);
-            preview_frame.addListener(new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-                }
-            });
             preview.addActor(preview_frame);
 
             final int i = counter;
             Actor preview_charPrev = new Actor() {
                 public void draw(Batch sb, float pa) {
-                    player.currentCharacter.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
+                    character.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
                             preview_frame.getY() + 5, 32 * 4, 48 * 4);
                 }
             };

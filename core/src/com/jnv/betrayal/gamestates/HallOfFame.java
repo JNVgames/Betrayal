@@ -13,9 +13,8 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.handlers.GameStateManager;
-import com.jnv.betrayal.handlers.screentouch.BetrayalGestureProcessor;
-import com.jnv.betrayal.handlers.screentouch.BetrayalInput;
+import com.jnv.betrayal.inputprocessors.BetrayalGestureProcessor;
+import com.jnv.betrayal.inputprocessors.BetrayalInput;
 import com.jnv.betrayal.main.Betrayal;
 
 public class HallOfFame extends GameState {

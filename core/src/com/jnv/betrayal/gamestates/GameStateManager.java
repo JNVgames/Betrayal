@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.handlers;
+package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.jnv.betrayal.gamestates.CharacterSelection;
@@ -21,8 +21,8 @@ public class GameStateManager {
 
     private Betrayal game;
     private Stack<GameState> gameStates;
-
     public State currentState;
+    public static GameState pauseState;
 
     public enum State {
         SPLASH,
@@ -42,8 +42,16 @@ public class GameStateManager {
     public void update(float dt) {
         gameStates.peek().update(dt);
     }
-    public void render () {
+    public void render() {
         gameStates.peek().render();
+    }
+    public void pause() {
+        pauseState = gameStates.peek();
+    }
+    public void resume() {
+        gameStates = new Stack<GameState>();
+        gameStates.push(pauseState);
+        pauseState = null;
     }
 
     // Helpers
