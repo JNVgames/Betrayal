@@ -72,9 +72,4 @@ public class SplashScreen extends GameState {
         text_percent.layout();
         stage.addActor(text_percent);
     }
-
-    // Getters
-    public OrthographicCamera getCam() {
-        return super.getCam();
-    }
 }

@@ -35,12 +35,6 @@ public class Menu extends GameState {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        cam.update();
-        sb.setProjectionMatrix(cam.combined);
-        sb.begin();
-        sb.draw(res.getTexture("start-background"), 0, 0, 720, 1280);
-        sb.end();
-
         stage.draw();
     }
     public void dispose() {
@@ -49,11 +43,17 @@ public class Menu extends GameState {
 
     // Helpers
     private void loadMenuButtons() {
+        loadBackground();
         loadNewGameButton();
         loadLoadGameButton();
         loadInstructionsButton();
         loadHallOfFameButton();
         loadOptionsButton();
+    }
+    private void loadBackground() {
+        Image background = new Image(res.getTexture("start-background"));
+        background.setBounds(0, 0, 720, 1280);
+        stage.addActor(background);
     }
     private void loadNewGameButton() {
         final Image button_newGame = new Image(res.getTexture("new-game"));

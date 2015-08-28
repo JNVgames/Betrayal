@@ -112,7 +112,7 @@ public class Dungeon extends GameState {
         stage.addActor(image_monster);
     }
     private void loadPlayers() {
-        final int scale = 2;
+        final int scale = 4;
         final Vector2[] playerCoords = new Vector2[5];
         playerCoords[0] = new Vector2(50f, 700f);
 

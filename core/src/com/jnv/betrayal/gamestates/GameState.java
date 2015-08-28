@@ -18,7 +18,6 @@ public abstract class GameState  {
     protected Betrayal game;
     protected SpriteBatch sb;
     protected OrthographicCamera cam;
-    protected StretchViewport stretchViewport;
     protected BetrayalAssetManager res;
     protected Player player;
     protected Stage stage;
@@ -26,12 +25,11 @@ public abstract class GameState  {
     protected GameState(GameStateManager gsm) {
         this.gsm = gsm;
         game = gsm.getGame();
+        stage = game.getStage();
+        stage.clear();
         sb = game.getBatch();
         cam = game.getCamera();
-        stretchViewport = game.getStretchViewport();
-        stage = game.getStage();
         res = game.res;
-        stage.clear();
         player = game.player;
     }
 
@@ -39,6 +37,4 @@ public abstract class GameState  {
     public abstract void handleInput();
     public abstract void render();
     public abstract void dispose();
-
-    public OrthographicCamera getCam() { return cam; }
 }
