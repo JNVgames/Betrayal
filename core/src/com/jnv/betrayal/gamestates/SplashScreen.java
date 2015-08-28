@@ -7,69 +7,62 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.jnv.betrayal.Network.Player;
+import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
-import java.text.DecimalFormat;
-
 public class SplashScreen extends GameState {
-
-    private ResourceLoader loader;
-    private Label text_percent;
-    private DecimalFormat format;
+    private BetrayalAssetManager res;
+    private float time;
+    private BitmapFont font;
+    private Player player;
 
     public SplashScreen(GameStateManager gsm) {
         super(gsm);
-        loader = game.getResourceLoader();
 
-        loader.loadLoadingScreen();
+        //Load player ID and data
+        player = gsm.getGame().player;
+        player.setPlayerID();
+
+        cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
+        res = gsm.getGame().res;
+        ResourceLoader resourceLoader = new ResourceLoader(res);
+        resourceLoader.loadLoadingScreen();
         res.finishLoading();
-        loader.loadAll();
+        resourceLoader.loadAll();
+        font = new BitmapFont();
 
-        format = new DecimalFormat("###");
-
-        loadStage();
     }
 
     public void update(float dt) {
-        stage.act(dt);
+        time += dt;
         if (res.update()) {
-            loader.loadAllData();
             gsm.setState(GameStateManager.State.MENU);
         }
-        text_percent.setText("Loading... " + format.format(res.getProgress() * 100) + "%");
     }
     public void handleInput() {
 
     }
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClearColor(0, 0, 0, 0); // Set background to black
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.draw();
+        cam.update();
+        game.getBatch().setProjectionMatrix(cam.combined);
+        game.getBatch().begin();
+        game.getBatch().draw(res.getTexture("splash"), 0, 0, 720, 1280);
+        font.draw(sb, Float.toString(res.getProgress()), 100, 100);
+        game.getBatch().end();
     }
     public void dispose() {
 
     }
 
     // Helpers
-    private void loadStage() {
-        loadBackground();
-        loadPercentText();
-    }
-    private void loadBackground() {
-        Image background = new Image(res.getTexture("splash"));
-        background.setBounds(0, 0, 720, 1280);
-        background.layout();
-        stage.addActor(background);
-    }
-    private void loadPercentText() {
-        text_percent = new Label("Loading... 99%", Betrayal.getFont(50));
-        text_percent.setBounds((Betrayal.WIDTH - text_percent.getPrefWidth()) / 2, 300,
-                text_percent.getPrefWidth(), text_percent.getPrefHeight());
-        text_percent.layout();
-        stage.addActor(text_percent);
+    private void movetoMenuScreen() {
+        gsm.setState(GameStateManager.State.MENU);
     }
 }

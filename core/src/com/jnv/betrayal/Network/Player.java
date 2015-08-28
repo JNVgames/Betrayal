@@ -3,7 +3,6 @@ package com.jnv.betrayal.Network;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.character.Character;
 
@@ -11,19 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private PlayerID playerID;
+    public int playerID;
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/get_player";
+    //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/get_player";
 
     /*
      * If array this was private, a getter would get this array and other classes would
      * still be able to edit it. Either way, this array will function as a public array
      */
-    public List<Character> characters = new ArrayList<Character>();
+    public List<Character> characters;
     public Character currentCharacter;
-    private String username;
+    public String username;
 
     public Player() {
+        characters = new ArrayList<Character>();
+    }
 
+    public void setPlayerID() {
+        FindPlayerIDTask task = new FindPlayerIDTask();
     }
 
     public Character getCurrentCharacter() {
@@ -38,61 +42,41 @@ public class Player {
      * Class used to asynchronously send an HTTP GET request and check if player ID matches one on
      * the server. If not, creates a new player ID and sends a POST request to the server
      */
-    private class FindPlayerID implements Net.HttpResponseListener {
+    private class FindPlayerIDTask implements Net.HttpResponseListener {
 
-        public FindPlayerID() {
-            PlayerID id;
-            Timer timer = new Timer();
+        public FindPlayerIDTask() {
             final FileHandle idFile = Gdx.files.local("id.sav"); //File that stores the player's ID
-
-            //If the file exists load it and search db for matching ID
+            final String requestContent;
             if(idFile.exists()) {
-                Timer.Task task = new Timer.Task() {
-                    @Override
-                    public void run() {
-                        String uniqueID = idFile.readString();
-                        Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
-                        request.setUrl(GET_PLAYER_ID_URL);
-
-                        Json json = new Json();
-
-                        request.setContent(json.toJson(uniqueID));
-                        Gdx.app.log("Player.java", "uniqueID in json: " + request.getContent());
-                        Gdx.net.sendHttpRequest(request, FindPlayerID.this);
-                        Gdx.app.log("FindPlayerID", "Sending Http Request");
-
-                    }
-                };
+                requestContent = idFile.readString();
             } else {
-                //If the file does not exist, send nothing to the backend and backend will return
-                //with a new ID for the user. Write it to the local file
-                Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
-                request.setUrl(GET_PLAYER_ID_URL);
-                request.setContent(""); //Send empty string literal
-                Gdx.net.sendHttpRequest(request, FindPlayerID.this);
+                //If there is no local ID file, send a -1
+                requestContent = "-1";
             }
+            Timer.Task task = new Timer.Task() {
+                @Override
+                public void run() {
+                    Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
+                    request.setUrl(GET_PLAYER_ID_URL);
+                    request.setContent(requestContent);
+                    Gdx.app.log("FindPlayerIDTask", "Http Post request content: " + requestContent);
+                    Gdx.net.sendHttpRequest(request, FindPlayerIDTask.this);
+                }
+            };
 
+            task.run();
         }
         @Override
         public void handleHttpResponse(Net.HttpResponse httpResponse) {
-            Gdx.app.log("Player.java", "handleHttpResponse");
             //Returns 1 means that ID exists in db
-            if(httpResponse.getResultAsString() == "1") {
-                Gdx.app.log("Player.java", "http response = 1");
-            }
-
-            //Returns -1 means that ID does not exist in db
-            else if(httpResponse.getResultAsString() == "-1") {
-                Gdx.app.log("Player.java", "http response = -1");
-            }
-
-            else {
-                Gdx.app.log("Player.java", "http response = " + httpResponse.getResultAsString());
-            }
+            String response = httpResponse.getResultAsString();
+            Gdx.app.log("Player.java", "Http Response: " + response);
+            playerID = Integer.getInteger(response);
         }
 
         @Override
         public void failed(Throwable t) {
+            Gdx.app.error("Player.java", "Http response listener failed");
             t.printStackTrace();
         }
 

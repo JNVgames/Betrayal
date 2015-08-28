@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.handlers.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
@@ -30,6 +30,7 @@ public class Betrayal extends Game {
     public BetrayalAssetManager res;
     private ResourceLoader loader;
 
+    private static GameStateManager.State state;
     private static boolean gamePaused;
 	private static FreeTypeFontGenerator generator;
 
@@ -42,11 +43,14 @@ public class Betrayal extends Game {
 
         res = new BetrayalAssetManager();
         loader = new ResourceLoader(res);
-		player = new Player();
+        //loader.loadAll();
+		//Item.loadAll();
+		//Monster.loadMonsters();
 
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 
 		gsm = new GameStateManager(this);
+		player = new Player();
 		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
 
         resume();
@@ -57,12 +61,12 @@ public class Betrayal extends Game {
 	}
 	public void pause() {
         gamePaused = true;
-        gsm.pause();
+        state = gsm.currentState;
 	}
 	public void resume() {
         if (gamePaused) {
             gamePaused = false;
-            gsm.resume();
+            gsm.setState(state);
         }
 	}
 	public void render() {
@@ -98,7 +102,7 @@ public class Betrayal extends Game {
     }
     public StretchViewport getStretchViewport() { return stretchViewport; }
 	public Stage getStage() { return stage; }
-	public static Label.LabelStyle getFont(int fontSize) {
+	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
 				new FreeTypeFontGenerator.FreeTypeFontParameter();
 		fontDetails.size = fontSize;
@@ -106,6 +110,5 @@ public class Betrayal extends Game {
 		labelStyle.font = generator.generateFont(fontDetails);
 		return labelStyle;
 	}
-    public ResourceLoader getResourceLoader() { return loader; }
 
 }
