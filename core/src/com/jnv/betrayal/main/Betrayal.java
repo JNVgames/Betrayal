@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.handlers.GameStateManager;
+import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
@@ -102,7 +102,7 @@ public class Betrayal extends Game {
     }
     public StretchViewport getStretchViewport() { return stretchViewport; }
 	public Stage getStage() { return stage; }
-	public static Label.LabelStyle getHurtmoldFontLabelStyle(int fontSize) {
+	public static Label.LabelStyle getFont(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
 				new FreeTypeFontGenerator.FreeTypeFontParameter();
 		fontDetails.size = fontSize;

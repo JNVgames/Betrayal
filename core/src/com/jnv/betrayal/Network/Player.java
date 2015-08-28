@@ -29,6 +29,9 @@ public class Player {
     public void setPlayerID() {
         FindPlayerIDTask task = new FindPlayerIDTask();
     }
+    public int getPlayerID() {
+        return this.playerID;
+    }
 
     public Character getCurrentCharacter() {
         return this.currentCharacter;
@@ -71,9 +74,8 @@ public class Player {
             //Returns 1 means that ID exists in db
             String response = httpResponse.getResultAsString();
             Gdx.app.log("Player.java", "Http Response: " + response);
-            playerID = Integer.getInteger(response);
+            playerID = Integer.parseInt(response);
         }
-
         @Override
         public void failed(Throwable t) {
             Gdx.app.error("Player.java", "Http response listener failed");
