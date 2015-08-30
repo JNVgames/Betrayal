@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Timer;
-import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.gameobjects.Character;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +14,9 @@ public class Player {
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/get_player";
     //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/get_player";
 
-    /*
-     * If array this was private, a getter would get this array and other classes would
-     * still be able to edit it. Either way, this array will function as a public array
-     */
-    public List<Character> characters;
-    public Character currentCharacter;
-    public String username;
+    private List<Character> characters = new ArrayList<Character>();
+    private Character currentCharacter;
+    private String username;
 
     public Player() {
         characters = new ArrayList<Character>();
@@ -31,14 +27,6 @@ public class Player {
     }
     public int getPlayerID() {
         return this.playerID;
-    }
-
-    public Character getCurrentCharacter() {
-        return this.currentCharacter;
-    }
-    public void addCharacter(Character character) {
-        characters.add(character);
-        currentCharacter = character;
     }
 
     /*
@@ -87,4 +75,21 @@ public class Player {
             Gdx.app.log("Player.java", "Http Request cancelled.");
         }
     }
+
+    // Getters
+    public List<Character> getCharacters() { return characters; }
+    public Character getCurrentCharacter() { return currentCharacter; }
+
+    // Setters
+    public void setCurrentCharacter(Character character) {
+        currentCharacter = character;
+    }
+    public void addCharacter(Character character) {
+        characters.add(character);
+        currentCharacter = character;
+    }
+    public boolean deleteCharacter(Character character) {
+        return characters.remove(character);
+    }
+
 }

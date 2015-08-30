@@ -10,13 +10,13 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public abstract class Popup {
 
-    protected Betrayal game;
-    protected BetrayalAssetManager res;
-    protected Stage stage;
+	protected Betrayal game;
+	protected BetrayalAssetManager res;
+	protected Stage stage;
 
-    protected Popup(Betrayal game) {
-        this.game = game;
-        res = game.res;
-        stage = game.getStage();
-    }
+	protected Popup(Betrayal game) {
+		this.game = game;
+		res = game.res;
+		stage = game.getStage();
+	}
 }

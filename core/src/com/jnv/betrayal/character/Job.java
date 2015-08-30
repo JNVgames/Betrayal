@@ -6,71 +6,68 @@ package com.jnv.betrayal.character;
 
 public class Job {
 
-    public enum Jobs {
-        WARRIOR, THIEF, KNIGHT, PRIEST
-    }
-    private Jobs job;
+	public static final int WARRIOR = 0;
+	public static final int THIEF = 1;
+	public static final int KNIGHT = 2;
+	public static final int PRIEST = 3;
 
-    public Job() {}
-    public Job(Jobs job) {
-        this.job = job;
-    }
+	private int job;
 
-    // Getters
-    public Jobs getJob() { return job; }
-    public String toString() {
-        switch (job) {
-            case WARRIOR:
-                return "Warrior";
-            case KNIGHT:
-                return "Knight";
-            case PRIEST:
-                return "Priest";
-            case THIEF:
-                return "Thief";
-            default:
-                return null;
-        }
-    }
+	public Job() {
+	}
 
-    // Setters
-    public void setJob(Jobs job) {
-        this.job = job;
-    }
-    public void setPreviousJob() {
-        switch (job) {
-            case WARRIOR:
-                this.job = Jobs.THIEF;
-                break;
-            case KNIGHT:
-                this.job = Jobs.WARRIOR;
-                break;
-            case PRIEST:
-                this.job = Jobs.KNIGHT;
-                break;
-            case THIEF:
-                this.job = Jobs.PRIEST;
-                break;
-            default:
-                break;
-        }
-    }
-    public void setNextJob() {
-        switch (job) {
-            case WARRIOR:
-                this.job = Jobs.KNIGHT;
-                break;
-            case KNIGHT:
-                this.job = Jobs.PRIEST;
-                break;
-            case PRIEST:
-                this.job = Jobs.THIEF;
-                break;
-            case THIEF:
-                this.job = Jobs.WARRIOR;
-                break;
-            default:
-                break;
-        }
-    }
+	public Job(int job) {
+		this.job = job;
+	}
+
+	// Static convenience methods
+	public static String getJobInitial(int job) {
+		switch (job) {
+			case Job.WARRIOR:
+				return "W";
+			case Job.KNIGHT:
+				return "K";
+			case Job.PRIEST:
+				return "P";
+			case Job.THIEF:
+				return "T";
+			default:
+				return null;
+		}
+	}
+
+	// Getters
+	public int getJob() {
+		return job;
+	}
+
+	// Setters
+	public void setJob(int job) {
+		this.job = job;
+	}
+
+	public String toString() {
+		switch (job) {
+			case WARRIOR:
+				return "Warrior";
+			case KNIGHT:
+				return "Knight";
+			case PRIEST:
+				return "Priest";
+			case THIEF:
+				return "Thief";
+			default:
+				return null;
+		}
+	}
+
+	public void setNextJob() {
+		if (job == 0) job = 3;
+		else job--;
+	}
+
+	public void setPreviousJob() {
+		if (job == 3) job = 0;
+		else job++;
+	}
 }
