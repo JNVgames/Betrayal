@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.Network.Player;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
 import java.text.DecimalFormat;
@@ -47,10 +48,6 @@ public class SplashScreen extends GameState {
 		text_percent.setText("Loading... " + format.format(res.getProgress() * 100) + "%");
 	}
 
-	public void handleInput() {
-
-	}
-
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -76,7 +73,7 @@ public class SplashScreen extends GameState {
 	}
 
 	private void loadPercentText() {
-		text_percent = new Label("Loading... 99%", Betrayal.getFont(50));
+		text_percent = new Label("Loading... 99%", FontManager.getFont(50));
 		text_percent.setBounds((Betrayal.WIDTH - text_percent.getPrefWidth()) / 2, 300,
 				text_percent.getPrefWidth(), text_percent.getPrefHeight());
 		text_percent.layout();

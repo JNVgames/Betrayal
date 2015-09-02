@@ -1,11 +1,14 @@
 package com.jnv.betrayal.popup;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 //TODO; add boolean
 //TODO: GET THE @FANGOT BACK TO WORK 8/11
@@ -18,15 +21,15 @@ public class Confirmation extends Popup {
 
 	public Confirmation(Betrayal game, String string) {
 		super(game);
-		loadButtons();
 		this.string = string;
+		loadButtons();
 	}
 
 	private void loadButtons() {
 		loadMask();
 		loadBackground();
-		loadTitle();
 		loadAnswer();
+		loadTitle();
 	}
 
 	private void loadMask() {
@@ -43,10 +46,14 @@ public class Confirmation extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label(string, Betrayal.getFont(40));
-		title.setHeight(100);
-		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
-		title.setY(Betrayal.HEIGHT / 2 + 50);
+		Label.LabelStyle font = FontManager.getFont(40);
+		font.fontColor = Color.BLACK;
+		title = new Label(string, font);
+		title.layout();
+		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
+				yesButton.getY() + yesButton.getHeight() + 20, background.getWidth(),
+				title.getPrefHeight());
+		title.setAlignment(Align.center);
 		stage.addActor(title);
 	}
 

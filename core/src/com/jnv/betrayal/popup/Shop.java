@@ -16,6 +16,7 @@ import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class Shop extends Popup {
 
@@ -84,7 +85,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Shop", Betrayal.getFont(40));
+		title = new Label("Shop", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -267,22 +268,22 @@ public class Shop extends Popup {
 	}
 
 	private void loadWeaponAndShieldsTitles() {
-		titleSword1 = new Label("Swords(Tier 1)", Betrayal.getFont(40));
+		titleSword1 = new Label("Swords(Tier 1)", FontManager.getFont(40));
 		titleSword1.setX(110);
 		titleSword1.setY(Betrayal.HEIGHT - 250);
 		stage.addActor(titleSword1);
 
-		titleSword2 = new Label("Swords(Tier 2)", Betrayal.getFont(40));
+		titleSword2 = new Label("Swords(Tier 2)", FontManager.getFont(40));
 		titleSword2.setX(110);
 		titleSword2.setY(Betrayal.HEIGHT - 422);
 		stage.addActor(titleSword2);
 
-		titleShield1 = new Label("Shields(Tier 1)", Betrayal.getFont(40));
+		titleShield1 = new Label("Shields(Tier 1)", FontManager.getFont(40));
 		titleShield1.setX(110);
 		titleShield1.setY(Betrayal.HEIGHT - 594);
 		stage.addActor(titleShield1);
 
-		titleShield2 = new Label("Shields(Tier 2)", Betrayal.getFont(40));
+		titleShield2 = new Label("Shields(Tier 2)", FontManager.getFont(40));
 		titleShield2.setX(110);
 		titleShield2.setY(Betrayal.HEIGHT - 766);
 		stage.addActor(titleShield2);
@@ -320,12 +321,12 @@ public class Shop extends Popup {
 	}
 
 	private void loadRingTitle() {
-		titleRing1 = new Label("Rings(Tier 1)", Betrayal.getFont(40));
+		titleRing1 = new Label("Rings(Tier 1)", FontManager.getFont(40));
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
 		stage.addActor(titleRing1);
 
-		titleRing2 = new Label("Rings(Tier 2)", Betrayal.getFont(40));
+		titleRing2 = new Label("Rings(Tier 2)", FontManager.getFont(40));
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
 		stage.addActor(titleRing2);
@@ -392,29 +393,29 @@ public class Shop extends Popup {
 	}
 
 	private void loadArmorTitle() {
-		titleHeadgear1 = new Label("Headgear(tier1)", Betrayal.getFont(40));
+		titleHeadgear1 = new Label("Headgear(tier1)", FontManager.getFont(40));
 		titleHeadgear1.setX(110);
 		titleHeadgear1.setY(Betrayal.HEIGHT - 250);
 		stage.addActor(titleHeadgear1);
 
-		titleHeadgear2 = new Label("Headgear(tier2)", Betrayal.getFont(40));
+		titleHeadgear2 = new Label("Headgear(tier2)", FontManager.getFont(40));
 		titleHeadgear2.setX(110);
 		titleHeadgear2.setY(Betrayal.HEIGHT - 422);
 		stage.addActor(titleHeadgear2);
 
-		titleArmor1 = new Label("Armor(tier 1)", Betrayal.getFont(40));
+		titleArmor1 = new Label("Armor(tier 1)", FontManager.getFont(40));
 		titleArmor1.setX(110);
 		titleArmor1.setY(Betrayal.HEIGHT - 594);
 		stage.addActor(titleArmor1);
 
-		titleArmor2 = new Label("Armor(tier 2)", Betrayal.getFont(40));
+		titleArmor2 = new Label("Armor(tier 2)", FontManager.getFont(40));
 		titleArmor2.setX(110);
 		titleArmor2.setY(Betrayal.HEIGHT - 766);
 		stage.addActor(titleArmor2);
 	}
 
 	private void loadItemsTitle() {
-		titleItems = new Label("Items", Betrayal.getFont(40));
+		titleItems = new Label("Items", FontManager.getFont(40));
 		titleItems.setX(110);
 		titleItems.setY(Betrayal.HEIGHT - 250);
 		stage.addActor(titleItems);

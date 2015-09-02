@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.ui;
+package com.jnv.betrayal.dungeon.utilities.constants;
 
 public final class Action {
 

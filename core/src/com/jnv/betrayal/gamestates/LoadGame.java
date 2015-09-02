@@ -20,6 +20,7 @@ import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.inputprocessors.InputListener;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class LoadGame extends GameState {
 
@@ -42,10 +43,6 @@ public class LoadGame extends GameState {
 		stage.act(dt);
 	}
 
-	public void handleInput() {
-
-	}
-
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -65,7 +62,7 @@ public class LoadGame extends GameState {
 
 	// Helpers
 	private Label.LabelStyle loadFont(int fontSize) {
-		return Betrayal.getFont(fontSize);
+		return FontManager.getFont(fontSize);
 	}
 
 	private void loadBackButton() {

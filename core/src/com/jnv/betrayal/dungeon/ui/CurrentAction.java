@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.managers.UIManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 import java.util.List;
 
@@ -20,17 +21,17 @@ public class CurrentAction {
 
 	public CurrentAction(Stage stage, UIManager uiManager) {
 		this.uiManager = uiManager;
-		action = Action.ACTION_DEFAULT;
-		target = Action.TARGET_DEFAULT;
+		action = com.jnv.betrayal.dungeon.utilities.constants.Action.ACTION_DEFAULT;
+		target = com.jnv.betrayal.dungeon.utilities.constants.Action.TARGET_DEFAULT;
 
-		targetText = new Label(Action.TARGET_DEFAULT, Betrayal.getFont(45));
-		targetText.setBounds(Panel.top.x, Panel.top.y,
+		targetText = new Label(com.jnv.betrayal.dungeon.utilities.constants.Action.TARGET_DEFAULT, FontManager.getFont(45));
+		targetText.setBounds(com.jnv.betrayal.dungeon.utilities.constants.Panel.top.x, com.jnv.betrayal.dungeon.utilities.constants.Panel.top.y,
 				Betrayal.WIDTH, targetText.getPrefHeight());
 		targetText.layout();
 		targetText.setAlignment(Align.center);
 		stage.addActor(targetText);
 
-		actionText = new Label(Action.ACTION_DEFAULT, Betrayal.getFont(45));
+		actionText = new Label(com.jnv.betrayal.dungeon.utilities.constants.Action.ACTION_DEFAULT, FontManager.getFont(45));
 		actionText.setBounds(targetText.getX(), targetText.getY() + targetText.getHeight(),
 				targetText.getWidth(), targetText.getHeight());
 		actionText.layout();
@@ -90,7 +91,7 @@ public class CurrentAction {
 			}
 		}
 		if (!text.equals("")) targetText.setText(text);
-		else targetText.setText(Action.TARGET_DEFAULT);
+		else targetText.setText(com.jnv.betrayal.dungeon.utilities.constants.Action.TARGET_DEFAULT);
 		target = targetText.getText().toString();
 		updateLabelBounds();
 	}

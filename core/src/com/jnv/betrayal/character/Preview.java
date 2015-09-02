@@ -15,6 +15,10 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Preview {
 
+	public enum Gender {
+		MALE, FEMALE
+	}
+
 	private BetrayalAssetManager res;
 	private com.jnv.betrayal.gameobjects.Character character;
 	private Gender gender;
@@ -368,9 +372,4 @@ public class Preview {
 
 		return group_previewRotators;
 	}
-
-	public enum Gender {
-		MALE, FEMALE
-	}
-
 }

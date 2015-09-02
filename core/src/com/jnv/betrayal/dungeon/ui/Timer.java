@@ -6,6 +6,7 @@ package com.jnv.betrayal.dungeon.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class Timer {
 
@@ -13,7 +14,7 @@ public class Timer {
 	private java.util.Timer timer;
 
 	public Timer() {
-		timerDisplay = new Label("----", Betrayal.getFont(70));
+		timerDisplay = new Label("----", FontManager.getFont(70));
 		timer = new java.util.Timer();
 	}
 }

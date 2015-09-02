@@ -9,6 +9,7 @@ import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class ShopPurchase extends Popup {
 
@@ -71,7 +72,7 @@ public class ShopPurchase extends Popup {
 	}
 
 	private void loadPrice() {
-		price = new Label("xxxxx", Betrayal.getFont(40));
+		price = new Label("xxxxx", FontManager.getFont(40));
 		price.setHeight(50);
 		price.setX(450);
 		price.setY(850);
@@ -79,8 +80,7 @@ public class ShopPurchase extends Popup {
 	}
 
 	private void loadDescription() {
-
-		description = new Label("+5 Attack", Betrayal.getFont(40));
+		description = new Label("+5 Attack", FontManager.getFont(40));
 		description.setHeight(50);
 		description.setX(250);
 		description.setY(900);

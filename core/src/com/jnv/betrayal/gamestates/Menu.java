@@ -17,6 +17,7 @@ import com.jnv.betrayal.inputprocessors.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Instructions;
 import com.jnv.betrayal.popup.Options;
+import com.jnv.betrayal.resources.FontManager;
 
 public class Menu extends GameState {
 
@@ -28,10 +29,6 @@ public class Menu extends GameState {
 
 	public void update(float dt) {
 		stage.act(dt);
-	}
-
-	public void handleInput() {
-
 	}
 
 	public void render() {
@@ -150,7 +147,7 @@ public class Menu extends GameState {
 	private void displayCharactersFullDialog() {
 		Group dialog_characterSlotsFull = new Group();
 		Label dialog_text = new Label("Character slots are full. " +
-				"\nPlease delete a character slot.", Betrayal.getFont(45));
+				"\nPlease delete a character slot.", FontManager.getFont(45));
 		dialog_text.setBounds((Betrayal.WIDTH - dialog_text.getPrefWidth()) / 2,
 				(Betrayal.HEIGHT - dialog_text.getPrefHeight()) / 2, dialog_text.getPrefWidth(),
 				dialog_text.getPrefHeight());

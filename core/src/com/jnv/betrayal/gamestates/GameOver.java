@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.inputprocessors.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 
 public class GameOver extends GameState {
 
@@ -30,10 +31,6 @@ public class GameOver extends GameState {
 		stage.act(dt);
 	}
 
-	public void handleInput() {
-
-	}
-
 	public void render() {
 		stage.draw();
 	}
@@ -43,7 +40,7 @@ public class GameOver extends GameState {
 	}
 
 	private void loadFont() {
-		labelStyle = Betrayal.getFont(60);
+		labelStyle = FontManager.getFont(60);
 	}
 
 	private void loadButtons() {

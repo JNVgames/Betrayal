@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.objects;
+package com.jnv.betrayal.dungeon.utilities.objects;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,11 +17,11 @@ public class DungeonMonster extends Entity {
 	public DungeonMonster(Monster monster,
 						  Stage stage) {
 		super(stage);
-		Vector2 coords = new Vector2(DungeonCoords.monster);
+		Vector2 coords = new Vector2(com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords.monster);
 		image = new Image(monster.getMonsterTexture());
 		image.layout();
 		image.setBounds(coords.x, coords.y,
-				DungeonCoords.MONSTER_WIDTH, DungeonCoords.MONSTER_HEIGHT);
+				com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords.MONSTER_WIDTH, com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords.MONSTER_HEIGHT);
 		image.addAction(Actions.alpha(0));
 		image.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		stage.addActor(image);

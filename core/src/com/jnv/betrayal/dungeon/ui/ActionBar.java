@@ -7,17 +7,20 @@ package com.jnv.betrayal.dungeon.ui;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.events.TargetSelect;
-import com.jnv.betrayal.dungeon.managers.DungeonManager;
 import com.jnv.betrayal.dungeon.managers.UIManager;
+import com.jnv.betrayal.dungeon.utilities.constants.Action;
+import com.jnv.betrayal.dungeon.utilities.constants.Panel;
+import com.jnv.betrayal.dungeon.utilities.constants.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.inputprocessors.InputListener;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.resources.FontManager;
 
 import java.util.Stack;
 
@@ -94,30 +97,31 @@ public class ActionBar {
 			}
 
 			protected Label newObject() {
-				return new Label(null, new Label.LabelStyle(Betrayal.getFont(70)));
+				return new Label(null, new Label.LabelStyle(FontManager.getFont(70)));
 			}
 		};
 	}
 
 	private void drawMainMenu() {
-		createPanel("Event Log", 67, Panel.bottomLeft, State.EVENT_LOG, actionBar);
+		createPanel("Items", 70, Panel.bottomLeft, State.EVENT_LOG, actionBar);
 		createPanel("Attack", 70, Panel.topLeft, State.ATTACK, actionBar);
-		createPanel("Items", 70, Panel.topRight, State.ITEMS, actionBar);
+		createPanel("Skills", 70, Panel.topRight, State.SKILLS, actionBar);
 
 		Label tmp = panelPool.obtain();
-		tmp.setText("Lobby (tmp)");
-		tmp.setStyle(Betrayal.getFont(50));
+		tmp.setText("Flee");
+		tmp.setStyle(FontManager.getFont(70));
 		tmp.setBounds(Panel.BUTTON_WIDTH, 0, Panel.BUTTON_WIDTH, Panel.BUTTON_HEIGHT);
 		tmp.setAlignment(Align.center);
 		tmp.layout();
-		tmp.addListener(new com.badlogic.gdx.scenes.scene2d.InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if (x > 0 && x < Panel.BUTTON_WIDTH && y > 0 && y < Panel.BUTTON_HEIGHT)
-					gsm.setState(GameStateManager.State.LOBBY);
+		tmp.addListener(new InputListener(tmp) {
+			@Override
+			public void doAction() {
+				new Confirmation(gsm.getGame(), "Are you sure you want to flee?" + "\n20% Chance") {
+					@Override
+					public void doSomething() {
+						gsm.setState(GameStateManager.State.LOBBY);
+					}
+				};
 			}
 		});
 		actionBar.addActor(tmp);
@@ -137,7 +141,7 @@ public class ActionBar {
 
 		Label doneButton = panelPool.obtain();
 		doneButton.setText("Done");
-		doneButton.setStyle(Betrayal.getFont(50));
+		doneButton.setStyle(FontManager.getFont(50));
 		doneButton.setBounds(Panel.topLeft.x, Panel.topLeft.y,
 				Betrayal.WIDTH, Panel.BUTTON_HEIGHT);
 		doneButton.layout();
@@ -154,7 +158,7 @@ public class ActionBar {
 
 		Label cancelButton = panelPool.obtain();
 		cancelButton.setText("Cancel");
-		cancelButton.setStyle(Betrayal.getFont(50));
+		cancelButton.setStyle(FontManager.getFont(50));
 		cancelButton.setBounds(Panel.bottomLeft.x, Panel.bottomLeft.y,
 				Betrayal.WIDTH, Panel.BUTTON_HEIGHT);
 		cancelButton.layout();
@@ -184,7 +188,7 @@ public class ActionBar {
 							 final State panelAction, Group group) {
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
-		panel.setStyle(Betrayal.getFont(fontSize));
+		panel.setStyle(FontManager.getFont(fontSize));
 		panel.setBounds(position.x, position.y, Panel.BUTTON_WIDTH, Panel.BUTTON_HEIGHT);
 		panel.setAlignment(Align.center);
 		panel.layout();
@@ -195,15 +199,5 @@ public class ActionBar {
 			}
 		});
 		group.addActor(panel);
-	}
-
-	public enum State {
-		BACK,
-		MAIN,
-		ATTACK,
-		ITEMS,
-		EVENT_LOG,
-		TARGET_SELECT,
-		MULTIPLE_TARGET_SELECT
 	}
 }

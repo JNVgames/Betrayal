@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.dungeon.managers;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -22,6 +23,7 @@ public class DungeonManager {
 						  GameStateManager gsm) {
 		this.gsm = gsm;
 		this.game = gsm.getGame();
+		gsm.getGame().getStage().addActor(new Image(game.res.getTexture("map-1")));
 		this.characters = orderListOfPlayers(characters);
 		uiManager = new UIManager(characters, monster, gsm, this);
 	}

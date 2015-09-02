@@ -15,6 +15,7 @@ import com.jnv.betrayal.character.Rotation;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class StatsWindow extends Popup {
 
@@ -76,7 +77,7 @@ public class StatsWindow extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("My Stats", Betrayal.getFont(40));
+		title = new Label("My Stats", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -120,7 +121,7 @@ public class StatsWindow extends Popup {
 
 	private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
 		int fontSize = 40;
-		Label statsText = new Label("", Betrayal.getFont(fontSize));
+		Label statsText = new Label("", FontManager.getFont(fontSize));
 		statsText.setText(character.getStats().toString(stat));
 		statsText.layout();
 		statsText.setX(background.getX() + 30);

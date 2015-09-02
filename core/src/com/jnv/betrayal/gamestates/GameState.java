@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.gamestates;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,11 +31,10 @@ public abstract class GameState {
 		cam = game.getCamera();
 		res = game.res;
 		player = game.getPlayer();
+		Gdx.input.setInputProcessor(stage);
 	}
 
 	public abstract void update(float dt);
-
-	public abstract void handleInput();
 
 	public abstract void render();
 

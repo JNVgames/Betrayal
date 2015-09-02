@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class LobbyOptions extends Popup {
 
@@ -59,7 +60,7 @@ public class LobbyOptions extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Options", Betrayal.getFont(40));
+		title = new Label("Options", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 350);

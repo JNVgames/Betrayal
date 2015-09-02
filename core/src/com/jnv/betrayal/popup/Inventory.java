@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class Inventory extends Popup {
 
@@ -73,7 +74,7 @@ public class Inventory extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Inventory", Betrayal.getFont(40));
+		title = new Label("Inventory", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -154,25 +155,25 @@ public class Inventory extends Popup {
 
 		// Labels
 		// head
-		charOutDescription[0] = new Label("Head", Betrayal.getFont(40));
+		charOutDescription[0] = new Label("Head", FontManager.getFont(40));
 		charOutDescription[0].setBounds(112, 525, itemSize, itemSize);
 		// body armor
-		charOutDescription[1] = new Label("Body", Betrayal.getFont(40));
+		charOutDescription[1] = new Label("Body", FontManager.getFont(40));
 		charOutDescription[1].setBounds(112, 425, itemSize, itemSize);
 		//left hand
-		charOutDescription[2] = new Label("Hand", Betrayal.getFont(40));
+		charOutDescription[2] = new Label("Hand", FontManager.getFont(40));
 		charOutDescription[2].setBounds(112, 265, itemSize, itemSize);
 		// right hand
-		charOutDescription[3] = new Label("Hand", Betrayal.getFont(40));
+		charOutDescription[3] = new Label("Hand", FontManager.getFont(40));
 		charOutDescription[3].setBounds(312, 265, itemSize, itemSize);
 		// ring1
-		charOutDescription[4] = new Label("Ring", Betrayal.getFont(40));
+		charOutDescription[4] = new Label("Ring", FontManager.getFont(40));
 		charOutDescription[4].setBounds(428, 325, itemSize, itemSize);
 		// ring2
-		charOutDescription[5] = new Label("Ring", Betrayal.getFont(40));
+		charOutDescription[5] = new Label("Ring", FontManager.getFont(40));
 		charOutDescription[5].setBounds(428, 225, itemSize, itemSize);
 		// cloak
-		charOutDescription[6] = new Label("Cloak", Betrayal.getFont(40));
+		charOutDescription[6] = new Label("Cloak", FontManager.getFont(40));
 		charOutDescription[6].setBounds(413, 525, itemSize, itemSize);
 
 		for (int i=0;i<8; i++){
@@ -229,7 +230,7 @@ public class Inventory extends Popup {
 	}
 
 	private void loadSortButton() {
-		button_sort = new Label("Sort", Betrayal.getFont(40));
+		button_sort = new Label("Sort", FontManager.getFont(40));
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());

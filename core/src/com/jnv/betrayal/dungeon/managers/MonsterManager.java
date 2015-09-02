@@ -6,7 +6,7 @@ package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.dungeon.objects.DungeonMonster;
+import com.jnv.betrayal.dungeon.utilities.objects.DungeonMonster;
 import com.jnv.betrayal.gameobjects.Monster;
 
 public class MonsterManager {

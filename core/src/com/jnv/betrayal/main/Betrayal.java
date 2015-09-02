@@ -25,7 +25,6 @@ public class Betrayal extends Game {
 	public final static int HEIGHT = 1280;
 	public static boolean debug = true;
 	private static boolean gamePaused;
-	private static FreeTypeFontGenerator generator;
 	public BetrayalAssetManager res;
 	public GameStateManager gsm;
 	private SpriteBatch sb;
@@ -35,23 +34,12 @@ public class Betrayal extends Game {
 	private ResourceLoader loader;
 	private Player player;
 
-	public static Label.LabelStyle getFont(int fontSize) {
-		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
-				new FreeTypeFontGenerator.FreeTypeFontParameter();
-		fontDetails.size = fontSize;
-		Label.LabelStyle labelStyle = new Label.LabelStyle();
-		labelStyle.font = generator.generateFont(fontDetails);
-		return labelStyle;
-	}
-
 	public void create() {
 		init();
 
 		res = new BetrayalAssetManager();
 		loader = new ResourceLoader(res);
 		player = new Player();
-
-		generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/HURTMOLD.ttf"));
 
 		gsm = new GameStateManager(this);
 		player = new Player();

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class ShopRingPurchase extends Popup {
 
@@ -61,7 +62,7 @@ public class ShopRingPurchase extends Popup {
 	}
 
 	private void loadPrice() {
-		price = new Label("$$$$$", Betrayal.getFont(40));
+		price = new Label("$$$$$", FontManager.getFont(40));
 		price.setHeight(50);
 		price.setX(450);
 		price.setY(500);
@@ -69,7 +70,7 @@ public class ShopRingPurchase extends Popup {
 	}
 
 	private void loadDescription() {
-		description = new Label("+5 Attack", Betrayal.getFont(40));
+		description = new Label("+5 Attack", FontManager.getFont(40));
 		description.setHeight(50);
 		description.setX(300);
 		description.setY(700);

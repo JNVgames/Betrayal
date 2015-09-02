@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.objects;
+package com.jnv.betrayal.dungeon.utilities.objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -12,9 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Target {
+public class Target extends Actor {
 
-	private Actor actor;
 	private TextureRegion selectedTexture;
 	private boolean isSelected = false;
 	private String name;
@@ -28,17 +27,16 @@ public class Target {
 				  Stage stage, BetrayalAssetManager res) {
 		this.name = name;
 		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
-		actor = new Actor() {
-			@Override
-			public void draw(Batch batch, float parentAlpha) {
-				if (isSelected) {
-					batch.setColor(Color.WHITE);
-					batch.draw(selectedTexture, x, y, width, height);
-				}
-			}
-		};
-		actor.setBounds(x, y, width, height);
-		stage.addActor(actor);
+		setBounds(x, y, width, height);
+		stage.addActor(this);
+	}
+
+	@Override
+	public void draw(Batch batch, float parentAlpha) {
+		if (isSelected) {
+			batch.setColor(Color.WHITE);
+			batch.draw(selectedTexture, getX(), getY(), getWidth(), getHeight());
+		}
 	}
 
 	// Getters
@@ -46,19 +44,11 @@ public class Target {
 		return name;
 	}
 
-	public Actor getActor() {
-		return actor;
-	}
-
 	public boolean isSelected() {
 		return isSelected;
 	}
 
 	// Settesr
-	public void remove() {
-		actor.remove();
-	}
-
 	public void select() {
 		isSelected = true;
 	}

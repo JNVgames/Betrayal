@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 
 public class Instructions extends Popup {
@@ -56,7 +57,7 @@ public class Instructions extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Instructions", Betrayal.getFont(40));
+		title = new Label("Instructions", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -135,7 +136,7 @@ public class Instructions extends Popup {
 	private void setContent0() {
 		content0 = new Label(" The goal of this turn" +
 				"\n based game is to clear " +
-				"\n 50 dungeon floors. ", Betrayal.getFont(40));
+				"\n 50 dungeon floors. ", FontManager.getFont(40));
 		content0.setX(100);
 		content0.setY(Betrayal.HEIGHT - content0.getHeight() - 250);
 		stage.addActor(content0);
@@ -147,7 +148,7 @@ public class Instructions extends Popup {
 				"\n and challenge a dungeon" +
 				"\n floor. Be careful the " +
 				"\n monsters aren't the only " +
-				"\n things to worry about", Betrayal.getFont(40));
+				"\n things to worry about", FontManager.getFont(40));
 		content1.setX(100);
 		content1.setY(Betrayal.HEIGHT - content1.getHeight() - 250);
 		stage.addActor(content1);
@@ -155,7 +156,7 @@ public class Instructions extends Popup {
 
 	private void setContent2() {
 		content2 = new Label(" Dungeons:" +
-				"\n hard as ballz", Betrayal.getFont(40));
+				"\n hard as ballz", FontManager.getFont(40));
 		content2.setX(100);
 		content2.setY(Betrayal.HEIGHT - content2.getHeight() - 250);
 		stage.addActor(content2);
@@ -169,7 +170,7 @@ public class Instructions extends Popup {
 				"\n you get to take two " +
 				"\n of their items. " +
 				"\n *note* all their gold counts" +
-				"\n as one item.", Betrayal.getFont(40));
+				"\n as one item.", FontManager.getFont(40));
 		content3.setX(100);
 		content3.setY(Betrayal.HEIGHT - content3.getHeight() - 250);
 		stage.addActor(content3);
@@ -177,7 +178,7 @@ public class Instructions extends Popup {
 
 	private void setContent4() {
 		content4 = new Label(" Shop:" +
-				"\n Spend all your money!", Betrayal.getFont(40));
+				"\n Spend all your money!", FontManager.getFont(40));
 		content4.setX(100);
 		content4.setY(Betrayal.HEIGHT - content4.getHeight() - 250);
 		stage.addActor(content4);

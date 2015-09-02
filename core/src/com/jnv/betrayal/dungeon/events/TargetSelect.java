@@ -7,9 +7,9 @@ package com.jnv.betrayal.dungeon.events;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.jnv.betrayal.dungeon.objects.DungeonCoords;
-import com.jnv.betrayal.dungeon.objects.Target;
-import com.jnv.betrayal.dungeon.ui.Action;
+import com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords;
+import com.jnv.betrayal.dungeon.utilities.objects.Target;
+import com.jnv.betrayal.dungeon.utilities.constants.Action;
 import com.jnv.betrayal.dungeon.ui.CurrentAction;
 import com.jnv.betrayal.inputprocessors.InputListener;
 import com.jnv.betrayal.main.Betrayal;
@@ -59,7 +59,7 @@ public class TargetSelect {
 	private void configSingleTargetSelect() {
 		for (int i = 0; i < targets.size(); i++) {
 			final int index = i;
-			targets.get(i).getActor().addListener(new InputListener(targets.get(i).getActor()) {
+			targets.get(i).addListener(new InputListener(targets.get(i)) {
 				@Override
 				public void doAction() {
 					if (targets.get(index).isSelected()) {
@@ -88,7 +88,7 @@ public class TargetSelect {
 	private void configMultipleTargetSelect(final int numTargets) {
 		for (int i = 0; i < targets.size(); i++) {
 			final int index = i;
-			targets.get(i).getActor().addListener(new InputListener(targets.get(i).getActor()) {
+			targets.get(i).addListener(new InputListener(targets.get(i)) {
 				@Override
 				public void doAction() {
 					if (targets.get(index).isSelected()) {

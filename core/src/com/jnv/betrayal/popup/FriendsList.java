@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 
 public class FriendsList extends Popup {
 
@@ -55,13 +56,13 @@ public class FriendsList extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Party", Betrayal.getFont(40));
+		title = new Label("Party", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 4);
 		title.setY(Betrayal.HEIGHT - 250);
 		stage.addActor(title);
 
-		title2 = new Label("Friends", Betrayal.getFont(40));
+		title2 = new Label("Friends", FontManager.getFont(40));
 		title2.setHeight(100);
 		title2.setX((Betrayal.WIDTH - title.getWidth()) / 4 * 3);
 		title2.setY(Betrayal.HEIGHT - 250);
