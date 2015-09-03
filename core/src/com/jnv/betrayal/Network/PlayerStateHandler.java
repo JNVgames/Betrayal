@@ -50,7 +50,7 @@ public class PlayerStateHandler implements Net.HttpResponseListener {
         if(response.equals("1")) {
             Gdx.app.log("PlayerStateHandler", "Http response success");
         } else {
-            Gdx.app.log("PlayerStateHandler", "Http response failed");
+            Gdx.app.log("PlayerStateHandler", "Http response failed: " + response);
         }
     }
 

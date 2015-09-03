@@ -70,13 +70,13 @@ public class Betrayal extends Game {
 		playerStateHandler.goOffline(player.playerID);
 		Gdx.app.log("Betrayal", "pause()");
         gamePaused = true;
-        state = gsm.currentState;
+		gsm.pause();
 	}
 
 	public void resume() {
         if (gamePaused) {
             gamePaused = false;
-            gsm.setState(state);
+            gsm.resume();
         }
 		Timer timer = new Timer();
 		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
