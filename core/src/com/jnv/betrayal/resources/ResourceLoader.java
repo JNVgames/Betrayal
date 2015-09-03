@@ -55,6 +55,7 @@ public class ResourceLoader {
 		res.loadTexture("about/game_over720x1280.png", "game-over-background");
 		res.loadTexture("about/tower.png", "tower");
 		res.loadTexture("about/lobby-tower.png", "lobby-tower");
+		res.loadTexture("character/character_outline.png", "character-outline");
 
 		// Dungeon backgrounds
 		for (int i = 1; i <= 5; i++) {
@@ -135,21 +136,33 @@ public class ResourceLoader {
 	}
 
 	private void loadShields() {
-		res.loadTexture("item/shield1.png", "shield1");
-		res.loadTexture("item/shield2.png", "shield2");
-		res.loadTexture("item/shield3.png", "shield3");
-		res.loadTexture("item/shield4.png", "shield4");
-		res.loadTexture("item/shield5.png", "shield5");
-		res.loadTexture("item/shield6.png", "shield6");
+		res.loadTexture("item/shield1.png", "shield11");
+		res.loadTexture("item/shield2.png", "shield12");
+		res.loadTexture("item/shield3.png", "shield13");
+		res.loadTexture("item/shield4.png", "shield14");
+		res.loadTexture("item/shield5.png", "shield15");
+		res.loadTexture("item/shield6.png", "shield16");
+		res.loadTexture("item/shield1.png", "shield21");
+		res.loadTexture("item/shield2.png", "shield22");
+		res.loadTexture("item/shield3.png", "shield23");
+		res.loadTexture("item/shield4.png", "shield24");
+		res.loadTexture("item/shield5.png", "shield25");
+		res.loadTexture("item/shield6.png", "shield26");
 	}
 
 	private void loadHeadGear() {
-		res.loadTexture("item/helmet1.png", "headgear1");
-		res.loadTexture("item/helmet2.png", "headgear2");
-		res.loadTexture("item/helmet3.png", "headgear3");
-		res.loadTexture("item/helmet4.png", "headgear4");
-		res.loadTexture("item/helmet5.png", "headgear5");
-		res.loadTexture("item/helmet6.png", "headgear6");
+		res.loadTexture("item/helmet1.png", "headgear11");
+		res.loadTexture("item/helmet2.png", "headgear12");
+		res.loadTexture("item/helmet3.png", "headgear13");
+		res.loadTexture("item/helmet4.png", "headgear14");
+		res.loadTexture("item/helmet5.png", "headgear15");
+		res.loadTexture("item/helmet6.png", "headgear16");
+		res.loadTexture("item/helmet1.png", "headgear21");
+		res.loadTexture("item/helmet2.png", "headgear22");
+		res.loadTexture("item/helmet3.png", "headgear23");
+		res.loadTexture("item/helmet4.png", "headgear24");
+		res.loadTexture("item/helmet5.png", "headgear25");
+		res.loadTexture("item/helmet6.png", "headgear26");
 	}
 
 	private void loadPotions() {
@@ -359,7 +372,9 @@ public class ResourceLoader {
 
 	private void loadWeaponData() {
 		for (int i = 1; i <= 6; i++) {
-			new Weapon(i, "sword1" + i, res);
+			new Weapon(i, "sword1" + i, res).setAttack(5);
+
+
 		}
 		/*
 

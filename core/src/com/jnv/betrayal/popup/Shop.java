@@ -10,14 +10,19 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Ring;
+import com.jnv.betrayal.gameobjects.Shield;
+import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 
 public class Shop extends Popup {
 
 	private Image lobbyButton, background, weapons, armors, extras, items, money;
-	private Image[] potions, sword1, sword2, shield1, shield2, headgear, armor1, armor2, ring1, ring2;
+	private Image[] potions, sword1, sword2, shield1, shield2, headgear1, headgear2, armor1, armor2, ring1, ring2;
 	private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
-	private Label titleHeadgear, titleArmor1, titleArmor2, titleItems;
+	private Label titleHeadgear1, titleHeadgear2, titleArmor1, titleArmor2, titleItems;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Actor mask;
 
@@ -32,7 +37,8 @@ public class Shop extends Popup {
 		sword2 = new Image[6];
 		shield1 = new Image[6];
 		shield2 = new Image[6];
-		headgear = new Image[6];
+		headgear1 = new Image[6];
+		headgear2 = new Image[6];
 		armor1 = new Image[6];
 		armor2 = new Image[6];
 		ring1 = new Image[6];
@@ -205,68 +211,54 @@ public class Shop extends Popup {
 
 	private void loadWeaponsAndShields() {
 		for (int i = 1; i <= 6; i++) {
-			final String item = "sword1" + i;
-			sword1[i - 1] = new Image(res.getTexture(item));
+			final String item1 = "sword1" + i;
+			final String item2 = "sword2" + i;
+			final String item3 = "shield1" + i;
+			final String item4 = "shield2" + i;
+			sword1[i - 1] = new Image(res.getTexture(item1));
 			sword1[i - 1].layout();
 			sword1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			sword1[i - 1].addListener(new InputListener() {
+			sword1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(sword1[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-					new com.jnv.betrayal.popup.ShopPurchase(game);
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Weapon(item1, res));
 				}
 			});
 			stage.addActor(sword1[i - 1]);
 
-			sword2[i - 1] = new Image(res.getTexture("sword2" + i));
+			sword2[i - 1] = new Image(res.getTexture(item2));
 			sword2[i - 1].layout();
 			sword2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			sword2[i - 1].addListener(new InputListener() {
+			sword2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(sword2[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Weapon(item2, res));
 				}
 			});
 			stage.addActor(sword2[i - 1]);
 
-			shield1[i - 1] = new Image(res.getTexture("shield" + i));
+			shield1[i - 1] = new Image(res.getTexture(item3));
 			shield1[i - 1].layout();
 			shield1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			shield1[i - 1].addListener(new InputListener() {
+			shield1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(shield1[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item3, res));
 				}
 			});
 			stage.addActor(shield1[i - 1]);
 
-			shield2[i - 1] = new Image(res.getTexture("shield" + i));
+			shield2[i - 1] = new Image(res.getTexture(item4));
 			shield2[i - 1].layout();
 			shield2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			shield2[i - 1].addListener(new InputListener() {
+			shield2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(shield2[i-1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item4, res));
 				}
 			});
 			stage.addActor(shield2[i - 1]);
@@ -298,34 +290,28 @@ public class Shop extends Popup {
 
 	private void loadRings() {
 		for (int i = 1; i <= 6; i++) {
-			ring1[i - 1] = new Image(res.getTexture("ring1-" + i));
+			final String item1 = "ring1-" + i;
+			final String item2 = "ring2-" + i;
+			ring1[i - 1] = new Image(res.getTexture(item1));
 			ring1[i - 1].layout();
 			ring1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			ring1[i - 1].addListener(new InputListener() {
+			ring1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(ring1[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item1, res));
 				}
 			});
 			stage.addActor(ring1[i - 1]);
 
-			ring2[i - 1] = new Image(res.getTexture("ring2-" + i));
+			ring2[i - 1] = new Image(res.getTexture(item2));
 			ring2[i - 1].layout();
 			ring2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			ring2[i - 1].addListener(new InputListener() {
+			ring2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(ring2[i-1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item2, res));
 				}
 			});
 			stage.addActor(ring2[i - 1]);
@@ -346,82 +332,84 @@ public class Shop extends Popup {
 	}
 
 	private void loadArmor() {
-		// Headgear
+		// Headgear1
 		for (int i = 1; i <= 6; i++) {
-
-			headgear[i - 1] = new Image(res.getTexture("headgear" + i));
-			headgear[i - 1].layout();
-			headgear[i - 1].setBounds(100 + itemSize * (i - 1),
+			final String item1 = "headgear1" + i;
+			final String item2 = "headgear2" + i;
+			final String item3 = "armor1-" + i;
+			final String item4 = "armor2-" + i;
+			headgear1[i - 1] = new Image(res.getTexture(item1));
+			headgear1[i - 1].layout();
+			headgear1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			headgear[i - 1].addListener(new InputListener() {
+			headgear1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(headgear1[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
 				}
 			});
-			stage.addActor(headgear[i - 1]);
-		}
+			stage.addActor(headgear1[i - 1]);
 
-		//Armor1
-		for (int i = 1; i <= 6; i++) {
+			// Headgear 2
+			headgear2[i - 1] = new Image(res.getTexture(item2));
+			headgear2[i - 1].layout();
+			headgear2[i - 1].setBounds(100 + itemSize * (i - 1),
+					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+			headgear2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(headgear2[i - 1]) {
+				@Override
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
+				}
+			});
+			stage.addActor(headgear2[i - 1]);
 
-			armor1[i - 1] = new Image(res.getTexture("armor1-" + i));
+			//Armor1
+			armor1[i - 1] = new Image(res.getTexture(item3));
 			armor1[i - 1].layout();
 			armor1[i - 1].setBounds(100 + itemSize * (i - 1),
-					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			armor1[i - 1].addListener(new InputListener() {
+					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
+			armor1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(armor1[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item3, res));
 				}
 			});
 			stage.addActor(armor1[i - 1]);
-		}
 
-		//Armor2
-		for (int i = 1; i <= 6; i++) {
-
-			armor2[i - 1] = new Image(res.getTexture("armor2-" + i));
+			//Armor2
+			armor2[i - 1] = new Image(res.getTexture(item4));
 			armor2[i - 1].layout();
 			armor2[i - 1].setBounds(100 + itemSize * (i - 1),
-					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			armor2[i - 1].addListener(new InputListener() {
+					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
+			armor2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(armor2[i - 1]) {
 				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				public void doAction() {
+					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item4, res));
 				}
 			});
 			stage.addActor(armor2[i - 1]);
 		}
-
 	}
 
 	private void loadArmorTitle() {
-		titleHeadgear = new Label("Headgear", Betrayal.getFont(40));
-		titleHeadgear.setX(110);
-		titleHeadgear.setY(Betrayal.HEIGHT - 250);
-		stage.addActor(titleHeadgear);
+		titleHeadgear1 = new Label("Headgear(tier1)", Betrayal.getFont(40));
+		titleHeadgear1.setX(110);
+		titleHeadgear1.setY(Betrayal.HEIGHT - 250);
+		stage.addActor(titleHeadgear1);
+
+		titleHeadgear2 = new Label("Headgear(tier2)", Betrayal.getFont(40));
+		titleHeadgear2.setX(110);
+		titleHeadgear2.setY(Betrayal.HEIGHT - 422);
+		stage.addActor(titleHeadgear2);
 
 		titleArmor1 = new Label("Armor(tier 1)", Betrayal.getFont(40));
 		titleArmor1.setX(110);
-		titleArmor1.setY(Betrayal.HEIGHT - 422);
+		titleArmor1.setY(Betrayal.HEIGHT - 594);
 		stage.addActor(titleArmor1);
 
 		titleArmor2 = new Label("Armor(tier 2)", Betrayal.getFont(40));
 		titleArmor2.setX(110);
-		titleArmor2.setY(Betrayal.HEIGHT - 594);
+		titleArmor2.setY(Betrayal.HEIGHT - 766);
 		stage.addActor(titleArmor2);
 	}
 
@@ -433,40 +421,30 @@ public class Shop extends Popup {
 	}
 
 	private void loadItems() {
-		for (int i = 1; i <= 6; i++) {
+		for (int i = 1; i <= 12; i++) {
+			final String item = "potion" + i;
 			potions[i - 1] = new Image(res.getTexture("potion" + i));
 			potions[i - 1].layout();
-			potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			potions[i - 1].addListener(new InputListener() {
-				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-					new com.jnv.betrayal.popup.ShopRingPurchase(game);
-				}
-			});
-			stage.addActor(potions[i - 1]);
+			if (i <= 6) {
+				potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
+				potions[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(potions[i - 1]) {
+					@Override
+					public void doAction() {
+						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));
+					}
+				});
+				stage.addActor(potions[i - 1]);
+			}else {
+				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
+				potions[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(potions[i - 1]) {
+					@Override
+					public void doAction() {
+						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));
+					}
+				});
+				stage.addActor(potions[i - 1]);
+			}
 		}
-		for (int i = 7; i <= 12; i++) {
-			potions[i - 1] = new Image(res.getTexture("potion" + i));
-			potions[i - 1].layout();
-			potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			potions[i - 1].addListener(new InputListener() {
-				@Override
-				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-					return true;
-				}
-
-				@Override
-				public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				}
-			});
-			stage.addActor(potions[i - 1]);
-		}
-
 	}
 
 	private void setContent0() {
@@ -494,11 +472,13 @@ public class Shop extends Popup {
 	}
 
 	private void removeContent1() {
-		titleHeadgear.remove();
+		titleHeadgear1.remove();
+		titleHeadgear2.remove();
 		titleArmor1.remove();
 		titleArmor2.remove();
 		for (int i = 0; i < 6; i++) {
-			headgear[i].remove();
+			headgear1[i].remove();
+			headgear2[i].remove();
 			armor1[i].remove();
 			armor2[i].remove();
 		}

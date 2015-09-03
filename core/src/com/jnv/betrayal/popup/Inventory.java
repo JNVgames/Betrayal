@@ -24,9 +24,14 @@ public class Inventory extends Popup {
 	private Group inventory;
 	private Label button_sort;
 	private Character character;
+	private Image [] inventorySpots, characterOutline;
+	private Label [] charOutDescription;
 
 	public Inventory(Betrayal game) {
 		super(game);
+		inventorySpots = new Image[20];
+		characterOutline = new Image[8];
+		charOutDescription = new Label [7];
 		character = game.getPlayer().getCurrentCharacter();
 		loadButtons();
 	}
@@ -36,9 +41,9 @@ public class Inventory extends Popup {
 		loadBackground();
 		loadTitle();
 		loadContent();
+		loadInventorySpots();
+		loadEquipSpots();
 		loadReturnToLobbyButton();
-
-		// VINCENTS
 		loadInventory();
 		loadSortButton();
 	}
@@ -96,14 +101,105 @@ public class Inventory extends Popup {
 	private void loadContent() {
 
 	}
+	private void loadInventorySpots(){
 
+		int padding = 10, itemSize = 92;
+		float startingX = background.getX()+ itemSize + padding, startingY = title.getY() - 30-92;
+
+		for (int i = 0; i <20; i++) {
+			inventorySpots[i] = new Image(res.getTexture("shop-purchase-background"));
+			inventorySpots[i].layout();
+
+			if (i < 5) {
+				inventorySpots[i].setBounds(startingX + itemSize * (i - 1) + padding * i,
+						startingY, itemSize, itemSize);
+			} else if (i>=5 && i<10) {
+				inventorySpots[i].setBounds(startingX + itemSize * (i - 6) + padding * (i-5),
+						startingY-itemSize-padding, itemSize, itemSize);
+			} else if (i>=10 && i<15) {
+				inventorySpots[i].setBounds(startingX + itemSize * (i - 11) + padding * (i-10),
+						startingY-(itemSize+padding)*2, itemSize, itemSize);
+			} else {
+				inventorySpots[i].setBounds(startingX + itemSize * (i - 16) + padding * (i-15),
+						startingY-(itemSize+padding)*3, itemSize, itemSize);
+			}
+			stage.addActor(inventorySpots[i]);
+		}
+	}
+
+	private void loadEquipSpots(){
+		int itemSize = 92;
+		// character outline
+		characterOutline[7] = new Image(res.getTexture("character-outline"));
+		characterOutline[7].layout();
+		characterOutline[7].setBounds(137, 225, 240, 400);
+		for (int i=0;i<7; i++){
+			characterOutline[i] = new Image(res.getTexture("instructions-background"));
+			characterOutline[i].layout();
+		}
+		// head
+		characterOutline[0].setBounds(212, 525, itemSize, itemSize);
+		// body armor
+		characterOutline[1].setBounds(212, 425, itemSize, itemSize);
+		// left hand
+		characterOutline[2].setBounds(112, 325, itemSize, itemSize);
+		// right hand
+		characterOutline[3].setBounds(312, 325, itemSize, itemSize);
+		// ring1
+		characterOutline[4].setBounds(518, 325, itemSize, itemSize);
+		// ring2
+		characterOutline[5].setBounds(518, 225, itemSize, itemSize);
+		// cloak
+		characterOutline[6].setBounds(518, 525, itemSize, itemSize);
+
+		// Labels
+		// head
+		charOutDescription[0] = new Label("Head", Betrayal.getFont(40));
+		charOutDescription[0].setBounds(112, 525, itemSize, itemSize);
+		// body armor
+		charOutDescription[1] = new Label("Body", Betrayal.getFont(40));
+		charOutDescription[1].setBounds(112, 425, itemSize, itemSize);
+		//left hand
+		charOutDescription[2] = new Label("Hand", Betrayal.getFont(40));
+		charOutDescription[2].setBounds(112, 265, itemSize, itemSize);
+		// right hand
+		charOutDescription[3] = new Label("Hand", Betrayal.getFont(40));
+		charOutDescription[3].setBounds(312, 265, itemSize, itemSize);
+		// ring1
+		charOutDescription[4] = new Label("Ring", Betrayal.getFont(40));
+		charOutDescription[4].setBounds(428, 325, itemSize, itemSize);
+		// ring2
+		charOutDescription[5] = new Label("Ring", Betrayal.getFont(40));
+		charOutDescription[5].setBounds(428, 225, itemSize, itemSize);
+		// cloak
+		charOutDescription[6] = new Label("Cloak", Betrayal.getFont(40));
+		charOutDescription[6].setBounds(413, 525, itemSize, itemSize);
+
+		for (int i=0;i<8; i++){
+			stage.addActor(characterOutline[i]);
+		}
+
+		for (int i = 0; i<7; i++){
+			stage.addActor(charOutDescription[i]);
+		}
+
+
+
+	}
 	private void removeInventory() {
 		mask.remove();
 		title.remove();
 		background.remove();
 		lobbyButton.remove();
-
-		// VINCENTS
+		for (int i = 0; i<20; i++){
+			inventorySpots[i].remove();
+		}
+		for (int i = 0; i<8; i++){
+			characterOutline[i].remove();
+		}
+		for (int i = 0; i<7; i++){
+			charOutDescription[i].remove();
+		}
 		inventory.remove();
 		button_sort.remove();
 	}
@@ -135,7 +231,7 @@ public class Inventory extends Popup {
 	private void loadSortButton() {
 		button_sort = new Label("Sort", Betrayal.getFont(40));
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
-				lobbyButton.getY() + lobbyButton.getHeight() + 30, button_sort.getPrefWidth(),
+				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());
 		button_sort.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

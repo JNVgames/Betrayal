@@ -6,18 +6,20 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 
 public class ShopPurchase extends Popup {
 
-	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
+	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow, item;
 	private Label price, description;
 	private Actor mask;
 	private int currentSide;
 	private Character character;
+	private Item currentItem;
 
-	public ShopPurchase(Betrayal game) {
+	public ShopPurchase(Betrayal game, Item item) {
 		super(game);
 		currentSide = 0;
 		character = game.getPlayer().getCurrentCharacter();
@@ -77,6 +79,7 @@ public class ShopPurchase extends Popup {
 	}
 
 	private void loadDescription() {
+
 		description = new Label("+5 Attack", Betrayal.getFont(40));
 		description.setHeight(50);
 		description.setX(250);
