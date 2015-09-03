@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Player {
     public int playerID;
-    private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/get_player";
-    //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/get_player";
+    private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/new_player";
+    //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/new_player";
 
     private List<Character> characters = new ArrayList<Character>();
     private Character currentCharacter;
@@ -34,34 +34,38 @@ public class Player {
      * the server. If not, creates a new player ID and sends a POST request to the server
      */
     private class FindPlayerIDTask implements Net.HttpResponseListener {
+        final FileHandle idFile = Gdx.files.local("id.sav"); //File that stores the player's ID
 
         public FindPlayerIDTask() {
-            final FileHandle idFile = Gdx.files.local("id.sav"); //File that stores the player's ID
+
             final String requestContent;
             if(idFile.exists()) {
-                requestContent = idFile.readString();
+                playerID = Integer.parseInt(idFile.readString());
+                Gdx.app.log("Player", "idFile = " + playerID);
             } else {
                 //If there is no local ID file, send a -1
                 requestContent = "-1";
-            }
-            Timer.Task task = new Timer.Task() {
-                @Override
-                public void run() {
-                    Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
-                    request.setUrl(GET_PLAYER_ID_URL);
-                    request.setContent(requestContent);
-                    Gdx.app.log("FindPlayerIDTask", "Http Post request content: " + requestContent);
-                    Gdx.net.sendHttpRequest(request, FindPlayerIDTask.this);
-                }
-            };
+                Timer.Task task = new Timer.Task() {
+                    @Override
+                    public void run() {
+                        Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
+                        request.setUrl(GET_PLAYER_ID_URL);
+                        request.setContent(requestContent);
+                        Gdx.app.log("FindPlayerIDTask", "Http Post request content: " + requestContent);
+                        Gdx.net.sendHttpRequest(request, FindPlayerIDTask.this);
+                    }
+                };
 
-            task.run();
+                task.run();
+            }
+
         }
         @Override
         public void handleHttpResponse(Net.HttpResponse httpResponse) {
             //Returns 1 means that ID exists in db
             String response = httpResponse.getResultAsString();
             Gdx.app.log("Player.java", "Http Response: " + response);
+            idFile.writeString(response, false);
             playerID = Integer.parseInt(response);
         }
         @Override

@@ -11,8 +11,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.Network.Player;
+import com.jnv.betrayal.Network.PlayerStateHandler;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
@@ -64,15 +66,22 @@ public class Betrayal extends Game {
 	}
 
 	public void pause() {
-		gamePaused = true;
-		gsm.pause();
+		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
+		playerStateHandler.goOffline(player.playerID);
+		Gdx.app.log("Betrayal", "pause()");
+        gamePaused = true;
+        state = gsm.currentState;
 	}
 
 	public void resume() {
-		if (gamePaused) {
-			gamePaused = false;
-			gsm.resume();
-		}
+        if (gamePaused) {
+            gamePaused = false;
+            gsm.setState(state);
+        }
+		Timer timer = new Timer();
+		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
+		playerStateHandler.goOnline(player.playerID);
+		Gdx.app.log("Betrayal", "resume()");
 	}
 
 	public void render() {
