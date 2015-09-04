@@ -40,7 +40,7 @@ public class Player {
 
             final String requestContent;
             if(idFile.exists()) {
-                playerID = Integer.parseInt(idFile.readString());
+                //playerID = Integer.parseInt(idFile.readString());
                 Gdx.app.log("Player", "idFile = " + playerID);
             } else {
                 //If there is no local ID file, send a -1

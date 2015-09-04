@@ -15,6 +15,7 @@ import com.jnv.betrayal.dungeon.managers.DungeonManager;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.resources.MonsterConstants;
 
 import java.util.Random;
 
@@ -33,7 +34,6 @@ public class Dungeon extends GameState {
 		//this.floor = floor;
 		//this.numPlayers = numPlayers;
 
-		monster = generateMonster(1);
 		// todo player.getCharacters() should be other real life characters
 		dungeonManager = new DungeonManager(player.getCharacters(), monster, gsm);
 		loadStage();
@@ -56,7 +56,7 @@ public class Dungeon extends GameState {
 
 	private void loadStage() {
 		loadTimer();
-		loadMonster();
+		//loadMonster();
 	}
 
 	// Helpers
@@ -79,36 +79,5 @@ public class Dungeon extends GameState {
 		stage.addActor(image_monster);
 	}
 
-	/**
-	 * Generates a random mob based on the floor the highest player in the party is currently on
-	 *
-	 * @param tier tier
-	 * @return monster for the dungeon
-	 */
-	public Monster generateMonster(int tier) { // MonsterGenerator(int floor)
-		// todo @joey change tier parameter to floor
-		Random randomNumberGenerator = new Random();
-		int x;
-		switch (tier) {
-			case 1:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-			case 2:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-			case 3:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-			case 4:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-			case 5:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-			default:
-				x = randomNumberGenerator.nextInt(10);
-				break;
-		}
-		return new Monster("monster-tier1-" + x, res);
-	}
+
 }

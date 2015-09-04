@@ -26,7 +26,7 @@ public class UIManager {
 		currentAction = new CurrentAction(gsm.getGame().getStage(), this);
 		actionBar = new ActionBar(characters.size(), gsm.getGame().getStage(), this);
 		playersManager = new PlayersManager(characters, gsm.getGame().getStage());
-		monsterManager = new MonsterManager(monster, gsm.getGame().getStage());
+		monsterManager = new MonsterManager(gsm.getGame().res, gsm.getGame().getStage());
 		actionBar.start();
 	}
 
