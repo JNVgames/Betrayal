@@ -63,14 +63,9 @@ public class Shop extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeShop();
 			}
 		});
@@ -96,14 +91,9 @@ public class Shop extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new InputListener() {
+		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeShop();
 			}
 		});
@@ -114,14 +104,9 @@ public class Shop extends Popup {
 		weapons = new Image(res.getTexture("shop-weapons"));
 		weapons.layout();
 		weapons.setBounds(100, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		weapons.addListener(new InputListener() {
+		weapons.addListener(new com.jnv.betrayal.inputprocessors.InputListener(weapons) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeCurrentContent();
 				currentContent = 0;
 				loadContent();
@@ -134,14 +119,9 @@ public class Shop extends Popup {
 		armors = new Image(res.getTexture("shop-armor"));
 		armors.layout();
 		armors.setBounds(100 + buttonWidth, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		armors.addListener(new InputListener() {
+		armors.addListener(new com.jnv.betrayal.inputprocessors.InputListener(armors) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeCurrentContent();
 				currentContent = 1;
 				loadContent();
@@ -154,14 +134,9 @@ public class Shop extends Popup {
 		extras = new Image(res.getTexture("shop-extra"));
 		extras.layout();
 		extras.setBounds(100 + buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		extras.addListener(new InputListener() {
+		extras.addListener(new com.jnv.betrayal.inputprocessors.InputListener(extras) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeCurrentContent();
 				currentContent = 2;
 				loadContent();
@@ -174,14 +149,9 @@ public class Shop extends Popup {
 		items = new Image(res.getTexture("shop-item"));
 		items.layout();
 		items.setBounds(100 + buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		items.addListener(new InputListener() {
+		items.addListener(new com.jnv.betrayal.inputprocessors.InputListener(items) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeCurrentContent();
 				currentContent = 3;
 				loadContent();
@@ -194,14 +164,9 @@ public class Shop extends Popup {
 		money = new Image(res.getTexture("shop-money"));
 		money.layout();
 		money.setBounds(100 + buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		money.addListener(new InputListener() {
+		money.addListener(new com.jnv.betrayal.inputprocessors.InputListener(money) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeCurrentContent();
 				currentContent = 4;
 				loadContent();

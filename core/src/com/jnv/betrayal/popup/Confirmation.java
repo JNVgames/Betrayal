@@ -62,14 +62,9 @@ public class Confirmation extends Popup {
 		yesButton.layout();
 		yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		yesButton.addListener(new InputListener() {
+		yesButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(yesButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				doSomething();
 				removeConfirmation();
 			}
@@ -80,14 +75,9 @@ public class Confirmation extends Popup {
 		noButton.layout();
 		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		noButton.addListener(new InputListener() {
+		noButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(noButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeConfirmation();
 			}
 		});

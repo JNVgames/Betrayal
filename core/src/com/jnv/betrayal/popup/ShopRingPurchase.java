@@ -33,14 +33,9 @@ public class ShopRingPurchase extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeShopPurchase();
 			}
 		});
@@ -81,15 +76,9 @@ public class ShopRingPurchase extends Popup {
 		buyButton = new Image(res.getTexture("buy"));
 		buyButton.layout();
 		buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 420, 100, 50);
-		buyButton.addListener(new InputListener() {
+		buyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(buyButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				//CharacterSelection.getCharacter().getInventoryClass().addItem(item);
+			public void doAction() {
 				new com.jnv.betrayal.popup.Confirmation(game, "Buy");
 			}
 		});
@@ -100,14 +89,9 @@ public class ShopRingPurchase extends Popup {
 		backButton = new Image(res.getTexture("back"));
 		backButton.layout();
 		backButton.setBounds(Betrayal.WIDTH / 2 - 150, 420, 100, 50);
-		backButton.addListener(new InputListener() {
+		backButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(backButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeShopPurchase();
 			}
 		});

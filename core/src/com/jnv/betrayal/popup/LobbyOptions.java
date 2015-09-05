@@ -38,14 +38,9 @@ public class LobbyOptions extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeLobbyOptons();
 			}
 		});
@@ -72,12 +67,9 @@ public class LobbyOptions extends Popup {
 		instructions.layout();
 		instructions.setBounds((Betrayal.WIDTH - instructions.getImageWidth()) / 2 + 100,
 				800, 312, 100);
-		instructions.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		instructions.addListener(new com.jnv.betrayal.inputprocessors.InputListener(instructions) {
+			@Override
+			public void doAction() {
 				new Instructions(game);
 			}
 		});
@@ -89,16 +81,10 @@ public class LobbyOptions extends Popup {
 		options.layout();
 		options.setBounds((Betrayal.WIDTH - options.getImageWidth()) / 2 + 100,
 				650, 312, 100);
-		options.addListener(new InputListener() {
-
+		options.addListener(new com.jnv.betrayal.inputprocessors.InputListener(options) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				new com.jnv.betrayal.popup.Instructions(game);
+			public void doAction() {
+				new Options(game);
 			}
 		});
 		stage.addActor(options);
@@ -108,14 +94,9 @@ public class LobbyOptions extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 350, 312, 100);
-		lobbyButton.addListener(new InputListener() {
+		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeLobbyOptons();
 			}
 		});

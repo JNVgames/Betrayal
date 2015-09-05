@@ -20,6 +20,7 @@ import com.jnv.betrayal.resources.FontManager;
 public class StatsWindow extends Popup {
 
 	private Image lobbyButton, background;
+	private Image [] icons;
 	private Label title;
 	private Actor mask;
 	private Group characterStats;
@@ -29,6 +30,7 @@ public class StatsWindow extends Popup {
 
 	public StatsWindow(Betrayal game) {
 		super(game);
+		icons = new Image [3];
 		characterStats = new Group();
 		character = game.getPlayer().getCurrentCharacter();
 		loadButtons();
@@ -49,6 +51,8 @@ public class StatsWindow extends Popup {
 		loadBackground();
 		loadTitle();
 		loadContent();
+		loadIcons();
+		loadApplyButton();
 		loadCharacterStats();
 		loadReturnToLobbyButton();
 		stage.addActor(characterStats);
@@ -78,10 +82,28 @@ public class StatsWindow extends Popup {
 
 	private void loadTitle() {
 		title = new Label("My Stats", FontManager.getFont(40));
-		title.setHeight(100);
+		title.setHeight(120);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
 		stage.addActor(title);
+	}
+
+	private void loadIcons(){
+		// Health
+		icons[0] = new Image(res.getTexture("health"));
+		icons[0].layout();
+		icons[0].setBounds(110,Betrayal.HEIGHT-380,40,40);
+		stage.addActor(icons[0]);
+		// Defense
+		icons[1] = new Image(res.getTexture("defense"));
+		icons[1].layout();
+		icons[1].setBounds(110, Betrayal.HEIGHT-470, 40, 40);
+		stage.addActor(icons[1]);
+		// Attack
+		icons[2] = new Image(res.getTexture("attack"));
+		icons[2].layout();
+		icons[2].setBounds(110, Betrayal.HEIGHT - 560, 40, 40);
+		stage.addActor(icons[2]);
 	}
 
 	private void loadCharacterStats() {
@@ -93,16 +115,17 @@ public class StatsWindow extends Popup {
 		characterStatsLabel(characterStats, Stats.Stat.ATTACK, yRef);
 	}
 
+	private void loadApplyButton(){
+
+	}
+
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+			@Override
+			public void doAction() {
 				removeStats();
 			}
 		});
@@ -114,9 +137,8 @@ public class StatsWindow extends Popup {
 		title.remove();
 		background.remove();
 		lobbyButton.remove();
-
-		// vincents variable
 		characterStats.remove();
+		for (int i=0; i<3; i++){icons[i].remove();}
 	}
 
 	private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
@@ -124,8 +146,8 @@ public class StatsWindow extends Popup {
 		Label statsText = new Label("", FontManager.getFont(fontSize));
 		statsText.setText(character.getStats().toString(stat));
 		statsText.layout();
-		statsText.setX(background.getX() + 30);
-		statsText.setY(yReference - fontSize - 30);
+		statsText.setX(background.getX() + 60);
+		statsText.setY(yReference - fontSize - 50);
 		yRef = statsText.getY();
 		statsText.setWidth(statsText.getPrefWidth());
 		statsText.setHeight(fontSize);
@@ -141,7 +163,7 @@ public class StatsWindow extends Popup {
 			}
 		};
 		charPreview.setBounds(background.getX() + (background.getWidth() - 32 * scale) / 2,
-				yRef - 48 * scale - 50,
+				yRef - 48 * scale - 25,
 				32 * scale, 48 * scale);
 		characterStats.addActor(charPreview);
 	}

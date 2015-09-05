@@ -52,14 +52,9 @@ public class Inventory extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeInventory();
 			}
 		});
@@ -85,14 +80,9 @@ public class Inventory extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new InputListener() {
+		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeInventory();
 			}
 		});
@@ -234,12 +224,9 @@ public class Inventory extends Popup {
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());
-		button_sort.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		button_sort.addListener(new com.jnv.betrayal.inputprocessors.InputListener(button_sort) {
+			@Override
+			public void doAction() {
 				character.getInventory().sortItems();
 				inventory.remove();
 				loadInventory();

@@ -42,14 +42,9 @@ public class Instructions extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeInstructions();
 			}
 		});
@@ -68,14 +63,9 @@ public class Instructions extends Popup {
 		exitButton = new Image(res.getTexture("x"));
 		exitButton.layout();
 		exitButton.setBounds(520, 1080, 100, 100);
-		exitButton.addListener(new InputListener() {
+		exitButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(exitButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeInstructions();
 			}
 		});
