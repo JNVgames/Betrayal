@@ -73,7 +73,9 @@ public class Dungeon extends GameState {
 		Vector2 center = new Vector2(Betrayal.WIDTH / 2, Betrayal.HEIGHT - 300);
 
 		image_monster.layout();
-		image_monster.setBounds(center.x - width / 2, center.y - height / 2, 300, 300);
+		image_monster.setBounds(center.x - width / 2, center.y - height / 2,
+				MonsterConstants.tier1Monsters[0].getWidth(),
+				MonsterConstants.tier1Monsters[0].getHeight());
 		image_monster.addAction(Actions.alpha(0));
 		image_monster.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		stage.addActor(image_monster);

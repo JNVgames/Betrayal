@@ -20,7 +20,10 @@ public class MonsterManager {
 
 	public MonsterManager(BetrayalAssetManager res, Stage stage) {
 		this.res = res;
-		this.monster = new DungeonMonster(generateMonster(1), stage);
+		int tier = 10;  //CHANGE accord to floor level
+		tier = generateMonster(tier); // TODO: take this out later. fully randomizes
+		int monsterID = generateMonster(tier);
+		this.monster = new DungeonMonster(res, tier, monsterID, stage);
 	}
 
 	/**
@@ -29,30 +32,33 @@ public class MonsterManager {
 	 * @param tier tier
 	 * @return monster for the dungeon
 	 */
-	public Monster generateMonster(int tier) { // MonsterGenerator(int floor)
+	public int generateMonster(int tier) { // MonsterGenerator(int floor)
 		Random randomNumberGenerator = new Random();
 		int x;
 		switch (tier) {
+			case 0:
+				x = 0;
+				break;
 			case 1:
-				x = randomNumberGenerator.nextInt(10);
+				x = randomNumberGenerator.nextInt(9);
 				break;
 			case 2:
 				x = randomNumberGenerator.nextInt(10);
 				break;
 			case 3:
-				x = randomNumberGenerator.nextInt(10);
+				x = randomNumberGenerator.nextInt(7);
 				break;
 			case 4:
-				x = randomNumberGenerator.nextInt(10);
+				x = randomNumberGenerator.nextInt(5);
 				break;
 			case 5:
-				x = randomNumberGenerator.nextInt(10);
+				x = randomNumberGenerator.nextInt(6);
 				break;
 			default:
-				x = randomNumberGenerator.nextInt(10);
+				x = randomNumberGenerator.nextInt(5);
 				break;
 		}
+		return x;
 		//return new Monster("monster-tier1-" + x, res);
-		return new Monster("monster-tier1-1", res);
 	}
 }

@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.dungeon.managers;
 
+import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.dungeon.ui.ActionBar;
 import com.jnv.betrayal.dungeon.ui.CurrentAction;
 import com.jnv.betrayal.gameobjects.Character;
