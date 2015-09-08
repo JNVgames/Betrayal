@@ -87,6 +87,8 @@ public class ResourceLoader {
 		res.loadTexture("button/yes360x144.png", "yes");
 		res.loadTexture("button/no360x144.png", "no");
 		res.loadTexture("button/apply360x144.png", "apply");
+		res.loadTexture("button/plus400x400.png", "plus");
+		res.loadTexture("button/minus400x400.png", "minus");
 	}
 
 	private void loadLobbyButtons() {
@@ -317,6 +319,9 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster45.png", "monster-tier1-6");
 		res.loadTexture("monster/monster46.png", "monster-tier1-7");
 		res.loadTexture("monster/monster47.png", "monster-tier1-8");
+		// Tier 1 Mob
+		res.loadTexture("monster/monster1.png", "monster-tier1-9");
+		res.loadTexture("monster/monster4.png", "monster-tier1-19");
 
 		//Tier 2
 		res.loadTexture("monster/monster6.png", "monster-tier2-0");
@@ -327,17 +332,18 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster12.png", "monster-tier2-5");
 		res.loadTexture("monster/monster17.png", "monster-tier2-6");
 		res.loadTexture("monster/monster18.png", "monster-tier2-7");
-		res.loadTexture("monster/monster25.png", "monster-tier2-8");
+		res.loadTexture("monster/monster26.png", "monster-tier2-8");
 		res.loadTexture("monster/monster14.png", "monster-tier2-9");
 
 		//Tier 3
 		res.loadTexture("monster/monster15.png", "monster-tier3-0");
 		res.loadTexture("monster/monster19.png", "monster-tier3-1");
-		res.loadTexture("monster/monster26.png", "monster-tier3-2");
+		res.loadTexture("monster/monster25.png", "monster-tier3-2");
 		res.loadTexture("monster/monster27.png", "monster-tier3-3");
 		res.loadTexture("monster/monster38.png", "monster-tier3-4");
 		res.loadTexture("monster/monster24.png", "monster-tier3-5");
-		res.loadTexture("monster/monster36.png", "monster-tier3-6");
+		res.loadTexture("monster/monster52.png", "monster-tier3-6");
+		res.loadTexture("monster/monster23.png", "monster-tier3-7");
 
 		//Tier 4
 		res.loadTexture("monster/monster10.png", "monster-tier4-0");
@@ -345,11 +351,11 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster28.png", "monster-tier4-2");
 		res.loadTexture("monster/monster29.png", "monster-tier4-3");
 		res.loadTexture("monster/monster37.png", "monster-tier4-4");
+		res.loadTexture("monster/monster36.png", "monster-tier4-5");
 		//Tier4 mob
 		res.loadTexture("monster/monster20.png", "monster-tier4-5");
 		res.loadTexture("monster/monster21.png", "monster-tier4-6");
 		res.loadTexture("monster/monster22.png", "monster-tier4-7");
-		res.loadTexture("monster/monster23.png", "monster-tier4-8");
 		//Tier 4 mob
 		res.loadTexture("monster/monster30.png", "monster-tier4-9");
 		res.loadTexture("monster/monster31.png", "monster-tier4-10");
@@ -369,6 +375,7 @@ public class ResourceLoader {
 		//Other
 		res.loadTexture("monster/monster1.png", "monster-tier0-0");
 		res.loadTexture("monster/monster16.png", "monster-tier0-1");
+		res.loadTexture("monster/monster51.png", "monster-tier0-2");
 	}
 
 	private void loadWeaponData() {
@@ -410,6 +417,9 @@ public class ResourceLoader {
 		new Monster(1, "monster-tier1-6", res).setData("monster-tier1-6", 25, 10, 1);
 		new Monster(1, "monster-tier1-7", res).setData("monster-tier1-7", 25, 10, 1);
 		new Monster(1, "monster-tier1-8", res).setData("monster-tier1-8", 25, 10, 1);
+		//Tier1 Mob
+		new Monster(1, "monster-tier1-9", res).setData("monster-tier1-9", 25, 10, 1);
+		new Monster(1, "monster-tier1-19", res).setData("monster-tier1-19", 25, 10, 1);
 
 		// Tier 2
 		new Monster(1, "monster-tier2-0", res).setData("monster-tier2-0", 25, 10, 1);
@@ -430,6 +440,7 @@ public class ResourceLoader {
 		new Monster(1, "monster-tier3-4", res).setData("monster-tier3-4", 25, 10, 1);
 		new Monster(1, "monster-tier3-5", res).setData("monster-tier3-5", 25, 10, 1);
 		new Monster(1, "monster-tier3-6", res).setData("monster-tier3-6", 25, 10, 1);
+		new Monster(1, "monster-tier3-7", res).setData("monster-tier3-7", 25, 10, 1);
 
 		// Tier 4
 		new Monster(1, "monster-tier4-0", res).setData("monster-tier4-0", 25, 10, 1);
@@ -437,6 +448,7 @@ public class ResourceLoader {
 		new Monster(1, "monster-tier4-2", res).setData("monster-tier4-2", 25, 10, 1);
 		new Monster(1, "monster-tier4-3", res).setData("monster-tier4-3", 25, 10, 1);
 		new Monster(1, "monster-tier4-4", res).setData("monster-tier4-4", 25, 10, 1);
+		new Monster(1, "monster-tier4-5", res).setData("monster-tier4-5", 25, 10, 1);
 
 		//Tier 5
 		new Monster(1, "monster-tier5-0", res).setData("monster-tier5-0", 25, 10, 1);

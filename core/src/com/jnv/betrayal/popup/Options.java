@@ -15,7 +15,7 @@ import com.jnv.betrayal.resources.FontManager;
 
 public class Options extends Popup {
 
-	private Image background, mainMenuButton;
+	private Image background, exitButton;
 	private Actor mask;
 	private Label title;
 	private int currentContent, totalContent;
@@ -47,16 +47,16 @@ public class Options extends Popup {
 	}
 
 	private void loadMainMenuButton() {
-		mainMenuButton = new Image(res.getTexture("main-menu"));
-		mainMenuButton.layout();
-		mainMenuButton.setBounds((Betrayal.WIDTH - mainMenuButton.getWidth()) / 2 + 100, 200, 312, 100);
-		mainMenuButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mainMenuButton) {
+		exitButton = new Image(res.getTexture("x"));
+		exitButton.layout();
+		exitButton.setBounds(Betrayal.WIDTH -250, Betrayal.HEIGHT-250, 100, 100);
+		exitButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(exitButton) {
 			@Override
 			public void doAction() {
 				removeOptions();
 			}
 		});
-		stage.addActor(mainMenuButton);
+		stage.addActor(exitButton);
 	}
 
 	private void loadTitle() {
@@ -77,7 +77,7 @@ public class Options extends Popup {
 	private void removeCurrentContent() {
 		switch (currentContent) {
 			case 0:
-				mainMenuButton.remove();
+				exitButton.remove();
 				title.remove();
 				break;
 			case 1:
@@ -105,7 +105,7 @@ public class Options extends Popup {
 	private void removeOptions() {
 		removeCurrentContent();
 		mask.remove();
-		mainMenuButton.remove();
+		exitButton.remove();
 		title.remove();
 		background.remove();
 	}

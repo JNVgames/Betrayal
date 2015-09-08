@@ -86,13 +86,9 @@ public class ShopPurchase extends Popup {
 		buyButton = new Image(res.getTexture("buy"));
 		buyButton.layout();
 		buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 220, 100, 50);
-		buyButton.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				//CharacterSelection.getCharacter().getInventoryClass().addItem(item);
+		buyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(buyButton) {
+			@Override
+			public void doAction() {
 				new Confirmation(game, "Confirm purchase") {
 					public void doSomething() {
 						character.getInventory().addItem(new Weapon("sword11", res));
@@ -107,14 +103,9 @@ public class ShopPurchase extends Popup {
 		backButton = new Image(res.getTexture("back"));
 		backButton.layout();
 		backButton.setBounds(Betrayal.WIDTH / 2 - 150, 220, 100, 50);
-		backButton.addListener(new InputListener() {
+		backButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(backButton) {
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+			public void doAction() {
 				removeShopPurchase();
 			}
 		});
@@ -148,12 +139,9 @@ public class ShopPurchase extends Popup {
 		leftArrow = new Image(res.getTexture("arrow-left"));
 		leftArrow.layout();
 		leftArrow.setBounds(Betrayal.WIDTH / 2 - 150, 300, 100, 50);
-		leftArrow.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		leftArrow.addListener(new com.jnv.betrayal.inputprocessors.InputListener(leftArrow) {
+			@Override
+			public void doAction() {
 				currentSide--;
 				if (currentSide < 0) {
 					currentSide = 3;
@@ -165,12 +153,9 @@ public class ShopPurchase extends Popup {
 		rightArrow = new Image(res.getTexture("arrow-right"));
 		rightArrow.layout();
 		rightArrow.setBounds(Betrayal.WIDTH / 2 + 50, 300, 100, 50);
-		rightArrow.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		rightArrow.addListener(new com.jnv.betrayal.inputprocessors.InputListener(rightArrow) {
+			@Override
+			public void doAction() {
 				currentSide = (currentSide + 1) % 4;
 			}
 		});

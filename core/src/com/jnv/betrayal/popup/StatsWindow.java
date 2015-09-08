@@ -19,9 +19,9 @@ import com.jnv.betrayal.resources.FontManager;
 
 public class StatsWindow extends Popup {
 
-	private Image lobbyButton, background;
-	private Image [] icons;
-	private Label title;
+	private Image lobbyButton, applyButton, background;
+	private Image [] icons, statPlusButtons, statMinusButtons;
+	private Label title, availablePoints;
 	private Actor mask;
 	private Group characterStats;
 	private float yRef;
@@ -31,6 +31,8 @@ public class StatsWindow extends Popup {
 	public StatsWindow(Betrayal game) {
 		super(game);
 		icons = new Image [3];
+		statPlusButtons = new Image [3];
+		statMinusButtons = new Image [3];
 		characterStats = new Group();
 		character = game.getPlayer().getCurrentCharacter();
 		loadButtons();
@@ -53,6 +55,8 @@ public class StatsWindow extends Popup {
 		loadContent();
 		loadIcons();
 		loadApplyButton();
+		loadStatsAdjustButton();
+		loadAvailablePoints();
 		loadCharacterStats();
 		loadReturnToLobbyButton();
 		stage.addActor(characterStats);
@@ -61,12 +65,9 @@ public class StatsWindow extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener() {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+			@Override
+			public void doAction() {
 				removeStats();
 			}
 		});
@@ -116,7 +117,20 @@ public class StatsWindow extends Popup {
 	}
 
 	private void loadApplyButton(){
-
+		applyButton = new Image(res.getTexture("apply"));
+		applyButton.layout();
+		applyButton.setBounds(460, 600, 150, 75);
+		applyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(applyButton) {
+			@Override
+			public void doAction() {
+				new Confirmation(game, "Stats Change Confirmation") {
+					public void doSomething() {
+						//TODO function to change stats
+					}
+				};
+			}
+		});
+		stage.addActor(applyButton);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -137,8 +151,47 @@ public class StatsWindow extends Popup {
 		title.remove();
 		background.remove();
 		lobbyButton.remove();
+		applyButton.remove();
+		availablePoints.remove();
+		for(int i = 0; i < 3; i++){
+			statMinusButtons[i].remove();
+			statPlusButtons[i].remove();
+		}
+
 		characterStats.remove();
 		for (int i=0; i<3; i++){icons[i].remove();}
+	}
+	private void loadStatsAdjustButton(){
+		for(int i = 0; i<3; i++) {
+			statPlusButtons[i] = new Image(res.getTexture("plus"));
+			statPlusButtons[i].layout();
+			statPlusButtons[i].setBounds(420, Betrayal.HEIGHT-380-90*i, 50, 50);
+			statPlusButtons[i].addListener(new com.jnv.betrayal.inputprocessors.InputListener(statPlusButtons[i]) {
+				@Override
+				public void doAction() {
+					//TODO: check available points if >0 then allow to press
+				}
+			});
+			stage.addActor(statPlusButtons[i]);
+
+			statMinusButtons[i] = new Image(res.getTexture("minus"));
+			statMinusButtons[i].layout();
+			statMinusButtons[i].setBounds(520, Betrayal.HEIGHT-380-90*i, 50, 50);
+			statMinusButtons[i].addListener(new com.jnv.betrayal.inputprocessors.InputListener(statMinusButtons[i]) {
+				@Override
+				public void doAction() {
+
+				}
+			});
+			stage.addActor(statMinusButtons[i]);
+		}
+	}
+
+	private void loadAvailablePoints(){
+		availablePoints = new Label("Available Points:", FontManager.getFont(40));
+		availablePoints.setX(Betrayal.WIDTH/2-150);
+		availablePoints.setY(Betrayal.HEIGHT - 225);
+		stage.addActor(availablePoints);
 	}
 
 	private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {

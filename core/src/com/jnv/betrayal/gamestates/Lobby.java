@@ -127,7 +127,7 @@ public class Lobby extends GameState {
 	private void loadAllPlayersBackground() {
 		Image allPlayersBackground = new Image(res.getTexture("lobby-screen"));
 		allPlayersBackground.layout();
-		allPlayersBackground.setBounds(Betrayal.WIDTH * 2 / 5, 510, Betrayal.WIDTH * 3 / 5 - 10, Betrayal.HEIGHT / 3 + 175);
+		allPlayersBackground.setBounds(Betrayal.WIDTH /2+10, 510, Betrayal.WIDTH /2 - 20, Betrayal.HEIGHT / 3 + 175);
 		stage.addActor(allPlayersBackground);
 	}
 
@@ -145,11 +145,16 @@ public class Lobby extends GameState {
 		stage.addActor(tower);
 	}
 
+	private void loadPartyLevels() {
+		//TODO: Finish this
+	}
+
 	private void loadContent() {
 		loadBackground();
 		loadAllPlayersBackground();
 		loadChatBackground();
 		loadTower();
+		loadPartyLevels();
 		loadShopButton();
 		loadSettingsButton();
 		loadPartyButton();
