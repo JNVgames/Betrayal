@@ -4,7 +4,11 @@
 
 package com.jnv.betrayal.character;
 
-public class Stats {
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+import com.jnv.betrayal.character.utils.Stat;
+
+public class Stats implements Json.Serializable {
 
 	private int health, defense, attack, floor;
 
@@ -27,7 +31,7 @@ public class Stats {
 			case DEFENSE:
 				return defense;
 			default:
-				return -1;
+				throw new AssertionError("Stat doesn't exist");
 		}
 	}
 
@@ -42,7 +46,7 @@ public class Stats {
 			case DEFENSE:
 				return "Defense: " + defense;
 			default:
-				return null;
+				throw new AssertionError("Stat doesn't exist");
 		}
 	}
 
@@ -55,7 +59,16 @@ public class Stats {
 		this.floor = floor;
 	}
 
-	public enum Stat {
-		FLOOR, HEALTH, DEFENSE, ATTACK
+	public void write(Json json) {
+		json.writeObjectStart("stats");
+		json.writeField(this, "health", Integer.class);
+		json.writeField(this, "defense", Integer.class);
+		json.writeField(this, "attack", Integer.class);
+		json.writeField(this, "floor", Integer.class);
+		json.writeObjectEnd();
+	}
+
+	public void read(Json json, JsonValue jsonData) {
+
 	}
 }

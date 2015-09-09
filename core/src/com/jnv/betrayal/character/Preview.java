@@ -11,17 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Slot;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Preview {
+public class Preview implements Json.Serializable {
 
 	PreviewHandler previewHandler;
 	BetrayalAssetManager res;
 	Character character;
-	Gender gender;
 	/**
 	 * Textures for character head, format: head_side_walkAnimation
 	 */
@@ -38,6 +39,7 @@ public class Preview {
 	/**
 	 * Holds character trait values
 	 */
+	Gender gender;
 	int hair_male, hair_female, hairColor;
 
 	public Preview(Character character, BetrayalAssetManager res) {
@@ -262,5 +264,18 @@ public class Preview {
 		});
 
 		return group_previewRotators;
+	}
+
+	public void write(Json json) {
+		json.writeObjectStart("traits");
+		json.writeField(this, "gender", String.class);
+		if (gender == Gender.MALE) json.writeField(this, "hair_male", Integer.class);
+		else json.writeField(this, "hair_female", Integer.class);
+		json.writeField(this, "hairColor", Integer.class);
+		json.writeObjectEnd();
+	}
+
+	public void read(Json json, JsonValue jsonData) {
+
 	}
 }

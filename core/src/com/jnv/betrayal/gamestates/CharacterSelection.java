@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
@@ -296,16 +297,16 @@ public class CharacterSelection extends GameState {
 
 	public void updateJobDescription(Label label) {
 		switch (character.job.getJob()) {
-			case Job.WARRIOR:
+			case Jobs.WARRIOR:
 				label.setText(JobDescription.getWarriorDescription());
 				break;
-			case Job.KNIGHT:
+			case Jobs.KNIGHT:
 				label.setText(JobDescription.getKnightDescription());
 				break;
-			case Job.PRIEST:
+			case Jobs.PRIEST:
 				label.setText(JobDescription.getPriestDescription());
 				break;
-			case Job.THIEF:
+			case Jobs.THIEF:
 				label.setText(JobDescription.getThiefDescription());
 				break;
 			default:

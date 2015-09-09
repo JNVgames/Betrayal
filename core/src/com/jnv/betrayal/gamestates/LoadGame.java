@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
@@ -37,6 +38,7 @@ public class LoadGame extends GameState {
 		savedSessions = new Group[player.getCharacters().size()];
 
 		loadStage();
+		System.out.println(player.getCurrentCharacter().toJson());
 	}
 
 	public void update(float dt) {
@@ -140,7 +142,7 @@ public class LoadGame extends GameState {
 			preview.addActor(preview_floor);
 
 			Label preview_floorNum =
-					new Label(Integer.toString(c.stats.getStat(Stats.Stat.FLOOR)),
+					new Label(Integer.toString(c.stats.getStat(Stat.FLOOR)),
 							loadFont(100));
 			preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
 					preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());

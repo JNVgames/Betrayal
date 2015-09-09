@@ -4,12 +4,9 @@
 
 package com.jnv.betrayal.character;
 
-public class Job {
+import com.jnv.betrayal.character.utils.Jobs;
 
-	public static final int WARRIOR = 0;
-	public static final int THIEF = 1;
-	public static final int KNIGHT = 2;
-	public static final int PRIEST = 3;
+public class Job {
 
 	private int job;
 
@@ -23,13 +20,13 @@ public class Job {
 	// Static convenience methods
 	public static String getJobInitial(int job) {
 		switch (job) {
-			case Job.WARRIOR:
+			case Jobs.WARRIOR:
 				return "W";
-			case Job.KNIGHT:
+			case Jobs.KNIGHT:
 				return "K";
-			case Job.PRIEST:
+			case Jobs.PRIEST:
 				return "P";
-			case Job.THIEF:
+			case Jobs.THIEF:
 				return "T";
 			default:
 				return null;
@@ -48,13 +45,13 @@ public class Job {
 
 	public String toString() {
 		switch (job) {
-			case WARRIOR:
+			case Jobs.WARRIOR:
 				return "Warrior";
-			case KNIGHT:
+			case Jobs.KNIGHT:
 				return "Knight";
-			case PRIEST:
+			case Jobs.PRIEST:
 				return "Priest";
-			case THIEF:
+			case Jobs.THIEF:
 				return "Thief";
 			default:
 				return null;

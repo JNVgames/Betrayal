@@ -5,6 +5,8 @@
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
@@ -12,7 +14,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  *
  * @author Vincent Wang
  */
-public class Character {
+public class Character implements Json.Serializable {
 
 	private String name;
 	public final Preview preview;
@@ -31,9 +33,9 @@ public class Character {
 		inventory = new Inventory(res);
 		stats = new Stats();
 
-		job.setJob(Job.WARRIOR);
+		job.setJob(Jobs.WARRIOR);
 		update();
-		//toJson();
+		toJson();
 	}
 
 	private void update() {
@@ -56,6 +58,20 @@ public class Character {
 
 	public String toJson() {
 		Json json = new Json();
-		return json.toJson(this);
+		System.out.println(json.prettyPrint(this));
+		return json.prettyPrint(this);
+	}
+
+	// Json methods
+	public void write(Json json) {
+		json.writeField(job, "job", Job.class);
+		preview.write(json);
+		equips.write(json);
+		inventory.write(json);
+		stats.write(json);
+	}
+
+	public void read(Json json, JsonValue jsonData) {
+
 	}
 }

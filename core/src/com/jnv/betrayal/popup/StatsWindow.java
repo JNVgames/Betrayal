@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -109,10 +110,10 @@ public class StatsWindow extends Popup {
 	private void loadCharacterStats() {
 		yRef = title.getY();
 
-		characterStatsLabel(characterStats, Stats.Stat.FLOOR, yRef);
-		characterStatsLabel(characterStats, Stats.Stat.HEALTH, yRef);
-		characterStatsLabel(characterStats, Stats.Stat.DEFENSE, yRef);
-		characterStatsLabel(characterStats, Stats.Stat.ATTACK, yRef);
+		characterStatsLabel(characterStats, Stat.FLOOR, yRef);
+		characterStatsLabel(characterStats, Stat.HEALTH, yRef);
+		characterStatsLabel(characterStats, Stat.DEFENSE, yRef);
+		characterStatsLabel(characterStats, Stat.ATTACK, yRef);
 	}
 
 	private void loadApplyButton(){
@@ -193,7 +194,7 @@ public class StatsWindow extends Popup {
 		stage.addActor(availablePoints);
 	}
 
-	private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
+	private void characterStatsLabel(Group group, Stat stat, float yReference) {
 		int fontSize = 40;
 		Label statsText = new Label("", FontManager.getFont(fontSize));
 		statsText.setText(character.stats.toString(stat));

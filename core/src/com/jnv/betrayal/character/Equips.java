@@ -5,6 +5,8 @@
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.*;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.Equip;
@@ -14,18 +16,18 @@ import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public class Equips {
+public class Equips implements Json.Serializable {
 
 	private EquipsHandler equipsHandler;
 	Character character;
 	BetrayalAssetManager res;
 
 	// todo @vincent add getPreview() for equip class
-	HeadGear slot_armor_head;
-	BodyArmor slot_armor_body;
-	Shield slot_shield;
-	Ring slot_ring_1, slot_ring_2;
-	Weapon slot_weapon;
+	HeadGear headArmor;
+	BodyArmor bodyArmor;
+	Shield shield;
+	Ring ring1, ring2;
+	Weapon weapon;
 
 	public Equips(Character character, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
@@ -35,52 +37,52 @@ public class Equips {
 
 	// Getters
 	public boolean isHeadSlotEmpty() {
-		return slot_armor_head == null;
+		return headArmor == null;
 	}
 
 	public boolean isBodySlotEmpty() {
-		return slot_armor_body == null;
+		return bodyArmor == null;
 	}
 
 	public boolean isShieldSlotEmpty() {
-		return slot_shield == null;
+		return shield == null;
 	}
 
 	public boolean isWeaponSlotEmpty() {
-		return slot_ring_1 == null;
+		return weapon == null;
 	}
 
 	public boolean isRingSlot1Empty() {
-		return slot_ring_1 == null;
+		return ring1 == null;
 	}
 
 	public boolean isRingSlot2Empty() {
-		return slot_ring_2 == null;
+		return ring2 == null;
 	}
 
 	public Texture getHeadArmorPreview() {
-		return slot_armor_head.getPreview();
+		return headArmor.getPreview();
 	}
 
 	public Texture getBodyArmorPreview() {
-		if (slot_armor_body == null) return res.getTexture("char-armor-peasant");
-		else return slot_armor_body.getPreview();
+		if (bodyArmor == null) return res.getTexture("char-armor-peasant");
+		else return bodyArmor.getPreview();
 	}
 
 	public Texture getShieldPreview() {
-		return slot_shield.getPreview();
+		return shield.getPreview();
 	}
 
 	public Texture getWeaponPreview() {
-		return slot_weapon.getPreview();
+		return weapon.getPreview();
 	}
 
 	public Texture getRing1Preview() {
-		return slot_ring_1.getItemIcon();
+		return ring1.getItemIcon();
 	}
 
 	public Texture getRing2Preview() {
-		return slot_ring_2.getItemIcon();
+		return ring2.getItemIcon();
 	}
 
 	// Setters
@@ -118,4 +120,18 @@ public class Equips {
 		}
 	}
 
+	public void write(Json json) {
+		json.writeObjectStart("equips");
+		json.writeField(this, "headArmor", String.class);
+		json.writeField(this, "bodyArmor", String.class);
+		json.writeField(this, "shield", String.class);
+		json.writeField(this, "ring1", String.class);
+		json.writeField(this, "ring2", String.class);
+		json.writeField(this, "weapon", String.class);
+		json.writeObjectEnd();
+	}
+
+	public void read(Json json, JsonValue jsonData) {
+
+	}
 }

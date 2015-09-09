@@ -4,13 +4,15 @@
 
 package com.jnv.betrayal.character;
 
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventory {
+public class Inventory implements Json.Serializable {
 
 	private BetrayalAssetManager res;
 	private int gold, items_max;
@@ -83,4 +85,14 @@ public class Inventory {
 		gold += amount;
 	}
 
+	public void write(Json json) {
+		json.writeObjectStart("inventory");
+		json.writeField(this, "gold", Integer.class);
+		json.writeField(this, "items", List.class);
+		json.writeObjectEnd();
+	}
+
+	public void read(Json json, JsonValue jsonData) {
+
+	}
 }
