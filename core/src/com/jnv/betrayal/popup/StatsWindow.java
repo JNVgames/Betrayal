@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.character.Rotation;
+import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.gameobjects.Character;
 import com.jnv.betrayal.main.Betrayal;

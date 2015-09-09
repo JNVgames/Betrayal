@@ -2,13 +2,14 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.utilities.objects;
+package com.jnv.betrayal.dungeon.utils.objects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.jnv.betrayal.character.Rotation;
+import com.jnv.betrayal.character.utils.Rotation;
+import com.jnv.betrayal.dungeon.utils.constants.DungeonCoords;
 import com.jnv.betrayal.gameobjects.Character;
 
 public class Player extends Entity {
@@ -26,7 +27,7 @@ public class Player extends Entity {
 	}
 
 	public void createActor(int player) {
-		final Vector2 coords = com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords.player[player];
+		final Vector2 coords = DungeonCoords.player[player];
 		actor = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
 				batch.setColor(getColor());

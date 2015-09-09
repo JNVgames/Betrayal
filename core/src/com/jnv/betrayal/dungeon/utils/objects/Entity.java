@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.utilities.objects;
+package com.jnv.betrayal.dungeon.utils.objects;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

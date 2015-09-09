@@ -2,14 +2,11 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.utilities.objects;
+package com.jnv.betrayal.dungeon.utils.objects;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.dungeon.managers.MonsterManager;
-import com.jnv.betrayal.dungeon.utilities.constants.DungeonCoords;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.MonsterConstants;
