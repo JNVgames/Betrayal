@@ -407,7 +407,7 @@ public class ResourceLoader {
 
 	private void loadMonsterData() {
 		//Tier 0
-		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1, 300, 300, 400, 400);
+		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1, 300, 300, 400, 400, 1, 0, 0,0,0,0,0);
 		// Tier1
 		/*
 		new Monster(1, "monster-tier1-0", res).setData("monster-tier1-0", 25, 10, 1);
