@@ -35,7 +35,6 @@ public class Character implements Json.Serializable {
 
 		job.setJob(Jobs.WARRIOR);
 		update();
-		toJson();
 	}
 
 	private void update() {
@@ -54,12 +53,6 @@ public class Character implements Json.Serializable {
 	// Setters
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String toJson() {
-		Json json = new Json();
-		System.out.println(json.prettyPrint(this));
-		return json.prettyPrint(this);
 	}
 
 	// Json methods

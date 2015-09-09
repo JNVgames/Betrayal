@@ -38,7 +38,6 @@ public class LoadGame extends GameState {
 		savedSessions = new Group[player.getCharacters().size()];
 
 		loadStage();
-		System.out.println(player.getCurrentCharacter().toJson());
 	}
 
 	public void update(float dt) {

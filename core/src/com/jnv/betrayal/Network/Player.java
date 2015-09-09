@@ -3,13 +3,15 @@ package com.jnv.betrayal.Network;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.character.Character;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Json.Serializable {
     public int playerID;
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/new_player";
     //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/new_player";
@@ -81,8 +83,8 @@ public class Player {
     }
 
 	public String toJson() {
-		//currentCharacter.toJson();
-		return null; // stub
+		Json json = new Json();
+        return json.prettyPrint(this);
 	}
 
     // Getters
@@ -101,4 +103,13 @@ public class Player {
         return characters.remove(character);
     }
 
+    // Json methods
+    public void write(Json json) {
+        json.writeField(this, "playerID", Integer.class);
+        currentCharacter.write(json);
+    }
+
+    public void read(Json json, JsonValue jsonData) {
+
+    }
 }
