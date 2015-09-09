@@ -106,7 +106,9 @@ public class Player implements Json.Serializable {
     // Json methods
     public void write(Json json) {
         json.writeField(this, "playerID", Integer.class);
-        currentCharacter.write(json);
+		json.writeObjectStart("currentCharacter");
+		currentCharacter.write(json);
+		json.writeObjectEnd();
     }
 
     public void read(Json json, JsonValue jsonData) {

@@ -55,6 +55,11 @@ public class Character implements Json.Serializable {
 		this.name = name;
 	}
 
+	public String toJson() {
+		Json json = new Json();
+		return json.prettyPrint(this);
+	}
+
 	// Json methods
 	public void write(Json json) {
 		json.writeField(job, "job", Job.class);
