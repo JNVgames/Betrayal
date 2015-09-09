@@ -20,8 +20,8 @@ public class DungeonMonster extends Entity {
 	public DungeonMonster(BetrayalAssetManager res, int tier, int monsterID, Stage stage) {
 		super(stage);
 		int numMonsters = 1;
-		//tier = 1;
-		//monsterID = 9;
+		tier = 0;
+		monsterID = 0;
 		if(tier==1&&monsterID==9) {
 			monsterID = 2;
 		}
@@ -30,15 +30,13 @@ public class DungeonMonster extends Entity {
 		for (int i = 0; i < numMonsters; i++) {
 			switch (tier) {
 				case 0:
-					monster[i] = new Monster("monster-tier0-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier0MonstersPosition[monsterID].x,
-							MonsterConstants.tier0MonstersPosition[monsterID].y,
-							MonsterConstants.tier0Monsters[monsterID].getWidth(),
-							MonsterConstants.tier0Monsters[monsterID].getHeight());
-					monsterID += 10;
+						monster[i] = new Monster("monster-tier0-" + monsterID, res);
+						image[i] = new Image(monster[i].getMonsterTexture());
+						image[i].layout();
+						image[i].setBounds(monster[i].getWidth(), monster[i].getHeight(),
+								monster[i].getxPos(), monster[i].getyPos());
+
+						//image[i].setBounds(300-i*200, 300, 400, 400);
 					break;
 				case 1:
 					monster[i] = new Monster("monster-tier1-" + monsterID, res);

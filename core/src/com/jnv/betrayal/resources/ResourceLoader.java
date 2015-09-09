@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.resources;
 
+import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.Weapon;
 
@@ -406,8 +407,9 @@ public class ResourceLoader {
 
 	private void loadMonsterData() {
 		//Tier 0
-		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1);
+		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1, 300, 300, 400, 400);
 		// Tier1
+		/*
 		new Monster(1, "monster-tier1-0", res).setData("monster-tier1-0", 25, 10, 1);
 		new Monster(1, "monster-tier1-1", res).setData("monster-tier1-1", 25, 10, 1);
 		new Monster(1, "monster-tier1-2", res).setData("monster-tier1-2", 25, 10, 1);
@@ -457,5 +459,6 @@ public class ResourceLoader {
 		new Monster(1, "monster-tier5-3", res).setData("monster-tier5-3", 25, 10, 1);
 		new Monster(1, "monster-tier5-4", res).setData("monster-tier5-4", 25, 10, 1);
 		new Monster(1, "monster-tier5-5", res).setData("monster-tier5-5", 25, 10, 1);
+		*/
 	}
 }
