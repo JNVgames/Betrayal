@@ -44,7 +44,7 @@ public class UIManager {
 	}
 
 	private void loadEventLogButton() {
-		float scale = 0.4f;
+		float scale = 0.5f;
 		Image eventLogButton = new Image(res.getTexture("event-log-button"));
 		eventLogButton.layout();
 		eventLogButton.setBounds(20, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144  * scale);
