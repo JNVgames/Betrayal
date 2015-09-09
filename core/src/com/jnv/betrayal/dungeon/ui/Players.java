@@ -6,7 +6,7 @@ package com.jnv.betrayal.dungeon.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.dungeon.utils.objects.Player;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 
 import java.util.ArrayList;
 import java.util.List;

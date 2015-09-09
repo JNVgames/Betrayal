@@ -1,12 +1,11 @@
 package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class FriendsList extends Popup {
 
@@ -29,7 +28,7 @@ public class FriendsList extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeFriendsList();
@@ -68,7 +67,7 @@ public class FriendsList extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 390, 110, 180, 60);
-		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
 				removeFriendsList();

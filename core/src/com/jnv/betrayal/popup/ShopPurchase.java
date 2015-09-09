@@ -1,15 +1,14 @@
 package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class ShopPurchase extends Popup {
 
@@ -22,8 +21,8 @@ public class ShopPurchase extends Popup {
 
 	public ShopPurchase(Betrayal game, Item item) {
 		super(game);
+		currentItem = item;
 		currentSide = 0;
-		character = game.getPlayer().getCurrentCharacter();
 		loadButtons();
 	}
 
@@ -43,7 +42,7 @@ public class ShopPurchase extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeShopPurchase();
@@ -86,12 +85,12 @@ public class ShopPurchase extends Popup {
 		buyButton = new Image(res.getTexture("buy"));
 		buyButton.layout();
 		buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 220, 100, 50);
-		buyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(buyButton) {
+		buyButton.addListener(new InputListener(buyButton) {
 			@Override
 			public void doAction() {
 				new Confirmation(game, "Confirm purchase") {
 					public void doSomething() {
-						character.getInventory().addItem(new Weapon("sword11", res));
+						character.inventory.addItem(new Weapon("sword11", res));
 					}
 				};
 			}
@@ -103,7 +102,7 @@ public class ShopPurchase extends Popup {
 		backButton = new Image(res.getTexture("back"));
 		backButton.layout();
 		backButton.setBounds(Betrayal.WIDTH / 2 - 150, 220, 100, 50);
-		backButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(backButton) {
+		backButton.addListener(new InputListener(backButton) {
 			@Override
 			public void doAction() {
 				removeShopPurchase();
@@ -139,7 +138,7 @@ public class ShopPurchase extends Popup {
 		leftArrow = new Image(res.getTexture("arrow-left"));
 		leftArrow.layout();
 		leftArrow.setBounds(Betrayal.WIDTH / 2 - 150, 300, 100, 50);
-		leftArrow.addListener(new com.jnv.betrayal.inputprocessors.InputListener(leftArrow) {
+		leftArrow.addListener(new InputListener(leftArrow) {
 			@Override
 			public void doAction() {
 				currentSide--;
@@ -153,7 +152,7 @@ public class ShopPurchase extends Popup {
 		rightArrow = new Image(res.getTexture("arrow-right"));
 		rightArrow.layout();
 		rightArrow.setBounds(Betrayal.WIDTH / 2 + 50, 300, 100, 50);
-		rightArrow.addListener(new com.jnv.betrayal.inputprocessors.InputListener(rightArrow) {
+		rightArrow.addListener(new InputListener(rightArrow) {
 			@Override
 			public void doAction() {
 				currentSide = (currentSide + 1) % 4;

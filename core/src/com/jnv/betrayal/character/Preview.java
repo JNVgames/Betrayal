@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.character.utils.Slot;
 import com.jnv.betrayal.character.utils.Gender;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Preview {
@@ -128,7 +128,7 @@ public class Preview {
 		return getFullPreview();
 	}
 
-	public String getTrait(Character.Trait trait) {
+	public String getTrait(Trait trait) {
 		switch (trait) {
 			case GENDER:
 				if (gender == Gender.MALE) return "M";
@@ -140,7 +140,7 @@ public class Preview {
 				if (gender == Gender.MALE) return Integer.toString(hairColor);
 				else return Integer.toString(hairColor);
 			case JOB:
-				return Job.getJobInitial(character.getJob().getJob());
+				return Job.getJobInitial(character.job.getJob());
 			default:
 				return null;
 		}
@@ -164,7 +164,7 @@ public class Preview {
 		this.rotation = rotation;
 	}
 
-	public void setPreviousTrait(Character.Trait trait) {
+	public void setPreviousTrait(Trait trait) {
 		switch (trait) {
 			case GENDER:
 				if (gender == Gender.MALE) gender = Gender.FEMALE;
@@ -189,13 +189,13 @@ public class Preview {
 				update();
 				break;
 			case JOB:
-				character.getJob().setPreviousJob();
+				character.job.setPreviousJob();
 			default:
 				break;
 		}
 	}
 
-	public void setNextTrait(Character.Trait trait) {
+	public void setNextTrait(Trait trait) {
 		switch (trait) {
 			case GENDER:
 				if (gender == Gender.MALE) gender = Gender.FEMALE;
@@ -220,7 +220,7 @@ public class Preview {
 				update();
 				break;
 			case JOB:
-				character.getJob().setNextJob();
+				character.job.setNextJob();
 			default:
 				break;
 		}

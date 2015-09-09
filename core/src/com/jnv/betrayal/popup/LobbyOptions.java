@@ -38,7 +38,7 @@ public class LobbyOptions extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new com.jnv.betrayal.scene2d.InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeLobbyOptons();
@@ -67,7 +67,7 @@ public class LobbyOptions extends Popup {
 		instructions.layout();
 		instructions.setBounds((Betrayal.WIDTH - instructions.getImageWidth()) / 2 + 100,
 				800, 312, 100);
-		instructions.addListener(new com.jnv.betrayal.inputprocessors.InputListener(instructions) {
+		instructions.addListener(new com.jnv.betrayal.scene2d.InputListener(instructions) {
 			@Override
 			public void doAction() {
 				new Instructions(game);
@@ -81,7 +81,7 @@ public class LobbyOptions extends Popup {
 		options.layout();
 		options.setBounds((Betrayal.WIDTH - options.getImageWidth()) / 2 + 100,
 				650, 312, 100);
-		options.addListener(new com.jnv.betrayal.inputprocessors.InputListener(options) {
+		options.addListener(new com.jnv.betrayal.scene2d.InputListener(options) {
 			@Override
 			public void doAction() {
 				new Options(game);
@@ -94,7 +94,7 @@ public class LobbyOptions extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 350, 312, 100);
-		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+		lobbyButton.addListener(new com.jnv.betrayal.scene2d.InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
 				removeLobbyOptons();

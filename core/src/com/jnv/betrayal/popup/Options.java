@@ -6,12 +6,11 @@ package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class Options extends Popup {
 
@@ -37,7 +36,7 @@ public class Options extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeOptions();
@@ -50,7 +49,7 @@ public class Options extends Popup {
 		exitButton = new Image(res.getTexture("x"));
 		exitButton.layout();
 		exitButton.setBounds(Betrayal.WIDTH -250, Betrayal.HEIGHT-250, 100, 100);
-		exitButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(exitButton) {
+		exitButton.addListener(new InputListener(exitButton) {
 			@Override
 			public void doAction() {
 				removeOptions();

@@ -7,15 +7,14 @@ package com.jnv.betrayal.popup;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.character.Stats;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class StatsWindow extends Popup {
 
@@ -43,7 +42,7 @@ public class StatsWindow extends Popup {
 		loadCharacterStats();
 		loadCharacterPreview();
 
-		characterStats.addActor(character.getPreview().createRotators(charPreview.getX() + rotatorIndent,
+		characterStats.addActor(character.preview.createRotators(charPreview.getX() + rotatorIndent,
 				charPreview.getY() - 20, (charPreview.getWidth() - (rotatorIndent * 2 + 30)) / 2, 30));
 	}
 
@@ -65,7 +64,7 @@ public class StatsWindow extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeStats();
@@ -120,7 +119,7 @@ public class StatsWindow extends Popup {
 		applyButton = new Image(res.getTexture("apply"));
 		applyButton.layout();
 		applyButton.setBounds(460, 600, 150, 75);
-		applyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(applyButton) {
+		applyButton.addListener(new InputListener(applyButton) {
 			@Override
 			public void doAction() {
 				new Confirmation(game, "Stats Change Confirmation") {
@@ -137,7 +136,7 @@ public class StatsWindow extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
 				removeStats();
@@ -166,7 +165,7 @@ public class StatsWindow extends Popup {
 			statPlusButtons[i] = new Image(res.getTexture("plus"));
 			statPlusButtons[i].layout();
 			statPlusButtons[i].setBounds(420, Betrayal.HEIGHT-380-90*i, 50, 50);
-			statPlusButtons[i].addListener(new com.jnv.betrayal.inputprocessors.InputListener(statPlusButtons[i]) {
+			statPlusButtons[i].addListener(new InputListener(statPlusButtons[i]) {
 				@Override
 				public void doAction() {
 					//TODO: check available points if >0 then allow to press
@@ -177,7 +176,7 @@ public class StatsWindow extends Popup {
 			statMinusButtons[i] = new Image(res.getTexture("minus"));
 			statMinusButtons[i].layout();
 			statMinusButtons[i].setBounds(520, Betrayal.HEIGHT-380-90*i, 50, 50);
-			statMinusButtons[i].addListener(new com.jnv.betrayal.inputprocessors.InputListener(statMinusButtons[i]) {
+			statMinusButtons[i].addListener(new InputListener(statMinusButtons[i]) {
 				@Override
 				public void doAction() {
 
@@ -197,7 +196,7 @@ public class StatsWindow extends Popup {
 	private void characterStatsLabel(Group group, Stats.Stat stat, float yReference) {
 		int fontSize = 40;
 		Label statsText = new Label("", FontManager.getFont(fontSize));
-		statsText.setText(character.getStats().toString(stat));
+		statsText.setText(character.stats.toString(stat));
 		statsText.layout();
 		statsText.setX(background.getX() + 60);
 		statsText.setY(yReference - fontSize - 50);
@@ -209,7 +208,7 @@ public class StatsWindow extends Popup {
 
 	private void loadCharacterPreview() {
 		int scale = 8;
-		character.getPreview().setRotation(Rotation.FRONT);
+		character.preview.setRotation(Rotation.FRONT);
 		charPreview = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
 				drawPreview(batch);
@@ -222,7 +221,7 @@ public class StatsWindow extends Popup {
 	}
 
 	private void drawPreview(Batch batch) {
-		character.getPreview().drawPreview(batch, charPreview.getX(), charPreview.getY(),
+		character.preview.drawPreview(batch, charPreview.getX(), charPreview.getY(),
 				charPreview.getWidth(), charPreview.getHeight());
 	}
 }

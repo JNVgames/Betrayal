@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.FriendsList;
 import com.jnv.betrayal.popup.Inventory;

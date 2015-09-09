@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.dungeon.utils.constants.DungeonCoords;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 
 public class Player extends Entity {
 
@@ -22,7 +22,7 @@ public class Player extends Entity {
 		super(stage);
 		this.character = character;
 		username = character.getName();
-		jobName = character.getJob().toString();
+		jobName = character.job.toString();
 		createActor(player);
 	}
 
@@ -31,7 +31,7 @@ public class Player extends Entity {
 		actor = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
 				batch.setColor(getColor());
-				character.getPreview().drawPreview(batch, Rotation.BACK, this.getX(), this.getY(),
+				character.preview.drawPreview(batch, Rotation.BACK, this.getX(), this.getY(),
 						this.getWidth(), this.getHeight());
 			}
 		};

@@ -8,14 +8,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class Inventory extends Popup {
 
@@ -52,7 +51,7 @@ public class Inventory extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeInventory();
@@ -80,7 +79,7 @@ public class Inventory extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
 				removeInventory();
@@ -197,7 +196,7 @@ public class Inventory extends Popup {
 
 	private void loadInventory() {
 		inventory = new Group();
-		Item[][] items = character.getInventory().getItems(6, 5);
+		Item[][] items = character.inventory.getItems(6, 5);
 		Actor[][] itemsDisplay = new Actor[items.length][items[0].length];
 
 		float padding = 10;
@@ -224,10 +223,10 @@ public class Inventory extends Popup {
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());
-		button_sort.addListener(new com.jnv.betrayal.inputprocessors.InputListener(button_sort) {
+		button_sort.addListener(new InputListener(button_sort) {
 			@Override
 			public void doAction() {
-				character.getInventory().sortItems();
+				character.inventory.sortItems();
 				inventory.remove();
 				loadInventory();
 			}

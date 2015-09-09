@@ -6,8 +6,6 @@ package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gameobjects.BodyArmor;
@@ -17,6 +15,7 @@ import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
@@ -63,7 +62,7 @@ public class Shop extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeShop();
@@ -91,7 +90,7 @@ public class Shop extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
-		lobbyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(lobbyButton) {
+		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
 				removeShop();
@@ -104,7 +103,7 @@ public class Shop extends Popup {
 		weapons = new Image(res.getTexture("shop-weapons"));
 		weapons.layout();
 		weapons.setBounds(100, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		weapons.addListener(new com.jnv.betrayal.inputprocessors.InputListener(weapons) {
+		weapons.addListener(new InputListener(weapons) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -119,7 +118,7 @@ public class Shop extends Popup {
 		armors = new Image(res.getTexture("shop-armor"));
 		armors.layout();
 		armors.setBounds(100 + buttonWidth, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		armors.addListener(new com.jnv.betrayal.inputprocessors.InputListener(armors) {
+		armors.addListener(new InputListener(armors) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -134,7 +133,7 @@ public class Shop extends Popup {
 		extras = new Image(res.getTexture("shop-extra"));
 		extras.layout();
 		extras.setBounds(100 + buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		extras.addListener(new com.jnv.betrayal.inputprocessors.InputListener(extras) {
+		extras.addListener(new InputListener(extras) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -149,7 +148,7 @@ public class Shop extends Popup {
 		items = new Image(res.getTexture("shop-item"));
 		items.layout();
 		items.setBounds(100 + buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		items.addListener(new com.jnv.betrayal.inputprocessors.InputListener(items) {
+		items.addListener(new InputListener(items) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -164,7 +163,7 @@ public class Shop extends Popup {
 		money = new Image(res.getTexture("shop-money"));
 		money.layout();
 		money.setBounds(100 + buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - 105, buttonWidth, buttonHeight);
-		money.addListener(new com.jnv.betrayal.inputprocessors.InputListener(money) {
+		money.addListener(new InputListener(money) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -185,10 +184,13 @@ public class Shop extends Popup {
 			sword1[i - 1].layout();
 			sword1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			sword1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(sword1[i - 1]) {
+			sword1[i - 1].addListener(new InputListener(sword1[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Weapon(item1, res));
+					Weapon sword = new Weapon(item1, res);
+					new ShopPurchase(game, sword);
+
+
 				}
 			});
 			stage.addActor(sword1[i - 1]);
@@ -197,7 +199,7 @@ public class Shop extends Popup {
 			sword2[i - 1].layout();
 			sword2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			sword2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(sword2[i - 1]) {
+			sword2[i - 1].addListener(new InputListener(sword2[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new Weapon(item2, res));
@@ -209,7 +211,7 @@ public class Shop extends Popup {
 			shield1[i - 1].layout();
 			shield1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			shield1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(shield1[i - 1]) {
+			shield1[i - 1].addListener(new InputListener(shield1[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item3, res));
@@ -221,7 +223,7 @@ public class Shop extends Popup {
 			shield2[i - 1].layout();
 			shield2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			shield2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(shield2[i-1]) {
+			shield2[i - 1].addListener(new InputListener(shield2[i-1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item4, res));
@@ -262,7 +264,7 @@ public class Shop extends Popup {
 			ring1[i - 1].layout();
 			ring1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			ring1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(ring1[i - 1]) {
+			ring1[i - 1].addListener(new InputListener(ring1[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item1, res));
@@ -274,7 +276,7 @@ public class Shop extends Popup {
 			ring2[i - 1].layout();
 			ring2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			ring2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(ring2[i-1]) {
+			ring2[i - 1].addListener(new InputListener(ring2[i-1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item2, res));
@@ -308,7 +310,7 @@ public class Shop extends Popup {
 			headgear1[i - 1].layout();
 			headgear1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			headgear1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(headgear1[i - 1]) {
+			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
@@ -321,7 +323,7 @@ public class Shop extends Popup {
 			headgear2[i - 1].layout();
 			headgear2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			headgear2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(headgear2[i - 1]) {
+			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
@@ -334,7 +336,7 @@ public class Shop extends Popup {
 			armor1[i - 1].layout();
 			armor1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			armor1[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(armor1[i - 1]) {
+			armor1[i - 1].addListener(new InputListener(armor1[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item3, res));
@@ -347,7 +349,7 @@ public class Shop extends Popup {
 			armor2[i - 1].layout();
 			armor2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			armor2[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(armor2[i - 1]) {
+			armor2[i - 1].addListener(new InputListener(armor2[i - 1]) {
 				@Override
 				public void doAction() {
 					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item4, res));
@@ -393,7 +395,7 @@ public class Shop extends Popup {
 			potions[i - 1].layout();
 			if (i <= 6) {
 				potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-				potions[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(potions[i - 1]) {
+				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
 					@Override
 					public void doAction() {
 						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));
@@ -402,7 +404,7 @@ public class Shop extends Popup {
 				stage.addActor(potions[i - 1]);
 			}else {
 				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-				potions[i - 1].addListener(new com.jnv.betrayal.inputprocessors.InputListener(potions[i - 1]) {
+				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
 					@Override
 					public void doAction() {
 						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));

@@ -17,8 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Stats;
-import com.jnv.betrayal.gameobjects.Character;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 
@@ -112,7 +112,7 @@ public class LoadGame extends GameState {
 			final int i = counter;
 			Actor preview_charPrev = new Actor() {
 				public void draw(Batch sb, float pa) {
-					character.getPreview().drawPreview(sb, 0, preview_frame.getX() + 5,
+					character.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
 							preview_frame.getY() + 5, 32 * 4, 48 * 4);
 				}
 			};
@@ -126,7 +126,7 @@ public class LoadGame extends GameState {
 			preview_name.setColor(Color.WHITE);
 			preview.addActor(preview_name);
 
-			Label preview_class = new Label(c.getJob().toString(), loadFont(50));
+			Label preview_class = new Label(c.job.toString(), loadFont(50));
 			preview_class.setX(preview_name.getX());
 			preview_class.setY(preview_name.getY() - 10 - preview_class.getPrefHeight());
 			preview_class.setColor(Color.LIGHT_GRAY);
@@ -140,7 +140,7 @@ public class LoadGame extends GameState {
 			preview.addActor(preview_floor);
 
 			Label preview_floorNum =
-					new Label(Integer.toString(c.getStats().getStat(Stats.Stat.FLOOR)),
+					new Label(Integer.toString(c.stats.getStat(Stats.Stat.FLOOR)),
 							loadFont(100));
 			preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
 					preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());

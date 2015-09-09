@@ -17,7 +17,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 public class Equips {
 
 	private EquipsHandler equipsHandler;
-	com.jnv.betrayal.gameobjects.Character character;
+	Character character;
 	BetrayalAssetManager res;
 
 	// todo @vincent add getPreview() for equip class
@@ -27,7 +27,7 @@ public class Equips {
 	Ring slot_ring_1, slot_ring_2;
 	Weapon slot_weapon;
 
-	public Equips(com.jnv.betrayal.gameobjects.Character character, BetrayalAssetManager res) {
+	public Equips(Character character, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
 		this.character = character;
 		this.res = res;

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Timer;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +79,11 @@ public class Player {
             Gdx.app.log("Player.java", "Http Request cancelled.");
         }
     }
+
+	public String toJson() {
+		//currentCharacter.toJson();
+		return null; // stub
+	}
 
     // Getters
     public List<Character> getCharacters() { return characters; }

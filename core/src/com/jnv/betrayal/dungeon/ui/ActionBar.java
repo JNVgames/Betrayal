@@ -17,7 +17,7 @@ import com.jnv.betrayal.dungeon.utils.constants.Action;
 import com.jnv.betrayal.dungeon.utils.constants.Panel;
 import com.jnv.betrayal.dungeon.utils.constants.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.resources.FontManager;

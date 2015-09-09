@@ -5,7 +5,7 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.gameobjects.Character;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;

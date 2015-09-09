@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Instructions;
 import com.jnv.betrayal.popup.Options;

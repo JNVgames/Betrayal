@@ -18,8 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Job;
-import com.jnv.betrayal.gameobjects.Character;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.utils.Trait;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.JobDescription;
@@ -82,10 +83,10 @@ public class CharacterSelection extends GameState {
 		loadImagePreview();
 		loadPreviewRotators();
 
-		gender = new SelectionField("Gender", Character.Trait.GENDER);
-		hairStyle = new SelectionField("Hair Style", Character.Trait.HAIR_STYLE);
-		hairColor = new SelectionField("Hair Color", Character.Trait.HAIR_COLOR);
-		job = new SelectionField("Class", Character.Trait.JOB);
+		gender = new SelectionField("Gender", Trait.GENDER);
+		hairStyle = new SelectionField("Hair Style", Trait.HAIR_STYLE);
+		hairColor = new SelectionField("Hair Color", Trait.HAIR_COLOR);
+		job = new SelectionField("Class", Trait.JOB);
 
 		gender.addToStage();
 		hairStyle.addToStage();
@@ -230,7 +231,7 @@ public class CharacterSelection extends GameState {
 		previewRotators_leftArrow.addListener(new InputListener(previewRotators_leftArrow) {
 			@Override
 			public void doAction() {
-				character.getPreview().rotateLeft();
+				character.preview.rotateLeft();
 			}
 		});
 		group_previewRotators.addActor(previewRotators_leftArrow);
@@ -245,7 +246,7 @@ public class CharacterSelection extends GameState {
 		previewRotators_rightArrow.addListener(new InputListener(previewRotators_rightArrow) {
 			@Override
 			public void doAction() {
-				character.getPreview().rotateRight();
+				character.preview.rotateRight();
 			}
 		});
 		stage.addActor(group_previewRotators);
@@ -262,7 +263,7 @@ public class CharacterSelection extends GameState {
 	private void loadPreview() {
 		Actor field_preview = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
-				character.getPreview().drawPreview(batch, field_framePreview.getX(),
+				character.preview.drawPreview(batch, field_framePreview.getX(),
 						field_framePreview.getY(), field_framePreview.getWidth(),
 						field_framePreview.getHeight());
 			}
@@ -294,7 +295,7 @@ public class CharacterSelection extends GameState {
 	}
 
 	public void updateJobDescription(Label label) {
-		switch (character.getJob().getJob()) {
+		switch (character.job.getJob()) {
 			case Job.WARRIOR:
 				label.setText(JobDescription.getWarriorDescription());
 				break;
@@ -315,7 +316,7 @@ public class CharacterSelection extends GameState {
 	// Classes
 	private class SelectionField {
 
-		private Character.Trait trait;
+		private Trait trait;
 
 		private Group group_selectionField;
 		private Label field_selection_label, field_selection_serialNumber;
@@ -327,7 +328,7 @@ public class CharacterSelection extends GameState {
 		 * @param label name of character trait to be edited
 		 * @param t     specifies character trait to be edited
 		 */
-		public SelectionField(String label, Character.Trait t) {
+		public SelectionField(String label, Trait t) {
 			this.trait = t;
 			group_selectionField = new Group();
 
@@ -384,7 +385,7 @@ public class CharacterSelection extends GameState {
 		}
 
 		public void update() {
-			field_selection_serialNumber.setText(character.getPreview().getTrait(trait));
+			field_selection_serialNumber.setText(character.preview.getTrait(trait));
 		}
 
 		// Helpers
@@ -392,12 +393,12 @@ public class CharacterSelection extends GameState {
 			stage.addActor(group_selectionField);
 		}
 
-		private void setPreviousTrait(Character.Trait trait) {
-			character.getPreview().setPreviousTrait(trait);
+		private void setPreviousTrait(Trait trait) {
+			character.preview.setPreviousTrait(trait);
 		}
 
-		private void setNextTrait(Character.Trait trait) {
-			character.getPreview().setNextTrait(trait);
+		private void setNextTrait(Trait trait) {
+			character.preview.setNextTrait(trait);
 		}
 	}
 }

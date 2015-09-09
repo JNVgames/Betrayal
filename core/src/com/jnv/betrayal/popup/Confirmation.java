@@ -2,13 +2,12 @@ package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 //TODO; add boolean
 //TODO: GET THE @FANGOT BACK TO WORK 8/11
@@ -62,7 +61,7 @@ public class Confirmation extends Popup {
 		yesButton.layout();
 		yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		yesButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(yesButton) {
+		yesButton.addListener(new InputListener(yesButton) {
 			@Override
 			public void doAction() {
 				doSomething();
@@ -75,7 +74,7 @@ public class Confirmation extends Popup {
 		noButton.layout();
 		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		noButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(noButton) {
+		noButton.addListener(new InputListener(noButton) {
 			@Override
 			public void doAction() {
 				removeConfirmation();

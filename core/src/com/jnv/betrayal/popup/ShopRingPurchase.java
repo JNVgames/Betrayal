@@ -2,12 +2,11 @@ package com.jnv.betrayal.popup;
 
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class ShopRingPurchase extends Popup {
 
@@ -33,7 +32,7 @@ public class ShopRingPurchase extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeShopPurchase();
@@ -76,7 +75,7 @@ public class ShopRingPurchase extends Popup {
 		buyButton = new Image(res.getTexture("buy"));
 		buyButton.layout();
 		buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 420, 100, 50);
-		buyButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(buyButton) {
+		buyButton.addListener(new InputListener(buyButton) {
 			@Override
 			public void doAction() {
 				new com.jnv.betrayal.popup.Confirmation(game, "Buy");
@@ -89,7 +88,7 @@ public class ShopRingPurchase extends Popup {
 		backButton = new Image(res.getTexture("back"));
 		backButton.layout();
 		backButton.setBounds(Betrayal.WIDTH / 2 - 150, 420, 100, 50);
-		backButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(backButton) {
+		backButton.addListener(new InputListener(backButton) {
 			@Override
 			public void doAction() {
 				removeShopPurchase();

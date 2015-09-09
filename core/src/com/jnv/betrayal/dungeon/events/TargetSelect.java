@@ -11,7 +11,7 @@ import com.jnv.betrayal.dungeon.utils.constants.DungeonCoords;
 import com.jnv.betrayal.dungeon.utils.objects.Target;
 import com.jnv.betrayal.dungeon.utils.constants.Action;
 import com.jnv.betrayal.dungeon.ui.CurrentAction;
-import com.jnv.betrayal.inputprocessors.InputListener;
+import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 

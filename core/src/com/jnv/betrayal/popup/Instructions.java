@@ -42,7 +42,7 @@ public class Instructions extends Popup {
 	private void loadMask() {
 		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.inputprocessors.InputListener(mask) {
+		mask.addListener(new com.jnv.betrayal.scene2d.InputListener(mask) {
 			@Override
 			public void doAction() {
 				removeInstructions();
@@ -63,7 +63,7 @@ public class Instructions extends Popup {
 		exitButton = new Image(res.getTexture("x"));
 		exitButton.layout();
 		exitButton.setBounds(520, 1080, 100, 100);
-		exitButton.addListener(new com.jnv.betrayal.inputprocessors.InputListener(exitButton) {
+		exitButton.addListener(new com.jnv.betrayal.scene2d.InputListener(exitButton) {
 			@Override
 			public void doAction() {
 				removeInstructions();
