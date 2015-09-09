@@ -28,8 +28,6 @@ public class DungeonMonster extends Entity {
 		image = new Image[5];
 		monster = new Monster[5];
 		for (int i = 0; i < numMonsters; i++) {
-			switch (tier) {
-				case 0:
 						monster[i] = new Monster("monster-tier0-" + monsterID, res);
 						image[i] = new Image(monster[i].getMonsterTexture());
 						image[i].layout();
@@ -37,65 +35,6 @@ public class DungeonMonster extends Entity {
 								monster[i].getxPos(), monster[i].getyPos());
 
 						//image[i].setBounds(300-i*200, 300, 400, 400);
-					break;
-				case 1:
-					monster[i] = new Monster("monster-tier1-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier1MonstersPosition[monsterID].x,
-							MonsterConstants.tier1MonstersPosition[monsterID].y,
-							MonsterConstants.tier1Monsters[monsterID].getWidth(),
-							MonsterConstants.tier1Monsters[monsterID].getHeight());
-					monsterID += 10;
-					break;
-				case 2:
-					monster[i] = new Monster("monster-tier2-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier2MonstersPosition[monsterID].x,
-							MonsterConstants.tier2MonstersPosition[monsterID].y,
-							MonsterConstants.tier2Monsters[monsterID].getWidth(),
-							MonsterConstants.tier2Monsters[monsterID].getHeight());
-					monsterID += 10;
-					break;
-				case 3:
-					monster[i] = new Monster("monster-tier3-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier3MonstersPosition[monsterID].x,
-							MonsterConstants.tier3MonstersPosition[monsterID].y,
-							MonsterConstants.tier3Monsters[monsterID].getWidth(),
-							MonsterConstants.tier3Monsters[monsterID].getHeight());
-					monsterID += 10;
-					break;
-				case 4:
-					monster[i] = new Monster("monster-tier4-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier4MonstersPosition[monsterID].x,
-							MonsterConstants.tier4MonstersPosition[monsterID].y,
-							MonsterConstants.tier4Monsters[monsterID].getWidth(),
-							MonsterConstants.tier4Monsters[monsterID].getHeight());
-					monsterID += 10;
-					break;
-				case 5:
-					monster[i] = new Monster("monster-tier5-" + monsterID, res);
-					image[i] = new Image(monster[i].getMonsterTexture());
-					image[i].layout();
-					image[i].setBounds(
-							MonsterConstants.tier5MonstersPosition[monsterID].x,
-							MonsterConstants.tier5MonstersPosition[monsterID].y,
-							MonsterConstants.tier5Monsters[monsterID].getWidth(),
-							MonsterConstants.tier5Monsters[monsterID].getHeight());
-					monsterID += 10;
-					break;
-				default:
-					break;
-			}
 			image[i].addAction(Actions.alpha(0));
 			image[i].addAction(Actions.delay(1, Actions.fadeIn(2)));
 			stage.addActor(image[i]);

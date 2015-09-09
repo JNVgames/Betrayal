@@ -27,6 +27,7 @@ public class Monster {
 		health = src.getHealth();
 		attack = src.getAttack();
 		defense = src.getDefense();
+
 		monsterTexture = src.getMonsterTexture();
 	}
 
