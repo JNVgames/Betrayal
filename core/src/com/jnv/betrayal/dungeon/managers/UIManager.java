@@ -4,11 +4,15 @@
 
 package com.jnv.betrayal.dungeon.managers;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.dungeon.ui.ActionBar;
 import com.jnv.betrayal.dungeon.ui.CurrentAction;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.scene2d.ui.Image;
 
 import java.util.List;
 
@@ -19,17 +23,33 @@ public class UIManager {
 	private CurrentAction currentAction;
 	private PlayersManager playersManager;
 	private MonsterManager monsterManager;
+	private BetrayalAssetManager res;
+	private Stage stage;
 
 	public UIManager(List<Character> characters, Monster monster,
 					 GameStateManager gsm, DungeonManager dungeonManager) {
 		this.dungeonManager = dungeonManager;
+		res = gsm.getGame().res;
+		stage = gsm.getGame().getStage();
 		currentAction = new CurrentAction(gsm.getGame().getStage(), this);
 		actionBar = new ActionBar(characters.size(), gsm.getGame().getStage(), this);
 		playersManager = new PlayersManager(characters, gsm.getGame().getStage());
 		monsterManager = new MonsterManager(gsm.getGame().res, gsm.getGame().getStage());
+		loadStage();
 		actionBar.start();
 	}
 
+	private void loadStage() {
+		loadEventLogButton();
+	}
+
+	private void loadEventLogButton() {
+		float scale = 0.4f;
+		Image eventLogButton = new Image(res.getTexture("event-log-button"));
+		eventLogButton.layout();
+		eventLogButton.setBounds(20, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144  * scale);
+		stage.addActor(eventLogButton);
+	}
 	// Getters
 	public DungeonManager getDungeonManager() {
 		return dungeonManager;

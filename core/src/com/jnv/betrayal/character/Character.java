@@ -58,7 +58,6 @@ public class Character implements Json.Serializable {
 
 	public String toJson() {
 		Json json = new Json();
-		System.out.println(json.prettyPrint(this));
 		return json.prettyPrint(this);
 	}
 

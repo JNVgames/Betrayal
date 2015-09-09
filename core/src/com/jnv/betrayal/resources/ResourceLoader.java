@@ -65,6 +65,7 @@ public class ResourceLoader {
 	}
 
 	private void loadButtons() {
+		res.loadTexture("button/event_log512x144.png", "event-log-button");
 		res.loadTexture("button/load_game_button512x144.png", "load-game");
 		res.loadTexture("button/load_game_grey512x144.png", "load-game-grey");
 		res.loadTexture("button/new_game_button512x144.png", "new-game");
