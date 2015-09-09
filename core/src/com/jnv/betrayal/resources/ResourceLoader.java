@@ -407,58 +407,57 @@ public class ResourceLoader {
 
 	private void loadMonsterData() {
 		//Tier 0
-		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1, 300, 300, 400, 400, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier0-0", res).setData("monster-tier0-0", 25, 10, 1, 250, 250, 235, 740, 1, 0, 0,0,0,0,0);
+
 		// Tier1
-		/*
-		new Monster(1, "monster-tier1-0", res).setData("monster-tier1-0", 25, 10, 1);
-		new Monster(1, "monster-tier1-1", res).setData("monster-tier1-1", 25, 10, 1);
-		new Monster(1, "monster-tier1-2", res).setData("monster-tier1-2", 25, 10, 1);
-		new Monster(1, "monster-tier1-3", res).setData("monster-tier1-3", 25, 10, 1);
-		new Monster(1, "monster-tier1-4", res).setData("monster-tier1-4", 25, 10, 1);
-		new Monster(1, "monster-tier1-5", res).setData("monster-tier1-5", 25, 10, 1);
-		new Monster(1, "monster-tier1-6", res).setData("monster-tier1-6", 25, 10, 1);
-		new Monster(1, "monster-tier1-7", res).setData("monster-tier1-7", 25, 10, 1);
-		new Monster(1, "monster-tier1-8", res).setData("monster-tier1-8", 25, 10, 1);
-		//Tier1 Mob
-		new Monster(1, "monster-tier1-9", res).setData("monster-tier1-9", 25, 10, 1);
-		new Monster(1, "monster-tier1-19", res).setData("monster-tier1-19", 25, 10, 1);
+		new Monster(1, "monster-tier1-0", res).setData("monster-tier0-0", 25, 10, 1, 350, 400, 185, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-1", res).setData("monster-tier1-1", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-2", res).setData("monster-tier1-2", 25, 10, 1, 250, 300, 235, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-3", res).setData("monster-tier1-3", 25, 10, 1, 450, 400, 135, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-4", res).setData("monster-tier1-4", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-5", res).setData("monster-tier1-5", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-6", res).setData("monster-tier1-6", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-7", res).setData("monster-tier1-7", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-8", res).setData("monster-tier1-8", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0,0,0,0,0);
+		// Tier1 mob1
+		new Monster(1, "monster-tier1-9", res).setData("monster-tier1-9", 25, 10, 1, 300, 350, 110, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier1-19", res).setData("monster-tier1-19", 25, 10, 1, 300, 350, 310, 740, 1, 0, 0,0,0,0,0);
 
-		// Tier 2
-		new Monster(1, "monster-tier2-0", res).setData("monster-tier2-0", 25, 10, 1);
-		new Monster(1, "monster-tier2-1", res).setData("monster-tier2-1", 25, 10, 1);
-		new Monster(1, "monster-tier2-2", res).setData("monster-tier2-2", 25, 10, 1);
-		new Monster(1, "monster-tier2-3", res).setData("monster-tier2-3", 25, 10, 1);
-		new Monster(1, "monster-tier2-4", res).setData("monster-tier2-4", 25, 10, 1);
-		new Monster(1, "monster-tier2-5", res).setData("monster-tier2-5", 25, 10, 1);
-		new Monster(1, "monster-tier2-6", res).setData("monster-tier2-6", 25, 10, 1);
-		new Monster(1, "monster-tier2-7", res).setData("monster-tier2-7", 25, 10, 1);
-		new Monster(1, "monster-tier2-8", res).setData("monster-tier2-8", 25, 10, 1);
+		// Tier2
+		new Monster(1, "monster-tier2-0", res).setData("monster-tier2-0", 25, 10, 1, 400, 450, 160, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-1", res).setData("monster-tier2-1", 25, 10, 1, 350, 450, 285, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-2", res).setData("monster-tier2-2", 25, 10, 1, 450, 450, 135, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-3", res).setData("monster-tier2-3", 25, 10, 1, 500, 450, 110, 715, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-4", res).setData("monster-tier2-4", 25, 10, 1, 650, 550, 35, 690, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-5", res).setData("monster-tier2-5", 25, 10, 1, 500, 500, 110, 690, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-6", res).setData("monster-tier2-6", 25, 10, 1, 500, 500, 110, 640, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-7", res).setData("monster-tier2-7", 25, 10, 1, 400, 600, 160, 690, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier2-8", res).setData("monster-tier2-8", 25, 10, 1, 400, 500, 160, 690, 1, 0, 0,0,0,0,0);
 
-		// Tier 3
-		new Monster(1, "monster-tier3-0", res).setData("monster-tier3-0", 25, 10, 1);
-		new Monster(1, "monster-tier3-1", res).setData("monster-tier3-1", 25, 10, 1);
-		new Monster(1, "monster-tier3-2", res).setData("monster-tier3-2", 25, 10, 1);
-		new Monster(1, "monster-tier3-3", res).setData("monster-tier3-3", 25, 10, 1);
-		new Monster(1, "monster-tier3-4", res).setData("monster-tier3-4", 25, 10, 1);
-		new Monster(1, "monster-tier3-5", res).setData("monster-tier3-5", 25, 10, 1);
-		new Monster(1, "monster-tier3-6", res).setData("monster-tier3-6", 25, 10, 1);
-		new Monster(1, "monster-tier3-7", res).setData("monster-tier3-7", 25, 10, 1);
+		//Tier 3
+		new Monster(1, "monster-tier3-0", res).setData("monster-tier3-0", 25, 10, 1, 450, 400, 135, 715, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-1", res).setData("monster-tier3-1", 25, 10, 1, 600, 500, 60, 640, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-2", res).setData("monster-tier3-2", 25, 10, 1, 400, 450, 160, 690, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-3", res).setData("monster-tier3-3", 25, 10, 1, 400, 450, 160, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-4", res).setData("monster-tier3-4", 25, 10, 1, 550, 500, 85, 740, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-5", res).setData("monster-tier3-5", 25, 10, 1, 500, 550, 110, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-6", res).setData("monster-tier3-6", 25, 10, 1, 500, 500, 110, 710, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier3-7", res).setData("monster-tier3-7", 25, 10, 1, 500, 500, 110, 710, 1, 0, 0,0,0,0,0);
 
-		// Tier 4
-		new Monster(1, "monster-tier4-0", res).setData("monster-tier4-0", 25, 10, 1);
-		new Monster(1, "monster-tier4-1", res).setData("monster-tier4-1", 25, 10, 1);
-		new Monster(1, "monster-tier4-2", res).setData("monster-tier4-2", 25, 10, 1);
-		new Monster(1, "monster-tier4-3", res).setData("monster-tier4-3", 25, 10, 1);
-		new Monster(1, "monster-tier4-4", res).setData("monster-tier4-4", 25, 10, 1);
-		new Monster(1, "monster-tier4-5", res).setData("monster-tier4-5", 25, 10, 1);
+		// Tier4
+		new Monster(1, "monster-tier4-0", res).setData("monster-tier4-0", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier4-1", res).setData("monster-tier4-1", 25, 10, 1, 350, 400, 185, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier4-2", res).setData("monster-tier4-2", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier4-3", res).setData("monster-tier4-3", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier4-4", res).setData("monster-tier4-4", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier4-5", res).setData("monster-tier4-5", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
 
-		//Tier 5
-		new Monster(1, "monster-tier5-0", res).setData("monster-tier5-0", 25, 10, 1);
-		new Monster(1, "monster-tier5-1", res).setData("monster-tier5-1", 25, 10, 1);
-		new Monster(1, "monster-tier5-2", res).setData("monster-tier5-2", 25, 10, 1);
-		new Monster(1, "monster-tier5-3", res).setData("monster-tier5-3", 25, 10, 1);
-		new Monster(1, "monster-tier5-4", res).setData("monster-tier5-4", 25, 10, 1);
-		new Monster(1, "monster-tier5-5", res).setData("monster-tier5-5", 25, 10, 1);
-		*/
+		//Tier5
+		new Monster(1, "monster-tier5-0", res).setData("monster-tier5-0", 25, 10, 1, 650, 550, 35, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier5-1", res).setData("monster-tier5-1", 25, 10, 1, 650, 850, 35, 540, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier5-2", res).setData("monster-tier5-2", 25, 10, 1, 720, 600, 0, 640, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier5-3", res).setData("monster-tier5-3", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier5-4", res).setData("monster-tier5-4", 25, 10, 1, 550, 550, 85, 665, 1, 0, 0,0,0,0,0);
+		new Monster(1, "monster-tier5-5", res).setData("monster-tier5-5", 25, 10, 1, 650, 650, 35, 665, 1, 0, 0,0,0,0,0);
 	}
 }
