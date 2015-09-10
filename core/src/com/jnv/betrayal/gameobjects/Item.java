@@ -17,6 +17,7 @@ public abstract class Item implements Json.Serializable {
 	protected Texture itemIcon;
 	protected String itemName;
 	protected int id, cost_buy, cost_sell;
+	protected boolean isEquippable = false;
 
 	public Item(int id, String name, BetrayalAssetManager res) {
 		this.res = res;
@@ -33,6 +34,7 @@ public abstract class Item implements Json.Serializable {
 		cost_buy = src.getBuyCost();
 		cost_sell = src.getSellCost();
 		itemIcon = src.getItemIcon();
+		isEquippable = src.isEquippable();
 	}
 
 	/**
@@ -52,6 +54,10 @@ public abstract class Item implements Json.Serializable {
 	}
 
 	// Getters
+	public boolean isEquippable() {
+		return isEquippable;
+	}
+
 	public int getID() {
 		return id;
 	}
@@ -60,13 +66,21 @@ public abstract class Item implements Json.Serializable {
 		return itemName;
 	}
 
-	// Setters
-	public void setName(String name) {
-		itemName = name;
+	public Texture getItemIcon() {
+		return itemIcon;
 	}
 
 	public int getBuyCost() {
 		return cost_buy;
+	}
+
+	public int getSellCost() {
+		return cost_sell;
+	}
+
+	// Setters
+	public void setName(String name) {
+		itemName = name;
 	}
 
 	/*
@@ -79,16 +93,8 @@ public abstract class Item implements Json.Serializable {
 		cost_buy = new_cost;
 	}
 
-	public int getSellCost() {
-		return cost_sell;
-	}
-
 	public void setSellCost(int new_cost) {
 		cost_sell = new_cost;
-	}
-
-	public Texture getItemIcon() {
-		return itemIcon;
 	}
 
 	/**

@@ -6,26 +6,26 @@ package com.jnv.betrayal.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Dimensions {
+public class Dimension {
 
 	private float x, y, width, height;
 	private boolean isCenterX, isCenterY;
 
-	public Dimensions(Vector2 coords, float width, float height) {
+	public Dimension(Vector2 coords, float width, float height) {
 		this(coords.x, coords.y, width, height, false, false);
 	}
 
-	public Dimensions(float x, float y, float width, float height) {
+	public Dimension(float x, float y, float width, float height) {
 		this(x, y, width, height, false, false);
 	}
 
-	public Dimensions(Vector2 coords, float width, float height,
-					  boolean isCenterX, boolean isCenterY) {
+	public Dimension(Vector2 coords, float width, float height,
+					 boolean isCenterX, boolean isCenterY) {
 		this(coords.x, coords.y, width, height, isCenterX, isCenterY);
 	}
 
-	public Dimensions(float x, float y, float width, float height,
-					  boolean isCenterX, boolean isCenterY) {
+	public Dimension(float x, float y, float width, float height,
+					 boolean isCenterX, boolean isCenterY) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -38,9 +38,18 @@ public class Dimensions {
 	public Vector2 getCoords() {
 		return new Vector2(getX(), getY());
 	}
+
 	public float getX() {
 		if (isCenterX) return x - width / 2;
 		else return x;
+	}
+
+	public float getRightX() {
+		return getX() + width;
+	}
+
+	public float getTopY() {
+		return getY() + getHeight();
 	}
 
 	public float getY() {

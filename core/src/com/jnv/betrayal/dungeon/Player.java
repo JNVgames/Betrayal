@@ -2,14 +2,14 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.utils.objects;
+package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.character.utils.Rotation;
-import com.jnv.betrayal.dungeon.utils.constants.DungeonCoords;
+import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.character.Character;
 
 public class Player extends Entity {

@@ -6,8 +6,7 @@ package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.dungeon.utils.objects.DungeonMonster;
-import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.dungeon.DungeonMonster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.Random;

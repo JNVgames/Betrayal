@@ -5,7 +5,7 @@
 package com.jnv.betrayal.scene2d.ui;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.jnv.betrayal.scene2d.Dimensions;
+import com.jnv.betrayal.scene2d.Dimension;
 
 public class Image extends com.badlogic.gdx.scenes.scene2d.ui.Image {
 
@@ -13,7 +13,7 @@ public class Image extends com.badlogic.gdx.scenes.scene2d.ui.Image {
 		super(texture);
 	}
 
-	public void setBounds(Dimensions dim) {
+	public void setBounds(Dimension dim) {
 		super.setBounds(dim.getX(), dim.getY(), dim.getWidth(), dim.getHeight());
 	}
 }

@@ -14,7 +14,11 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory extends Popup {
 
@@ -212,6 +216,19 @@ public class Inventory extends Popup {
 							sideLength, items[row][col]
 					);
 					inventory.addActor(itemsDisplay[row][col]);
+					final Dimension itemDimens = new Dimension(
+							itemsDisplay[row][col].getX(),
+							itemsDisplay[row][col].getY(),
+							itemsDisplay[row][col].getWidth(),
+							itemsDisplay[row][col].getHeight()
+					);
+					final boolean isEquippable = items[row][col].isEquippable();
+					itemsDisplay[row][col].addListener(new InputListener(itemsDisplay[row][col]) {
+						@Override
+						public void doAction() {
+							showItemOptions(itemDimens, isEquippable);
+						}
+					});
 				}
 			}
 		}
@@ -244,5 +261,30 @@ public class Inventory extends Popup {
 		};
 		invBox.setBounds(x, topY - sideLength, sideLength, sideLength);
 		return invBox;
+	}
+
+	private void showItemOptions(Dimension itemDimens, boolean isEquippable) {
+		Group options = new Group();
+		List<Dimension> dimensions = new ArrayList<Dimension>();
+
+		// Options values
+		float optionWidth = 200;
+		float optionHeight = 71;
+
+		// If there's enough space to the right of the item, draw labels
+		if (itemDimens.getRightX() + optionWidth < Betrayal.WIDTH) {
+			// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
+			if (isEquippable) {
+				Dimension[] dims = new Dimension[4];
+				for (int i = 0; i < dims.length; i++) {
+					dims[i] = new Dimension(itemDimens.getRightX() + 20,
+							itemDimens.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight);
+				}
+			}
+		}
+		// If there's not enough space, find the new dimensions and draw labels
+
+
+		stage.addActor(options);
 	}
 }

@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.managers.UIManager;
-import com.jnv.betrayal.dungeon.utils.constants.Action;
-import com.jnv.betrayal.dungeon.utils.constants.Panel;
+import com.jnv.betrayal.dungeon.utils.Action;
+import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 
