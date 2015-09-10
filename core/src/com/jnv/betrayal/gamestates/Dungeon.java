@@ -10,14 +10,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.Network.Player;
+import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.dungeon.managers.DungeonManager;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.MonsterConstants;
-
-import java.util.Random;
 
 public class Dungeon extends GameState {
 

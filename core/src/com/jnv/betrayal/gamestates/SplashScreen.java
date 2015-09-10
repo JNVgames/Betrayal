@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.Network.Player;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 

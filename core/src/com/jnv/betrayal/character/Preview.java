@@ -180,7 +180,7 @@ public class Preview implements Json.Serializable {
 					} else hair_male--;
 				} else {
 					if (hair_female == 1) {
-						hair_female = 4;
+						hair_female = 5;
 					} else hair_female--;
 				}
 				update();
@@ -210,7 +210,7 @@ public class Preview implements Json.Serializable {
 						hair_male = 1;
 					} else hair_male++;
 				} else {
-					if (hair_female == 4) {
+					if (hair_female == 5) {
 						hair_female = 1;
 					} else hair_female++;
 				}

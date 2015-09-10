@@ -1,4 +1,4 @@
-package com.jnv.betrayal.Network;
+package com.jnv.betrayal.network;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;

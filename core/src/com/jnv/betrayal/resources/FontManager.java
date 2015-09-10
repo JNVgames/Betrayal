@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class FontManager {
 
 	private static FreeTypeFontGenerator generator =
-			new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-SemiBold.ttf"));;
+			new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-Regular.ttf"));;
 
 	public static Label.LabelStyle getFont(int fontSize) {
 		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =

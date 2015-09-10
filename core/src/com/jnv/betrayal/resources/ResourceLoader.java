@@ -239,7 +239,7 @@ public class ResourceLoader {
 			res.loadTexture("character/head" + i + "f.png", "hair-male-" + i + "-6-all");
 			res.loadTexture("character/head" + i + "g.png", "hair-male-" + i + "-7-all");
 		}
-		for (int i = 6; i <= 9; i++) {
+		for (int i = 6; i <= 10; i++) {
 			// Female heads
 			res.loadTexture("character/head" + i + "a.png",
 					"hair-female-" + (i - 5) + "-1-all");
