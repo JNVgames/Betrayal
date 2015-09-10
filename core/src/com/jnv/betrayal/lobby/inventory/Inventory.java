@@ -2,49 +2,43 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.lobby.inventory;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.jnv.betrayal.scene2d.ui.Label;
 
 public class Inventory extends Popup {
 
 	private Image lobbyButton, background;
 	private Label title;
-	private Actor mask;
 	private Group inventory;
-	private Label button_sort;
 	private Character character;
-	private Image [] inventorySpots, characterOutline;
-	private Label [] charOutDescription;
+	private Image[] inventorySpots, characterOutline;
+	private Label[] charOutDescription;
 
 	public Inventory(Betrayal game) {
 		super(game);
 		inventorySpots = new Image[20];
 		characterOutline = new Image[8];
-		charOutDescription = new Label [7];
+		charOutDescription = new Label[7];
 		character = game.getPlayer().getCurrentCharacter();
 		loadButtons();
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadTitle();
-		loadContent();
 		loadInventorySpots();
 		loadEquipSpots();
 		loadReturnToLobbyButton();
@@ -52,23 +46,11 @@ public class Inventory extends Popup {
 		loadSortButton();
 	}
 
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeInventory();
-			}
-		});
-		stage.addActor(mask);
-	}
-
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadTitle() {
@@ -76,7 +58,7 @@ public class Inventory extends Popup {
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -86,15 +68,12 @@ public class Inventory extends Popup {
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
-				removeInventory();
+				remove();
 			}
 		});
-		stage.addActor(lobbyButton);
+		popup.addActor(lobbyButton);
 	}
 
-	private void loadContent() {
-
-	}
 	private void loadInventorySpots(){
 
 		int padding = 10, itemSize = 92;
@@ -117,7 +96,7 @@ public class Inventory extends Popup {
 				inventorySpots[i].setBounds(startingX + itemSize * (i - 16) + padding * (i-15),
 						startingY-(itemSize+padding)*3, itemSize, itemSize);
 			}
-			stage.addActor(inventorySpots[i]);
+			popup.addActor(inventorySpots[i]);
 		}
 	}
 
@@ -127,7 +106,7 @@ public class Inventory extends Popup {
 		characterOutline[7] = new Image(res.getTexture("character-outline"));
 		characterOutline[7].layout();
 		characterOutline[7].setBounds(137, 225, 240, 400);
-		for (int i=0;i<7; i++){
+		for (int i = 0; i < 7; i++) {
 			characterOutline[i] = new Image(res.getTexture("instructions-background"));
 			characterOutline[i].layout();
 		}
@@ -169,33 +148,16 @@ public class Inventory extends Popup {
 		charOutDescription[6] = new Label("Cloak", FontManager.getFont(40));
 		charOutDescription[6].setBounds(413, 525, itemSize, itemSize);
 
-		for (int i=0;i<8; i++){
-			stage.addActor(characterOutline[i]);
+		for (int i = 0; i < 8; i++) {
+			popup.addActor(characterOutline[i]);
 		}
 
-		for (int i = 0; i<7; i++){
-			stage.addActor(charOutDescription[i]);
+		for (int i = 0; i < 7; i++) {
+			popup.addActor(charOutDescription[i]);
 		}
 
 
 
-	}
-	private void removeInventory() {
-		mask.remove();
-		title.remove();
-		background.remove();
-		lobbyButton.remove();
-		for (int i = 0; i<20; i++){
-			inventorySpots[i].remove();
-		}
-		for (int i = 0; i<8; i++){
-			characterOutline[i].remove();
-		}
-		for (int i = 0; i<7; i++){
-			charOutDescription[i].remove();
-		}
-		inventory.remove();
-		button_sort.remove();
 	}
 
 	private void loadInventory() {
@@ -223,20 +185,21 @@ public class Inventory extends Popup {
 							itemsDisplay[row][col].getHeight()
 					);
 					final boolean isEquippable = items[row][col].isEquippable();
+					final Item item = items[row][col];
 					itemsDisplay[row][col].addListener(new InputListener(itemsDisplay[row][col]) {
 						@Override
 						public void doAction() {
-							showItemOptions(itemDimens, isEquippable);
+							new ItemOptions(item, itemDimens, game);
 						}
 					});
 				}
 			}
 		}
-		stage.addActor(inventory);
+		popup.addActor(inventory);
 	}
 
 	private void loadSortButton() {
-		button_sort = new Label("Sort", FontManager.getFont(40));
+		Label button_sort = new Label("Sort", FontManager.getFont(40));
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());
@@ -248,7 +211,7 @@ public class Inventory extends Popup {
 				loadInventory();
 			}
 		});
-		stage.addActor(button_sort);
+		popup.addActor(button_sort);
 	}
 
 	private Actor loadInventoryBox(float x, float topY, final float sideLength, final Item item) {
@@ -261,30 +224,5 @@ public class Inventory extends Popup {
 		};
 		invBox.setBounds(x, topY - sideLength, sideLength, sideLength);
 		return invBox;
-	}
-
-	private void showItemOptions(Dimension itemDimens, boolean isEquippable) {
-		Group options = new Group();
-		List<Dimension> dimensions = new ArrayList<Dimension>();
-
-		// Options values
-		float optionWidth = 200;
-		float optionHeight = 71;
-
-		// If there's enough space to the right of the item, draw labels
-		if (itemDimens.getRightX() + optionWidth < Betrayal.WIDTH) {
-			// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
-			if (isEquippable) {
-				Dimension[] dims = new Dimension[4];
-				for (int i = 0; i < dims.length; i++) {
-					dims[i] = new Dimension(itemDimens.getRightX() + 20,
-							itemDimens.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight);
-				}
-			}
-		}
-		// If there's not enough space, find the new dimensions and draw labels
-
-
-		stage.addActor(options);
 	}
 }

@@ -2,18 +2,19 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.lobby.stats;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.character.utils.Rotation;
-import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
@@ -22,7 +23,6 @@ public class StatsWindow extends Popup {
 	private Image lobbyButton, applyButton, background;
 	private Image [] icons, statPlusButtons, statMinusButtons;
 	private Label title, availablePoints;
-	private Actor mask;
 	private Group characterStats;
 	private float yRef;
 	private Actor charPreview;
@@ -49,7 +49,6 @@ public class StatsWindow extends Popup {
 
 	// Helpers
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadTitle();
 		loadContent();
@@ -59,26 +58,14 @@ public class StatsWindow extends Popup {
 		loadAvailablePoints();
 		loadCharacterStats();
 		loadReturnToLobbyButton();
-		stage.addActor(characterStats);
-	}
-
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeStats();
-			}
-		});
-		stage.addActor(mask);
+		popup.addActor(characterStats);
 	}
 
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadTitle() {
@@ -86,7 +73,7 @@ public class StatsWindow extends Popup {
 		title.setHeight(120);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadIcons(){
@@ -94,17 +81,17 @@ public class StatsWindow extends Popup {
 		icons[0] = new Image(res.getTexture("health"));
 		icons[0].layout();
 		icons[0].setBounds(110,Betrayal.HEIGHT-380,40,40);
-		stage.addActor(icons[0]);
+		popup.addActor(icons[0]);
 		// Defense
 		icons[1] = new Image(res.getTexture("defense"));
 		icons[1].layout();
 		icons[1].setBounds(110, Betrayal.HEIGHT-470, 40, 40);
-		stage.addActor(icons[1]);
+		popup.addActor(icons[1]);
 		// Attack
 		icons[2] = new Image(res.getTexture("attack"));
 		icons[2].layout();
 		icons[2].setBounds(110, Betrayal.HEIGHT - 560, 40, 40);
-		stage.addActor(icons[2]);
+		popup.addActor(icons[2]);
 	}
 
 	private void loadCharacterStats() {
@@ -130,7 +117,7 @@ public class StatsWindow extends Popup {
 				};
 			}
 		});
-		stage.addActor(applyButton);
+		popup.addActor(applyButton);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -140,27 +127,12 @@ public class StatsWindow extends Popup {
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
-				removeStats();
+				remove();
 			}
 		});
-		stage.addActor(lobbyButton);
+		popup.addActor(lobbyButton);
 	}
 
-	private void removeStats() {
-		mask.remove();
-		title.remove();
-		background.remove();
-		lobbyButton.remove();
-		applyButton.remove();
-		availablePoints.remove();
-		for(int i = 0; i < 3; i++){
-			statMinusButtons[i].remove();
-			statPlusButtons[i].remove();
-		}
-
-		characterStats.remove();
-		for (int i=0; i<3; i++){icons[i].remove();}
-	}
 	private void loadStatsAdjustButton(){
 		for(int i = 0; i<3; i++) {
 			statPlusButtons[i] = new Image(res.getTexture("plus"));
@@ -172,7 +144,7 @@ public class StatsWindow extends Popup {
 					//TODO: check available points if >0 then allow to press
 				}
 			});
-			stage.addActor(statPlusButtons[i]);
+			popup.addActor(statPlusButtons[i]);
 
 			statMinusButtons[i] = new Image(res.getTexture("minus"));
 			statMinusButtons[i].layout();
@@ -183,7 +155,7 @@ public class StatsWindow extends Popup {
 
 				}
 			});
-			stage.addActor(statMinusButtons[i]);
+			popup.addActor(statMinusButtons[i]);
 		}
 	}
 
@@ -191,7 +163,7 @@ public class StatsWindow extends Popup {
 		availablePoints = new Label("Available Points:", FontManager.getFont(40));
 		availablePoints.setX(Betrayal.WIDTH/2-150);
 		availablePoints.setY(Betrayal.HEIGHT - 225);
-		stage.addActor(availablePoints);
+		popup.addActor(availablePoints);
 	}
 
 	private void characterStatsLabel(Group group, Stat stat, float yReference) {

@@ -19,7 +19,6 @@ public class Instructions extends Popup {
 
 	private Image image_rightArrow, image_leftArrow, exitButton, background;
 	private Label title, content0, content1, content2, content3, content4;
-	private Actor mask;
 	private int currentContent, totalContent;
 
 	public Instructions(Betrayal game) {
@@ -30,7 +29,6 @@ public class Instructions extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadLeftArrow();
 		loadRightArrow();
@@ -39,24 +37,12 @@ public class Instructions extends Popup {
 		loadTitle();
 	}
 
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.scene2d.InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeInstructions();
-			}
-		});
-		stage.addActor(mask);
-	}
-
 	private void loadTitle() {
 		title = new Label("Instructions", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadXButton() {
@@ -66,17 +52,17 @@ public class Instructions extends Popup {
 		exitButton.addListener(new com.jnv.betrayal.scene2d.InputListener(exitButton) {
 			@Override
 			public void doAction() {
-				removeInstructions();
+				remove();
 			}
 		});
-		stage.addActor(exitButton);
+		popup.addActor(exitButton);
 	}
 
 	private void loadBackground() {
 		background = new Image(res.getTexture("instructions-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadLeftArrow() {
@@ -101,7 +87,7 @@ public class Instructions extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(image_leftArrow);
+		popup.addActor(image_leftArrow);
 	}
 
 	private void loadRightArrow() {
@@ -120,7 +106,7 @@ public class Instructions extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(image_rightArrow);
+		popup.addActor(image_rightArrow);
 	}
 
 	private void setContent0() {
@@ -129,7 +115,7 @@ public class Instructions extends Popup {
 				"\n 50 dungeon floors. ", FontManager.getFont(40));
 		content0.setX(100);
 		content0.setY(Betrayal.HEIGHT - content0.getHeight() - 250);
-		stage.addActor(content0);
+		popup.addActor(content0);
 	}
 
 	private void setContent1() {
@@ -141,7 +127,7 @@ public class Instructions extends Popup {
 				"\n things to worry about", FontManager.getFont(40));
 		content1.setX(100);
 		content1.setY(Betrayal.HEIGHT - content1.getHeight() - 250);
-		stage.addActor(content1);
+		popup.addActor(content1);
 	}
 
 	private void setContent2() {
@@ -149,7 +135,7 @@ public class Instructions extends Popup {
 				"\n hard as ballz", FontManager.getFont(40));
 		content2.setX(100);
 		content2.setY(Betrayal.HEIGHT - content2.getHeight() - 250);
-		stage.addActor(content2);
+		popup.addActor(content2);
 	}
 
 	private void setContent3() {
@@ -163,7 +149,7 @@ public class Instructions extends Popup {
 				"\n as one item.", FontManager.getFont(40));
 		content3.setX(100);
 		content3.setY(Betrayal.HEIGHT - content3.getHeight() - 250);
-		stage.addActor(content3);
+		popup.addActor(content3);
 	}
 
 	private void setContent4() {
@@ -171,7 +157,7 @@ public class Instructions extends Popup {
 				"\n Spend all your money!", FontManager.getFont(40));
 		content4.setX(100);
 		content4.setY(Betrayal.HEIGHT - content4.getHeight() - 250);
-		stage.addActor(content4);
+		popup.addActor(content4);
 	}
 
 	private void removeCurrentContent() {
@@ -218,15 +204,5 @@ public class Instructions extends Popup {
 				Gdx.app.log("content", "should not happen");
 				break;
 		}
-	}
-
-	private void removeInstructions() {
-		mask.remove();
-		removeCurrentContent();
-		image_leftArrow.remove();
-		image_rightArrow.remove();
-		title.remove();
-		background.remove();
-		exitButton.remove();
 	}
 }

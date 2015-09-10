@@ -1,12 +1,13 @@
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.lobby.shop;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
@@ -14,7 +15,6 @@ public class ShopPurchase extends Popup {
 
 	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow, item;
 	private Label price, description;
-	private Actor mask;
 	private int currentSide;
 	private Character character;
 	private Item currentItem;
@@ -28,7 +28,6 @@ public class ShopPurchase extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadContent();
 		loadReturnToShopButton();
@@ -40,30 +39,18 @@ public class ShopPurchase extends Popup {
 		loadArrows();
 	}
 
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeShopPurchase();
-			}
-		});
-		stage.addActor(mask);
-	}
-
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-purchase-background"));
 		background.layout();
 		background.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadGoldIcon() {
 		goldIcon = new Image(res.getTexture("icon-gold"));
 		goldIcon.layout();
 		goldIcon.setBounds(410, 850, 40, 40);
-		stage.addActor(goldIcon);
+		popup.addActor(goldIcon);
 	}
 
 	private void loadPrice() {
@@ -71,7 +58,7 @@ public class ShopPurchase extends Popup {
 		price.setHeight(50);
 		price.setX(450);
 		price.setY(850);
-		stage.addActor(price);
+		popup.addActor(price);
 	}
 
 	private void loadDescription() {
@@ -79,7 +66,7 @@ public class ShopPurchase extends Popup {
 		description.setHeight(50);
 		description.setX(250);
 		description.setY(900);
-		stage.addActor(description);
+		popup.addActor(description);
 	}
 
 	private void loadBuyButton() {
@@ -96,7 +83,7 @@ public class ShopPurchase extends Popup {
 				};
 			}
 		});
-		stage.addActor(buyButton);
+		popup.addActor(buyButton);
 	}
 
 	private void loadReturnToShopButton() {
@@ -106,10 +93,10 @@ public class ShopPurchase extends Popup {
 		backButton.addListener(new InputListener(backButton) {
 			@Override
 			public void doAction() {
-				removeShopPurchase();
+				remove();
 			}
 		});
-		stage.addActor(backButton);
+		popup.addActor(backButton);
 	}
 
 	private void loadContent() {
@@ -148,7 +135,7 @@ public class ShopPurchase extends Popup {
 				}
 			}
 		});
-		stage.addActor(leftArrow);
+		popup.addActor(leftArrow);
 
 		rightArrow = new Image(res.getTexture("arrow-right"));
 		rightArrow.layout();
@@ -159,19 +146,6 @@ public class ShopPurchase extends Popup {
 				currentSide = (currentSide + 1) % 4;
 			}
 		});
-		stage.addActor(rightArrow);
-	}
-
-	private void removeShopPurchase() {
-		rightArrow.remove();
-		leftArrow.remove();
-		mask.remove();
-		background.remove();
-		backButton.remove();
-		buyButton.remove();
-		goldIcon.remove();
-		price.remove();
-		description.remove();
-
+		popup.addActor(rightArrow);
 	}
 }

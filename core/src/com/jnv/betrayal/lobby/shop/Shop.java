@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,6 +14,7 @@ import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
@@ -24,7 +25,6 @@ public class Shop extends Popup {
 	private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
 	private Label titleHeadgear1, titleHeadgear2, titleArmor1, titleArmor2, titleItems;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
-	private Actor mask;
 
 	public Shop(Betrayal game) {
 		super(game);
@@ -47,7 +47,6 @@ public class Shop extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadTitle();
 		loadWeaponsButton();
@@ -59,23 +58,11 @@ public class Shop extends Popup {
 		loadReturnToLobbyButton();
 	}
 
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeShop();
-			}
-		});
-		stage.addActor(mask);
-	}
-
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadTitle() {
@@ -83,7 +70,7 @@ public class Shop extends Popup {
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -93,10 +80,10 @@ public class Shop extends Popup {
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
-				removeShop();
+				remove();
 			}
 		});
-		stage.addActor(lobbyButton);
+		popup.addActor(lobbyButton);
 	}
 
 	private void loadWeaponsButton() {
@@ -111,7 +98,7 @@ public class Shop extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(weapons);
+		popup.addActor(weapons);
 	}
 
 	private void loadArmorButton() {
@@ -126,7 +113,7 @@ public class Shop extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(armors);
+		popup.addActor(armors);
 	}
 
 	private void loadExtrasButton() {
@@ -141,7 +128,7 @@ public class Shop extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(extras);
+		popup.addActor(extras);
 	}
 
 	private void loadItemsButton() {
@@ -156,7 +143,7 @@ public class Shop extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(items);
+		popup.addActor(items);
 	}
 
 	private void loadMoneyButton() {
@@ -171,7 +158,7 @@ public class Shop extends Popup {
 				loadContent();
 			}
 		});
-		stage.addActor(money);
+		popup.addActor(money);
 	}
 
 	private void loadWeaponsAndShields() {
@@ -193,7 +180,7 @@ public class Shop extends Popup {
 
 				}
 			});
-			stage.addActor(sword1[i - 1]);
+			popup.addActor(sword1[i - 1]);
 
 			sword2[i - 1] = new Image(res.getTexture(item2));
 			sword2[i - 1].layout();
@@ -202,10 +189,10 @@ public class Shop extends Popup {
 			sword2[i - 1].addListener(new InputListener(sword2[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Weapon(item2, res));
+					new ShopPurchase(game, new Weapon(item2, res));
 				}
 			});
-			stage.addActor(sword2[i - 1]);
+			popup.addActor(sword2[i - 1]);
 
 			shield1[i - 1] = new Image(res.getTexture(item3));
 			shield1[i - 1].layout();
@@ -214,10 +201,10 @@ public class Shop extends Popup {
 			shield1[i - 1].addListener(new InputListener(shield1[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item3, res));
+					new ShopPurchase(game, new Shield(item3, res));
 				}
 			});
-			stage.addActor(shield1[i - 1]);
+			popup.addActor(shield1[i - 1]);
 
 			shield2[i - 1] = new Image(res.getTexture(item4));
 			shield2[i - 1].layout();
@@ -226,10 +213,10 @@ public class Shop extends Popup {
 			shield2[i - 1].addListener(new InputListener(shield2[i-1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Shield(item4, res));
+					new ShopPurchase(game, new Shield(item4, res));
 				}
 			});
-			stage.addActor(shield2[i - 1]);
+			popup.addActor(shield2[i - 1]);
 
 		}
 	}
@@ -238,22 +225,22 @@ public class Shop extends Popup {
 		titleSword1 = new Label("Swords(Tier 1)", FontManager.getFont(40));
 		titleSword1.setX(110);
 		titleSword1.setY(Betrayal.HEIGHT - 250);
-		stage.addActor(titleSword1);
+		popup.addActor(titleSword1);
 
 		titleSword2 = new Label("Swords(Tier 2)", FontManager.getFont(40));
 		titleSword2.setX(110);
 		titleSword2.setY(Betrayal.HEIGHT - 422);
-		stage.addActor(titleSword2);
+		popup.addActor(titleSword2);
 
 		titleShield1 = new Label("Shields(Tier 1)", FontManager.getFont(40));
 		titleShield1.setX(110);
 		titleShield1.setY(Betrayal.HEIGHT - 594);
-		stage.addActor(titleShield1);
+		popup.addActor(titleShield1);
 
 		titleShield2 = new Label("Shields(Tier 2)", FontManager.getFont(40));
 		titleShield2.setX(110);
 		titleShield2.setY(Betrayal.HEIGHT - 766);
-		stage.addActor(titleShield2);
+		popup.addActor(titleShield2);
 	}
 
 	private void loadRings() {
@@ -267,10 +254,10 @@ public class Shop extends Popup {
 			ring1[i - 1].addListener(new InputListener(ring1[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item1, res));
+					new ShopPurchase(game, new Ring(item1, res));
 				}
 			});
-			stage.addActor(ring1[i - 1]);
+			popup.addActor(ring1[i - 1]);
 
 			ring2[i - 1] = new Image(res.getTexture(item2));
 			ring2[i - 1].layout();
@@ -279,10 +266,10 @@ public class Shop extends Popup {
 			ring2[i - 1].addListener(new InputListener(ring2[i-1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new Ring(item2, res));
+					new ShopPurchase(game, new Ring(item2, res));
 				}
 			});
-			stage.addActor(ring2[i - 1]);
+			popup.addActor(ring2[i - 1]);
 
 		}
 	}
@@ -291,12 +278,12 @@ public class Shop extends Popup {
 		titleRing1 = new Label("Rings(Tier 1)", FontManager.getFont(40));
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
-		stage.addActor(titleRing1);
+		popup.addActor(titleRing1);
 
 		titleRing2 = new Label("Rings(Tier 2)", FontManager.getFont(40));
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
-		stage.addActor(titleRing2);
+		popup.addActor(titleRing2);
 	}
 
 	private void loadArmor() {
@@ -313,10 +300,10 @@ public class Shop extends Popup {
 			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
+					new ShopPurchase(game, new HeadGear(item1, res));
 				}
 			});
-			stage.addActor(headgear1[i - 1]);
+			popup.addActor(headgear1[i - 1]);
 
 			// Headgear 2
 			headgear2[i - 1] = new Image(res.getTexture(item2));
@@ -326,10 +313,10 @@ public class Shop extends Popup {
 			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new HeadGear(item1, res));
+					new ShopPurchase(game, new HeadGear(item1, res));
 				}
 			});
-			stage.addActor(headgear2[i - 1]);
+			popup.addActor(headgear2[i - 1]);
 
 			//Armor1
 			armor1[i - 1] = new Image(res.getTexture(item3));
@@ -339,10 +326,10 @@ public class Shop extends Popup {
 			armor1[i - 1].addListener(new InputListener(armor1[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item3, res));
+					new ShopPurchase(game, new BodyArmor(item3, res));
 				}
 			});
-			stage.addActor(armor1[i - 1]);
+			popup.addActor(armor1[i - 1]);
 
 			//Armor2
 			armor2[i - 1] = new Image(res.getTexture(item4));
@@ -352,10 +339,10 @@ public class Shop extends Popup {
 			armor2[i - 1].addListener(new InputListener(armor2[i - 1]) {
 				@Override
 				public void doAction() {
-					new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item4, res));
+					new ShopPurchase(game, new BodyArmor(item4, res));
 				}
 			});
-			stage.addActor(armor2[i - 1]);
+			popup.addActor(armor2[i - 1]);
 		}
 	}
 
@@ -363,29 +350,29 @@ public class Shop extends Popup {
 		titleHeadgear1 = new Label("Headgear(tier1)", FontManager.getFont(40));
 		titleHeadgear1.setX(110);
 		titleHeadgear1.setY(Betrayal.HEIGHT - 250);
-		stage.addActor(titleHeadgear1);
+		popup.addActor(titleHeadgear1);
 
 		titleHeadgear2 = new Label("Headgear(tier2)", FontManager.getFont(40));
 		titleHeadgear2.setX(110);
 		titleHeadgear2.setY(Betrayal.HEIGHT - 422);
-		stage.addActor(titleHeadgear2);
+		popup.addActor(titleHeadgear2);
 
 		titleArmor1 = new Label("Armor(tier 1)", FontManager.getFont(40));
 		titleArmor1.setX(110);
 		titleArmor1.setY(Betrayal.HEIGHT - 594);
-		stage.addActor(titleArmor1);
+		popup.addActor(titleArmor1);
 
 		titleArmor2 = new Label("Armor(tier 2)", FontManager.getFont(40));
 		titleArmor2.setX(110);
 		titleArmor2.setY(Betrayal.HEIGHT - 766);
-		stage.addActor(titleArmor2);
+		popup.addActor(titleArmor2);
 	}
 
 	private void loadItemsTitle() {
 		titleItems = new Label("Items", FontManager.getFont(40));
 		titleItems.setX(110);
 		titleItems.setY(Betrayal.HEIGHT - 250);
-		stage.addActor(titleItems);
+		popup.addActor(titleItems);
 	}
 
 	private void loadItems() {
@@ -398,19 +385,19 @@ public class Shop extends Popup {
 				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
 					@Override
 					public void doAction() {
-						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));
+						new ShopPurchase(game, new BodyArmor(item, res));
 					}
 				});
-				stage.addActor(potions[i - 1]);
-			}else {
+				popup.addActor(potions[i - 1]);
+			} else {
 				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
 				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
 					@Override
 					public void doAction() {
-						new com.jnv.betrayal.popup.ShopPurchase(game, new BodyArmor(item, res));
+						new ShopPurchase(game, new BodyArmor(item, res));
 					}
 				});
-				stage.addActor(potions[i - 1]);
+				popup.addActor(potions[i - 1]);
 			}
 		}
 	}
@@ -530,18 +517,5 @@ public class Shop extends Popup {
 				Gdx.app.log("content", "should not happen");
 				break;
 		}
-	}
-
-	private void removeShop() {
-		removeCurrentContent();
-		mask.remove();
-		title.remove();
-		background.remove();
-		lobbyButton.remove();
-		weapons.remove();
-		armors.remove();
-		extras.remove();
-		items.remove();
-		money.remove();
 	}
 }

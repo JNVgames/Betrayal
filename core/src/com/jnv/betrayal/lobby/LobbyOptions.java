@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.lobby;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Instructions;
+import com.jnv.betrayal.popup.Options;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 
 public class LobbyOptions extends Popup {
@@ -25,7 +28,6 @@ public class LobbyOptions extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadTitle();
 		loadContent();
@@ -35,23 +37,11 @@ public class LobbyOptions extends Popup {
 		loadReturnToMainMenuButton();
 	}
 
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new com.jnv.betrayal.scene2d.InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeLobbyOptons();
-			}
-		});
-		stage.addActor(mask);
-	}
-
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(175, 300, Betrayal.WIDTH - 350, Betrayal.HEIGHT - 550);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadTitle() {
@@ -59,7 +49,7 @@ public class LobbyOptions extends Popup {
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 350);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadInstructionsButton() {
@@ -73,7 +63,7 @@ public class LobbyOptions extends Popup {
 				new Instructions(game);
 			}
 		});
-		stage.addActor(instructions);
+		popup.addActor(instructions);
 	}
 
 	private void loadOptionsButton() {
@@ -87,7 +77,7 @@ public class LobbyOptions extends Popup {
 				new Options(game);
 			}
 		});
-		stage.addActor(options);
+		popup.addActor(options);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -97,10 +87,10 @@ public class LobbyOptions extends Popup {
 		lobbyButton.addListener(new com.jnv.betrayal.scene2d.InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
-				removeLobbyOptons();
+				remove();
 			}
 		});
-		stage.addActor(lobbyButton);
+		popup.addActor(lobbyButton);
 	}
 
 	private void loadReturnToMainMenuButton() {
@@ -115,24 +105,14 @@ public class LobbyOptions extends Popup {
 
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				removeLobbyOptons();
+				remove();
 				game.gsm.setState(GameStateManager.State.MENU);
 			}
 		});
-		stage.addActor(mainMenuButton);
+		popup.addActor(mainMenuButton);
 	}
 
 	private void loadContent() {
 
-	}
-
-	private void removeLobbyOptons() {
-		mask.remove();
-		title.remove();
-		background.remove();
-		lobbyButton.remove();
-		mainMenuButton.remove();
-		options.remove();
-		instructions.remove();
 	}
 }

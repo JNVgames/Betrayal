@@ -15,7 +15,6 @@ public class Confirmation extends Popup {
 
 	private Image yesButton, noButton, background;
 	private Label title;
-	private Actor mask;
 	private String string;
 
 	public Confirmation(Betrayal game, String string) {
@@ -25,23 +24,16 @@ public class Confirmation extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadAnswer();
 		loadTitle();
-	}
-
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		stage.addActor(mask);
 	}
 
 	private void loadBackground() {
 		background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
 		background.setBounds(150, 500, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 1000);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void loadTitle() {
@@ -53,7 +45,7 @@ public class Confirmation extends Popup {
 				yesButton.getY() + yesButton.getHeight() + 20, background.getWidth(),
 				title.getPrefHeight());
 		title.setAlignment(Align.center);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadAnswer() {
@@ -65,10 +57,10 @@ public class Confirmation extends Popup {
 			@Override
 			public void doAction() {
 				doSomething();
-				removeConfirmation();
+				remove();
 			}
 		});
-		stage.addActor(yesButton);
+		popup.addActor(yesButton);
 
 		noButton = new Image(res.getTexture("no"));
 		noButton.layout();
@@ -77,18 +69,10 @@ public class Confirmation extends Popup {
 		noButton.addListener(new InputListener(noButton) {
 			@Override
 			public void doAction() {
-				removeConfirmation();
+				remove();
 			}
 		});
-		stage.addActor(noButton);
-	}
-
-	private void removeConfirmation() {
-		mask.remove();
-		title.remove();
-		background.remove();
-		yesButton.remove();
-		noButton.remove();
+		popup.addActor(noButton);
 	}
 
 	public void doSomething() {

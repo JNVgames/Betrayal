@@ -20,7 +20,7 @@ class EquipsHandler {
 
 	void equipWeapon(Weapon weapon) {
 		equips.character.inventory.removeItem(weapon);
-		if (!(equips.ring1 == null))
+		if (!(equips.weapon == null))
 			equips.character.inventory.addItem(equips.weapon);
 		equips.weapon = weapon;
 		equips.character.preview.update();

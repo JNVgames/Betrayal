@@ -15,10 +15,8 @@ import com.jnv.betrayal.scene2d.InputListener;
 public class Options extends Popup {
 
 	private Image background, exitButton;
-	private Actor mask;
 	private Label title;
 	private int currentContent, totalContent;
-
 
 	public Options(Betrayal game) {
 		super(game);
@@ -28,34 +26,21 @@ public class Options extends Popup {
 	}
 
 	private void loadButtons() {
-		loadMask();
 		loadBackground();
 		loadContent();
-	}
-
-	private void loadMask() {
-		mask = new Actor();
-		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		mask.addListener(new InputListener(mask) {
-			@Override
-			public void doAction() {
-				removeOptions();
-			}
-		});
-		stage.addActor(mask);
 	}
 
 	private void loadMainMenuButton() {
 		exitButton = new Image(res.getTexture("x"));
 		exitButton.layout();
-		exitButton.setBounds(Betrayal.WIDTH -250, Betrayal.HEIGHT-250, 100, 100);
+		exitButton.setBounds(Betrayal.WIDTH - 250, Betrayal.HEIGHT - 250, 100, 100);
 		exitButton.addListener(new InputListener(exitButton) {
 			@Override
 			public void doAction() {
-				removeOptions();
+				remove();
 			}
 		});
-		stage.addActor(exitButton);
+		popup.addActor(exitButton);
 	}
 
 	private void loadTitle() {
@@ -63,14 +48,14 @@ public class Options extends Popup {
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 300);
-		stage.addActor(title);
+		popup.addActor(title);
 	}
 
 	private void loadBackground() {
 		background = new Image(res.getTexture("instructions-background"));
 		background.layout();
 		background.setBounds(150, 150, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 300);
-		stage.addActor(background);
+		popup.addActor(background);
 	}
 
 	private void removeCurrentContent() {
@@ -99,13 +84,5 @@ public class Options extends Popup {
 				Gdx.app.log("content", "should not happen");
 				break;
 		}
-	}
-
-	private void removeOptions() {
-		removeCurrentContent();
-		mask.remove();
-		exitButton.remove();
-		title.remove();
-		background.remove();
 	}
 }
