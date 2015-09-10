@@ -16,7 +16,6 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  */
 public class Character implements Json.Serializable {
 
-	private String name;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -43,16 +42,6 @@ public class Character implements Json.Serializable {
 
 	public void saveInfo() {
 
-	}
-
-	// Getters
-	public String getName() {
-		return name;
-	}
-
-	// Setters
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String toJson() {

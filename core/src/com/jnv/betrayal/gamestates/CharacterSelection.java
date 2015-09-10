@@ -5,7 +5,6 @@
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -17,14 +16,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Trait;
-import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.JobDescription;
+import com.jnv.betrayal.scene2d.InputListener;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -80,7 +78,6 @@ public class CharacterSelection extends GameState {
 		loadBackground();
 		loadBackButton();
 		loadPlayNowButton();
-		loadUsernameField();
 		loadImagePreview();
 		loadPreviewRotators();
 
@@ -158,7 +155,6 @@ public class CharacterSelection extends GameState {
 						&& x <= button_play_now.getX() + button_play_now.getWidth()
 						&& y >= button_play_now.getY()
 						&& y <= button_play_now.getY() + button_play_now.getHeight()) {
-					character.setName(field_usernameEnter.getText());
 					player.addCharacter(character);
 					gsm.setState(GameStateManager.State.LOBBY);
 				} else image_button_play = res.getTexture("play-now");
@@ -169,38 +165,6 @@ public class CharacterSelection extends GameState {
 			}
 		});
 		stage.addActor(button_play_now);
-	}
-
-	private void loadUsernameField() {
-		// Username "Name:" text
-		field_usernameLabel = new Label("Name: ", FontManager.getFont(60));
-		field_usernameLabel.setX(10);
-		field_usernameLabel.setY(button_back.getY() - button_back.getHeight() - 10);
-		stage.addActor(field_usernameLabel);
-
-		// Username input text field
-		TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
-		tfs.font = FontManager.getFont(60).font;
-		tfs.messageFont = tfs.font;
-		tfs.fontColor = Color.LIGHT_GRAY;
-		tfs.messageFontColor = Color.GRAY;
-		field_usernameEnter = new TextField("", tfs);
-		field_usernameEnter.setMessageText("Enter name here");
-		field_usernameEnter.setBounds(10 + field_usernameLabel.getWidth() + 10, field_usernameLabel.getY(),
-				Betrayal.WIDTH - 20 - field_usernameLabel.getWidth(), field_usernameLabel.getHeight());
-		field_usernameEnter.setMaxLength(10);
-		stage.addActor(field_usernameEnter);
-
-		// Removes keyboard focus if tap isn't on a TextField
-		stage.getRoot().addCaptureListener(new InputListener(field_usernameEnter) {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				if (!(event.getTarget() instanceof TextField)) {
-					stage.setKeyboardFocus(null);
-					Gdx.input.setOnscreenKeyboardVisible(false);
-				}
-				return false;
-			}
-		});
 	}
 
 	private void loadImagePreview() {
@@ -214,8 +178,7 @@ public class CharacterSelection extends GameState {
 		field_framePreview.setWidth(384);
 		field_framePreview.setHeight(576);
 		field_framePreview.setX(10);
-		field_framePreview.setY(field_usernameLabel.getY() - field_usernameLabel.getHeight()
-				- field_framePreview.getHeight());
+		field_framePreview.setY(button_back.getY() - 71 - field_framePreview.getHeight());
 		stage.addActor(field_framePreview);
 	}
 

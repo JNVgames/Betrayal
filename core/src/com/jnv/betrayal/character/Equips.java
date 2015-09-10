@@ -7,7 +7,7 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.jnv.betrayal.character.utils.*;
+import com.jnv.betrayal.character.utils.Slot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.HeadGear;
@@ -23,66 +23,75 @@ public class Equips implements Json.Serializable {
 	BetrayalAssetManager res;
 
 	// todo @vincent add getPreview() for equip class
-	HeadGear headArmor;
-	BodyArmor bodyArmor;
-	Shield shield;
-	Ring ring1, ring2;
-	Weapon weapon;
+	public final Equip[] allEquips;
 
 	public Equips(Character character, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
 		this.character = character;
 		this.res = res;
+		allEquips = new Equip[Slot.SLOTS];
 	}
 
 	// Getters
 	public boolean isHeadSlotEmpty() {
-		return headArmor == null;
+		return allEquips[Slot.HEAD] == null;
 	}
 
 	public boolean isBodySlotEmpty() {
-		return bodyArmor == null;
+		return allEquips[Slot.BODY] == null;
 	}
 
 	public boolean isShieldSlotEmpty() {
-		return shield == null;
+		return allEquips[Slot.SHIELD] == null;
 	}
 
-	public boolean isWeaponSlotEmpty() {
-		return weapon == null;
+	public boolean isWeapon1SlotEmpty() {
+		return allEquips[Slot.WEAPON1] == null;
+	}
+
+	public boolean isWeapon2SlotEmpty() {
+		return allEquips[Slot.WEAPON2] == null;
 	}
 
 	public boolean isRingSlot1Empty() {
-		return ring1 == null;
+		return allEquips[Slot.RING1] == null;
 	}
 
 	public boolean isRingSlot2Empty() {
-		return ring2 == null;
+		return allEquips[Slot.RING2] == null;
+	}
+
+	public boolean isCloakSlotEmpty() {
+		return allEquips[Slot.CLOAK] == null;
 	}
 
 	public Texture getHeadArmorPreview() {
-		return headArmor.getPreview();
+		return allEquips[Slot.HEAD].getPreview();
 	}
 
 	public Texture getBodyArmorPreview() {
-		if (bodyArmor == null) return res.getTexture("char-armor-peasant");
-		else return bodyArmor.getPreview();
+		if (allEquips[Slot.BODY] == null) return res.getTexture("char-armor-peasant");
+		else return allEquips[Slot.BODY].getPreview();
 	}
 
 	public Texture getShieldPreview() {
-		return shield.getPreview();
+		return allEquips[Slot.SHIELD].getPreview();
 	}
 
-	public Texture getWeaponPreview() {
-		return weapon.getPreview();
+	public Texture getWeapon1Preview() {
+		return allEquips[Slot.WEAPON1].getPreview();
+	}
+
+	public Texture getWeapon2Preview() {
+		return allEquips[Slot.WEAPON2].getPreview();
 	}
 
 	public Texture getRing1Preview() {
-		return ring1.getItemIcon();
+		return allEquips[Slot.RING1].getItemIcon();
 	}
 
 	public Texture getRing2Preview() {
-		return ring2.getItemIcon();
+		return allEquips[Slot.RING2].getItemIcon();
 	}
 
 	// Setters
@@ -109,8 +118,10 @@ public class Equips implements Json.Serializable {
 				return equipsHandler.unequipBodyArmor();
 			case Slot.SHIELD:
 				return equipsHandler.unequipShield();
-			case Slot.WEAPON:
-				return equipsHandler.unequipWeapon();
+			case Slot.WEAPON1:
+				return equipsHandler.unequipWeapon1();
+			case Slot.WEAPON2:
+				return equipsHandler.unequipWeapon2();
 			case Slot.RING1:
 				return equipsHandler.unequipRing1();
 			case Slot.RING2:
@@ -133,5 +144,14 @@ public class Equips implements Json.Serializable {
 
 	public void read(Json json, JsonValue jsonData) {
 
+	}
+
+	public static Class determineEquipType(Equip equip) {
+		if (equip instanceof Weapon) return Weapon.class;
+		else if (equip instanceof HeadGear) return HeadGear.class;
+		else if (equip instanceof BodyArmor) return BodyArmor.class;
+		else if (equip instanceof Shield) return Shield.class;
+		else if (equip instanceof Ring) return Ring.class;
+		throw new AssertionError("Class type is not an equip");
 	}
 }

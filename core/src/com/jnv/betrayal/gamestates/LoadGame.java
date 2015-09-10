@@ -120,17 +120,11 @@ public class LoadGame extends GameState {
 			preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);
 			preview.addActor(preview_charPrev);
 
-			Label preview_name = new Label(c.getName(), loadFont(60));
-			preview_name.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
-			preview_name.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
-					- preview_name.getPrefHeight());
-			preview_name.setColor(Color.WHITE);
-			preview.addActor(preview_name);
-
 			Label preview_class = new Label(c.job.toString(), loadFont(50));
-			preview_class.setX(preview_name.getX());
-			preview_class.setY(preview_name.getY() - 10 - preview_class.getPrefHeight());
-			preview_class.setColor(Color.LIGHT_GRAY);
+			preview_class.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
+			preview_class.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
+					- preview_class.getPrefHeight());
+			preview_class.setColor(Color.WHITE);
 			preview.addActor(preview_class);
 
 			Label preview_floor = new Label("FLOOR", loadFont(40));

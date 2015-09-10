@@ -13,21 +13,30 @@ import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Label;
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
 class ItemOptions extends Popup {
 
+	private Inventory inventory;
 	private Item item;
 	public final Dimension itemBoxDimen;
-	private boolean isEquippable;
+	private boolean isEquippable, isEquipped;
+	private final int unequipSlot;
 
-	public ItemOptions(Item item, Dimension itemBoxDimen, Betrayal game) {
+	ItemOptions(Inventory inventory, Item item, Dimension itemBoxDimen, Betrayal game) {
+		this(inventory, item, itemBoxDimen, game, -1);
+	}
+
+	ItemOptions(Inventory inventory, Item equip, Dimension itemBoxDimen, Betrayal game,
+				int unequipSlot) {
 		super(game);
-		this.item = item;
+		this.inventory = inventory;
+		this.item = equip;
 		this.itemBoxDimen = itemBoxDimen;
 		isEquippable = item.isEquippable();
+		this.isEquipped = unequipSlot != -1;
+		this.unequipSlot = unequipSlot;
 		showItemOptions();
 	}
 
@@ -35,83 +44,86 @@ class ItemOptions extends Popup {
 		List<Dimension> dimensions = new ArrayList<Dimension>();
 
 		// Options values
+		int numOptions;
 		float optionWidth = 200;
 		float optionHeight = 71;
 
-		// If there's enough space to the right of the item, draw labels
-		if (itemBoxDimen.getRightX() + optionWidth < Betrayal.WIDTH) {
-			// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
-			if (isEquippable) {
-				for (int i = 0; i < 4; i++) {
-					dimensions.add(new Dimension(itemBoxDimen.getRightX() + 20,
-							itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
-				}
-			}
+		// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
+		if (isEquippable) {
+			numOptions = 4;
+		} else numOptions = 3;
+
+		for (int i = 0; i < numOptions; i++) {
+			// If there's enough space to the right of the item, draw labels
+			if (itemBoxDimen.getRightX() + optionWidth < Betrayal.WIDTH)
+				dimensions.add(new Dimension(itemBoxDimen.getRightX() + 20,
+						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
+			// Else draw to the left of the item
+			else
+				dimensions.add(new Dimension(itemBoxDimen.getX() - 20 - optionWidth,
+						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
 		}
-		// If there's not enough space, find the new dimensions and draw labels
-
-
 		// Draw out options
 		setOptions(dimensions);
 	}
 
 	private void setOptions(List<Dimension> dimensions) {
 		int counter = 0;
-		if (isEquippable) {
-			popup.addActor(createEquipButton(dimensions.get(counter++), Option.EQUIP));
+		// If item is equipped, show unequip option
+		if (isEquipped) {
+			popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Unequip));
+		} else if (isEquippable) {
+			popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Equip));
 		}
-		Label info = new Label("Info", FontManager.getFont(60));
-		info.setBounds(dimensions.get(counter++));
-		info.addListener(new InputListener(info) {
-			@Override
-			public void doAction() {
-				// stub - show item information
-			}
-		});
-		popup.addActor(info);
-		Label sell = new Label("Sell", FontManager.getFont(60));
-		sell.setBounds(dimensions.get(counter++));
-		sell.addListener(new InputListener(sell) {
-			@Override
-			public void doAction() {
-				// stub - sell from inventory
-			}
-		});
-		popup.addActor(sell);
-		Label cancel = new Label("Cancel", FontManager.getFont(60));
-		cancel.setBounds(dimensions.get(counter));
-		cancel.addListener(new InputListener(cancel) {
-			@Override
-			public void doAction() {
-				remove();
-			}
-		});
-		popup.addActor(cancel);
+		popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Info));
+		if (!isEquipped) popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Sell));
+		popup.addActor(createOptionLabel(dimensions.get(counter), Option.Cancel));
 	}
 
-	private Label createEquipButton(Dimension dimens, Option option) {
-		Label label = new Label("", FontManager.getFont(60));
+	private Label createOptionLabel(Dimension dimens, Option option) {
+		Label label = new Label(option.toString(), FontManager.getFont(60));
 		label.setBounds(dimens);
 		switch (option) {
-			case EQUIP:
-				label.setText("Equip");
+			case Equip:
 				label.addListener(new InputListener(label) {
 					@Override
 					public void doAction() {
 						game.getPlayer().getCurrentCharacter().equips.equip((Equip) item);
+						inventory.refresh();
 						remove();
 					}
 				});
 				break;
-			case INFO:
-				label.setText("Info");
+			case Unequip:
+				label.addListener(new InputListener(label) {
+					@Override
+					public void doAction() {
+						if (Betrayal.debug && unequipSlot != -1)
+							game.getPlayer().getCurrentCharacter().equips.unequip(unequipSlot);
+						inventory.refresh();
+						remove();
+					}
+				});
+			case Info:
 				label.addListener(new InputListener(label) {
 					// stub - show info
 				});
 				break;
-			case SELL:
-				label.setText("Sell");
-				label.addListener(new InputListener(label));
+			case Sell:
+				label.addListener(new InputListener(label) {
+					// stub - add gold to inventory
+				});
+				break;
+			case Cancel:
+				label.addListener(new InputListener(label) {
+					@Override
+					public void doAction() {
+						remove();
+					}
+				});
+				break;
+			default:
+				throw new AssertionError("ItemOptions.java: Option doesn't exist");
 		}
 		return label;
 	}

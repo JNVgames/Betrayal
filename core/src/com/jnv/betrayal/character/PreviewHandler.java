@@ -21,10 +21,13 @@ class PreviewHandler {
 		updateHeadSprites();
 		updateArmorSprites();
 		updateShieldSprites();
-		updateWeaponSprites();
+		updateWeapon1Sprites();
+		updateWeapon2Sprites();
 
-		toBackOfPreview(Slot.WEAPON, preview.front);
-		toFrontOfPreview(Slot.WEAPON, preview.back);
+		toBackOfPreview(Slot.WEAPON1, preview.front);
+		toBackOfPreview(Slot.WEAPON2, preview.front);
+		toFrontOfPreview(Slot.WEAPON1, preview.back);
+		toFrontOfPreview(Slot.WEAPON2, preview.back);
 		toFrontOfPreview(Slot.HEAD, preview.back);
 	}
 
@@ -79,22 +82,41 @@ class PreviewHandler {
 		}
 	}
 
-	private void updateWeaponSprites() {
-		if (!preview.character.equips.isWeaponSlotEmpty()) {
+	private void updateWeapon1Sprites() {
+		if (!preview.character.equips.isWeapon1SlotEmpty()) {
 			TextureRegion[][] weapon_split =
-					TextureRegion.split(preview.character.equips.getWeaponPreview(), 32, 48);
-			preview.front_left[Slot.WEAPON] = weapon_split[0][0];
-			preview.front_still[Slot.WEAPON] = weapon_split[0][1];
-			preview.front_right[Slot.WEAPON] = weapon_split[0][2];
-			preview.right_left[Slot.WEAPON] = weapon_split[1][0];
-			preview.right_still[Slot.WEAPON] = weapon_split[1][1];
-			preview.right_right[Slot.WEAPON] = weapon_split[1][2];
-			preview.left_left[Slot.WEAPON] = weapon_split[2][0];
-			preview.left_still[Slot.WEAPON] = weapon_split[2][1];
-			preview.left_right[Slot.WEAPON] = weapon_split[2][2];
-			preview.back_left[Slot.WEAPON] = weapon_split[3][0];
-			preview.back_still[Slot.WEAPON] = weapon_split[3][1];
-			preview.back_right[Slot.WEAPON] = weapon_split[3][2];
+					TextureRegion.split(preview.character.equips.getWeapon1Preview(), 32, 48);
+			preview.front_left[Slot.WEAPON1] = weapon_split[0][0];
+			preview.front_still[Slot.WEAPON1] = weapon_split[0][1];
+			preview.front_right[Slot.WEAPON1] = weapon_split[0][2];
+			preview.right_left[Slot.WEAPON1] = weapon_split[1][0];
+			preview.right_still[Slot.WEAPON1] = weapon_split[1][1];
+			preview.right_right[Slot.WEAPON1] = weapon_split[1][2];
+			preview.left_left[Slot.WEAPON1] = weapon_split[2][0];
+			preview.left_still[Slot.WEAPON1] = weapon_split[2][1];
+			preview.left_right[Slot.WEAPON1] = weapon_split[2][2];
+			preview.back_left[Slot.WEAPON1] = weapon_split[3][0];
+			preview.back_still[Slot.WEAPON1] = weapon_split[3][1];
+			preview.back_right[Slot.WEAPON1] = weapon_split[3][2];
+		}
+	}
+
+	private void updateWeapon2Sprites() {
+		if (!preview.character.equips.isWeapon2SlotEmpty()) {
+			TextureRegion[][] weapon_split =
+					TextureRegion.split(preview.character.equips.getWeapon2Preview(), 32, 48);
+			preview.front_left[Slot.WEAPON2] = weapon_split[0][0];
+			preview.front_still[Slot.WEAPON2] = weapon_split[0][1];
+			preview.front_right[Slot.WEAPON2] = weapon_split[0][2];
+			preview.right_left[Slot.WEAPON2] = weapon_split[1][0];
+			preview.right_still[Slot.WEAPON2] = weapon_split[1][1];
+			preview.right_right[Slot.WEAPON2] = weapon_split[1][2];
+			preview.left_left[Slot.WEAPON2] = weapon_split[2][0];
+			preview.left_still[Slot.WEAPON2] = weapon_split[2][1];
+			preview.left_right[Slot.WEAPON2] = weapon_split[2][2];
+			preview.back_left[Slot.WEAPON2] = weapon_split[3][0];
+			preview.back_still[Slot.WEAPON2] = weapon_split[3][1];
+			preview.back_right[Slot.WEAPON2] = weapon_split[3][2];
 		}
 	}
 

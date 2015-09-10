@@ -14,7 +14,7 @@ public abstract class Popup {
 
 	protected Betrayal game;
 	protected BetrayalAssetManager res;
-	protected Group popup;
+	public final Group popup;
 
 	protected Popup(Betrayal game) {
 		this.game = game;

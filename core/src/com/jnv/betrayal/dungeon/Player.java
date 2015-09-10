@@ -21,7 +21,6 @@ public class Player extends Entity {
 	public Player(int player, Character character, Stage stage) {
 		super(stage);
 		this.character = character;
-		username = character.getName();
 		jobName = character.job.toString();
 		createActor(player);
 	}
