@@ -39,16 +39,16 @@ public class MonsterManager {
 				x = 0;
 				break;
 			case 1:
-				x = randomNumberGenerator.nextInt(9);
+				x = randomNumberGenerator.nextInt(10);
 				break;
 			case 2:
 				x = randomNumberGenerator.nextInt(10);
 				break;
 			case 3:
-				x = randomNumberGenerator.nextInt(8);
+				x = randomNumberGenerator.nextInt(10);
 				break;
 			case 4:
-				x = randomNumberGenerator.nextInt(6);
+				x = randomNumberGenerator.nextInt(8);
 				break;
 			case 5:
 				x = randomNumberGenerator.nextInt(6);
