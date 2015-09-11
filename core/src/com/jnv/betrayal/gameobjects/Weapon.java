@@ -10,15 +10,16 @@ public class Weapon extends Equip {
 
 	private int attack;
 
-	public void setAttack(int attack){this.attack = attack;	}
-
-	public int  getAttack(){return attack;}
-	public Weapon(int id, String name, BetrayalAssetManager res) {
-		super(id, name, res);
+	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int new_attack)
+	{
+		super(id, name, res, cost_buy);
+		attack = new_attack;
 	}
 
 	public Weapon(String name, BetrayalAssetManager res) {
 		super(name, res);
 	}
+
+	public int  getAttack(){return attack;}
 
 }

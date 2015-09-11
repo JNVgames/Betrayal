@@ -8,7 +8,7 @@ import com.jnv.betrayal.resources.Dimensions;
 public class Monster {
 
     protected Texture monsterTexture;
-    protected String MonsterName;
+    protected String MonsterName, nickname;
     protected int id, health, attack, defense, width, height, xPos, yPos, normalAttackTimer;
     protected int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
     private BetrayalAssetManager res;
@@ -39,6 +39,7 @@ public class Monster {
         s1cooldown = src.getS1CoolDown();
         s2cooldown = src.getS2CoolDown();
         s3cooldown = src.getS3CoolDown();
+        nickname = src.getNickname();
         monsterTexture = src.getMonsterTexture();
     }
 
@@ -112,6 +113,8 @@ public class Monster {
         yPos = new_yPos;
     }
 
+    public void setNickname(String nickname) { this.nickname = nickname;}
+
     // Getters
     public int getHealth() {
         return health;
@@ -157,6 +160,8 @@ public class Monster {
         return width;
     }
 
+    public String getNickname(){ return nickname;}
+
     public int getHeight() {
         return height;
     }
@@ -173,11 +178,12 @@ public class Monster {
         return monsterTexture;
     }
 
-    public void setData(String name, int newHealth, int newAttack, int newDefense,
+    public void setData(String nickname, String name, int newHealth, int newAttack, int newDefense,
                         int newWidth, int newHeight, int newXPos, int newYPos,
                         int newNormalAttackTimer, int newSkill1, int newS1CoolDown,
                         int newSkill2, int newS2CoolDown, int newSkill3, int newS3CoolDown) {
         Monster src = res.getMonster(name);
+        src.setNickname(nickname);
         src.setHealth(newHealth);
         src.setAttack(newAttack);
         src.setDefense(newDefense);

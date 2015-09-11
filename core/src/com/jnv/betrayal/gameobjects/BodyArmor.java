@@ -7,9 +7,12 @@ package com.jnv.betrayal.gameobjects;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class BodyArmor extends Equip {
+	private int defense;
 
-	public BodyArmor(int id, String name, BetrayalAssetManager res) {
-		super(id, name, res);
+	public int getDefense() { return defense;}
+	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy) {
+		super(id, name, res, cost_buy);
+		this.defense = defense;
 	}
 
 	public BodyArmor(String name, BetrayalAssetManager res) {
