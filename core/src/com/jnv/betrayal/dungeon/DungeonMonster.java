@@ -9,8 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.MonsterInfo;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class DungeonMonster extends Entity {
 
@@ -38,37 +41,42 @@ public class DungeonMonster extends Entity {
 						image[i].layout();
 						image[i].setBounds(monster[i].getxPos(), monster[i].getyPos(),
 								monster[i].getWidth(), monster[i].getHeight());
+		/*	image[i].addListener(new InputListener(image[i]) {
+				@Override
+				new MonsterInfo(Betrayal.game,monster[i], 10) //CHANGE 10 to current health??
+			});
+			*/
 			image[i].addAction(Actions.alpha(0));
 			image[i].addAction(Actions.delay(1, Actions.fadeIn(2)));
 			stage.addActor(image[i]);
 			monsterID+=10;
-			HealthBar(res, "monster", monster[i].getxPos(), monster[i].getyPos() + monster[i].getHeight(), stage);
+			HealthBar(res, monster[i].getxPos(), monster[i].getyPos() + monster[i].getHeight(), stage);
 		}
 	}
 
-	public void HealthBar(BetrayalAssetManager res, String name, int xPos, int yPos, Stage stage){
+	public void HealthBar(BetrayalAssetManager res, int xPos, int yPos, Stage stage){
 
 		Image healthBarBackground, healthBar;
-		Label nameText;
-		int healthBarWidth=200;
-		int healthBarHeight=25;
+		xPos+=50;
+		yPos-=25;
 		healthBarBackground = new Image(res.getTexture("bar-background"));
 		healthBarBackground.layout();
-		healthBarBackground.setBounds(xPos, yPos, healthBarWidth, healthBarHeight);
+		healthBarBackground.setBounds(xPos, yPos, 227, 25);
 		healthBarBackground.addAction(Actions.alpha(0));
 		healthBarBackground.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		stage.addActor(healthBarBackground);
 
 		healthBar= new Image(res.getTexture("green-bar"));
 		healthBar.layout();
-		healthBar.setBounds(xPos+83, yPos+9, 100, 8);
+		healthBar.setBounds(xPos+10, yPos+8, 200, 8);
 		healthBar.addAction(Actions.alpha(0));
 		healthBar.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		stage.addActor(healthBar);
-
+/*
 		nameText = new Label(name, FontManager.getFont(17));
 		nameText.setX(xPos+5);
 		nameText.setY(yPos + 4);
 		stage.addActor(nameText);
+		*/
 	}
 }

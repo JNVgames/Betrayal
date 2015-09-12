@@ -10,7 +10,7 @@ public class HeadGear extends Equip {
 	private int defense;
 
 	public int getDefense() { return defense;}
-	public HeadGear(int id, String name, BetrayalAssetManager res,int cost_buy) {
+	public HeadGear(int id, String name, BetrayalAssetManager res,int cost_buy, int defense) {
 		super(id, name, res, cost_buy);
 		this.defense = defense;
 	}

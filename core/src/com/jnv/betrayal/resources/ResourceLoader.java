@@ -5,6 +5,8 @@
 package com.jnv.betrayal.resources;
 
 import com.badlogic.gdx.math.Vector2;
+import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.HeadGear;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
@@ -34,7 +36,7 @@ public class ResourceLoader {
 	}
 
 	public void loadAllData() {
-		loadWeaponData();
+		loadItemsData();
 		loadMonsterData();
 	}
 
@@ -404,35 +406,20 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster51.png", "monster-tier0-2");
 	}
 
-	private void loadWeaponData() {
+	private void loadItemsData() {
 		for (int i = 1; i <= 6; i++) {
 			new Weapon(i, "sword1" + i, res, 500,5);
-			new Weapon(i, "sword2" + i, res, 1000,10);
+	    	new Weapon(i, "sword2" + i, res, 1000,10);
+			/*
 			new Shield(i, "shield1" + i, res, 500, 5);
 			new Shield(i, "shield2" + i, res, 1000, 10);
-			new Shield(i, "headgear1" + i, res, 500, 5);
-			new Shield(i, "headgear2" + i, res, 1000, 10);
-			new Shield(i, "armor1" + i, res, 500, 5);
-			new Shield(i, "armor2" + i, res, 1000, 10);
+			new HeadGear(i, "headgear1" + i, res, 500, 5);
+			new HeadGear(i, "headgear2" + i, res, 1000, 10);
+			new BodyArmor (i, "armor1" + i, res, 500, 5);
+			new BodyArmor(i, "armor2" + i, res, 1000, 10);
+			*/
 		}
-		/*
 
-        for (int i = 1; i <= 6; i++) {
-            new Shield(i, "sword" + i);
-        }
-        for (int i = 1; i <= 6; i++) {
-            new Ring(i, "sword" + i);
-        }
-        for (int i = 1; i <= 6; i++) {
-            new Item(i, "sword" + i);
-        }
-
-        for (int i = 1; i <= 6; i++) {
-            new Weapon(i + 6, "sword2" + i);
-        }
-
-        new BodyArmor(0, "char-armor-peasant");
-        */
 	}
 
 	private void loadMonsterData() {

@@ -10,7 +10,7 @@ public class BodyArmor extends Equip {
 	private int defense;
 
 	public int getDefense() { return defense;}
-	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy) {
+	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy, int defense) {
 		super(id, name, res, cost_buy);
 		this.defense = defense;
 	}
