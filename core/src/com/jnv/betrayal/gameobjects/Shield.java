@@ -12,7 +12,7 @@ public class Shield extends Equip {
 	public int getDefense() { return defense;}
 
 	public Shield(int id, String name, BetrayalAssetManager res, int cost_buy, int defense) {
-		super(id, name, res,cost_buy);
+		super(id, name, res, cost_buy);
 		this.defense = defense;
 	}
 

@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.jnv.betrayal.scene2d.Dimension;
 
+/**
+ * My own version of label
+ */
 public class Label extends com.badlogic.gdx.scenes.scene2d.ui.Label {
 
 	public Label(CharSequence text, Skin skin, String styleName) {
@@ -33,5 +36,9 @@ public class Label extends com.badlogic.gdx.scenes.scene2d.ui.Label {
 	public void setBounds(Dimension dimension) {
 		setBounds(dimension.getX(), dimension.getY(), dimension.getWidth(),
 				dimension.getHeight());
+	}
+
+	public Dimension getDimensions() {
+		return new Dimension(getX(), getY(), getWidth(), getHeight());
 	}
 }

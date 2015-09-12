@@ -15,7 +15,6 @@ import com.jnv.betrayal.dungeon.managers.DungeonManager;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.resources.MonsterConstants;
 
 public class Dungeon extends GameState {
 
@@ -64,20 +63,4 @@ public class Dungeon extends GameState {
 		label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
 		stage.addActor(label);
 	}
-
-	private void loadMonster() {
-		Image image_monster = new Image(monster.getMonsterTexture());
-		float width = 300, height = 300;
-		Vector2 center = new Vector2(Betrayal.WIDTH / 2, Betrayal.HEIGHT - 300);
-
-		image_monster.layout();
-		image_monster.setBounds(center.x - width / 2, center.y - height / 2,
-				MonsterConstants.tier1Monsters[0].getWidth(),
-				MonsterConstants.tier1Monsters[0].getHeight());
-		image_monster.addAction(Actions.alpha(0));
-		image_monster.addAction(Actions.delay(1, Actions.fadeIn(2)));
-		stage.addActor(image_monster);
-	}
-
-
 }

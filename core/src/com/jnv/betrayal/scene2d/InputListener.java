@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
+/**
+ * My own version of input listener
+ */
 public class InputListener extends com.badlogic.gdx.scenes.scene2d.InputListener {
 
 	private Actor actor;
@@ -46,6 +49,10 @@ public class InputListener extends com.badlogic.gdx.scenes.scene2d.InputListener
 			actor.addAction(Actions.moveBy(-5, 5));
 			isPressed = false;
 		}
+	}
+
+	public void setPressedEffect(boolean hasPressedEffect) {
+		this.hasPressedEffect = hasPressedEffect;
 	}
 
 	public void doAction() {

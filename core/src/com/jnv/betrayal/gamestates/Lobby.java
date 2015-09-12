@@ -178,7 +178,6 @@ public class Lobby extends GameState {
 
    */
 
-	// VINCENTS SHIT. LOADS THE PLAY BUTTON FOR DUNGEON TESTING. YOU CAN DELETE WHENEVER
 	private void loadPlayNowButton() {
 		image_button_play = res.getTexture("play-now");
 		button_play_now = new Actor() {

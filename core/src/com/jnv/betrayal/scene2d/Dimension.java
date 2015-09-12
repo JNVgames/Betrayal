@@ -6,6 +6,10 @@ package com.jnv.betrayal.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Holds x, y, width, and height values. Used mainly for actor positioning. Can be used for Betrayal Actor setBounds()
+ * for convenience
+ */
 public class Dimension {
 
 	private float x, y, width, height;

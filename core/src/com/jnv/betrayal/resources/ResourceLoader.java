@@ -165,6 +165,7 @@ public class ResourceLoader {
 		res.loadTexture("dungeon/healthbar/yellow_bar102x17.png", "yellow-bar");
 		res.loadTexture("dungeon/healthbar/health_bar_background330x40.png", "bar-background");
 	}
+
 	private void loadHeadGear() {
 		res.loadTexture("item/helmet1.png", "headgear11");
 		res.loadTexture("item/helmet2.png", "headgear12");
@@ -305,19 +306,26 @@ public class ResourceLoader {
 			}
 		}
 
+		// Shield previews
+		for (int colors = 1; colors <= 6; colors++) {
+			res.loadTexture("character/shield1" + colors + ".png", "char-shield-left-" + colors);
+			res.loadTexture("character/shield2" + colors + ".png", "char-shield-right-" + colors);
+		}
+
+
 		// Shields
-		res.loadTexture("shields/shield1a.png", "shield-1-red");
-		res.loadTexture("shields/shield1b.png", "shield-1-black");
-		res.loadTexture("shields/shield1c.png", "shield-1-gold");
-		res.loadTexture("shields/shield1d.png", "shield-1-blue");
-		res.loadTexture("shields/shield1e.png", "shield-1-green");
-		res.loadTexture("shields/shield1f.png", "shield-1-purple");
-		res.loadTexture("shields/shield2a.png", "shield-2-red");
-		res.loadTexture("shields/shield2b.png", "shield-2-black");
-		res.loadTexture("shields/shield2c.png", "shield-2-gold");
-		res.loadTexture("shields/shield2d.png", "shield-2-blue");
-		res.loadTexture("shields/shield2e.png", "shield-2-green");
-		res.loadTexture("shields/shield2f.png", "shield-2-purple");
+		res.loadTexture("shields/shield1a.png", "shield-left-1");	// red
+		res.loadTexture("shields/shield1b.png", "shield-left-2");	// black
+		res.loadTexture("shields/shield1c.png", "shield-left-3");	// gold
+		res.loadTexture("shields/shield1d.png", "shield-left-4");	// blue
+		res.loadTexture("shields/shield1e.png", "shield-left-5");	// green
+		res.loadTexture("shields/shield1f.png", "shield-left-6");	// purple
+		res.loadTexture("shields/shield2a.png", "shield-right-1");
+		res.loadTexture("shields/shield2b.png", "shield-right-2");
+		res.loadTexture("shields/shield2c.png", "shield-right-3");
+		res.loadTexture("shields/shield2d.png", "shield-right-4");
+		res.loadTexture("shields/shield2e.png", "shield-right-5");
+		res.loadTexture("shields/shield2f.png", "shield-right-6");
 	}
 
 	private void loadMonsters() {
@@ -411,13 +419,15 @@ public class ResourceLoader {
 			new Weapon(i, "sword1" + i, res, 500,5);
 	    	new Weapon(i, "sword2" + i, res, 1000,10);
 			/*
-			new Shield(i, "shield1" + i, res, 500, 5);
-			new Shield(i, "shield2" + i, res, 1000, 10);
-			new HeadGear(i, "headgear1" + i, res, 500, 5);
-			new HeadGear(i, "headgear2" + i, res, 1000, 10);
-			new BodyArmor (i, "armor1" + i, res, 500, 5);
-			new BodyArmor(i, "armor2" + i, res, 1000, 10);
+			new Weapon(i, "sword2" + i, res, 1000,10);
+			new Shield(i, "shield-left-" + i, res, 500, 5);
+			new Shield(i, "shield-right-" + i, res, 1000, 10);
+			//new Shield(i, "headgear1" + i, res, 500, 5);
+			//new Shield(i, "headgear2" + i, res, 1000, 10);
+			//new Shield(i, "armor1" + i, res, 500, 5);
+			//new Shield(i, "armor2" + i, res, 1000, 10);
 			*/
+	
 		}
 
 	}

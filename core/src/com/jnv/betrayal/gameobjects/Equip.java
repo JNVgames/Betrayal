@@ -14,7 +14,6 @@ public abstract class Equip extends Item {
 	protected Equip(int id, String name, BetrayalAssetManager res, int cost_buy) {
 		super(id, name, res, cost_buy);
 		isEquippable = true;
-		this.res = res;
 		weapon_preview = res.getTexture("char-" + name);
 	}
 

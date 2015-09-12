@@ -1,9 +1,7 @@
 package com.jnv.betrayal.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-import com.jnv.betrayal.resources.Dimensions;
 
 public class Monster {
 
