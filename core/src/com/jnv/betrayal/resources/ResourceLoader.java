@@ -33,6 +33,7 @@ public class ResourceLoader {
 		loadCharacterPreviewsImages();
 		loadMonsters();
 		loadHealthBar();
+		loadSkills();
 	}
 
 	public void loadAllData() {
@@ -312,7 +313,6 @@ public class ResourceLoader {
 			res.loadTexture("character/shield2" + colors + ".png", "char-shield-right-" + colors);
 		}
 
-
 		// Shields
 		res.loadTexture("shields/shield1a.png", "shield-left-1");	// red
 		res.loadTexture("shields/shield1b.png", "shield-left-2");	// black
@@ -427,11 +427,34 @@ public class ResourceLoader {
 			//new Shield(i, "armor1" + i, res, 500, 5);
 			//new Shield(i, "armor2" + i, res, 1000, 10);
 			*/
-	
 		}
-
 	}
 
+	private void loadSkills(){
+		res.loadTexture("icon/skills/axe.png", "skill1");
+		res.loadTexture("icon/skills/bomb.png", "skill2");
+		res.loadTexture("icon/skills/brokensword.png", "skill3");
+		res.loadTexture("icon/skills/chains.png", "skill4");
+		res.loadTexture("icon/skills/death.png", "skill5");
+		res.loadTexture("icon/skills/defensebreak.png", "skill6");
+		res.loadTexture("icon/skills/demon.png", "skill7");
+		res.loadTexture("icon/skills/explosion.png", "skill8");
+		res.loadTexture("icon/skills/fire.png", "skill9");
+		res.loadTexture("icon/skills/fist.png", "skill10");
+		res.loadTexture("icon/skills/freeze.png", "skill11");
+		res.loadTexture("icon/skills/heal.png", "skill12");
+		res.loadTexture("icon/skills/horn.png", "skill13");
+		res.loadTexture("icon/skills/hourglass.png", "skill14");
+		res.loadTexture("icon/skills/lockon.png", "skill15");
+		res.loadTexture("icon/skills/magesymbol.png.png", "skill16");
+		res.loadTexture("icon/skills/magesymbol2.png", "skill17");
+		res.loadTexture("icon/skills/poison.png", "skill18");
+		res.loadTexture("icon/skills/powerdown.png", "skill19");
+		res.loadTexture("icon/skills/scythe.png", "skill20");
+		res.loadTexture("icon/skills/shield.png", "skill21");
+		res.loadTexture("icon/skills/male.png", "skill22");
+		res.loadTexture("icon/skills/female.png", "skill23");
+	}
 	private void loadMonsterData() {
 		//Tier 0
 		new Monster(1, "monster-tier0-0", res).setData("Skeleton Kelly","monster-tier0-0", 25, 10, 1, 250, 250, 235, 740, 1, 0, 0,0,0,0,0);
