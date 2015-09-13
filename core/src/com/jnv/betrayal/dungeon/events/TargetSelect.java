@@ -35,10 +35,13 @@ public class TargetSelect {
 		Actor monsterMask = new Actor();
 		monsterMask.setBounds(coords.x, coords.y, DungeonCoords.MONSTER_WIDTH,
 				DungeonCoords.MONSTER_HEIGHT);
+
+		// Set up monster targets
 		targets = new ArrayList<Target>();
 		targets.add(new Target(DungeonCoords.monster, DungeonCoords.MONSTER_WIDTH,
 				DungeonCoords.MONSTER_HEIGHT, Action.TARGET_MONSTER, stage, res));
 
+		// Set up player targets
 		for (int i = 0; i < numPlayers; i++) {
 			targets.add(new Target(DungeonCoords.player[i], DungeonCoords.PLAYER_WIDTH,
 					DungeonCoords.PLAYER_HEIGHT, Action.TARGET_PLAYER[i], stage, res));

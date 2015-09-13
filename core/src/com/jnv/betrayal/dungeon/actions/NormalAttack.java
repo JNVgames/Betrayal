@@ -24,10 +24,16 @@ public class NormalAttack implements Action {
 
 	}
 
+	@Override
 	public void setTargets(List<Player> player) {
 		// Assertion that there is only one target, since this is a normal attack
 		if (Betrayal.debug && player.size() != 1)
 			throw new AssertionError("Normal attack can only target one player");
 		targets.addAll(player);
+	}
+
+	@Override
+	public void fire() {
+
 	}
 }
