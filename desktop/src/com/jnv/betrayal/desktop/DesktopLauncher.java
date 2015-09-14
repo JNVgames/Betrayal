@@ -13,8 +13,8 @@ public class DesktopLauncher {
         float scale = 0.4f;
         System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = (int) Math.floor(720 * scale) + 20;
-        config.height = (int) Math.floor(1280 * scale);
+        config.width = (int) Math.floor(1440 * scale) + 20;
+        config.height = (int) Math.floor(2560 * scale);
         config.useGL30 = false;
         new LwjglApplication(new Betrayal(), config);
     }
