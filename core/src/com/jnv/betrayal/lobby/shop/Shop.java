@@ -404,20 +404,50 @@ public class Shop extends Popup {
 				}
 			});
 			currentGroup.addActor(ring2[i - 1]);
+		}
 
+
+		for (int i = 1; i <= 12; i++) {
+			final String item = "potion" + i;
+			potions[i - 1] = new Image(res.getTexture("potion" + i));
+			potions[i - 1].layout();
+			if (i <= 6) {
+				potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
+				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
+					@Override
+					public void doAction() {
+						new ShopPurchase(game, new BodyArmor(item, res));
+					}
+				});
+				currentGroup.addActor(potions[i - 1]);
+			} else {
+				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
+				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
+					@Override
+					public void doAction() {
+						new ShopPurchase(game, new BodyArmor(item, res));
+					}
+				});
+				currentGroup.addActor(potions[i - 1]);
+			}
 		}
 	}
 
 	private void loadRingTitle() {
-		titleRing1 = new Label("Rings(Tier 1)", FontManager.getFont(40));
+		titleRing1 = new Label("Rings(Tier1)", FontManager.getFont(40));
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
 		currentGroup.addActor(titleRing1);
 
-		titleRing2 = new Label("Rings(Tier 2)", FontManager.getFont(40));
+		titleRing2 = new Label("Rings(Tier2)", FontManager.getFont(40));
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
 		currentGroup.addActor(titleRing2);
+
+		titleItems = new Label("Potions", FontManager.getFont(40));
+		titleItems.setX(110);
+		titleItems.setY(Betrayal.HEIGHT - 250-172*2);
+		currentGroup.addActor(titleItems);
 	}
 
 	private void loadHeadgear() {
@@ -605,37 +635,9 @@ public class Shop extends Popup {
 	}
 
 	private void loadItemsTitle() {
-		titleItems = new Label("Items", FontManager.getFont(40));
-		titleItems.setX(110);
-		titleItems.setY(Betrayal.HEIGHT - 250);
-		currentGroup.addActor(titleItems);
 	}
 
 	private void loadItems() {
-		for (int i = 1; i <= 12; i++) {
-			final String item = "potion" + i;
-			potions[i - 1] = new Image(res.getTexture("potion" + i));
-			potions[i - 1].layout();
-			if (i <= 6) {
-				potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
-					@Override
-					public void doAction() {
-						new ShopPurchase(game, new BodyArmor(item, res));
-					}
-				});
-				currentGroup.addActor(potions[i - 1]);
-			} else {
-				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
-					@Override
-					public void doAction() {
-						new ShopPurchase(game, new BodyArmor(item, res));
-					}
-				});
-				currentGroup.addActor(potions[i - 1]);
-			}
-		}
 	}
 
 	private void setContent0() {

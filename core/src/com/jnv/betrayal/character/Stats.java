@@ -145,19 +145,19 @@ public class Stats implements Json.Serializable {
 		}
 
 		// Getters
-		public int getTmpHealth() {
+		public int getHealth() {
 			return tmpHealth;
 		}
 
-		public int getTmpDefense() {
+		public int getDefense() {
 			return tmpDefense;
 		}
 
-		public int getTmpAttack() {
+		public int getAttack() {
 			return tmpAttack;
 		}
 
-		public int getTmpAvailablePoints() {
+		public int getAvailablePoints() {
 			return tmpAvailablePoints;
 		}
 	}
