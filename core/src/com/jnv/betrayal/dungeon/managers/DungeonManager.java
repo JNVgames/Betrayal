@@ -14,9 +14,9 @@ import java.util.List;
 
 public class DungeonManager {
 
-	private GameStateManager gsm;
-	private Betrayal game;
-	private UIManager uiManager;
+	public final GameStateManager gsm;
+	public final Betrayal game;
+	public final UIManager uiManager;
 	private List<Character> characters;
 
 	public DungeonManager(List<Character> characters, Monster monster,
@@ -41,12 +41,4 @@ public class DungeonManager {
 		return characters;
 	}
 
-	// Getters
-	public UIManager getUIManager() {
-		return uiManager;
-	}
-
-	public GameStateManager getGSM() {
-		return gsm;
-	}
 }

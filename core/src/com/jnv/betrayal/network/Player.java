@@ -16,7 +16,7 @@ public class Player implements Json.Serializable {
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/new_player";
     //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/new_player";
 
-    private List<Character> characters = new ArrayList<Character>();
+    public final List<Character> characters;
     private Character currentCharacter;
     private String username;
 
@@ -88,7 +88,6 @@ public class Player implements Json.Serializable {
 	}
 
     // Getters
-    public List<Character> getCharacters() { return characters; }
     public Character getCurrentCharacter() { return currentCharacter; }
 
     // Setters

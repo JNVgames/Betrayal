@@ -18,6 +18,9 @@ import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
+/**
+ * Manages a character's preview
+ */
 public class Preview implements Json.Serializable {
 
 	PreviewHandler previewHandler;

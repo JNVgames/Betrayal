@@ -19,5 +19,5 @@ public abstract class Entity {
 		frozen = false;
 	}
 
-	public abstract void handleEvent(Action action);
+	//public abstract void handleEvent(Action action);
 }

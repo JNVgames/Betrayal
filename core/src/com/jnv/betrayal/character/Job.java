@@ -6,6 +6,9 @@ package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.Jobs;
 
+/**
+ * Manages a character's job. Mainly used in character selection
+ */
 public class Job {
 
 	private int job;

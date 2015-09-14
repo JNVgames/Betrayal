@@ -18,13 +18,13 @@ import java.util.List;
 
 public class UIManager {
 
-	private DungeonManager dungeonManager;
-	private ActionBar actionBar;
-	private CurrentAction currentAction;
-	private PlayersManager playersManager;
-	private MonsterManager monsterManager;
-	private BetrayalAssetManager res;
-	private Stage stage;
+	public final DungeonManager dungeonManager;
+	public final ActionBar actionBar;
+	public final CurrentAction currentAction;
+	public final PlayersManager playersManager;
+	public final MonsterManager monsterManager;
+	public final BetrayalAssetManager res;
+	public final Stage stage;
 
 	public UIManager(List<Character> characters, Monster monster,
 					 GameStateManager gsm, DungeonManager dungeonManager) {
@@ -49,25 +49,5 @@ public class UIManager {
 		eventLogButton.layout();
 		eventLogButton.setBounds(20, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144  * scale);
 		stage.addActor(eventLogButton);
-	}
-	// Getters
-	public DungeonManager getDungeonManager() {
-		return dungeonManager;
-	}
-
-	public ActionBar getActionBar() {
-		return actionBar;
-	}
-
-	public CurrentAction getCurrentAction() {
-		return currentAction;
-	}
-
-	public PlayersManager getPlayersManager() {
-		return playersManager;
-	}
-
-	public MonsterManager getMonsterManager() {
-		return monsterManager;
 	}
 }

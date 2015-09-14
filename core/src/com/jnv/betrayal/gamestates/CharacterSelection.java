@@ -47,7 +47,7 @@ public class CharacterSelection extends GameState {
 		image_leftArrow.flip(true, false);
 		image_rightArrow = new TextureRegion(res.getTexture("arrow-right"));
 
-		character = new Character(res);
+		character = new Character(gsm.getGame().getPlayer(), res);
 
 		loadStage();
 	}

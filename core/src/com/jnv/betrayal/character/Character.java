@@ -7,15 +7,15 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Jobs;
+import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
  * Holds information regarding a game character's traits
- *
- * @author Vincent Wang
  */
 public class Character implements Json.Serializable {
 
+	private int characterID;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -25,11 +25,12 @@ public class Character implements Json.Serializable {
 	/**
 	 * Creates a character with default traits
 	 */
-	public Character(BetrayalAssetManager res) {
+	public Character(Player player, BetrayalAssetManager res) {
+		characterID = player.characters.size();
 		equips = new Equips(this, res);
 		preview = new Preview(this, res);
 		job = new Job();
-		inventory = new Inventory(res);
+		inventory = new Inventory();
 		stats = new Stats();
 
 		job.setJob(Jobs.WARRIOR);
@@ -40,10 +41,6 @@ public class Character implements Json.Serializable {
 		preview.update();
 	}
 
-	public void saveInfo() {
-
-	}
-
 	public String toJson() {
 		Json json = new Json();
 		return json.prettyPrint(this);
@@ -51,6 +48,7 @@ public class Character implements Json.Serializable {
 
 	// Json methods
 	public void write(Json json) {
+		json.writeField(this, "characterID", Integer.class);
 		json.writeField(job, "job", Job.class);
 		preview.write(json);
 		equips.write(json);

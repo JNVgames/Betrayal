@@ -27,7 +27,7 @@ public class CurrentAction {
 		target = Action.TARGET_DEFAULT;
 
 		targetText = new Label(Action.TARGET_DEFAULT, FontManager.getFont(45));
-		targetText.setBounds(Panel.top.x, Panel.top.y,
+		targetText.setBounds(Panel.top.getX(), Panel.top.getTopY(),
 				Betrayal.WIDTH, targetText.getPrefHeight());
 		targetText.layout();
 		targetText.setAlignment(Align.center);
@@ -65,13 +65,11 @@ public class CurrentAction {
 	}
 
 	public void setActionText(String text) {
-		action = text;
-		actionText.setText(action);
+		actionText.setText(text);
 	}
 
 	public void setTargetText(String text) {
-		target = text;
-		targetText.setText(target);
+		targetText.setText(text);
 	}
 
 	public void setTargetText(List<String> targets) {

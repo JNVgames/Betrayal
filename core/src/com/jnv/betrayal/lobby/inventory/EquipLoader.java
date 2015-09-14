@@ -24,7 +24,7 @@ class EquipLoader {
 	}
 
 	void loadEquips() {
-		final Equip[] allEquips = character.equips.allEquips;
+		final Equip[] allEquips = character.equips.equips;
 		// Check each equip slot to see if it's empty
 		for (int i = 0; i < Slot.SLOTS; i++) {
 			final int index = i;

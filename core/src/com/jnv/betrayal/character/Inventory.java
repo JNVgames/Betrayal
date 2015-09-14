@@ -12,14 +12,15 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages a character's inventory
+ */
 public class Inventory implements Json.Serializable {
 
-	private BetrayalAssetManager res;
 	private int gold, items_max;
 	private List<Item> items;
 
-	public Inventory(BetrayalAssetManager res) {
-		this.res = res;
+	public Inventory() {
 		gold = 0;
 		items_max = 30;
 

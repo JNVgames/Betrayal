@@ -4,11 +4,13 @@
 
 package com.jnv.betrayal.dungeon.ui;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.events.TargetSelect;
@@ -17,10 +19,13 @@ import com.jnv.betrayal.dungeon.utils.Action;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.dungeon.utils.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
-import com.jnv.betrayal.scene2d.InputListener;
-import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Dimension;
+import com.jnv.betrayal.scene2d.InputListener;
+import com.jnv.betrayal.scene2d.ui.Button;
+import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.Stack;
 
@@ -28,21 +33,24 @@ public class ActionBar {
 
 	private UIManager uiManager;
 	private GameStateManager gsm;
+	private BetrayalAssetManager res;
 	private Stage stage;
 	private Group actionBar;
 	private Pool<Label> panelPool;
+	private Pool<Button> buttonPool;
 	private Stack<State> menu;
 	private int numPlayers;
 
 	public ActionBar(int numPlayers, Stage stage, UIManager uiManager) {
 		this.uiManager = uiManager;
-		gsm = uiManager.getDungeonManager().getGSM();
+		gsm = uiManager.dungeonManager.gsm;
 		this.numPlayers = numPlayers;
 		this.stage = stage;
+		res = uiManager.dungeonManager.gsm.getGame().res;
 		actionBar = new Group();
 		menu = new Stack<State>();
 		stage.addActor(actionBar);
-		setupLabelPool();
+		setupPools();
 	}
 
 	public void start() {
@@ -52,9 +60,12 @@ public class ActionBar {
 	private void draw(State state) {
 		for (Actor actor : actionBar.getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
+			System.out.println("buttonPool" + buttonPool.getFree());
+			if (actor instanceof Button) buttonPool.free((Button) actor);
+			System.out.println("buttonPool" + buttonPool.getFree());
 		}
 		actionBar.clear();
-		uiManager.getCurrentAction().updateText();
+		uiManager.currentAction.updateText();
 		switch (state) {
 			case BACK:
 				menu.pop();
@@ -88,7 +99,21 @@ public class ActionBar {
 		if (menu.isEmpty() || menu.peek() != state) menu.push(state);
 	}
 
-	private void setupLabelPool() {
+	private void setupPools() {
+		buttonPool = new Pool<Button>() {
+			public Button obtain() {
+				Button tmp = super.obtain();
+				ClickListener clickListener = tmp.getClickListener();
+				// Remove all listeners except for the one needed for button to work
+				for (EventListener listener : tmp.getListeners())
+					if (listener != clickListener) tmp.removeListener(listener);
+				return tmp;
+			}
+
+			protected Button newObject() {
+				return new Button();
+			}
+		};
 		panelPool = new Pool<Label>() {
 			public Label obtain() {
 				Label tmp = super.obtain();
@@ -103,19 +128,24 @@ public class ActionBar {
 	}
 
 	private void drawMainMenu() {
-		createPanel("Items", 70, Panel.bottomLeft, State.EVENT_LOG, actionBar);
-		createPanel("Attack", 70, Panel.topLeft, State.ATTACK, actionBar);
-		createPanel("Skills", 70, Panel.topRight, State.SKILLS, actionBar);
-
-		Label tmp = panelPool.obtain();
-		tmp.setText("Flee");
-		tmp.setStyle(FontManager.getFont(70));
-		tmp.setBounds(Panel.BUTTON_WIDTH, 0, Panel.BUTTON_WIDTH, Panel.BUTTON_HEIGHT);
-		tmp.setAlignment(Align.center);
-		tmp.layout();
-		tmp.addListener(new InputListener(tmp) {
+		createPanel("Items", 70, Panel.bottomLeft, actionBar, new Runnable() {
+			public void run() {
+				draw(State.EVENT_LOG);
+			}
+		});
+		createPanel("Attack", 70, Panel.topLeft, actionBar, new Runnable() {
+			public void run() {
+				draw(State.ATTACK);
+			}
+		});
+		createPanel("Skills", 70, Panel.topRight, actionBar, new Runnable() {
+			public void run() {
+				draw(State.SKILLS);
+			}
+		});
+		createPanel("Flee", 70, Panel.bottomRight, actionBar, new Runnable() {
 			@Override
-			public void doAction() {
+			public void run() {
 				new Confirmation(gsm.getGame(), "Are you sure you want to flee?" + "\n20% Chance") {
 					@Override
 					public void doSomething() {
@@ -124,55 +154,45 @@ public class ActionBar {
 				};
 			}
 		});
-		actionBar.addActor(tmp);
 	}
 
 	private void drawAttackMenu() {
-		createPanel("Normal Attack", 50, Panel.topLeft, State.TARGET_SELECT, actionBar);
-		createPanel("Skill", 70, Panel.topRight, null, actionBar);
-		createPanel("Back", 70, Panel.bottomRight, State.BACK, actionBar);
+		createPanel("Normal Attack", 50, Panel.topLeft, actionBar, new Runnable() {
+			public void run() {
+				draw(State.TARGET_SELECT);
+			}
+		});
+		createPanel("Skill", 70, Panel.topRight, actionBar, null);
+		createPanel("Back", 70, Panel.bottomRight, actionBar, new Runnable() {
+			public void run() {
+				draw(State.BACK);
+			}
+		});
 	}
 
 	private void drawTargetSelect() {
 		final TargetSelect targetSelect =
 				new TargetSelect(numPlayers, Action.ACTION_NORMAL_ATTACK, stage,
-						uiManager.getCurrentAction());
+						uiManager.currentAction);
 		targetSelect.configureTargetSelect(4);
 
-		Label doneButton = panelPool.obtain();
-		doneButton.setText("Done");
-		doneButton.setStyle(FontManager.getFont(50));
-		doneButton.setBounds(Panel.topLeft.x, Panel.topLeft.y,
-				Betrayal.WIDTH, Panel.BUTTON_HEIGHT);
-		doneButton.layout();
-		doneButton.setAlignment(Align.center);
-		doneButton.addListener(new InputListener(doneButton) {
-			public void doAction() {
-				uiManager.getCurrentAction().setCurrentActionText(targetSelect.getAction(),
+		createPanel("Done", 70, Panel.top, actionBar, new Runnable() {
+			@Override
+			public void run() {
+				uiManager.currentAction.setCurrentActionText(targetSelect.getAction(),
 						targetSelect.getTargetSelected());
 				targetSelect.remove();
 				draw(State.BACK);
 			}
 		});
-		actionBar.addActor(doneButton);
-
-		Label cancelButton = panelPool.obtain();
-		cancelButton.setText("Cancel");
-		cancelButton.setStyle(FontManager.getFont(50));
-		cancelButton.setBounds(Panel.bottomLeft.x, Panel.bottomLeft.y,
-				Betrayal.WIDTH, Panel.BUTTON_HEIGHT);
-		cancelButton.layout();
-		cancelButton.setAlignment(Align.center);
-		cancelButton.addListener(new InputListener(cancelButton) {
+		createPanel("Cancel", 70, Panel.bottom, actionBar, new Runnable() {
 			@Override
-			public void doAction() {
+			public void run() {
 				targetSelect.remove();
 				draw(State.BACK);
+				uiManager.currentAction.updateText();
 			}
 		});
-		actionBar.addActor(cancelButton);
-
-		menu.push(State.TARGET_SELECT);
 	}
 
 	/**
@@ -180,24 +200,32 @@ public class ActionBar {
 	 *
 	 * @param panelText   text you want your button to say
 	 * @param fontSize    text size
-	 * @param position    where you want your button to be
-	 * @param panelAction what you want your button to do
 	 * @param group       add your button to a group
 	 */
-	private void createPanel(String panelText, int fontSize, Vector2 position,
-							 final State panelAction, Group group) {
+	private void createPanel(String panelText, int fontSize, Dimension dimension,
+							 Group group, final Runnable action) {
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
 		panel.setStyle(FontManager.getFont(fontSize));
-		panel.setBounds(position.x, position.y, Panel.BUTTON_WIDTH, Panel.BUTTON_HEIGHT);
+		panel.setBounds(dimension);
 		panel.setAlignment(Align.center);
 		panel.layout();
-		panel.addListener(new InputListener(panel) {
+		Button border = buttonPool.obtain();
+		border.setStyle(new com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle(
+				new TextureRegionDrawable(new TextureRegion(
+						res.getTexture("actionBarButtonUp" + (int) dimension.getWidth() + "x"
+								+ (int) dimension.getHeight()))),
+				new TextureRegionDrawable(new TextureRegion(
+						res.getTexture("actionBarButtonDown" + (int) dimension.getWidth() + "x"
+								+ (int) dimension.getHeight()))), null));
+		border.setBounds(dimension);
+		border.addListener(new InputListener(border) {
 			@Override
 			public void doAction() {
-				draw(panelAction);
+				action.run();
 			}
 		});
 		group.addActor(panel);
+		group.addActor(border);
 	}
 }

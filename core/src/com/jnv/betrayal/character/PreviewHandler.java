@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Slot;
 
+/**
+ * Helper methods for the character's preview class
+ */
 class PreviewHandler {
 
 	private Preview preview;

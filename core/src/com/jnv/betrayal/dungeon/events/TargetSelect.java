@@ -30,7 +30,7 @@ public class TargetSelect {
 		this.currentAction = currentAction;
 		this.action = action;
 		BetrayalAssetManager res =
-				currentAction.getUiManager().getDungeonManager().getGSM().getGame().res;
+				currentAction.getUiManager().dungeonManager.gsm.getGame().res;
 		Vector2 coords = DungeonCoords.monster;
 		Actor monsterMask = new Actor();
 		monsterMask.setBounds(coords.x, coords.y, DungeonCoords.MONSTER_WIDTH,

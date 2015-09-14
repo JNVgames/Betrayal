@@ -4,11 +4,7 @@
 
 package com.jnv.betrayal.resources;
 
-import com.badlogic.gdx.math.Vector2;
-import com.jnv.betrayal.gameobjects.BodyArmor;
-import com.jnv.betrayal.gameobjects.HeadGear;
 import com.jnv.betrayal.gameobjects.Monster;
-import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 
 public class ResourceLoader {
@@ -34,6 +30,7 @@ public class ResourceLoader {
 		loadMonsters();
 		loadHealthBar();
 		loadSkills();
+		loadDungeonTextures();
 	}
 
 	public void loadAllData() {
@@ -414,6 +411,13 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster51.png", "monster-tier0-2");
 	}
 
+	private void loadDungeonTextures() {
+		res.loadTexture("dungeon/grey_outline360x150.png", "actionBarButtonDown360x150");
+		res.loadTexture("dungeon/white_outline360x150.png", "actionBarButtonUp360x150");
+		res.loadTexture("dungeon/grey_outline720x150.png", "actionBarButtonDown720x150");
+		res.loadTexture("dungeon/white_outline720x150.png", "actionBarButtonUp720x150");
+	}
+
 	private void loadItemsData() {
 		for (int i = 1; i <= 6; i++) {
 			new Weapon(i, "sword1" + i, res, 500,5);
@@ -446,7 +450,7 @@ public class ResourceLoader {
 		res.loadTexture("icon/skills/horn.png", "skill13");
 		res.loadTexture("icon/skills/hourglass.png", "skill14");
 		res.loadTexture("icon/skills/lockon.png", "skill15");
-		res.loadTexture("icon/skills/magesymbol.png.png", "skill16");
+		res.loadTexture("icon/skills/magesymbol.png", "skill16");
 		res.loadTexture("icon/skills/magesymbol2.png", "skill17");
 		res.loadTexture("icon/skills/poison.png", "skill18");
 		res.loadTexture("icon/skills/powerdown.png", "skill19");
@@ -455,6 +459,7 @@ public class ResourceLoader {
 		res.loadTexture("icon/skills/male.png", "skill22");
 		res.loadTexture("icon/skills/female.png", "skill23");
 	}
+
 	private void loadMonsterData() {
 		//Tier 0
 		new Monster(1, "monster-tier0-0", res).setData("Skeleton Kelly","monster-tier0-0", 25, 10, 1, 250, 250, 235, 740, 1, 0, 0,0,0,0,0);

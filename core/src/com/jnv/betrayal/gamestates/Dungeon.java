@@ -32,7 +32,7 @@ public class Dungeon extends GameState {
 		//this.numPlayers = numPlayers;
 
 		// todo player.getCharacters() should be other real life characters
-		dungeonManager = new DungeonManager(player.getCharacters(), monster, gsm);
+		dungeonManager = new DungeonManager(player.characters, monster, gsm);
 		loadStage();
 	}
 

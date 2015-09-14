@@ -16,12 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Stat;
-import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class LoadGame extends GameState {
 
@@ -35,7 +34,7 @@ public class LoadGame extends GameState {
 		super(gsm);
 		image_leftArrow = new TextureRegion(res.getTexture("arrow-left"));
 
-		savedSessions = new Group[player.getCharacters().size()];
+		savedSessions = new Group[player.characters.size()];
 
 		loadStage();
 	}
@@ -101,7 +100,7 @@ public class LoadGame extends GameState {
 		// TODO @vincent loads kinda slow and code is kinda long
 		int counter = 1, scale = 4;
 
-		for (Character c : player.getCharacters()) {
+		for (Character c : player.characters) {
 			final Character character = c;
 			Group preview = new Group();
 
