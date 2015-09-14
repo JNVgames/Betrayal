@@ -23,7 +23,7 @@ public class Betrayal extends Game {
 	public final static int HEIGHT = 1280;
 	public static boolean debug = true;
 	private static boolean gamePaused;
-	public BetrayalAssetManager res;
+	public final BetrayalAssetManager res = new BetrayalAssetManager();
 	public GameStateManager gsm;
 	private SpriteBatch sb;
 	private OrthographicCamera worldCam;
@@ -35,7 +35,6 @@ public class Betrayal extends Game {
 	public void create() {
 		init();
 
-		res = new BetrayalAssetManager();
 		loader = new ResourceLoader(res);
 		player = new Player();
 
@@ -53,7 +52,7 @@ public class Betrayal extends Game {
 
 	public void pause() {
 		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
-		playerStateHandler.goOffline(player.playerID);
+		playerStateHandler.goOffline(player.getPlayerID());
 		Gdx.app.log("Betrayal", "pause()");
         gamePaused = true;
 		gsm.pause();
@@ -66,7 +65,7 @@ public class Betrayal extends Game {
         }
 		Timer timer = new Timer();
 		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
-		playerStateHandler.goOnline(player.playerID);
+		playerStateHandler.goOnline(player.getPlayerID());
 		Gdx.app.log("Betrayal", "resume()");
 	}
 

@@ -12,8 +12,8 @@ import java.util.Stack;
 public class GameStateManager {
 
 	public static GameState pauseState;
+	public final Betrayal game;
 	public State currentState;
-	private Betrayal game;
 	private Stack<GameState> gameStates;
 
 	public GameStateManager(Betrayal game) {

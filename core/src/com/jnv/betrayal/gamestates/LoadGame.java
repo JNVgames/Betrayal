@@ -37,6 +37,8 @@ public class LoadGame extends GameState {
 		savedSessions = new Group[player.characters.size()];
 
 		loadStage();
+
+		if (Betrayal.debug) System.out.println(gsm.game.getPlayer().toJson());
 	}
 
 	public void update(float dt) {
@@ -191,37 +193,22 @@ public class LoadGame extends GameState {
 
 	private void addPreviewListener(final Group preview,
 									final Actor frame, final Character character) {
-		preview.addListener(new InputListener(frame) {
-			private boolean bool_pressed = false;
-
+		preview.addListener(new InputListener(frame, true) {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				for (Actor actor : preview.getChildren()) {
-					actor.addAction(Actions.moveBy(5, -5));
-				}
-				bool_pressed = true;
 				return true;
 			}
 
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
 						&& y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
-					if (!mode_delete) {
+					if (!mode_delete) { // Delete mode is off
 						player.setCurrentCharacter(character);
 						gsm.setState(GameStateManager.State.LOBBY);
-					} else { // mode_delete == true
+					} else { // Delete mode is on
 						removeSavedSessions();
 						player.deleteCharacter(character);
 						loadSavedSessions();
 					}
-				}
-			}
-
-			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				if (bool_pressed) {
-					for (Actor actor : preview.getChildren()) {
-						actor.addAction(Actions.moveBy(-5, 5));
-					}
-					bool_pressed = false;
 				}
 			}
 		});

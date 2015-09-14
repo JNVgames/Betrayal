@@ -58,6 +58,7 @@ public class ActionBar {
 	}
 
 	private void draw(State state) {
+		// Clear action bar
 		for (Actor actor : actionBar.getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
 			System.out.println("buttonPool" + buttonPool.getFree());
@@ -76,8 +77,8 @@ public class ActionBar {
 				pushMenuState(State.MAIN);
 				break;
 			case ATTACK:
-				drawAttackMenu();
-				pushMenuState(State.ATTACK);
+				//drawAttackMenu();
+				//pushMenuState(State.ATTACK);
 				break;
 			case ITEMS:
 				//drawItemsMenu();
@@ -86,12 +87,29 @@ public class ActionBar {
 				//drawEventLogMenu();
 				break;
 			case TARGET_SELECT:
-				drawTargetSelect();
-				pushMenuState(State.TARGET_SELECT);
-				break;
+				throw new AssertionError("Use draw(int targets) for target selection");
 			default:
 				break;
 		}
+	}
+
+	/**
+	 * Use this method for target selection
+	 * @param targets targets for target selection
+	 */
+	private void draw(int targets) {
+		// Clear action bar
+		for (Actor actor : actionBar.getChildren()) {
+			if (actor instanceof Label) panelPool.free((Label) actor);
+			System.out.println("buttonPool" + buttonPool.getFree());
+			if (actor instanceof Button) buttonPool.free((Button) actor);
+			System.out.println("buttonPool" + buttonPool.getFree());
+		}
+		actionBar.clear();
+		uiManager.currentAction.updateText();
+
+		drawTargetSelect(targets);
+		pushMenuState(State.TARGET_SELECT);
 	}
 
 	// Helpers
@@ -135,7 +153,7 @@ public class ActionBar {
 		});
 		createPanel("Attack", 70, Panel.topLeft, actionBar, new Runnable() {
 			public void run() {
-				draw(State.ATTACK);
+				draw(1);
 			}
 		});
 		createPanel("Skills", 70, Panel.topRight, actionBar, new Runnable() {
@@ -156,25 +174,11 @@ public class ActionBar {
 		});
 	}
 
-	private void drawAttackMenu() {
-		createPanel("Normal Attack", 50, Panel.topLeft, actionBar, new Runnable() {
-			public void run() {
-				draw(State.TARGET_SELECT);
-			}
-		});
-		createPanel("Skill", 70, Panel.topRight, actionBar, null);
-		createPanel("Back", 70, Panel.bottomRight, actionBar, new Runnable() {
-			public void run() {
-				draw(State.BACK);
-			}
-		});
-	}
-
-	private void drawTargetSelect() {
+	private void drawTargetSelect(int targets) {
 		final TargetSelect targetSelect =
 				new TargetSelect(numPlayers, Action.ACTION_NORMAL_ATTACK, stage,
 						uiManager.currentAction);
-		targetSelect.configureTargetSelect(4);
+		targetSelect.configureTargetSelect(targets);
 
 		createPanel("Done", 70, Panel.top, actionBar, new Runnable() {
 			@Override

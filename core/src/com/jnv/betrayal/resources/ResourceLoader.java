@@ -148,7 +148,7 @@ public class ResourceLoader {
 		}
 	}
 
-	private void loadHealthBar(){
+	private void loadHealthBar() {
 		res.loadTexture("dungeon/healthbar/greenbar214x17.png", "green-bar");
 		res.loadTexture("dungeon/healthbar/red_bar52x17.png", "red-bar");
 		res.loadTexture("dungeon/healthbar/yellow_bar102x17.png", "yellow-bar");

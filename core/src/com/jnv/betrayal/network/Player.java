@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Json.Serializable {
-    public int playerID;
+    private int playerID, currentCharacterID;
     private static final String GET_PLAYER_ID_URL = "https://betrayal-backend.herokuapp.com/new_player";
     //private static final String GET_PLAYER_ID_URL = "http://localhost:5000/new_player";
 
@@ -26,9 +26,6 @@ public class Player implements Json.Serializable {
 
     public void setPlayerID() {
         FindPlayerIDTask task = new FindPlayerIDTask();
-    }
-    public int getPlayerID() {
-        return this.playerID;
     }
 
     /*
@@ -90,14 +87,25 @@ public class Player implements Json.Serializable {
     // Getters
     public Character getCurrentCharacter() { return currentCharacter; }
 
+    public int getPlayerID() {
+        return this.playerID;
+    }
+
     // Setters
     public void setCurrentCharacter(Character character) {
         currentCharacter = character;
+        currentCharacterID = characters.indexOf(character);
     }
+
+    public void setCurrentCharacterIndex(int currentCharacterID) {
+        this.currentCharacterID = currentCharacterID;
+    }
+
     public void addCharacter(Character character) {
         characters.add(character);
         currentCharacter = character;
     }
+
     public boolean deleteCharacter(Character character) {
         return characters.remove(character);
     }
@@ -105,8 +113,12 @@ public class Player implements Json.Serializable {
     // Json methods
     public void write(Json json) {
         json.writeField(this, "playerID", Integer.class);
-		json.writeObjectStart("currentCharacter");
-		currentCharacter.write(json);
+        json.writeField(this, "currentCharacterID", Integer.class);
+		json.writeObjectStart("allCharacters");
+        // Ask jarnin about all characters
+		for (Character character : characters) {
+            character.write(json);
+        }
 		json.writeObjectEnd();
     }
 

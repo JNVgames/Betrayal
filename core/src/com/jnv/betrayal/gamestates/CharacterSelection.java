@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Jobs;
@@ -33,8 +32,7 @@ public class CharacterSelection extends GameState {
 
 	private Actor reference, button_play_now;
 	private Image button_back, field_framePreview;
-	private Label field_usernameLabel, label_jobDescription;
-	private TextField field_usernameEnter;
+	private Label label_jobDescription;
 	private SelectionField gender, hairStyle, hairColor, job;
 	private Character character;
 	private TextureRegion image_leftArrow, image_rightArrow;
@@ -156,6 +154,7 @@ public class CharacterSelection extends GameState {
 						&& y >= button_play_now.getY()
 						&& y <= button_play_now.getY() + button_play_now.getHeight()) {
 					player.addCharacter(character);
+					player.setCurrentCharacterIndex(player.characters.indexOf(character));
 					gsm.setState(GameStateManager.State.LOBBY);
 				} else image_button_play = res.getTexture("play-now");
 			}
