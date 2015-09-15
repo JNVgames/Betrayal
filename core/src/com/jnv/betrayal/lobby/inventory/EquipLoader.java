@@ -26,16 +26,16 @@ class EquipLoader {
 	void loadEquips() {
 		final Equip[] allEquips = character.equips.equips;
 		// Check each equip slot to see if it's empty
-		for (int i = 0; i < Slot.SLOTS; i++) {
+		for (int i = 0; i < CharacterChart.SLOTS; i++) {
 			final int index = i;
 			// If the slot is not empty, display the item icon
 			if (allEquips[i] != null) {
 				Image equipIcon = new Image(allEquips[i].getItemIcon());
-				equipIcon.setBounds(Slot.ALL_DIMENS[i]);
+				equipIcon.setBounds(CharacterChart.ALL_DIMENS[i]);
 				equipIcon.addListener(new InputListener(equipIcon) {
 					@Override
 					public void doAction() {
-						new ItemOptions(inventory, allEquips[index], Slot.ALL_DIMENS[index],
+						new ItemOptions(inventory, allEquips[index], CharacterChart.ALL_DIMENS[index],
 								inventory.game, index);
 					}
 				});

@@ -11,13 +11,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.scene2d.InputListener;
-import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.lobby.social.FriendsList;
-import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.LobbyOptions;
+import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.shop.Shop;
+import com.jnv.betrayal.lobby.social.FriendsList;
 import com.jnv.betrayal.lobby.stats.StatsWindow;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class Lobby extends GameState {
 

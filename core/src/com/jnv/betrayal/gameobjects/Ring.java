@@ -8,7 +8,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Ring extends Equip {
 
-	public Ring(int id, String name, BetrayalAssetManager res,int cost_buy) {
+	public Ring(int id, String name, BetrayalAssetManager res, int cost_buy) {
 		super(id, name, res, cost_buy);
 	}
 

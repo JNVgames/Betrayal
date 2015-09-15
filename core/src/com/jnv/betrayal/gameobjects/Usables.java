@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.gameobjects;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public abstract class Usables extends Item {

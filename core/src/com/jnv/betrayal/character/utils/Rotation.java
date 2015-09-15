@@ -5,7 +5,6 @@
 package com.jnv.betrayal.character.utils;
 
 public final class Rotation {
-
 	public static final int FRONT = 0;
 	public static final int RIGHT = 1;
 	public static final int BACK = 2;

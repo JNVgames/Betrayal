@@ -6,14 +6,9 @@ package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Monster;
-import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.popup.MonsterInfo;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.InputListener;
 
 public class DungeonMonster extends Entity {
 

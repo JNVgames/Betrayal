@@ -7,10 +7,12 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.jnv.betrayal.character.utils.Slot;
+import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Previewable;
 import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
@@ -25,84 +27,66 @@ public class Equips implements Json.Serializable {
 	Character character;
 	BetrayalAssetManager res;
 
-	// todo @vincent add getPreview() for equip class
 	public final Equip[] equips;
 
 	public Equips(Character character, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
 		this.character = character;
 		this.res = res;
-		equips = new Equip[Slot.SLOTS];
+		equips = new Equip[EquipSlot.SLOTS];
 	}
 
 	// Getters
 	public boolean isHeadSlotEmpty() {
-		return equips[Slot.HEAD] == null;
+		return equips[EquipSlot.HEAD] == null;
 	}
 
 	public boolean isBodySlotEmpty() {
-		return equips[Slot.BODY] == null;
+		return equips[EquipSlot.BODY] == null;
 	}
 
-	public boolean isShieldSlotEmpty() {
-		return equips[Slot.SHIELD] == null;
+	public boolean isLeftHandSlotEmpty() {
+		return equips[EquipSlot.LEFT_HAND] == null;
 	}
 
-	public boolean isWeapon1SlotEmpty() {
-		return equips[Slot.WEAPON1] == null;
-	}
-
-	public boolean isWeapon2SlotEmpty() {
-		return equips[Slot.WEAPON2] == null;
+	public boolean isRightHandSlotEmpty() {
+		return equips[EquipSlot.RIGHT_HAND] == null;
 	}
 
 	public boolean isRingSlot1Empty() {
-		return equips[Slot.RING1] == null;
+		return equips[EquipSlot.RING1] == null;
 	}
 
 	public boolean isRingSlot2Empty() {
-		return equips[Slot.RING2] == null;
+		return equips[EquipSlot.RING2] == null;
 	}
 
 	public boolean isCloakSlotEmpty() {
-		return equips[Slot.CLOAK] == null;
+		return equips[EquipSlot.CLOAK] == null;
 	}
 
 	public Texture getHeadArmorPreview() {
-		return equips[Slot.HEAD].getPreview();
+		return ((Previewable) equips[EquipSlot.HEAD]).getPreview();
 	}
 
 	public Texture getBodyArmorPreview() {
-		if (equips[Slot.BODY] == null) return res.getTexture("char-armor-peasant");
-		else return equips[Slot.BODY].getPreview();
+		if (equips[EquipSlot.BODY] == null) return res.getTexture("previewarmor0");
+		else return ((Previewable) equips[EquipSlot.BODY]).getPreview();
 	}
 
-	public Texture getShieldPreview() {
-		return equips[Slot.SHIELD].getPreview();
+	public Texture getLeftHandPreview() {
+		return ((DualWieldable) equips[EquipSlot.LEFT_HAND]).getLeftPreview();
 	}
 
-	public Texture getWeapon1Preview() {
-		return equips[Slot.WEAPON1].getPreview();
-	}
-
-	public Texture getWeapon2Preview() {
-		return equips[Slot.WEAPON2].getPreview();
-	}
-
-	public Texture getRing1Preview() {
-		return equips[Slot.RING1].getItemIcon();
-	}
-
-	public Texture getRing2Preview() {
-		return equips[Slot.RING2].getItemIcon();
+	public Texture getRightHandPreview() {
+		return ((DualWieldable) equips[EquipSlot.RIGHT_HAND]).getRightPreview();
 	}
 
 	// Setters
 	public void equip(Equip equip) {
-		if (equip instanceof Weapon) equipsHandler.equipWeapon((Weapon) equip);
+		if (equip instanceof DualWieldable) equipsHandler.equipHand(equip);
 		else if (equip instanceof HeadGear) equipsHandler.equipHeadArmor((HeadGear) equip);
 		else if (equip instanceof BodyArmor) equipsHandler.equipBodyArmor((BodyArmor) equip);
-		else if (equip instanceof Shield) equipsHandler.equipShield((Shield) equip);
 		else if (equip instanceof Ring) equipsHandler.equipRing((Ring) equip);
 	}
 
@@ -115,19 +99,17 @@ public class Equips implements Json.Serializable {
 	 */
 	public boolean unequip(int slot) {
 		switch (slot) {
-			case Slot.HEAD:
+			case EquipSlot.HEAD:
 				return equipsHandler.unequipHeadArmor();
-			case Slot.BODY:
+			case EquipSlot.BODY:
 				return equipsHandler.unequipBodyArmor();
-			case Slot.SHIELD:
-				return equipsHandler.unequipShield();
-			case Slot.WEAPON1:
-				return equipsHandler.unequipWeapon1();
-			case Slot.WEAPON2:
-				return equipsHandler.unequipWeapon2();
-			case Slot.RING1:
+			case EquipSlot.LEFT_HAND:
+				return equipsHandler.unequipLeftHand();
+			case EquipSlot.RIGHT_HAND:
+				return equipsHandler.unequipRightHand();
+			case EquipSlot.RING1:
 				return equipsHandler.unequipRing1();
-			case Slot.RING2:
+			case EquipSlot.RING2:
 				return equipsHandler.unequipRing2();
 			default:
 				throw new AssertionError("Unequip slot does not exist");

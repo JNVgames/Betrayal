@@ -5,7 +5,6 @@
 package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.jnv.betrayal.dungeon.actions.Action;
 
 public abstract class Entity {
 

@@ -64,7 +64,7 @@ public class Stats implements Json.Serializable {
 	 */
 	public void advanceFloor() {
 		floor++;
-		availablePoints += 3;
+		availablePoints += 5;
 	}
 
 	public void setFloor(int floor) {
@@ -84,15 +84,24 @@ public class Stats implements Json.Serializable {
 
 	}
 
+	/**
+	 * Provides methods for applying points to character stats.
+	 */
 	public class ApplyPoints {
 
+		private Stats stats;
 		private int tmpHealth, tmpDefense, tmpAttack, tmpAvailablePoints;
 
-		public ApplyPoints() {
-			tmpHealth = health;
-			tmpAttack = attack;
-			tmpDefense = defense;
-			tmpAvailablePoints = availablePoints;
+		/**
+		 * Initializes temporary character stats to the provided character
+		 * @param character the current character
+		 */
+		public ApplyPoints(Character character) {
+			stats = character.stats;
+			tmpHealth = stats.health;
+			tmpAttack = stats.attack;
+			tmpDefense = stats.defense;
+			tmpAvailablePoints = stats.availablePoints;
 		}
 
 		public void addHealthPoint() {
@@ -125,26 +134,32 @@ public class Stats implements Json.Serializable {
 			tmpAvailablePoints++;
 		}
 
+		/**
+		 * Sets the changes in stats to the character
+		 */
 		public void applyPoints() {
-			health = tmpHealth;
-			attack = tmpAttack;
-			defense = tmpDefense;
-			availablePoints = tmpAvailablePoints;
+			stats.health = tmpHealth;
+			stats.attack = tmpAttack;
+			stats.defense = tmpDefense;
+			stats.availablePoints = tmpAvailablePoints;
 		}
 
 		/**
 		 * Resets all stats and returns points back to available points
 		 */
 		public void cancel() {
-			tmpAvailablePoints += tmpHealth - health;
-			tmpAvailablePoints += tmpAttack - attack;
-			tmpAvailablePoints += tmpDefense - defense;
-			tmpHealth = health;
-			tmpAttack = attack;
-			tmpDefense = defense;
+			tmpAvailablePoints = stats.availablePoints;
+			tmpHealth = stats.health;
+			tmpAttack = stats.attack;
+			tmpDefense = stats.defense;
 		}
 
 		// Getters
+
+		/**
+		 * Use these methods to constantly get the correct stats values for display
+		 * @return returns requested stats
+		 */
 		public int getHealth() {
 			return tmpHealth;
 		}

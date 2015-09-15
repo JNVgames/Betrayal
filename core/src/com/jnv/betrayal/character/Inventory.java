@@ -7,7 +7,6 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.gameobjects.Item;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,6 @@ public class Inventory implements Json.Serializable {
 	}
 
 	// Setters
-
 	/**
 	 * Adds the specific amount of items to inventory and return true.
 	 * If inventory is filled, do nothing and return false.

@@ -34,10 +34,6 @@ public class Character implements Json.Serializable {
 		stats = new Stats();
 
 		job.setJob(Jobs.WARRIOR);
-		update();
-	}
-
-	private void update() {
 		preview.update();
 	}
 

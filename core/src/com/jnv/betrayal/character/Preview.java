@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.jnv.betrayal.character.utils.Slot;
 import com.jnv.betrayal.character.utils.Gender;
+import com.jnv.betrayal.character.utils.PreviewSlot;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
@@ -29,20 +29,18 @@ public class Preview implements Json.Serializable {
 	/**
 	 * Textures for character head, format: head_side_walkAnimation
 	 */
+	TextureRegion[] currentPreview;
 	TextureRegion[] front_left, front_still, front_right;
 	TextureRegion[] right_left, right_still, right_right;
 	TextureRegion[] left_left, left_still, left_right;
 	TextureRegion[] back_left, back_still, back_right;
 	TextureRegion[][] front, right, left, back;
-	/**
-	 * Contains rotation value for character preview
-	 * front = 0, right side = 1, back = 2, left side = 3
-	 */
-	int rotation = 0;
+
 	/**
 	 * Holds character trait values
 	 */
 	Gender gender;
+	int rotation = 0;
 	int hair_male, hair_female, hairColor;
 
 	public Preview(Character character, BetrayalAssetManager res) {
@@ -55,37 +53,38 @@ public class Preview implements Json.Serializable {
 		hair_female = 1;
 		hairColor = 1;
 
-		initArrays();
+		initializeArrays();
 		update();
 	}
 
-	private void initArrays() {
-		front_left = new TextureRegion[Slot.SLOTS];
-		front_still = new TextureRegion[Slot.SLOTS];
-		front_right = new TextureRegion[Slot.SLOTS];
-		right_left = new TextureRegion[Slot.SLOTS];
-		right_still = new TextureRegion[Slot.SLOTS];
-		right_right = new TextureRegion[Slot.SLOTS];
-		left_left = new TextureRegion[Slot.SLOTS];
-		left_still = new TextureRegion[Slot.SLOTS];
-		left_right = new TextureRegion[Slot.SLOTS];
-		back_left = new TextureRegion[Slot.SLOTS];
-		back_still = new TextureRegion[Slot.SLOTS];
-		back_right = new TextureRegion[Slot.SLOTS];
+	void initializeArrays() {
+		currentPreview = new TextureRegion[PreviewSlot.SLOTS];
+		front_left = new TextureRegion[PreviewSlot.SLOTS];
+		front_still = new TextureRegion[PreviewSlot.SLOTS];
+		front_right = new TextureRegion[PreviewSlot.SLOTS];
+		right_left = new TextureRegion[PreviewSlot.SLOTS];
+		right_still = new TextureRegion[PreviewSlot.SLOTS];
+		right_right = new TextureRegion[PreviewSlot.SLOTS];
+		left_left = new TextureRegion[PreviewSlot.SLOTS];
+		left_still = new TextureRegion[PreviewSlot.SLOTS];
+		left_right = new TextureRegion[PreviewSlot.SLOTS];
+		back_left = new TextureRegion[PreviewSlot.SLOTS];
+		back_still = new TextureRegion[PreviewSlot.SLOTS];
+		back_right = new TextureRegion[PreviewSlot.SLOTS];
 
-		front = new TextureRegion[3][Slot.SLOTS];
+		front = new TextureRegion[3][PreviewSlot.SLOTS];
 		front[0] = front_left;
 		front[1] = front_still;
 		front[2] = front_right;
-		right = new TextureRegion[3][Slot.SLOTS];
+		right = new TextureRegion[3][PreviewSlot.SLOTS];
 		right[0] = right_left;
 		right[1] = right_still;
 		right[2] = right_right;
-		left = new TextureRegion[3][Slot.SLOTS];
+		left = new TextureRegion[3][PreviewSlot.SLOTS];
 		left[0] = left_left;
 		left[1] = left_still;
 		left[2] = left_right;
-		back = new TextureRegion[3][Slot.SLOTS];
+		back = new TextureRegion[3][PreviewSlot.SLOTS];
 		back[0] = back_left;
 		back[1] = back_still;
 		back[2] = back_right;
@@ -102,9 +101,9 @@ public class Preview implements Json.Serializable {
 
 	public void drawPreview(Batch batch, int rotation, float x, float y, float width, float height) {
 		this.rotation = rotation;
-		TextureRegion[] preview = getFullPreview();
-		if (preview != null) {
-			for (TextureRegion tr : preview) {
+		setCurrentPreview(rotation);
+		if (currentPreview != null) {
+			for (TextureRegion tr : currentPreview) {
 				if (tr != null) {
 					batch.draw(tr, x, y, width, height);
 				}
@@ -112,25 +111,24 @@ public class Preview implements Json.Serializable {
 		}
 	}
 
-	private TextureRegion[] getFullPreview() {
+	private void setCurrentPreview(int rotation) {
 		update();
 		switch (rotation) {
 			case 0:
-				return front_still;
+				currentPreview = front_still;
+				break;
 			case 1:
-				return right_still;
+				currentPreview = right_still;
+				break;
 			case 2:
-				return back_still;
+				currentPreview = back_still;
+				break;
 			case 3:
-				return left_still;
+				currentPreview = left_still;
+				break;
 			default:
-				return null;
+				throw new AssertionError("Rotation out of bounds (0-3): " + rotation);
 		}
-	}
-
-	private TextureRegion[] getFullPreview(int rotation) {
-		this.rotation = rotation;
-		return getFullPreview();
 	}
 
 	public String getTrait(Trait trait) {

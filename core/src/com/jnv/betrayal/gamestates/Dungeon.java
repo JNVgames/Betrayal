@@ -6,14 +6,11 @@ package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.dungeon.managers.DungeonManager;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.FontManager;
 
 public class Dungeon extends GameState {

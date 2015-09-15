@@ -5,7 +5,6 @@
 package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -192,11 +191,11 @@ public class Shop extends Popup {
 
 	private void loadSwords() {
 		for (int i = 1; i <= 6; i++) {
-			final String item1 = "sword1" + i;
-			final String item2 = "sword2" + i;
-			final String item3 = "sword3" + i;
-			final String item4 = "sword4" + i;
-			final String item5 = "sword5" + i;
+			final String item1 = "sword" + i + "1";
+			final String item2 = "sword" + i + "2";
+			final String item3 = "sword" + i + "3";
+			final String item4 = "sword" + i + "4";
+			final String item5 = "sword" + i + "5";
 			sword1[i - 1] = new Image(res.getTexture(item1));
 			sword1[i - 1].layout();
 			sword1[i - 1].setBounds(100 + itemSize * (i - 1),
@@ -206,8 +205,6 @@ public class Shop extends Popup {
 				public void doAction() {
 					Weapon sword = new Weapon(item1, res);
 					new ShopPurchase(game, sword);
-
-
 				}
 			});
 			currentGroup.addActor(sword1[i - 1]);

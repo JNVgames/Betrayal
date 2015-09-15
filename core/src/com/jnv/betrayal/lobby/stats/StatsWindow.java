@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.character.Stats;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
@@ -77,16 +76,16 @@ public class StatsWindow extends Popup {
 		popup.addActor(title);
 	}
 
-	private void loadIcons(){
+	private void loadIcons() {
 		// Health
 		icons[0] = new Image(res.getTexture("health"));
 		icons[0].layout();
-		icons[0].setBounds(110,Betrayal.HEIGHT-380,40,40);
+		icons[0].setBounds(110, Betrayal.HEIGHT - 380, 40, 40);
 		popup.addActor(icons[0]);
 		// Defense
 		icons[1] = new Image(res.getTexture("defense"));
 		icons[1].layout();
-		icons[1].setBounds(110, Betrayal.HEIGHT-470, 40, 40);
+		icons[1].setBounds(110, Betrayal.HEIGHT - 470, 40, 40);
 		popup.addActor(icons[1]);
 		// Attack
 		icons[2] = new Image(res.getTexture("attack"));
@@ -104,7 +103,7 @@ public class StatsWindow extends Popup {
 		characterStatsLabel(characterStats, Stat.ATTACK, yRef);
 	}
 
-	private void loadApplyButton(){
+	private void loadApplyButton() {
 		applyButton = new Image(res.getTexture("apply"));
 		applyButton.layout();
 		applyButton.setBounds(460, 600, 150, 75);
@@ -134,11 +133,11 @@ public class StatsWindow extends Popup {
 		popup.addActor(lobbyButton);
 	}
 
-	private void loadStatsAdjustButton(){
-		for(int i = 0; i<3; i++) {
+	private void loadStatsAdjustButton() {
+		for (int i = 0; i < 3; i++) {
 			statPlusButtons[i] = new Image(res.getTexture("plus"));
 			statPlusButtons[i].layout();
-			statPlusButtons[i].setBounds(420, Betrayal.HEIGHT-380-90*i, 50, 50);
+			statPlusButtons[i].setBounds(420, Betrayal.HEIGHT - 380 - 90 * i, 50, 50);
 			statPlusButtons[i].addListener(new InputListener(statPlusButtons[i]) {
 				@Override
 				public void doAction() {
@@ -149,7 +148,7 @@ public class StatsWindow extends Popup {
 
 			statMinusButtons[i] = new Image(res.getTexture("minus"));
 			statMinusButtons[i].layout();
-			statMinusButtons[i].setBounds(520, Betrayal.HEIGHT-380-90*i, 50, 50);
+			statMinusButtons[i].setBounds(520, Betrayal.HEIGHT - 380 - 90 * i, 50, 50);
 			statMinusButtons[i].addListener(new InputListener(statMinusButtons[i]) {
 				@Override
 				public void doAction() {
@@ -160,9 +159,9 @@ public class StatsWindow extends Popup {
 		}
 	}
 
-	private void loadAvailablePoints(){
+	private void loadAvailablePoints() {
 		availablePoints = new Label("Available Points:", FontManager.getFont(40));
-		availablePoints.setX(Betrayal.WIDTH/2-150);
+		availablePoints.setX(Betrayal.WIDTH / 2 - 150);
 		availablePoints.setY(Betrayal.HEIGHT - 225);
 		popup.addActor(availablePoints);
 	}
