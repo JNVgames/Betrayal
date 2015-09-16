@@ -26,6 +26,62 @@ public class Inventory implements Json.Serializable {
 		items = new ArrayList<Item>();
 	}
 
+	/**
+	 * Buys the requested item
+	 * @param item item the character is trying to buy
+	 * @return true if character has enough gold, false if not
+	 */
+	public boolean buyItem(Item item) {
+		// if character doesn't have enough gold to buy item
+		if (gold < item.getBuyCost()) {
+			// fail to buy and return false
+			return false;
+		}
+		// if character has enough gold and return true
+		else { // if (gold >= item.getBuyCost()) {
+			gold -= item.getBuyCost();
+			addItem(item);
+			return true;
+		}
+	}
+
+	/**
+	 * Sells the requested item
+	 * @param item item to be sold
+	 * @throws AssertionError if item isn't in the inventory
+	 */
+	public void sellItem(Item item) {
+		// if item isn't in the inventory, crash the game
+		if (!items.contains(item))
+			throw new AssertionError("Item does not exist in the character's inventory: " + item.getName());
+		items.remove(item);
+		gold += item.getSellCost();
+	}
+
+	/**
+	 * Adds the specific amount of items to inventory and return true.
+	 * If inventory is filled, do nothing and return false.
+	 *
+	 * @param item   item to be added
+	 * @param amount how many items to be added
+	 */
+	public void addItem(Item item, int amount) {
+		for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(item);
+	}
+
+	public void addItem(Item item) {
+		addItem(item, 1);
+	}
+
+	/**
+	 * Sorts the inventory
+	 */
+	public void sortItems() {
+		if (items != null) {
+			items.sort(new Item.ItemComparator());
+		}
+	}
+
 	// Getters
 	public int getGold() {
 		return gold;
@@ -44,35 +100,6 @@ public class Inventory implements Json.Serializable {
 
 	public boolean isFull() {
 		return items.size() == items_max;
-	}
-
-	// Setters
-	/**
-	 * Adds the specific amount of items to inventory and return true.
-	 * If inventory is filled, do nothing and return false.
-	 *
-	 * @param item   item to be added
-	 * @param amount how many items to be added
-	 */
-	public void addItem(Item item, int amount) {
-		for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(item);
-	}
-
-	public void addItem(Item item) {
-		addItem(item, 1);
-	}
-
-	public void removeItem(Item item) {
-		items.remove(item);
-	}
-
-	/**
-	 * Sorts the inventory
-	 */
-	public void sortItems() {
-		if (items != null) {
-			items.sort(new Item.ItemComparator());
-		}
 	}
 
 	/**
