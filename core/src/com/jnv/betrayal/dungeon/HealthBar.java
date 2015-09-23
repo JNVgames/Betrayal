@@ -2,12 +2,11 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.renamedthings;
+package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -22,10 +21,10 @@ public class HealthBar extends Group {
 	private final Drawable greenBar, yellowBar, redBar;
 	private int currentHealthPercentage, finalHealthPercentage;
 
-	public HealthBar(float topX, float leftY, BetrayalAssetManager res) {
+	public HealthBar(float height, BetrayalAssetManager res) {
 		// Calibrate health bar coordinates
-		float x = topX + 50;
-		float y = leftY - 25;
+		float x = 50;
+		float y = height - 25;
 
 		// Initialize health drawables
 		greenBar = new TextureRegionDrawable(new TextureRegion(res.getTexture("green-bar")));
@@ -33,11 +32,12 @@ public class HealthBar extends Group {
 		redBar = new TextureRegionDrawable(new TextureRegion(res.getTexture("red-bar")));
 
 		// Initialize health bar image actors
-		healthBarBackground = new Image(res.getTexture("bar"));
+		healthBarBackground = new Image(res.getTexture("bar-background"));
 		healthBar = new Image(greenBar);
 
 		// Health percentage starts at full
 		currentHealthPercentage = 100;
+		finalHealthPercentage = 100;
 		initialize(x, y);
 
 		// Add actors to the group
@@ -47,11 +47,11 @@ public class HealthBar extends Group {
 
 	private void initialize(float x, float y) {
 		healthBarBackground.setBounds(x, y, 227, 25);
-		healthBarBackground.addAction(Actions.alpha(0));
-		healthBarBackground.addAction(Actions.delay(1, Actions.fadeIn(2)));
+		//healthBarBackground.addAction(Actions.alpha(0));
+		//healthBarBackground.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		healthBar.setBounds(x + 10, y + 8, 200, 8);
-		healthBar.addAction(Actions.alpha(0));
-		healthBar.addAction(Actions.delay(1, Actions.fadeIn(2)));
+		//healthBar.addAction(Actions.alpha(0));
+		//healthBar.addAction(Actions.delay(1, Actions.fadeIn(2)));
 	}
 
 	public void setNewHealthPercent(int newHealthPercent) {

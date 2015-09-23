@@ -373,10 +373,14 @@ public class ResourceLoader {
 	}
 
 	private void loadDungeonTextures() {
-		res.loadTexture("dungeon/grey_outline360x150.png", "actionBarButtonDown360x150");
-		res.loadTexture("dungeon/white_outline360x150.png", "actionBarButtonUp360x150");
-		res.loadTexture("dungeon/grey_outline720x150.png", "actionBarButtonDown720x150");
-		res.loadTexture("dungeon/white_outline720x150.png", "actionBarButtonUp720x150");
+		res.loadTexture("dungeon/buttongraphics/white_outline360x150.png", "actionBarButtonUp360x150");
+		res.loadTexture("dungeon/buttongraphics/white_outline360x300.png", "actionBarButtonUp360x300");
+		res.loadTexture("dungeon/buttongraphics/white_outline720x150.png", "actionBarButtonUp720x150");
+		res.loadTexture("dungeon/buttongraphics/white_outline720x300.png", "actionBarButtonUp720x300");
+		res.loadTexture("dungeon/buttongraphics/grey_outline360x150.png", "actionBarButtonDown360x150");
+		res.loadTexture("dungeon/buttongraphics/grey_outline360x300.png", "actionBarButtonDown360x300");
+		res.loadTexture("dungeon/buttongraphics/grey_outline720x150.png", "actionBarButtonDown720x150");
+		res.loadTexture("dungeon/buttongraphics/grey_outline720x300.png", "actionBarButtonDown720x300");
 	}
 
 	private void loadItemsData() {

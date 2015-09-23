@@ -2,27 +2,23 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.managers;
+package com.jnv.betrayal.dungeon;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.dungeon.DungeonMonster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.Random;
 
 public class MonsterManager {
 
-	private Image image;
 	private DungeonMonster monster;
 	private BetrayalAssetManager res;
 
-	public MonsterManager(BetrayalAssetManager res, Stage stage) {
+	public MonsterManager(int floor, BetrayalAssetManager res, Field field) {
 		this.res = res;
 		int tier = 10;  //CHANGE accord to floor level
 		tier = generateMonster(tier); // TODO: take this out later. fully randomizes
 		int monsterID = generateMonster(tier);
-		this.monster = new DungeonMonster(res, tier, monsterID, stage);
+		this.monster = new DungeonMonster(res, tier, monsterID, field);
 	}
 
 	/**

@@ -50,10 +50,6 @@ public class GameStateManager {
 	}
 
 	// Getters
-	public Betrayal getGame() {
-		return game;
-	}
-
 	private GameState getState(State state) {
 		currentState = state;
 		switch (state) {

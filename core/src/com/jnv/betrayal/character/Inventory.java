@@ -74,6 +74,14 @@ public class Inventory implements Json.Serializable {
 	}
 
 	/**
+	 * Removes and does not sell item from inventory
+	 * @param item to remove
+	 */
+	public void removeItem(Item item) {
+		items.remove(item);
+	}
+
+	/**
 	 * Sorts the inventory
 	 */
 	public void sortItems() {
@@ -87,6 +95,12 @@ public class Inventory implements Json.Serializable {
 		return gold;
 	}
 
+	/**
+	 * Returns items in a 2D array. *Used for inventory in lobby
+	 * @param rows in inventory
+	 * @param cols in inventory
+	 * @return 2D array of items
+	 */
 	public Item[][] getItems(int rows, int cols) {
 		Item[][] itemArray = new Item[rows][cols];
 		int counter = 0;

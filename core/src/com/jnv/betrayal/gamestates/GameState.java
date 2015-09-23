@@ -24,7 +24,7 @@ public abstract class GameState {
 
 	protected GameState(GameStateManager gsm) {
 		this.gsm = gsm;
-		game = gsm.getGame();
+		game = gsm.game;
 		stage = game.getStage();
 		stage.clear();
 		sb = game.getBatch();

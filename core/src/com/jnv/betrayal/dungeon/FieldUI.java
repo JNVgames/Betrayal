@@ -2,20 +2,18 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.ui;
+package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.events.TargetSelect;
-import com.jnv.betrayal.dungeon.managers.UIManager;
-import com.jnv.betrayal.dungeon.utils.Action;
+import com.jnv.betrayal.dungeon.actions.Action;
+import com.jnv.betrayal.dungeon.actions.NormalAttack;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.dungeon.utils.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -29,27 +27,22 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.Stack;
 
-public class ActionBar {
+class FieldUI extends Group {
 
-	private UIManager uiManager;
-	private GameStateManager gsm;
+	private Field field;
 	private BetrayalAssetManager res;
-	private Stage stage;
-	private Group actionBar;
 	private Pool<Label> panelPool;
 	private Pool<Button> buttonPool;
 	private Stack<State> menu;
 	private int numPlayers;
+	private Action currentAction;
+	public final GameStateManager gsm;
 
-	public ActionBar(int numPlayers, Stage stage, UIManager uiManager) {
-		this.uiManager = uiManager;
-		gsm = uiManager.dungeonManager.gsm;
-		this.numPlayers = numPlayers;
-		this.stage = stage;
-		res = uiManager.dungeonManager.gsm.getGame().res;
-		actionBar = new Group();
+	public FieldUI(Field field) {
+		this.field = field;
+		res = field.res;
+		gsm = field.gsm;
 		menu = new Stack<State>();
-		stage.addActor(actionBar);
 		setupPools();
 	}
 
@@ -59,14 +52,11 @@ public class ActionBar {
 
 	private void draw(State state) {
 		// Clear action bar
-		for (Actor actor : actionBar.getChildren()) {
+		for (Actor actor : getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
-			System.out.println("buttonPool" + buttonPool.getFree());
 			if (actor instanceof Button) buttonPool.free((Button) actor);
-			System.out.println("buttonPool" + buttonPool.getFree());
 		}
-		actionBar.clear();
-		uiManager.currentAction.updateText();
+		clear();
 		switch (state) {
 			case BACK:
 				menu.pop();
@@ -95,20 +85,28 @@ public class ActionBar {
 
 	/**
 	 * Use this method for target selection
-	 * @param targets targets for target selection
+	 *
+	 * @param action used for targets
 	 */
-	private void draw(int targets) {
+	private void draw(Action action) {
+		// If currentAction is null, set the action to current action
+		if (currentAction == null) currentAction = action;
+		// If not null, unselect all
+		else if (!currentAction.equals(action)) { // if (currentAction != null)
+			field.unselectAll();
+		}
+
 		// Clear action bar
-		for (Actor actor : actionBar.getChildren()) {
+		for (Actor actor : getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
 			System.out.println("buttonPool" + buttonPool.getFree());
 			if (actor instanceof Button) buttonPool.free((Button) actor);
 			System.out.println("buttonPool" + buttonPool.getFree());
 		}
-		actionBar.clear();
-		uiManager.currentAction.updateText();
+		clear();
 
-		drawTargetSelect(targets);
+		field.beginSelectMode(action.getTargetLimit());
+		drawTargetSelect();
 		pushMenuState(State.TARGET_SELECT);
 	}
 
@@ -146,25 +144,25 @@ public class ActionBar {
 	}
 
 	private void drawMainMenu() {
-		createPanel("Items", 70, Panel.bottomLeft, actionBar, new Runnable() {
+		createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
 			public void run() {
 				draw(State.EVENT_LOG);
 			}
 		});
-		createPanel("Attack", 70, Panel.topLeft, actionBar, new Runnable() {
+		createPanel("Attack", 70, Panel.topLeft, new Runnable() {
 			public void run() {
-				draw(1);
+				draw(new NormalAttack());
 			}
 		});
-		createPanel("Skills", 70, Panel.topRight, actionBar, new Runnable() {
+		createPanel("Skills", 70, Panel.topRight, new Runnable() {
 			public void run() {
 				draw(State.SKILLS);
 			}
 		});
-		createPanel("Flee", 70, Panel.bottomRight, actionBar, new Runnable() {
+		createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
 			@Override
 			public void run() {
-				new Confirmation(gsm.getGame(), "Are you sure you want to flee?" + "\n20% Chance") {
+				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
 					@Override
 					public void doSomething() {
 						gsm.setState(GameStateManager.State.LOBBY);
@@ -174,27 +172,25 @@ public class ActionBar {
 		});
 	}
 
-	private void drawTargetSelect(int targets) {
-		final TargetSelect targetSelect =
-				new TargetSelect(numPlayers, Action.ACTION_NORMAL_ATTACK, stage,
-						uiManager.currentAction);
-		targetSelect.configureTargetSelect(targets);
+	private void drawTargetSelect() {
+		//final TargetSelect targetSelect =
+		//		new TargetSelect(numPlayers, Action.ACTION_NORMAL_ATTACK, stage);
+		//targetSelect.configureTargetSelect(targets);
 
-		createPanel("Done", 70, Panel.top, actionBar, new Runnable() {
+		createPanel("Done", 70, Panel.top, new Runnable() {
 			@Override
 			public void run() {
-				uiManager.currentAction.setCurrentActionText(targetSelect.getAction(),
-						targetSelect.getTargetSelected());
-				targetSelect.remove();
+				field.endSelectMode();
+				if (field.getCardsSelected() == 0) currentAction = null;
 				draw(State.BACK);
 			}
 		});
-		createPanel("Cancel", 70, Panel.bottom, actionBar, new Runnable() {
+		createPanel("Cancel", 70, Panel.bottom, new Runnable() {
 			@Override
 			public void run() {
-				targetSelect.remove();
+				field.cancelSelectMode();
+				if (field.getCardsSelected() == 0) currentAction = null;
 				draw(State.BACK);
-				uiManager.currentAction.updateText();
 			}
 		});
 	}
@@ -202,12 +198,11 @@ public class ActionBar {
 	/**
 	 * Function to make creating 4-button action bars easier
 	 *
-	 * @param panelText   text you want your button to say
-	 * @param fontSize    text size
-	 * @param group       add your button to a group
+	 * @param panelText text you want your button to say
+	 * @param fontSize  text size
 	 */
 	private void createPanel(String panelText, int fontSize, Dimension dimension,
-							 Group group, final Runnable action) {
+							 final Runnable action) {
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
 		panel.setStyle(FontManager.getFont(fontSize));
@@ -229,7 +224,7 @@ public class ActionBar {
 				action.run();
 			}
 		});
-		group.addActor(panel);
-		group.addActor(border);
+		addActor(panel);
+		addActor(border);
 	}
 }

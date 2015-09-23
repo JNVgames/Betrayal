@@ -4,36 +4,41 @@
 
 package com.jnv.betrayal.dungeon.actions;
 
-import com.jnv.betrayal.dungeon.Player;
+import com.jnv.betrayal.dungeon.Card;
 import com.jnv.betrayal.main.Betrayal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NormalAttack implements Action {
+public class NormalAttack extends Action {
 
 	public final ActionType actionType = ActionType.Attack;
-	public final List<Player> targets;
+	public final List<Card> targets;
 
 	public NormalAttack() {
-		targets = new ArrayList<Player>();
+		targets = new ArrayList<Card>();
 	}
 
-	@Override
+	public String toString() {
+		return "Normal Attack";
+	}
+
 	public void event() {
 
 	}
 
-	@Override
-	public void setTargets(List<Player> player) {
+	public void setTargets(List<Card> player) {
 		// Assertion that there is only one target, since this is a normal attack
 		if (Betrayal.debug && player.size() != 1)
 			throw new AssertionError("Normal attack can only target one player");
 		targets.addAll(player);
 	}
 
-	@Override
 	public void fire() {
 
+	}
+
+	public int getTargetLimit() {
+		return 1;
 	}
 }

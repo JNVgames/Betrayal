@@ -7,7 +7,11 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.jnv.betrayal.dungeon.managers.DungeonManager;
+import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.dungeon.Field;
+import com.jnv.betrayal.dungeon.MonsterManager;
+import com.jnv.betrayal.dungeon.PlayerCard;
+import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.network.Player;
@@ -15,7 +19,7 @@ import com.jnv.betrayal.resources.FontManager;
 
 public class Dungeon extends GameState {
 
-	private DungeonManager dungeonManager;
+	private Field field;
 	private Monster monster;
 
 	private int floor, numPlayers, strongestPlayer;
@@ -24,13 +28,23 @@ public class Dungeon extends GameState {
 
 	public Dungeon(GameStateManager gsm) {
 		super(gsm);
-		player = gsm.getGame().getPlayer();
+		player = gsm.game.getPlayer();
 		//this.floor = floor;
 		//this.numPlayers = numPlayers;
 
 		// todo player.getCharacters() should be other real life characters
-		dungeonManager = new DungeonManager(player.characters, monster, gsm);
-		loadStage();
+		//dungeonManager = new DungeonManager(player.characters, monster, gsm);
+		//loadStage();
+		field = new Field(gsm);
+
+		// Add all player and monster cards to the field
+		int playerNum = 0;
+		for (Character character : player.characters) {
+			field.addCard(new PlayerCard(DungeonCoords.player[playerNum], character, res));
+			playerNum++;
+		}
+		MonsterManager monsterManager = new MonsterManager(1, res, field);
+		stage.addActor(field);
 	}
 
 	public void update(float dt) {

@@ -19,7 +19,7 @@ public class HallOfFame extends GameState {
 
 	public HallOfFame(GameStateManager gsm) {
 		super(gsm);
-		res = gsm.getGame().res;
+		res = gsm.game.res;
 
 		table = new Table();
 		table.add(new Image(res.getTexture("hall-of-fame-background")));

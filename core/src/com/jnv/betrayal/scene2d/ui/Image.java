@@ -46,6 +46,10 @@ public class Image extends com.badlogic.gdx.scenes.scene2d.ui.Image {
 		super(drawable, scaling, align);
 	}
 
+	public void act(float delta) {
+		super.act(delta);
+	}
+
 	public void setBounds(Dimension dim) {
 		setBounds(dim.getX(), dim.getY(), dim.getWidth(), dim.getHeight());
 	}

@@ -13,6 +13,10 @@ public class Actor extends com.badlogic.gdx.scenes.scene2d.Actor {
 		super();
 	}
 
+	public void act(float delta) {
+		super.act(delta);
+	}
+
 	public void setBounds(Dimension dimension) {
 		setBounds(dimension.getX(), dimension.getY(), dimension.getWidth(),
 				dimension.getHeight());

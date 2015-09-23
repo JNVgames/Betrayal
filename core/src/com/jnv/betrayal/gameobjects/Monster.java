@@ -5,10 +5,10 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Monster {
 
-    protected Texture monsterTexture;
-    protected String MonsterName, nickname;
-    protected int id, health, attack, defense, width, height, xPos, yPos, normalAttackTimer;
-    protected int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
+    private Texture monsterTexture;
+    private String MonsterName, nickname;
+    private int id, health, attack, defense, width, height, xPos, yPos, normalAttackTimer;
+    private int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
     private BetrayalAssetManager res;
 
     public Monster(int id, String name, BetrayalAssetManager res) {

@@ -4,8 +4,7 @@
 
 package com.jnv.betrayal.dungeon.actions;
 
-import com.jnv.betrayal.dungeon.Entity;
-import com.jnv.betrayal.dungeon.Player;
+import com.jnv.betrayal.dungeon.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,9 @@ import java.util.List;
 /**
  * Interface that provides methods for a dungeon action
  */
-public interface Action {
+public abstract class Action {
 
-	List<Entity> targets = new ArrayList<Entity>();
+	List<Card> targets = new ArrayList<Card>();
 
 	/**
 	 * Different types of actions
@@ -24,19 +23,30 @@ public interface Action {
 		Attack, Defend, Buff, Skill
 	}
 
+	public boolean equals(Action obj) {
+		return this.toString().equals(obj.toString());
+	}
+
+	public abstract String toString();
+
 	/**
 	 * Specifies everything that happens when this action is executed
 	 */
-	void event();
+	public abstract void event();
 
 	/**
 	 * Specifies targets for this action
 	 * @param player targets
 	 */
-	void setTargets(List<Player> player);
+	public abstract void setTargets(List<Card> player);
 
 	/**
 	 * Performs the event on all the targets
 	 */
-	void fire();
+	public abstract void fire();
+
+	/**
+	 * @return number of targets that can be selected. -1 is returned if there is no limit
+	 */
+	public abstract int getTargetLimit();
 }

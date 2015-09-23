@@ -22,7 +22,7 @@ public class GameOver extends GameState {
 
 	public GameOver(GameStateManager gsm) {
 		super(gsm);
-		this.res = gsm.getGame().res;
+		this.res = gsm.game.res;
 		loadFont();
 		loadButtons();
 	}

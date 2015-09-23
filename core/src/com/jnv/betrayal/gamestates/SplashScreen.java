@@ -26,7 +26,7 @@ public class SplashScreen extends GameState {
 		super(gsm);
 		loader = game.getResourceLoader();
 
-        player = gsm.getGame().getPlayer();
+        player = gsm.game.getPlayer();
         player.setPlayerID();
         
 		loader.loadLoadingScreen();
