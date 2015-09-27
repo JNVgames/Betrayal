@@ -4,19 +4,15 @@
 
 package com.jnv.betrayal.dungeon.actions;
 
-import com.jnv.betrayal.dungeon.Card;
+import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.main.Betrayal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NormalAttack extends Action {
 
-	public final ActionType actionType = ActionType.Attack;
-	public final List<Card> targets;
-
 	public NormalAttack() {
-		targets = new ArrayList<Card>();
+
 	}
 
 	public String toString() {
@@ -34,7 +30,11 @@ public class NormalAttack extends Action {
 		targets.addAll(player);
 	}
 
-	public void fire() {
+	public void begin() {
+
+	}
+
+	public void end() {
 
 	}
 

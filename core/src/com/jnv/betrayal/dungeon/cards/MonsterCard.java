@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.jnv.betrayal.gameobjects.Monster;

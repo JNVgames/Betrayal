@@ -2,8 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.cards;
 
+import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import java.util.Random;

@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.mechanics;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.resources.FontManager;

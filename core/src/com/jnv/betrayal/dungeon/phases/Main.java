@@ -1,24 +1,15 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.phases;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.actions.NormalAttack;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.dungeon.utils.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.Confirmation;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -27,36 +18,23 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.Stack;
 
-class FieldUI extends Group {
+public class Main extends Phase {
 
-	private Field field;
-	private BetrayalAssetManager res;
-	private Pool<Label> panelPool;
-	private Pool<Button> buttonPool;
-	private Stack<State> menu;
-	private int numPlayers;
+	private Stack<State> menu = new Stack<State>();
 	private Action currentAction;
-	public final GameStateManager gsm;
 
-	public FieldUI(Field field) {
-		this.field = field;
-		res = field.res;
-		gsm = field.gsm;
-		menu = new Stack<State>();
-		setupPools();
-	}
-
-	public void start() {
+	public Main(PhaseManager pm) {
+		super(pm);
 		draw(State.MAIN);
 	}
 
 	private void draw(State state) {
 		// Clear action bar
-		for (Actor actor : getChildren()) {
+		for (Actor actor : group.getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
 			if (actor instanceof Button) buttonPool.free((Button) actor);
 		}
-		clear();
+		group.clear();
 		switch (state) {
 			case BACK:
 				menu.pop();
@@ -91,19 +69,19 @@ class FieldUI extends Group {
 	private void draw(Action action) {
 		// If currentAction is null, set the action to current action
 		if (currentAction == null) currentAction = action;
-		// If not null, unselect all
+			// If not null, unselect all
 		else if (!currentAction.equals(action)) { // if (currentAction != null)
 			field.unselectAll();
 		}
 
 		// Clear action bar
-		for (Actor actor : getChildren()) {
+		for (Actor actor : group.getChildren()) {
 			if (actor instanceof Label) panelPool.free((Label) actor);
 			System.out.println("buttonPool" + buttonPool.getFree());
 			if (actor instanceof Button) buttonPool.free((Button) actor);
 			System.out.println("buttonPool" + buttonPool.getFree());
 		}
-		clear();
+		group.clear();
 
 		field.beginSelectMode(action.getTargetLimit());
 		drawTargetSelect();
@@ -113,34 +91,6 @@ class FieldUI extends Group {
 	// Helpers
 	private void pushMenuState(State state) {
 		if (menu.isEmpty() || menu.peek() != state) menu.push(state);
-	}
-
-	private void setupPools() {
-		buttonPool = new Pool<Button>() {
-			public Button obtain() {
-				Button tmp = super.obtain();
-				ClickListener clickListener = tmp.getClickListener();
-				// Remove all listeners except for the one needed for button to work
-				for (EventListener listener : tmp.getListeners())
-					if (listener != clickListener) tmp.removeListener(listener);
-				return tmp;
-			}
-
-			protected Button newObject() {
-				return new Button();
-			}
-		};
-		panelPool = new Pool<Label>() {
-			public Label obtain() {
-				Label tmp = super.obtain();
-				tmp.clearListeners();
-				return tmp;
-			}
-
-			protected Label newObject() {
-				return new Label(null, new Label.LabelStyle(FontManager.getFont(70)));
-			}
-		};
 	}
 
 	private void drawMainMenu() {
@@ -210,7 +160,7 @@ class FieldUI extends Group {
 		panel.setAlignment(Align.center);
 		panel.layout();
 		Button border = buttonPool.obtain();
-		border.setStyle(new com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle(
+		border.setStyle(new Button.ButtonStyle(
 				new TextureRegionDrawable(new TextureRegion(
 						res.getTexture("actionBarButtonUp" + (int) dimension.getWidth() + "x"
 								+ (int) dimension.getHeight()))),
@@ -224,7 +174,7 @@ class FieldUI extends Group {
 				action.run();
 			}
 		});
-		addActor(panel);
-		addActor(border);
+		group.addActor(panel);
+		group.addActor(border);
 	}
 }

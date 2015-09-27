@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.cards;
 
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -12,7 +12,7 @@ public class DungeonMonster {
     private MonsterCard[] monsterCards;
     private Monster[] monster;
 
-    public DungeonMonster(BetrayalAssetManager res, int tier, int monsterID, Field field) {
+    public DungeonMonster(BetrayalAssetManager res, int tier, int monsterID, com.jnv.betrayal.dungeon.mechanics.Field field) {
         int numMonsters = 1;
         //tier = 4;
         //monsterID = 7;

@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon;
+package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -27,9 +27,9 @@ public class PlayerCard extends Card {
 	public PlayerCard(float x, float y, Character character,
 						 BetrayalAssetManager res) {
 		super(new Dimension(x, y, DungeonCoords.PLAYER_WIDTH, DungeonCoords.PLAYER_HEIGHT), res);
-		health = character.stats.getStat(Stat.HEALTH);
-		attack = character.stats.getStat(Stat.ATTACK);
-		defense = character.stats.getStat(Stat.DEFENSE);
+		baseHealth = character.stats.getStat(Stat.HEALTH);
+		baseAttack = character.stats.getStat(Stat.ATTACK);
+		baseDefense = character.stats.getStat(Stat.DEFENSE);
 		preview = character.preview;
 		cardImage = new Actor() {
 			@Override
