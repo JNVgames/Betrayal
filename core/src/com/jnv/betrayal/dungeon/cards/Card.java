@@ -20,7 +20,7 @@ import com.jnv.betrayal.utils.Queue;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Card extends Group {
+public abstract class Card {
 
 	public final List<Card> defenders = new ArrayList<Card>();
 	protected Field field;
@@ -28,6 +28,7 @@ public abstract class Card extends Group {
 	protected HealthBar healthBar;
 	protected BetrayalAssetManager res;
 	protected Actor cardImage;
+	protected Group group;
 	private TextureRegion selectedTexture;
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener;
@@ -35,7 +36,14 @@ public abstract class Card extends Group {
 	private Queue<Action> actionsIn;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
-		setBounds(dimension);
+		group = new Group() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				super.draw(batch, parentAlpha);
+				if (isSelected && selecting) batch.draw(selectedTexture, getX(), getY(), getWidth(), getHeight());
+			}
+		};
+		group.setBounds(dimension);
 		this.res = res;
 		initialize();
 	}
@@ -46,23 +54,14 @@ public abstract class Card extends Group {
 	}
 
 	private void initialize() {
-		addAction(Actions.alpha(0));
-		addAction(Actions.delay(1, Actions.fadeIn(2)));
-		healthBar = new HealthBar(getHeight(), res);
+		group.addAction(Actions.alpha(0));
+		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
+		healthBar = new HealthBar(group.getHeight(), res);
 		actionsIn = new Queue<Action>();
 		actionsOut = new ArrayList<Action>();
 		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
-		addActor(healthBar);
+		group.addActor(healthBar);
 		healthBar.toFront();
-	}
-
-	public void act(float delta) {
-		super.act(delta);
-	}
-
-	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		if (isSelected && selecting) batch.draw(selectedTexture, getX(), getY(), getWidth(), getHeight());
 	}
 
 	/**
@@ -101,14 +100,14 @@ public abstract class Card extends Group {
 		if (selecting)
 			throw new IllegalStateException("Card.endSelectMode must be called before beginSelectMode");
 		selectListener = createSelectListener(numTargets);
-		addListener(selectListener);
+		group.addListener(selectListener);
 		selecting = true;
 	}
 
 	public void endSelectMode() {
 		if (!selecting)
 			throw new IllegalStateException("Card.beginSelectMode must be called before endSelectMode");
-		removeListener(selectListener);
+		group.removeListener(selectListener);
 		wasSelected = isSelected;
 		selecting = false;
 	}
@@ -116,6 +115,11 @@ public abstract class Card extends Group {
 	public void cancelSelectMode() {
 		isSelected = wasSelected;
 		endSelectMode();
+	}
+
+	public void reset() {
+		isSelected = false;
+		wasSelected = false;
 	}
 
 	public void select() {
@@ -154,5 +158,9 @@ public abstract class Card extends Group {
 			Gdx.app.exit();
 		}
 		return null;
+	}
+
+	public Group getGroup() {
+		return group;
 	}
 }

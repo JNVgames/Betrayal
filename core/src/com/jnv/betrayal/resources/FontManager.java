@@ -12,10 +12,10 @@ public class FontManager {
 
 	private static FreeTypeFontGenerator generator =
 			new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-Regular.ttf"));;
+	private static FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
+			new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 	public static Label.LabelStyle getFont(int fontSize) {
-		FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
-				new FreeTypeFontGenerator.FreeTypeFontParameter();
 		fontDetails.size = fontSize;
 		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = generator.generateFont(fontDetails);

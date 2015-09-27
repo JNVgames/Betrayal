@@ -2,11 +2,11 @@ package com.jnv.betrayal.dungeon.phases;
 
 import com.jnv.betrayal.dungeon.utils.Panel;
 
-public class Attack extends Phase {
+public class Skill extends Phase {
 
-	Attack(final PhaseManager pm) {
+	Skill(final PhaseManager pm) {
 		super(pm);
-		createPanel("Attack Phase", 50, Panel.full, new Runnable() {
+		createPanel("Skill Phase", 50, Panel.full, new Runnable() {
 			@Override
 			public void run() {
 				pm.nextPhase();
@@ -15,6 +15,6 @@ public class Attack extends Phase {
 	}
 
 	public int getPhaseNum() {
-		return PhaseConst.ATTACK;
+		return PhaseConst.SKILL;
 	}
 }

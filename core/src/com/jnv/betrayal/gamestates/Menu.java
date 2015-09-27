@@ -23,7 +23,6 @@ public class Menu extends GameState {
 
 	public Menu(GameStateManager gsm) {
 		super(gsm);
-		cam.setToOrtho(false, Betrayal.WIDTH, Betrayal.HEIGHT);
 		loadMenuButtons();
 	}
 
@@ -53,7 +52,14 @@ public class Menu extends GameState {
 	}
 
 	private void loadBackground() {
-		Image background = new Image(res.getTexture("start-background"));
+		Image background = new Image(res.getTexture("start-background")) {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				batch.disableBlending();
+				super.draw(batch, parentAlpha);
+				batch.enableBlending();
+			}
+		};
 		background.setBounds(0, 0, 720, 1280);
 		stage.addActor(background);
 	}

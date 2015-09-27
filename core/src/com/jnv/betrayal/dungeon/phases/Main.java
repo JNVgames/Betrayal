@@ -1,20 +1,13 @@
 package com.jnv.betrayal.dungeon.phases;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.actions.NormalAttack;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.dungeon.utils.State;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.Confirmation;
-import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.Dimension;
-import com.jnv.betrayal.scene2d.InputListener;
-import com.jnv.betrayal.scene2d.ui.Button;
-import com.jnv.betrayal.scene2d.ui.Label;
+import com.jnv.betrayal.scene2d.Group;
 
 import java.util.Stack;
 
@@ -23,18 +16,14 @@ public class Main extends Phase {
 	private Stack<State> menu = new Stack<State>();
 	private Action currentAction;
 
-	public Main(PhaseManager pm) {
+	Main(PhaseManager pm) {
 		super(pm);
 		draw(State.MAIN);
+		pm.field.resetCards();
 	}
 
 	private void draw(State state) {
-		// Clear action bar
-		for (Actor actor : group.getChildren()) {
-			if (actor instanceof Label) panelPool.free((Label) actor);
-			if (actor instanceof Button) buttonPool.free((Button) actor);
-		}
-		group.clear();
+		clearActionBar();
 		switch (state) {
 			case BACK:
 				menu.pop();
@@ -74,14 +63,7 @@ public class Main extends Phase {
 			field.unselectAll();
 		}
 
-		// Clear action bar
-		for (Actor actor : group.getChildren()) {
-			if (actor instanceof Label) panelPool.free((Label) actor);
-			System.out.println("buttonPool" + buttonPool.getFree());
-			if (actor instanceof Button) buttonPool.free((Button) actor);
-			System.out.println("buttonPool" + buttonPool.getFree());
-		}
-		group.clear();
+		clearActionBar();
 
 		field.beginSelectMode(action.getTargetLimit());
 		drawTargetSelect();
@@ -123,58 +105,47 @@ public class Main extends Phase {
 	}
 
 	private void drawTargetSelect() {
-		//final TargetSelect targetSelect =
-		//		new TargetSelect(numPlayers, Action.ACTION_NORMAL_ATTACK, stage);
-		//targetSelect.configureTargetSelect(targets);
+		final Actor checker = new Actor() {
+			private Group doneButton = new Group();
+			private boolean isDoneButtonGray = true;
 
-		createPanel("Done", 70, Panel.top, new Runnable() {
 			@Override
-			public void run() {
-				field.endSelectMode();
-				if (field.getCardsSelected() == 0) currentAction = null;
-				draw(State.BACK);
+			public void act(float delta) {
+				if (pm.field.getCardsSelected() > 0 && isDoneButtonGray) {
+					doneButton.clear();
+					doneButton = createPanel("Done", 70, Panel.top, new Runnable() {
+						@Override
+						public void run() {
+							field.endSelectMode();
+							if (field.getCardsSelected() == 0) {
+								currentAction = null;
+							}
+							pm.nextPhase();
+						}
+					});
+					isDoneButtonGray = false;
+				} else if (pm.field.getCardsSelected() == 0 && !isDoneButtonGray){
+					doneButton.clear();
+					doneButton = createGrayPanel("Done", 70, Panel.top);
+					isDoneButtonGray = true;
+				}
 			}
-		});
+		};
+		checker.setVisible(false);
+		pm.field.addActor(checker);
+		createGrayPanel("Done", 70, Panel.top);
 		createPanel("Cancel", 70, Panel.bottom, new Runnable() {
 			@Override
 			public void run() {
 				field.cancelSelectMode();
 				if (field.getCardsSelected() == 0) currentAction = null;
 				draw(State.BACK);
+				checker.remove();
 			}
 		});
 	}
 
-	/**
-	 * Function to make creating 4-button action bars easier
-	 *
-	 * @param panelText text you want your button to say
-	 * @param fontSize  text size
-	 */
-	private void createPanel(String panelText, int fontSize, Dimension dimension,
-							 final Runnable action) {
-		Label panel = panelPool.obtain();
-		panel.setText(panelText);
-		panel.setStyle(FontManager.getFont(fontSize));
-		panel.setBounds(dimension);
-		panel.setAlignment(Align.center);
-		panel.layout();
-		Button border = buttonPool.obtain();
-		border.setStyle(new Button.ButtonStyle(
-				new TextureRegionDrawable(new TextureRegion(
-						res.getTexture("actionBarButtonUp" + (int) dimension.getWidth() + "x"
-								+ (int) dimension.getHeight()))),
-				new TextureRegionDrawable(new TextureRegion(
-						res.getTexture("actionBarButtonDown" + (int) dimension.getWidth() + "x"
-								+ (int) dimension.getHeight()))), null));
-		border.setBounds(dimension);
-		border.addListener(new InputListener(border) {
-			@Override
-			public void doAction() {
-				action.run();
-			}
-		});
-		group.addActor(panel);
-		group.addActor(border);
+	public int getPhaseNum() {
+		return PhaseConst.MAIN;
 	}
 }

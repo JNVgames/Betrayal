@@ -28,7 +28,7 @@ public class MonsterCard extends Card {
 			}
 		};
 		cardImage.setBounds(0, 0, width, height);
-		addActor(cardImage);
+		group.addActor(cardImage);
 		cardImage.toBack();
 	}
 }

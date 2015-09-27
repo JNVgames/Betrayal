@@ -52,7 +52,7 @@ public class Field extends Group {
 		if (card instanceof PlayerCard) playerZone.add((PlayerCard) card);
 		else if (card instanceof MonsterCard) monsterZone.add((MonsterCard) card);
 		else throw new AssertionError("Card is neither a PlayerCard or MonsterCard");
-		addActor(card);
+		addActor(card.getGroup());
 		card.setField(this);
 	}
 
@@ -126,6 +126,12 @@ public class Field extends Group {
 	public void unselectAll() {
 		for (Card card : getAllCards()) {
 			card.unselect();
+		}
+	}
+
+	public void resetCards() {
+		for (Card card : getAllCards()) {
+			card.reset();
 		}
 	}
 

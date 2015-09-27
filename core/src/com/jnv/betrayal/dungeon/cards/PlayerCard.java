@@ -38,16 +38,8 @@ public class PlayerCard extends Card {
 				preview.drawPreview(batch, Rotation.BACK, getX(), getY(), getWidth(), getHeight());
 			}
 		};
-		cardImage.setBounds(0, 0, getWidth(), getHeight());
-		addActor(cardImage);
+		cardImage.setBounds(0, 0, group.getWidth(), group.getHeight());
+		group.addActor(cardImage);
 		cardImage.toBack();
-	}
-
-	public void act(float delta) {
-		super.act(delta);
-	}
-
-	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
 	}
 }

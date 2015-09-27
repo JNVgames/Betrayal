@@ -15,6 +15,10 @@ public class Dimension {
 	private float x, y, width, height;
 	private boolean isCenterX, isCenterY;
 
+	public Dimension() {
+
+	}
+
 	public Dimension(Vector2 coords, float width, float height) {
 		this(coords.x, coords.y, width, height, false, false);
 	}
@@ -30,12 +34,7 @@ public class Dimension {
 
 	public Dimension(float x, float y, float width, float height,
 					 boolean isCenterX, boolean isCenterY) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.isCenterX = isCenterX;
-		this.isCenterY = isCenterY;
+		setBounds(x, y, width, height, isCenterX, isCenterY);
 	}
 
 	// Getters
@@ -67,5 +66,48 @@ public class Dimension {
 
 	public float getHeight() {
 		return height;
+	}
+
+	// Setters
+	public void setBounds(float x, float y, float width, float height) {
+		setBounds(x, y, width, height, false, false);
+	}
+
+	public void setBounds(float x, float y, float width, float height, boolean isCenterX,
+						  boolean isCenterY) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.isCenterX = isCenterX;
+		this.isCenterY = isCenterY;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+		isCenterX = false;
+	}
+
+	public void setCenterX(float x) {
+		this.x = x;
+		isCenterX = true;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+		isCenterY = false;
+	}
+
+	public void setCenterY(float y) {
+		this.y = y;
+		isCenterY = true;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
 	}
 }

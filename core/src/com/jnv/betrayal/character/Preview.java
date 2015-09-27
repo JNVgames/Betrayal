@@ -127,7 +127,7 @@ public class Preview implements Json.Serializable {
 				currentPreview = left_still;
 				break;
 			default:
-				throw new AssertionError("Rotation out of bounds (0-3): " + rotation);
+				throw new IllegalStateException("Rotation out of bounds (0-3): " + rotation);
 		}
 	}
 

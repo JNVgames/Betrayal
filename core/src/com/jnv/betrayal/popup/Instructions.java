@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.popup;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -18,12 +17,14 @@ public class Instructions extends Popup {
 
 	private Image image_rightArrow, image_leftArrow, exitButton, background;
 	private Label title, content0, content1, content2, content3, content4;
+	private Label.LabelStyle font40;
 	private int currentContent, totalContent;
 
 	public Instructions(Betrayal game) {
 		super(game);
 		currentContent = 0;
 		totalContent = 5;
+		font40 = FontManager.getFont(40);
 		loadButtons();
 	}
 
@@ -37,7 +38,7 @@ public class Instructions extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Instructions", FontManager.getFont(40));
+		title = new Label("Instructions", font40);
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -111,7 +112,7 @@ public class Instructions extends Popup {
 	private void setContent0() {
 		content0 = new Label(" The goal of this turn" +
 				"\n based game is to clear " +
-				"\n 50 dungeon floors. ", FontManager.getFont(40));
+				"\n 50 dungeon floors. ", font40);
 		content0.setX(100);
 		content0.setY(Betrayal.HEIGHT - content0.getHeight() - 250);
 		popup.addActor(content0);
@@ -123,7 +124,7 @@ public class Instructions extends Popup {
 				"\n and challenge a dungeon" +
 				"\n floor. Be careful the " +
 				"\n monsters aren't the only " +
-				"\n things to worry about", FontManager.getFont(40));
+				"\n things to worry about", font40);
 		content1.setX(100);
 		content1.setY(Betrayal.HEIGHT - content1.getHeight() - 250);
 		popup.addActor(content1);
@@ -131,7 +132,7 @@ public class Instructions extends Popup {
 
 	private void setContent2() {
 		content2 = new Label(" Dungeons:" +
-				"\n hard as ballz", FontManager.getFont(40));
+				"\n hard as ballz", font40);
 		content2.setX(100);
 		content2.setY(Betrayal.HEIGHT - content2.getHeight() - 250);
 		popup.addActor(content2);
@@ -145,7 +146,7 @@ public class Instructions extends Popup {
 				"\n you get to take two " +
 				"\n of their items. " +
 				"\n *note* all their gold counts" +
-				"\n as one item.", FontManager.getFont(40));
+				"\n as one item.", font40);
 		content3.setX(100);
 		content3.setY(Betrayal.HEIGHT - content3.getHeight() - 250);
 		popup.addActor(content3);
@@ -153,7 +154,7 @@ public class Instructions extends Popup {
 
 	private void setContent4() {
 		content4 = new Label(" Shop:" +
-				"\n Spend all your money!", FontManager.getFont(40));
+				"\n Spend all your money!", font40);
 		content4.setX(100);
 		content4.setY(Betrayal.HEIGHT - content4.getHeight() - 250);
 		popup.addActor(content4);
@@ -177,8 +178,7 @@ public class Instructions extends Popup {
 				content4.remove();
 				break;
 			default:
-				Gdx.app.log("content", "should not happen");
-				break;
+				throw new IllegalStateException("Content is null");
 		}
 	}
 
@@ -200,8 +200,7 @@ public class Instructions extends Popup {
 				setContent4();
 				break;
 			default:
-				Gdx.app.log("content", "should not happen");
-				break;
+				throw new IllegalStateException("Content is null");
 		}
 	}
 }

@@ -6,14 +6,11 @@ package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Jobs;
@@ -21,7 +18,10 @@ import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.JobDescription;
+import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
+import com.jnv.betrayal.scene2d.ui.Button;
+import com.jnv.betrayal.scene2d.ui.Image;
 
 /**
  * Sets up the character creation screen with scene2d
@@ -30,13 +30,12 @@ import com.jnv.betrayal.scene2d.InputListener;
  */
 public class CharacterSelection extends GameState {
 
-	private Actor reference, button_play_now;
+	private Actor button_play_now;
+	private Dimension reference;
 	private Image button_back, field_framePreview;
-	private Label label_jobDescription;
-	private SelectionField gender, hairStyle, hairColor, job;
 	private Character character;
 	private TextureRegion image_leftArrow, image_rightArrow;
-	private Texture image_button_play;
+	private Label.LabelStyle font60, font45;
 
 	public CharacterSelection(GameStateManager gsm) {
 		super(gsm);
@@ -44,6 +43,8 @@ public class CharacterSelection extends GameState {
 		image_leftArrow = new TextureRegion(res.getTexture("arrow-right"));
 		image_leftArrow.flip(true, false);
 		image_rightArrow = new TextureRegion(res.getTexture("arrow-right"));
+		font60 = FontManager.getFont(60);
+		font45 = FontManager.getFont(45);
 
 		character = new Character(gsm.game.getPlayer(), res);
 
@@ -51,8 +52,6 @@ public class CharacterSelection extends GameState {
 	}
 
 	public void update(float dt) {
-		updateTraits();
-		updateJobDescription(label_jobDescription);
 		stage.act(dt);
 	}
 
@@ -79,88 +78,70 @@ public class CharacterSelection extends GameState {
 		loadImagePreview();
 		loadPreviewRotators();
 
-		gender = new SelectionField("Gender", Trait.GENDER);
-		hairStyle = new SelectionField("Hair Style", Trait.HAIR_STYLE);
-		hairColor = new SelectionField("Hair Color", Trait.HAIR_COLOR);
-		job = new SelectionField("Class", Trait.JOB);
-
-		gender.addToStage();
-		hairStyle.addToStage();
-		hairColor.addToStage();
-		job.addToStage();
+		createSelectionField("Gender", Trait.GENDER);
+		createSelectionField("Hair Style", Trait.HAIR_STYLE);
+		createSelectionField("Hair Color", Trait.HAIR_COLOR);
+		createSelectionField("Class", Trait.JOB);
 
 		loadJobDescription();
 	}
 
 	private void loadBackground() {
-		Image background = new Image(res.getTexture("instructions-background"));
+		Image background = new Image(res.getTexture("instructions-background")) {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				batch.disableBlending();
+				super.draw(batch, parentAlpha);
+				batch.enableBlending();
+			}
+		};
 		background.layout();
 		background.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
 		stage.addActor(background);
 	}
 
 	private void loadBackButton() {
-		Group group_button_back = new Group();
-
 		button_back = new Image(image_leftArrow);
 		button_back.setHeight(60);
 		button_back.setWidth(80);
 		button_back.setX(10);
 		button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
-		group_button_back.addActor(button_back);
+		stage.addActor(button_back);
 
-		Label button_text_back = new Label("Back", FontManager.getFont(60));
-		button_text_back.setX(button_back.getX() + button_back.getWidth() + 10);
-		button_text_back.setY(button_back.getY());
-		group_button_back.addActor(button_text_back);
+		Actor actor = new Label("Back", font60);
+		actor.setX(button_back.getX() + button_back.getWidth() + 10);
+		actor.setY(button_back.getY());
+		stage.addActor(actor);
+		Dimension ref = new Dimension(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		Actor button_back_clickArea = new Actor();
-		button_back_clickArea.setWidth(button_back.getWidth() + button_text_back.getWidth() + 10);
-		button_back_clickArea.setHeight(button_text_back.getHeight());
-		button_back_clickArea.setX(button_back.getX());
-		button_back_clickArea.setY(button_back.getY());
-		button_back_clickArea.addListener(new InputListener(button_back_clickArea) {
+		actor = new Actor();
+		actor.setWidth(button_back.getWidth() + ref.getWidth() + 10);
+		actor.setHeight(ref.getHeight());
+		actor.setX(button_back.getX());
+		actor.setY(button_back.getY());
+		actor.addListener(new InputListener(actor) {
 			@Override
 			public void doAction() {
 				character = null;
 				gsm.setState(GameStateManager.State.MENU);
 			}
 		});
-		group_button_back.addActor(button_back_clickArea);
-
-		stage.addActor(group_button_back);
+		stage.addActor(actor);
 	}
 
 	private void loadPlayNowButton() {
-		// if layout() is used, the inputlistener x, y field becomes relative to the actor position
-		image_button_play = res.getTexture("play-now");
-		button_play_now = new Actor() {
-			public void draw(Batch batch, float parentAlpha) {
-				batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
-						button_play_now.getWidth(), button_play_now.getHeight());
-			}
-		};
+		Skin skin = new Skin();
+		skin.add("play-now", res.getTexture("play-now"));
+		skin.add("play-now-pressed", res.getTexture("play-now-pressed"));
+		button_play_now = new Button(skin.getDrawable("play-now"), skin.getDrawable("play-now-pressed"));
 		button_play_now.setWidth(512);
 		button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
 		button_play_now.addListener(new InputListener(button_play_now) {
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				image_button_play = res.getTexture("play-now-pressed");
-				return true;
-			}
-
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if (x >= button_play_now.getX()
-						&& x <= button_play_now.getX() + button_play_now.getWidth()
-						&& y >= button_play_now.getY()
-						&& y <= button_play_now.getY() + button_play_now.getHeight()) {
-					player.addCharacter(character);
-					player.setCurrentCharacterIndex(player.characters.indexOf(character));
-					gsm.setState(GameStateManager.State.LOBBY);
-				} else image_button_play = res.getTexture("play-now");
-			}
-
-			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				image_button_play = res.getTexture("play-now");
+			@Override
+			public void doAction() {
+				player.addCharacter(character);
+				player.setCurrentCharacterIndex(player.characters.indexOf(character));
+				gsm.setState(GameStateManager.State.LOBBY);
 			}
 		});
 		stage.addActor(button_play_now);
@@ -168,7 +149,7 @@ public class CharacterSelection extends GameState {
 
 	private void loadImagePreview() {
 		loadPreviewFrame();
-		loadReferenceActor();
+		loadReference();
 		loadPreview();
 	}
 
@@ -183,42 +164,40 @@ public class CharacterSelection extends GameState {
 
 	private void loadPreviewRotators() {
 		int gap = 60, padding = 30;
-		Group group_previewRotators = new Group();
 
-		Image previewRotators_leftArrow = new Image(image_leftArrow);
-		previewRotators_leftArrow.setHeight(60);
-		previewRotators_leftArrow.setWidth((field_framePreview.getWidth() - gap - padding * 2) / 2);
-		previewRotators_leftArrow.setX(field_framePreview.getX() + padding);
-		previewRotators_leftArrow.setY(field_framePreview.getY()
-				- previewRotators_leftArrow.getHeight() - 10);
-		previewRotators_leftArrow.addListener(new InputListener(previewRotators_leftArrow) {
+		Actor actor = new Image(image_leftArrow);
+		actor.setHeight(60);
+		actor.setWidth((field_framePreview.getWidth() - gap - padding * 2) / 2);
+		actor.setX(field_framePreview.getX() + padding);
+		actor.setY(field_framePreview.getY()
+				- actor.getHeight() - 10);
+		actor.addListener(new InputListener(actor) {
 			@Override
 			public void doAction() {
 				character.preview.rotateLeft();
 			}
 		});
-		group_previewRotators.addActor(previewRotators_leftArrow);
+		stage.addActor(actor);
+		Dimension ref = new Dimension(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		Image previewRotators_rightArrow = new Image(image_rightArrow);
-		previewRotators_rightArrow.setHeight(previewRotators_leftArrow.getHeight());
-		previewRotators_rightArrow.setWidth(previewRotators_leftArrow.getWidth());
-		previewRotators_rightArrow.setX(previewRotators_leftArrow.getX()
-				+ previewRotators_leftArrow.getWidth() + gap);
-		previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
-		group_previewRotators.addActor(previewRotators_rightArrow);
-		previewRotators_rightArrow.addListener(new InputListener(previewRotators_rightArrow) {
+		actor = new Image(image_rightArrow);
+		actor.setHeight(ref.getHeight());
+		actor.setWidth(ref.getWidth());
+		actor.setX(ref.getRightX() + gap);
+		actor.setY(ref.getY());
+		stage.addActor(actor);
+		actor.addListener(new InputListener(actor) {
 			@Override
 			public void doAction() {
 				character.preview.rotateRight();
 			}
 		});
-		stage.addActor(group_previewRotators);
 	}
 
-	private void loadReferenceActor() {
-		reference = new Actor();
-		reference.setX(field_framePreview.getX() + field_framePreview.getWidth() + 20);
-		reference.setY(field_framePreview.getY() + field_framePreview.getHeight() + 30);
+	private void loadReference() {
+		reference = new Dimension();
+		reference.setX(field_framePreview.getRight() + 20);
+		reference.setY(field_framePreview.getTop() + 30);
 		reference.setWidth(Betrayal.WIDTH - reference.getX() - 20);
 		reference.setHeight(60);
 	}
@@ -239,129 +218,101 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadJobDescription() {
-		label_jobDescription = new Label("", FontManager.getFont(45));
-		label_jobDescription.setHeight(field_framePreview.getY() - 80
-				- label_jobDescription.getHeight()
-				- (button_play_now.getY() + button_play_now.getHeight() + 10));
-		label_jobDescription.setWidth(Betrayal.WIDTH - 20);
-		label_jobDescription.setX(field_framePreview.getX());
-		label_jobDescription.setY(field_framePreview.getY() - 80 - label_jobDescription.getHeight());
-		label_jobDescription.setAlignment(Align.topLeft);
-		stage.addActor(label_jobDescription);
-	}
-
-	private void updateTraits() {
-		gender.update();
-		hairStyle.update();
-		hairColor.update();
-		job.update();
-	}
-
-	public void updateJobDescription(Label label) {
-		switch (character.job.getJob()) {
-			case Jobs.WARRIOR:
-				label.setText(JobDescription.getWarriorDescription());
-				break;
-			case Jobs.KNIGHT:
-				label.setText(JobDescription.getKnightDescription());
-				break;
-			case Jobs.PRIEST:
-				label.setText(JobDescription.getPriestDescription());
-				break;
-			case Jobs.THIEF:
-				label.setText(JobDescription.getThiefDescription());
-				break;
-			default:
-				break;
-		}
-	}
-
-	// Classes
-	private class SelectionField {
-
-		private Trait trait;
-
-		private Group group_selectionField;
-		private Label field_selection_label, field_selection_serialNumber;
-		private Image field_selection_leftArrow, field_selection_rightArrow;
-
-		/**
-		 * Creates selection field based off the position of the last selection field created
-		 *
-		 * @param label name of character trait to be edited
-		 * @param t     specifies character trait to be edited
-		 */
-		public SelectionField(String label, Trait t) {
-			this.trait = t;
-			group_selectionField = new Group();
-
-			// Create label
-			field_selection_label = new Label(label, FontManager.getFont(60));
-			field_selection_label.setWidth(Betrayal.WIDTH - reference.getX() - 20);
-			field_selection_label.setHeight(60);
-			field_selection_label.setX(field_framePreview.getX()
-					+ field_framePreview.getWidth() + 20);
-			field_selection_label.setY(reference.getY() -
-					field_selection_label.getHeight() - 30);
-			field_selection_label.setAlignment(Align.center);
-			group_selectionField.addActor(field_selection_label);
-
-			// Create left arrow
-			field_selection_leftArrow = new Image(image_leftArrow);
-			field_selection_leftArrow.setWidth((Betrayal.WIDTH - 160
-					- field_framePreview.getWidth() -
-					field_framePreview.getX()) / 2);
-			field_selection_leftArrow.setHeight(field_selection_label.getHeight());
-			field_selection_leftArrow.setX(field_selection_label.getX());
-			field_selection_leftArrow.setY(field_selection_label.getY() - 10
-					- field_selection_leftArrow.getHeight());
-			reference = field_selection_leftArrow;
-			field_selection_leftArrow.addListener(new InputListener(field_selection_leftArrow) {
-				@Override
-				public void doAction() {
-					setPreviousTrait(trait);
+		Label jobDescription = new Label("", font45) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				switch (character.job.getJob()) {
+					case Jobs.WARRIOR:
+						setText(JobDescription.getWarriorDescription());
+						break;
+					case Jobs.KNIGHT:
+						setText(JobDescription.getKnightDescription());
+						break;
+					case Jobs.PRIEST:
+						setText(JobDescription.getPriestDescription());
+						break;
+					case Jobs.THIEF:
+						setText(JobDescription.getThiefDescription());
+						break;
+					default:
+						break;
 				}
-			});
-			group_selectionField.addActor(field_selection_leftArrow);
+			}
+		};
+		jobDescription.setHeight(field_framePreview.getY() - 80
+				- jobDescription.getHeight()
+				- (button_play_now.getTop() + 10));
+		jobDescription.setWidth(Betrayal.WIDTH - 20);
+		jobDescription.setX(field_framePreview.getX());
+		jobDescription.setY(field_framePreview.getY() - 80 - jobDescription.getHeight());
+		jobDescription.setAlignment(Align.topLeft);
+		stage.addActor(jobDescription);
+	}
 
-			// Create serial number
-			field_selection_serialNumber = new Label("", FontManager.getFont(60));
-			field_selection_serialNumber.setBounds(field_selection_leftArrow.getX()
-							+ field_selection_leftArrow.getWidth() + 30, field_selection_leftArrow.getY(),
-					60, field_selection_leftArrow.getHeight());
-			field_selection_serialNumber.setAlignment(Align.center);
-			group_selectionField.addActor(field_selection_serialNumber);
+	public void createSelectionField(String label, final Trait trait) {
+		// Create dimension reference
+		Dimension dimRef = new Dimension();
 
-			// Create right arrow
-			field_selection_rightArrow = new Image(image_rightArrow);
-			field_selection_rightArrow.setBounds(field_selection_serialNumber.getX() +
-							field_selection_serialNumber.getWidth() + 30,
-					field_selection_serialNumber.getY(),
-					field_selection_leftArrow.getWidth(), field_selection_leftArrow.getHeight());
-			field_selection_rightArrow.addListener(new InputListener(field_selection_leftArrow) {
-				@Override
-				public void doAction() {
-					setNextTrait(trait);
-				}
-			});
-			group_selectionField.addActor(field_selection_rightArrow);
-		}
+		// Create label
+		Actor actor = new Label(label, font60);
+		actor.setBounds(field_framePreview.getRight() + 20, reference.getY() -
+				actor.getHeight() - 30, Betrayal.WIDTH - reference.getX() - 20, 60);
+		((Label) actor).setAlignment(Align.center);
+		stage.addActor(actor);
+		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		public void update() {
-			field_selection_serialNumber.setText(character.preview.getTrait(trait));
-		}
+		// Create left arrow
+		actor = new Image(image_leftArrow);
+		actor.setBounds(dimRef.getX(),
+				dimRef.getY() - 10 - dimRef.getHeight(),
+				(Betrayal.WIDTH - 160 - field_framePreview.getRight()) / 2,
+				reference.getHeight());
+		reference.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+		actor.addListener(new InputListener(actor) {
+			@Override
+			public void doAction() {
+				setPreviousTrait(trait);
+			}
+		});
+		stage.addActor(actor);
+		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		// Helpers
-		public void addToStage() {
-			stage.addActor(group_selectionField);
-		}
+		// Create serial number
+		actor = new Label("", font60) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				if (!getText().toString().equals(character.preview.getTrait(trait)))
+					setText(character.preview.getTrait(trait));
+			}
+		};
+		actor.setBounds(dimRef.getX()
+						+ dimRef.getWidth() + 30, dimRef.getY(),
+				60, reference.getHeight());
+		((Label) actor).setAlignment(Align.center);
+		stage.addActor(actor);
+		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		private void setPreviousTrait(Trait trait) {
-			character.preview.setPreviousTrait(trait);
-		}
+		// Create right arrow
+		actor = new Image(image_rightArrow);
+		actor.setBounds(dimRef.getX() +
+						dimRef.getWidth() + 30, reference.getY(),
+				reference.getWidth(), reference.getHeight());
+		actor.addListener(new InputListener(actor) {
+			@Override
+			public void doAction() {
+				setNextTrait(trait);
+			}
+		});
+		stage.addActor(actor);
+	}
 
-		private void setNextTrait(Trait trait) {
-			character.preview.setNextTrait(trait);
-		}
+	private void setPreviousTrait(Trait trait) {
+		character.preview.setPreviousTrait(trait);
+	}
+
+	private void setNextTrait(Trait trait) {
+		character.preview.setNextTrait(trait);
 	}
 }

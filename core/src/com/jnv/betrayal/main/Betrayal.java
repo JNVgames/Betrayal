@@ -33,6 +33,8 @@ public class Betrayal extends Game {
 	private Player player;
 
 	public void create() {
+		Gdx.graphics.setContinuousRendering(false);
+
 		init();
 
 		loader = new ResourceLoader(res);
