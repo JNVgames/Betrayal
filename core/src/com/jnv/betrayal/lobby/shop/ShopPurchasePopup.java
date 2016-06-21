@@ -1,29 +1,35 @@
 package com.jnv.betrayal.lobby.shop;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.Equips;
 import com.jnv.betrayal.character.Preview;
+import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class ShopPurchasePopup extends Popup {
 
-	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow, item;
+	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
 	private Label price, description;
 	private int currentSide;
 	private Character character;
-	private Item currentItem;
+	private Item item;
+	private Preview preview;
 
 	public ShopPurchasePopup(Betrayal game, Item item) {
 		super(game);
 		character = game.getPlayer().getCurrentCharacter();
-		currentItem = item;
+		this.item = item;
 		currentSide = 0;
 		loadButtons();
 	}
@@ -37,7 +43,6 @@ public class ShopPurchasePopup extends Popup {
 		loadDescription();
 		loadPreview();
 		loadPrice();
-		loadArrows();
 	}
 
 	private void loadBackground() {
@@ -105,24 +110,31 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadPreview() {
-		// Create copy of character's preview with the extra weapon
+		loadArrows();
 
-		/*
-		Actor field_preview = new Actor() {
-            public void draw(Batch sb, float parentAlpha) {
-                for (TextureRegion preview : character.getFullPreview()) {
-                    sb.draw(preview, field_framePreview.getX(),
-                            field_framePreview.getY(), field_framePreview.getWidth(),
-                            field_framePreview.getHeight());
-                }
-            }
-        };
-        field_preview.setWidth(384);
-        field_preview.setHeight(576);
-        field_preview.setX(field_framePreview.getX());
-        field_preview.setY(field_framePreview.getY());
-        stage.addActor(field_preview);
-        */
+		preview = character.preview;
+		if (item instanceof Equip) {
+			// Create copy of character's preview with the extra weapon
+			Equips equips = new Equips(character.equips, res);
+			equips.equip((Equip) item);
+			preview = new Preview(equips, res);
+		}
+
+		final float x = leftArrow.getX();
+		final float y = leftArrow.getTop() + 20;
+		final float width = rightArrow.getRight() - leftArrow.getX();
+		final float height = width * 18 / 12;
+
+		Actor previewImage = new Actor() {
+			public void draw(Batch sb, float pa) {
+				preview.drawPreview(game.getBatch(), x, y, width, height);
+			}
+		};
+		previewImage.setWidth(width);
+		previewImage.setHeight(height);
+		previewImage.setX(x);
+		previewImage.setY(y);
+		popup.addActor(previewImage);
 	}
 
 	private void loadArrows() {
@@ -132,10 +144,7 @@ public class ShopPurchasePopup extends Popup {
 		leftArrow.addListener(new InputListener(leftArrow) {
 			@Override
 			public void doAction() {
-				currentSide--;
-				if (currentSide < 0) {
-					currentSide = 3;
-				}
+				preview.rotateLeft();
 			}
 		});
 		popup.addActor(leftArrow);
@@ -146,7 +155,7 @@ public class ShopPurchasePopup extends Popup {
 		rightArrow.addListener(new InputListener(rightArrow) {
 			@Override
 			public void doAction() {
-				currentSide = (currentSide + 1) % 4;
+				preview.rotateRight();
 			}
 		});
 		popup.addActor(rightArrow);

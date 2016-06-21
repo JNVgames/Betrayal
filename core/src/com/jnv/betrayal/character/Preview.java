@@ -100,6 +100,7 @@ public class Preview implements Json.Serializable {
 		drawPreview(batch, rotation, x, y, width, height);
 	}
 
+	// To use, create an actor and override draw() with this function in it
 	public void drawPreview(Batch batch, int rotation, float x, float y, float width, float height) {
 		this.rotation = rotation;
 		setCurrentPreview(rotation);

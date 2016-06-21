@@ -36,6 +36,14 @@ public class Equips implements Json.Serializable {
 		equips = new Equip[EquipSlot.SLOTS];
 	}
 
+	// Copy Constructor
+	public Equips(Equips equips, BetrayalAssetManager res) {
+		equipsHandler = new EquipsHandler(this);
+		this.inventory = equips.inventory;
+		this.res = res;
+		this.equips = equips.equips.clone();
+	}
+
 	// Getters
 	public boolean isHeadSlotEmpty() {
 		return equips[EquipSlot.HEAD] == null;
