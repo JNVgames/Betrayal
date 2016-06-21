@@ -198,10 +198,14 @@ public class ResourceLoader {
 	}
 
 	private void loadArmor() {
-		for (int tier = 1; tier <= 5; tier++) {
+		for (int tier = 1; tier < 5; tier++) {
 			for (int color = 1; color <= 6; color++) {
 				res.loadTexture("shop/armor" + tier + color + ".png", "armor" + color + tier);
 			}
+		}
+
+		for (int color = 1; color <= 6; color++) {
+			res.loadTexture("shop/armor" + 5 + color + ".png", "armor" + color + 5 + "s");
 		}
 
 		res.loadTexture("armor/brown_cloak.png", "armor-cloak-brown");
@@ -257,18 +261,18 @@ public class ResourceLoader {
 
 	private void loadArmorPreview() {
 		res.loadTexture("character/armor0.png", "previewarmor0");
-		res.loadTexture("character/armor1b.png", "previewarmor1");
-		res.loadTexture("character/armor1c.png", "previewarmor2");
-		res.loadTexture("character/armor1a.png", "previewarmor3");
+		res.loadTexture("character/armor1a.png", "previewarmor1");
+		res.loadTexture("character/armor1b.png", "previewarmor2");
+		res.loadTexture("character/armor1c.png", "previewarmor3");
 		res.loadTexture("character/armor1d.png", "previewarmor4");
 		res.loadTexture("character/armor1e.png", "previewarmor5");
 		res.loadTexture("character/armor1f.png", "previewarmor6");
-		res.loadTexture("character/armor2a.png", "previewarmor1");
-		res.loadTexture("character/armor2b.png", "previewarmorblack");
-		res.loadTexture("character/armor2c.png", "previewarmorgold");
-		res.loadTexture("character/armor2d.png", "previewarmorblue");
-		res.loadTexture("character/armor2e.png", "previewarmorgreen");
-		res.loadTexture("character/armor2f.png", "previewarmorpurple");
+		res.loadTexture("character/armor2a.png", "previewarmor15");
+		res.loadTexture("character/armor2b.png", "previewarmor25");
+		res.loadTexture("character/armor2c.png", "previewarmor35");
+		res.loadTexture("character/armor2d.png", "previewarmor45");
+		res.loadTexture("character/armor2e.png", "previewarmor55");
+		res.loadTexture("character/armor2f.png", "previewarmor65");
 		res.loadTexture("character/cloak1a.png", "previewcloakbrown");
 		res.loadTexture("character/cloak1b.png", "previewcloakblack");
 	}
@@ -494,7 +498,7 @@ public class ResourceLoader {
 
 			new BodyArmor.ArmorFactory(res)
 					.id(color + 84) // id - 85 to 90
-					.name("armor" + color + "5")
+					.name("armor" + color + "5s")
 					.costBuy(500)
 					.defense(10)
 					.build();

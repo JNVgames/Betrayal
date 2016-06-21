@@ -23,10 +23,10 @@ public class Shop extends Popup {
 	private Image lobbyButton, background, weapons, armors, extras, items, money, shields, swords;
 	private Image swordButton, armorButton, shieldButton, headGearButton;
 	private Image[] potions, ring1, ring2;
-	private Image[] sword1,sword2,sword3,sword4,sword5;
-	private Image[] shield1,shield2,shield3,shield4,shield5;
-	private Image[] headgear1,headgear2,headgear3, headgear4,headgear5;
-	private Image[] armor1,armor2,armor3,armor4,armor5;
+	private Image[] sword1, sword2, sword3, sword4, sword5;
+	private Image[] shield1, shield2, shield3, shield4, shield5;
+	private Image[] headgear1, headgear2, headgear3, headgear4, headgear5;
+	private Image[] armor1, armor2, armor3, armor4, armor5;
 	private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
 	private Label titleHeadgear1, titleHeadgear2, titleArmor1, titleArmor2, titleItems;
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
@@ -70,7 +70,8 @@ public class Shop extends Popup {
 		loadButtons();
 		loadCurrentActors();
 	}
-	private void loadCurrentActors(){
+
+	private void loadCurrentActors() {
 		popup.addActor(currentGroup);
 	}
 
@@ -104,7 +105,7 @@ public class Shop extends Popup {
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
-		lobbyButton.setBounds((Betrayal.WIDTH-312)/2, 110, 312, 100);
+		lobbyButton.setBounds((Betrayal.WIDTH - 312) / 2, 110, 312, 100);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
@@ -272,7 +273,7 @@ public class Shop extends Popup {
 		currentGroup.addActor(shieldButton);
 	}
 
-	private void loadShields(){
+	private void loadShields() {
 		for (int i = 1; i <= 6; i++) {
 			final String item1 = "shield" + i + "1";
 			final String item2 = "shield" + i + "2";
@@ -321,7 +322,7 @@ public class Shop extends Popup {
 			shield4[i - 1].layout();
 			shield4[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			shield4[i - 1].addListener(new InputListener(shield2[i-1]) {
+			shield4[i - 1].addListener(new InputListener(shield2[i - 1]) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item4, res));
@@ -343,7 +344,7 @@ public class Shop extends Popup {
 		}
 		swordButton = new Image(res.getTexture("sword-button"));
 		swordButton.layout();
-		swordButton.setBounds(460,1035,150,60);
+		swordButton.setBounds(460, 1035, 150, 60);
 		swordButton.addListener(new InputListener(swordButton) {
 			@Override
 			public void doAction() {
@@ -357,21 +358,21 @@ public class Shop extends Popup {
 
 	private void loadSwordTitles() {
 		int spacing = 172;
-		for (int i=1; i<=5; i++) {
-			titleSword[i-1] = new Label("Sword(tier"+i+")", FontManager.getFont(40));
-			titleSword[i-1].setX(110);
-			titleSword[i-1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
-			currentGroup.addActor(titleSword[i-1]);
+		for (int i = 1; i <= 5; i++) {
+			titleSword[i - 1] = new Label("Sword(tier" + i + ")", FontManager.getFont(40));
+			titleSword[i - 1].setX(110);
+			titleSword[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
+			currentGroup.addActor(titleSword[i - 1]);
 		}
 	}
 
-	private void loadShieldTitles(){
+	private void loadShieldTitles() {
 		int spacing = 172;
-		for (int i=1; i<=5; i++) {
-			titleShield[i-1] = new Label("Shield(tier"+i+")", FontManager.getFont(40));
-			titleShield[i-1].setX(110);
-			titleShield[i-1].setY(Betrayal.HEIGHT - 250 - (i-1)*spacing);
-			currentGroup.addActor(titleShield[i-1]);
+		for (int i = 1; i <= 5; i++) {
+			titleShield[i - 1] = new Label("Shield(tier" + i + ")", FontManager.getFont(40));
+			titleShield[i - 1].setX(110);
+			titleShield[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
+			currentGroup.addActor(titleShield[i - 1]);
 		}
 	}
 
@@ -444,7 +445,7 @@ public class Shop extends Popup {
 
 		titleItems = new Label("Potions", FontManager.getFont(40));
 		titleItems.setX(110);
-		titleItems.setY(Betrayal.HEIGHT - 250-172*2);
+		titleItems.setY(Betrayal.HEIGHT - 250 - 172 * 2);
 		currentGroup.addActor(titleItems);
 	}
 
@@ -519,89 +520,91 @@ public class Shop extends Popup {
 		}
 		armorButton = new Image(res.getTexture("armor-button"));
 		armorButton.layout();
-		armorButton.setBounds(460,1035,150,60);
+		armorButton.setBounds(460, 1035, 150, 60);
 		armorButton.addListener(new InputListener(armorButton) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
 				loadArmor();
+				loadBestArmor();
 				loadArmorTitle();
 			}
 		});
 		currentGroup.addActor(armorButton);
 	}
 
-	private void loadArmor(){
-		for(int i=1; i<=6; i++) {
-			final String item1 = "armor" + i + "1";
-			final String item2 = "armor" + i + "2";
-			final String item3 = "armor" + i + "3";
-			final String item4 = "armor" + i + "4";
-			final String item5 = "armor" + i + "5";
-			armor1[i - 1] = new Image(res.getTexture(item1));
-			armor1[i - 1].layout();
-			armor1[i - 1].setBounds(100 + itemSize * (i - 1),
+	private void loadArmor() {
+		for (int color = 1; color <= 6; color++) {
+			final String tier1String = "armor" + color + "1";
+			final String tier2String = "armor" + color + "2";
+			final String tier3String = "armor" + color + "3";
+			final String tier4String = "armor" + color + "4";
+			final String tier5String = "armor" + color + "5s";
+
+			armor1[color - 1] = new Image(res.getTexture(tier1String));
+			armor1[color - 1].layout();
+			armor1[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 1, itemSize, itemSize);
-			armor1[i - 1].addListener(new InputListener(armor1[i - 1]) {
+			armor1[color - 1].addListener(new InputListener(armor1[color - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(item1, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier1String, res));
 				}
 			});
-			currentGroup.addActor(armor1[i - 1]);
+			currentGroup.addActor(armor1[color - 1]);
 
-			armor2[i - 1] = new Image(res.getTexture(item2));
-			armor2[i - 1].layout();
-			armor2[i - 1].setBounds(100 + itemSize * (i - 1),
+			armor2[color - 1] = new Image(res.getTexture(tier2String));
+			armor2[color - 1].layout();
+			armor2[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			armor2[i - 1].addListener(new InputListener(armor2[i - 1]) {
+			armor2[color - 1].addListener(new InputListener(armor2[color - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(item2, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier2String, res));
 				}
 			});
-			currentGroup.addActor(armor2[i - 1]);
+			currentGroup.addActor(armor2[color - 1]);
 
-			armor3[i - 1] = new Image(res.getTexture(item3));
-			armor3[i - 1].layout();
-			armor3[i - 1].setBounds(100 + itemSize * (i - 1),
+			armor3[color - 1] = new Image(res.getTexture(tier3String));
+			armor3[color - 1].layout();
+			armor3[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			armor3[i - 1].addListener(new InputListener(armor3[i - 1]) {
+			armor3[color - 1].addListener(new InputListener(armor3[color - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(item3, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier3String, res));
 				}
 			});
-			currentGroup.addActor(armor3[i - 1]);
+			currentGroup.addActor(armor3[color - 1]);
 
-			armor4[i - 1] = new Image(res.getTexture(item4));
-			armor4[i - 1].layout();
-			armor4[i - 1].setBounds(100 + itemSize * (i - 1),
+			armor4[color - 1] = new Image(res.getTexture(tier4String));
+			armor4[color - 1].layout();
+			armor4[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			armor4[i - 1].addListener(new InputListener(armor4[i - 1]) {
+			armor4[color - 1].addListener(new InputListener(armor4[color - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(item4, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier4String, res));
 				}
 			});
-			currentGroup.addActor(armor4[i - 1]);
+			currentGroup.addActor(armor4[color - 1]);
 
 			//Armor5
-			armor5[i - 1] = new Image(res.getTexture(item5));
-			armor5[i - 1].layout();
-			armor5[i - 1].setBounds(100 + itemSize * (i - 1),
+			armor5[color - 1] = new Image(res.getTexture(tier5String));
+			armor5[color - 1].layout();
+			armor5[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			armor5[i - 1].addListener(new InputListener(armor5[i - 1]) {
+			armor5[color - 1].addListener(new InputListener(armor5[color - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(item4, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier5String, res));
 				}
 			});
-			currentGroup.addActor(armor5[i - 1]);
+			currentGroup.addActor(armor5[color - 1]);
 		}
 		headGearButton = new Image(res.getTexture("headgear-button"));
 		headGearButton.layout();
-		headGearButton.setBounds(460,1035,150,60);
+		headGearButton.setBounds(460, 1035, 150, 60);
 		headGearButton.addListener(new InputListener(headGearButton) {
 			@Override
 			public void doAction() {
@@ -613,22 +616,26 @@ public class Shop extends Popup {
 		currentGroup.addActor(headGearButton);
 	}
 
+	private void loadBestArmor() {
+
+	}
+
 	private void loadHeadgearTitle() {
 		int spacing = 172;
-		for (int i=1; i<=5; i++) {
-			titleHeadgear[i-1] = new Label("Headgear(tier"+i+")", FontManager.getFont(40));
-			titleHeadgear[i-1].setX(110);
-			titleHeadgear[i-1].setY(Betrayal.HEIGHT - 250 - (i-1)*spacing);
-			currentGroup.addActor(titleHeadgear[i-1]);
+		for (int i = 1; i <= 5; i++) {
+			titleHeadgear[i - 1] = new Label("Headgear(tier" + i + ")", FontManager.getFont(40));
+			titleHeadgear[i - 1].setX(110);
+			titleHeadgear[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
+			currentGroup.addActor(titleHeadgear[i - 1]);
 		}
 	}
 
-	private void loadArmorTitle(){
+	private void loadArmorTitle() {
 		int spacing = 172;
-		for (int i=1; i<=5; i++) {
-			titleArmor[i-1] = new Label("Armor(tier"+i+")", FontManager.getFont(40));
-			titleArmor[i-1].setX(110);
-			titleArmor[i-1].setY(Betrayal.HEIGHT - 250 - (i-1)*spacing);
+		for (int i = 1; i <= 5; i++) {
+			titleArmor[i - 1] = new Label("Armor(tier" + i + ")", FontManager.getFont(40));
+			titleArmor[i - 1].setX(110);
+			titleArmor[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleArmor[i - 1]);
 		}
 	}

@@ -22,7 +22,7 @@ public class BodyArmor extends Equip implements Previewable {
 		this.defense = defense;
 	}
 
-	public int getDefense() { return defense;}
+	public int getDefense() { return defense; }
 
 	public Texture getPreview() {
 		return preview;
@@ -39,10 +39,11 @@ public class BodyArmor extends Equip implements Previewable {
 			this.res = res;
 		}
 
-		public ArmorFactory id(int id){
+		public ArmorFactory id(int id) {
 			this.id = id;
 			return this;
 		}
+
 		public ArmorFactory name(String name) {
 			this.name = name;
 			return this;
@@ -61,7 +62,6 @@ public class BodyArmor extends Equip implements Previewable {
 		public BodyArmor build() {
 			return new BodyArmor(id, name, res, costBuy, defense);
 		}
-
 	}
 
 }
