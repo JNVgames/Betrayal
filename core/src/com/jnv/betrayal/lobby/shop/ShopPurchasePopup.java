@@ -83,7 +83,7 @@ public class ShopPurchasePopup extends Popup {
 			public void doAction() {
 				new Confirmation(game, "Confirm purchase") {
 					public void doSomething() {
-						character.inventory.addItem(new Weapon("sword11", res));
+						character.inventory.addItem(item);
 					}
 				};
 			}
