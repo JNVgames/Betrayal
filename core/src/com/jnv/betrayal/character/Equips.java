@@ -24,14 +24,14 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 public class Equips implements Json.Serializable {
 
 	private EquipsHandler equipsHandler;
-	Character character;
+	Inventory inventory;
 	BetrayalAssetManager res;
 
 	public final Equip[] equips;
 
-	public Equips(Character character, BetrayalAssetManager res) {
+	public Equips(Inventory inventory, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
-		this.character = character;
+		this.inventory = inventory;
 		this.res = res;
 		equips = new Equip[EquipSlot.SLOTS];
 	}

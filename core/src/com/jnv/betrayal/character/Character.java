@@ -28,10 +28,10 @@ public class Character implements Json.Serializable {
 	 */
 	public Character(Player player, BetrayalAssetManager res) {
 		characterID = player.characters.size();
-		equips = new Equips(this, res);
+		inventory = new Inventory();
+		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);
 		job = new Job();
-		inventory = new Inventory();
 		stats = new Stats();
 
 		preview.update();

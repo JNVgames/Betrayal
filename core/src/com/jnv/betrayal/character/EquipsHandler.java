@@ -22,47 +22,47 @@ class EquipsHandler {
 	}
 
 	void equipHand(Equip equip) {
-		equips.character.inventory.removeItem(equip);
+		equips.inventory.removeItem(equip);
 		if (equips.equips[EquipSlot.LEFT_HAND] == null) {
 			equips.equips[EquipSlot.LEFT_HAND] = equip;
 		} else if (equips.equips[EquipSlot.RIGHT_HAND] == null) {
 			equips.equips[EquipSlot.RIGHT_HAND] = equip;
 		} else {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.RIGHT_HAND]);
+			equips.inventory.addItem(equips.equips[EquipSlot.RIGHT_HAND]);
 			equips.equips[EquipSlot.RIGHT_HAND] = equip;
 		}
 	}
 
 	void equipHeadArmor(HeadGear gear) {
-		equips.character.inventory.removeItem(gear);
+		equips.inventory.removeItem(gear);
 		if (!(equips.equips[EquipSlot.HEAD] == null))
-			equips.character.inventory.addItem(equips.equips[EquipSlot.HEAD]);
+			equips.inventory.addItem(equips.equips[EquipSlot.HEAD]);
 		equips.equips[EquipSlot.HEAD] = gear;
 	}
 
 	void equipBodyArmor(BodyArmor armor) {
-		equips.character.inventory.removeItem(armor);
+		equips.inventory.removeItem(armor);
 		if (!(equips.equips[EquipSlot.BODY] == null))
-			equips.character.inventory.addItem(equips.equips[EquipSlot.BODY]);
+			equips.inventory.addItem(equips.equips[EquipSlot.BODY]);
 		equips.equips[EquipSlot.BODY] = armor;
 	}
 
 	void equipRing(Ring ring) {
-		equips.character.inventory.removeItem(ring);
+		equips.inventory.removeItem(ring);
 		if (equips.equips[EquipSlot.RING1] == null) {
 			equips.equips[EquipSlot.RING1] = ring;
 		} else if (equips.equips[EquipSlot.RING2] == null) {
 			equips.equips[EquipSlot.RING2] = ring;
 		} else {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.RING2]);
+			equips.inventory.addItem(equips.equips[EquipSlot.RING2]);
 			equips.equips[EquipSlot.RING2] = ring;
 		}
 	}
 
 	boolean unequipHeadArmor() {
 		if (!(equips.equips[EquipSlot.HEAD] == null)
-				&& !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.HEAD]);
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.HEAD]);
 			equips.equips[EquipSlot.HEAD] = null;
 			return true;
 		}
@@ -71,8 +71,8 @@ class EquipsHandler {
 
 	boolean unequipLeftHand() {
 		if (!(equips.equips[EquipSlot.LEFT_HAND] == null)
-				&& !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.LEFT_HAND]);
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.LEFT_HAND]);
 			equips.equips[EquipSlot.LEFT_HAND] = null;
 			return true;
 		}
@@ -81,8 +81,8 @@ class EquipsHandler {
 
 	boolean unequipRightHand() {
 		if (!(equips.equips[EquipSlot.RIGHT_HAND] == null)
-				&& !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.RIGHT_HAND]);
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.RIGHT_HAND]);
 			equips.equips[EquipSlot.RIGHT_HAND] = null;
 			return true;
 		}
@@ -91,8 +91,8 @@ class EquipsHandler {
 
 	boolean unequipBodyArmor() {
 		if (!(equips.equips[EquipSlot.BODY] == null)
-				&& !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.BODY]);
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.BODY]);
 			equips.equips[EquipSlot.BODY] = null;
 			return true;
 		}
@@ -100,8 +100,8 @@ class EquipsHandler {
 	}
 
 	boolean unequipRing1() {
-		if (!(equips.equips[EquipSlot.RING1] == null) && !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.RING1]);
+		if (!(equips.equips[EquipSlot.RING1] == null) && !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.RING1]);
 			equips.equips[EquipSlot.RING1] = null;
 			return true;
 		}
@@ -110,8 +110,8 @@ class EquipsHandler {
 
 	boolean unequipRing2() {
 		if (!(equips.equips[EquipSlot.RING2] == null)
-				&& !equips.character.inventory.isFull()) {
-			equips.character.inventory.addItem(equips.equips[EquipSlot.RING2]);
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.RING2]);
 			equips.equips[EquipSlot.RING2] = null;
 			return true;
 		}
