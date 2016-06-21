@@ -28,7 +28,7 @@ public abstract class Item implements Json.Serializable {
 		res.loadItem(name, this);
 	}
 
-		public Item(String name, BetrayalAssetManager res) {
+	public Item(String name, BetrayalAssetManager res) {
 		Item src = res.getItem(name);
 		id = src.getID();
 		itemName = name;

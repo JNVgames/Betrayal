@@ -385,17 +385,26 @@ public class ResourceLoader {
 
 	private void loadItemsData() {
 		for (int color = 1; color <= 6; color++) {
-			new Weapon(color, "sword" + color + "1", res, 500, 5);
-	    	new Weapon(color, "sword" + color + "2", res, 1000, 10);
-			/*
-			new Weapon(i, "sword2" + i, res, 1000,10);
-			new Shield(i, "shield-left-" + i, res, 500, 5);
-			new Shield(i, "shield-right-" + i, res, 1000, 10);
-			//new Shield(i, "headgear1" + i, res, 500, 5);
-			//new Shield(i, "headgear2" + i, res, 1000, 10);
-			//new Shield(i, "armor1" + i, res, 500, 5);
-			//new Shield(i, "armor2" + i, res, 1000, 10);
-			*/
+			new Weapon.WeaponFactory(res)
+					.id(color) // id - 1 to 6
+					.name("sword" + color + "1")
+					.costBuy(500)
+					.newAttack(6)
+					.build();
+			new Weapon.WeaponFactory(res)
+					.id(color + 6) // id - 7 to 12
+					.name("sword" + color + "2")
+					.costBuy(1000)
+					.newAttack(10)
+					.build();
+
+//			new Weapon(i, "sword2" + i, res, 1000,10);
+//			new Shield(i, "shield-left-" + i, res, 500, 5);
+//			new Shield(i, "shield-right-" + i, res, 1000, 10);
+//			new Shield(i, "headgear1" + i, res, 500, 5);
+//			new Shield(i, "headgear2" + i, res, 1000, 10);
+//			new Shield(i, "armor1" + i, res, 500, 5);
+//			new Shield(i, "armor2" + i, res, 1000, 10);
 		}
 	}
 

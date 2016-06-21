@@ -32,4 +32,42 @@ public class Weapon extends Equip implements DualWieldable {
 	public Texture getRightPreview() {
 		return rightPreview;
 	}
+
+	public static class WeaponFactory {
+
+		private int id = -1;
+		private String name = "";
+		private int costBuy = -1;
+		private int newAttack = -1;
+		private BetrayalAssetManager res;
+
+		public WeaponFactory(BetrayalAssetManager res) {
+			this.res = res;
+		}
+
+		public WeaponFactory id(int id) {
+			this.id = id;
+			return this;
+		}
+
+		public WeaponFactory name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public WeaponFactory costBuy(int costBuy) {
+			this.costBuy = costBuy;
+			return this;
+		}
+
+		public WeaponFactory newAttack(int newAttack) {
+			this.newAttack = newAttack;
+			return this;
+		}
+
+		public Weapon build() {
+			return new Weapon(id, name, res, costBuy, newAttack);
+		}
+
+	}
 }
