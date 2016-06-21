@@ -27,4 +27,42 @@ public class HeadGear extends Equip implements Previewable {
 	public Texture getPreview() {
 		return preview;
 	}
+
+
+	public static class HeadGearFactory {
+		private int id = -1;
+		private String name = "";
+		private int costBuy = -1;
+		private int defense = -1;
+		private BetrayalAssetManager res;
+
+		public HeadGearFactory(BetrayalAssetManager res) {
+			this.res = res;
+		}
+
+		public HeadGearFactory id(int id){
+			this.id = id;
+			return this;
+		}
+		public HeadGearFactory name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public HeadGearFactory costBuy(int costBuy) {
+			this.costBuy = costBuy;
+			return this;
+		}
+
+		public HeadGearFactory defense(int defense) {
+			this.defense = defense;
+			return this;
+		}
+
+		public HeadGear build() {
+			return new HeadGear(id, name, res, costBuy, defense);
+		}
+
+
+	}
 }

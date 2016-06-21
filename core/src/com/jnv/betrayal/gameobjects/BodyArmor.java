@@ -27,4 +27,41 @@ public class BodyArmor extends Equip implements Previewable {
 	public Texture getPreview() {
 		return preview;
 	}
+
+	public static class ArmorFactory {
+		private int id = -1;
+		private String name = "";
+		private int costBuy = -1;
+		private int defense = -1;
+		private BetrayalAssetManager res;
+
+		public ArmorFactory(BetrayalAssetManager res) {
+			this.res = res;
+		}
+
+		public ArmorFactory id(int id){
+			this.id = id;
+			return this;
+		}
+		public ArmorFactory name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public ArmorFactory costBuy(int costBuy) {
+			this.costBuy = costBuy;
+			return this;
+		}
+
+		public ArmorFactory defense(int defense) {
+			this.defense = defense;
+			return this;
+		}
+
+		public Shield build() {
+			return new Shield(id, name, res, costBuy, defense);
+		}
+
+	}
+
 }

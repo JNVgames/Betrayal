@@ -3,6 +3,8 @@
  */
 
 buildscript {
+    System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+
     repositories {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
@@ -11,7 +13,7 @@ buildscript {
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'org.robovm:robovm-gradle-plugin:1.5.0'
+        classpath 'org.robovm:robovm-gradle-plugin:1.5.1-SNAPSHOT'
     }
 }
 
