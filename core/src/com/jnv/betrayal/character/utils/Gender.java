@@ -5,6 +5,25 @@
 package com.jnv.betrayal.character.utils;
 
 public enum Gender {
-	MALE,
-	FEMALE
+	MALE("M"),
+	FEMALE("F");
+
+	private String initial;
+
+	Gender(String initial) {
+		this.initial = initial;
+	}
+
+	public String getInitial() {
+		return initial;
+	}
+
+	public Gender getOtherGender() {
+		if (this == MALE) {
+			return FEMALE;
+		}
+		else {
+			return MALE;
+		}
+	}
 }

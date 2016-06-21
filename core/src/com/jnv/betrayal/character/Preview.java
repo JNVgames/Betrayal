@@ -25,15 +25,15 @@ public class Preview implements Json.Serializable {
 
 	PreviewHandler previewHandler;
 	BetrayalAssetManager res;
-	Character character;
+
 	/**
 	 * Textures for character head, format: head_side_walkAnimation
 	 */
 	TextureRegion[] currentPreview;
-	TextureRegion[] front_left, front_still, front_right;
-	TextureRegion[] right_left, right_still, right_right;
-	TextureRegion[] left_left, left_still, left_right;
-	TextureRegion[] back_left, back_still, back_right;
+	TextureRegion[] frontLeft, frontStill, frontRight;
+	TextureRegion[] rightLeft, rightStill, rightRight;
+	TextureRegion[] leftLeft, leftStill, leftRight;
+	TextureRegion[] backLeft, backStill, backRight;
 	TextureRegion[][] front, right, left, back;
 
 	/**
@@ -41,16 +41,15 @@ public class Preview implements Json.Serializable {
 	 */
 	Gender gender;
 	int rotation = 0;
-	int hair_male, hair_female, hairColor;
+	int maleHairColor, femaleHairColor, hairColor;
 
-	public Preview(Character character, BetrayalAssetManager res) {
+	public Preview(BetrayalAssetManager res) {
 		previewHandler = new PreviewHandler(this);
 		this.res = res;
-		this.character = character;
 
 		gender = Gender.MALE;
-		hair_male = 1;
-		hair_female = 1;
+		maleHairColor = 1;
+		femaleHairColor = 1;
 		hairColor = 1;
 
 		initializeArrays();
@@ -59,35 +58,35 @@ public class Preview implements Json.Serializable {
 
 	void initializeArrays() {
 		currentPreview = new TextureRegion[PreviewSlot.SLOTS];
-		front_left = new TextureRegion[PreviewSlot.SLOTS];
-		front_still = new TextureRegion[PreviewSlot.SLOTS];
-		front_right = new TextureRegion[PreviewSlot.SLOTS];
-		right_left = new TextureRegion[PreviewSlot.SLOTS];
-		right_still = new TextureRegion[PreviewSlot.SLOTS];
-		right_right = new TextureRegion[PreviewSlot.SLOTS];
-		left_left = new TextureRegion[PreviewSlot.SLOTS];
-		left_still = new TextureRegion[PreviewSlot.SLOTS];
-		left_right = new TextureRegion[PreviewSlot.SLOTS];
-		back_left = new TextureRegion[PreviewSlot.SLOTS];
-		back_still = new TextureRegion[PreviewSlot.SLOTS];
-		back_right = new TextureRegion[PreviewSlot.SLOTS];
+		frontLeft = new TextureRegion[PreviewSlot.SLOTS];
+		frontStill = new TextureRegion[PreviewSlot.SLOTS];
+		frontRight = new TextureRegion[PreviewSlot.SLOTS];
+		rightLeft = new TextureRegion[PreviewSlot.SLOTS];
+		rightStill = new TextureRegion[PreviewSlot.SLOTS];
+		rightRight = new TextureRegion[PreviewSlot.SLOTS];
+		leftLeft = new TextureRegion[PreviewSlot.SLOTS];
+		leftStill = new TextureRegion[PreviewSlot.SLOTS];
+		leftRight = new TextureRegion[PreviewSlot.SLOTS];
+		backLeft = new TextureRegion[PreviewSlot.SLOTS];
+		backStill = new TextureRegion[PreviewSlot.SLOTS];
+		backRight = new TextureRegion[PreviewSlot.SLOTS];
 
 		front = new TextureRegion[3][PreviewSlot.SLOTS];
-		front[0] = front_left;
-		front[1] = front_still;
-		front[2] = front_right;
+		front[0] = frontLeft;
+		front[1] = frontStill;
+		front[2] = frontRight;
 		right = new TextureRegion[3][PreviewSlot.SLOTS];
-		right[0] = right_left;
-		right[1] = right_still;
-		right[2] = right_right;
+		right[0] = rightLeft;
+		right[1] = rightStill;
+		right[2] = rightRight;
 		left = new TextureRegion[3][PreviewSlot.SLOTS];
-		left[0] = left_left;
-		left[1] = left_still;
-		left[2] = left_right;
+		left[0] = leftLeft;
+		left[1] = leftStill;
+		left[2] = leftRight;
 		back = new TextureRegion[3][PreviewSlot.SLOTS];
-		back[0] = back_left;
-		back[1] = back_still;
-		back[2] = back_right;
+		back[0] = backLeft;
+		back[1] = backStill;
+		back[2] = backRight;
 	}
 
 	public void update() {
@@ -115,37 +114,19 @@ public class Preview implements Json.Serializable {
 		update();
 		switch (rotation) {
 			case 0:
-				currentPreview = front_still;
+				currentPreview = frontStill;
 				break;
 			case 1:
-				currentPreview = right_still;
+				currentPreview = rightStill;
 				break;
 			case 2:
-				currentPreview = back_still;
+				currentPreview = backStill;
 				break;
 			case 3:
-				currentPreview = left_still;
+				currentPreview = leftStill;
 				break;
 			default:
 				throw new IllegalStateException("Rotation out of bounds (0-3): " + rotation);
-		}
-	}
-
-	public String getTrait(Trait trait) {
-		switch (trait) {
-			case GENDER:
-				if (gender == Gender.MALE) return "M";
-				else return "F";
-			case HAIR_STYLE:
-				if (gender == Gender.MALE) return Integer.toString(hair_male);
-				else return Integer.toString(hair_female);
-			case HAIR_COLOR:
-				if (gender == Gender.MALE) return Integer.toString(hairColor);
-				else return Integer.toString(hairColor);
-			case JOB:
-				return Job.getJobInitial(character.job.getJob());
-			default:
-				return null;
 		}
 	}
 
@@ -167,74 +148,12 @@ public class Preview implements Json.Serializable {
 		this.rotation = rotation;
 	}
 
-	public void setPreviousTrait(Trait trait) {
-		switch (trait) {
-			case GENDER:
-				if (gender == Gender.MALE) gender = Gender.FEMALE;
-				else gender = Gender.MALE;
-				update();
-				break;
-			case HAIR_STYLE:
-				if (gender == Gender.MALE) {
-					if (hair_male == 1) {
-						hair_male = 5;
-					} else hair_male--;
-				} else {
-					if (hair_female == 1) {
-						hair_female = 5;
-					} else hair_female--;
-				}
-				update();
-				break;
-			case HAIR_COLOR:
-				if (hairColor == 1) hairColor = 7;
-				else hairColor--;
-				update();
-				break;
-			case JOB:
-				character.job.setPreviousJob();
-			default:
-				break;
-		}
-	}
-
-	public void setNextTrait(Trait trait) {
-		switch (trait) {
-			case GENDER:
-				if (gender == Gender.MALE) gender = Gender.FEMALE;
-				else gender = Gender.MALE;
-				update();
-				break;
-			case HAIR_STYLE:
-				if (gender == Gender.MALE) {
-					if (hair_male == 5) {
-						hair_male = 1;
-					} else hair_male++;
-				} else {
-					if (hair_female == 5) {
-						hair_female = 1;
-					} else hair_female++;
-				}
-				update();
-				break;
-			case HAIR_COLOR:
-				if (hairColor == 7) hairColor = 1;
-				else hairColor++;
-				update();
-				break;
-			case JOB:
-				character.job.setNextJob();
-			default:
-				break;
-		}
-	}
-
 	public Group createRotators(float x, float topY, float width, float gap) {
-		Texture image_leftArrow = res.getTexture("arrow-left");
-		Texture image_rightArrow = res.getTexture("arrow-right");
-		Group group_previewRotators = new Group();
+		Texture imageLeftArrow = res.getTexture("arrow-left");
+		Texture imageRightArrow = res.getTexture("arrow-right");
+		Group previewRotatorsGroup = new Group();
 
-		Image previewRotators_leftArrow = new Image(image_leftArrow);
+		Image previewRotators_leftArrow = new Image(imageLeftArrow);
 		previewRotators_leftArrow.setBounds(x, topY - 60, width, 60);
 		previewRotators_leftArrow.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -245,16 +164,16 @@ public class Preview implements Json.Serializable {
 				rotateLeft();
 			}
 		});
-		group_previewRotators.addActor(previewRotators_leftArrow);
+		previewRotatorsGroup.addActor(previewRotators_leftArrow);
 
-		Image previewRotators_rightArrow = new Image(image_rightArrow);
-		previewRotators_rightArrow.setHeight(previewRotators_leftArrow.getHeight());
-		previewRotators_rightArrow.setWidth(previewRotators_leftArrow.getWidth());
-		previewRotators_rightArrow.setX(previewRotators_leftArrow.getX()
+		Image rotatorsRightArrow = new Image(imageRightArrow);
+		rotatorsRightArrow.setHeight(previewRotators_leftArrow.getHeight());
+		rotatorsRightArrow.setWidth(previewRotators_leftArrow.getWidth());
+		rotatorsRightArrow.setX(previewRotators_leftArrow.getX()
 				+ previewRotators_leftArrow.getWidth() + gap);
-		previewRotators_rightArrow.setY(previewRotators_leftArrow.getY());
-		group_previewRotators.addActor(previewRotators_rightArrow);
-		previewRotators_rightArrow.addListener(new InputListener() {
+		rotatorsRightArrow.setY(previewRotators_leftArrow.getY());
+		previewRotatorsGroup.addActor(rotatorsRightArrow);
+		rotatorsRightArrow.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				return true;
 			}
@@ -264,14 +183,14 @@ public class Preview implements Json.Serializable {
 			}
 		});
 
-		return group_previewRotators;
+		return previewRotatorsGroup;
 	}
 
 	public void write(Json json) {
 		json.writeObjectStart("traits");
 		json.writeField(this, "gender", String.class);
-		if (gender == Gender.MALE) json.writeField(this, "hair_male", Integer.class);
-		else json.writeField(this, "hair_female", Integer.class);
+		if (gender == Gender.MALE) json.writeField(this, "maleHairColor", Integer.class);
+		else json.writeField(this, "femaleHairColor", Integer.class);
 		json.writeField(this, "hairColor", Integer.class);
 		json.writeObjectEnd();
 	}

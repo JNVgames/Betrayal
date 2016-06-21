@@ -3,6 +3,7 @@ package com.jnv.betrayal.lobby.shop;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
@@ -11,7 +12,7 @@ import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
-public class ShopPurchase extends Popup {
+public class ShopPurchasePopup extends Popup {
 
 	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow, item;
 	private Label price, description;
@@ -19,7 +20,7 @@ public class ShopPurchase extends Popup {
 	private Character character;
 	private Item currentItem;
 
-	public ShopPurchase(Betrayal game, Item item) {
+	public ShopPurchasePopup(Betrayal game, Item item) {
 		super(game);
 		character = game.getPlayer().getCurrentCharacter();
 		currentItem = item;
@@ -104,6 +105,8 @@ public class ShopPurchase extends Popup {
 	}
 
 	private void loadPreview() {
+		// Create copy of character's preview with the extra weapon
+
 		/*
 		Actor field_preview = new Actor() {
             public void draw(Batch sb, float parentAlpha) {

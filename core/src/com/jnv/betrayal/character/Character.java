@@ -6,7 +6,8 @@ package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.jnv.betrayal.character.utils.Jobs;
+import com.jnv.betrayal.character.utils.Gender;
+import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
@@ -28,13 +29,29 @@ public class Character implements Json.Serializable {
 	public Character(Player player, BetrayalAssetManager res) {
 		characterID = player.characters.size();
 		equips = new Equips(this, res);
-		preview = new Preview(this, res);
+		preview = new Preview(res);
 		job = new Job();
 		inventory = new Inventory();
 		stats = new Stats();
 
-		job.setJob(Jobs.WARRIOR);
 		preview.update();
+	}
+
+	public String getTrait(Trait trait) {
+		switch (trait) {
+			case GENDER:
+				return preview.gender.getInitial();
+			case HAIR_STYLE:
+				if (preview.gender == Gender.MALE) return Integer.toString(preview.maleHairColor);
+				else return Integer.toString(preview.femaleHairColor);
+			case HAIR_COLOR:
+				if (preview.gender == Gender.MALE) return Integer.toString(preview.hairColor);
+				else return Integer.toString(preview.hairColor);
+			case JOB:
+				return job.getJob().getInitial();
+			default:
+				return null;
+		}
 	}
 
 	public String toJson() {
@@ -54,5 +71,56 @@ public class Character implements Json.Serializable {
 
 	public void read(Json json, JsonValue jsonData) {
 
+	}
+
+	public void setNextTrait(Trait trait) {
+		switch (trait) {
+			case GENDER:
+				preview.gender = preview.gender.getOtherGender();
+				preview.update();
+				break;
+			case HAIR_STYLE:
+				if (preview.gender == Gender.MALE) {
+					preview.maleHairColor = preview.maleHairColor % 5 + 1;
+				} else {
+					preview.femaleHairColor = preview.femaleHairColor % 5 + 1;
+				}
+				preview.update();
+				break;
+			case HAIR_COLOR:
+				preview.hairColor = preview.hairColor % 7 + 1;
+				preview.update();
+				break;
+			case JOB:
+				job.setNextJob();
+			default:
+				break;
+		}
+	}
+
+	public void setPreviousTrait(Trait trait) {
+		switch (trait) {
+			case GENDER:
+				preview.gender = preview.gender.getOtherGender();
+				preview.update();
+				break;
+			case HAIR_STYLE:
+				if (preview.gender == Gender.MALE) {
+					preview.maleHairColor = (preview.maleHairColor + 3) % 5 + 1;
+				} else {
+					preview.femaleHairColor = (preview.femaleHairColor + 3) % 5 + 1;
+				}
+				preview.update();
+				break;
+			case HAIR_COLOR:
+				if (preview.hairColor == 1) preview.hairColor = 7;
+				else preview.hairColor--;
+				preview.update();
+				break;
+			case JOB:
+				job.setPreviousJob();
+			default:
+				break;
+		}
 	}
 }

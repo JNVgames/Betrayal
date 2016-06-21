@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
@@ -223,16 +222,16 @@ public class CharacterSelection extends GameState {
 			public void act(float delta) {
 				super.act(delta);
 				switch (character.job.getJob()) {
-					case Jobs.WARRIOR:
+					case WARRIOR:
 						setText(JobDescription.getWarriorDescription());
 						break;
-					case Jobs.KNIGHT:
+					case KNIGHT:
 						setText(JobDescription.getKnightDescription());
 						break;
-					case Jobs.PRIEST:
+					case PRIEST:
 						setText(JobDescription.getPriestDescription());
 						break;
-					case Jobs.THIEF:
+					case THIEF:
 						setText(JobDescription.getThiefDescription());
 						break;
 					default:
@@ -283,8 +282,8 @@ public class CharacterSelection extends GameState {
 			@Override
 			public void act(float delta) {
 				super.act(delta);
-				if (!getText().toString().equals(character.preview.getTrait(trait)))
-					setText(character.preview.getTrait(trait));
+				if (!getText().toString().equals(character.getTrait(trait)))
+					setText(character.getTrait(trait));
 			}
 		};
 		actor.setBounds(dimRef.getX()
@@ -309,10 +308,10 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void setPreviousTrait(Trait trait) {
-		character.preview.setPreviousTrait(trait);
+		character.setPreviousTrait(trait);
 	}
 
 	private void setNextTrait(Trait trait) {
-		character.preview.setNextTrait(trait);
+		character.setNextTrait(trait);
 	}
 }
