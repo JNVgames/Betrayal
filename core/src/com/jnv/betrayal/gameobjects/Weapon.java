@@ -23,7 +23,7 @@ public class Weapon extends Equip implements DualWieldable {
 		rightPreview = res.getTexture(ItemNaming.toPreview(name, false));
 	}
 
-	public int  getAttack(){return attack;}
+	public int getAttack() {return attack;}
 
 	public Texture getLeftPreview() {
 		return leftPreview;

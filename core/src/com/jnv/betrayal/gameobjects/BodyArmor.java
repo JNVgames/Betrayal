@@ -14,12 +14,12 @@ public class BodyArmor extends Equip implements Previewable {
 
 	public BodyArmor(String name, BetrayalAssetManager res) {
 		super(name, res);
+		preview = res.getTexture(ItemNaming.toPreview(name));
 	}
 
 	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy, int defense) {
 		super(id, name, res, cost_buy);
 		this.defense = defense;
-		preview = res.getTexture(ItemNaming.toPreview(name));
 	}
 
 	public int getDefense() { return defense;}
@@ -58,8 +58,8 @@ public class BodyArmor extends Equip implements Previewable {
 			return this;
 		}
 
-		public Shield build() {
-			return new Shield(id, name, res, costBuy, defense);
+		public BodyArmor build() {
+			return new BodyArmor(id, name, res, costBuy, defense);
 		}
 
 	}

@@ -116,7 +116,7 @@ public class ShopPurchasePopup extends Popup {
 			// Create copy of character's preview with the extra weapon
 			Equips equips = new Equips(character.equips, res);
 			equips.equip((Equip) item);
-			preview = new Preview(equips, res);
+			preview = new Preview(character.preview, equips, res);
 		}
 
 		final float x = leftArrow.getX();

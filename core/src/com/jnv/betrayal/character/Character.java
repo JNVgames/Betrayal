@@ -42,8 +42,8 @@ public class Character implements Json.Serializable {
 			case GENDER:
 				return preview.gender.getInitial();
 			case HAIR_STYLE:
-				if (preview.gender == Gender.MALE) return Integer.toString(preview.maleHairColor);
-				else return Integer.toString(preview.femaleHairColor);
+				if (preview.gender == Gender.MALE) return Integer.toString(preview.maleHair);
+				else return Integer.toString(preview.femaleHair);
 			case HAIR_COLOR:
 				if (preview.gender == Gender.MALE) return Integer.toString(preview.hairColor);
 				else return Integer.toString(preview.hairColor);
@@ -81,9 +81,9 @@ public class Character implements Json.Serializable {
 				break;
 			case HAIR_STYLE:
 				if (preview.gender == Gender.MALE) {
-					preview.maleHairColor = preview.maleHairColor % 5 + 1;
+					preview.maleHair = preview.maleHair % 5 + 1;
 				} else {
-					preview.femaleHairColor = preview.femaleHairColor % 5 + 1;
+					preview.femaleHair = preview.femaleHair % 5 + 1;
 				}
 				preview.update();
 				break;
@@ -106,9 +106,9 @@ public class Character implements Json.Serializable {
 				break;
 			case HAIR_STYLE:
 				if (preview.gender == Gender.MALE) {
-					preview.maleHairColor = (preview.maleHairColor + 3) % 5 + 1;
+					preview.maleHair = (preview.maleHair + 3) % 5 + 1;
 				} else {
-					preview.femaleHairColor = (preview.femaleHairColor + 3) % 5 + 1;
+					preview.femaleHair = (preview.femaleHair + 3) % 5 + 1;
 				}
 				preview.update();
 				break;

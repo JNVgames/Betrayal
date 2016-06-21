@@ -284,8 +284,8 @@ public class ResourceLoader {
 
 		// Shield previews
 		for (int colors = 1; colors <= 6; colors++) {
-			res.loadTexture("character/shield1" + colors + ".png", "previewshieldleft" + colors);
-			res.loadTexture("character/shield2" + colors + ".png", "previewshieldright" + colors);
+			res.loadTexture("character/shield1" + colors + ".png", "previewshield" + colors + "left");
+			res.loadTexture("character/shield2" + colors + ".png", "previewshield" + colors + "right");
 		}
 	}
 
@@ -424,116 +424,116 @@ public class ResourceLoader {
 					.costBuy(500)
 					.attack(10)
 					.build();
-//
-//			/********************SHIELDS********************/
-//
-//			new Shield.ShieldFactory(res)
-//					.id(color + 30) // id - 31 to 36
-//					.name("shield" + color + "1")
-//					.costBuy(100)
-//					.defense(2)
-//					.build();
-//
-//			new Shield.ShieldFactory(res)
-//					.id(color + 36) // id - 37 to 42
-//					.name("shield" + color + "2")
-//					.costBuy(200)
-//					.defense(4)
-//					.build();
-//
-//			new Shield.ShieldFactory(res)
-//					.id(color + 42) // id - 43 to 48
-//					.name("shield" + color + "3")
-//					.costBuy(300)
-//					.defense(6)
-//					.build();
-//
-//			new Shield.ShieldFactory(res)
-//					.id(color + 48) // id - 49 to 54
-//					.name("shield" + color + "4")
-//					.costBuy(400)
-//					.defense(8)
-//					.build();
-//
-//			new Shield.ShieldFactory(res)
-//					.id(color + 54) // id - 55 to 60
-//					.name("shield" + color + "5")
-//					.costBuy(500)
-//					.defense(10)
-//					.build();
-//
-//			/********************ARMOR********************/
-//
-//			new BodyArmor.ArmorFactory(res)
-//					.id(color + 60) // id - 61 to 66
-//					.name("Armor" + color + "1")
-//					.costBuy(100)
-//					.defense(2)
-//					.build();
-//
-//			new BodyArmor.ArmorFactory(res)
-//					.id(color + 66) // id - 67 to 72
-//					.name("Armor" + color + "2")
-//					.costBuy(200)
-//					.defense(4)
-//					.build();
-//
-//			new BodyArmor.ArmorFactory(res)
-//					.id(color + 72) // id - 73 to 78
-//					.name("Armor" + color + "3")
-//					.costBuy(300)
-//					.defense(6)
-//					.build();
-//
-//			new BodyArmor.ArmorFactory(res)
-//					.id(color + 78) // id - 79 to 84
-//					.name("Armor" + color + "4")
-//					.costBuy(400)
-//					.defense(8)
-//					.build();
-//
-//			new BodyArmor.ArmorFactory(res)
-//					.id(color + 84) // id - 85 to 90
-//					.name("Armor" + color + "5")
-//					.costBuy(500)
-//					.defense(10)
-//					.build();
-//
-//			/********************HEADGEAR********************/
-//			new HeadGear.HeadGearFactory(res)
-//					.id(color + 90) // id - 91 to 96
-//					.name("headgear" + color + "1")
-//					.costBuy(100)
-//					.defense(2)
-//					.build();
-//
-//			new HeadGear.HeadGearFactory(res)
-//					.id(color + 96) // id - 97 to 102
-//					.name("headgear" + color + "2")
-//					.costBuy(200)
-//					.defense(4)
-//					.build();
-//
-//			new HeadGear.HeadGearFactory(res)
-//					.id(color + 102) // id - 103 to 108
-//					.name("headgear" + color + "3")
-//					.costBuy(300)
-//					.defense(6)
-//					.build();
-//
-//			new HeadGear.HeadGearFactory(res)
-//					.id(color + 108) // id - 109 to 114
-//					.name("headgear" + color + "4")
-//					.costBuy(400)
-//					.defense(8)
-//					.build();
-//
-//			new HeadGear.HeadGearFactory(res)
-//					.id(color + 114) // id - 115 to 120
-//					.name("headgear" + color + "5")
-//					.costBuy(500)
-//					.defense(10)
-//					.build();
+
+			/********************SHIELDS********************/
+
+			new Shield.ShieldFactory(res)
+					.id(color + 30) // id - 31 to 36
+					.name("shield" + color + "1")
+					.costBuy(100)
+					.defense(2)
+					.build();
+
+			new Shield.ShieldFactory(res)
+					.id(color + 36) // id - 37 to 42
+					.name("shield" + color + "2")
+					.costBuy(200)
+					.defense(4)
+					.build();
+
+			new Shield.ShieldFactory(res)
+					.id(color + 42) // id - 43 to 48
+					.name("shield" + color + "3")
+					.costBuy(300)
+					.defense(6)
+					.build();
+
+			new Shield.ShieldFactory(res)
+					.id(color + 48) // id - 49 to 54
+					.name("shield" + color + "4")
+					.costBuy(400)
+					.defense(8)
+					.build();
+
+			new Shield.ShieldFactory(res)
+					.id(color + 54) // id - 55 to 60
+					.name("shield" + color + "5")
+					.costBuy(500)
+					.defense(10)
+					.build();
+
+			/********************ARMOR********************/
+
+			new BodyArmor.ArmorFactory(res)
+					.id(color + 60) // id - 61 to 66
+					.name("armor" + color + "1")
+					.costBuy(100)
+					.defense(2)
+					.build();
+
+			new BodyArmor.ArmorFactory(res)
+					.id(color + 66) // id - 67 to 72
+					.name("armor" + color + "2")
+					.costBuy(200)
+					.defense(4)
+					.build();
+
+			new BodyArmor.ArmorFactory(res)
+					.id(color + 72) // id - 73 to 78
+					.name("armor" + color + "3")
+					.costBuy(300)
+					.defense(6)
+					.build();
+
+			new BodyArmor.ArmorFactory(res)
+					.id(color + 78) // id - 79 to 84
+					.name("armor" + color + "4")
+					.costBuy(400)
+					.defense(8)
+					.build();
+
+			new BodyArmor.ArmorFactory(res)
+					.id(color + 84) // id - 85 to 90
+					.name("armor" + color + "5")
+					.costBuy(500)
+					.defense(10)
+					.build();
+
+			/********************HEADGEAR********************/
+			new HeadGear.HeadGearFactory(res)
+					.id(color + 90) // id - 91 to 96
+					.name("headgear" + color + "1")
+					.costBuy(100)
+					.defense(2)
+					.build();
+
+			new HeadGear.HeadGearFactory(res)
+					.id(color + 96) // id - 97 to 102
+					.name("headgear" + color + "2")
+					.costBuy(200)
+					.defense(4)
+					.build();
+
+			new HeadGear.HeadGearFactory(res)
+					.id(color + 102) // id - 103 to 108
+					.name("headgear" + color + "3")
+					.costBuy(300)
+					.defense(6)
+					.build();
+
+			new HeadGear.HeadGearFactory(res)
+					.id(color + 108) // id - 109 to 114
+					.name("headgear" + color + "4")
+					.costBuy(400)
+					.defense(8)
+					.build();
+
+			new HeadGear.HeadGearFactory(res)
+					.id(color + 114) // id - 115 to 120
+					.name("headgear" + color + "5")
+					.costBuy(500)
+					.defense(10)
+					.build();
 
 		}
 

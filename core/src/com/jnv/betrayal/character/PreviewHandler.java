@@ -45,10 +45,10 @@ class PreviewHandler {
 		Texture head_all;
 		if (preview.gender == Gender.MALE) {
 			head_all = preview.res.getTexture("hair-male-"
-					+ preview.maleHairColor + "-" + preview.hairColor + "-all");
+					+ preview.maleHair + "-" + preview.hairColor + "-all");
 		} else {
 			head_all = preview.res.getTexture("hair-female-"
-					+ preview.femaleHairColor + "-" + preview.hairColor + "-all");
+					+ preview.femaleHair + "-" + preview.hairColor + "-all");
 		}
 		TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
 		preview.frontLeft[PreviewSlot.HEAD] = head_split[0][0];

@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.PreviewSlot;
-import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
@@ -42,7 +41,7 @@ public class Preview implements Json.Serializable {
 	 */
 	Gender gender;
 	int rotation = 0;
-	int maleHairColor, femaleHairColor, hairColor;
+	int maleHair, femaleHair, hairColor;
 
 	public Preview(Equips equips, BetrayalAssetManager res) {
 		previewHandler = new PreviewHandler(this);
@@ -50,9 +49,23 @@ public class Preview implements Json.Serializable {
 		this.equips = equips;
 
 		gender = Gender.MALE;
-		maleHairColor = 1;
-		femaleHairColor = 1;
+		maleHair = 1;
+		femaleHair = 1;
 		hairColor = 1;
+
+		initializeArrays();
+		update();
+	}
+
+	public Preview(Preview preview, Equips equips, BetrayalAssetManager res) {
+		previewHandler = new PreviewHandler(this);
+		this.res = res;
+		this.equips = equips;
+
+		gender = preview.gender;
+		maleHair = preview.maleHair;
+		femaleHair = preview.femaleHair;
+		hairColor = preview.hairColor;
 
 		initializeArrays();
 		update();
@@ -192,8 +205,8 @@ public class Preview implements Json.Serializable {
 	public void write(Json json) {
 		json.writeObjectStart("traits");
 		json.writeField(this, "gender", String.class);
-		if (gender == Gender.MALE) json.writeField(this, "maleHairColor", Integer.class);
-		else json.writeField(this, "femaleHairColor", Integer.class);
+		if (gender == Gender.MALE) json.writeField(this, "maleHair", Integer.class);
+		else json.writeField(this, "femaleHair", Integer.class);
 		json.writeField(this, "hairColor", Integer.class);
 		json.writeObjectEnd();
 	}
