@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.EquipSlot;
+import com.jnv.betrayal.character.utils.PreviewSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
@@ -45,6 +46,14 @@ public class Equips implements Json.Serializable {
 	}
 
 	// Getters
+	public boolean isLeftHandSlotSword() {
+		return equips[EquipSlot.LEFT_HAND] instanceof Weapon;
+	}
+
+	public boolean isRightHandSlotSword() {
+		return equips[EquipSlot.RIGHT_HAND] instanceof Weapon;
+	}
+
 	public boolean isHeadSlotEmpty() {
 		return equips[EquipSlot.HEAD] == null;
 	}

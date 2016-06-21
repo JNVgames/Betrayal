@@ -32,11 +32,39 @@ class PreviewHandler {
 		updateHeadGearSprites();
 
 		// Calibrate how the previews are drawn
-		toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
-		toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
-		toFrontOfPreview(PreviewSlot.HEAD, preview.back);
-		toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
-		toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+		// Front and sides
+		// Check if hand slots have swords
+		if (preview.equips.isLeftHandSlotSword()) {
+			toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
+		}
+		else {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.front);
+		}
+		if (preview.equips.isRightHandSlotSword()) {
+			toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+		}
+		else {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+		}
+		toBackOfPreview(PreviewSlot.BODY, preview.front);
+		toBackOfPreview(PreviewSlot.HEAD, preview.front);
+
+		// Back side
+		if (!preview.equips.isLeftHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+		}
+		if (!preview.equips.isRightHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+		}
+		if (preview.equips.isLeftHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+		}
+		if (preview.equips.isRightHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+		}
+		toBackOfPreview(PreviewSlot.BODY, preview.back);
+		toBackOfPreview(PreviewSlot.HEAD, preview.back);
+
 	}
 
 	private void updateHeadGearSprites() {
@@ -149,8 +177,13 @@ class PreviewHandler {
 	 */
 	static void toBackOfPreview(final int index, TextureRegion[][] src) {
 		for (int i = 0; i < 3; i++) {
-			src[i][index - 7] = src[i][index];
-			src[i][index] = null;
+			for (int j = 0; j < 7; j++) {
+				if (src[i][j] == null) {
+					src[i][j] = src[i][index];
+					src[i][index] = null;
+					break;
+				}
+			}
 		}
 	}
 
@@ -163,8 +196,13 @@ class PreviewHandler {
 	 */
 	static void toFrontOfPreview(final int index, TextureRegion[][] src) {
 		for (int i = 0; i < 3; i++) {
-			src[i][index + 7] = src[i][index];
-			src[i][index] = null;
+			for (int j = 20; j > 13; j--) {
+				if (src[i][j] == null) {
+					src[i][j] = src[i][index];
+					src[i][index] = null;
+					break;
+				}
+			}
 		}
 	}
 }
