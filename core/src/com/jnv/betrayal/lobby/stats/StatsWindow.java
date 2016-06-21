@@ -42,6 +42,12 @@ public class StatsWindow extends Popup {
 		updateStatValues();
 	}
 
+	@Override
+	public void remove() {
+		super.remove();
+		applyPoints.cancel();
+	}
+
 	private void loadContent() {
 		int rotatorIndent = 20;
 		loadCharacterStats();
@@ -162,7 +168,7 @@ public class StatsWindow extends Popup {
 			public void doAction() {
 				new Confirmation(game, "Stats Change Confirmation") {
 					public void doSomething() {
-						//TODO function to change stats
+						applyPoints.applyPoints();
 					}
 				};
 			}
@@ -177,6 +183,7 @@ public class StatsWindow extends Popup {
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
+				applyPoints.cancel();
 				remove();
 			}
 		});

@@ -25,7 +25,7 @@ public abstract class Popup {
 		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
-				popup.remove();
+				remove();
 			}
 		});
 		popup.addActor(mask);
