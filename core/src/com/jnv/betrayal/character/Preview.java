@@ -25,6 +25,7 @@ public class Preview implements Json.Serializable {
 
 	PreviewHandler previewHandler;
 	BetrayalAssetManager res;
+	Equips equips;
 
 	/**
 	 * Textures for character head, format: head_side_walkAnimation
@@ -43,9 +44,10 @@ public class Preview implements Json.Serializable {
 	int rotation = 0;
 	int maleHairColor, femaleHairColor, hairColor;
 
-	public Preview(BetrayalAssetManager res) {
+	public Preview(Equips equips, BetrayalAssetManager res) {
 		previewHandler = new PreviewHandler(this);
 		this.res = res;
+		this.equips = equips;
 
 		gender = Gender.MALE;
 		maleHairColor = 1;

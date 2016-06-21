@@ -67,7 +67,7 @@ class PreviewHandler {
 
 	private void updateArmorSprites() {
 		TextureRegion[][] armor_split =
-				TextureRegion.split(preview.character.equips.getBodyArmorPreview(), 32, 48);
+				TextureRegion.split(preview.equips.getBodyArmorPreview(), 32, 48);
 		preview.frontLeft[PreviewSlot.BODY] = armor_split[0][0];
 		preview.frontStill[PreviewSlot.BODY] = armor_split[0][1];
 		preview.frontRight[PreviewSlot.BODY] = armor_split[0][2];
@@ -83,9 +83,9 @@ class PreviewHandler {
 	}
 
 	private void updateLeftHandSprites() {
-		if (!preview.character.equips.isLeftHandSlotEmpty()) {
+		if (!preview.equips.isLeftHandSlotEmpty()) {
 			TextureRegion[][] weapon_split =
-					TextureRegion.split(preview.character.equips.getLeftHandPreview(), 32, 48);
+					TextureRegion.split(preview.equips.getLeftHandPreview(), 32, 48);
 			preview.frontLeft[PreviewSlot.LEFT_HAND] = weapon_split[0][0];
 			preview.frontStill[PreviewSlot.LEFT_HAND] = weapon_split[0][1];
 			preview.frontRight[PreviewSlot.LEFT_HAND] = weapon_split[0][2];
@@ -102,9 +102,9 @@ class PreviewHandler {
 	}
 
 	private void updateRightHandSprites() {
-		if (!preview.character.equips.isRightHandSlotEmpty()) {
+		if (!preview.equips.isRightHandSlotEmpty()) {
 			TextureRegion[][] weapon_split =
-					TextureRegion.split(preview.character.equips.getRightHandPreview(), 32, 48);
+					TextureRegion.split(preview.equips.getRightHandPreview(), 32, 48);
 			preview.frontLeft[PreviewSlot.RIGHT_HAND] = weapon_split[0][0];
 			preview.frontStill[PreviewSlot.RIGHT_HAND] = weapon_split[0][1];
 			preview.frontRight[PreviewSlot.RIGHT_HAND] = weapon_split[0][2];
