@@ -1,7 +1,6 @@
 package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
@@ -110,7 +109,7 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadPreview() {
-		loadArrows();
+		loadPreviewArrows();
 
 		preview = character.preview;
 		if (item instanceof Equip) {
@@ -126,6 +125,7 @@ public class ShopPurchasePopup extends Popup {
 		final float height = width * 18 / 12;
 
 		Actor previewImage = new Actor() {
+			@Override
 			public void draw(Batch sb, float pa) {
 				preview.drawPreview(game.getBatch(), x, y, width, height);
 			}
@@ -137,7 +137,7 @@ public class ShopPurchasePopup extends Popup {
 		popup.addActor(previewImage);
 	}
 
-	private void loadArrows() {
+	private void loadPreviewArrows() {
 		leftArrow = new Image(res.getTexture("arrow-left"));
 		leftArrow.layout();
 		leftArrow.setBounds(Betrayal.WIDTH / 2 - 150, 300, 100, 50);

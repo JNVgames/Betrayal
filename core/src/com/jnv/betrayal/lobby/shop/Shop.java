@@ -274,11 +274,11 @@ public class Shop extends Popup {
 
 	private void loadShields(){
 		for (int i = 1; i <= 6; i++) {
-			final String item1 = "shield1" + i;
-			final String item2 = "shield2" + i;
-			final String item3 = "shield3" + i;
-			final String item4 = "shield4" + i;
-			final String item5 = "shield5" + i;
+			final String item1 = "shield" + i + "1";
+			final String item2 = "shield" + i + "2";
+			final String item3 = "shield" + i + "3";
+			final String item4 = "shield" + i + "4";
+			final String item5 = "shield" + i + "5";
 
 			shield1[i - 1] = new Image(res.getTexture(item1));
 			shield1[i - 1].layout();
@@ -451,11 +451,11 @@ public class Shop extends Popup {
 	private void loadHeadgear() {
 		// Headgear1
 		for (int i = 1; i <= 6; i++) {
-			final String item1 = "headgear1" + i;
-			final String item2 = "headgear2" + i;
-			final String item3 = "headgear3" + i;
-			final String item4 = "headgear4" + i;
-			final String item5 = "headgear5" + i;
+			final String item1 = "headgear" + i + "1";
+			final String item2 = "headgear" + i + "2";
+			final String item3 = "headgear" + i + "3";
+			final String item4 = "headgear" + i + "4";
+			final String item5 = "headgear" + i + "5";
 			headgear1[i - 1] = new Image(res.getTexture(item1));
 			headgear1[i - 1].layout();
 			headgear1[i - 1].setBounds(100 + itemSize * (i - 1),
@@ -533,11 +533,11 @@ public class Shop extends Popup {
 
 	private void loadArmor(){
 		for(int i=1; i<=6; i++) {
-			final String item1 = "armor1" + i;
-			final String item2 = "armor2" + i;
-			final String item3 = "armor3" + i;
-			final String item4 = "armor4" + i;
-			final String item5 = "armor5" + i;
+			final String item1 = "armor" + i + "1";
+			final String item2 = "armor" + i + "2";
+			final String item3 = "armor" + i + "3";
+			final String item4 = "armor" + i + "4";
+			final String item5 = "armor" + i + "5";
 			armor1[i - 1] = new Image(res.getTexture(item1));
 			armor1[i - 1].layout();
 			armor1[i - 1].setBounds(100 + itemSize * (i - 1),

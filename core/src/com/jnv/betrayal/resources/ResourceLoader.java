@@ -161,7 +161,7 @@ public class ResourceLoader {
 	private void loadHeadGear() {
 		for (int tier = 1; tier <= 5; tier++) {
 			for (int color = 1; color <= 6; color++) {
-				res.loadTexture("shop/headgear" + tier + color + ".png", "headgear" + tier + color);
+				res.loadTexture("shop/headgear" + tier + color + ".png", "headgear" + color + tier);
 			}
 		}
 	}
