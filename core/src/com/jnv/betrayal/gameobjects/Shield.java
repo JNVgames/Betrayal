@@ -32,4 +32,40 @@ public class Shield extends Equip implements DualWieldable {
 	public Texture getRightPreview() {
 		return rightPreview;
 	}
+
+	public static class ShieldFactory {
+		private int id = -1;
+		private String name = "";
+		private int costBuy = -1;
+		private int defense = -1;
+		private BetrayalAssetManager res;
+
+		public ShieldFactory(BetrayalAssetManager res) {
+			this.res = res;
+		}
+
+		public ShieldFactory id(int id){
+			this.id = id;
+			return this;
+		}
+		public ShieldFactory name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public ShieldFactory costBuy(int costBuy) {
+			this.costBuy = costBuy;
+			return this;
+		}
+
+		public ShieldFactory defense(int defense) {
+			this.defense = defense;
+			return this;
+		}
+
+		public Shield build() {
+			return new Shield(id, name, res, costBuy, defense);
+		}
+
+	}
 }

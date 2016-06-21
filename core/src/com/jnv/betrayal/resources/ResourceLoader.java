@@ -4,7 +4,10 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.HeadGear;
 import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 
 public class ResourceLoader {
@@ -385,27 +388,164 @@ public class ResourceLoader {
 
 	private void loadItemsData() {
 		for (int color = 1; color <= 6; color++) {
+
+			/*******************Swords********************/
 			new Weapon.WeaponFactory(res)
 					.id(color) // id - 1 to 6
 					.name("sword" + color + "1")
-					.costBuy(500)
-					.newAttack(6)
+					.costBuy(100)
+					.attack(2)
 					.build();
+
 			new Weapon.WeaponFactory(res)
 					.id(color + 6) // id - 7 to 12
 					.name("sword" + color + "2")
-					.costBuy(1000)
-					.newAttack(10)
+					.costBuy(200)
+					.attack(4)
 					.build();
 
-//			new Weapon(i, "sword2" + i, res, 1000,10);
-//			new Shield(i, "shield-left-" + i, res, 500, 5);
-//			new Shield(i, "shield-right-" + i, res, 1000, 10);
-//			new Shield(i, "headgear1" + i, res, 500, 5);
-//			new Shield(i, "headgear2" + i, res, 1000, 10);
-//			new Shield(i, "armor1" + i, res, 500, 5);
-//			new Shield(i, "armor2" + i, res, 1000, 10);
+			new Weapon.WeaponFactory(res)
+					.id(color + 12) // id - 3 to 18
+					.name("sword" + color + "3")
+					.costBuy(300)
+					.attack(6)
+					.build();
+
+			new Weapon.WeaponFactory(res)
+					.id(color + 18) // id - 19 to 24
+					.name("sword" + color + "4")
+					.costBuy(400)
+					.attack(8)
+					.build();
+
+			new Weapon.WeaponFactory(res)
+					.id(color + 24) // id - 25 to 30
+					.name("sword" + color + "5")
+					.costBuy(500)
+					.attack(10)
+					.build();
+//
+//			/********************SHIELDS********************/
+//
+//			new Shield.ShieldFactory(res)
+//					.id(color + 30) // id - 31 to 36
+//					.name("shield" + color + "1")
+//					.costBuy(100)
+//					.defense(2)
+//					.build();
+//
+//			new Shield.ShieldFactory(res)
+//					.id(color + 36) // id - 37 to 42
+//					.name("shield" + color + "2")
+//					.costBuy(200)
+//					.defense(4)
+//					.build();
+//
+//			new Shield.ShieldFactory(res)
+//					.id(color + 42) // id - 43 to 48
+//					.name("shield" + color + "3")
+//					.costBuy(300)
+//					.defense(6)
+//					.build();
+//
+//			new Shield.ShieldFactory(res)
+//					.id(color + 48) // id - 49 to 54
+//					.name("shield" + color + "4")
+//					.costBuy(400)
+//					.defense(8)
+//					.build();
+//
+//			new Shield.ShieldFactory(res)
+//					.id(color + 54) // id - 55 to 60
+//					.name("shield" + color + "5")
+//					.costBuy(500)
+//					.defense(10)
+//					.build();
+//
+//			/********************ARMOR********************/
+//
+//			new BodyArmor.ArmorFactory(res)
+//					.id(color + 60) // id - 61 to 66
+//					.name("Armor" + color + "1")
+//					.costBuy(100)
+//					.defense(2)
+//					.build();
+//
+//			new BodyArmor.ArmorFactory(res)
+//					.id(color + 66) // id - 67 to 72
+//					.name("Armor" + color + "2")
+//					.costBuy(200)
+//					.defense(4)
+//					.build();
+//
+//			new BodyArmor.ArmorFactory(res)
+//					.id(color + 72) // id - 73 to 78
+//					.name("Armor" + color + "3")
+//					.costBuy(300)
+//					.defense(6)
+//					.build();
+//
+//			new BodyArmor.ArmorFactory(res)
+//					.id(color + 78) // id - 79 to 84
+//					.name("Armor" + color + "4")
+//					.costBuy(400)
+//					.defense(8)
+//					.build();
+//
+//			new BodyArmor.ArmorFactory(res)
+//					.id(color + 84) // id - 85 to 90
+//					.name("Armor" + color + "5")
+//					.costBuy(500)
+//					.defense(10)
+//					.build();
+//
+//			/********************HEADGEAR********************/
+//			new HeadGear.HeadGearFactory(res)
+//					.id(color + 90) // id - 91 to 96
+//					.name("headgear" + color + "1")
+//					.costBuy(100)
+//					.defense(2)
+//					.build();
+//
+//			new HeadGear.HeadGearFactory(res)
+//					.id(color + 96) // id - 97 to 102
+//					.name("headgear" + color + "2")
+//					.costBuy(200)
+//					.defense(4)
+//					.build();
+//
+//			new HeadGear.HeadGearFactory(res)
+//					.id(color + 102) // id - 103 to 108
+//					.name("headgear" + color + "3")
+//					.costBuy(300)
+//					.defense(6)
+//					.build();
+//
+//			new HeadGear.HeadGearFactory(res)
+//					.id(color + 108) // id - 109 to 114
+//					.name("headgear" + color + "4")
+//					.costBuy(400)
+//					.defense(8)
+//					.build();
+//
+//			new HeadGear.HeadGearFactory(res)
+//					.id(color + 114) // id - 115 to 120
+//					.name("headgear" + color + "5")
+//					.costBuy(500)
+//					.defense(10)
+//					.build();
+
 		}
+
+
+
+		//TODO: FINISH THE FACTORIES
+
+		/********************RINGS********************/
+
+
+		/********************POTIONS********************/
+
 	}
 
 	private void loadSkills() {
