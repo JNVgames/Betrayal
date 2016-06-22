@@ -93,6 +93,7 @@ public class ResourceLoader {
 		res.loadTexture("button/preview360x144.png", "preview");
 		res.loadTexture("button/yes360x144.png", "yes");
 		res.loadTexture("button/no360x144.png", "no");
+		res.loadTexture("button/ok360x144.png", "ok");
 		res.loadTexture("button/apply360x144.png", "apply");
 		res.loadTexture("button/plus400x400.png", "plus");
 		res.loadTexture("button/minus400x400.png", "minus");
