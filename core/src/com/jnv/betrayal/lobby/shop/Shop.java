@@ -21,16 +21,11 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
-	private Image shields;
-	private Image swords;
-	private Image swordButton, armorButton, shieldButton, headGearButton;
 	private Image[] potions, ring1, ring2;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
 	private Image[] headgear1, headgear2, headgear3, headgear4, headgear5;
 	private Image[] armor1, armor2, armor3, armor4, armor5;
-	private Label title, titleSword1, titleSword2, titleShield1, titleShield2, titleRing1, titleRing2;
-	private Label titleHeadgear1, titleHeadgear2, titleArmor1, titleArmor2, titleItems;
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Group currentGroup;
@@ -97,7 +92,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Shop", FontManager.getFont(40));
+		Label title = new Label("Shop", FontManager.getFont(40));
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -261,7 +256,7 @@ public class Shop extends Popup {
 			currentGroup.addActor(sword5[i - 1]);
 		}
 
-		shieldButton = new Image(res.getTexture("shield-button"));
+		Image shieldButton = new Image(res.getTexture("shield-button"));
 		shieldButton.layout();
 		shieldButton.setBounds(460, 1035, 150, 60);
 		shieldButton.addListener(new InputListener(shieldButton) {
@@ -344,7 +339,7 @@ public class Shop extends Popup {
 			});
 			currentGroup.addActor(shield5[i - 1]);
 		}
-		swordButton = new Image(res.getTexture("sword-button"));
+		Image swordButton = new Image(res.getTexture("sword-button"));
 		swordButton.layout();
 		swordButton.setBounds(460, 1035, 150, 60);
 		swordButton.addListener(new InputListener(swordButton) {
@@ -435,17 +430,17 @@ public class Shop extends Popup {
 	}
 
 	private void loadRingTitle() {
-		titleRing1 = new Label("Rings (Tier 1)", FontManager.getFont(40));
+		Label titleRing1 = new Label("Rings (Tier 1)", FontManager.getFont(40));
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
 		currentGroup.addActor(titleRing1);
 
-		titleRing2 = new Label("Rings (Tier 2)", FontManager.getFont(40));
+		Label titleRing2 = new Label("Rings (Tier 2)", FontManager.getFont(40));
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
 		currentGroup.addActor(titleRing2);
 
-		titleItems = new Label("Potions", FontManager.getFont(40));
+		Label titleItems = new Label("Potions", FontManager.getFont(40));
 		titleItems.setX(110);
 		titleItems.setY(Betrayal.HEIGHT - 250 - 172 * 2);
 		currentGroup.addActor(titleItems);
@@ -520,7 +515,7 @@ public class Shop extends Popup {
 			});
 			currentGroup.addActor(headgear5[i - 1]);
 		}
-		armorButton = new Image(res.getTexture("armor-button"));
+		Image armorButton = new Image(res.getTexture("armor-button"));
 		armorButton.layout();
 		armorButton.setBounds(460, 1035, 150, 60);
 		armorButton.addListener(new InputListener(armorButton) {
@@ -604,7 +599,7 @@ public class Shop extends Popup {
 			});
 			currentGroup.addActor(armor5[color - 1]);
 		}
-		headGearButton = new Image(res.getTexture("headgear-button"));
+		Image headGearButton = new Image(res.getTexture("headgear-button"));
 		headGearButton.layout();
 		headGearButton.setBounds(460, 1035, 150, 60);
 		headGearButton.addListener(new InputListener(headGearButton) {

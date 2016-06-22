@@ -25,46 +25,67 @@ class PreviewHandler {
 	 */
 	void update() {
 		preview.initializeArrays();
-		updateHeadSprites();
-		updateArmorSprites();
-		updateLeftHandSprites();
-		updateRightHandSprites();
-		updateHeadGearSprites();
+		// If player has a cloak, don't render any other sprites
+		if (!updateCloakSprites()) {
+			updateHeadSprites();
+			updateArmorSprites();
+			updateLeftHandSprites();
+			updateRightHandSprites();
+			updateHeadGearSprites();
 
-		// Calibrate how the previews are drawn
-		// Front and sides
-		// Check if hand slots have swords
-		if (preview.equips.isLeftHandSlotSword()) {
-			toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
-		}
-		else {
-			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.front);
-		}
-		if (preview.equips.isRightHandSlotSword()) {
-			toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
-		}
-		else {
-			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
-		}
-		toBackOfPreview(PreviewSlot.BODY, preview.front);
-		toBackOfPreview(PreviewSlot.HEAD, preview.front);
+			// Calibrate how the previews are drawn
+			// Front and sides
+			// Check if hand slots have swords
+			if (preview.equips.isLeftHandSlotSword()) {
+				toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
+			} else {
+				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.front);
+			}
+			if (preview.equips.isRightHandSlotSword()) {
+				toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+			} else {
+				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+			}
+			toBackOfPreview(PreviewSlot.BODY, preview.front);
+			toBackOfPreview(PreviewSlot.HEAD, preview.front);
 
-		// Back side
-		if (!preview.equips.isLeftHandSlotSword()) {
-			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+			// Back side
+			if (!preview.equips.isLeftHandSlotSword()) {
+				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+			}
+			if (!preview.equips.isRightHandSlotSword()) {
+				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+			}
+			if (preview.equips.isLeftHandSlotSword()) {
+				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+			}
+			if (preview.equips.isRightHandSlotSword()) {
+				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+			}
+			toBackOfPreview(PreviewSlot.BODY, preview.back);
+			toBackOfPreview(PreviewSlot.HEAD, preview.back);
 		}
-		if (!preview.equips.isRightHandSlotSword()) {
-			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
-		}
-		if (preview.equips.isLeftHandSlotSword()) {
-			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
-		}
-		if (preview.equips.isRightHandSlotSword()) {
-			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
-		}
-		toBackOfPreview(PreviewSlot.BODY, preview.back);
-		toBackOfPreview(PreviewSlot.HEAD, preview.back);
+	}
 
+	private boolean updateCloakSprites() {
+		if (!preview.equips.isCloakSlotEmpty()) {
+			TextureRegion[][] cloakTextures =
+					TextureRegion.split(preview.equips.getCloakPreview(), 32, 48);
+			preview.frontLeft[PreviewSlot.HEAD] = cloakTextures[0][0];
+			preview.frontStill[PreviewSlot.HEAD] = cloakTextures[0][1];
+			preview.frontRight[PreviewSlot.HEAD] = cloakTextures[0][2];
+			preview.rightLeft[PreviewSlot.HEAD] = cloakTextures[1][0];
+			preview.rightStill[PreviewSlot.HEAD] = cloakTextures[1][1];
+			preview.rightRight[PreviewSlot.HEAD] = cloakTextures[1][2];
+			preview.leftLeft[PreviewSlot.HEAD] = cloakTextures[2][0];
+			preview.leftStill[PreviewSlot.HEAD] = cloakTextures[2][1];
+			preview.leftRight[PreviewSlot.HEAD] = cloakTextures[2][2];
+			preview.backLeft[PreviewSlot.HEAD] = cloakTextures[3][0];
+			preview.backStill[PreviewSlot.HEAD] = cloakTextures[3][1];
+			preview.backRight[PreviewSlot.HEAD] = cloakTextures[3][2];
+			return true;
+		}
+		return false;
 	}
 
 	private void updateHeadGearSprites() {

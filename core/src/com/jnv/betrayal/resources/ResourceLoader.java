@@ -5,6 +5,7 @@
 package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.Cloak;
 import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.Potion;
@@ -213,8 +214,8 @@ public class ResourceLoader {
 			res.loadTexture("shop/armor" + 5 + color + ".png", "armor" + color + 5 + "s");
 		}
 
-		res.loadTexture("armor/brown_cloak.png", "armor-cloak-brown");
-		res.loadTexture("armor/black_cloak.png", "armor-cloak-black");
+		res.loadTexture("armor/black_cloak.png", "cloak11");
+		res.loadTexture("armor/brown_cloak.png", "cloak21");
 	}
 
 	private void loadCharacterPreviewsImages() {
@@ -278,8 +279,8 @@ public class ResourceLoader {
 		res.loadTexture("character/armor2d.png", "previewarmor45");
 		res.loadTexture("character/armor2e.png", "previewarmor55");
 		res.loadTexture("character/armor2f.png", "previewarmor65");
-		res.loadTexture("character/cloak1a.png", "previewcloakbrown");
-		res.loadTexture("character/cloak1b.png", "previewcloakblack");
+		res.loadTexture("character/cloak1b.png", "previewcloak11");
+		res.loadTexture("character/cloak1a.png", "previewcloak21");
 	}
 
 	private void loadSwordsAndShieldPreviews() {
@@ -812,6 +813,14 @@ public class ResourceLoader {
 				.description("+")
 				.build();
 
+		new Cloak.CloakFactory(res)
+				.id(139)
+				.name("cloak11")
+				.costBuy(750)
+				.description("If the player takes any damage that would bring their health below 0," +
+						"the cloak absorbs any further damage and keeps the player at 10 HP." +
+						"The cloak is a one-time use item.")
+				.build();
 	}
 
 	private void loadSkills() {

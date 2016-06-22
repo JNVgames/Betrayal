@@ -83,6 +83,10 @@ public class Equips implements Json.Serializable {
 		return equips[EquipSlot.CLOAK] == null;
 	}
 
+	public Texture getCloakPreview() {
+		return ((Previewable) equips[EquipSlot.CLOAK]).getPreview();
+	}
+
 	public Texture getHeadArmorPreview() {
 		return ((Previewable) equips[EquipSlot.HEAD]).getPreview();
 	}

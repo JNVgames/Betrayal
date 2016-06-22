@@ -29,7 +29,6 @@ public class Helmet extends Equip implements Previewable {
 		return preview;
 	}
 
-
 	public static class HelmetFactory {
 		private int id = -1;
 		private String name = "";
@@ -67,9 +66,7 @@ public class Helmet extends Equip implements Previewable {
 			return this;
 		}
 		public Helmet build() {
-			return new Helmet(id, name, res, costBuy,0, 0, defense, description);
+			return new Helmet(id, name, res, costBuy, 0, 0, defense, description);
 		}
-
-
 	}
 }
