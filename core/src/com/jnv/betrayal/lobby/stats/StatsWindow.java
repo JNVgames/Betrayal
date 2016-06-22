@@ -166,7 +166,7 @@ public class StatsWindow extends Popup {
 		applyButton.addListener(new InputListener(applyButton) {
 			@Override
 			public void doAction() {
-				new Confirmation(game, "Stats Change\nAre You Sure?") {
+				new Confirmation(game, "Are You Sure?") {
 					public void doAction() {
 						applyPoints.applyPoints();
 					}

@@ -8,13 +8,13 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
-public class Confirmation extends Popup {
+public class OKPopup extends Popup {
 
-	private Image yesButton, noButton, background;
+	private Image okayButton, noButton, background;
 	private Label title;
 	private String string;
 
-	public Confirmation(Betrayal game, String string) {
+	public OKPopup(Betrayal game, String string) {
 		super(game);
 		this.string = string;
 		loadButtons();
@@ -39,37 +39,25 @@ public class Confirmation extends Popup {
 		title = new Label(string, font);
 		title.layout();
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
-				yesButton.getY() + yesButton.getHeight() + 50, background.getWidth(),
+				okayButton.getY() + okayButton.getHeight() + 50, background.getWidth(),
 				title.getPrefHeight());
 		title.setAlignment(Align.center);
 		popup.addActor(title);
 	}
 
 	private void loadAnswer() {
-		yesButton = new Image(res.getTexture("yes"));
-		yesButton.layout();
-		yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
+		okayButton = new Image(res.getTexture("ok"));
+		okayButton.layout();
+		okayButton.setBounds(Betrayal.WIDTH / 2 - 75,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		yesButton.addListener(new InputListener(yesButton) {
+		okayButton.addListener(new InputListener(okayButton) {
 			@Override
 			public void doAction() {
-				Confirmation.this.doAction();
 				remove();
 			}
 		});
-		popup.addActor(yesButton);
+		popup.addActor(okayButton);
 
-		noButton = new Image(res.getTexture("no"));
-		noButton.layout();
-		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
-		noButton.addListener(new InputListener(noButton) {
-			@Override
-			public void doAction() {
-				remove();
-			}
-		});
-		popup.addActor(noButton);
 	}
 
 	public void doAction() {

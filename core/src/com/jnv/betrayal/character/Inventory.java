@@ -16,12 +16,12 @@ import java.util.List;
  */
 public class Inventory implements Json.Serializable {
 
-	private int gold, items_max;
+	private int gold, maxItems;
 	private List<Item> items;
 
 	public Inventory() {
-		gold = 0;
-		items_max = 30;
+		gold = 2000;
+		maxItems = 30;
 
 		items = new ArrayList<Item>();
 	}
@@ -63,14 +63,13 @@ public class Inventory implements Json.Serializable {
 	 * If inventory is filled, do nothing and return false.
 	 *
 	 * @param item   item to be added
-	 * @param amount how many items to be added
 	 */
-	public void addItem(Item item, int amount) {
-		for (int i = 0; i < amount; i++) if (items.size() < items_max) items.add(item);
-	}
-
-	public void addItem(Item item) {
-		addItem(item, 1);
+	public boolean addItem(Item item) {
+		if (items.size() < maxItems){
+			items.add(item);
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -113,7 +112,7 @@ public class Inventory implements Json.Serializable {
 	}
 
 	public boolean isFull() {
-		return items.size() == items_max;
+		return items.size() == maxItems;
 	}
 
 	/**

@@ -10,6 +10,7 @@ import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -89,7 +90,9 @@ public class ShopPurchasePopup extends Popup {
 				new Confirmation(game, "Confirm purchase") {
 					@Override
 					public void doAction() {
-						character.inventory.addItem(item);
+						if(!character.inventory.addItem(item)){
+							new OKPopup(game, "Inventory Full");
+						}
 					}
 
 					@Override
