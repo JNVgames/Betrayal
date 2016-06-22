@@ -5,7 +5,7 @@
 package com.jnv.betrayal.lobby.inventory;
 
 enum Option {
-	Equip,
+	Equip(" Equip"),
 	Unequip,
 	Info,
 	Sell,

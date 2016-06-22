@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.lobby.inventory;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
@@ -19,6 +20,7 @@ import java.util.List;
 class ItemOptions extends Popup {
 
 	private Inventory inventory;
+	private Image background;
 	private Item item;
 	public final Dimension itemBoxDimen;
 	private boolean isEquippable, isEquipped;
@@ -51,7 +53,13 @@ class ItemOptions extends Popup {
 		// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
 		if (isEquippable) {
 			numOptions = 4;
-		} else numOptions = 3;
+			background = new Image(res.getTexture("4option-background"));
+		} else{
+			numOptions = 3;
+			background = new Image(res.getTexture("3option-background"));
+		}
+
+		background.layout();
 
 		for (int i = 0; i < numOptions; i++) {
 			// If there's enough space to the right of the item, draw labels
@@ -63,8 +71,15 @@ class ItemOptions extends Popup {
 				dimensions.add(new Dimension(itemBoxDimen.getX() - 20 - optionWidth,
 						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
 		}
+		float x = dimensions.get(0).getX();
+		float y = dimensions.get(numOptions-1).getY();
+		float width = dimensions.get(0).getWidth();
+		float height = dimensions.get(0).getHeight() * numOptions;
+		background.setBounds(x,y,width,height);
+		popup.addActor(background);
 		// Draw out options
 		setOptions(dimensions);
+
 	}
 
 	private void setOptions(List<Dimension> dimensions) {
