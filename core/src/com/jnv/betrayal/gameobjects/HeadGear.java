@@ -15,7 +15,7 @@ public class HeadGear extends Equip implements Previewable {
 	public HeadGear(int id, String name, BetrayalAssetManager res,int cost_buy, int health, int attack, int defense, String description) {
 		super(id, name, res, cost_buy, health, attack, defense, description);
 		this.defense = defense;
-		itemDescription = description;
+		this.description = description;
 	}
 
 	public HeadGear(String name, BetrayalAssetManager res) {

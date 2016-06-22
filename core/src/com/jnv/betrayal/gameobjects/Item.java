@@ -15,17 +15,18 @@ public abstract class Item implements Json.Serializable {
 
 	protected BetrayalAssetManager res;
 	protected Texture itemIcon;
-	protected String itemName, itemDescription;
-	protected int id, cost_buy, cost_sell;
+	protected String textureName, description;
+	protected int id, buyCost, sellCost;
 	protected boolean isEquippable = false;
 
-	public Item(int id, String name, BetrayalAssetManager res, int cost_buy, String description) {
+	public Item(int id, String name, BetrayalAssetManager res, int buyCost, String description) {
 		this.res = res;
 		this.id = id;
-		itemName = name;
+		textureName = name;
 		itemIcon = res.getTexture(name);
-		this.cost_buy = cost_buy;
-		itemDescription = description;
+		this.buyCost = buyCost;
+		sellCost = buyCost / 2;
+		this.description = description;
 		res.loadItem(name, this);
 
 	}
@@ -33,10 +34,10 @@ public abstract class Item implements Json.Serializable {
 	public Item(String name, BetrayalAssetManager res) {
 		Item src = res.getItem(name);
 		id = src.getID();
-		itemName = name;
-		itemDescription = src.getItemDescription();
-		cost_buy = src.getBuyCost();
-		cost_sell = src.getSellCost();
+		textureName = name;
+		description = src.getDescription();
+		buyCost = src.getBuyCost();
+		sellCost = src.getSellCost();
 		itemIcon = src.getItemIcon();
 		isEquippable = src.isEquippable();
 	}
@@ -67,7 +68,7 @@ public abstract class Item implements Json.Serializable {
 	}
 
 	public String getName() {
-		return itemName;
+		return textureName;
 	}
 
 	public Texture getItemIcon() {
@@ -75,17 +76,17 @@ public abstract class Item implements Json.Serializable {
 	}
 
 	public int getBuyCost() {
-		return cost_buy;
+		return buyCost;
 	}
 
 	public int getSellCost() {
-		return cost_sell;
+		return sellCost;
 	}
 
-	public String getItemDescription(){return itemDescription;}
+	public String getDescription(){return description;}
 	// Setters
 	public void setName(String name) {
-		itemName = name;
+		textureName = name;
 	}
 
 	/*
@@ -95,11 +96,11 @@ public abstract class Item implements Json.Serializable {
 		src.setSellCost(newSellCost);
 	} */
 	public void setBuyCost(int new_cost) {
-		cost_buy = new_cost;
+		buyCost = new_cost;
 	}
 
 	public void setSellCost(int new_cost) {
-		cost_sell = new_cost;
+		sellCost = new_cost;
 	}
 
 	/**
@@ -115,7 +116,7 @@ public abstract class Item implements Json.Serializable {
 	}
 
 	public void write(Json json) {
-		json.writeField(this, "itemName", String.class);
+		json.writeField(this, "textureName", String.class);
 	}
 
 	public void read(Json json, JsonValue jsonData) {

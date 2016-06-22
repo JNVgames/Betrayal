@@ -13,7 +13,7 @@ public class Weapon extends Equip implements DualWieldable {
 
 	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
 		super(id, name, res, cost_buy, health, attack, defense, description);
-		itemDescription = description;
+		this.description = description;
 	}
 
 	public Weapon(String name, BetrayalAssetManager res) {

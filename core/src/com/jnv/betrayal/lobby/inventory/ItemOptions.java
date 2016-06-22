@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -120,12 +122,25 @@ class ItemOptions extends Popup {
 				});
 			case Info:
 				label.addListener(new InputListener(label) {
-					// stub - show info
+					@Override
+					public void doAction() {
+						new OKPopup(game, item.getDescription());
+					}
 				});
 				break;
 			case Sell:
 				label.addListener(new InputListener(label) {
-					// stub - add gold to inventory
+					@Override
+					public void doAction() {
+						new Confirmation(game, "Are you sure?") {
+							@Override
+							public void doAction() {
+								inventory.character.inventory.sellItem(item);
+								removeThisPopup();
+								inventory.refresh();
+							}
+						};
+					}
 				});
 				break;
 			case Cancel:
@@ -140,5 +155,9 @@ class ItemOptions extends Popup {
 				throw new AssertionError("ItemOptions.java: Option doesn't exist");
 		}
 		return label;
+	}
+
+	private void removeThisPopup() {
+		remove();
 	}
 }
