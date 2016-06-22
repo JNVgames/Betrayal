@@ -166,7 +166,7 @@ public class StatsWindow extends Popup {
 		applyButton.addListener(new InputListener(applyButton) {
 			@Override
 			public void doAction() {
-				new Confirmation(game, "Stats Change Confirmation") {
+				new Confirmation(game, "Stats Change\nAre You Sure?") {
 					public void doAction() {
 						applyPoints.applyPoints();
 					}
@@ -227,7 +227,7 @@ public class StatsWindow extends Popup {
 			statMinusButtons[i].addListener(new InputListener(statMinusButtons[i]) {
 				@Override
 				public void doAction() {
-					if(applyPoints.hasAvailablePoints()) {
+					if(applyPoints.hasPointsApplied()) {
 						switch (temp) {
 							case 0:
 								applyPoints.decHealthPoint();

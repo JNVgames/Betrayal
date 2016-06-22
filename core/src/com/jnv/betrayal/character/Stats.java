@@ -100,7 +100,7 @@ public class Stats implements Json.Serializable {
 	 */
 	public class ApplyPoints {
 
-		private int tmpHealth, tmpDefense, tmpAttack, tmpAvailablePoints;
+		private int tmpHealth, tmpDefense, tmpAttack, tmpAvailablePoints, tmpPointsApplied;
 
 		/**
 		 * Initializes temporary character stats to the provided character
@@ -112,37 +112,47 @@ public class Stats implements Json.Serializable {
 		public void addHealthPoint() {
 			tmpHealth++;
 			tmpAvailablePoints--;
+			tmpPointsApplied++;
 		}
 
 		public void decHealthPoint() {
-			if (tmpHealth > health) {
+			if (tmpHealth > health && hasPointsApplied()) {
 				tmpHealth--;
 				tmpAvailablePoints++;
+				tmpPointsApplied--;
 			}
 		}
 
 		public void addDefensePoint() {
 			tmpDefense++;
 			tmpAvailablePoints--;
+			tmpPointsApplied++;
 		}
 
 		public void decDefensePoint() {
-			if (tmpDefense > defense) {
+			if (tmpDefense > defense && hasPointsApplied()) {
 				tmpDefense--;
 				tmpAvailablePoints++;
+				tmpPointsApplied--;
 			}
 		}
 
 		public void addAttackPoint() {
 			tmpAttack++;
 			tmpAvailablePoints--;
+			tmpPointsApplied++;
 		}
 
 		public void decAttackPoint() {
-			if (tmpAttack > attack) {
+			if (tmpAttack > attack && hasPointsApplied()) {
 				tmpAttack--;
 				tmpAvailablePoints++;
+				tmpPointsApplied--;
 			}
+		}
+
+		public boolean hasPointsApplied(){
+			return (tmpPointsApplied>0);
 		}
 
 		public boolean hasAvailablePoints() {
@@ -156,6 +166,7 @@ public class Stats implements Json.Serializable {
 			attack = tmpAttack;
 			defense = tmpDefense;
 			availablePoints = tmpAvailablePoints;
+			tmpPointsApplied = 0;
 		}
 
 		/**
@@ -166,6 +177,7 @@ public class Stats implements Json.Serializable {
 			tmpHealth = health;
 			tmpAttack = attack;
 			tmpDefense = defense;
+			tmpPointsApplied = 0;
 		}
 
 		public void updateValues() {
@@ -173,6 +185,7 @@ public class Stats implements Json.Serializable {
 			tmpAttack = attack;
 			tmpDefense = defense;
 			tmpAvailablePoints = availablePoints;
+			tmpPointsApplied = 0;
 		}
 
 		// Getters

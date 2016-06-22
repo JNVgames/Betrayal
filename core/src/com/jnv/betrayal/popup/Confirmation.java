@@ -35,7 +35,7 @@ public class Confirmation extends Popup {
 
 	private void loadTitle() {
 		Label.LabelStyle font = FontManager.getFont(40);
-		font.fontColor = Color.BLACK;
+		font.fontColor = Color.WHITE;
 		title = new Label(string, font);
 		title.layout();
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
