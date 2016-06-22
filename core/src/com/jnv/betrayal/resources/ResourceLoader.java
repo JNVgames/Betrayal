@@ -399,34 +399,39 @@ public class ResourceLoader {
 					.name("sword" + color + "1")
 					.costBuy(100)
 					.attack(2)
+					.description("+2 Attack")
 					.build();
 
 			new Weapon.WeaponFactory(res)
 					.id(color + 6) // id - 7 to 12
 					.name("sword" + color + "2")
 					.costBuy(200)
-					.attack(4)
+					.attack(5)
+					.description("+5 Attack")
 					.build();
 
 			new Weapon.WeaponFactory(res)
 					.id(color + 12) // id - 3 to 18
 					.name("sword" + color + "3")
-					.costBuy(300)
-					.attack(6)
+					.costBuy(400)
+					.attack(10)
+					.description("+10 Attack")
 					.build();
 
 			new Weapon.WeaponFactory(res)
 					.id(color + 18) // id - 19 to 24
 					.name("sword" + color + "4")
-					.costBuy(400)
-					.attack(8)
+					.costBuy(700)
+					.attack(15)
+					.description("+15 Attack")
 					.build();
 
 			new Weapon.WeaponFactory(res)
 					.id(color + 24) // id - 25 to 30
 					.name("sword" + color + "5")
-					.costBuy(500)
-					.attack(10)
+					.costBuy(1000)
+					.attack(20)
+					.description("+20 Attack")
 					.build();
 
 			/********************SHIELDS********************/
@@ -436,6 +441,7 @@ public class ResourceLoader {
 					.name("shield" + color + "1")
 					.costBuy(100)
 					.defense(2)
+					.description("+2 Defense")
 					.build();
 
 			new Shield.ShieldFactory(res)
@@ -443,27 +449,31 @@ public class ResourceLoader {
 					.name("shield" + color + "2")
 					.costBuy(200)
 					.defense(4)
+					.description("+4 Defense")
 					.build();
 
 			new Shield.ShieldFactory(res)
 					.id(color + 42) // id - 43 to 48
 					.name("shield" + color + "3")
-					.costBuy(300)
+					.costBuy(400)
 					.defense(6)
+					.description("+6 Defense")
 					.build();
 
 			new Shield.ShieldFactory(res)
 					.id(color + 48) // id - 49 to 54
 					.name("shield" + color + "4")
-					.costBuy(400)
+					.costBuy(700)
 					.defense(8)
+					.description("+8 Defense")
 					.build();
 
 			new Shield.ShieldFactory(res)
 					.id(color + 54) // id - 55 to 60
 					.name("shield" + color + "5")
-					.costBuy(500)
+					.costBuy(1000)
 					.defense(10)
+					.description("+10 Defense")
 					.build();
 
 			/********************ARMOR********************/
@@ -473,6 +483,7 @@ public class ResourceLoader {
 					.name("armor" + color + "1")
 					.costBuy(100)
 					.defense(2)
+					.description("+2 Defense")
 					.build();
 
 			new BodyArmor.ArmorFactory(res)
@@ -480,6 +491,7 @@ public class ResourceLoader {
 					.name("armor" + color + "2")
 					.costBuy(200)
 					.defense(4)
+					.description("+4 Defense")
 					.build();
 
 			new BodyArmor.ArmorFactory(res)
@@ -487,6 +499,7 @@ public class ResourceLoader {
 					.name("armor" + color + "3")
 					.costBuy(300)
 					.defense(6)
+					.description("+6 Defense")
 					.build();
 
 			new BodyArmor.ArmorFactory(res)
@@ -494,6 +507,7 @@ public class ResourceLoader {
 					.name("armor" + color + "4")
 					.costBuy(400)
 					.defense(8)
+					.description("+8 Defense")
 					.build();
 
 			new BodyArmor.ArmorFactory(res)
@@ -501,6 +515,7 @@ public class ResourceLoader {
 					.name("armor" + color + "5s")
 					.costBuy(500)
 					.defense(10)
+					.description("+10 Defense")
 					.build();
 
 			/********************HEADGEAR********************/
@@ -509,6 +524,7 @@ public class ResourceLoader {
 					.name("headgear" + color + "1")
 					.costBuy(100)
 					.defense(2)
+					.description("+2 Defense")
 					.build();
 
 			new HeadGear.HeadGearFactory(res)
@@ -516,6 +532,7 @@ public class ResourceLoader {
 					.name("headgear" + color + "2")
 					.costBuy(200)
 					.defense(4)
+					.description("+4 Defense")
 					.build();
 
 			new HeadGear.HeadGearFactory(res)
@@ -523,6 +540,7 @@ public class ResourceLoader {
 					.name("headgear" + color + "3")
 					.costBuy(300)
 					.defense(6)
+					.description("+6 Defense")
 					.build();
 
 			new HeadGear.HeadGearFactory(res)
@@ -530,6 +548,7 @@ public class ResourceLoader {
 					.name("headgear" + color + "4")
 					.costBuy(400)
 					.defense(8)
+					.description("+8 Defense")
 					.build();
 
 			new HeadGear.HeadGearFactory(res)
@@ -537,8 +556,8 @@ public class ResourceLoader {
 					.name("headgear" + color + "5")
 					.costBuy(500)
 					.defense(10)
+					.description("+10 Defense")
 					.build();
-
 		}
 
 
