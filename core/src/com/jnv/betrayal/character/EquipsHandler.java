@@ -7,7 +7,7 @@ package com.jnv.betrayal.character;
 import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.Equip;
-import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Ring;
 
 /**
@@ -33,7 +33,7 @@ class EquipsHandler {
 		}
 	}
 
-	void equipHeadArmor(HeadGear gear) {
+	void equipHeadArmor(Helmet gear) {
 		equips.inventory.removeItem(gear);
 		if (!(equips.equips[EquipSlot.HEAD] == null))
 			equips.inventory.addItem(equips.equips[EquipSlot.HEAD]);

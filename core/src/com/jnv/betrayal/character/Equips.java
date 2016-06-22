@@ -8,11 +8,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.EquipSlot;
-import com.jnv.betrayal.character.utils.PreviewSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
-import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Previewable;
 import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
@@ -104,7 +103,7 @@ public class Equips implements Json.Serializable {
 	// Setters
 	public void equip(Equip equip) {
 		if (equip instanceof DualWieldable) equipsHandler.equipHand(equip);
-		else if (equip instanceof HeadGear) equipsHandler.equipHeadArmor((HeadGear) equip);
+		else if (equip instanceof Helmet) equipsHandler.equipHeadArmor((Helmet) equip);
 		else if (equip instanceof BodyArmor) equipsHandler.equipBodyArmor((BodyArmor) equip);
 		else if (equip instanceof Ring) equipsHandler.equipRing((Ring) equip);
 		if (stats != null) stats.updateStats();
@@ -159,7 +158,7 @@ public class Equips implements Json.Serializable {
 
 	public static Class determineEquipType(Equip equip) {
 		if (equip instanceof Weapon) return Weapon.class;
-		else if (equip instanceof HeadGear) return HeadGear.class;
+		else if (equip instanceof Helmet) return Helmet.class;
 		else if (equip instanceof BodyArmor) return BodyArmor.class;
 		else if (equip instanceof Shield) return Shield.class;
 		else if (equip instanceof Ring) return Ring.class;

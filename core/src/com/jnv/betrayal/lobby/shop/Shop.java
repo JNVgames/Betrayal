@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.gameobjects.BodyArmor;
-import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Potion;
 import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
@@ -361,7 +361,7 @@ public class Shop extends Popup {
 	private void loadSwordTitles() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleSword[i - 1] = new Label("Sword(tier" + i + ")", FontManager.getFont(40));
+			titleSword[i - 1] = new Label("Sword (Tier " + i + ")", FontManager.getFont(40));
 			titleSword[i - 1].setX(110);
 			titleSword[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleSword[i - 1]);
@@ -371,7 +371,7 @@ public class Shop extends Popup {
 	private void loadShieldTitles() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleShield[i - 1] = new Label("Shield(tier" + i + ")", FontManager.getFont(40));
+			titleShield[i - 1] = new Label("Shield (Tier" + i + ")", FontManager.getFont(40));
 			titleShield[i - 1].setX(110);
 			titleShield[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleShield[i - 1]);
@@ -435,12 +435,12 @@ public class Shop extends Popup {
 	}
 
 	private void loadRingTitle() {
-		titleRing1 = new Label("Rings(Tier1)", FontManager.getFont(40));
+		titleRing1 = new Label("Rings (Tier 1)", FontManager.getFont(40));
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
 		currentGroup.addActor(titleRing1);
 
-		titleRing2 = new Label("Rings(Tier2)", FontManager.getFont(40));
+		titleRing2 = new Label("Rings (Tier 2)", FontManager.getFont(40));
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
 		currentGroup.addActor(titleRing2);
@@ -466,7 +466,7 @@ public class Shop extends Popup {
 			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(tier1, res));
+					new ShopPurchasePopup(game, new Helmet(tier1, res));
 				}
 			});
 			currentGroup.addActor(headgear1[i - 1]);
@@ -479,7 +479,7 @@ public class Shop extends Popup {
 			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(tier2, res));
+					new ShopPurchasePopup(game, new Helmet(tier2, res));
 				}
 			});
 			currentGroup.addActor(headgear2[i - 1]);
@@ -491,7 +491,7 @@ public class Shop extends Popup {
 			headgear3[i - 1].addListener(new InputListener(headgear3[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(tier3, res));
+					new ShopPurchasePopup(game, new Helmet(tier3, res));
 				}
 			});
 			currentGroup.addActor(headgear3[i - 1]);
@@ -503,7 +503,7 @@ public class Shop extends Popup {
 			headgear4[i - 1].addListener(new InputListener(headgear4[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(tier4, res));
+					new ShopPurchasePopup(game, new Helmet(tier4, res));
 				}
 			});
 			currentGroup.addActor(headgear4[i - 1]);
@@ -515,7 +515,7 @@ public class Shop extends Popup {
 			headgear5[i - 1].addListener(new InputListener(headgear5[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(tier5, res));
+					new ShopPurchasePopup(game, new Helmet(tier5, res));
 				}
 			});
 			currentGroup.addActor(headgear5[i - 1]);
@@ -625,7 +625,7 @@ public class Shop extends Popup {
 	private void loadHeadgearTitle() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleHeadgear[i - 1] = new Label("Headgear(tier" + i + ")", FontManager.getFont(40));
+			titleHeadgear[i - 1] = new Label("Helmet (Tier " + i + ")", FontManager.getFont(40));
 			titleHeadgear[i - 1].setX(110);
 			titleHeadgear[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleHeadgear[i - 1]);
@@ -635,7 +635,7 @@ public class Shop extends Popup {
 	private void loadArmorTitle() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleArmor[i - 1] = new Label("Armor(tier" + i + ")", FontManager.getFont(40));
+			titleArmor[i - 1] = new Label("Armor (Tier " + i + ")", FontManager.getFont(40));
 			titleArmor[i - 1].setX(110);
 			titleArmor[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleArmor[i - 1]);

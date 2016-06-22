@@ -5,7 +5,7 @@
 package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.gameobjects.BodyArmor;
-import com.jnv.betrayal.gameobjects.HeadGear;
+import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.Potion;
 import com.jnv.betrayal.gameobjects.Ring;
@@ -524,7 +524,7 @@ public class ResourceLoader {
 					.build();
 
 			/********************HEADGEAR********************/
-			new HeadGear.HeadGearFactory(res)
+			new Helmet.HelmetFactory(res)
 					.id(color + 90) // id - 91 to 96
 					.name("headgear" + color + "1")
 					.costBuy(100)
@@ -532,7 +532,7 @@ public class ResourceLoader {
 					.description("+2 Defense")
 					.build();
 
-			new HeadGear.HeadGearFactory(res)
+			new Helmet.HelmetFactory(res)
 					.id(color + 96) // id - 97 to 102
 					.name("headgear" + color + "2")
 					.costBuy(200)
@@ -540,7 +540,7 @@ public class ResourceLoader {
 					.description("+4 Defense")
 					.build();
 
-			new HeadGear.HeadGearFactory(res)
+			new Helmet.HelmetFactory(res)
 					.id(color + 102) // id - 103 to 108
 					.name("headgear" + color + "3")
 					.costBuy(300)
@@ -548,7 +548,7 @@ public class ResourceLoader {
 					.description("+6 Defense")
 					.build();
 
-			new HeadGear.HeadGearFactory(res)
+			new Helmet.HelmetFactory(res)
 					.id(color + 108) // id - 109 to 114
 					.name("headgear" + color + "4")
 					.costBuy(400)
@@ -556,7 +556,7 @@ public class ResourceLoader {
 					.description("+8 Defense")
 					.build();
 
-			new HeadGear.HeadGearFactory(res)
+			new Helmet.HelmetFactory(res)
 					.id(color + 114) // id - 115 to 120
 					.name("headgear" + color + "5")
 					.costBuy(500)
