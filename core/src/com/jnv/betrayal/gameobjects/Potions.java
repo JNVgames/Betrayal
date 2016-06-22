@@ -14,8 +14,8 @@ public class Potions extends Usables {
 
     public int getAttack(){return attack;}
 
-    public Potions(int id, String name, BetrayalAssetManager res, int cost_buy) {
-        super(id, name, res,cost_buy);
+    public Potions(int id, String name, BetrayalAssetManager res, int cost_buy, String description) {
+        super(id, name, res,cost_buy, description);
     }
 
     public Potions(String name, BetrayalAssetManager res) {

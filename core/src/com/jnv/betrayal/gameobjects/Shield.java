@@ -20,9 +20,10 @@ public class Shield extends Equip implements DualWieldable {
 		rightPreview = res.getTexture(ItemNaming.toPreview(name, false));
 	}
 
-	public Shield(int id, String name, BetrayalAssetManager res, int cost_buy, int defense) {
-		super(id, name, res, cost_buy);
+	public Shield(int id, String name, BetrayalAssetManager res, int cost_buy, int defense, String description) {
+		super(id, name, res, cost_buy, description);
 		this.defense = defense;
+		itemDescription = description;
 	}
 
 	public Texture getLeftPreview() {
@@ -39,7 +40,7 @@ public class Shield extends Equip implements DualWieldable {
 		private int costBuy = -1;
 		private int defense = -1;
 		private BetrayalAssetManager res;
-
+		private String description;
 		public ShieldFactory(BetrayalAssetManager res) {
 			this.res = res;
 		}
@@ -64,8 +65,13 @@ public class Shield extends Equip implements DualWieldable {
 			return this;
 		}
 
+		public ShieldFactory description(String description){
+			this.description = description;
+			return this;
+		}
+
 		public Shield build() {
-			return new Shield(id, name, res, costBuy, defense);
+			return new Shield(id, name, res, costBuy, defense, description);
 		}
 
 	}

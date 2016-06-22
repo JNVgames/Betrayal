@@ -8,7 +8,6 @@ import com.jnv.betrayal.character.Equips;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
-import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.Popup;
@@ -19,7 +18,7 @@ import com.jnv.betrayal.scene2d.InputListener;
 public class ShopPurchasePopup extends Popup {
 
 	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
-	private Label price, description;
+	private Label description;
 	private int currentSide;
 	private Character character;
 	private Item item;
@@ -38,9 +37,10 @@ public class ShopPurchasePopup extends Popup {
 		loadReturnToShopButton();
 		loadBuyButton();
 		loadGoldIcon();
+		loadPrice();
 		loadDescription();
 		loadPreview();
-		loadPrice();
+		loadYourMoney();
 	}
 
 	private void loadBackground() {
@@ -57,16 +57,23 @@ public class ShopPurchasePopup extends Popup {
 		popup.addActor(goldIcon);
 	}
 
-	private void loadPrice() {
-		price = new Label("xxxxx", FontManager.getFont(40));
+	private void loadPrice(){
+		Label price = new Label("Price: "+ Integer.toString(item.getBuyCost()), FontManager.getFont(40));
 		price.setHeight(50);
-		price.setX(450);
-		price.setY(850);
+		price.setX(365);
+		price.setY(900);
 		popup.addActor(price);
+	}
+	private void loadYourMoney() {
+		Label userMoney = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
+		userMoney.setHeight(50);
+		userMoney.setX(450);
+		userMoney.setY(850);
+		popup.addActor(userMoney);
 	}
 
 	private void loadDescription() {
-		description = new Label("+5 Attack", FontManager.getFont(40));
+		description = new Label("", FontManager.getFont(40));
 		description.setHeight(50);
 		description.setX(250);
 		description.setY(900);

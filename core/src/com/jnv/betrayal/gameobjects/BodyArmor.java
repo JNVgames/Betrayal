@@ -17,9 +17,10 @@ public class BodyArmor extends Equip implements Previewable {
 		preview = res.getTexture(ItemNaming.toPreview(name));
 	}
 
-	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy, int defense) {
-		super(id, name, res, cost_buy);
+	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy, int defense, String description) {
+		super(id, name, res, cost_buy, description);
 		this.defense = defense;
+		itemDescription = description;
 	}
 
 	public int getDefense() { return defense; }
@@ -34,6 +35,7 @@ public class BodyArmor extends Equip implements Previewable {
 		private int costBuy = -1;
 		private int defense = -1;
 		private BetrayalAssetManager res;
+		private String description;
 
 		public ArmorFactory(BetrayalAssetManager res) {
 			this.res = res;
@@ -59,8 +61,13 @@ public class BodyArmor extends Equip implements Previewable {
 			return this;
 		}
 
+		public ArmorFactory description(String description){
+			this.description = description;
+			return this;
+		}
+
 		public BodyArmor build() {
-			return new BodyArmor(id, name, res, costBuy, defense);
+			return new BodyArmor(id, name, res, costBuy, defense, description);
 		}
 	}
 

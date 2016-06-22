@@ -8,8 +8,6 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
-//TODO; add boolean
-//TODO: GET THE @FANGOT BACK TO WORK 8/11
 public class Confirmation extends Popup {
 
 	private Image yesButton, noButton, background;

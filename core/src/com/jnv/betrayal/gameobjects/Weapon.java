@@ -12,9 +12,10 @@ public class Weapon extends Equip implements DualWieldable {
 	private int attack;
 	private Texture leftPreview, rightPreview;
 
-	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int new_attack) {
-		super(id, name, res, cost_buy);
+	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int new_attack, String description) {
+		super(id, name, res, cost_buy, description);
 		attack = new_attack;
+		itemDescription = description;
 	}
 
 	public Weapon(String name, BetrayalAssetManager res) {
@@ -40,7 +41,7 @@ public class Weapon extends Equip implements DualWieldable {
 		private int costBuy = -1;
 		private int attack = -1;
 		private BetrayalAssetManager res;
-
+		private String description;
 		public WeaponFactory(BetrayalAssetManager res) {
 			this.res = res;
 		}
@@ -64,9 +65,13 @@ public class Weapon extends Equip implements DualWieldable {
 			this.attack = attack;
 			return this;
 		}
+		public WeaponFactory description(String description){
+			this.description = description;
+			return this;
+		}
 
 		public Weapon build() {
-			return new Weapon(id, name, res, costBuy, attack);
+			return new Weapon(id, name, res, costBuy, attack, description);
 		}
 
 	}
