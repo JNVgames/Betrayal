@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.lobby.LobbyOptions;
 import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.shop.Shop;
-import com.jnv.betrayal.lobby.social.FriendsList;
+import com.jnv.betrayal.lobby.social.PartyRoom;
 import com.jnv.betrayal.lobby.stats.StatsWindow;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -104,7 +104,7 @@ public class Lobby extends GameState {
 		partyButton.addListener(new InputListener(partyButton) {
 			@Override
 			public void doAction() {
-				new FriendsList(game);
+				new PartyRoom(game);
 			}
 		});
 		stage.addActor(partyButton);

@@ -13,17 +13,17 @@ import com.jnv.betrayal.scene2d.ui.ScrollPane;
 
 import java.util.List;
 
-public class FriendsList extends Popup {
+public class PartyRoom extends Popup {
 
-	public final Image partyBackground, friendsBackground, lobbyButton;
-	public final Label partyTitle, friendsTitle;
+	public final Image partyBackground, lobbyButton, createRoom, leaveRoom;
+	public final Label partyTitle;
 
-	public FriendsList(Betrayal game) {
+	public PartyRoom(Betrayal game) {
 		super(game);
+		createRoom = new Image(res.getTexture("create-room"));
+		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
-		friendsBackground = new Image(res.getTexture("shop-background"));
-		partyTitle = new Label("Party", FontManager.getFont(60));
-		friendsTitle = new Label("Friends", FontManager.getFont(60));
+		partyTitle = new Label("", FontManager.getFont(60));			//VINCENT DO NOT DELETE THIS. USING IT IN RELATION
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
 	}
@@ -32,17 +32,14 @@ public class FriendsList extends Popup {
 		loadBackground();
 		loadReturnToLobbyButton();
 		loadTitle();
+		loadRoomButtons();
 	}
 
 	private void loadBackground() {
 		partyBackground.layout();
-		partyBackground.setBounds(35, 100, Betrayal.WIDTH / 2 - 45, Betrayal.HEIGHT - 250);
+		partyBackground.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
 		popup.addActor(partyBackground);
 
-		friendsBackground.layout();
-		friendsBackground.setBounds(Betrayal.WIDTH / 2 + 10, 100, Betrayal.WIDTH / 2 - 45,
-				Betrayal.HEIGHT - 250);
-		popup.addActor(friendsBackground);
 	}
 
 	private void loadTitle() {
@@ -52,16 +49,12 @@ public class FriendsList extends Popup {
 				partyTitle.getPrefHeight(), true, false));
 		popup.addActor(partyTitle);
 
-		friendsTitle.layout();
-		friendsTitle.setBounds(new Dimension(friendsBackground.getX() + friendsBackground.getWidth() / 2,
-				partyTitle.getY(), friendsTitle.getPrefWidth(),
-				friendsTitle.getPrefHeight(), true, false));
-		popup.addActor(friendsTitle);
+
 	}
 
 	private void loadReturnToLobbyButton() {
 		lobbyButton.layout();
-		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 390, 110, 180, 60);
+		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
@@ -69,6 +62,28 @@ public class FriendsList extends Popup {
 			}
 		});
 		popup.addActor(lobbyButton);
+	}
+
+	private void loadRoomButtons(){
+		createRoom.layout();
+		createRoom.setBounds(142 , partyTitle.getY()-20, 200, 65);
+		createRoom.addListener(new InputListener(createRoom) {
+			@Override
+			public void doAction() {
+
+			}
+		});
+		popup.addActor(createRoom);
+
+		leaveRoom.layout();
+		leaveRoom.setBounds(372 , partyTitle.getY()-20, 200, 65);
+		leaveRoom.addListener(new InputListener(leaveRoom) {
+			@Override
+			public void doAction() {
+
+			}
+		});
+		popup.addActor(leaveRoom);
 	}
 
 	/**
@@ -82,8 +97,6 @@ public class FriendsList extends Popup {
 			verticalGroup.addActor(label);
 		}
 		ScrollPane scrollPane = new ScrollPane(verticalGroup);
-		scrollPane.setBounds(friendsBackground.getX(), lobbyButton.getTop() + 20,
-				friendsBackground.getWidth(), friendsTitle.getY() - lobbyButton.getTop() - 30);
 		scrollPane.setScrollingDisabled(true, false);
 		verticalGroup.align(Align.topLeft);
 		verticalGroup.pad(0, 20, 0, 20);
