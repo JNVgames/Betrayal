@@ -14,8 +14,9 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 public class Inventory extends Popup {
 
-	private Image lobbyButton;
+	private Image lobbyButton, goldIcon;
 	private Image[] inventorySpots, characterOutline;
+	private Label userGold;
 	private Label[] charOutDescription;
 	private ItemLoader itemLoader;
 	private EquipLoader equipLoader;
@@ -34,6 +35,7 @@ public class Inventory extends Popup {
 		loadButtons();
 		itemLoader = new ItemLoader(this);
 		itemLoader.loadInventory();
+		loadGoldIcon();
 		equipLoader = new EquipLoader(this);
 		equipLoader.loadEquips();
 	}
@@ -61,6 +63,22 @@ public class Inventory extends Popup {
 		title.setY(Betrayal.HEIGHT - 200);
 		popup.addActor(title);
 	}
+
+	private void loadGoldIcon() {
+		goldIcon = new Image(res.getTexture("icon-gold"));
+		goldIcon.layout();
+		float x = inventorySpots[0].getX();
+		float y = inventorySpots[0].getTop();
+		goldIcon.setBounds(x, y + 10, 40, 40);
+		popup.addActor(goldIcon);
+
+		userGold = new Label(Integer.toString(character.inventory.getGold()),FontManager.getFont(40));
+		userGold.setX(x + goldIcon.getWidth() + 10);
+		userGold.setY(y + 5);
+		popup.addActor(userGold);
+	}
+
+
 
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
@@ -174,7 +192,9 @@ public class Inventory extends Popup {
 	}
 
 	void refresh() {
+		userGold.setText(Integer.toString(character.inventory.getGold()));
 		itemLoader.refresh();
 		equipLoader.refresh();
+
 	}
 }
