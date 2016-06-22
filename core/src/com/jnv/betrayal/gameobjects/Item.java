@@ -25,14 +25,16 @@ public abstract class Item implements Json.Serializable {
 		itemName = name;
 		itemIcon = res.getTexture(name);
 		this.cost_buy = cost_buy;
-		res.loadItem(name, this);
 		itemDescription = description;
+		res.loadItem(name, this);
+
 	}
 
 	public Item(String name, BetrayalAssetManager res) {
 		Item src = res.getItem(name);
 		id = src.getID();
 		itemName = name;
+		itemDescription = src.getItemDescription();
 		cost_buy = src.getBuyCost();
 		cost_sell = src.getSellCost();
 		itemIcon = src.getItemIcon();
@@ -80,6 +82,7 @@ public abstract class Item implements Json.Serializable {
 		return cost_sell;
 	}
 
+	public String getItemDescription(){return itemDescription;}
 	// Setters
 	public void setName(String name) {
 		itemName = name;
