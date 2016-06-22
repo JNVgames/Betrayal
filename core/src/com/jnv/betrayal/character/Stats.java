@@ -13,16 +13,38 @@ import com.jnv.betrayal.character.utils.Stat;
  */
 public class Stats implements Json.Serializable {
 
-	private int health, defense, attack, floor, availablePoints;
+	private int baseHealth, baseDefense, baseAttack, floor, availablePoints;
+	private int equipHealth, equipAttack, equipDefense;
+	private int totalHealth, totalAttack, totalDefense;
 	private ApplyPoints applyPoints;
+	private Equips equips;
 
-	public Stats() {
-		health = 25;
-		attack = 5;
-		defense = 5;
+	public Stats(Equips equips) {
+		baseHealth = 25;
+		baseAttack = 5;
+		baseDefense = 5;
 		floor = 0;
 		availablePoints = 0;
 		applyPoints = new ApplyPoints();
+		this.equips = equips;
+		updateStats();
+	}
+
+	/**
+	 * Updates equip and total stats
+	 */
+	public void updateStats() {
+		equipHealth = equipAttack = equipDefense = 0;
+		for (int i = 0; i < equips.equips.length; i++) {
+			if (equips.equips[i] != null) {
+				equipHealth += equips.equips[i].getHealth();
+				equipAttack += equips.equips[i].getHealth();
+				equipDefense += equips.equips[i].getHealth();
+			}
+		}
+		totalHealth = baseHealth + equipHealth;
+		totalAttack = baseAttack + equipAttack;
+		totalDefense = baseDefense + equipDefense;
 	}
 
 	// Getters
@@ -31,11 +53,11 @@ public class Stats implements Json.Serializable {
 			case FLOOR:
 				return floor;
 			case HEALTH:
-				return health;
+				return baseHealth;
 			case ATTACK:
-				return attack;
+				return baseAttack;
 			case DEFENSE:
-				return defense;
+				return baseDefense;
 			default:
 				throw new AssertionError("Stat doesn't exist");
 		}
@@ -50,14 +72,50 @@ public class Stats implements Json.Serializable {
 			case FLOOR:
 				return "Floor: " + floor;
 			case HEALTH:
-				return "Health: " + health;
+				return "Health: " + baseHealth;
 			case ATTACK:
-				return "Attack: " + attack;
+				return "Attack: " + baseAttack;
 			case DEFENSE:
-				return "Defense: " + defense;
+				return "Defense: " + baseDefense;
 			default:
 				throw new AssertionError("Stat doesn't exist");
 		}
+	}
+
+	public int getBaseHealth() {
+		return baseHealth;
+	}
+
+	public int getBaseDefense() {
+		return baseDefense;
+	}
+
+	public int getBaseAttack() {
+		return baseAttack;
+	}
+
+	public int getEquipHealth() {
+		return equipHealth;
+	}
+
+	public int getEquipAttack() {
+		return equipAttack;
+	}
+
+	public int getEquipDefense() {
+		return equipDefense;
+	}
+
+	public int getTotalHealth() {
+		return totalHealth;
+	}
+
+	public int getTotalAttack() {
+		return totalAttack;
+	}
+
+	public int getTotalDefense() {
+		return totalDefense;
 	}
 
 	// Setters
@@ -80,9 +138,9 @@ public class Stats implements Json.Serializable {
 
 	public void write(Json json) {
 		json.writeObjectStart("stats");
-		json.writeField(this, "health", Integer.class);
-		json.writeField(this, "defense", Integer.class);
-		json.writeField(this, "attack", Integer.class);
+		json.writeField(this, "baseHealth", Integer.class);
+		json.writeField(this, "baseAttack", Integer.class);
+		json.writeField(this, "baseDefense", Integer.class);
 		json.writeField(this, "floor", Integer.class);
 		json.writeObjectEnd();
 	}
@@ -116,7 +174,7 @@ public class Stats implements Json.Serializable {
 		}
 
 		public void decHealthPoint() {
-			if (tmpHealth > health && hasPointsApplied()) {
+			if (tmpHealth > baseHealth && hasPointsApplied()) {
 				tmpHealth--;
 				tmpAvailablePoints++;
 				tmpPointsApplied--;
@@ -130,7 +188,7 @@ public class Stats implements Json.Serializable {
 		}
 
 		public void decDefensePoint() {
-			if (tmpDefense > defense && hasPointsApplied()) {
+			if (tmpDefense > baseDefense && hasPointsApplied()) {
 				tmpDefense--;
 				tmpAvailablePoints++;
 				tmpPointsApplied--;
@@ -144,7 +202,7 @@ public class Stats implements Json.Serializable {
 		}
 
 		public void decAttackPoint() {
-			if (tmpAttack > attack && hasPointsApplied()) {
+			if (tmpAttack > baseAttack && hasPointsApplied()) {
 				tmpAttack--;
 				tmpAvailablePoints++;
 				tmpPointsApplied--;
@@ -162,9 +220,9 @@ public class Stats implements Json.Serializable {
 		 * Sets the changes in stats to the character
 		 */
 		public void applyPoints() {
-			health = tmpHealth;
-			attack = tmpAttack;
-			defense = tmpDefense;
+			baseHealth = tmpHealth;
+			baseAttack = tmpAttack;
+			baseDefense = tmpDefense;
 			availablePoints = tmpAvailablePoints;
 			tmpPointsApplied = 0;
 		}
@@ -174,16 +232,16 @@ public class Stats implements Json.Serializable {
 		 */
 		public void cancel() {
 			tmpAvailablePoints = availablePoints;
-			tmpHealth = health;
-			tmpAttack = attack;
-			tmpDefense = defense;
+			tmpHealth = baseHealth;
+			tmpAttack = baseAttack;
+			tmpDefense = baseDefense;
 			tmpPointsApplied = 0;
 		}
 
 		public void updateValues() {
-			tmpHealth = health;
-			tmpAttack = attack;
-			tmpDefense = defense;
+			tmpHealth = baseHealth;
+			tmpAttack = baseAttack;
+			tmpDefense = baseDefense;
 			tmpAvailablePoints = availablePoints;
 			tmpPointsApplied = 0;
 		}

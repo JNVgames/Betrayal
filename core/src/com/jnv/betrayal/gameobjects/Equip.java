@@ -8,8 +8,13 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public abstract class Equip extends Item {
 
-	protected Equip(int id, String name, BetrayalAssetManager res, int cost_buy, String description) {
+	protected int attack, defense, health;
+
+	protected Equip(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense,  String description) {
 		super(id, name, res, cost_buy, description);
+		this.health = health;
+		this.attack = attack;
+		this.defense = defense;
 		isEquippable = true;
 	}
 
@@ -17,4 +22,15 @@ public abstract class Equip extends Item {
 		super(name, res);
 	}
 
+	public int getHealth() {
+		return health;
+	}
+
+	public int getAttack() {
+		return attack;
+	}
+
+	public int getDefense() {
+		return defense;
+	}
 }

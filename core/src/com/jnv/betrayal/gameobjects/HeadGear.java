@@ -12,8 +12,8 @@ public class HeadGear extends Equip implements Previewable {
 	private int defense;
 	private Texture preview;
 
-	public HeadGear(int id, String name, BetrayalAssetManager res,int cost_buy, int defense, String description) {
-		super(id, name, res, cost_buy, description);
+	public HeadGear(int id, String name, BetrayalAssetManager res,int cost_buy, int health, int attack, int defense, String description) {
+		super(id, name, res, cost_buy, health, attack, defense, description);
 		this.defense = defense;
 		itemDescription = description;
 	}
@@ -66,7 +66,7 @@ public class HeadGear extends Equip implements Previewable {
 			return this;
 		}
 		public HeadGear build() {
-			return new HeadGear(id, name, res, costBuy, defense, description);
+			return new HeadGear(id, name, res, costBuy,0, 0, defense, description);
 		}
 
 

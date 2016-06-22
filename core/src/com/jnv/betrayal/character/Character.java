@@ -32,7 +32,7 @@ public class Character implements Json.Serializable {
 		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);
 		job = new Job();
-		stats = new Stats();
+		stats = new Stats(equips);
 
 		preview.update();
 	}
