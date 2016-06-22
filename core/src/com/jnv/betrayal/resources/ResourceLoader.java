@@ -7,6 +7,8 @@ package com.jnv.betrayal.resources;
 import com.jnv.betrayal.gameobjects.BodyArmor;
 import com.jnv.betrayal.gameobjects.HeadGear;
 import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.gameobjects.Potion;
+import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 
@@ -566,9 +568,247 @@ public class ResourceLoader {
 		//TODO: FINISH THE FACTORIES
 
 		/********************RINGS********************/
+		new Ring.RingFactory(res)	//Red Health Ring
+				.id(115)
+				.name("ring11")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
 
+		new Ring.RingFactory(res)
+				.id(116)
+				.name("ring21")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(117)
+				.name("ring12")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(118)
+				.name("ring22")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(119)
+				.name("ring13")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(120)
+				.name("ring23")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(121)
+				.name("ring14")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(122)
+				.name("ring24")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(123)
+				.name("ring15")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(124)
+				.name("ring25")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(125)
+				.name("ring16")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(126)
+				.name("ring26")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
 
 		/********************POTIONS********************/
+
+		new Potion.PotionFactory(res)
+				.id(127)
+				.name("potion1")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(128)
+				.name("potion2")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(129)
+				.name("potion3")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(130)
+				.name("potion4")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(131)
+				.name("potion5")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(132)
+				.name("potion6")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(133)
+				.name("potion7")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(134)
+				.name("potion8")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(135)
+				.name("potion9")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(136)
+				.name("potion10")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(137)
+				.name("potion11")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Potion.PotionFactory(res)
+				.id(138)
+				.name("potion12")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
 
 	}
 
