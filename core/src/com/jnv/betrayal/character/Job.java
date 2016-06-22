@@ -34,4 +34,9 @@ public class Job {
 	public void setPreviousJob() {
 		job = job.getPrevJob();
 	}
+
+	@Override
+	public String toString() {
+		return job.toString();
+	}
 }

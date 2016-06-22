@@ -34,7 +34,7 @@ public enum Jobs {
 		return initial;
 	}
 
-	public String getName() {
+	public String toString() {
 		return name;
 	}
 
