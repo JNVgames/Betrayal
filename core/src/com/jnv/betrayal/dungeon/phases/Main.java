@@ -96,7 +96,7 @@ public class Main extends Phase {
 			public void run() {
 				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
 					@Override
-					public void doSomething() {
+					public void doAction() {
 						gsm.setState(GameStateManager.State.LOBBY);
 					}
 				};

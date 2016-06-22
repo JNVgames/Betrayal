@@ -55,7 +55,7 @@ public class Confirmation extends Popup {
 		yesButton.addListener(new InputListener(yesButton) {
 			@Override
 			public void doAction() {
-				doSomething();
+				Confirmation.this.doAction();
 				remove();
 			}
 		});
@@ -74,6 +74,6 @@ public class Confirmation extends Popup {
 		popup.addActor(noButton);
 	}
 
-	public void doSomething() {
+	public void doAction() {
 	}
 }

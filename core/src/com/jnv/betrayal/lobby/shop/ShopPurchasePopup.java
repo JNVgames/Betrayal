@@ -35,7 +35,6 @@ public class ShopPurchasePopup extends Popup {
 
 	private void loadButtons() {
 		loadBackground();
-		loadContent();
 		loadReturnToShopButton();
 		loadBuyButton();
 		loadGoldIcon();
@@ -82,8 +81,15 @@ public class ShopPurchasePopup extends Popup {
 			@Override
 			public void doAction() {
 				new Confirmation(game, "Confirm purchase") {
-					public void doSomething() {
+					@Override
+					public void doAction() {
 						character.inventory.addItem(item);
+					}
+
+					@Override
+					public void remove() {
+						super.remove();
+						removeThisPopup();
 					}
 				};
 			}
@@ -102,10 +108,6 @@ public class ShopPurchasePopup extends Popup {
 			}
 		});
 		popup.addActor(backButton);
-	}
-
-	private void loadContent() {
-
 	}
 
 	private void loadPreview() {
@@ -159,5 +161,9 @@ public class ShopPurchasePopup extends Popup {
 			}
 		});
 		popup.addActor(rightArrow);
+	}
+
+	private void removeThisPopup() {
+		remove();
 	}
 }

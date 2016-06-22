@@ -167,7 +167,7 @@ public class StatsWindow extends Popup {
 			@Override
 			public void doAction() {
 				new Confirmation(game, "Stats Change Confirmation") {
-					public void doSomething() {
+					public void doAction() {
 						applyPoints.applyPoints();
 					}
 				};
