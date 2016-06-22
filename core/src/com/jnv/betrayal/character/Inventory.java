@@ -7,6 +7,7 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.gameobjects.Item;
+import com.jnv.betrayal.popup.OKPopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +29,25 @@ public class Inventory implements Json.Serializable {
 
 	/**
 	 * Buys the requested item
+	 *
 	 * @param item item the character is trying to buy
-	 * @return true if character has enough gold, false if not
+	 * @return 0 - success
+	 * 		   1 - not enough gold
+	 * 		   2 - inventory full
 	 */
-	public boolean buyItem(Item item) {
+	public int buyItem(Item item) {
 		// if character doesn't have enough gold to buy item
 		if (gold < item.getBuyCost()) {
 			// fail to buy and return false
-			return false;
+			return 1;
 		}
 		// if character has enough gold and return true
 		else { // if (gold >= item.getBuyCost()) {
 			gold -= item.getBuyCost();
-			addItem(item);
-			return true;
+			if (!addItem(item)) {
+				return 2;
+			}
+			return 0;
 		}
 	}
 

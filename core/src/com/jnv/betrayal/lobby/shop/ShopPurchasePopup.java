@@ -90,8 +90,18 @@ public class ShopPurchasePopup extends Popup {
 				new Confirmation(game, "Confirm purchase") {
 					@Override
 					public void doAction() {
-						if(!character.inventory.addItem(item)){
-							new OKPopup(game, "Inventory Full");
+						switch (character.inventory.buyItem(item)){
+							case 0:
+								new OKPopup(game, "Item Bought");
+								break;
+							case 1:
+								new OKPopup(game, "Not Enough Gold");
+								break;
+							case 2:
+								new OKPopup(game, "Inventory Full");
+								break;
+							default:
+								throw new AssertionError("Shop Transaction Error: buyItem() returned weird number");
 						}
 					}
 

@@ -51,14 +51,13 @@ class ItemOptions extends Popup {
 		float optionHeight = 71;
 
 		// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
-		if (isEquippable) {
+		if (isEquippable && !isEquipped) {
 			numOptions = 4;
 			background = new Image(res.getTexture("4option-background"));
-		} else{
+		} else {
 			numOptions = 3;
 			background = new Image(res.getTexture("3option-background"));
 		}
-
 		background.layout();
 
 		for (int i = 0; i < numOptions; i++) {
@@ -72,15 +71,14 @@ class ItemOptions extends Popup {
 						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
 		}
 		float x = dimensions.get(0).getX();
-		float y = dimensions.get(numOptions-1).getY();
+		float y = dimensions.get(numOptions - 1).getY();
 		float width = dimensions.get(0).getWidth();
 		float height = dimensions.get(0).getHeight() * numOptions;
-		background.setBounds(x,y,width,height);
+		background.setBounds(x, y, width, height);
 		popup.addActor(background);
 
 		// Draw out options
 		setOptions(dimensions);
-
 	}
 
 	private void setOptions(List<Dimension> dimensions) {
