@@ -74,7 +74,7 @@ public class Inventory extends Popup {
 
 		userGold = new Label(Integer.toString(character.inventory.getGold()),FontManager.getFont(40));
 		userGold.setX(x + goldIcon.getWidth() + 10);
-		userGold.setY(y + 5);
+		userGold.setY(y + 7);
 		popup.addActor(userGold);
 	}
 
