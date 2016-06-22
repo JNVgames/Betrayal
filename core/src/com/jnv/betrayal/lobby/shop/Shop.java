@@ -20,7 +20,8 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
-	private Image lobbyButton, background, weapons, armors, extras, items, money, shields, swords;
+	private Image shields;
+	private Image swords;
 	private Image swordButton, armorButton, shieldButton, headGearButton;
 	private Image[] potions, ring1, ring2;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
@@ -88,7 +89,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadBackground() {
-		background = new Image(res.getTexture("shop-background"));
+		Image background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
 		popup.addActor(background);
@@ -103,7 +104,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadReturnToLobbyButton() {
-		lobbyButton = new Image(res.getTexture("back-to-lobby"));
+		Image lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.layout();
 		lobbyButton.setBounds((Betrayal.WIDTH - 312) / 2, 110, 312, 100);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
@@ -116,7 +117,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadWeaponsButton() {
-		weapons = new Image(res.getTexture("shop-weapons"));
+		Image weapons = new Image(res.getTexture("shop-weapons"));
 		weapons.layout();
 		weapons.setBounds(100, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
 		weapons.addListener(new InputListener(weapons) {
@@ -131,7 +132,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadArmorButton() {
-		armors = new Image(res.getTexture("shop-armor"));
+		Image armors = new Image(res.getTexture("shop-armor"));
 		armors.layout();
 		armors.setBounds(100 + buttonWidth, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
 		armors.addListener(new InputListener(armors) {
@@ -146,7 +147,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadExtrasButton() {
-		extras = new Image(res.getTexture("shop-extra"));
+		Image extras = new Image(res.getTexture("shop-extra"));
 		extras.layout();
 		extras.setBounds(100 + buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
 		extras.addListener(new InputListener(extras) {
@@ -161,7 +162,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadItemsButton() {
-		items = new Image(res.getTexture("shop-item"));
+		Image items = new Image(res.getTexture("shop-item"));
 		items.layout();
 		items.setBounds(100 + buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
 		items.addListener(new InputListener(items) {
@@ -176,7 +177,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadMoneyButton() {
-		money = new Image(res.getTexture("shop-money"));
+		Image money = new Image(res.getTexture("shop-money"));
 		money.layout();
 		money.setBounds(100 + buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
 		money.addListener(new InputListener(money) {
@@ -452,68 +453,68 @@ public class Shop extends Popup {
 	private void loadHeadgear() {
 		// Headgear1
 		for (int i = 1; i <= 6; i++) {
-			final String item1 = "headgear" + i + "1";
-			final String item2 = "headgear" + i + "2";
-			final String item3 = "headgear" + i + "3";
-			final String item4 = "headgear" + i + "4";
-			final String item5 = "headgear" + i + "5";
-			headgear1[i - 1] = new Image(res.getTexture(item1));
+			final String tier1 = "headgear" + i + "1";
+			final String tier2 = "headgear" + i + "2";
+			final String tier3 = "headgear" + i + "3";
+			final String tier4 = "headgear" + i + "4";
+			final String tier5 = "headgear" + i + "5";
+			headgear1[i - 1] = new Image(res.getTexture(tier1));
 			headgear1[i - 1].layout();
 			headgear1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
 			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(item1, res));
+					new ShopPurchasePopup(game, new HeadGear(tier1, res));
 				}
 			});
 			currentGroup.addActor(headgear1[i - 1]);
 
 			// Headgear 2
-			headgear2[i - 1] = new Image(res.getTexture(item2));
+			headgear2[i - 1] = new Image(res.getTexture(tier2));
 			headgear2[i - 1].layout();
 			headgear2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
 			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(item1, res));
+					new ShopPurchasePopup(game, new HeadGear(tier2, res));
 				}
 			});
 			currentGroup.addActor(headgear2[i - 1]);
 
-			headgear3[i - 1] = new Image(res.getTexture(item3));
+			headgear3[i - 1] = new Image(res.getTexture(tier3));
 			headgear3[i - 1].layout();
 			headgear3[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
 			headgear3[i - 1].addListener(new InputListener(headgear3[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(item3, res));
+					new ShopPurchasePopup(game, new HeadGear(tier3, res));
 				}
 			});
 			currentGroup.addActor(headgear3[i - 1]);
 
-			headgear4[i - 1] = new Image(res.getTexture(item4));
+			headgear4[i - 1] = new Image(res.getTexture(tier4));
 			headgear4[i - 1].layout();
 			headgear4[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
 			headgear4[i - 1].addListener(new InputListener(headgear4[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(item4, res));
+					new ShopPurchasePopup(game, new HeadGear(tier4, res));
 				}
 			});
 			currentGroup.addActor(headgear4[i - 1]);
 
-			headgear5[i - 1] = new Image(res.getTexture(item5));
+			headgear5[i - 1] = new Image(res.getTexture(tier5));
 			headgear5[i - 1].layout();
 			headgear5[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
 			headgear5[i - 1].addListener(new InputListener(headgear5[i - 1]) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new HeadGear(item5, res));
+					new ShopPurchasePopup(game, new HeadGear(tier5, res));
 				}
 			});
 			currentGroup.addActor(headgear5[i - 1]);
