@@ -64,7 +64,7 @@ class ItemOptions extends Popup {
 		for (int i = 0; i < numOptions; i++) {
 			// If there's enough space to the right of the item, draw labels
 			if (itemBoxDimen.getRightX() + optionWidth < Betrayal.WIDTH)
-				dimensions.add(new Dimension(itemBoxDimen.getRightX() + 20,
+				dimensions.add(new Dimension(itemBoxDimen.getRightX(),
 						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
 			// Else draw to the left of the item
 			else
@@ -77,6 +77,7 @@ class ItemOptions extends Popup {
 		float height = dimensions.get(0).getHeight() * numOptions;
 		background.setBounds(x,y,width,height);
 		popup.addActor(background);
+
 		// Draw out options
 		setOptions(dimensions);
 

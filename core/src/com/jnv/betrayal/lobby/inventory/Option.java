@@ -6,8 +6,18 @@ package com.jnv.betrayal.lobby.inventory;
 
 enum Option {
 	Equip(" Equip"),
-	Unequip,
-	Info,
-	Sell,
-	Cancel
+	Unequip(" Unequip"),
+	Info(" Info"),
+	Sell(" Sell"),
+	Cancel(" Cancel");
+
+	private String text;
+
+	Option(String text) {
+		this.text = text;
+	}
+
+	public String toString() {
+		return text;
+	}
 }
