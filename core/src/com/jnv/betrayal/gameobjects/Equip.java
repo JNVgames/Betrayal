@@ -20,6 +20,10 @@ public abstract class Equip extends Item {
 
 	public Equip(String name, BetrayalAssetManager res) {
 		super(name, res);
+		Item src = res.getItem(name);
+		health = ((Equip) src).getHealth();
+		attack = ((Equip) src).getAttack();
+		defense = ((Equip) src).getDefense();
 	}
 
 	public int getHealth() {

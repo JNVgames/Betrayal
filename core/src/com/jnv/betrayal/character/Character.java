@@ -33,6 +33,7 @@ public class Character implements Json.Serializable {
 		preview = new Preview(equips, res);
 		job = new Job();
 		stats = new Stats(equips);
+		equips.setStats(stats);
 
 		preview.update();
 	}

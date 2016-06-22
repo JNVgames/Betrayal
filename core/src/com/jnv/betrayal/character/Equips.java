@@ -26,6 +26,7 @@ public class Equips implements Json.Serializable {
 
 	private EquipsHandler equipsHandler;
 	Inventory inventory;
+	Stats stats;
 	BetrayalAssetManager res;
 
 	public final Equip[] equips;
@@ -35,6 +36,7 @@ public class Equips implements Json.Serializable {
 		this.inventory = inventory;
 		this.res = res;
 		equips = new Equip[EquipSlot.SLOTS];
+		this.stats = stats;
 	}
 
 	// Copy Constructor
@@ -105,6 +107,11 @@ public class Equips implements Json.Serializable {
 		else if (equip instanceof HeadGear) equipsHandler.equipHeadArmor((HeadGear) equip);
 		else if (equip instanceof BodyArmor) equipsHandler.equipBodyArmor((BodyArmor) equip);
 		else if (equip instanceof Ring) equipsHandler.equipRing((Ring) equip);
+		if (stats != null) stats.updateStats();
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
 	}
 
 	/**
@@ -115,22 +122,31 @@ public class Equips implements Json.Serializable {
 	 * @return true if unequip was successful, false if not
 	 */
 	public boolean unequip(int slot) {
+		boolean isUnequipped = false;
 		switch (slot) {
 			case EquipSlot.HEAD:
-				return equipsHandler.unequipHeadArmor();
+				isUnequipped = equipsHandler.unequipHeadArmor();
+				break;
 			case EquipSlot.BODY:
-				return equipsHandler.unequipBodyArmor();
+				isUnequipped = equipsHandler.unequipBodyArmor();
+				break;
 			case EquipSlot.LEFT_HAND:
-				return equipsHandler.unequipLeftHand();
+				isUnequipped = equipsHandler.unequipLeftHand();
+				break;
 			case EquipSlot.RIGHT_HAND:
-				return equipsHandler.unequipRightHand();
+				isUnequipped = equipsHandler.unequipRightHand();
+				break;
 			case EquipSlot.RING1:
-				return equipsHandler.unequipRing1();
+				isUnequipped = equipsHandler.unequipRing1();
+				break;
 			case EquipSlot.RING2:
-				return equipsHandler.unequipRing2();
+				isUnequipped = equipsHandler.unequipRing2();
+				break;
 			default:
 				throw new AssertionError("Unequip slot does not exist");
 		}
+		stats.updateStats();
+		return isUnequipped;
 	}
 
 	public void write(Json json) {

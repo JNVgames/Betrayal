@@ -9,12 +9,10 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Weapon extends Equip implements DualWieldable {
 
-	private int attack;
 	private Texture leftPreview, rightPreview;
 
 	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
 		super(id, name, res, cost_buy, health, attack, defense, description);
-		this.attack = attack;
 		itemDescription = description;
 	}
 
@@ -23,8 +21,6 @@ public class Weapon extends Equip implements DualWieldable {
 		leftPreview = res.getTexture(ItemNaming.toPreview(name, true));
 		rightPreview = res.getTexture(ItemNaming.toPreview(name, false));
 	}
-
-	public int getAttack() {return attack;}
 
 	public Texture getLeftPreview() {
 		return leftPreview;

@@ -9,10 +9,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Shield extends Equip implements DualWieldable {
 
-	private int defense;
 	private Texture leftPreview, rightPreview;
-
-	public int getDefense() { return defense; }
 
 	public Shield(String name, BetrayalAssetManager res) {
 		super(name, res);
@@ -22,8 +19,6 @@ public class Shield extends Equip implements DualWieldable {
 
 	public Shield(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
 		super(id, name, res, cost_buy, health, attack, defense, description);
-		this.defense = defense;
-		itemDescription = description;
 	}
 
 	public Texture getLeftPreview() {

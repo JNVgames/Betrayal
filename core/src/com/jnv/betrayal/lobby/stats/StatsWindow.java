@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.lobby.stats;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -119,12 +120,14 @@ public class StatsWindow extends Popup {
 		// Floor Label
 		int fontSize = 40;
 		floorLabel = new Label("", FontManager.getFont(fontSize));
-		healthLabel = new Label("Health: " + Integer.toString(applyPoints.getHealth()), FontManager.getFont(fontSize));
-		attackLabel = new Label("Attack: " + Integer.toString(applyPoints.getAttack()), FontManager.getFont(fontSize));
-		defenseLabel = new Label("Defense: " + Integer.toString(applyPoints.getDefense()), FontManager.getFont(fontSize));
-		equipHealthLabel = new Label("Health: " + Integer.toString(applyPoints.getHealth()), FontManager.getFont(fontSize));
-		equipAttackLabel = new Label("Attack: " + Integer.toString(applyPoints.getAttack()), FontManager.getFont(fontSize));
-		equipDefenseLabel = new Label("Defense: " + Integer.toString(applyPoints.getDefense()), FontManager.getFont(fontSize));
+
+		character.stats.updateStats();
+		equipHealthLabel = new Label(" + " + Integer.toString(character.stats.getEquipHealth()),
+				FontManager.getFont(fontSize));
+		equipAttackLabel = new Label(" + " + Integer.toString(character.stats.getEquipAttack()),
+				FontManager.getFont(fontSize));
+		equipDefenseLabel = new Label(" + " + Integer.toString(character.stats.getEquipDefense()),
+				FontManager.getFont(fontSize));
 
 		// Get stats from character
 		floorLabel.setText(character.stats.toString(Stat.FLOOR));
@@ -161,6 +164,33 @@ public class StatsWindow extends Popup {
 		defenseLabel.setWidth(defenseLabel.getPrefWidth());
 		defenseLabel.setHeight(fontSize);
 		characterStats.addActor(defenseLabel);
+
+		// SET EQUIP HEALTH LABEL
+		equipHealthLabel = new Label("", FontManager.getFont(40));
+		equipHealthLabel.setColor(Color.GREEN);
+		equipHealthLabel.setX(healthLabel.getRight());
+		equipHealthLabel.setY(healthLabel.getY());
+		equipHealthLabel.setWidth(equipHealthLabel.getPrefWidth());
+		equipHealthLabel.setHeight(fontSize);
+		popup.addActor(equipHealthLabel);
+
+		// SET EQUIP ATTACK LABEL
+		equipAttackLabel = new Label("", FontManager.getFont(40));
+		equipAttackLabel.setColor(Color.GREEN);
+		equipAttackLabel.setX(attackLabel.getRight());
+		equipAttackLabel.setY(attackLabel.getY());
+		equipAttackLabel.setWidth(equipAttackLabel.getPrefWidth());
+		equipAttackLabel.setHeight(fontSize);
+		characterStats.addActor(equipAttackLabel);
+
+		// SET EQUIP DEFENSE LABEL
+		equipDefenseLabel = new Label("", FontManager.getFont(40));
+		equipDefenseLabel.setColor(Color.GREEN);
+		equipDefenseLabel.setX(defenseLabel.getRight());
+		equipDefenseLabel.setY(defenseLabel.getY());
+		equipDefenseLabel.setWidth(equipDefenseLabel.getPrefWidth());
+		equipDefenseLabel.setHeight(fontSize);
+		characterStats.addActor(equipDefenseLabel);
 	}
 
 	private void loadApplyButton() {
@@ -284,5 +314,27 @@ public class StatsWindow extends Popup {
 		defenseLabel.setText("Defense: " + Integer.toString(applyPoints.getDefense()));
 		attackLabel.setText("Attack: " + Integer.toString(applyPoints.getAttack()));
 		availablePoints.setText(("Available Points: " + Integer.toString(applyPoints.getAvailablePoints())));
+		equipHealthLabel.setText(" + " + Integer.toString(character.stats.getEquipHealth()));
+		equipAttackLabel.setText(" + " + Integer.toString(character.stats.getEquipAttack()));
+		equipDefenseLabel.setText(" + " + Integer.toString(character.stats.getEquipDefense()));
+		updateEquipStatsLabelDimensions();
+	}
+
+	private void updateEquipStatsLabelDimensions() {
+		healthLabel.setWidth(healthLabel.getPrefWidth());
+		attackLabel.setWidth(attackLabel.getPrefWidth());
+		defenseLabel.setWidth(defenseLabel.getPrefWidth());
+
+		equipHealthLabel.setX(healthLabel.getRight());
+		equipHealthLabel.setY(healthLabel.getY());
+		equipHealthLabel.setWidth(equipHealthLabel.getPrefWidth());
+
+		equipAttackLabel.setX(attackLabel.getRight());
+		equipAttackLabel.setY(attackLabel.getY());
+		equipAttackLabel.setWidth(equipAttackLabel.getPrefWidth());
+
+		equipDefenseLabel.setX(defenseLabel.getRight());
+		equipDefenseLabel.setY(defenseLabel.getY());
+		equipDefenseLabel.setWidth(equipDefenseLabel.getPrefWidth());
 	}
 }

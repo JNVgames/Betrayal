@@ -38,8 +38,8 @@ public class Stats implements Json.Serializable {
 		for (int i = 0; i < equips.equips.length; i++) {
 			if (equips.equips[i] != null) {
 				equipHealth += equips.equips[i].getHealth();
-				equipAttack += equips.equips[i].getHealth();
-				equipDefense += equips.equips[i].getHealth();
+				equipAttack += equips.equips[i].getAttack();
+				equipDefense += equips.equips[i].getDefense();
 			}
 		}
 		totalHealth = baseHealth + equipHealth;
