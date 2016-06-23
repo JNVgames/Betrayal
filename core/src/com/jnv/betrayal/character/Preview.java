@@ -42,6 +42,7 @@ public class Preview implements Json.Serializable {
 	Gender gender;
 	int rotation = 0;
 	int maleHair, femaleHair, hairColor;
+	protected boolean isShowingHead;
 
 	public Preview(Equips equips, BetrayalAssetManager res) {
 		previewHandler = new PreviewHandler(this);
@@ -52,6 +53,7 @@ public class Preview implements Json.Serializable {
 		maleHair = 1;
 		femaleHair = 1;
 		hairColor = 1;
+		isShowingHead = false;
 
 		initializeArrays();
 		update();
@@ -66,6 +68,7 @@ public class Preview implements Json.Serializable {
 		maleHair = preview.maleHair;
 		femaleHair = preview.femaleHair;
 		hairColor = preview.hairColor;
+		isShowingHead = preview.isShowingHead();
 
 		initializeArrays();
 		update();
@@ -124,6 +127,14 @@ public class Preview implements Json.Serializable {
 				}
 			}
 		}
+	}
+
+	public boolean isShowingHead() {
+		return isShowingHead;
+	}
+
+	public void setShowHead(boolean isShowingHead) {
+		this.isShowingHead = isShowingHead;
 	}
 
 	private void setCurrentPreview(int rotation) {
