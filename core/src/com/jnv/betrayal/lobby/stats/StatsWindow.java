@@ -25,7 +25,7 @@ public class StatsWindow extends Popup {
 	private Image lobbyButton, applyButton, background;
 	private Image [] icons, statPlusButtons, statMinusButtons;
 	private Label title, availablePoints, floorLabel, healthLabel, attackLabel, defenseLabel;
-	private Label equipHealthLabel, equipAttackLabel, equipDefenseLabel;
+	private Label equipHealthLabel, equipAttackLabel, equipDefenseLabel, hair;
 	private Group characterStats;
 	private float yRef;
 	private Actor charPreview;
@@ -41,7 +41,22 @@ public class StatsWindow extends Popup {
 		character = game.getPlayer().getCurrentCharacter();
 		applyPoints = character.stats.getApplyPointsObject();
 		loadButtons();
+		loadHairButton();
 		updateStatValues();
+	}
+
+	public void loadHairButton(){
+		//TODO: ADD IF WEARING HELMET
+		hair = new Label("Show\nhair", FontManager.getFont(40));
+		hair.setX(120);
+		hair.setY(Betrayal.HEIGHT - 800);
+		hair.addListener(new InputListener(title) {
+			@Override
+			public void doAction() {
+				//TODO: FILL THIS IN
+			}
+		});
+		popup.addActor(hair);
 	}
 
 	@Override
