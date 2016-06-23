@@ -10,7 +10,6 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 public class BodyArmor extends Equip implements Previewable {
 
 	private Texture preview;
-	private int defense;
 
 	public BodyArmor(String name, BetrayalAssetManager res) {
 		super(name, res);
@@ -22,8 +21,6 @@ public class BodyArmor extends Equip implements Previewable {
 		this.defense = defense;
 		this.description = description;
 	}
-
-	public int getDefense() { return defense; }
 
 	public Texture getPreview() {
 		return preview;

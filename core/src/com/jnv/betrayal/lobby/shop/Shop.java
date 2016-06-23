@@ -5,10 +5,16 @@
 package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.Equips;
+import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.Cloak;
 import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Potion;
 import com.jnv.betrayal.gameobjects.Ring;
@@ -17,10 +23,12 @@ import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
+	private Image leftArrow, rightArrow;
 	private Image[] potions, ring1, ring2;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
@@ -29,9 +37,13 @@ public class Shop extends Popup {
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Group currentGroup;
+	private Character character;
+	private Preview preview;
 
 	public Shop(Betrayal game) {
 		super(game);
+		character = game.getPlayer().getCurrentCharacter();
+		preview = game.getPlayer().getCurrentCharacter().preview;
 		currentGroup = new Group();
 		currentContent = 0;
 		buttonHeight = 100;
@@ -74,7 +86,6 @@ public class Shop extends Popup {
 
 	private void loadButtons() {
 		loadBackground();
-		loadTitle();
 		loadWeaponsButton();
 		loadArmorButton();
 		loadExtrasButton();
@@ -89,14 +100,6 @@ public class Shop extends Popup {
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
 		popup.addActor(background);
-	}
-
-	private void loadTitle() {
-		Label title = new Label("Shop", FontManager.getFont(40));
-		title.setHeight(100);
-		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
-		title.setY(Betrayal.HEIGHT - 200);
-		popup.addActor(title);
 	}
 
 	private void loadReturnToLobbyButton() {
@@ -523,7 +526,6 @@ public class Shop extends Popup {
 			public void doAction() {
 				removeCurrentContent();
 				loadArmor();
-				loadBestArmor();
 				loadArmorTitle();
 			}
 		});
@@ -613,10 +615,6 @@ public class Shop extends Popup {
 		currentGroup.addActor(headGearButton);
 	}
 
-	private void loadBestArmor() {
-
-	}
-
 	private void loadHeadgearTitle() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
@@ -643,27 +641,103 @@ public class Shop extends Popup {
 	private void loadItems() {
 	}
 
-	private void setContent0() {
+	private void loadSwordAndShieldPage() {
 		loadSwordTitles();
 		loadSwords();
 	}
 
-	private void setContent1() {  //armor + headgear
+	private void loadArmorPage() {  //armor + headgear
 		loadHeadgearTitle();
 		loadHeadgear();
 	}
 
-	private void setContent2() { // rings
+	private void loadExtrasPage() { // rings
 		loadRingTitle();
 		loadRings();
 	}
 
-	private void setContent3() { // extras
+	private void loadItemsPage() { // extras
 		loadItemsTitle();
 		loadItems();
 	}
 
-	private void setContent4() { // money
+	private void loadMoneyPage() { // money
+		loadPreviewArrows();
+		Actor previewImage = loadMoneyPagePreview();
+		Image cloakIcon = loadCloakIcon(previewImage);
+		loadCloakDescription(cloakIcon);
+	}
+
+	private void loadCloakDescription(Image cloakIcon) {
+		Label description = new Label("Cloak\n" + new Cloak("cloak11", res).getDescription(), FontManager.getFont(40));
+		description.setX(cloakIcon.getRight() + 30);
+		description.setY(cloakIcon.getY() - 55);
+		description.setWidth(600);
+		description.setHeight(90);
+		currentGroup.addActor(description);
+	}
+
+	private Image loadCloakIcon(Actor previewImage) {
+		Image cloakIcon = new Image(res.getTexture("cloak11"));
+		cloakIcon.setX(popup.getX() + 120);
+		cloakIcon.setY(previewImage.getY() - 200);
+		cloakIcon.setWidth(itemSize);
+		cloakIcon.setHeight(itemSize);
+		currentGroup.addActor(cloakIcon);
+
+		return cloakIcon;
+	}
+
+	private Actor loadMoneyPagePreview() {
+		preview = character.preview;
+		// Create copy of character's preview with the extra weapon
+		Equips equips = new Equips(character.equips, res);
+		equips.equip(new Cloak("cloak11", res));
+		preview = new Preview(character.preview, equips, res);
+
+		final float x = leftArrow.getX();
+		final float y = leftArrow.getTop() + 20;
+		final float width = rightArrow.getRight() - leftArrow.getX();
+		final float height = width * 18 / 12;
+
+		Actor previewImage = new Actor() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				preview.drawPreview(batch, x, y, width, height);
+			}
+		};
+		previewImage.setWidth(width);
+		previewImage.setHeight(height);
+		previewImage.setX(x);
+		previewImage.setY(y);
+		currentGroup.addActor(previewImage);
+
+		return previewImage;
+	}
+
+	private void loadPreviewArrows() {
+		float y = 550, width = 100, height = 50;
+		leftArrow = new Image(res.getTexture("arrow-left"));
+		leftArrow.layout();
+		leftArrow.setBounds(Betrayal.WIDTH / 2 - 150, y, width, height);
+		leftArrow.addListener(new InputListener(leftArrow) {
+			@Override
+			public void doAction() {
+				preview.rotateLeft();
+			}
+		});
+		currentGroup.addActor(leftArrow);
+
+		rightArrow = new Image(res.getTexture("arrow-right"));
+		rightArrow.layout();
+		rightArrow.setBounds(Betrayal.WIDTH / 2 + 50, y, width, height);
+		rightArrow.addListener(new InputListener(rightArrow) {
+			@Override
+			public void doAction() {
+				preview.rotateRight();
+			}
+		});
+		currentGroup.addActor(rightArrow);
 	}
 
 	private void removeCurrentContent() {
@@ -673,19 +747,19 @@ public class Shop extends Popup {
 	private void loadContent() {
 		switch (currentContent) {
 			case 0:
-				setContent0();//weapons + shields
+				loadSwordAndShieldPage();
 				break;
 			case 1:
-				setContent1();//armor
+				loadArmorPage();
 				break;
 			case 2:
-				setContent2();//extras
+				loadExtrasPage();
 				break;
 			case 3:
-				setContent3();//items
+				loadItemsPage();
 				break;
 			case 4:
-				setContent4();//money
+				loadMoneyPage();
 				break;
 			default:
 				Gdx.app.log("content", "should not happen");

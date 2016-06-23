@@ -283,8 +283,8 @@ public class ResourceLoader {
 		res.loadTexture("character/armor2d.png", "previewarmor45");
 		res.loadTexture("character/armor2e.png", "previewarmor55");
 		res.loadTexture("character/armor2f.png", "previewarmor65");
-		res.loadTexture("character/cloak1b.png", "previewcloak11");
-		res.loadTexture("character/cloak1a.png", "previewcloak21");
+		res.loadTexture("character/cloak1b.png", "previewcloak1");
+		res.loadTexture("character/cloak1a.png", "previewcloak2");
 	}
 
 	private void loadSwordsAndShieldPreviews() {
@@ -821,9 +821,7 @@ public class ResourceLoader {
 				.id(139)
 				.name("cloak11")
 				.costBuy(750)
-				.description("If the player takes any damage that would bring their health below 0," +
-						"the cloak absorbs any further damage and keeps the player at 10 HP." +
-						"The cloak is a one-time use item.")
+				.description("Revives the player with\n10 HP upon death for\none time only.")
 				.build();
 	}
 

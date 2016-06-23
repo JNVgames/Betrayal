@@ -7,7 +7,6 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.gameobjects.Item;
-import com.jnv.betrayal.popup.OKPopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,15 +118,6 @@ public class Inventory implements Json.Serializable {
 
 	public boolean isFull() {
 		return items.size() == maxItems;
-	}
-
-	/**
-	 * Adds specified amount of gold to inventory
-	 *
-	 * @param amount amount of gold to be added
-	 */
-	public void addGold(int amount) {
-		gold += amount;
 	}
 
 	public void write(Json json) {

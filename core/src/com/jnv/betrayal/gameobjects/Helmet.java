@@ -9,7 +9,6 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Helmet extends Equip implements Previewable {
 
-	private int defense;
 	private Texture preview;
 
 	public Helmet(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
@@ -22,8 +21,6 @@ public class Helmet extends Equip implements Previewable {
 		super(name, res);
 		preview = res.getTexture(ItemNaming.toPreview(name));
 	}
-
-	public int getDefense() { return defense; }
 
 	public Texture getPreview() {
 		return preview;

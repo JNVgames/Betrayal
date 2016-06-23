@@ -120,6 +120,7 @@ class ItemOptions extends Popup {
 						remove();
 					}
 				});
+				break;
 			case Info:
 				label.addListener(new InputListener(label) {
 					@Override

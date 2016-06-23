@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.Cloak;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Helmet;
@@ -110,6 +111,7 @@ public class Equips implements Json.Serializable {
 		else if (equip instanceof Helmet) equipsHandler.equipHeadArmor((Helmet) equip);
 		else if (equip instanceof BodyArmor) equipsHandler.equipBodyArmor((BodyArmor) equip);
 		else if (equip instanceof Ring) equipsHandler.equipRing((Ring) equip);
+		else if (equip instanceof Cloak) equipsHandler.equipCloak((Cloak) equip);
 		if (stats != null) stats.updateStats();
 	}
 

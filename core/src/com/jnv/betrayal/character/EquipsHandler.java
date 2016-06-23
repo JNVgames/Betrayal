@@ -6,6 +6,7 @@ package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.BodyArmor;
+import com.jnv.betrayal.gameobjects.Cloak;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Ring;
@@ -19,6 +20,15 @@ class EquipsHandler {
 
 	EquipsHandler(Equips equips) {
 		this.equips = equips;
+	}
+
+	void equipCloak(Cloak cloak) {
+		equips.inventory.removeItem(cloak);
+		// Cloak slot is full, swap out current cloak
+		if (equips.equips[EquipSlot.CLOAK] != null) {
+			equips.inventory.addItem(equips.equips[EquipSlot.CLOAK]);
+		}
+		equips.equips[EquipSlot.CLOAK] = cloak;
 	}
 
 	void equipHand(Equip equip) {
