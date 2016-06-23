@@ -31,7 +31,7 @@ class PreviewHandler {
 			updateArmorSprites();
 			updateLeftHandSprites();
 			updateRightHandSprites();
-			updateHeadGearSprites();
+			updateHelmetSprites();
 
 			// Calibrate how the previews are drawn
 			// Front and sides
@@ -88,8 +88,8 @@ class PreviewHandler {
 		return false;
 	}
 
-	private void updateHeadGearSprites() {
-		if (!preview.equips.isHeadSlotEmpty()) {
+	private void updateHelmetSprites() {
+		if (!preview.equips.isHeadSlotEmpty() && !preview.isShowingHead) {
 			TextureRegion[][] headTextures =
 					TextureRegion.split(preview.equips.getHeadArmorPreview(), 32, 48);
 			preview.frontLeft[PreviewSlot.HEAD] = headTextures[0][0];

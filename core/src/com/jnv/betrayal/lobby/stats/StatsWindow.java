@@ -46,17 +46,21 @@ public class StatsWindow extends Popup {
 	}
 
 	public void loadHairButton(){
-		//TODO: ADD IF WEARING HELMET
-		hair = new Label("Show\nhair", FontManager.getFont(40));
-		hair.setX(120);
-		hair.setY(Betrayal.HEIGHT - 800);
-		hair.addListener(new InputListener(title) {
-			@Override
-			public void doAction() {
-				//TODO: FILL THIS IN
-			}
-		});
-		popup.addActor(hair);
+		if (!character.equips.isHeadSlotEmpty()) {
+			final String showHairText = "Show\nhair";
+			final String showHelmetText = "Show\nhelmet";
+			hair = new Label(character.preview.isShowingHead() ? showHelmetText : showHairText, FontManager.getFont(40));
+			hair.setX(120);
+			hair.setY(Betrayal.HEIGHT - 800);
+			hair.addListener(new InputListener(title) {
+				@Override
+				public void doAction() {
+					character.preview.setShowHead(!character.preview.isShowingHead());
+					hair.setText(character.preview.isShowingHead() ? showHelmetText : showHairText);
+				}
+			});
+			popup.addActor(hair);
+		}
 	}
 
 	@Override
