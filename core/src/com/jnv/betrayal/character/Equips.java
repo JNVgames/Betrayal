@@ -42,7 +42,7 @@ public class Equips implements Json.Serializable {
 	// Copy Constructor
 	public Equips(Equips equips, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
-		this.inventory = equips.inventory;
+		this.inventory = new Inventory();
 		this.res = res;
 		this.equips = equips.equips.clone();
 	}
