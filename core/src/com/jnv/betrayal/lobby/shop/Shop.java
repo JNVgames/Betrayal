@@ -5,7 +5,6 @@
 package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,6 +20,8 @@ import com.jnv.betrayal.gameobjects.Ring;
 import com.jnv.betrayal.gameobjects.Shield;
 import com.jnv.betrayal.gameobjects.Weapon;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -28,13 +29,14 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
-	private Image leftArrow, rightArrow;
+	private Image leftArrow, rightArrow, cloakBuyButton ;
 	private Image[] potions, ring1, ring2;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
 	private Image[] headgear1, headgear2, headgear3, headgear4, headgear5;
 	private Image[] armor1, armor2, armor3, armor4, armor5;
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
+	private Label cloakPrice;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Group currentGroup;
 	private Character character;
@@ -666,6 +668,7 @@ public class Shop extends Popup {
 		Actor previewImage = loadMoneyPagePreview();
 		Image cloakIcon = loadCloakIcon(previewImage);
 		loadCloakDescription(cloakIcon);
+		loadCloakButtons();
 	}
 
 	private void loadCloakDescription(Image cloakIcon) {
@@ -695,9 +698,9 @@ public class Shop extends Popup {
 		equips.equip(new Cloak("cloak11", res));
 		preview = new Preview(character.preview, equips, res);
 
-		final float x = leftArrow.getX();
+		final float x = leftArrow.getX() + 50;
 		final float y = leftArrow.getTop() + 20;
-		final float width = rightArrow.getRight() - leftArrow.getX();
+		final float width = rightArrow.getRight() - leftArrow.getX()-100;
 		final float height = width * 18 / 12;
 
 		Actor previewImage = new Actor() {
@@ -716,7 +719,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadPreviewArrows() {
-		float y = 550, width = 100, height = 50;
+		float y = 700, width = 100, height = 50;
 		leftArrow = new Image(res.getTexture("arrow-left"));
 		leftArrow.layout();
 		leftArrow.setBounds(Betrayal.WIDTH / 2 - 150, y, width, height);
@@ -739,6 +742,43 @@ public class Shop extends Popup {
 		});
 		currentGroup.addActor(rightArrow);
 	}
+
+	private void loadCloakButtons(){
+		cloakBuyButton = new Image(res.getTexture("buy"));
+		cloakBuyButton.layout();
+		cloakBuyButton.setBounds(Betrayal.WIDTH/2-75, 250, 150, 75);
+		cloakBuyButton.addListener(new InputListener(cloakBuyButton) {
+			@Override
+			public void doAction() {
+				new Confirmation(game, "Confirm purchase") {
+					@Override
+					public void doAction() {
+						switch (character.inventory.buyItem(new Cloak("cloak11", res))){
+							case 0:
+								new OKPopup(game, "Item Bought");
+								break;
+							case 1:
+								new OKPopup(game, "Not Enough Gold");
+								break;
+							case 2:
+								new OKPopup(game, "Inventory Full");
+								break;
+							default:
+								throw new AssertionError("Shop Transaction Error: buyItem() returned weird number");
+						}
+					}
+				};
+			}
+		});
+
+		currentGroup.addActor(cloakBuyButton);
+		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont((60)) );
+		cloakPrice.setX((leftArrow.getX() + 40));
+		cloakPrice.setY(cloakBuyButton.getY()+ 110);
+		currentGroup.addActor(cloakPrice);
+
+	}
+
 
 	private void removeCurrentContent() {
 		currentGroup.clear();
