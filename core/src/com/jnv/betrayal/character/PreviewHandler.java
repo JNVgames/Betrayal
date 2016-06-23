@@ -26,45 +26,47 @@ class PreviewHandler {
 	void update() {
 		preview.initializeArrays();
 		// If player has a cloak, don't render any other sprites
-		if (!updateCloakSprites()) {
-			updateHeadSprites();
-			updateArmorSprites();
-			updateLeftHandSprites();
-			updateRightHandSprites();
-			updateHelmetSprites();
+		updateCloakSprites();
+		updateHeadSprites();
+		updateArmorSprites();
+		updateLeftHandSprites();
+		updateRightHandSprites();
+		updateHelmetSprites();
 
-			// Calibrate how the previews are drawn
-			// Front and sides
-			// Check if hand slots have swords
-			if (preview.equips.isLeftHandSlotSword()) {
-				toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
-			} else {
-				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.front);
-			}
-			if (preview.equips.isRightHandSlotSword()) {
-				toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
-			} else {
-				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
-			}
-			toBackOfPreview(PreviewSlot.BODY, preview.front);
-			toBackOfPreview(PreviewSlot.HEAD, preview.front);
-
-			// Back side
-			if (!preview.equips.isLeftHandSlotSword()) {
-				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
-			}
-			if (!preview.equips.isRightHandSlotSword()) {
-				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
-			}
-			if (preview.equips.isLeftHandSlotSword()) {
-				toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
-			}
-			if (preview.equips.isRightHandSlotSword()) {
-				toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
-			}
-			toBackOfPreview(PreviewSlot.BODY, preview.back);
-			toBackOfPreview(PreviewSlot.HEAD, preview.back);
+		// Calibrate how the previews are drawn
+		// Front and sides
+		// Check if hand slots have swords
+		if (preview.equips.isLeftHandSlotSword()) {
+			toBackOfPreview(PreviewSlot.LEFT_HAND, preview.front);
 		}
+		if (preview.equips.isRightHandSlotSword()) {
+			toBackOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+		}
+		if (!preview.equips.isLeftHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.front);
+		}
+		if (!preview.equips.isRightHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.front);
+		}
+		toFrontOfPreview(PreviewSlot.CLOAK, preview.front);
+		toBackOfPreview(PreviewSlot.BODY, preview.front);
+		toBackOfPreview(PreviewSlot.HEAD, preview.front);
+
+		// Back side
+		if (!preview.equips.isLeftHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+		}
+		if (!preview.equips.isRightHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+		}
+		if (preview.equips.isLeftHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.LEFT_HAND, preview.back);
+		}
+		if (preview.equips.isRightHandSlotSword()) {
+			toFrontOfPreview(PreviewSlot.RIGHT_HAND, preview.back);
+		}
+		toBackOfPreview(PreviewSlot.BODY, preview.back);
+		toBackOfPreview(PreviewSlot.HEAD, preview.back);
 	}
 
 	private boolean updateCloakSprites() {
@@ -89,7 +91,7 @@ class PreviewHandler {
 	}
 
 	private void updateHelmetSprites() {
-		if (!preview.equips.isHeadSlotEmpty() && !preview.isShowingHead) {
+		if (preview.equips.isCloakSlotEmpty() && !preview.equips.isHeadSlotEmpty() && !preview.isShowingHead) {
 			TextureRegion[][] headTextures =
 					TextureRegion.split(preview.equips.getHeadArmorPreview(), 32, 48);
 			preview.frontLeft[PreviewSlot.HEAD] = headTextures[0][0];
@@ -111,44 +113,48 @@ class PreviewHandler {
 	 * Update and split the sprite sheet into appropriate sprites
 	 */
 	private void updateHeadSprites() {
-		Texture head_all;
-		if (preview.gender == Gender.MALE) {
-			head_all = preview.res.getTexture("hair-male-"
-					+ preview.maleHair + "-" + preview.hairColor + "-all");
-		} else {
-			head_all = preview.res.getTexture("hair-female-"
-					+ preview.femaleHair + "-" + preview.hairColor + "-all");
+		if (preview.equips.isCloakSlotEmpty()) {
+			Texture head_all;
+			if (preview.gender == Gender.MALE) {
+				head_all = preview.res.getTexture("hair-male-"
+						+ preview.maleHair + "-" + preview.hairColor + "-all");
+			} else {
+				head_all = preview.res.getTexture("hair-female-"
+						+ preview.femaleHair + "-" + preview.hairColor + "-all");
+			}
+			TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
+			preview.frontLeft[PreviewSlot.HEAD] = head_split[0][0];
+			preview.frontStill[PreviewSlot.HEAD] = head_split[0][1];
+			preview.frontRight[PreviewSlot.HEAD] = head_split[0][2];
+			preview.rightLeft[PreviewSlot.HEAD] = head_split[1][0];
+			preview.rightStill[PreviewSlot.HEAD] = head_split[1][1];
+			preview.rightRight[PreviewSlot.HEAD] = head_split[1][2];
+			preview.leftLeft[PreviewSlot.HEAD] = head_split[2][0];
+			preview.leftStill[PreviewSlot.HEAD] = head_split[2][1];
+			preview.leftRight[PreviewSlot.HEAD] = head_split[2][2];
+			preview.backLeft[PreviewSlot.HEAD] = head_split[3][0];
+			preview.backStill[PreviewSlot.HEAD] = head_split[3][1];
+			preview.backRight[PreviewSlot.HEAD] = head_split[3][2];
 		}
-		TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
-		preview.frontLeft[PreviewSlot.HEAD] = head_split[0][0];
-		preview.frontStill[PreviewSlot.HEAD] = head_split[0][1];
-		preview.frontRight[PreviewSlot.HEAD] = head_split[0][2];
-		preview.rightLeft[PreviewSlot.HEAD] = head_split[1][0];
-		preview.rightStill[PreviewSlot.HEAD] = head_split[1][1];
-		preview.rightRight[PreviewSlot.HEAD] = head_split[1][2];
-		preview.leftLeft[PreviewSlot.HEAD] = head_split[2][0];
-		preview.leftStill[PreviewSlot.HEAD] = head_split[2][1];
-		preview.leftRight[PreviewSlot.HEAD] = head_split[2][2];
-		preview.backLeft[PreviewSlot.HEAD] = head_split[3][0];
-		preview.backStill[PreviewSlot.HEAD] = head_split[3][1];
-		preview.backRight[PreviewSlot.HEAD] = head_split[3][2];
 	}
 
 	private void updateArmorSprites() {
-		TextureRegion[][] armorTextures =
-				TextureRegion.split(preview.equips.getBodyArmorPreview(), 32, 48);
-		preview.frontLeft[PreviewSlot.BODY] = armorTextures[0][0];
-		preview.frontStill[PreviewSlot.BODY] = armorTextures[0][1];
-		preview.frontRight[PreviewSlot.BODY] = armorTextures[0][2];
-		preview.rightLeft[PreviewSlot.BODY] = armorTextures[1][0];
-		preview.rightStill[PreviewSlot.BODY] = armorTextures[1][1];
-		preview.rightRight[PreviewSlot.BODY] = armorTextures[1][2];
-		preview.leftLeft[PreviewSlot.BODY] = armorTextures[2][0];
-		preview.leftStill[PreviewSlot.BODY] = armorTextures[2][1];
-		preview.leftRight[PreviewSlot.BODY] = armorTextures[2][2];
-		preview.backLeft[PreviewSlot.BODY] = armorTextures[3][0];
-		preview.backStill[PreviewSlot.BODY] = armorTextures[3][1];
-		preview.backRight[PreviewSlot.BODY] = armorTextures[3][2];
+		if (preview.equips.isCloakSlotEmpty()) {
+			TextureRegion[][] armorTextures =
+					TextureRegion.split(preview.equips.getBodyArmorPreview(), 32, 48);
+			preview.frontLeft[PreviewSlot.BODY] = armorTextures[0][0];
+			preview.frontStill[PreviewSlot.BODY] = armorTextures[0][1];
+			preview.frontRight[PreviewSlot.BODY] = armorTextures[0][2];
+			preview.rightLeft[PreviewSlot.BODY] = armorTextures[1][0];
+			preview.rightStill[PreviewSlot.BODY] = armorTextures[1][1];
+			preview.rightRight[PreviewSlot.BODY] = armorTextures[1][2];
+			preview.leftLeft[PreviewSlot.BODY] = armorTextures[2][0];
+			preview.leftStill[PreviewSlot.BODY] = armorTextures[2][1];
+			preview.leftRight[PreviewSlot.BODY] = armorTextures[2][2];
+			preview.backLeft[PreviewSlot.BODY] = armorTextures[3][0];
+			preview.backStill[PreviewSlot.BODY] = armorTextures[3][1];
+			preview.backRight[PreviewSlot.BODY] = armorTextures[3][2];
+		}
 	}
 
 	private void updateLeftHandSprites() {

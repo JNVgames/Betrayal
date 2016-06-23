@@ -147,6 +147,9 @@ public class Equips implements Json.Serializable {
 			case EquipSlot.RING2:
 				isUnequipped = equipsHandler.unequipRing2();
 				break;
+			case EquipSlot.CLOAK:
+				isUnequipped = equipsHandler.unequipCloak();
+				break;
 			default:
 				throw new AssertionError("Unequip slot does not exist");
 		}

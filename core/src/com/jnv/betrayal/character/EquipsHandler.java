@@ -127,4 +127,14 @@ class EquipsHandler {
 		}
 		return false;
 	}
+
+	boolean unequipCloak() {
+		if (!(equips.equips[EquipSlot.CLOAK] == null)
+				&& !equips.inventory.isFull()) {
+			equips.inventory.addItem(equips.equips[EquipSlot.CLOAK]);
+			equips.equips[EquipSlot.CLOAK] = null;
+			return true;
+		}
+		return false;
+	}
 }
