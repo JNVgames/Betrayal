@@ -462,6 +462,7 @@ public class ResourceLoader {
 					.description("+4 Defense")
 					.build();
 
+
 			new Shield.ShieldFactory(res)
 					.id(color + 42) // id - 43 to 48
 					.name("shield" + color + "3")
@@ -469,7 +470,6 @@ public class ResourceLoader {
 					.defense(6)
 					.description("+6 Defense")
 					.build();
-
 			new Shield.ShieldFactory(res)
 					.id(color + 48) // id - 49 to 54
 					.name("shield" + color + "4")
