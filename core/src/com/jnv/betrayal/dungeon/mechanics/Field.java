@@ -11,7 +11,6 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.MonsterManager;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.phases.PhaseManager;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -20,8 +19,7 @@ import com.jnv.betrayal.scene2d.ui.Image;
 public class Field extends Group {
 
 	private Image background;
-	private MonsterManager monsterManager;
-	public final PhaseManager phaseManager;
+	private PhaseManager phaseManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final SnapshotArray<PlayerCard> playerZone;

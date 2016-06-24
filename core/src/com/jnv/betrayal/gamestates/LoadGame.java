@@ -33,11 +33,11 @@ public class LoadGame extends GameState {
 		super(gsm);
 		image_leftArrow = new TextureRegion(res.getTexture("arrow-left"));
 
-		savedSessions = new Group[player.characters.size()];
+		savedSessions = new Group[game.characters.size()];
 
 		loadStage();
 
-		if (Betrayal.debug) System.out.println(gsm.game.getPlayer().toJson());
+		//if (Betrayal.debug) System.out.println(gsm.game.getPlayer().toJson());
 	}
 
 	public void update(float dt) {
@@ -101,7 +101,7 @@ public class LoadGame extends GameState {
 		// TODO @vincent loads kinda slow and code is kinda long
 		int counter = 1, scale = 4;
 
-		for (Character c : player.characters) {
+		for (Character c : game.characters) {
 			final Character character = c;
 			Group preview = new Group();
 
@@ -201,11 +201,11 @@ public class LoadGame extends GameState {
 				if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
 						&& y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
 					if (!mode_delete) { // Delete mode is off
-						player.setCurrentCharacter(character);
+						game.setCurrentCharacter(character);
 						gsm.setState(GameStateManager.State.LOBBY);
 					} else { // Delete mode is on
 						removeSavedSessions();
-						player.deleteCharacter(character);
+						game.characters.remove(character);
 						loadSavedSessions();
 					}
 				}

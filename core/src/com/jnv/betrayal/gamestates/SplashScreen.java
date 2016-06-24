@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
@@ -18,16 +17,12 @@ import java.text.DecimalFormat;
 public class SplashScreen extends GameState {
 
 	private ResourceLoader loader;
-	private Label text_percent;
+	private Label percentText;
 	private DecimalFormat format;
-    private Player player;
 
 	public SplashScreen(GameStateManager gsm) {
 		super(gsm);
 		loader = game.getResourceLoader();
-
-        player = gsm.game.getPlayer();
-        player.setPlayerID();
         
 		loader.loadLoadingScreen();
 		res.finishLoading();
@@ -45,7 +40,7 @@ public class SplashScreen extends GameState {
 			loader.loadAllData();
 			gsm.setState(GameStateManager.State.MENU);
 		}
-		text_percent.setText("Loading... " + format.format(res.getProgress() * 100) + "%");
+		percentText.setText("Loading... " + format.format(res.getProgress() * 100) + "%");
 	}
 
 	public void render() {
@@ -73,10 +68,10 @@ public class SplashScreen extends GameState {
 	}
 
 	private void loadPercentText() {
-		text_percent = new Label("Loading... 99%", FontManager.getFont(50));
-		text_percent.setBounds((Betrayal.WIDTH - text_percent.getPrefWidth()) / 2, 300,
-				text_percent.getPrefWidth(), text_percent.getPrefHeight());
-		text_percent.layout();
-		stage.addActor(text_percent);
+		percentText = new Label("Loading... 99%", FontManager.getFont(50));
+		percentText.setBounds((Betrayal.WIDTH - percentText.getPrefWidth()) / 2, 300,
+				percentText.getPrefWidth(), percentText.getPrefHeight());
+		percentText.layout();
+		stage.addActor(percentText);
 	}
 }

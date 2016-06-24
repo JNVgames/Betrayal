@@ -7,7 +7,6 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public abstract class GameState {
@@ -15,7 +14,6 @@ public abstract class GameState {
 	protected GameStateManager gsm;
 	protected Betrayal game;
 	protected BetrayalAssetManager res;
-	protected Player player;
 	protected Stage stage;
 
 	protected GameState(GameStateManager gsm) {
@@ -24,7 +22,6 @@ public abstract class GameState {
 		stage = game.getStage();
 		stage.clear();
 		res = game.res;
-		player = game.getPlayer();
 		Gdx.input.setInputProcessor(stage);
 	}
 

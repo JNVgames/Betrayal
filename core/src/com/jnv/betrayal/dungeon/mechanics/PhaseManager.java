@@ -1,15 +1,15 @@
-package com.jnv.betrayal.dungeon.phases;
+package com.jnv.betrayal.dungeon.mechanics;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -18,20 +18,21 @@ import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
-public abstract class Phase {
+/**
+ * Keeps track of user/party member/monster's turns.
+ */
+public class PhaseManager {
 
-	public final Group group = new Group();
-	public final Pool<Label> panelPool;
-	public final Pool<Button> buttonPool;
-	public final GameStateManager gsm;
-	public final BetrayalAssetManager res;
-	public final Field field;
-	public final PhaseManager pm;
+	public final Group panels = new Group();
+	private Field field;
+	private GameStateManager gsm;
+	private Pool<Label> panelPool;
+	private Pool<Button> buttonPool;
+	private BetrayalAssetManager res;
 
-	protected Phase(PhaseManager pm) {
-		this.pm = pm;
-		field = pm.field;
-		gsm = pm.field.gsm;
+	public PhaseManager(Field field) {
+		this.field = field;
+		gsm = field.gsm;
 		res = field.res;
 		buttonPool = new Pool<Button>() {
 			public Button obtain() {
@@ -58,22 +59,64 @@ public abstract class Phase {
 				return new Label(null, new Label.LabelStyle(FontManager.getFont(70)));
 			}
 		};
+		drawMainMenu();
+		field.addActor(panels);
 	}
 
-	protected void clearActionBar() {
-		// Clear action bar
-		for (Actor actor : group.getChildren()) {
-			if (actor instanceof Label) panelPool.free((Label) actor);
-			if (actor instanceof Button) buttonPool.free((Button) actor);
-		}
-		group.clear();
+//	public ArrayList<Card> selectNextPlayerTurn() {
+//
+//	}
+
+	private void drawMainMenu() {
+		panels.clearChildren();
+		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
+			public void run() {
+				// todo stub
+			}
+		}));
+		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
+			public void run() {
+				field.beginSelectMode(1);
+				drawAttackBar();
+			}
+		}));
+		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
+			public void run() {
+				// todo stub
+			}
+		}));
+		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
+			@Override
+			public void run() {
+				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
+					@Override
+					public void doAction() {
+						gsm.setState(GameStateManager.State.LOBBY);
+					}
+				};
+			}
+		}));
+	}
+
+	private void drawAttackBar() {
+		panels.clearChildren();
+		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
+			public void run() {
+				field.endSelectMode();
+			}
+		}));
+		panels.addActor(createPanel("Cancel", 70, Panel.bottom, new Runnable() {
+			public void run() {
+				drawMainMenu();
+			}
+		}));
 	}
 
 	protected Group createGrayPanel(String panelText, int fontSize, Dimension dimension) {
 		Group group = new Group();
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
-		com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle font = FontManager.getFont(fontSize);
+		Label.LabelStyle font = FontManager.getFont(fontSize);
 		font.fontColor = Color.LIGHT_GRAY;
 		panel.setStyle(font);
 		panel.setBounds(dimension);
@@ -87,7 +130,7 @@ public abstract class Phase {
 		border.setBounds(dimension);
 		group.addActor(panel);
 		group.addActor(border);
-		this.group.addActor(group);
+		panels.addActor(group);
 		return group;
 	}
 
@@ -98,7 +141,7 @@ public abstract class Phase {
 	 * @param fontSize  text size
 	 */
 	protected Group createPanel(String panelText, int fontSize, Dimension dimension,
-							 final Runnable action) {
+								final Runnable action) {
 		Group group = new Group();
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
@@ -123,9 +166,8 @@ public abstract class Phase {
 		});
 		group.addActor(panel);
 		group.addActor(border);
-		this.group.addActor(group);
+		panels.addActor(group);
 		return group;
 	}
 
-	public abstract int getPhaseNum();
 }

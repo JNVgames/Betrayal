@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
-import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**
@@ -26,8 +25,7 @@ public class Character implements Json.Serializable {
 	/**
 	 * Creates a character with default traits
 	 */
-	public Character(Player player, BetrayalAssetManager res) {
-		characterID = player.characters.size();
+	public Character(BetrayalAssetManager res) {
 		inventory = new Inventory();
 		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);

@@ -104,7 +104,7 @@ class ItemOptions extends Popup {
 				label.addListener(new InputListener(label) {
 					@Override
 					public void doAction() {
-						game.getPlayer().getCurrentCharacter().equips.equip((Equip) item);
+						game.getCurrentCharacter().equips.equip((Equip) item);
 						inventory.refresh();
 						remove();
 					}
@@ -115,7 +115,7 @@ class ItemOptions extends Popup {
 					@Override
 					public void doAction() {
 						if (Betrayal.debug && unequipSlot != -1)
-							game.getPlayer().getCurrentCharacter().equips.unequip(unequipSlot);
+							game.getCurrentCharacter().equips.unequip(unequipSlot);
 						inventory.refresh();
 						remove();
 					}

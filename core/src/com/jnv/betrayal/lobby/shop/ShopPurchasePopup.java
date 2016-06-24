@@ -27,7 +27,7 @@ public class ShopPurchasePopup extends Popup {
 
 	public ShopPurchasePopup(Betrayal game, Item item) {
 		super(game);
-		character = game.getPlayer().getCurrentCharacter();
+		character = game.getCurrentCharacter();
 		this.item = item;
 		currentSide = 0;
 		loadButtons();

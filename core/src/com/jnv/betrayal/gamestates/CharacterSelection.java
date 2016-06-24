@@ -45,7 +45,7 @@ public class CharacterSelection extends GameState {
 		font60 = FontManager.getFont(60);
 		font45 = FontManager.getFont(45);
 
-		character = new Character(gsm.game.getPlayer(), res);
+		character = new Character(res);
 
 		loadStage();
 	}
@@ -138,8 +138,8 @@ public class CharacterSelection extends GameState {
 		button_play_now.addListener(new InputListener(button_play_now) {
 			@Override
 			public void doAction() {
-				player.addCharacter(character);
-				player.setCurrentCharacterIndex(player.characters.indexOf(character));
+				game.characters.add(character);
+				game.setCurrentCharacter(character);
 				gsm.setState(GameStateManager.State.LOBBY);
 			}
 		});

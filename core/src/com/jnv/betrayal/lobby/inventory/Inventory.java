@@ -31,7 +31,7 @@ public class Inventory extends Popup {
 		inventorySpots = new Image[20];
 		characterOutline = new Image[8];
 		charOutDescription = new Label[7];
-		character = game.getPlayer().getCurrentCharacter();
+		character = game.getCurrentCharacter();
 		loadButtons();
 		itemLoader = new ItemLoader(this);
 		itemLoader.loadInventory();

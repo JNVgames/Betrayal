@@ -38,7 +38,7 @@ public class StatsWindow extends Popup {
 		statPlusButtons = new Image [3];
 		statMinusButtons = new Image [3];
 		characterStats = new Group();
-		character = game.getPlayer().getCurrentCharacter();
+		character = game.getCurrentCharacter();
 		applyPoints = character.stats.getApplyPointsObject();
 		loadButtons();
 		loadHairButton();

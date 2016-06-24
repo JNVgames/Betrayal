@@ -15,9 +15,10 @@ import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
-import com.jnv.betrayal.utils.Queue;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public abstract class Card {
@@ -33,7 +34,7 @@ public abstract class Card {
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener;
 	private List<Action> actionsOut;
-	private Queue<Action> actionsIn;
+	private Deque<Action> actionsIn;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -57,7 +58,7 @@ public abstract class Card {
 		group.addAction(Actions.alpha(0));
 		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		healthBar = new HealthBar(group.getHeight(), res);
-		actionsIn = new Queue<Action>();
+		actionsIn = new ArrayDeque<Action>();
 		actionsOut = new ArrayList<Action>();
 		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
 		group.addActor(healthBar);
@@ -97,8 +98,9 @@ public abstract class Card {
 	}
 
 	public void beginSelectMode(int numTargets) {
-		if (selecting)
+		if (selecting) {
 			throw new IllegalStateException("Card.endSelectMode must be called before beginSelectMode");
+		}
 		selectListener = createSelectListener(numTargets);
 		group.addListener(selectListener);
 		selecting = true;

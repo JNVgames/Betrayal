@@ -44,8 +44,8 @@ public class Shop extends Popup {
 
 	public Shop(Betrayal game) {
 		super(game);
-		character = game.getPlayer().getCurrentCharacter();
-		preview = game.getPlayer().getCurrentCharacter().preview;
+		character = game.getCurrentCharacter();
+		preview = game.getCurrentCharacter().preview;
 		currentGroup = new Group();
 		currentContent = 0;
 		buttonHeight = 100;

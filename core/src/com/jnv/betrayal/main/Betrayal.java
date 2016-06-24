@@ -11,11 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.jnv.betrayal.character.*;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gamestates.GameStateManager;
-import com.jnv.betrayal.network.Player;
-import com.jnv.betrayal.network.PlayerStateHandler;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Betrayal extends Game {
 
@@ -30,7 +33,8 @@ public class Betrayal extends Game {
 	private StretchViewport stretchViewport;
 	private Stage stage;
 	private ResourceLoader loader;
-	private Player player;
+	public final List<Character> characters = new ArrayList<Character>();
+	private Character currentCharacter;
 
 	public void create() {
 		Gdx.graphics.setContinuousRendering(false);
@@ -38,10 +42,8 @@ public class Betrayal extends Game {
 		init();
 
 		loader = new ResourceLoader(res);
-		player = new Player();
 
 		gsm = new GameStateManager(this);
-		player = new Player();
 		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
 
 		resume();
@@ -53,8 +55,6 @@ public class Betrayal extends Game {
 	}
 
 	public void pause() {
-		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
-		playerStateHandler.goOffline(player.getPlayerID());
 		Gdx.app.log("Betrayal", "pause()");
         gamePaused = true;
 		gsm.pause();
@@ -66,8 +66,6 @@ public class Betrayal extends Game {
             gsm.resume();
         }
 		Timer timer = new Timer();
-		PlayerStateHandler playerStateHandler = new PlayerStateHandler(player);
-		playerStateHandler.goOnline(player.getPlayerID());
 		Gdx.app.log("Betrayal", "resume()");
 	}
 
@@ -97,10 +95,6 @@ public class Betrayal extends Game {
 	}
 
 	// Getters
-	public Player getPlayer() {
-		return player;
-	}
-
 	public SpriteBatch getBatch() {
 		return sb;
 	}
@@ -121,4 +115,11 @@ public class Betrayal extends Game {
 		return loader;
 	}
 
+	public Character getCurrentCharacter() {
+		return currentCharacter;
+	}
+
+	public void setCurrentCharacter(Character currentCharacter) {
+		this.currentCharacter = currentCharacter;
+	}
 }

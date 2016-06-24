@@ -72,7 +72,7 @@ public class Menu extends GameState {
 		button_newGame.addListener(new InputListener(button_newGame) {
 			@Override
 			public void doAction() {
-				if (player.characters.size() < 4)
+				if (game.characters.size() < 4)
 					gsm.setState(GameStateManager.State.CHARACTER_SELECTION);
 				else // if (players.character.size() == 4)
 					displayCharactersFullDialog();
@@ -84,7 +84,7 @@ public class Menu extends GameState {
 	private void loadLoadGameButton() {
 		Actor button_loadGame = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
-				if (!player.characters.isEmpty()) {
+				if (!game.characters.isEmpty()) {
 					batch.draw(res.getTexture("load-game"),
 							(Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
 							600, 512, 144);
@@ -97,7 +97,7 @@ public class Menu extends GameState {
 		};
 		button_loadGame.setBounds((Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
 				600, 512, 144);
-		if (player.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
+		if (game.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
 
 		button_loadGame.addListener(new InputListener(button_loadGame) {
 			@Override

@@ -14,7 +14,6 @@ import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.network.Player;
 import com.jnv.betrayal.resources.FontManager;
 
 public class Dungeon extends GameState {
@@ -24,11 +23,8 @@ public class Dungeon extends GameState {
 
 	private int floor, numPlayers, strongestPlayer;
 
-	private Player player;
-
 	public Dungeon(GameStateManager gsm) {
 		super(gsm);
-		player = gsm.game.getPlayer();
 		//this.floor = floor;
 		//this.numPlayers = numPlayers;
 
@@ -39,7 +35,7 @@ public class Dungeon extends GameState {
 
 		// Add all player and monster cards to the field
 		int playerNum = 0;
-		for (Character character : player.characters) {
+		for (Character character : game.characters) {
 			field.addCard(new PlayerCard(DungeonCoords.player[playerNum], character, res));
 			playerNum++;
 		}
