@@ -13,7 +13,7 @@ import java.util.Deque;
 public class ActionManager {
 
 	//for history. Always add to the front of the Deque
-	private Deque<Action> actionHistory;
+	public final Deque<Action> actionHistory;
 	private Field field;
 
 	public ActionManager(Field field) {

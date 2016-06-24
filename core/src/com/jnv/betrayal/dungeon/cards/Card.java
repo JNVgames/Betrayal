@@ -54,6 +54,10 @@ public abstract class Card {
 		this(new Dimension(x, y, width, height), res);
 	}
 
+	public Actor getCardImage() {
+		return cardImage;
+	}
+
 	private void initialize() {
 		group.addAction(Actions.alpha(0));
 		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
