@@ -7,11 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.CardEffects;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -21,7 +24,7 @@ import com.jnv.betrayal.scene2d.ui.Label;
 /**
  * Keeps track of user/party member/monster's turns.
  */
-public class PhaseManager {
+public class TurnManager {
 
 	public final Group panels = new Group();
 	private Field field;
@@ -30,7 +33,7 @@ public class PhaseManager {
 	private Pool<Button> buttonPool;
 	private BetrayalAssetManager res;
 
-	public PhaseManager(Field field) {
+	public TurnManager(Field field) {
 		this.field = field;
 		gsm = field.gsm;
 		res = field.res;

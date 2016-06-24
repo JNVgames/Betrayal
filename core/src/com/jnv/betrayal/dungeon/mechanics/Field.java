@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
-import com.jnv.betrayal.dungeon.cards.MonsterManager;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -19,7 +18,7 @@ import com.jnv.betrayal.scene2d.ui.Image;
 public class Field extends Group {
 
 	private Image background;
-	private PhaseManager phaseManager;
+	private TurnManager turnManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final SnapshotArray<PlayerCard> playerZone;
@@ -43,7 +42,7 @@ public class Field extends Group {
 		eventLogButton.layout();
 		eventLogButton.setBounds(20, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144 * scale);
 		addActor(eventLogButton);
-		phaseManager = new PhaseManager(this);
+		turnManager = new TurnManager(this);
 	}
 
 	public void addCard(Card card) {
