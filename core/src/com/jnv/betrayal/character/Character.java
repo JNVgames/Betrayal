@@ -10,12 +10,14 @@ import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
+import java.util.Random;
+
 /**
  * Holds information regarding a game character's traits
  */
 public class Character implements Json.Serializable {
 
-	private int characterID;
+	private int id;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -26,6 +28,8 @@ public class Character implements Json.Serializable {
 	 * Creates a character with default traits
 	 */
 	public Character(BetrayalAssetManager res) {
+		id = generateRandomID();
+
 		inventory = new Inventory();
 		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);
@@ -53,8 +57,8 @@ public class Character implements Json.Serializable {
 		}
 	}
 
-	public int getCharacterID() {
-		return characterID;
+	public int getId() {
+		return id;
 	}
 
 	public String toJson() {
@@ -64,7 +68,7 @@ public class Character implements Json.Serializable {
 
 	// Json methods
 	public void write(Json json) {
-		json.writeField(this, "characterID", Integer.class);
+		json.writeField(this, "id", Integer.class);
 		json.writeField(job, "job", Job.class);
 		preview.write(json);
 		equips.write(json);
@@ -125,5 +129,11 @@ public class Character implements Json.Serializable {
 			default:
 				break;
 		}
+	}
+
+	// TODO REMOVE THIS WE WILL NOT BE USING THIS WE WILL USE ACCOUNT ID
+	private static int generateRandomID() {
+		Random random = new Random();
+		return random.nextInt(999999);
 	}
 }

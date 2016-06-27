@@ -28,9 +28,8 @@ public class YourTurn extends Turn {
 			public void run() {
 				field.endSelectMode();
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
-				field.actionManager.addActionToHistory(new Action(field.getCurrentCard(), dest, ActionType.ATTACK));
+				field.actionManager.performAction(new Action(field.getCurrentCard(), dest, ActionType.ATTACK));
 				field.turnManager.nextTurn();
-//				new Action()
 			}
 		}));
 		panels.addActor(createPanel("Cancel", 70, Panel.bottom, new Runnable() {

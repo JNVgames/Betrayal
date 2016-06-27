@@ -27,15 +27,10 @@ public class ActionManager {
 		return actionHistory.getFirst();
 	}
 
-	//adds an action to the history deque and notifies all other cards
-	public void addActionToHistory(Action action){
-		actionHistory.addFirst(action);
-		performAction();
-	}
-
 	//update field, update all card's data
-	public void performAction() {
-		Action action = actionHistory.peekLast();
+	public void performAction(Action action) {
+		actionHistory.addFirst(action);
+
 		// If dest card is null, perform action on self
 		if (action.destExist()) {
 			switch (action.getActionType()){

@@ -570,10 +570,6 @@ public class ResourceLoader {
 					.build();
 		}
 
-
-
-		//TODO: FINISH THE FACTORIES
-
 		/********************RINGS********************/
 		new Ring.RingFactory(res)	//Red Health Ring
 				.id(115)

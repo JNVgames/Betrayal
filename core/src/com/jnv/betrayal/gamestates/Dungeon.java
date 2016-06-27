@@ -40,6 +40,7 @@ public class Dungeon extends GameState {
 			playerNum++;
 		}
 		MonsterManager monsterManager = new MonsterManager(1, res, field);
+		field.turnManager.draw();
 		stage.addActor(field);
 	}
 

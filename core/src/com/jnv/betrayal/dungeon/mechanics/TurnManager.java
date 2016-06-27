@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.turns.MonsterTurn;
 import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
@@ -59,7 +60,6 @@ public class TurnManager {
 			}
 		};
 		field.addActor(panels);
-		getTurn(Turns.YOUR_TURN).draw();
 	}
 
 //	public ArrayList<Card> selectNextPlayerTurn() {
@@ -68,10 +68,24 @@ public class TurnManager {
 
 	public void nextTurn() {
 		field.setNextCardTurn();
+		draw();
+	}
+
+	public void draw() {
 		Card currentCard = field.getCurrentCard();
-		//if (currentCard instanceof PlayerCard && )
-		if (currentCard instanceof MonsterCard) {
+
+		// Team member turn
+		if (currentCard instanceof PlayerCard
+				&& ((PlayerCard) currentCard).getCharacterID() != field.game.getCurrentCharacter().getId()) {
+			getTurn(Turns.TEAM_MEMBER_TURN).draw();
+		}
+		// Monster turn
+		else if (currentCard instanceof MonsterCard) {
 			getTurn(Turns.MONSTER_TURN).draw();
+		}
+		// Your turn
+		else {
+			getTurn(Turns.YOUR_TURN).draw();
 		}
 	}
 

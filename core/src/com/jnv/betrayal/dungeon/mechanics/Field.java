@@ -9,7 +9,6 @@ import com.jnv.betrayal.dungeon.ActionHandler.ActionManager;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -22,7 +21,6 @@ import java.util.List;
 
 public class Field extends Group {
 
-	private Image background;
 	public final ActionManager actionManager;
 	public final TurnManager turnManager;
 	public final GameStateManager gsm;
@@ -43,7 +41,7 @@ public class Field extends Group {
 		this.gsm = gsm;
 		game = gsm.game;
 		res = gsm.game.res;
-		background = new Image(res.getTexture("map-1"));
+		Image background = new Image(res.getTexture("map-1"));
 		currentCardTurn = 0;
 		allCards = new ArrayList<Card>();
 
@@ -150,7 +148,7 @@ public class Field extends Group {
 	}
 
 	// refreshed all cards incase a card died.
-	public void refreshAllCards(){
+	public void refreshAllCards() {
 		allCards.clear();
 		allCards.addAll(playerZone);
 		allCards.addAll(monsterZone);
@@ -161,8 +159,27 @@ public class Field extends Group {
 		return allCards;
 	}
 
-	public List<Card> getAllPlayerCards (){
+	public List<Card> getAllPlayerCards() {
 		return new ArrayList<Card>(playerZone);
 	}
 
+	public List<Card> getAllMonsterCards() {
+		return new ArrayList<Card>(monsterZone);
+	}
+
+	/**
+	 * Player card death event
+	 */
+	public void removePlayerCard(PlayerCard card) {
+		playerZone.remove(card);
+		//todo perform kill die animation pass away kick the bucket eat the dust hit the hay
+	}
+
+	/**
+	 * Monster card death event
+	 */
+	public void removeMonsterCard(MonsterCard card) {
+		monsterZone.remove(card);
+		//todo perform kill die animation pass away kick the bucket eat the dust hit the hay
+	}
 }

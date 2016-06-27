@@ -28,6 +28,7 @@ public class PlayerCard extends Card {
 	public PlayerCard(float x, float y, Character character,
 						 BetrayalAssetManager res) {
 		super(new Dimension(x, y, DungeonCoords.PLAYER_WIDTH, DungeonCoords.PLAYER_HEIGHT), res);
+		this.character = character;
 		baseHealth = character.stats.getStat(Stat.HEALTH);
 		baseAttack = character.stats.getStat(Stat.ATTACK);
 		baseDefense = character.stats.getStat(Stat.DEFENSE);
@@ -45,6 +46,6 @@ public class PlayerCard extends Card {
 	}
 
 	public int getCharacterID() {
-		return character.getCharacterID();
+		return character.getId();
 	}
 }
