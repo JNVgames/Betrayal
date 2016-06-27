@@ -35,6 +35,7 @@ public abstract class Card {
 	private InputListener selectListener;
 	private List<Action> actionsOut;
 	private Deque<Action> actionsIn;
+	private boolean isTurn;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -67,6 +68,7 @@ public abstract class Card {
 		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
 		group.addActor(healthBar);
 		healthBar.toFront();
+		isTurn = false;
 	}
 
 	/**
@@ -154,7 +156,7 @@ public abstract class Card {
 							select();
 							// If unselected, check if targets selected is less than the limit
 						} else { // numTarget > 1
-							if (field.getCardsSelected() < numTargets) select();
+							if (field.getCardsSelected().size() < numTargets) select();
 						}
 					}
 				}
@@ -168,5 +170,13 @@ public abstract class Card {
 
 	public Group getGroup() {
 		return group;
+	}
+
+	public boolean isTurn() {
+		return isTurn;
+	}
+
+	public void setTurn(boolean turn) {
+		isTurn = turn;
 	}
 }

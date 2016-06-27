@@ -3,9 +3,11 @@ package com.jnv.betrayal.dungeon.ActionHandler;
 
 import com.jnv.betrayal.dungeon.cards.Card;
 
-public abstract class Action {
+import java.util.List;
+
+public class Action {
 	private Card src;
-	private Card dest;
+	private List<Card> dest;
 	private ActionType actionType;
 
 	public Action(Card src, ActionType actionType) {
@@ -13,7 +15,7 @@ public abstract class Action {
 		this.actionType = actionType;
 	}
 
-	public Action(Card src, Card dest, ActionType actionType) {
+	public Action(Card src, List<Card> dest, ActionType actionType) {
 		this.src = src;
 		this.dest = dest;
 		this.actionType = actionType;
@@ -23,7 +25,7 @@ public abstract class Action {
 		return src;
 	}
 
-	public Card getDest() {
+	public List<Card> getDest() {
 		return dest;
 	}
 
@@ -32,6 +34,6 @@ public abstract class Action {
 	}
 
 	public boolean destExist() {
-		return dest == null;
+		return dest == null || dest.size() != 0;
 	}
 }

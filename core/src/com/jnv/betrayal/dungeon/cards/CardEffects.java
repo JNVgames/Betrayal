@@ -30,10 +30,10 @@ public class CardEffects {
 	}
 
 	public static void attack(Card card){
-
+		// todo joey jump up and down
 	}
 
-	public static void defend(Card card ){
+	public static void defend(Card card) {
 
 	}
 }

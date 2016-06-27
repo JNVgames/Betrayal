@@ -1,23 +1,76 @@
 package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.ActionHandler.Action;
+import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
+import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.utils.Panel;
+import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class YourTurn extends Turn {
 
-	private Pool<Label> panelPool;
-	private Pool<Button> buttonPool;
+	public YourTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
+		super(field, panelPool, buttonPool, panels, game);
+	}
 
-	public YourTurn(Pool<Label> panelPool, Pool<Button> buttonPool) {
-		this.panelPool = panelPool;
-		this.buttonPool = buttonPool;
+	private void drawAttackBar() {
+		panels.clearChildren();
+		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
+			public void run() {
+				field.endSelectMode();
+				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
+				field.actionManager.addActionToHistory(new Action(field.getCurrentCard(), dest, ActionType.ATTACK));
+				field.turnManager.nextTurn();
+//				new Action()
+			}
+		}));
+		panels.addActor(createPanel("Cancel", 70, Panel.bottom, new Runnable() {
+			public void run() {
+				draw();
+				field.endSelectMode();
+			}
+		}));
 	}
 
 	@Override
-	public void draw(Group group) {
-
+	public void draw() {
+		panels.clearChildren();
+		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
+			public void run() {
+				// todo stub
+			}
+		}));
+		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
+			public void run() {
+				field.beginSelectMode(1);
+				drawAttackBar();
+			}
+		}));
+		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
+			public void run() {
+				// todo stub
+			}
+		}));
+		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
+			@Override
+			public void run() {
+				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
+					@Override
+					public void doAction() {
+						gsm.setState(GameStateManager.State.LOBBY);
+					}
+				};
+			}
+		}));
 	}
 
 	@Override

@@ -18,7 +18,6 @@ public class EventLog extends Popup {
     private ScrollPane scrollPane;
     private Table table;
 
-
     public EventLog(Betrayal game) {
         super(game);
         loadButtons();

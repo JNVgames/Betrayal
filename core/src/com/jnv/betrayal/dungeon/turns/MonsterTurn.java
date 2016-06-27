@@ -1,4 +1,34 @@
 package com.jnv.betrayal.dungeon.turns;
 
-public class MonsterTurn {
+import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.ActionHandler.Action;
+import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
+import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.utils.Panel;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.scene2d.Group;
+import com.jnv.betrayal.scene2d.ui.Button;
+import com.jnv.betrayal.scene2d.ui.Label;
+
+public class MonsterTurn extends Turn {
+
+	public MonsterTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
+		super(field, panelPool, buttonPool, panels, game);
+	}
+
+	@Override
+	public void draw() {
+		panels.clearChildren();
+		createPanel("Monster's turn", 80, Panel.full, new Runnable() {
+			@Override
+			public void run() {
+				field.actionManager.addActionToHistory(new Action(field.getCurrentCard(), field.getAllPlayerCards(), ActionType.ATTACK));
+			}
+		});
+	}
+
+	@Override
+	public void erase() {
+
+	}
 }

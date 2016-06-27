@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.ActionHandler;
 
 
+import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 
 import java.util.ArrayDeque;
@@ -18,7 +19,7 @@ public class ActionManager {
 
 	public ActionManager(Field field) {
 		this.field = field;
-		actionHistory = new ArrayDeque();
+		actionHistory = new ArrayDeque<Action>();
 	}
 
 	//gets the action that happened most recently
@@ -29,15 +30,17 @@ public class ActionManager {
 	//adds an action to the history deque and notifies all other cards
 	public void addActionToHistory(Action action){
 		actionHistory.addFirst(action);
+		performAction();
 	}
 
 	//update field, update all card's data
 	public void performAction() {
 		Action action = actionHistory.peekLast();
 		// If dest card is null, perform action on self
-		if (!action.destExist()) {
+		if (action.destExist()) {
 			switch (action.getActionType()){
 				case ATTACK:
+					AnimationManager.performAnimation(action);
 					break;
 				case DEFEND:
 					break;

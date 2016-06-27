@@ -18,6 +18,7 @@ import com.jnv.betrayal.scene2d.Dimension;
 public class PlayerCard extends Card {
 
 	private Preview preview;
+	private Character character;
 
 	public PlayerCard(Vector2 coords, Character character,
 					  BetrayalAssetManager res) {
@@ -41,5 +42,9 @@ public class PlayerCard extends Card {
 		cardImage.setBounds(0, 0, group.getWidth(), group.getHeight());
 		group.addActor(cardImage);
 		cardImage.toBack();
+	}
+
+	public int getCharacterID() {
+		return character.getCharacterID();
 	}
 }

@@ -53,6 +53,10 @@ public class Character implements Json.Serializable {
 		}
 	}
 
+	public int getCharacterID() {
+		return characterID;
+	}
+
 	public String toJson() {
 		Json json = new Json();
 		return json.prettyPrint(this);
