@@ -32,7 +32,7 @@ public class MonsterCard extends Card {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
 				batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
-				batch.draw(monster.getMonsterTexture(), 0, 0, width, height);
+				batch.draw(monster.getMonsterTexture(), getX(), getY(), width, height);
 			}
 		};
 		cardImage.setBounds(0, 0, width, height);
@@ -45,7 +45,6 @@ public class MonsterCard extends Card {
 	public ActionType getActionType() {
 		return allActions.get(actionIndex);
 	}
-
 
 	public void nextActionIndex() {
 		this.actionIndex = (actionIndex + 1) % allActions.size();

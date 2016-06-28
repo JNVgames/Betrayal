@@ -5,8 +5,8 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.jnv.betrayal.gameobjects.Monster;
 
 public class CardEffects {
 
@@ -29,8 +29,13 @@ public class CardEffects {
 		));
 	}
 
-	public static void attack(Card card){
-		// todo joey jump up and down
+	public static void attack(Card card) {
+		int multiplier = 1;
+		if (card instanceof MonsterCard) {
+			multiplier *= -1;
+		}
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(0, 50 * multiplier, 0.2f)));
+		card.getCardImage().addAction(Actions.delay(0.7f, Actions.moveBy(0, -50 * multiplier, 0.2f)));
 	}
 
 	public static void defend(Card card) {

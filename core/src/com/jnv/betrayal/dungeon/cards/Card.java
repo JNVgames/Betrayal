@@ -33,8 +33,6 @@ public abstract class Card {
 	private TextureRegion selectedTexture;
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener;
-	private List<Action> actionsOut;
-	private Deque<Action> actionsIn;
 	private boolean isTurn;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
@@ -63,8 +61,6 @@ public abstract class Card {
 		group.addAction(Actions.alpha(0));
 		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		healthBar = new HealthBar(group.getHeight(), res);
-		actionsIn = new ArrayDeque<Action>();
-		actionsOut = new ArrayList<Action>();
 		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
 		group.addActor(healthBar);
 		healthBar.toFront();
