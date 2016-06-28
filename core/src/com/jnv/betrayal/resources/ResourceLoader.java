@@ -111,6 +111,7 @@ public class ResourceLoader {
 		res.loadTexture("button/Swords360x144.png", "sword-button");
 		res.loadTexture("button/Headgear360x144.png", "headgear-button");
 
+
 	}
 
 	private void loadLobbyButtons() {
@@ -166,6 +167,7 @@ public class ResourceLoader {
 		res.loadTexture("dungeon/healthbar/red_bar52x17.png", "red-bar");
 		res.loadTexture("dungeon/healthbar/yellow_bar102x17.png", "yellow-bar");
 		res.loadTexture("dungeon/healthbar/health_bar_background330x40.png", "bar-background");
+		res.loadTexture("dungeon/monster_select312x312.png", "cross-hair");
 	}
 
 	private void loadHeadGear() {
