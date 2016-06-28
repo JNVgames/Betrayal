@@ -29,7 +29,7 @@ public class CardEffects {
 		));
 	}
 
-	public static void attack(Card card) {
+	public static void jump(Card card) {
 		int multiplier = 1;
 		if (card instanceof MonsterCard) {
 			multiplier *= -1;
@@ -39,6 +39,14 @@ public class CardEffects {
 	}
 
 	public static void defend(Card card) {
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.GRAY)));
+		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
+	}
+
+	public static void useItem(Card card) {
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30,2)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
 
 	}
 }

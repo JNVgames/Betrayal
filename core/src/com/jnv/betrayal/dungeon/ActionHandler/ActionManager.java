@@ -38,8 +38,10 @@ public class ActionManager {
 					AnimationManager.performAnimation(action);
 					break;
 				case DEFEND:
+					AnimationManager.performAnimation(action);
 					break;
 				case FLEE:
+					AnimationManager.performAnimation(action);
 					break;
 				default:
 					throw new AssertionError();

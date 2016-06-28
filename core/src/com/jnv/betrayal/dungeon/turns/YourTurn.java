@@ -22,13 +22,13 @@ public class YourTurn extends Turn {
 		super(field, panelPool, buttonPool, panels, game);
 	}
 
-	private void drawAttackBar() {
+	private void drawAttackBar(final ActionType actionType) {
 		panels.clearChildren();
 		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
 			public void run() {
 				field.endSelectMode();
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
-				field.actionManager.performAction(new Action(field.getCurrentCard(), dest, ActionType.ATTACK));
+				field.actionManager.performAction(new Action(field.getCurrentCard(), dest, actionType));
 				field.turnManager.nextTurn();
 			}
 		}));
@@ -40,22 +40,27 @@ public class YourTurn extends Turn {
 		}));
 	}
 
+
 	@Override
 	public void draw() {
 		panels.clearChildren();
 		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
 			public void run() {
-				// todo stub
+				field.beginSelectMode(1);
+				drawAttackBar(ActionType.ITEM);
+				// todo change input to what is needed by the specific item
 			}
 		}));
 		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawAttackBar();
+				drawAttackBar(ActionType.ATTACK);
 			}
 		}));
 		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
 			public void run() {
+				field.beginSelectMode(1);
+				drawAttackBar(ActionType.DEFEND);
 				// todo stub
 			}
 		}));

@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -16,9 +15,7 @@ import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
 public abstract class Card {
@@ -30,7 +27,7 @@ public abstract class Card {
 	protected BetrayalAssetManager res;
 	protected Actor cardImage;
 	protected Group group;
-	private TextureRegion selectedTexture;
+	private TextureRegion selectedTexture, shieldTexture;
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener;
 	private boolean isTurn;
@@ -40,7 +37,10 @@ public abstract class Card {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
 				super.draw(batch, parentAlpha);
-				if (isSelected && selecting) batch.draw(selectedTexture, getX(), getY(), getWidth(), getHeight());
+				if (isSelected && selecting) {
+					batch.draw(selectedTexture, getX() + (getWidth() - 100) / 2,
+							getY() + (getHeight() - 100) / 2, 100, 100);
+				}
 			}
 		};
 		group.setBounds(dimension);
@@ -61,10 +61,12 @@ public abstract class Card {
 		group.addAction(Actions.alpha(0));
 		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		healthBar = new HealthBar(group.getHeight(), res);
-		selectedTexture = new TextureRegion(res.getTexture("instructions-background"));
+		selectedTexture = new TextureRegion(res.getTexture("cross-hair"));
+		shieldTexture = new TextureRegion(res.getTexture("defense"));
 		group.addActor(healthBar);
 		healthBar.toFront();
 		isTurn = false;
+
 	}
 
 	/**

@@ -54,6 +54,7 @@ public class ResourceLoader {
 	}
 
 	private void loadBackgrounds() {
+		res.loadTexture("about/empty.png", "empty");
 		res.loadTexture("about/start_screen720x1280.png", "start-background");
 		res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
 		res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
