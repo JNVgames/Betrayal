@@ -5,6 +5,7 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
 import com.jnv.betrayal.gameobjects.Monster;
@@ -28,6 +29,9 @@ public class MonsterCard extends Card {
 	public MonsterCard(final float x, final float y, final float width, final float height,
 					   final Monster monster, BetrayalAssetManager res) {
 		super(x, y, width, height, res);
+		baseHealth = currentHealth = monster.getHealth();
+		baseAttack = currentAttack = monster.getAttack();
+		baseDefense = currentDefense = monster.getDefense();
 		cardImage = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {

@@ -26,10 +26,10 @@ public class YourTurn extends Turn {
 		panels.clearChildren();
 		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
 			public void run() {
-				field.endSelectMode();
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
 				field.actionManager.performAction(new Action(field.getCurrentCard(), dest, actionType));
 				field.turnManager.nextTurn();
+				field.endSelectMode();
 			}
 		}));
 		panels.addActor(createPanel("Cancel", 70, Panel.bottom, new Runnable() {

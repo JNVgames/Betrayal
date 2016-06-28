@@ -29,9 +29,9 @@ public class PlayerCard extends Card {
 						 BetrayalAssetManager res) {
 		super(new Dimension(x, y, DungeonCoords.PLAYER_WIDTH, DungeonCoords.PLAYER_HEIGHT), res);
 		this.character = character;
-		baseHealth = character.stats.getStat(Stat.HEALTH);
-		baseAttack = character.stats.getStat(Stat.ATTACK);
-		baseDefense = character.stats.getStat(Stat.DEFENSE);
+		baseHealth = currentHealth = character.stats.getStat(Stat.HEALTH);
+		baseAttack = currentAttack = character.stats.getStat(Stat.ATTACK);
+		baseDefense = currentDefense = character.stats.getStat(Stat.DEFENSE);
 		preview = character.preview;
 		cardImage = new Actor() {
 			@Override

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.jnv.betrayal.gameobjects.Monster;
 
-public class CardEffects {
+public class CardAnimation {
 
 	public static void damaged(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.RED)));
@@ -45,8 +45,8 @@ public class CardEffects {
 
 	public static void useItem(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30,2)));
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30, 2)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
 
 	}
 }

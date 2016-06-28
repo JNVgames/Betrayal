@@ -3,7 +3,7 @@ package com.jnv.betrayal.dungeon.managers;
 
 import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.cards.CardEffects;
+import com.jnv.betrayal.dungeon.cards.CardAnimation;
 
 public class AnimationManager {
 
@@ -11,21 +11,26 @@ public class AnimationManager {
 
         switch (action.getActionType()) {
             case ATTACK:
-                CardEffects.jump(action.getSrc());
+                CardAnimation.jump(action.getSrc());
                 for (Card card : action.getDest()) {
-                    CardEffects.damaged(card);
+                    CardAnimation.damaged(card);
+                    card.getHealthBar().takeDamage(5);
                 }
                 break;
             case DEFEND:
-                CardEffects.jump(action.getSrc());
+                CardAnimation.jump(action.getSrc());
                 for (Card card : action.getDest()) {
-                    CardEffects.defend(card);
+                    CardAnimation.defend(card);
                 }
                 break;
             case FLEE:
                 break;
             case ITEM:
-                CardEffects.useItem(action.getSrc());
+                CardAnimation.useItem(action.getSrc());
         }
+    }
+
+    public static void healthBarAnimation(){
+
     }
 }

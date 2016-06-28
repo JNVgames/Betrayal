@@ -92,24 +92,10 @@ public class Field extends Group {
 	 * Ends select mode on all cards
 	 */
 	public void endSelectMode() {
-		for (Card card : playerZone) {
+		refreshAllCards();
+		for (Card card : allCards) {
 			card.endSelectMode();
-		}
-		for (Card card : monsterZone) {
-			card.endSelectMode();
-		}
-	}
-
-	/**
-	 * Cancels select mode on all cards. Differs from Field.endSelectMode in that this doesn't save the user's
-	 * decision in target selecting
-	 */
-	public void cancelSelectMode() {
-		for (Card card : playerZone) {
-			card.cancelSelectMode();
-		}
-		for (Card card : monsterZone) {
-			card.cancelSelectMode();
+			card.unselect();
 		}
 	}
 
@@ -126,7 +112,8 @@ public class Field extends Group {
 	}
 
 	public void unselectAll() {
-		for (Card card : getAllCards()) {
+		refreshAllCards();
+		for (Card card : allCards) {
 			card.unselect();
 		}
 	}
