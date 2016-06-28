@@ -71,9 +71,4 @@ public class YourTurn extends Turn {
 			}
 		}));
 	}
-
-	@Override
-	public void erase() {
-
-	}
 }

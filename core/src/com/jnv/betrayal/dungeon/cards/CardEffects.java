@@ -11,10 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 public class CardEffects {
 
 	public static void damaged(Card card) {
-		card.getCardImage().addAction(Actions.color(Color.RED));
-		card.getCardImage().addAction(Actions.delay(0.1f, Actions.color(Color.WHITE)));
-		card.getCardImage().addAction(Actions.delay(0.2f, Actions.color(Color.RED)));
-		card.getCardImage().addAction(Actions.delay(0.3f, Actions.color(Color.WHITE)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.RED)));
+		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
+		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(Color.RED)));
+		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
 	}
 
 	public static void freeze(Card card) {

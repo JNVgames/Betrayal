@@ -23,15 +23,11 @@ public class TeamMemberTurn extends Turn {
 		createPanel("____'s turn", 80, Panel.full, new Runnable() {
 			@Override
 			public void run() {
+				// TODO animation not working
 				field.actionManager.performAction(new Action(field.getCurrentCard(), field.getAllMonsterCards(),
 						ActionType.ATTACK));
 				field.turnManager.nextTurn();
 			}
 		});
-	}
-
-	@Override
-	public void erase() {
-
 	}
 }

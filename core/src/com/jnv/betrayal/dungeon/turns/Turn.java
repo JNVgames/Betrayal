@@ -36,8 +36,6 @@ public abstract class Turn {
 
 	public abstract void draw();
 
-	public abstract void erase();
-
 	/**
 	 * Function to make creating 4-button action bars easier
 	 *

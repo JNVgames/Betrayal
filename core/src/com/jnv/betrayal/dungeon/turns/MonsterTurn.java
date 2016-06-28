@@ -22,16 +22,12 @@ public class MonsterTurn extends Turn {
 		createPanel("Monster's turn", 80, Panel.full, new Runnable() {
 			@Override
 			public void run() {
-				field.actionManager.performAction(new Action(field.getCurrentCard(), field.getAllPlayerCards(), ActionType.ATTACK));
+				field.actionManager.performAction(new Action(field.getCurrentCard(),
+						field.getAllPlayerCards(), ActionType.ATTACK));
 
 				// TODO REMOVE THIS LINE
 				field.turnManager.nextTurn();
 			}
 		});
-	}
-
-	@Override
-	public void erase() {
-
 	}
 }
