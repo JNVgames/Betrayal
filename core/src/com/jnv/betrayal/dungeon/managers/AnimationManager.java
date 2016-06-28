@@ -14,7 +14,7 @@ public class AnimationManager {
                 CardAnimation.jump(action.getSrc());
                 for (Card card : action.getDest()) {
                     CardAnimation.damaged(card);
-                    card.getHealthBar().takeDamage(5);
+                    card.takeDamage(5);
                 }
                 break;
             case DEFEND:

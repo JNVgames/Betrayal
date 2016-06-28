@@ -53,6 +53,7 @@ public class OKPopup extends Popup {
 		okayButton.addListener(new InputListener(okayButton) {
 			@Override
 			public void doAction() {
+				onConfirm();
 				remove();
 			}
 		});
@@ -60,6 +61,6 @@ public class OKPopup extends Popup {
 
 	}
 
-	public void doAction() {
+	public void onConfirm() {
 	}
 }

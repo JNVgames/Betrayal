@@ -20,8 +20,6 @@ public class EventLog extends Popup {
 
     public EventLog(Betrayal game) {
         super(game);
-        loadButtons();
-
         table = new Table();
         table.add(new Image(res.getTexture("confirmation-background")));
         table.layout();
@@ -33,6 +31,8 @@ public class EventLog extends Popup {
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setOverscroll(false, false);
         popup.addActor(scrollPane);
+
+        loadButtons();
 
     }
 
@@ -46,8 +46,8 @@ public class EventLog extends Popup {
         font.fontColor = Color.WHITE;
         title = new Label("Event Log", font);
         title.layout();
-        title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
-                Betrayal.HEIGHT - 100 - 75, table.getWidth(),
+      title.setBounds((Betrayal.WIDTH - title.getPrefWidth()) / 2,
+                Betrayal.HEIGHT - 110 - title.getPrefHeight(), title.getPrefWidth(),
                 title.getPrefHeight());
         title.setAlignment(Align.center);
         popup.addActor(title);

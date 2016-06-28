@@ -12,6 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -182,6 +185,52 @@ public abstract class Card {
 		isTurn = turn;
 	}
 
+	public boolean checkIfDied(){
+		return currentHealth == 0;
+	}
+
+	//check if character is you, switch to death screen, else fade out correct card
+	public void cardDeath(Card card){
+		CardAnimation.fadeOut(card);
+		if(card instanceof PlayerCard && ((PlayerCard) card).getCharacterID() == field.game.getCurrentCharacter().getId()){
+			//You have died
+			//todo change gamestate out of dungeon. Reset character
+			field.removePlayerCard((PlayerCard) card);
+
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					new OKPopup(field.game, "You Have Died" ) {
+						@Override
+						public void onConfirm() {
+							field.game.characters.remove(field.game.getCurrentCharacter());
+							field.game.gsm.setState(GameStateManager.State.MENU);
+						}
+					};
+				}
+			};
+			healthBar.addAction(Actions.delay(4f, Actions.run(r)));
+
+		}else if(card instanceof PlayerCard){
+			//Teammate died
+			field.removePlayerCard((PlayerCard)card);
+
+		}else if (card instanceof MonsterCard){
+			//Monster Card
+			field.removeMonsterCard((MonsterCard) card);
+		}else{
+			//todo create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard
+		}
+	}
+	public void takeDamage(int damage){
+		currentHealth-=damage;
+		if(currentHealth<0)
+			currentHealth=0;
+		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
+		if(checkIfDied())
+			cardDeath(this);
+	}
+
 	public HealthBar getHealthBar() {
 		return healthBar;
 	}
@@ -214,10 +263,6 @@ public abstract class Card {
 			// Add actors to the group
 			addActor(healthBarBackground);
 			addActor(healthBar);
-		}
-		public void takeDamage(int damage){
-			currentHealth-=damage;
-			setNewHealthPercent(currentHealth*100/baseHealth);
 		}
 
 		public void heal(int healAmount){

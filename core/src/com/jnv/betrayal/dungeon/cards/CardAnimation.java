@@ -6,6 +6,7 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.gameobjects.Monster;
 
 public class CardAnimation {
@@ -48,5 +49,10 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30, 2)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
 
+	}
+
+	public static void fadeOut(Card card) {
+		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
+		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 	}
 }

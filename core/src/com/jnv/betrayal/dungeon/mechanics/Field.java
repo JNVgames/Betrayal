@@ -159,7 +159,7 @@ public class Field extends Group {
 	 */
 	public void removePlayerCard(PlayerCard card) {
 		playerZone.remove(card);
-		//todo perform kill die animation pass away kick the bucket eat the dust hit the hay
+		refreshAllCards();
 	}
 
 	/**
@@ -167,6 +167,6 @@ public class Field extends Group {
 	 */
 	public void removeMonsterCard(MonsterCard card) {
 		monsterZone.remove(card);
-		//todo perform kill die animation pass away kick the bucket eat the dust hit the hay
+		refreshAllCards();
 	}
 }

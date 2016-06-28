@@ -120,12 +120,12 @@ public class LoadGame extends GameState {
 			preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);
 			preview.addActor(preview_charPrev);
 
-			Label preview_class = new Label(c.job.toString(), loadFont(50));
-			preview_class.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
-			preview_class.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
-					- preview_class.getPrefHeight());
-			preview_class.setColor(Color.WHITE);
-			preview.addActor(preview_class);
+			Label classPreview = new Label(c.job.toString(), loadFont(50));
+			classPreview.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
+			classPreview.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
+					- classPreview.getPrefHeight());
+			classPreview.setColor(Color.WHITE);
+			preview.addActor(classPreview);
 
 			Label preview_floor = new Label("FLOOR", loadFont(40));
 			preview_floor.setX(Betrayal.WIDTH - 10 - preview_floor.getPrefWidth());
@@ -153,19 +153,19 @@ public class LoadGame extends GameState {
 	}
 
 	private void loadDeleteButton() {
-		final Label button_delete = new Label("Delete tmp", loadFont(60));
-		button_delete.setBounds(Betrayal.WIDTH - 30 - button_delete.getPrefWidth(),
-				50, button_delete.getPrefWidth(), button_delete.getPrefHeight());
-		button_delete.layout();
-		button_delete.addListener(new InputListener(button_delete) {
+		final Label buttonDelete = new Label("Delete tmp", loadFont(60));
+		buttonDelete.setBounds(Betrayal.WIDTH - 30 - buttonDelete.getPrefWidth(),
+				50, buttonDelete.getPrefWidth(), buttonDelete.getPrefHeight());
+		buttonDelete.layout();
+		buttonDelete.addListener(new InputListener(buttonDelete) {
 			@Override
 			public void doAction() {
 				mode_delete = true;
-				button_delete.remove();
+				buttonDelete.remove();
 				loadCancelButton();
 			}
 		});
-		stage.addActor(button_delete);
+		stage.addActor(buttonDelete);
 	}
 
 	private void loadCancelButton() {
