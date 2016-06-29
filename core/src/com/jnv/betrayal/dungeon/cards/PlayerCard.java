@@ -29,9 +29,9 @@ public class PlayerCard extends Card {
 						 BetrayalAssetManager res) {
 		super(new Dimension(x, y, DungeonCoords.PLAYER_WIDTH, DungeonCoords.PLAYER_HEIGHT), res);
 		this.character = character;
-		baseHealth = currentHealth = character.stats.getStat(Stat.HEALTH);
-		baseAttack = currentAttack = character.stats.getStat(Stat.ATTACK);
-		baseDefense = currentDefense = character.stats.getStat(Stat.DEFENSE);
+		baseHealth = currentHealth = character.stats.getTotalHealth();
+		baseAttack = currentAttack = character.stats.getTotalAttack();
+		baseDefense = currentDefense = character.stats.getTotalDefense();
 		preview = character.preview;
 		cardImage = new Actor() {
 			@Override
@@ -43,9 +43,18 @@ public class PlayerCard extends Card {
 		cardImage.setBounds(0, 0, group.getWidth(), group.getHeight());
 		group.addActor(cardImage);
 		cardImage.toBack();
+		initializeCardListener();
+	}
+
+	public String getName() {
+		return character.getName();
 	}
 
 	public int getCharacterID() {
 		return character.getId();
+	}
+
+	public void levelUpCharacter() {
+		character.stats.advanceFloor();
 	}
 }

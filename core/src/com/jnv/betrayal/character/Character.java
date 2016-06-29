@@ -18,6 +18,7 @@ import java.util.Random;
 public class Character implements Json.Serializable {
 
 	private int id;
+	private String name;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -59,6 +60,14 @@ public class Character implements Json.Serializable {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String toJson() {

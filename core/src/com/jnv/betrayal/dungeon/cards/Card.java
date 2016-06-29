@@ -5,14 +5,13 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.dungeon.mechanics.Field;
-import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.dungeon.popup.CardInfo;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -36,8 +35,9 @@ public abstract class Card {
 	protected Group group;
 	private TextureRegion selectedTexture, shieldTexture;
 	private boolean wasSelected, isSelected, selecting;
-	private InputListener selectListener;
+	private InputListener selectListener, cardInfoListener;
 	private boolean isTurn;
+	private Card thisCard = this;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -73,23 +73,16 @@ public abstract class Card {
 		group.addActor(healthBar);
 		healthBar.toFront();
 		isTurn = false;
-
 	}
 
-	/**
-	 * Get the health after being affected by buffs and debuffs
-	 * @return final health
-	 */
-	public int getFinalHealth() {
-		return baseHealth + currentHealth;
-	}
-
-	public int getFinalAttack() {
-		return baseAttack + currentAttack;
-	}
-
-	public int getFinalDefense() {
-		return baseDefense + currentDefense;
+	protected void initializeCardListener() {
+		cardInfoListener = new InputListener(cardImage) {
+			@Override
+			public void doAction() {
+				new CardInfo(field.game, thisCard);
+			}
+		};
+		group.addListener(cardInfoListener);
 	}
 
 	public int getBaseHealth() {
@@ -104,6 +97,18 @@ public abstract class Card {
 		return baseDefense;
 	}
 
+	public int getCurrentHealth() {
+		return currentHealth;
+	}
+
+	public int getCurrentAttack() {
+		return currentAttack;
+	}
+
+	public int getCurrentDefense() {
+		return currentDefense;
+	}
+
 	public void setField(Field field) {
 		this.field = field;
 	}
@@ -114,6 +119,7 @@ public abstract class Card {
 		}
 		selectListener = createSelectListener(numTargets);
 		group.addListener(selectListener);
+		group.removeListener(cardInfoListener);
 		selecting = true;
 	}
 
@@ -121,6 +127,7 @@ public abstract class Card {
 		if (!selecting)
 			throw new IllegalStateException("Card.beginSelectMode must be called before endSelectMode");
 		group.removeListener(selectListener);
+		group.addListener(cardInfoListener);
 		wasSelected = isSelected;
 		selecting = false;
 	}
@@ -145,6 +152,21 @@ public abstract class Card {
 
 	public boolean isSelected() {
 		return isSelected;
+	}
+
+	public InputListener createCardInfoListener() {
+		try {
+			return new InputListener(cardImage) {
+				@Override
+				public void doAction() {
+					new CardInfo(field.game, thisCard);
+				}
+			};
+		} catch (NullPointerException e) {
+			System.out.println("Card: Actor cardImage was not created properly");
+			Gdx.app.exit();
+		}
+		return null;
 	}
 
 	public InputListener createSelectListener(final int numTargets) {
@@ -185,22 +207,21 @@ public abstract class Card {
 		isTurn = turn;
 	}
 
-	public boolean checkIfDied(){
+	public boolean checkIfDied() {
 		return currentHealth == 0;
 	}
 
 	//check if character is you, switch to death screen, else fade out correct card
-	public void cardDeath(Card card){
+	public void cardDeath(Card card) {
 		CardAnimation.fadeOut(card);
-		if(card instanceof PlayerCard && ((PlayerCard) card).getCharacterID() == field.game.getCurrentCharacter().getId()){
-			//You have died
-			//todo change gamestate out of dungeon. Reset character
+		if (card instanceof PlayerCard && ((PlayerCard) card).getCharacterID() == field.game.getCurrentCharacter().getId()) {
+			// You have died
 			field.removePlayerCard((PlayerCard) card);
 
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
-					new OKPopup(field.game, "You Have Died" ) {
+					new OKPopup(field.game, "You Have Died") {
 						@Override
 						public void onConfirm() {
 							field.game.characters.remove(field.game.getCurrentCharacter());
@@ -211,23 +232,41 @@ public abstract class Card {
 			};
 			healthBar.addAction(Actions.delay(4f, Actions.run(r)));
 
-		}else if(card instanceof PlayerCard){
+		} else if (card instanceof PlayerCard) {
 			//Teammate died
-			field.removePlayerCard((PlayerCard)card);
+			field.removePlayerCard((PlayerCard) card);
 
-		}else if (card instanceof MonsterCard){
+		} else if (card instanceof MonsterCard) {
 			//Monster Card
 			field.removeMonsterCard((MonsterCard) card);
-		}else{
-			//todo create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard
+			if (field.isMonsterZoneEmpty()) {
+				Runnable r = new Runnable() {
+					@Override
+					public void run() {
+						new OKPopup(field.game, "Floor Completed!") {
+							@Override
+							public void onConfirm() {
+								for (Card c : field.getAllPlayerCards()) {
+									((PlayerCard) c).levelUpCharacter();
+								}
+								field.game.gsm.setState(GameStateManager.State.LOBBY);
+							}
+						};
+					}
+				};
+				healthBar.addAction(Actions.delay(4f, Actions.run(r)));
+			}
+		} else {
+			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard");
 		}
 	}
-	public void takeDamage(int damage){
-		currentHealth-=damage;
-		if(currentHealth<0)
-			currentHealth=0;
+
+	public void takeDamage(int damage) {
+		currentHealth -= damage;
+		if (currentHealth < 0)
+			currentHealth = 0;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
-		if(checkIfDied())
+		if (checkIfDied())
 			cardDeath(this);
 	}
 
@@ -239,7 +278,7 @@ public abstract class Card {
 
 		private Image healthBarBackground, healthBar;
 		private final Drawable greenBar, yellowBar, redBar;
-		private int currentHealthPercentage, finalHealthPercentage;	//change current % to final %
+		private int currentHealthPercentage, finalHealthPercentage;    //change current % to final %
 
 		public HealthBar(float height, BetrayalAssetManager res) {
 			// Calibrate health bar coordinates
@@ -265,9 +304,9 @@ public abstract class Card {
 			addActor(healthBar);
 		}
 
-		public void heal(int healAmount){
-			currentHealth+=healAmount;
-			setNewHealthPercent(currentHealth*100/baseHealth);
+		public void heal(int healAmount) {
+			currentHealth += healAmount;
+			setNewHealthPercent(currentHealth * 100 / baseHealth);
 		}
 
 		private void initialize(float x, float y) {
@@ -285,7 +324,7 @@ public abstract class Card {
 
 			System.out.println(newHealthPercent);
 			//LOSING HEALTH
-			if (newHealthPercent <= 70 && currentHealthPercentage > 70) {
+			if (newHealthPercent <= 70 && newHealthPercent > 30 && currentHealthPercentage > 70) {
 				System.out.println("Green to yellow");
 				//Green to Yellow
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(70 * 2, 8, 0.5f)));
@@ -298,7 +337,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else if (newHealthPercent <= 30 && currentHealthPercentage > 70) {
-				//Green to Red
+				// Green to Red
 				healthBar.addAction(Actions.delay(0.3f, Actions.sizeTo(70 * 2, 8, 0.3f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -306,7 +345,7 @@ public abstract class Card {
 						healthBar.setDrawable(yellowBar);
 					}
 				};
-				healthBar.addAction(Actions.delay(.6f, Actions.run(r)));
+				healthBar.addAction(Actions.delay(0.6f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(0.6f, Actions.sizeTo(30 * 2, 8, 0.3f)));
 				Runnable s = new Runnable() {
 					@Override
@@ -321,12 +360,12 @@ public abstract class Card {
 				//Yellow to Red
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(30 * 2, 8, 0.5f)));
 				Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					healthBar.setDrawable(redBar);
-				}
-			};
-			healthBar.addAction(Actions.delay(1f, Actions.run(r)));
+					@Override
+					public void run() {
+						healthBar.setDrawable(redBar);
+					}
+				};
+				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else if (newHealthPercent > 30 && newHealthPercent <= 70 && currentHealthPercentage <= 30) {
 				//Red to yellow
@@ -376,4 +415,6 @@ public abstract class Card {
 			currentHealthPercentage = newHealthPercent;
 		}
 	}
+
+	public abstract String getName();
 }

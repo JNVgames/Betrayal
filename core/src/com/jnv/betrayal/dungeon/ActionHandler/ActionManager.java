@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.ActionHandler;
 
 
+import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 
@@ -29,12 +30,16 @@ public class ActionManager {
 
 	//update field, update all card's data
 	public void performAction(Action action) {
-		actionHistory.addFirst(action);
+		actionHistory.addLast(action);
+		// todo add to event log
 
 		// If dest card is null, perform action on self
 		if (action.destExist()) {
-			switch (action.getActionType()){
+			switch (action.getActionType()) {
 				case ATTACK:
+					for (Card card : action.getDest()) {
+						card.takeDamage(action.getSrc().getCurrentAttack());
+					}
 					AnimationManager.performAnimation(action);
 					break;
 				case DEFEND:

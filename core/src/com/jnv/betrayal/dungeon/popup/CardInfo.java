@@ -1,29 +1,28 @@
-package com.jnv.betrayal.popup;
+package com.jnv.betrayal.dungeon.popup;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
-public class OKPopup extends Popup {
+public class CardInfo extends Popup {
 
 	private Image okayButton, noButton, background;
 	private Label title;
 	private String string;
 
-	public OKPopup(Betrayal game, String string) {
+	public CardInfo(Betrayal game, Card card) {
 		super(game);
-		this.string = string;
+		this.string = "Name: " + card.getName()
+				+ "\nHealth: " + Integer.toString(card.getCurrentHealth()) + "/" + Integer.toString(card.getBaseHealth())
+				+ "\nAttack: " + Integer.toString(card.getCurrentAttack()) + "/" + Integer.toString(card.getBaseAttack())
+				+ "\nDefense: " + Integer.toString(card.getCurrentDefense()) + "/" + Integer.toString(card.getBaseDefense());
 		loadButtons();
-		setMaskAction(new Runnable() {
-			@Override
-			public void run() {
-				onConfirm();
-			}
-		});
 	}
 
 	private void loadButtons() {
@@ -35,7 +34,7 @@ public class OKPopup extends Popup {
 	private void loadBackground() {
 		background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
-		background.setBounds(150, 500, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 1000);
+		background.setBounds(150, 500, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 875);
 		popup.addActor(background);
 	}
 

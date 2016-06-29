@@ -1,72 +1,78 @@
 package com.jnv.betrayal.dungeon.popup;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
+import java.util.Deque;
+
 public class EventLog extends Popup {
 
-    private Image okayButton, noButton, background;
-    private Label title;
-    private ScrollPane scrollPane;
-    private Table table;
+	private Image okayButton;
+	private ScrollPane scrollPane;
+	private VerticalGroup verticalGroup;
+	private Deque<Action> actionHistory;
 
-    public EventLog(Betrayal game) {
-        super(game);
-        table = new Table();
-        table.add(new Image(res.getTexture("confirmation-background")));
-        table.layout();
-        table.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-        scrollPane = new ScrollPane(table);
-        scrollPane.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
-        scrollPane.layout();
-        scrollPane.setZIndex(0);
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setOverscroll(false, false);
-        popup.addActor(scrollPane);
+	public EventLog(Betrayal game, Deque<Action> actionHistory) {
+		super(game);
+		loadBackground();
+		this.actionHistory = actionHistory;
+		verticalGroup = new VerticalGroup();
+		verticalGroup.layout();
+		verticalGroup.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
+		verticalGroup.align(Align.left);
+		scrollPane = new ScrollPane(verticalGroup);
+		scrollPane.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
+		scrollPane.layout();
+		scrollPane.setZIndex(0);
+		scrollPane.setScrollingDisabled(true, false);
+		scrollPane.setOverscroll(false, false);
+		popup.addActor(scrollPane);
 
-        loadButtons();
+		loadButtons();
+		loadHistory();
+	}
 
-    }
+	private void loadBackground() {
+		Image background = new Image(res.getTexture("confirmation-background"));
+		background.layout();
+		background.setBounds(100, 200, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 100);
+		popup.addActor(background);
+	}
 
-    private void loadButtons() {
-        loadAnswer();
-        loadTitle();
-    }
+	private void loadButtons() {
+		loadAnswer();
+	}
 
-    private void loadTitle() {
-        Label.LabelStyle font = FontManager.getFont(40);
-        font.fontColor = Color.WHITE;
-        title = new Label("Event Log", font);
-        title.layout();
-      title.setBounds((Betrayal.WIDTH - title.getPrefWidth()) / 2,
-                Betrayal.HEIGHT - 110 - title.getPrefHeight(), title.getPrefWidth(),
-                title.getPrefHeight());
-        title.setAlignment(Align.center);
-        popup.addActor(title);
-    }
+	private void loadAnswer() {
+		okayButton = new Image(res.getTexture("ok"));
+		okayButton.layout();
+		okayButton.setBounds(Betrayal.WIDTH/2 - 75, 110, 150, 75);
 
-    private void loadAnswer() {
-        okayButton = new Image(res.getTexture("ok"));
-        okayButton.layout();
-        okayButton.setBounds(110, Betrayal.HEIGHT / 2 - 100, 150, 75);
-        okayButton.addListener(new InputListener(okayButton) {
-            @Override
-            public void doAction() {
-                remove();
-            }
-        });
-        popup.addActor(okayButton);
+		okayButton.addListener(new InputListener(okayButton) {
+			@Override
+			public void doAction() {
+				remove();
+			}
+		});
+		popup.addActor(okayButton);
+	}
 
-    }
-
-    public void doAction() {
-    }
+	private void loadHistory() {
+		for (Action action : actionHistory) {
+			Label newEvent = new Label(action.toString(), FontManager.getFont(40));
+			verticalGroup.addActor(newEvent);
+		}
+	}
 }

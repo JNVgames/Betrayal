@@ -14,17 +14,25 @@ public abstract class Popup {
 
 	protected Betrayal game;
 	protected BetrayalAssetManager res;
+	protected Actor mask;
 	public final Group popup;
+	private Runnable maskAction;
 
 	protected Popup(Betrayal game) {
 		this.game = game;
 		res = game.res;
 		popup = new Group();
-		final Actor mask = new Actor();
+		maskAction = new Runnable() {
+			@Override
+			public void run() {
+			}
+		};
+		mask = new Actor();
 		mask.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
 		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
+				maskAction.run();
 				remove();
 			}
 		});
@@ -34,5 +42,9 @@ public abstract class Popup {
 
 	public void remove() {
 		popup.remove();
+	}
+
+	protected void setMaskAction(Runnable r) {
+		this.maskAction = r;
 	}
 }

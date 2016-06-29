@@ -6,14 +6,14 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 public class Monster {
 
     private Texture monsterTexture;
-    private String MonsterName, nickname;
+    private String textureName, nickname;
     private int id, health, attack, defense, width, height, xPos, yPos, normalAttackTimer;
     private int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
     private BetrayalAssetManager res;
 
     public Monster(int id, String name, BetrayalAssetManager res) {
         this.id = id;
-        MonsterName = name;
+        textureName = name;
         this.res = res;
         monsterTexture = res.getTexture(name);
         res.loadMonster(name, this);
@@ -22,7 +22,7 @@ public class Monster {
     public Monster(String name, BetrayalAssetManager res) {
         Monster src = res.getMonster(name);
         id = src.getID();
-        MonsterName = name;
+        textureName = name;
         health = src.getHealth();
         attack = src.getAttack();
         defense = src.getDefense();
@@ -47,12 +47,12 @@ public class Monster {
     }
 
     public String getName() {
-        return MonsterName;
+        return textureName;
     }
 
     // Setters
     public void setName(String name) {
-        MonsterName = name;
+        textureName = name;
     }
 
     public void setHealth(int new_health) {

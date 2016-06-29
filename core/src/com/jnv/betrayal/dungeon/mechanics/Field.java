@@ -56,7 +56,7 @@ public class Field extends Group {
 		eventLogButton.addListener(new InputListener(eventLogButton) {
 			@Override
 			public void doAction() {
-				new EventLog(game);
+				new EventLog(game, actionManager.actionHistory);
 			}
 		});
 		addActor(eventLogButton);
@@ -82,6 +82,10 @@ public class Field extends Group {
 		for (Card card : monsterZone) {
 			card.beginSelectMode(numTargets);
 		}
+	}
+
+	public boolean isMonsterZoneEmpty(){
+		return monsterZone.size()==0;
 	}
 
 	public boolean checkCardsSelected(int cardsSelected) {

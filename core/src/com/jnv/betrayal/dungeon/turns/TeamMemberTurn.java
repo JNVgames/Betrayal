@@ -20,7 +20,7 @@ public class TeamMemberTurn extends Turn {
 	public void draw() {
 		panels.clearChildren();
 		// TODO change ____ to user string
-		createPanel("____'s turn", 80, Panel.full, new Runnable() {
+		createPanel("'s turn", 80, Panel.full, new Runnable() {
 			@Override
 			public void run() {
 				// TODO animation not working

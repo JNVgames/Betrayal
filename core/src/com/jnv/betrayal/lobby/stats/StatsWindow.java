@@ -104,14 +104,6 @@ public class StatsWindow extends Popup {
 		title.setHeight(120);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
-		title.addListener(new InputListener(title) {
-			@Override
-			public void doAction() {
-				System.out.println(character.stats.getFloor());
-				character.stats.advanceFloor();
-				System.out.println(character.stats.getFloor());
-			}
-		});
 		popup.addActor(title);
 	}
 

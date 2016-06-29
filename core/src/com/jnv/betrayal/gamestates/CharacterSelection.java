@@ -5,12 +5,15 @@
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Trait;
@@ -29,19 +32,20 @@ import com.jnv.betrayal.scene2d.ui.Image;
  */
 public class CharacterSelection extends GameState {
 
-	private Actor button_play_now;
+	private Actor playNowButton;
 	private Dimension reference;
-	private Image button_back, field_framePreview;
+	private Image backButton, previewFrame;
 	private Character character;
-	private TextureRegion image_leftArrow, image_rightArrow;
+	private TextureRegion leftArrowImage, rightArrowImage;
 	private Label.LabelStyle font60, font45;
+	private TextField fieldUsernameEnter;
 
 	public CharacterSelection(GameStateManager gsm) {
 		super(gsm);
 
-		image_leftArrow = new TextureRegion(res.getTexture("arrow-right"));
-		image_leftArrow.flip(true, false);
-		image_rightArrow = new TextureRegion(res.getTexture("arrow-right"));
+		leftArrowImage = new TextureRegion(res.getTexture("arrow-right"));
+		leftArrowImage.flip(true, false);
+		rightArrowImage = new TextureRegion(res.getTexture("arrow-right"));
 		font60 = FontManager.getFont(60);
 		font45 = FontManager.getFont(45);
 
@@ -76,6 +80,7 @@ public class CharacterSelection extends GameState {
 		loadPlayNowButton();
 		loadImagePreview();
 		loadPreviewRotators();
+		loadUsernameField();
 
 		createSelectionField("Gender", Trait.GENDER);
 		createSelectionField("Hair Style", Trait.HAIR_STYLE);
@@ -100,24 +105,24 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadBackButton() {
-		button_back = new Image(image_leftArrow);
-		button_back.setHeight(60);
-		button_back.setWidth(80);
-		button_back.setX(10);
-		button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
-		stage.addActor(button_back);
+		backButton = new Image(leftArrowImage);
+		backButton.setHeight(60);
+		backButton.setWidth(80);
+		backButton.setX(10);
+		backButton.setY(Betrayal.HEIGHT - backButton.getHeight() - 10);
+		stage.addActor(backButton);
 
 		Actor actor = new Label("Back", font60);
-		actor.setX(button_back.getX() + button_back.getWidth() + 10);
-		actor.setY(button_back.getY());
+		actor.setX(backButton.getX() + backButton.getWidth() + 10);
+		actor.setY(backButton.getY());
 		stage.addActor(actor);
 		Dimension ref = new Dimension(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		actor = new Actor();
-		actor.setWidth(button_back.getWidth() + ref.getWidth() + 10);
+		actor.setWidth(backButton.getWidth() + ref.getWidth() + 10);
 		actor.setHeight(ref.getHeight());
-		actor.setX(button_back.getX());
-		actor.setY(button_back.getY());
+		actor.setX(backButton.getX());
+		actor.setY(backButton.getY());
 		actor.addListener(new InputListener(actor) {
 			@Override
 			public void doAction() {
@@ -132,18 +137,51 @@ public class CharacterSelection extends GameState {
 		Skin skin = new Skin();
 		skin.add("play-now", res.getTexture("play-now"));
 		skin.add("play-now-pressed", res.getTexture("play-now-pressed"));
-		button_play_now = new Button(skin.getDrawable("play-now"), skin.getDrawable("play-now-pressed"));
-		button_play_now.setWidth(512);
-		button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
-		button_play_now.addListener(new InputListener(button_play_now) {
+		playNowButton = new Button(skin.getDrawable("play-now"), skin.getDrawable("play-now-pressed"));
+		playNowButton.setWidth(512);
+		playNowButton.setBounds((Betrayal.WIDTH - playNowButton.getWidth()) / 2, 20, 512, 144);
+		playNowButton.addListener(new InputListener(playNowButton) {
 			@Override
 			public void doAction() {
+				character.setName(fieldUsernameEnter.getText());
 				game.characters.add(character);
 				game.setCurrentCharacter(character);
 				gsm.setState(GameStateManager.State.LOBBY);
 			}
 		});
-		stage.addActor(button_play_now);
+		stage.addActor(playNowButton);
+	}
+
+	private void loadUsernameField() {
+		// Username "Name:" text
+		Label usernameTextField = new Label("Name: ", FontManager.getFont(60));
+		usernameTextField.setX(10);
+		usernameTextField.setY(backButton.getY() - backButton.getHeight() - 10);
+		stage.addActor(usernameTextField);
+
+		// Username input text field
+		TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
+		tfs.font = FontManager.getFont(60).font;
+		tfs.messageFont = tfs.font;
+		tfs.fontColor = Color.LIGHT_GRAY;
+		tfs.messageFontColor = Color.GRAY;
+		fieldUsernameEnter = new TextField("", tfs);
+		fieldUsernameEnter.setMessageText("Enter name here");
+		fieldUsernameEnter.setBounds(10 + usernameTextField.getWidth() + 10, usernameTextField.getY(),
+				Betrayal.WIDTH - 20 - usernameTextField.getWidth(), usernameTextField.getHeight());
+		fieldUsernameEnter.setMaxLength(12);
+		stage.addActor(fieldUsernameEnter);
+
+		// Removes keyboard focus if tap isn't on a TextField
+		stage.getRoot().addCaptureListener(new InputListener(fieldUsernameEnter) {
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				if (!(event.getTarget() instanceof TextField)) {
+					stage.setKeyboardFocus(null);
+					Gdx.input.setOnscreenKeyboardVisible(false);
+				}
+				return false;
+			}
+		});
 	}
 
 	private void loadImagePreview() {
@@ -153,22 +191,22 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadPreviewFrame() {
-		field_framePreview = new Image();
-		field_framePreview.setWidth(384);
-		field_framePreview.setHeight(576);
-		field_framePreview.setX(10);
-		field_framePreview.setY(button_back.getY() - 71 - field_framePreview.getHeight());
-		stage.addActor(field_framePreview);
+		previewFrame = new Image();
+		previewFrame.setWidth(384);
+		previewFrame.setHeight(576);
+		previewFrame.setX(10);
+		previewFrame.setY(backButton.getY() - 71 - previewFrame.getHeight());
+		stage.addActor(previewFrame);
 	}
 
 	private void loadPreviewRotators() {
 		int gap = 60, padding = 30;
 
-		Actor actor = new Image(image_leftArrow);
+		Actor actor = new Image(leftArrowImage);
 		actor.setHeight(60);
-		actor.setWidth((field_framePreview.getWidth() - gap - padding * 2) / 2);
-		actor.setX(field_framePreview.getX() + padding);
-		actor.setY(field_framePreview.getY()
+		actor.setWidth((previewFrame.getWidth() - gap - padding * 2) / 2);
+		actor.setX(previewFrame.getX() + padding);
+		actor.setY(previewFrame.getY()
 				- actor.getHeight() - 10);
 		actor.addListener(new InputListener(actor) {
 			@Override
@@ -179,7 +217,7 @@ public class CharacterSelection extends GameState {
 		stage.addActor(actor);
 		Dimension ref = new Dimension(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
-		actor = new Image(image_rightArrow);
+		actor = new Image(rightArrowImage);
 		actor.setHeight(ref.getHeight());
 		actor.setWidth(ref.getWidth());
 		actor.setX(ref.getRightX() + gap);
@@ -195,25 +233,25 @@ public class CharacterSelection extends GameState {
 
 	private void loadReference() {
 		reference = new Dimension();
-		reference.setX(field_framePreview.getRight() + 20);
-		reference.setY(field_framePreview.getTop() + 30);
+		reference.setX(previewFrame.getRight() + 20);
+		reference.setY(previewFrame.getTop() + 30);
 		reference.setWidth(Betrayal.WIDTH - reference.getX() - 20);
 		reference.setHeight(60);
 	}
 
 	private void loadPreview() {
-		Actor field_preview = new Actor() {
+		Actor previewField = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
-				character.preview.drawPreview(batch, field_framePreview.getX(),
-						field_framePreview.getY(), field_framePreview.getWidth(),
-						field_framePreview.getHeight());
+				character.preview.drawPreview(batch, previewFrame.getX(),
+						previewFrame.getY(), previewFrame.getWidth(),
+						previewFrame.getHeight());
 			}
 		};
-		field_preview.setWidth(384);
-		field_preview.setHeight(576);
-		field_preview.setX(field_framePreview.getX());
-		field_preview.setY(field_framePreview.getY());
-		stage.addActor(field_preview);
+		previewField.setWidth(384);
+		previewField.setHeight(576);
+		previewField.setX(previewFrame.getX());
+		previewField.setY(previewFrame.getY());
+		stage.addActor(previewField);
 	}
 
 	private void loadJobDescription() {
@@ -239,12 +277,12 @@ public class CharacterSelection extends GameState {
 				}
 			}
 		};
-		jobDescription.setHeight(field_framePreview.getY() - 80
+		jobDescription.setHeight(previewFrame.getY() - 80
 				- jobDescription.getHeight()
-				- (button_play_now.getTop() + 10));
+				- (playNowButton.getTop() + 10));
 		jobDescription.setWidth(Betrayal.WIDTH - 20);
-		jobDescription.setX(field_framePreview.getX());
-		jobDescription.setY(field_framePreview.getY() - 80 - jobDescription.getHeight());
+		jobDescription.setX(previewFrame.getX());
+		jobDescription.setY(previewFrame.getY() - 80 - jobDescription.getHeight());
 		jobDescription.setAlignment(Align.topLeft);
 		stage.addActor(jobDescription);
 	}
@@ -255,17 +293,17 @@ public class CharacterSelection extends GameState {
 
 		// Create label
 		Actor actor = new Label(label, font60);
-		actor.setBounds(field_framePreview.getRight() + 20, reference.getY() -
+		actor.setBounds(previewFrame.getRight() + 20, reference.getY() -
 				actor.getHeight() - 30, Betrayal.WIDTH - reference.getX() - 20, 60);
 		((Label) actor).setAlignment(Align.center);
 		stage.addActor(actor);
 		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		// Create left arrow
-		actor = new Image(image_leftArrow);
+		actor = new Image(leftArrowImage);
 		actor.setBounds(dimRef.getX(),
 				dimRef.getY() - 10 - dimRef.getHeight(),
-				(Betrayal.WIDTH - 160 - field_framePreview.getRight()) / 2,
+				(Betrayal.WIDTH - 160 - previewFrame.getRight()) / 2,
 				reference.getHeight());
 		reference.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 		actor.addListener(new InputListener(actor) {
@@ -294,7 +332,7 @@ public class CharacterSelection extends GameState {
 		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		// Create right arrow
-		actor = new Image(image_rightArrow);
+		actor = new Image(rightArrowImage);
 		actor.setBounds(dimRef.getX() +
 						dimRef.getWidth() + 30, reference.getY(),
 				reference.getWidth(), reference.getHeight());
