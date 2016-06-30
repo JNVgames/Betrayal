@@ -44,6 +44,11 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
 	}
 
+	public static void broBlock(Card src, Card dest){
+		src.getCardImage().addAction(Actions.delay(0.5f, Actions.moveTo(dest.getCardImage().getX(), dest.getCardImage().getTop())));
+
+	}
+
 	public static void useItem(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30, 2)));

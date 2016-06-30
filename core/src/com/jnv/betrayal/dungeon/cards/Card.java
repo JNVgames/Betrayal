@@ -26,7 +26,7 @@ import java.util.List;
 
 public abstract class Card {
 
-	public final List<Card> defenders = new ArrayList<Card>();
+	private List<Card> defenders = new ArrayList<Card>();
 	protected Field field;
 	protected int baseHealth, baseAttack, baseDefense, currentHealth, currentAttack, currentDefense;
 	protected HealthBar healthBar;
@@ -262,7 +262,7 @@ public abstract class Card {
 	}
 
 	public void takeDamage(int damage) {
-		currentHealth -= damage;
+		currentHealth -= calculateDamageWithDefense(damage, this.getCurrentDefense());
 		if (currentHealth < 0)
 			currentHealth = 0;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
@@ -270,8 +270,35 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
+	private int calculateDamageWithDefense(int damage, int armor) {
+		double newDamage = (50.0 / (50 + armor)) * damage;
+		return (int) Math.ceil(newDamage);
+	}
+
 	public HealthBar getHealthBar() {
 		return healthBar;
+	}
+
+	public void addDefender(PlayerCard defender) {
+		defenders.add(defender);
+	}
+
+	public void removeDefender(PlayerCard defender) {
+		defenders.remove(defender);
+	}
+
+	public boolean isBeingDefended() {
+		return defenders.size() > 0;
+	}
+
+	public void damageDefender(Card src) {
+		 for (Card defender : defenders) {
+			 defender.takeDamage(src.getCurrentAttack() / defenders.size());
+		 }
+	}
+
+	public void removeDefender(Card card){
+		defenders.remove(card);
 	}
 
 	public class HealthBar extends Group {
@@ -311,22 +338,16 @@ public abstract class Card {
 
 		private void initialize(float x, float y) {
 			healthBarBackground.setBounds(x, y, 227, 25);
-			//healthBarBackground.addAction(Actions.alpha(0));
-			//healthBarBackground.addAction(Actions.delay(1, Actions.fadeIn(2)));
 			healthBar.setBounds(x + 10, y + 8, 200, 8);
-			//healthBar.addAction(Actions.alpha(0));
-			//healthBar.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		}
 
 		private void setNewHealthPercent(int newHealthPercent) {
 			if (newHealthPercent > 100) newHealthPercent = 100;
 			if (newHealthPercent < 0) newHealthPercent = 0;
 
-			System.out.println(newHealthPercent);
-			//LOSING HEALTH
+			// LOSING HEALTH
 			if (newHealthPercent <= 70 && newHealthPercent > 30 && currentHealthPercentage > 70) {
-				System.out.println("Green to yellow");
-				//Green to Yellow
+				// Green to Yellow
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(70 * 2, 8, 0.5f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -357,7 +378,7 @@ public abstract class Card {
 
 				healthBar.addAction(Actions.delay(0.9f, Actions.sizeTo(newHealthPercent * 2, 8, 0.3f)));
 			} else if (newHealthPercent <= 30 && currentHealthPercentage <= 70 && currentHealthPercentage > 30) {
-				//Yellow to Red
+				// Yellow to Red
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(30 * 2, 8, 0.5f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -368,7 +389,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else if (newHealthPercent > 30 && newHealthPercent <= 70 && currentHealthPercentage <= 30) {
-				//Red to yellow
+				// Red to yellow
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(30 * 2, 8, 0.5f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -379,7 +400,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else if (newHealthPercent > 70 && currentHealthPercentage <= 30) {
-				//Red to Green
+				// Red to Green
 				healthBar.addAction(Actions.delay(0.3f, Actions.sizeTo(30 * 2, 8, 0.3f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -398,7 +419,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(0.9f, Actions.run(s)));
 				healthBar.addAction(Actions.delay(0.9f, Actions.sizeTo(newHealthPercent * 2, 8, 0.3f)));
 			} else if (newHealthPercent > 70 && currentHealthPercentage > 30 && currentHealthPercentage < 70) {
-				//Yellow to Green
+				// Yellow to Green
 				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(70 * 2, 8, 0.5f)));
 				Runnable r = new Runnable() {
 					@Override
@@ -409,7 +430,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
 				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else {
-				//stays in same color range
+				// stays in same color range
 				healthBar.addAction(Actions.delay(1.0f, Actions.sizeTo(newHealthPercent * 2, 8, 1f)));
 			}
 			currentHealthPercentage = newHealthPercent;

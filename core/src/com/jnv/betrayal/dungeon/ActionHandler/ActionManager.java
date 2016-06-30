@@ -2,6 +2,7 @@ package com.jnv.betrayal.dungeon.ActionHandler;
 
 
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 
@@ -28,25 +29,36 @@ public class ActionManager {
 		return actionHistory.getFirst();
 	}
 
+	public void addToHistory(Action action){
+		actionHistory.addLast(action);
+	}
+
 	//update field, update all card's data
 	public void performAction(Action action) {
 		actionHistory.addLast(action);
 		// todo add to event log
 
+		AnimationManager.performAnimation(action);
 		// If dest card is null, perform action on self
 		if (action.destExist()) {
 			switch (action.getActionType()) {
 				case ATTACK:
 					for (Card card : action.getDest()) {
-						card.takeDamage(action.getSrc().getCurrentAttack());
+						// Check if there are defenders
+						if (card.isBeingDefended()) {
+							// Apply damage damage appropriately
+							card.damageDefender(action.getSrc());
+						}
+						else { // There are no defenders
+							card.takeDamage(action.getSrc().getCurrentAttack());
+						}
 					}
-					AnimationManager.performAnimation(action);
 					break;
 				case DEFEND:
-					AnimationManager.performAnimation(action);
+					((PlayerCard) action.getSrc()).defendCard(action.getDest().get(0));
+					action.getDest().get(0).addDefender((PlayerCard) action.getSrc());
 					break;
 				case FLEE:
-					AnimationManager.performAnimation(action);
 					break;
 				default:
 					throw new AssertionError();

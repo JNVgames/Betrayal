@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.character.utils.Rotation;
-import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -19,6 +18,7 @@ public class PlayerCard extends Card {
 
 	private Preview preview;
 	private Character character;
+	private Card cardToDefend;
 
 	public PlayerCard(Vector2 coords, Character character,
 					  BetrayalAssetManager res) {
@@ -56,5 +56,18 @@ public class PlayerCard extends Card {
 
 	public void levelUpCharacter() {
 		character.stats.advanceFloor();
+	}
+
+	public Card getCardToDefend() {
+		return cardToDefend;
+	}
+
+
+	public void defendCard(Card defending) {
+		this.cardToDefend = defending;
+	}
+
+	public boolean isDefending() {
+		return cardToDefend != null;
 	}
 }

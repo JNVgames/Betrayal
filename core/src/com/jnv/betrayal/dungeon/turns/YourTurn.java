@@ -2,8 +2,10 @@ package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.ActionHandler.Action;
+import com.jnv.betrayal.dungeon.ActionHandler.ActionManager;
 import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -22,7 +24,7 @@ public class YourTurn extends Turn {
 		super(field, panelPool, buttonPool, panels, game);
 	}
 
-	private void drawAttackBar(final ActionType actionType) {
+	private void drawSelectBar(final ActionType actionType) {
 		panels.clearChildren();
 		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
 			public void run() {
@@ -47,21 +49,20 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawAttackBar(ActionType.ITEM);
+				drawSelectBar(ActionType.ITEM);
 				// todo change input to what is needed by the specific item
 			}
 		}));
 		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawAttackBar(ActionType.ATTACK);
+				drawSelectBar(ActionType.ATTACK);
 			}
 		}));
 		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawAttackBar(ActionType.DEFEND);
-				// todo stub
+				drawSelectBar(ActionType.DEFEND);
 			}
 		}));
 		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
@@ -70,6 +71,7 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
 					@Override
 					public void doAction() {
+						field.actionManager.addToHistory(new Action(field.getCurrentCard(),ActionType.FLEE));
 						gsm.setState(GameStateManager.State.LOBBY);
 					}
 				};

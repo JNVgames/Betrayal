@@ -29,6 +29,7 @@ public class TurnManager {
 	private Pool<Label> panelPool;
 	private Pool<Button> buttonPool;
 	private BetrayalAssetManager res;
+	private Turn currentTurn;
 
 	public TurnManager(Field field) {
 		this.field = field;
@@ -68,6 +69,9 @@ public class TurnManager {
 
 	public void nextTurn() {
 		field.setNextCardTurn();
+		if (field.getCurrentCard() instanceof PlayerCard) {
+			currentTurn.doAtStartOfTurn();
+		}
 		draw();
 	}
 
@@ -77,19 +81,20 @@ public class TurnManager {
 		// Team member turn
 		if (currentCard instanceof PlayerCard
 				&& ((PlayerCard) currentCard).getCharacterID() != field.game.getCurrentCharacter().getId()) {
-			getTurn(Turns.TEAM_MEMBER_TURN).draw();
+			currentTurn = getTurn(Turns.TEAM_MEMBER_TURN);
 		}
 		// Monster turn
 		else if (currentCard instanceof MonsterCard) {
-			getTurn(Turns.MONSTER_TURN).draw();
+			currentTurn = getTurn(Turns.MONSTER_TURN);
 		}
 		// Your turn
 		else {
-			getTurn(Turns.YOUR_TURN).draw();
+			currentTurn = getTurn(Turns.YOUR_TURN);
 		}
+		currentTurn.draw();
 	}
 
-	public Turn getTurn(Turns turnType) {
+	private Turn getTurn(Turns turnType) {
 		switch (turnType) {
 			case YOUR_TURN:
 				return new YourTurn(field, panelPool, buttonPool, panels, field.game);

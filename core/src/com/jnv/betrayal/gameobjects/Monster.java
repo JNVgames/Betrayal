@@ -7,7 +7,7 @@ public class Monster {
 
     private Texture monsterTexture;
     private String textureName, nickname;
-    private int id, health, attack, defense, width, height, xPos, yPos, normalAttackTimer;
+    private int id, health, attack, defense, width, height, xPos, yPos, numTargets;
     private int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
     private BetrayalAssetManager res;
 
@@ -30,7 +30,7 @@ public class Monster {
         height = src.getHeight();
         xPos = src.getxPos();
         yPos = src.getyPos();
-        normalAttackTimer = src.getNormalAttackTimer();
+        numTargets = src.getNumTargets();
         skill1 = src.getSkill1();
         skill2 = src.getSkill2();
         skill3 = src.getSkill3();
@@ -51,7 +51,7 @@ public class Monster {
     }
 
     // Setters
-    public void setName(String name) {
+    public void setTextureName(String name) {
         textureName = name;
     }
 
@@ -68,7 +68,7 @@ public class Monster {
     }
 
     public void setAutoattackTimer(int new_normalAattackTimer) {
-        normalAttackTimer = new_normalAattackTimer;
+        numTargets = new_normalAattackTimer;
     }
 
     public void setSkill1(int new_skill1) {
@@ -126,8 +126,8 @@ public class Monster {
         return defense;
     }
 
-    public int getNormalAttackTimer() {
-        return normalAttackTimer;
+    public int getNumTargets() {
+        return numTargets;
     }
 
     public int getSkill1() {
@@ -178,7 +178,7 @@ public class Monster {
 
     public void setData(String nickname, String name, int newHealth, int newAttack, int newDefense,
                         int newWidth, int newHeight, int newXPos, int newYPos,
-                        int newNormalAttackTimer, int newSkill1, int newS1CoolDown,
+                        int numTargets, int newSkill1, int newS1CoolDown,
                         int newSkill2, int newS2CoolDown, int newSkill3, int newS3CoolDown) {
         Monster src = res.getMonster(name);
         src.setNickname(nickname);
@@ -189,12 +189,74 @@ public class Monster {
         src.setHeight((newHeight));
         src.setXPos(newXPos);
         src.setyPos(newYPos);
-        src.setAutoattackTimer(newNormalAttackTimer);
+        src.setAutoattackTimer(numTargets);
         src.setSkill1(newSkill1);
         src.setSkill2(newSkill2);
         src.setSkill3(newSkill3);
         src.setS1CoolDown(newS1CoolDown);
         src.setS2CoolDown(newS2CoolDown);
         src.setS3CoolDown(newS3CoolDown);
+    }
+
+    public static class MonsterFactory {
+
+        private String nickname = "stub";
+        private String textureName = "stub";
+        private int health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
+        private int skill1, skill1CD, skill2, skill2CD, skill3, skill3CD;
+
+        public MonsterFactory() {}
+
+        public MonsterFactory nickname(String nickname) {
+            this.nickname = nickname;
+            return this;
+        }
+
+        public MonsterFactory textureName(String textureName) {
+            this.textureName = textureName;
+            return this;
+        }
+
+        public MonsterFactory health(int health) {
+            this.health = health;
+            return this;
+        }
+
+        public MonsterFactory attack(int attack) {
+            this.attack = attack;
+            return this;
+        }
+
+        public MonsterFactory defense(int defense) {
+            this.defense = defense;
+            return this;
+        }
+
+        public MonsterFactory textureWidth(int textureWidth) {
+            this.textureWidth = textureWidth;
+            return this;
+        }
+
+        public MonsterFactory textureHeight(int textureWidth) {
+            this.textureWidth = textureWidth;
+            return this;
+        }
+
+        public MonsterFactory x(int x) {
+            this.x = x;
+            return this;
+        }
+
+        public MonsterFactory y(int y) {
+            this.y = y;
+            return this;
+        }
+
+        public MonsterFactory numTargets(int numTargets) {
+            this.numTargets = numTargets;
+            return this;
+        }
+
+
     }
 }

@@ -10,6 +10,7 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.popup.EventLog;
+import com.jnv.betrayal.dungeon.turns.Turn;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
