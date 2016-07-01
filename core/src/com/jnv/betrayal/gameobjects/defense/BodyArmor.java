@@ -2,9 +2,12 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gameobjects;
+package com.jnv.betrayal.gameobjects.defense;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.jnv.betrayal.gameobjects.Equip;
+import com.jnv.betrayal.gameobjects.ItemNaming;
+import com.jnv.betrayal.gameobjects.Previewable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class BodyArmor extends Equip implements Previewable {

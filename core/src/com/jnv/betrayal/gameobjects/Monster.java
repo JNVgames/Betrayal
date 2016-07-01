@@ -8,15 +8,21 @@ public class Monster {
 	private Texture monsterTexture;
 	private String textureName, nickname;
 	private int id, health, attack, defense, width, height, xPos, yPos, numTargets;
-	private int skill1, s1cooldown, skill2, s2cooldown, skill3, s3cooldown;
-	private BetrayalAssetManager res;
 
-	public Monster(int id, String name, BetrayalAssetManager res) {
+	public Monster(int id, BetrayalAssetManager res, String textureName, String nickname, int health, int attack, int defense, int width, int height, int xPos, int yPos, int numTargets) {
+		this.textureName = textureName;
+		this.nickname = nickname;
 		this.id = id;
-		textureName = name;
-		this.res = res;
-		monsterTexture = res.getTexture(name);
-		res.loadMonster(name, this);
+		this.health = health;
+		this.attack = attack;
+		this.defense = defense;
+		this.width = width;
+		this.height = height;
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.numTargets = numTargets;
+		monsterTexture = res.getTexture(textureName);
+		res.loadMonster(textureName, this);
 	}
 
 	public Monster(String name, BetrayalAssetManager res) {
@@ -31,12 +37,6 @@ public class Monster {
 		xPos = src.getxPos();
 		yPos = src.getyPos();
 		numTargets = src.getNumTargets();
-		skill1 = src.getSkill1();
-		skill2 = src.getSkill2();
-		skill3 = src.getSkill3();
-		s1cooldown = src.getS1CoolDown();
-		s2cooldown = src.getS2CoolDown();
-		s3cooldown = src.getS3CoolDown();
 		nickname = src.getNickname();
 		monsterTexture = src.getMonsterTexture();
 	}
@@ -51,11 +51,7 @@ public class Monster {
 	}
 
 	// Setters
-	public void setTextureName(String name) {
-		textureName = name;
-	}
-
-	public void setAutoattackTimer(int new_normalAattackTimer) {
+	public void setAutoAttackTimer(int new_normalAattackTimer) {
 		numTargets = new_normalAattackTimer;
 	}
 
@@ -90,54 +86,6 @@ public class Monster {
 
 	public int getNumTargets() {
 		return numTargets;
-	}
-
-	public int getSkill1() {
-		return skill1;
-	}
-
-	public void setSkill1(int new_skill1) {
-		skill1 = new_skill1;
-	}
-
-	public int getSkill2() {
-		return skill2;
-	}
-
-	public void setSkill2(int new_skill2) {
-		skill2 = new_skill2;
-	}
-
-	public int getSkill3() {
-		return skill3;
-	}
-
-	public void setSkill3(int new_skill3) {
-		skill3 = new_skill3;
-	}
-
-	public int getS1CoolDown() {
-		return s1cooldown;
-	}
-
-	public void setS1CoolDown(int new_S1CoolDown) {
-		s1cooldown = new_S1CoolDown;
-	}
-
-	public int getS2CoolDown() {
-		return s2cooldown;
-	}
-
-	public void setS2CoolDown(int new_S2CoolDown) {
-		s2cooldown = new_S2CoolDown;
-	}
-
-	public int getS3CoolDown() {
-		return s3cooldown;
-	}
-
-	public void setS3CoolDown(int new_S3CoolDown) {
-		s3cooldown = new_S3CoolDown;
 	}
 
 	public int getWidth() {
@@ -180,36 +128,24 @@ public class Monster {
 		return monsterTexture;
 	}
 
-	public void setData(String nickname, String name, int newHealth, int newAttack, int newDefense,
-						int newWidth, int newHeight, int newXPos, int newYPos,
-						int numTargets, int newSkill1, int newS1CoolDown,
-						int newSkill2, int newS2CoolDown, int newSkill3, int newS3CoolDown) {
-		Monster src = res.getMonster(name);
-		src.setNickname(nickname);
-		src.setHealth(newHealth);
-		src.setAttack(newAttack);
-		src.setDefense(newDefense);
-		src.setWidth(newWidth);
-		src.setHeight((newHeight));
-		src.setXPos(newXPos);
-		src.setyPos(newYPos);
-		src.setAutoattackTimer(numTargets);
-		src.setSkill1(newSkill1);
-		src.setSkill2(newSkill2);
-		src.setSkill3(newSkill3);
-		src.setS1CoolDown(newS1CoolDown);
-		src.setS2CoolDown(newS2CoolDown);
-		src.setS3CoolDown(newS3CoolDown);
-	}
-
 	public static class MonsterFactory {
 
 		private String nickname = "stub";
 		private String textureName = "stub";
-		private int health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
-		private int skill1, skill1CD, skill2, skill2CD, skill3, skill3CD;
+		private BetrayalAssetManager res;
+		private int id, health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
 
 		public MonsterFactory() {
+		}
+
+		public MonsterFactory assetManager(BetrayalAssetManager res) {
+			this.res = res;
+			return this;
+		}
+
+		public MonsterFactory id(int id) {
+			this.id = id;
+			return this;
 		}
 
 		public MonsterFactory nickname(String nickname) {
@@ -242,8 +178,8 @@ public class Monster {
 			return this;
 		}
 
-		public MonsterFactory textureHeight(int textureWidth) {
-			this.textureWidth = textureWidth;
+		public MonsterFactory textureHeight(int textureHeight) {
+			this.textureHeight = textureHeight;
 			return this;
 		}
 
@@ -262,6 +198,9 @@ public class Monster {
 			return this;
 		}
 
-
+		public Monster build() {
+			return new Monster(id, res, textureName, nickname, health, attack, defense, textureWidth,
+					textureHeight, x, y, numTargets);
+		}
 	}
 }

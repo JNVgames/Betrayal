@@ -26,9 +26,9 @@ public class MonsterInfo extends Popup {
 		attack = monster.getAttack();
 		defense = monster.getDefense();
 		health = monster.getHealth();
-		skill1 = monster.getSkill1();
-		skill2 = monster.getSkill2();
-		skill3 = monster.getSkill3();
+//		skill1 = monster.getSkill1();
+//		skill2 = monster.getSkill2();
+//		skill3 = monster.getSkill3();
 		loadButtons();
 	}
 

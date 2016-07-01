@@ -2,8 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gameobjects;
+package com.jnv.betrayal.gameobjects.special;
 
+import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Ring extends Equip {

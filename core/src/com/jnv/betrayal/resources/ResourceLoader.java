@@ -4,14 +4,14 @@
 
 package com.jnv.betrayal.resources;
 
-import com.jnv.betrayal.gameobjects.BodyArmor;
-import com.jnv.betrayal.gameobjects.Cloak;
-import com.jnv.betrayal.gameobjects.Helmet;
 import com.jnv.betrayal.gameobjects.Monster;
-import com.jnv.betrayal.gameobjects.Potion;
-import com.jnv.betrayal.gameobjects.Ring;
-import com.jnv.betrayal.gameobjects.Shield;
-import com.jnv.betrayal.gameobjects.Weapon;
+import com.jnv.betrayal.gameobjects.attack.Weapon;
+import com.jnv.betrayal.gameobjects.defense.BodyArmor;
+import com.jnv.betrayal.gameobjects.defense.Helmet;
+import com.jnv.betrayal.gameobjects.defense.Shield;
+import com.jnv.betrayal.gameobjects.special.Cloak;
+import com.jnv.betrayal.gameobjects.special.Ring;
+import com.jnv.betrayal.gameobjects.usables.Potion;
 
 public class ResourceLoader {
 
@@ -166,7 +166,6 @@ public class ResourceLoader {
 	private void loadHealthBar() {
 		res.loadTexture("dungeon/healthbar/greenbar214x17.png", "green-bar");
 		res.loadTexture("dungeon/healthbar/red_bar52x17.png", "red-bar");
-		res.loadTexture("dungeon/healthbar/whitebar214x17.png", "white-bar");
 		res.loadTexture("dungeon/healthbar/yellow_bar102x17.png", "yellow-bar");
 		res.loadTexture("dungeon/healthbar/health_bar_background330x40.png", "bar-background");
 		res.loadTexture("dungeon/monster_select312x312.png", "cross-hair");
@@ -852,93 +851,572 @@ public class ResourceLoader {
 	}
 
 	private void loadMonsterData() {
-		//Tier 0
-		new Monster(0, "monster-tier0-0", res).setData("Skeleton Kelly", "monster-tier0-0", 25, 10, 1, 250, 250, 235, 740, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 0
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(0)
+				.nickname("Skeleton Kelly")
+				.textureName("monster-tier0-0")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(250).x(235).y(740)
+				.numTargets(1)
+				.build();
 
-		// Tier1
-		new Monster(1, "monster-tier1-0", res).setData("The Green Lantern", "monster-tier0-0", 25, 10, 1, 350, 400, 185, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(2, "monster-tier1-1", res).setData("Muriel the Mummy", "monster-tier1-1", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(3, "monster-tier1-2", res).setData("Knight of the Underworld, Fred", "monster-tier1-2", 25, 10, 1, 250, 300, 235, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(4, "monster-tier1-3", res).setData("Big Chest", "monster-tier1-3", 25, 10, 1, 450, 400, 135, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(5, "monster-tier1-4", res).setData("Arthur", "monster-tier1-4", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(6, "monster-tier1-5", res).setData("Sir Cumference", "monster-tier1-5", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(7, "monster-tier1-6", res).setData("Peeping Tom", "monster-tier1-6", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(8, "monster-tier1-7", res).setData("Lil Jimmy", "monster-tier1-7", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(9, "monster-tier1-8", res).setData("Jeff the Killer", "monster-tier1-8", 25, 10, 1, 300, 350, 210, 740, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 1
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(1)
+				.nickname("The Green Lantern")
+				.textureName("monster-tier1-0")
+				.health(0).attack(0).defense(0)
+				.textureWidth(0).textureHeight(0).x(0).y(0)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(2)
+				.nickname("Muriel the Mummy")
+				.textureName("monster-tier1-1")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(3)
+				.nickname("Knight of the Underworld, Fred")
+				.textureName("monster-tier1-2")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(235).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(4)
+				.nickname("Big Chest")
+				.textureName("monster-tier1-3")
+				.health(25).attack(10).defense(1)
+				.textureWidth(450).textureHeight(400).x(135).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(5)
+				.nickname("Arthur")
+				.textureName("monster-tier1-4")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(6)
+				.nickname("Sir Cumference")
+				.textureName("monster-tier1-5")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(7)
+				.nickname("Peeping Tom")
+				.textureName("monster-tier1-6")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(8)
+				.nickname("Lil Jimmy")
+				.textureName("monster-tier1-7")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(9)
+				.nickname("Jeff the Killer")
+				.textureName("monster-tier1-8")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.numTargets(1)
+				.build();
 
-		// Tier1 mob1
-		new Monster(10, "monster-tier1-9", res).setData("Skeleton Kelly", "monster-tier1-9", 25, 10, 1, 300, 350, 50, 720, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(11, "monster-tier1-19", res).setData("Knight of the Underworld, Fred", "monster-tier1-19", 25, 10, 1, 300, 350, 370, 740, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 1 Mob
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(10)
+				.nickname("Skeleton Kelly")
+				.textureName("monster-tier1-9")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(50).y(720)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(11)
+				.nickname("Knight of the Underworld, Fred")
+				.textureName("monster-tier1-19")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(370).y(740)
+				.numTargets(1)
+				.build();
 
-		// Tier2
-		new Monster(12, "monster-tier2-0", res).setData("Ghost Rider", "monster-tier2-0", 25, 10, 1, 400, 450, 160, 700, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(13, "monster-tier2-1", res).setData("Moose", "monster-tier2-1", 25, 10, 1, 350, 450, 185, 700, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(14, "monster-tier2-2", res).setData("Samurai Joe", "monster-tier2-2", 25, 10, 1, 250, 300, 30, 690, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(15, "monster-tier2-3", res).setData("David the Tiger", "monster-tier2-3", 25, 10, 1, 500, 450, 110, 680, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(16, "monster-tier2-4", res).setData("Ed Edd and Eddy", "monster-tier2-4", 25, 10, 1, 650, 550, 35, 690, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(17, "monster-tier2-5", res).setData("Angry Susan", "monster-tier2-5", 25, 10, 1, 500, 500, 110, 670, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(18, "monster-tier2-6", res).setData("Purple Delight", "monster-tier2-6", 25, 10, 1, 500, 500, 110, 640, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(19, "monster-tier2-7", res).setData("Horny Trevor", "monster-tier2-7", 25, 10, 1, 400, 450, 160, 650, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(20, "monster-tier2-8", res).setData("Dead Mary", "monster-tier2-8", 25, 10, 1, 400, 500, 160, 670, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(21, "monster-tier2-9", res).setData("It's Your Girlfriend", "monster-tier2-9", 25, 10, 1, 400, 500, 160, 670, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 2
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(12)
+				.nickname("Ghost Rider")
+				.textureName("monster-tier2-0")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(450).x(160).y(700)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(13)
+				.nickname("Moose")
+				.textureName("monster-tier2-1")
+				.health(25).attack(10).defense(1)
+				.textureWidth(350).textureHeight(450).x(185).y(700)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(14)
+				.nickname("Samurai Joe")
+				.textureName("monster-tier2-2")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(30).y(690)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(15)
+				.nickname("David the Tiger")
+				.textureName("monster-tier2-3")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(450).x(110).y(680)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(16)
+				.nickname("Ed Edd and Eddy")
+				.textureName("monster-tier2-4")
+				.health(25).attack(10).defense(1)
+				.textureWidth(650).textureHeight(550).x(35).y(690)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(17)
+				.nickname("Angry Susan")
+				.textureName("monster-tier2-5")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(670)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(18)
+				.nickname("Purple Delight")
+				.textureName("monster-tier2-6")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(640)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(19)
+				.nickname("Horny Trevor")
+				.textureName("monster-tier2-7")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(450).x(160).y(650)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(20)
+				.nickname("Dead Mary")
+				.textureName("monster-tier2-8")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(500).x(160).y(670)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(21)
+				.nickname("It's Your Girlfriend")
+				.textureName("monster-tier2-9")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(500).x(160).y(670)
+				.numTargets(1)
+				.build();
 
 		// Tier 2 Mob
-		new Monster(22, "monster-tier2-12", res).setData("Samurai Poe", "monster-tier2-12", 25, 10, 1, 250, 300, 230, 760, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(23, "monster-tier2-22", res).setData("Samurai Low", "monster-tier2-22", 25, 10, 1, 250, 300, 430, 690, 1, 0, 0, 0, 0, 0, 0);
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(22)
+				.nickname("Samurai Poe")
+				.textureName("monster-tier2-12")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(230).y(760)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(23)
+				.nickname("Samurai Low")
+				.textureName("monster-tier2-22")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(430).y(690)
+				.numTargets(1)
+				.build();
 
+		// Tier 3
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(24)
+				.nickname("Pack o' Wolves")
+				.textureName("monster-tier3-0")
+				.health(25).attack(10).defense(1)
+				.textureWidth(350).textureHeight(300).x(340).y(670)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(25)
+				.nickname("Hagrid")
+				.textureName("monster-tier3-1")
+				.health(25).attack(10).defense(1)
+				.textureWidth(600).textureHeight(500).x(60).y(640)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(26)
+				.nickname("Tiki To")
+				.textureName("monster-tier3-2")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(450).x(0).y(690)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(27)
+				.nickname("Ghost")
+				.textureName("monster-tier3-3")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(450).x(160).y(690)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(28)
+				.nickname("Chad Livingston")
+				.textureName("monster-tier3-4")
+				.health(25).attack(10).defense(1)
+				.textureWidth(550).textureHeight(500).x(85).y(740)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(29)
+				.nickname("Fire Dragon")
+				.textureName("monster-tier3-5")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(550).x(110).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(30)
+				.nickname("Envious Kevin")
+				.textureName("monster-tier3-6")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(670)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(31)
+				.nickname("Terrible Terry")
+				.textureName("monster-tier3-7")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(670)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(32)
+				.nickname("No Body Greg")
+				.textureName("monster-tier3-9")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(670)
+				.numTargets(1)
+				.build();
 
-		//Tier 3
-		new Monster(24, "monster-tier3-0", res).setData("Pack o' Wolves", "monster-tier3-0", 25, 10, 1, 350, 300, 340, 670, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(25, "monster-tier3-1", res).setData("Hagrid", "monster-tier3-1", 25, 10, 1, 600, 500, 60, 640, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(26, "monster-tier3-2", res).setData("Tiki To", "monster-tier3-2", 25, 10, 1, 400, 450, 0, 690, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(27, "monster-tier3-3", res).setData("Ghost", "monster-tier3-3", 25, 10, 1, 400, 450, 160, 690, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(28, "monster-tier3-4", res).setData("Chad Livingston", "monster-tier3-4", 25, 10, 1, 550, 500, 85, 740, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(29, "monster-tier3-5", res).setData("Fire Dragon", "monster-tier3-5", 25, 10, 1, 500, 550, 110, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(30, "monster-tier3-6", res).setData("Envious Kevin", "monster-tier3-6", 25, 10, 1, 500, 500, 110, 670, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(31, "monster-tier3-7", res).setData("Terrible Terry", "monster-tier3-7", 25, 10, 1, 500, 500, 110, 670, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(32, "monster-tier3-9", res).setData("No Body Greg", "monster-tier3-9", 25, 10, 1, 500, 500, 110, 670, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 3 Mob 1
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(33)
+				.nickname("Ghost Rider")
+				.textureName("monster-tier3-8")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(400).x(160).y(750)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(34)
+				.nickname("Skeleton Kelly")
+				.textureName("monster-tier3-18")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(20).y(660)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(35)
+				.nickname("Knight of the Underworld Fred")
+				.textureName("monster-tier3-28")
+				.health(25).attack(10).defense(1)
+				.textureWidth(250).textureHeight(300).x(480).y(680)
+				.numTargets(1)
+				.build();
 
-		//Tier3Mob1
-		new Monster(33, "monster-tier3-8", res).setData("Ghost Rider", "monster-tier3-8", 25, 10, 1, 400, 400, 160, 750, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(34, "monster-tier3-18", res).setData("Skeleton Kelly", "monster-tier3-18", 25, 10, 1, 250, 300, 20, 660, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(35, "monster-tier3-28", res).setData("Knight of the Underworld Fred", "monster-tier3-28", 25, 10, 1, 250, 300, 480, 680, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 3 Mob 2
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(36)
+				.nickname("Pack o' Wolves")
+				.textureName("monster-tier3-10")
+				.health(25).attack(10).defense(1)
+				.textureWidth(350).textureHeight(300).x(50).y(710)
+				.numTargets(1)
+				.build();
 
-		//Tier3mob2
-		new Monster(36, "monster-tier3-10", res).setData("Pack o' Wolves", "monster-tier3-10", 25, 10, 1, 350, 300, 50, 710, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 3 Mob 3
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(37)
+				.nickname("Tiki Ta")
+				.textureName("monster-tier3-12")
+				.health(25).attack(10).defense(1)
+				.textureWidth(400).textureHeight(450).x(360).y(690)
+				.numTargets(1)
+				.build();
 
-		//Tier 3mob 3
-		new Monster(37, "monster-tier3-12", res).setData("Tiki Ta", "monster-tier3-12", 25, 10, 1, 400, 450, 360, 690, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 4
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(38)
+				.nickname("Magic Mike")
+				.textureName("monster-tier4-0")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(475).x(110).y(675)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(39)
+				.nickname("Ghost Rider")
+				.textureName("monster-tier4-1")
+				.health(25).attack(10).defense(1)
+				.textureWidth(350).textureHeight(400).x(185).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(40)
+				.nickname("The Thing")
+				.textureName("monster-tier4-2")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(475).x(110).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(41)
+				.nickname("Wizard of Narwhal")
+				.textureName("monster-tier4-3")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(475).x(110).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(42)
+				.nickname("Fluffy")
+				.textureName("monster-tier4-4")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(475).x(110).y(665)
+				.numTargets(1)
+				.build();
 
-		// Tier4
-		new Monster(38, "monster-tier4-0", res).setData("Magic Mike", "monster-tier4-0", 25, 10, 1, 500, 475, 110, 675, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(39, "monster-tier4-1", res).setData("Ghost Rider", "monster-tier4-1", 25, 10, 1, 350, 400, 185, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(40, "monster-tier4-2", res).setData("The Thing", "monster-tier4-2", 25, 10, 1, 500, 475, 110, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(41, "monster-tier4-3", res).setData("Wizard of Narwhal", "monster-tier4-3", 25, 10, 1, 500, 475, 110, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(42, "monster-tier4-4", res).setData("Fluffy", "monster-tier4-4", 25, 10, 1, 500, 475, 110, 665, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 4 Mob 1
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(43)
+				.nickname("Drake")
+				.textureName("monster-tier4-5")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(0).y(655)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(44)
+				.nickname("Drako")
+				.textureName("monster-tier4-15")
+				.health(25).attack(10).defense(1)
+				.textureWidth(350).textureHeight(400).x(185).y(765)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(45)
+				.nickname("Drakey")
+				.textureName("monster-tier4-25")
+				.health(25).attack(10).defense(1)
+				.textureWidth(300).textureHeight(350).x(420).y(655)
+				.numTargets(1)
+				.build();
 
-		//Tier 4 mob
-		new Monster(43, "monster-tier4-5", res).setData("Drake", "monster-tier4-5", 25, 10, 1, 300, 350, 0, 655, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(44, "monster-tier4-15", res).setData("Drako", "monster-tier4-15", 25, 10, 1, 350, 400, 185, 765, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(45, "monster-tier4-25", res).setData("Drakey", "monster-tier4-25", 25, 10, 1, 300, 350, 420, 655, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 4 Mob 2
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(46)
+				.nickname("Rock")
+				.textureName("monster-tier4-6")
+				.health(25).attack(10).defense(1)
+				.textureWidth(425).textureHeight(475).x(40).y(675)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(47)
+				.nickname("Chad Livingston")
+				.textureName("monster-tier4-16")
+				.health(25).attack(10).defense(1)
+				.textureWidth(225).textureHeight(250).x(400).y(740)
+				.numTargets(1)
+				.build();
 
-		//Tier 4 mob
-		new Monster(46, "monster-tier4-6", res).setData("Rock", "monster-tier4-6", 25, 10, 1, 425, 475, 40, 675, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(47, "monster-tier4-16", res).setData("Chad Livingston", "monster-tier4-16", 25, 10, 1, 225, 250, 400, 740, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 4 Mob 3
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(48)
+				.nickname("Merlin")
+				.textureName("monster-tier4-7")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(260).y(675)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(49)
+				.nickname("Arthur")
+				.textureName("monster-tier4-17")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(0).y(725)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(50)
+				.nickname("Sir Cumference")
+				.textureName("monster-tier4-27")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(520).y(725)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(51)
+				.nickname("Peeping Tom")
+				.textureName("monster-tier4-37")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(120).y(815)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(52)
+				.nickname("Lil Jimmy")
+				.textureName("monster-tier4-47")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(400).y(815)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(53)
+				.nickname("Jeff the Killer")
+				.textureName("monster-tier4-57")
+				.health(25).attack(10).defense(1)
+				.textureWidth(200).textureHeight(250).x(260).y(870)
+				.numTargets(1)
+				.build();
 
-		//Tier 4 mob
-		new Monster(48, "monster-tier4-7", res).setData("Merlin", "monster-tier4-7", 25, 10, 1, 200, 250, 260, 675, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(49, "monster-tier4-17", res).setData("Arthur", "monster-tier4-17", 25, 10, 1, 200, 250, 0, 725, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(50, "monster-tier4-27", res).setData("Sir Cumference", "monster-tier4-27", 25, 10, 1, 200, 250, 520, 725, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(51, "monster-tier4-37", res).setData("Peeping Tom", "monster-tier4-37", 25, 10, 1, 200, 250, 120, 815, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(52, "monster-tier4-47", res).setData("Lil Jimmy", "monster-tier4-47", 25, 10, 1, 200, 250, 400, 815, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(53, "monster-tier4-57", res).setData("Jeff the Killer", "monster-tier4-57", 25, 10, 1, 200, 250, 260, 870, 1, 0, 0, 0, 0, 0, 0);
-
-		//Tier5
-		new Monster(54, "monster-tier5-0", res).setData("Fattie Triple Chin", "monster-tier5-0", 25, 10, 1, 600, 525, 60, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(55, "monster-tier5-1", res).setData("King of the Mountain, Lioke", "monster-tier5-1", 25, 10, 1, 450, 550, 135, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(56, "monster-tier5-2", res).setData("Dragon of the Floor, Jacob Rivington III", "monster-tier5-2", 25, 10, 1, 620, 500, 50, 640, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(57, "monster-tier5-3", res).setData("Morenth Bringer of Death", "monster-tier5-3", 25, 10, 1, 500, 500, 110, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(58, "monster-tier5-4", res).setData("Lusloth Protector of Life", "monster-tier5-4", 25, 10, 1, 500, 500, 110, 665, 1, 0, 0, 0, 0, 0, 0);
-		new Monster(59, "monster-tier5-5", res).setData("Tough Tanuth", "monster-tier5-5", 25, 10, 1, 500, 500, 110, 665, 1, 0, 0, 0, 0, 0, 0);
+		// Tier 5
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(54)
+				.nickname("Fattie Triple Chin")
+				.textureName("monster-tier5-0")
+				.health(25).attack(10).defense(1)
+				.textureWidth(600).textureHeight(525).x(60).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(55)
+				.nickname("King of the Mountain, Lioke")
+				.textureName("monster-tier5-1")
+				.health(25).attack(10).defense(1)
+				.textureWidth(450).textureHeight(550).x(135).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(56)
+				.nickname("Dragon of the Floor, Jacob Rivington III")
+				.textureName("monster-tier5-2")
+				.health(25).attack(10).defense(1)
+				.textureWidth(620).textureHeight(500).x(50).y(640)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(57)
+				.nickname("Morenth Bringer of Death")
+				.textureName("monster-tier5-3")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(58)
+				.nickname("Lusloth Protector of Life")
+				.textureName("monster-tier5-4")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(665)
+				.numTargets(1)
+				.build();
+		new Monster.MonsterFactory()
+				.assetManager(res)
+				.id(59)
+				.nickname("Tough Tanuth")
+				.textureName("monster-tier5-5")
+				.health(25).attack(10).defense(1)
+				.textureWidth(500).textureHeight(500).x(110).y(665)
+				.numTargets(1)
+				.build();
 	}
 }

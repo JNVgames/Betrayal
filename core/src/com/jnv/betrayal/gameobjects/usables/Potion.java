@@ -2,9 +2,10 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.gameobjects;
+package com.jnv.betrayal.gameobjects.usables;
 
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.gameobjects.Usables;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Potion extends Usables {
