@@ -24,13 +24,13 @@ public final class DungeonCoords {
 			},
 			// 3 Players
 			{
-					new Vector2(10, Panel.top.getTop() + 90),
-					new Vector2((Betrayal.WIDTH - PLAYER_WIDTH - 149) / 2, Panel.top.getTop() + 50),
-					new Vector2(Betrayal.WIDTH - PLAYER_WIDTH - 149 - 10, Panel.top.getTop() + 10)
+					new Vector2(0, Panel.top.getTop() + 10),
+					new Vector2((Betrayal.WIDTH - PLAYER_WIDTH - 149) / 2 +25, Panel.top.getTop() + 150),
+					new Vector2(Betrayal.WIDTH - PLAYER_WIDTH - 149 , Panel.top.getTop() + 10)
 			},
 			// 4 Players
 			{
-					new Vector2(0f, Panel.top.getTop() + 150),
+					new Vector2(0, Panel.top.getTop() + 150),
 					new Vector2(100, Panel.top.getTop() + 10),
 					new Vector2(450, Panel.top.getTop() + 10),
 					new Vector2(350, Panel.top.getTop() + 150)
