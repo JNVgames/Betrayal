@@ -52,11 +52,11 @@ public class Dimension {
 		isCenterX = false;
 	}
 
-	public float getRightX() {
+	public float getRight() {
 		return getX() + width;
 	}
 
-	public float getTopY() {
+	public float getTop() {
 		return getY() + getHeight();
 	}
 

@@ -6,6 +6,7 @@ package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -15,6 +16,8 @@ import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
+
+import java.util.List;
 
 public class Dungeon extends GameState {
 
@@ -33,12 +36,8 @@ public class Dungeon extends GameState {
 		//loadStage();
 		field = new Field(gsm);
 
-		// Add all player and monster cards to the field
-		int playerNum = 0;
-		for (Character character : game.characters) {
-			field.addCard(new PlayerCard(DungeonCoords.player[playerNum], character, res));
-			playerNum++;
-		}
+		addCardsToStage(game.characters);
+
 		MonsterManager monsterManager = new MonsterManager(1, res, field);
 		field.turnManager.draw();
 		stage.addActor(field);
@@ -70,5 +69,13 @@ public class Dungeon extends GameState {
 		label.setX((Betrayal.WIDTH - label.getWidth()) / 2);
 		label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
 		stage.addActor(label);
+	}
+
+	private void addCardsToStage(List<Character> characters) {
+		int playerNum = 0;
+		for (Character character : characters) {
+			field.addCard(new PlayerCard(DungeonCoords.player[characters.size() - 1][playerNum], character, res));
+			playerNum++;
+		}
 	}
 }

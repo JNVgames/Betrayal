@@ -5,7 +5,7 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;

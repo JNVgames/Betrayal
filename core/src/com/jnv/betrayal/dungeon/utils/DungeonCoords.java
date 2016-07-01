@@ -12,12 +12,28 @@ public final class DungeonCoords {
 	public static final float PLAYER_WIDTH = 128;
 	public static final float PLAYER_HEIGHT = 192;
 
-	public static final Vector2 player5 = new Vector2(30f, Panel.top.getTopY() + 50);
-	public static final Vector2 player1 = new Vector2((Betrayal.WIDTH - PLAYER_WIDTH) / 2, player5.y);
-	public static final Vector2 player3 = new Vector2((player5.x + player1.x) / 2, player5.y);
-	public static final Vector2 player4 = new Vector2(Betrayal.WIDTH - player5.x - PLAYER_WIDTH,
-			player5.y);
-	public static final Vector2 player2 = new Vector2(Betrayal.WIDTH - player3.x - PLAYER_WIDTH,
-			player5.y);
-	public static final Vector2 player[] = {player1, player2, player3, player4, player5};
+	public static final Vector2 player[][] = {
+			// 1 Player
+			{
+					new Vector2((Betrayal.WIDTH - PLAYER_WIDTH) / 2, Panel.top.getTop() + 10)
+			},
+			// 2 Players
+			{
+					new Vector2(68, Panel.top.getTop() + 10),
+					new Vector2(Betrayal.WIDTH - PLAYER_WIDTH - 217, Panel.top.getTop() + 10)
+			},
+			// 3 Players
+			{
+					new Vector2(10, Panel.top.getTop() + 90),
+					new Vector2((Betrayal.WIDTH - PLAYER_WIDTH - 149) / 2, Panel.top.getTop() + 50),
+					new Vector2(Betrayal.WIDTH - PLAYER_WIDTH - 149 - 10, Panel.top.getTop() + 10)
+			},
+			// 4 Players
+			{
+					new Vector2(0f, Panel.top.getTop() + 150),
+					new Vector2(100, Panel.top.getTop() + 10),
+					new Vector2(450, Panel.top.getTop() + 10),
+					new Vector2(350, Panel.top.getTop() + 150)
+			}
+	};
 }

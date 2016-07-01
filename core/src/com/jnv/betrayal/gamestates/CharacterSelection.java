@@ -220,7 +220,7 @@ public class CharacterSelection extends GameState {
 		actor = new Image(rightArrowImage);
 		actor.setHeight(ref.getHeight());
 		actor.setWidth(ref.getWidth());
-		actor.setX(ref.getRightX() + gap);
+		actor.setX(ref.getRight() + gap);
 		actor.setY(ref.getY());
 		stage.addActor(actor);
 		actor.addListener(new InputListener(actor) {

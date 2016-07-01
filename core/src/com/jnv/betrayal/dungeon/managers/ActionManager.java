@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.managers;
 
 
-import com.jnv.betrayal.dungeon.ActionHandler.Action;
+import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.mechanics.Field;
