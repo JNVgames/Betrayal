@@ -5,29 +5,27 @@ import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
 
-public class AttackDown extends Effect {
+public class Poison extends Effect {
 	private int value;
 
-	public AttackDown() {
+	public Poison() {
 	}
 
-	public AttackDown(Card src, ArrayList<Card> dest,boolean consistent, int value) {
+	public Poison(Card src, ArrayList<Card> dest, boolean consistent, int value) {
 		super(src, dest, consistent);
 		this.value = value;
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.decreaseCurrentAttack(value);
+		card.poison();
 	}
 
 	@Override
-	public void endEffect(Card card) {
-		card.increaseCurrentAttack(value);
-	}
+	public void endEffect(Card card) {	}
 
 	@Override
 	public void consistentEffect(Card card) {
-
+		card.poison();
 	}
 }

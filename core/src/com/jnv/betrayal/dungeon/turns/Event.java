@@ -12,6 +12,8 @@ public class Event {
 		this.card = card;
 		this.turnsLeft = turnsLeft;
 		this.effect = effect;
+
+		throw new AssertionError("Turnsleft can't be initialized to 0. make it 1 for instant effects");
 	}
 
 	public Card getCard() {

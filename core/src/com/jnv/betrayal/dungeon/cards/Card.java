@@ -284,6 +284,14 @@ public abstract class Card {
 		}
 	}
 
+	public void poison(){
+		double newhealth = Math.floor(currentHealth*.8);
+		currentHealth = (int) newhealth;
+		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
+		if (checkIfDied())
+			cardDeath(this);
+	}
+
 	public void takeDamage(int damage) {
 		currentHealth -= calculateDamageWithDefense(damage, this.getCurrentDefense());
 		if (currentHealth < 0)

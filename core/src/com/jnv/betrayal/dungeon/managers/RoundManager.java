@@ -13,11 +13,17 @@ public class RoundManager {
 	}
 
 	public void checkEvents(Card card) {
-		for (Event event : events) {
-			if (card == event.getCard()) {
-				event.decreaseTurns();
-				if (event.turnIsZero()) {
-					event.getEffect().endEffect(card);
+		for (int i=0; i< events.size(); i++) {
+			if (card == events.get(i).getCard()) {
+				events.get(i).decreaseTurns();
+				if (events.get(i).turnIsZero()) {
+					events.get(i).getEffect().doEndEffect();
+					events.remove(i);
+					i--;				//makes sure you dont skip anything
+				}
+				//if effect is consistent
+				if(events.get(i).getEffect().isConsistent()){
+					events.get(i).getEffect().doConsistentEffect();
 				}
 			}
 		}
