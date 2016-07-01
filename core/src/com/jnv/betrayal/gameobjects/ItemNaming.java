@@ -12,8 +12,9 @@ public class ItemNaming {
 
 	/**
 	 * Converts a dual-wieldable item icon name to the preview name
+	 *
 	 * @param itemIconName the item icon name
-	 * @param isLeft true if you want the left side preview, false if you want the right side
+	 * @param isLeft       true if you want the left side preview, false if you want the right side
 	 * @return the preview name
 	 */
 	public static String toPreview(String itemIconName, boolean isLeft) {
@@ -26,6 +27,7 @@ public class ItemNaming {
 
 	/**
 	 * Converts a previewable item icon name to the preview name
+	 *
 	 * @param itemIconName the item icon name
 	 * @return the preview name
 	 */

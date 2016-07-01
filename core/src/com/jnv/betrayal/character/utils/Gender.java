@@ -21,8 +21,7 @@ public enum Gender {
 	public Gender getOtherGender() {
 		if (this == MALE) {
 			return FEMALE;
-		}
-		else {
+		} else {
 			return MALE;
 		}
 	}

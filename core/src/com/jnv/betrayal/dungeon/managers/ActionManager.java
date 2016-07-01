@@ -1,9 +1,9 @@
-package com.jnv.betrayal.dungeon.ActionHandler;
+package com.jnv.betrayal.dungeon.managers;
 
 
+import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 
 import java.util.ArrayDeque;
@@ -25,11 +25,11 @@ public class ActionManager {
 	}
 
 	//gets the action that happened most recently
-	public Action getMostRecentAction(){
+	public Action getMostRecentAction() {
 		return actionHistory.getFirst();
 	}
 
-	public void addToHistory(Action action){
+	public void addToHistory(Action action) {
 		actionHistory.addLast(action);
 	}
 
@@ -48,8 +48,7 @@ public class ActionManager {
 						if (card.isBeingDefended()) {
 							// Apply damage damage appropriately
 							card.damageDefender(action.getSrc());
-						}
-						else { // There are no defenders
+						} else { // There are no defenders
 							card.takeDamage(action.getSrc().getCurrentAttack());
 						}
 					}

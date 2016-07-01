@@ -14,16 +14,16 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 public class Inventory extends Popup {
 
+	Label title;
+	Image background;
+	Character character;
+	Betrayal game;
 	private Image lobbyButton, goldIcon;
 	private Image[] inventorySpots, characterOutline;
 	private Label userGold;
 	private Label[] charOutDescription;
 	private ItemLoader itemLoader;
 	private EquipLoader equipLoader;
-	Label title;
-	Image background;
-	Character character;
-	Betrayal game;
 
 	public Inventory(Betrayal game) {
 		super(game);
@@ -72,12 +72,11 @@ public class Inventory extends Popup {
 		goldIcon.setBounds(x, y + 10, 40, 40);
 		popup.addActor(goldIcon);
 
-		userGold = new Label(Integer.toString(character.inventory.getGold()),FontManager.getFont(40));
+		userGold = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
 		userGold.setX(x + goldIcon.getWidth() + 10);
 		userGold.setY(y + 7);
 		popup.addActor(userGold);
 	}
-
 
 
 	private void loadReturnToLobbyButton() {
@@ -96,7 +95,7 @@ public class Inventory extends Popup {
 	private void loadInventorySpots() {
 
 		int padding = 10, itemSize = 92;
-		float startingX = background.getX()+ itemSize + padding, startingY = title.getY() - 30-92;
+		float startingX = background.getX() + itemSize + padding, startingY = title.getY() - 30 - 92;
 
 		for (int i = 0; i < 20; i++) {
 			inventorySpots[i] = new Image(res.getTexture("shop-purchase-background"));

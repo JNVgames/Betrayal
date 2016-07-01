@@ -119,6 +119,7 @@ public class Stats implements Json.Serializable {
 	}
 
 	// Setters
+
 	/**
 	 * Called when the character levels up
 	 */
@@ -209,13 +210,14 @@ public class Stats implements Json.Serializable {
 			}
 		}
 
-		public boolean hasPointsApplied(){
-			return (tmpPointsApplied>0);
+		public boolean hasPointsApplied() {
+			return (tmpPointsApplied > 0);
 		}
 
 		public boolean hasAvailablePoints() {
 			return (tmpAvailablePoints > 0);
 		}
+
 		/**
 		 * Sets the changes in stats to the character
 		 */
@@ -250,6 +252,7 @@ public class Stats implements Json.Serializable {
 
 		/**
 		 * Use these methods to constantly get the correct stats values for display
+		 *
 		 * @return returns requested stats
 		 */
 		public int getHealth() {

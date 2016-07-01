@@ -1,13 +1,9 @@
 package com.jnv.betrayal.dungeon.popup;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.main.Betrayal;
@@ -58,7 +54,7 @@ public class EventLog extends Popup {
 	private void loadAnswer() {
 		okayButton = new Image(res.getTexture("ok"));
 		okayButton.layout();
-		okayButton.setBounds(Betrayal.WIDTH/2 - 75, 110, 150, 75);
+		okayButton.setBounds(Betrayal.WIDTH / 2 - 75, 110, 150, 75);
 
 		okayButton.addListener(new InputListener(okayButton) {
 			@Override

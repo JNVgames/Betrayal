@@ -23,7 +23,7 @@ public class PartyRoom extends Popup {
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
-		partyTitle = new Label("", FontManager.getFont(60));			//VINCENT DO NOT DELETE THIS. USING IT IN RELATION
+		partyTitle = new Label("", FontManager.getFont(60));            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
 	}
@@ -64,9 +64,9 @@ public class PartyRoom extends Popup {
 		popup.addActor(lobbyButton);
 	}
 
-	private void loadRoomButtons(){
+	private void loadRoomButtons() {
 		createRoom.layout();
-		createRoom.setBounds(142 , partyTitle.getY()-20, 200, 65);
+		createRoom.setBounds(142, partyTitle.getY() - 20, 200, 65);
 		createRoom.addListener(new InputListener(createRoom) {
 			@Override
 			public void doAction() {
@@ -76,7 +76,7 @@ public class PartyRoom extends Popup {
 		popup.addActor(createRoom);
 
 		leaveRoom.layout();
-		leaveRoom.setBounds(372 , partyTitle.getY()-20, 200, 65);
+		leaveRoom.setBounds(372, partyTitle.getY() - 20, 200, 65);
 		leaveRoom.addListener(new InputListener(leaveRoom) {
 			@Override
 			public void doAction() {
@@ -88,6 +88,7 @@ public class PartyRoom extends Popup {
 
 	/**
 	 * Given a list of usernames, this method prints out every name in a column.
+	 *
 	 * @param listOfFriends list of usernames
 	 */
 	private void loadFriendsList(List<String> listOfFriends) {

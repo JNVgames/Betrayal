@@ -21,12 +21,12 @@ import java.util.List;
 
 class ItemOptions extends Popup {
 
+	public final Dimension itemBoxDimen;
+	private final int unequipSlot;
 	private Inventory inventory;
 	private Image background;
 	private Item item;
-	public final Dimension itemBoxDimen;
 	private boolean isEquippable, isEquipped;
-	private final int unequipSlot;
 
 	ItemOptions(Inventory inventory, Item item, Dimension itemBoxDimen, Betrayal game) {
 		this(inventory, item, itemBoxDimen, game, -1);
@@ -67,7 +67,7 @@ class ItemOptions extends Popup {
 			if (itemBoxDimen.getRightX() + optionWidth < Betrayal.WIDTH)
 				dimensions.add(new Dimension(itemBoxDimen.getRightX(),
 						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));
-			// Else draw to the left of the item
+				// Else draw to the left of the item
 			else
 				dimensions.add(new Dimension(itemBoxDimen.getX() - 20 - optionWidth,
 						itemBoxDimen.getTopY() - optionHeight * (i + 1), optionWidth, optionHeight));

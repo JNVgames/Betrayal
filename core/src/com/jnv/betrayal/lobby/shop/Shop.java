@@ -29,7 +29,7 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
-	private Image leftArrow, rightArrow, cloakBuyButton ;
+	private Image leftArrow, rightArrow, cloakBuyButton;
 	private Image[] potions, ring1, ring2;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
@@ -700,7 +700,7 @@ public class Shop extends Popup {
 
 		final float x = leftArrow.getX() + 50;
 		final float y = leftArrow.getTop() + 20;
-		final float width = rightArrow.getRight() - leftArrow.getX()-100;
+		final float width = rightArrow.getRight() - leftArrow.getX() - 100;
 		final float height = width * 18 / 12;
 
 		Actor previewImage = new Actor() {
@@ -743,17 +743,17 @@ public class Shop extends Popup {
 		currentGroup.addActor(rightArrow);
 	}
 
-	private void loadCloakButtons(){
+	private void loadCloakButtons() {
 		cloakBuyButton = new Image(res.getTexture("buy"));
 		cloakBuyButton.layout();
-		cloakBuyButton.setBounds(Betrayal.WIDTH/2-75, 250, 150, 75);
+		cloakBuyButton.setBounds(Betrayal.WIDTH / 2 - 75, 250, 150, 75);
 		cloakBuyButton.addListener(new InputListener(cloakBuyButton) {
 			@Override
 			public void doAction() {
 				new Confirmation(game, "Confirm purchase") {
 					@Override
 					public void doAction() {
-						switch (character.inventory.buyItem(new Cloak("cloak11", res))){
+						switch (character.inventory.buyItem(new Cloak("cloak11", res))) {
 							case 0:
 								new OKPopup(game, "Item Bought");
 								break;
@@ -772,9 +772,9 @@ public class Shop extends Popup {
 		});
 
 		currentGroup.addActor(cloakBuyButton);
-		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont((60)) );
+		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont((60)));
 		cloakPrice.setX((leftArrow.getX() + 40));
-		cloakPrice.setY(cloakBuyButton.getY()+ 110);
+		cloakPrice.setY(cloakBuyButton.getY() + 110);
 		currentGroup.addActor(cloakPrice);
 
 	}

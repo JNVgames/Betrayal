@@ -5,12 +5,11 @@
 package com.jnv.betrayal.dungeon.mechanics;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.jnv.betrayal.dungeon.ActionHandler.ActionManager;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.managers.ActionManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
-import com.jnv.betrayal.dungeon.turns.Turn;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -23,14 +22,14 @@ import java.util.List;
 public class Field extends Group {
 
 	public final ActionManager actionManager;
-	public final TurnManager turnManager;
+	public final com.jnv.betrayal.dungeon.managers.TurnManager turnManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final Betrayal game;
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
-	private int currentCardTurn;
 	List<Card> allCards;
+	private int currentCardTurn;
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
@@ -62,7 +61,7 @@ public class Field extends Group {
 		});
 		addActor(eventLogButton);
 		actionManager = new ActionManager(this);
-		turnManager = new TurnManager(this);
+		turnManager = new com.jnv.betrayal.dungeon.managers.TurnManager(this);
 	}
 
 	public void addCard(Card card) {
@@ -85,8 +84,8 @@ public class Field extends Group {
 		}
 	}
 
-	public boolean isMonsterZoneEmpty(){
-		return monsterZone.size()==0;
+	public boolean isMonsterZoneEmpty() {
+		return monsterZone.size() == 0;
 	}
 
 	public boolean checkCardsSelected(int cardsSelected) {

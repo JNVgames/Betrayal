@@ -16,7 +16,7 @@ public class Ring extends Equip {
 	public Ring(String name, BetrayalAssetManager res) {
 		super(name, res);
 	}
-
+	
 	public static class RingFactory {
 		private int id = -1;
 		private String name = "";

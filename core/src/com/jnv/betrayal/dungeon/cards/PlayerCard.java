@@ -26,7 +26,7 @@ public class PlayerCard extends Card {
 	}
 
 	public PlayerCard(float x, float y, Character character,
-						 BetrayalAssetManager res) {
+					  BetrayalAssetManager res) {
 		super(new Dimension(x, y, DungeonCoords.PLAYER_WIDTH, DungeonCoords.PLAYER_HEIGHT), res);
 		this.character = character;
 		baseHealth = currentHealth = character.stats.getTotalHealth();
@@ -50,10 +50,6 @@ public class PlayerCard extends Card {
 		return character.getName();
 	}
 
-	public int getCharacterID() {
-		return character.getId();
-	}
-
 	public void levelUpCharacter() {
 		character.stats.advanceFloor();
 	}
@@ -62,6 +58,10 @@ public class PlayerCard extends Card {
 		return cardToDefend;
 	}
 
+	@Override
+	public int getID() {
+		return character.getId();
+	}
 
 	public void defendCard(Card defending) {
 		this.cardToDefend = defending;

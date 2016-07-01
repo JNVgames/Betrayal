@@ -24,12 +24,11 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  */
 public class Equips implements Json.Serializable {
 
-	private EquipsHandler equipsHandler;
+	public final Equip[] equips;
 	Inventory inventory;
 	Stats stats;
 	BetrayalAssetManager res;
-
-	public final Equip[] equips;
+	private EquipsHandler equipsHandler;
 
 	public Equips(Inventory inventory, BetrayalAssetManager res) {
 		equipsHandler = new EquipsHandler(this);
@@ -45,6 +44,15 @@ public class Equips implements Json.Serializable {
 		this.inventory = new Inventory();
 		this.res = res;
 		this.equips = equips.equips.clone();
+	}
+
+	public static Class determineEquipType(Equip equip) {
+		if (equip instanceof Weapon) return Weapon.class;
+		else if (equip instanceof Helmet) return Helmet.class;
+		else if (equip instanceof BodyArmor) return BodyArmor.class;
+		else if (equip instanceof Shield) return Shield.class;
+		else if (equip instanceof Ring) return Ring.class;
+		throw new AssertionError("Class type is not an equip");
 	}
 
 	// Getters
@@ -163,14 +171,5 @@ public class Equips implements Json.Serializable {
 
 	public void read(Json json, JsonValue jsonData) {
 
-	}
-
-	public static Class determineEquipType(Equip equip) {
-		if (equip instanceof Weapon) return Weapon.class;
-		else if (equip instanceof Helmet) return Helmet.class;
-		else if (equip instanceof BodyArmor) return BodyArmor.class;
-		else if (equip instanceof Shield) return Shield.class;
-		else if (equip instanceof Ring) return Ring.class;
-		throw new AssertionError("Class type is not an equip");
 	}
 }

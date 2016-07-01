@@ -26,13 +26,13 @@ import java.util.List;
 
 public abstract class Card {
 
-	private List<Card> defenders = new ArrayList<Card>();
 	protected Field field;
 	protected int baseHealth, baseAttack, baseDefense, currentHealth, currentAttack, currentDefense;
 	protected HealthBar healthBar;
 	protected BetrayalAssetManager res;
 	protected Actor cardImage;
 	protected Group group;
+	private List<Card> defenders = new ArrayList<Card>();
 	private TextureRegion selectedTexture, shieldTexture;
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener, cardInfoListener;
@@ -108,6 +108,29 @@ public abstract class Card {
 	public int getCurrentDefense() {
 		return currentDefense;
 	}
+
+	public void increaseCurrentAttack(int value) {
+		currentAttack += value;
+	}
+
+	public void decreaseCurrentAttack(int value) {
+		currentAttack -= value;
+	}
+
+	public void increaseCurrentDefense(int value) {
+		currentDefense += value;
+	}
+
+	public void decreaseCurrentDefense(int value) {
+		currentDefense -= value;
+	}
+
+	public void heal(int value) {
+		currentHealth += value;
+		if (currentHealth > baseHealth)
+			currentHealth = baseHealth;
+	}
+
 
 	public void setField(Field field) {
 		this.field = field;
@@ -214,7 +237,7 @@ public abstract class Card {
 	//check if character is you, switch to death screen, else fade out correct card
 	public void cardDeath(Card card) {
 		CardAnimation.fadeOut(card);
-		if (card instanceof PlayerCard && ((PlayerCard) card).getCharacterID() == field.game.getCurrentCharacter().getId()) {
+		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
 			field.removePlayerCard((PlayerCard) card);
 
@@ -292,19 +315,23 @@ public abstract class Card {
 	}
 
 	public void damageDefender(Card src) {
-		 for (Card defender : defenders) {
-			 defender.takeDamage(src.getCurrentAttack() / defenders.size());
-		 }
+		for (Card defender : defenders) {
+			defender.takeDamage(src.getCurrentAttack() / defenders.size());
+		}
 	}
 
-	public void removeDefender(Card card){
+	public void removeDefender(Card card) {
 		defenders.remove(card);
 	}
 
+	public abstract String getName();
+
+	public abstract int getID();
+
 	public class HealthBar extends Group {
 
-		private Image healthBarBackground, healthBar;
 		private final Drawable greenBar, yellowBar, redBar;
+		private Image healthBarBackground, healthBar;
 		private int currentHealthPercentage, finalHealthPercentage;    //change current % to final %
 
 		public HealthBar(float height, BetrayalAssetManager res) {
@@ -436,6 +463,4 @@ public abstract class Card {
 			currentHealthPercentage = newHealthPercent;
 		}
 	}
-
-	public abstract String getName();
 }

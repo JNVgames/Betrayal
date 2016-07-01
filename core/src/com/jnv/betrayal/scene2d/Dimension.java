@@ -47,6 +47,11 @@ public class Dimension {
 		else return x;
 	}
 
+	public void setX(float x) {
+		this.x = x;
+		isCenterX = false;
+	}
+
 	public float getRightX() {
 		return getX() + width;
 	}
@@ -60,12 +65,25 @@ public class Dimension {
 		else return y;
 	}
 
+	public void setY(float y) {
+		this.y = y;
+		isCenterY = false;
+	}
+
 	public float getWidth() {
 		return width;
 	}
 
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
 	public float getHeight() {
 		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
 	}
 
 	// Setters
@@ -83,31 +101,13 @@ public class Dimension {
 		this.isCenterY = isCenterY;
 	}
 
-	public void setX(float x) {
-		this.x = x;
-		isCenterX = false;
-	}
-
 	public void setCenterX(float x) {
 		this.x = x;
 		isCenterX = true;
 	}
 
-	public void setY(float y) {
-		this.y = y;
-		isCenterY = false;
-	}
-
 	public void setCenterY(float y) {
 		this.y = y;
 		isCenterY = true;
-	}
-
-	public void setWidth(float width) {
-		this.width = width;
-	}
-
-	public void setHeight(float height) {
-		this.height = height;
 	}
 }

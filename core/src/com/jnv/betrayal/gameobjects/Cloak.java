@@ -34,7 +34,7 @@ public class Cloak extends Equip implements Previewable {
 			this.res = res;
 		}
 
-		public CloakFactory id(int id){
+		public CloakFactory id(int id) {
 			this.id = id;
 			return this;
 		}
@@ -49,10 +49,11 @@ public class Cloak extends Equip implements Previewable {
 			return this;
 		}
 
-		public CloakFactory description(String description){
+		public CloakFactory description(String description) {
 			this.description = description;
 			return this;
 		}
+
 		public Cloak build() {
 			return new Cloak(id, name, res, costBuy, 0, 0, 0, description);
 		}

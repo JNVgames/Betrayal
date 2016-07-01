@@ -23,7 +23,7 @@ public class SplashScreen extends GameState {
 	public SplashScreen(GameStateManager gsm) {
 		super(gsm);
 		loader = game.getResourceLoader();
-        
+
 		loader.loadLoadingScreen();
 		res.finishLoading();
 		loader.loadAll();

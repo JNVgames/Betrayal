@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.jnv.betrayal.character.*;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -27,13 +26,13 @@ public class Betrayal extends Game {
 	public static boolean debug = true;
 	private static boolean gamePaused;
 	public final BetrayalAssetManager res = new BetrayalAssetManager();
+	public final List<Character> characters = new ArrayList<Character>();
 	public GameStateManager gsm;
 	private SpriteBatch sb;
 	private OrthographicCamera worldCam;
 	private StretchViewport stretchViewport;
 	private Stage stage;
 	private ResourceLoader loader;
-	public final List<Character> characters = new ArrayList<Character>();
 	private Character currentCharacter;
 
 	public void create() {
@@ -56,15 +55,15 @@ public class Betrayal extends Game {
 
 	public void pause() {
 		Gdx.app.log("Betrayal", "pause()");
-        gamePaused = true;
+		gamePaused = true;
 		gsm.pause();
 	}
 
 	public void resume() {
-        if (gamePaused) {
-            gamePaused = false;
-            gsm.resume();
-        }
+		if (gamePaused) {
+			gamePaused = false;
+			gsm.resume();
+		}
 		Timer timer = new Timer();
 		Gdx.app.log("Betrayal", "resume()");
 	}

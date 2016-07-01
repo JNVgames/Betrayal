@@ -22,10 +22,10 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  */
 public class Preview implements Json.Serializable {
 
+	protected boolean isShowingHead;
 	PreviewHandler previewHandler;
 	BetrayalAssetManager res;
 	Equips equips;
-
 	/**
 	 * Textures for character head, format: head_side_walkAnimation
 	 */
@@ -35,14 +35,12 @@ public class Preview implements Json.Serializable {
 	TextureRegion[] leftLeft, leftStill, leftRight;
 	TextureRegion[] backLeft, backStill, backRight;
 	TextureRegion[][] front, right, left, back;
-
 	/**
 	 * Holds character trait values
 	 */
 	Gender gender;
 	int rotation = 0;
 	int maleHair, femaleHair, hairColor;
-	protected boolean isShowingHead;
 
 	public Preview(Equips equips, BetrayalAssetManager res) {
 		previewHandler = new PreviewHandler(this);

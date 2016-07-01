@@ -12,10 +12,10 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public abstract class Popup {
 
+	public final Group popup;
 	protected Betrayal game;
 	protected BetrayalAssetManager res;
 	protected Actor mask;
-	public final Group popup;
 	private Runnable maskAction;
 
 	protected Popup(Betrayal game) {

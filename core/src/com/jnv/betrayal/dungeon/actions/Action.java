@@ -35,6 +35,7 @@ public abstract class Action {
 
 	/**
 	 * Specifies targets for this action
+	 *
 	 * @param player targets
 	 */
 	public abstract void setTargets(List<Card> player);

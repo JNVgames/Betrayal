@@ -7,32 +7,32 @@ import com.jnv.betrayal.dungeon.cards.CardAnimation;
 
 public class AnimationManager {
 
-    public static void performAnimation(Action action) {
+	public static void performAnimation(Action action) {
 
-        switch (action.getActionType()) {
-            case ATTACK:
-                CardAnimation.jump(action.getSrc());
-                for (Card card : action.getDest()) {
-                    CardAnimation.damaged(card);
-                }
+		switch (action.getActionType()) {
+			case ATTACK:
+				CardAnimation.jump(action.getSrc());
+				for (Card card : action.getDest()) {
+					CardAnimation.damaged(card);
+				}
 
-                break;
-            case DEFEND:
-                CardAnimation.jump(action.getSrc());
-                for (Card card : action.getDest()) {
-                    CardAnimation.defend(card);
-                }
-                break;
-            case FLEE:
-                CardAnimation.fadeOut(action.getSrc());
-                break;
-            case ITEM:
-                CardAnimation.useItem(action.getSrc());
-                break;
-        }
-    }
+				break;
+			case DEFEND:
+				CardAnimation.jump(action.getSrc());
+				for (Card card : action.getDest()) {
+					CardAnimation.defend(card);
+				}
+				break;
+			case FLEE:
+				CardAnimation.fadeOut(action.getSrc());
+				break;
+			case ITEM:
+				CardAnimation.useItem(action.getSrc());
+				break;
+		}
+	}
 
-    public static void healthBarAnimation(){
+	public static void healthBarAnimation() {
 
-    }
+	}
 }

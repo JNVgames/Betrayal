@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.dungeon.utils;
 
-import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.scene2d.Dimension;
 

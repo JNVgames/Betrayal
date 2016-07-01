@@ -2,8 +2,6 @@ package com.jnv.betrayal.dungeon.ActionHandler;
 
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.cards.MonsterCard;
-import com.jnv.betrayal.dungeon.cards.PlayerCard;
 
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class Action {
 		if (destExist()) {
 			for (int i = 0; i < dest.size(); i++) {
 				event += dest.get(i).getName();
-				if(i< dest.size()-1)
+				if (i < dest.size() - 1)
 					event += ", ";
 			}
 		}

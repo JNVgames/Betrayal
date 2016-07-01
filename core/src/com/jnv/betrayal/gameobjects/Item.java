@@ -71,22 +71,17 @@ public abstract class Item implements Json.Serializable {
 		return textureName;
 	}
 
+	// Setters
+	public void setName(String name) {
+		textureName = name;
+	}
+
 	public Texture getItemIcon() {
 		return itemIcon;
 	}
 
 	public int getBuyCost() {
 		return buyCost;
-	}
-
-	public int getSellCost() {
-		return sellCost;
-	}
-
-	public String getDescription(){return description;}
-	// Setters
-	public void setName(String name) {
-		textureName = name;
 	}
 
 	/*
@@ -99,8 +94,16 @@ public abstract class Item implements Json.Serializable {
 		buyCost = new_cost;
 	}
 
+	public int getSellCost() {
+		return sellCost;
+	}
+
 	public void setSellCost(int new_cost) {
 		sellCost = new_cost;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.jnv.betrayal.dungeon.mechanics;
+package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.turns.MonsterTurn;
 import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
@@ -30,11 +31,13 @@ public class TurnManager {
 	private Pool<Button> buttonPool;
 	private BetrayalAssetManager res;
 	private Turn currentTurn;
+	private RoundManager roundManager;
 
 	public TurnManager(Field field) {
 		this.field = field;
 		gsm = field.gsm;
 		res = field.res;
+		roundManager = new RoundManager();
 		buttonPool = new Pool<Button>() {
 			public Button obtain() {
 				Button tmp = super.obtain();
@@ -80,7 +83,7 @@ public class TurnManager {
 
 		// Team member turn
 		if (currentCard instanceof PlayerCard
-				&& ((PlayerCard) currentCard).getCharacterID() != field.game.getCurrentCharacter().getId()) {
+				&& currentCard.getID() != field.game.getCurrentCharacter().getId()) {
 			currentTurn = getTurn(Turns.TEAM_MEMBER_TURN);
 		}
 		// Monster turn

@@ -36,11 +36,12 @@ public class Shield extends Equip implements DualWieldable {
 		private int defense = -1;
 		private BetrayalAssetManager res;
 		private String description;
+
 		public ShieldFactory(BetrayalAssetManager res) {
 			this.res = res;
 		}
 
-		public ShieldFactory id(int id){
+		public ShieldFactory id(int id) {
 			this.id = id;
 			return this;
 		}
@@ -60,7 +61,7 @@ public class Shield extends Equip implements DualWieldable {
 			return this;
 		}
 
-		public ShieldFactory description(String description){
+		public ShieldFactory description(String description) {
 			this.description = description;
 			return this;
 		}

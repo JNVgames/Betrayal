@@ -2,8 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.cards;
+package com.jnv.betrayal.dungeon.managers;
 
+import com.jnv.betrayal.dungeon.cards.DungeonMonster;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 

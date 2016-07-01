@@ -38,6 +38,7 @@ public class Weapon extends Equip implements DualWieldable {
 		private int attack = -1;
 		private BetrayalAssetManager res;
 		private String description;
+
 		public WeaponFactory(BetrayalAssetManager res) {
 			this.res = res;
 		}
@@ -61,7 +62,8 @@ public class Weapon extends Equip implements DualWieldable {
 			this.attack = attack;
 			return this;
 		}
-		public WeaponFactory description(String description){
+
+		public WeaponFactory description(String description) {
 			this.description = description;
 			return this;
 		}

@@ -11,7 +11,8 @@ public class Helmet extends Equip implements Previewable {
 
 	private Texture preview;
 
-	public Helmet(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
+	public Helmet(int id, String name, BetrayalAssetManager res, int cost_buy, int health,
+				  int attack, int defense, String description) {
 		super(id, name, res, cost_buy, health, attack, defense, description);
 		this.defense = defense;
 		this.description = description;
@@ -38,7 +39,7 @@ public class Helmet extends Equip implements Previewable {
 			this.res = res;
 		}
 
-		public HelmetFactory id(int id){
+		public HelmetFactory id(int id) {
 			this.id = id;
 			return this;
 		}
@@ -58,10 +59,11 @@ public class Helmet extends Equip implements Previewable {
 			return this;
 		}
 
-		public HelmetFactory description(String description){
+		public HelmetFactory description(String description) {
 			this.description = description;
 			return this;
 		}
+
 		public Helmet build() {
 			return new Helmet(id, name, res, costBuy, 0, 0, defense, description);
 		}

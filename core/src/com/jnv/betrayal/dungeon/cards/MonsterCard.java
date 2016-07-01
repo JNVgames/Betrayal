@@ -5,8 +5,6 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.jnv.betrayal.character.utils.Stat;
-import com.jnv.betrayal.dungeon.ActionHandler.Action;
 import com.jnv.betrayal.dungeon.ActionHandler.ActionType;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -59,5 +57,10 @@ public class MonsterCard extends Card {
 
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int getID() {
+		return 0;
 	}
 }

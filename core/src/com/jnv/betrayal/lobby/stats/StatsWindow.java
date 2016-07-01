@@ -23,7 +23,7 @@ import com.jnv.betrayal.scene2d.InputListener;
 public class StatsWindow extends Popup {
 
 	private Image lobbyButton, applyButton, background;
-	private Image [] icons, statPlusButtons, statMinusButtons;
+	private Image[] icons, statPlusButtons, statMinusButtons;
 	private Label title, availablePoints, floorLabel, healthLabel, attackLabel, defenseLabel;
 	private Label equipHealthLabel, equipAttackLabel, equipDefenseLabel, hair;
 	private Group characterStats;
@@ -34,9 +34,9 @@ public class StatsWindow extends Popup {
 
 	public StatsWindow(Betrayal game) {
 		super(game);
-		icons = new Image [3];
-		statPlusButtons = new Image [3];
-		statMinusButtons = new Image [3];
+		icons = new Image[3];
+		statPlusButtons = new Image[3];
+		statMinusButtons = new Image[3];
 		characterStats = new Group();
 		character = game.getCurrentCharacter();
 		applyPoints = character.stats.getApplyPointsObject();
@@ -45,7 +45,7 @@ public class StatsWindow extends Popup {
 		updateStatValues();
 	}
 
-	public void loadHairButton(){
+	public void loadHairButton() {
 		if (!character.equips.isHeadSlotEmpty()) {
 			final String showHairText = "Show\nhair";
 			final String showHelmetText = "Show\nhelmet";
@@ -244,7 +244,7 @@ public class StatsWindow extends Popup {
 			statPlusButtons[i].addListener(new InputListener(statPlusButtons[i]) {
 				@Override
 				public void doAction() {
-					if(applyPoints.hasAvailablePoints()) {
+					if (applyPoints.hasAvailablePoints()) {
 						switch (temp) {
 							case 0:
 								System.out.printf("%d", applyPoints.getHealth());
@@ -272,7 +272,7 @@ public class StatsWindow extends Popup {
 			statMinusButtons[i].addListener(new InputListener(statMinusButtons[i]) {
 				@Override
 				public void doAction() {
-					if(applyPoints.hasPointsApplied()) {
+					if (applyPoints.hasPointsApplied()) {
 						switch (temp) {
 							case 0:
 								applyPoints.decHealthPoint();

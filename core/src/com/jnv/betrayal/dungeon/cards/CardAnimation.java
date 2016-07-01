@@ -6,8 +6,6 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.jnv.betrayal.dungeon.ActionHandler.Action;
-import com.jnv.betrayal.gameobjects.Monster;
 
 public class CardAnimation {
 
@@ -44,16 +42,14 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
 	}
 
-	public static void broBlock(Card src, Card dest){
+	public static void broBlock(Card src, Card dest) {
 		src.getCardImage().addAction(Actions.delay(0.5f, Actions.moveTo(dest.getCardImage().getX(), dest.getCardImage().getTop())));
-
 	}
 
 	public static void useItem(Card card) {
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30,1)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30, 2)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
-
 	}
 
 	public static void fadeOut(Card card) {

@@ -31,8 +31,8 @@ public class Inventory implements Json.Serializable {
 	 *
 	 * @param item item the character is trying to buy
 	 * @return 0 - success
-	 * 		   1 - not enough gold
-	 * 		   2 - inventory full
+	 * 1 - not enough gold
+	 * 2 - inventory full
 	 */
 	public int buyItem(Item item) {
 		// if character doesn't have enough gold to buy item
@@ -52,6 +52,7 @@ public class Inventory implements Json.Serializable {
 
 	/**
 	 * Sells the requested item
+	 *
 	 * @param item item to be sold
 	 * @throws AssertionError if item isn't in the inventory
 	 */
@@ -67,10 +68,10 @@ public class Inventory implements Json.Serializable {
 	 * Adds the specific amount of items to inventory and return true.
 	 * If inventory is filled, do nothing and return false.
 	 *
-	 * @param item   item to be added
+	 * @param item item to be added
 	 */
 	public boolean addItem(Item item) {
-		if (items.size() < maxItems){
+		if (items.size() < maxItems) {
 			items.add(item);
 			return true;
 		}
@@ -79,6 +80,7 @@ public class Inventory implements Json.Serializable {
 
 	/**
 	 * Removes and does not sell item from inventory
+	 *
 	 * @param item to remove
 	 */
 	public void removeItem(Item item) {
@@ -101,6 +103,7 @@ public class Inventory implements Json.Serializable {
 
 	/**
 	 * Returns items in a 2D array. *Used for inventory in lobby
+	 *
 	 * @param rows in inventory
 	 * @param cols in inventory
 	 * @return 2D array of items

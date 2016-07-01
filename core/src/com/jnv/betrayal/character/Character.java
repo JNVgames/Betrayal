@@ -17,13 +17,13 @@ import java.util.Random;
  */
 public class Character implements Json.Serializable {
 
-	private int id;
-	private String name;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
 	public final Inventory inventory;
 	public final Stats stats;
+	private int id;
+	private String name;
 
 	/**
 	 * Creates a character with default traits
@@ -39,6 +39,12 @@ public class Character implements Json.Serializable {
 		equips.setStats(stats);
 
 		preview.update();
+	}
+
+	// TODO REMOVE THIS WE WILL NOT BE USING THIS WE WILL USE ACCOUNT ID
+	private static int generateRandomID() {
+		Random random = new Random();
+		return random.nextInt(999999);
 	}
 
 	public String getTrait(Trait trait) {
@@ -138,11 +144,5 @@ public class Character implements Json.Serializable {
 			default:
 				break;
 		}
-	}
-
-	// TODO REMOVE THIS WE WILL NOT BE USING THIS WE WILL USE ACCOUNT ID
-	private static int generateRandomID() {
-		Random random = new Random();
-		return random.nextInt(999999);
 	}
 }

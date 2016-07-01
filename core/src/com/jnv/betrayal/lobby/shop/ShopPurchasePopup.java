@@ -58,13 +58,14 @@ public class ShopPurchasePopup extends Popup {
 		popup.addActor(goldIcon);
 	}
 
-	private void loadPrice(){
-		Label price = new Label("Price: "+ Integer.toString(item.getBuyCost()), FontManager.getFont(40));
+	private void loadPrice() {
+		Label price = new Label("Price: " + Integer.toString(item.getBuyCost()), FontManager.getFont(40));
 		price.setHeight(50);
 		price.setX(365);
 		price.setY(900);
 		popup.addActor(price);
 	}
+
 	private void loadYourMoney() {
 		Label userMoney = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
 		userMoney.setHeight(50);
@@ -90,7 +91,7 @@ public class ShopPurchasePopup extends Popup {
 				new Confirmation(game, "Confirm purchase") {
 					@Override
 					public void doAction() {
-						switch (character.inventory.buyItem(item)){
+						switch (character.inventory.buyItem(item)) {
 							case 0:
 								new OKPopup(game, "Item Bought");
 								break;

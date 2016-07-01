@@ -10,7 +10,7 @@ public abstract class Equip extends Item {
 
 	protected int attack, defense, health;
 
-	protected Equip(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense,  String description) {
+	protected Equip(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
 		super(id, name, res, cost_buy, description);
 		this.health = health;
 		this.attack = attack;

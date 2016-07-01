@@ -127,7 +127,7 @@ public class Lobby extends GameState {
 	private void loadAllPlayersBackground() {
 		Image allPlayersBackground = new Image(res.getTexture("lobby-screen"));
 		allPlayersBackground.layout();
-		allPlayersBackground.setBounds(Betrayal.WIDTH /2+10, 510, Betrayal.WIDTH /2 - 20, Betrayal.HEIGHT / 3 + 175);
+		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10, 510, Betrayal.WIDTH / 2 - 20, Betrayal.HEIGHT / 3 + 175);
 		stage.addActor(allPlayersBackground);
 	}
 

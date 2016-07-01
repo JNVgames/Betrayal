@@ -21,6 +21,44 @@ class PreviewHandler {
 	}
 
 	/**
+	 * Sends the specified character preview frame (ex: SWORD, HEAD, SHIELD) to the
+	 * back of the character preview
+	 *
+	 * @param index specified character preview frame
+	 * @param src   character preview frame
+	 */
+	static void toBackOfPreview(final int index, TextureRegion[][] src) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (src[i][j] == null) {
+					src[i][j] = src[i][index];
+					src[i][index] = null;
+					break;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Sends the specified character preview frame (ex: SWORD, HEAD, SHIELD) to the
+	 * front of the character preview
+	 *
+	 * @param index specified character preview frame
+	 * @param src   character preview frame
+	 */
+	static void toFrontOfPreview(final int index, TextureRegion[][] src) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 20; j > 13; j--) {
+				if (src[i][j] == null) {
+					src[i][j] = src[i][index];
+					src[i][index] = null;
+					break;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Resets the preview images to the correct images
 	 */
 	void update() {
@@ -192,44 +230,6 @@ class PreviewHandler {
 			preview.backLeft[PreviewSlot.RIGHT_HAND] = weaponTextures[3][0];
 			preview.backStill[PreviewSlot.RIGHT_HAND] = weaponTextures[3][1];
 			preview.backRight[PreviewSlot.RIGHT_HAND] = weaponTextures[3][2];
-		}
-	}
-
-	/**
-	 * Sends the specified character preview frame (ex: SWORD, HEAD, SHIELD) to the
-	 * back of the character preview
-	 *
-	 * @param index specified character preview frame
-	 * @param src   character preview frame
-	 */
-	static void toBackOfPreview(final int index, TextureRegion[][] src) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 7; j++) {
-				if (src[i][j] == null) {
-					src[i][j] = src[i][index];
-					src[i][index] = null;
-					break;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Sends the specified character preview frame (ex: SWORD, HEAD, SHIELD) to the
-	 * front of the character preview
-	 *
-	 * @param index specified character preview frame
-	 * @param src   character preview frame
-	 */
-	static void toFrontOfPreview(final int index, TextureRegion[][] src) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 20; j > 13; j--) {
-				if (src[i][j] == null) {
-					src[i][j] = src[i][index];
-					src[i][index] = null;
-					break;
-				}
-			}
 		}
 	}
 }
