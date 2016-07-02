@@ -19,8 +19,8 @@ public class BodyArmor extends Equip implements Previewable {
 		preview = res.getTexture(ItemNaming.toPreview(name));
 	}
 
-	public BodyArmor(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
-		super(id, name, res, cost_buy, health, attack, defense, description);
+	public BodyArmor(int id, String name, BetrayalAssetManager res, int buyCost, int health, int attack, int defense, String description) {
+		super(id, name, res, buyCost, health, attack, defense, description);
 		this.defense = defense;
 		this.description = description;
 	}

@@ -9,6 +9,8 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.ActionManager;
+import com.jnv.betrayal.dungeon.managers.RoundManager;
+import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -22,7 +24,8 @@ import java.util.List;
 public class Field extends Group {
 
 	public final ActionManager actionManager;
-	public final com.jnv.betrayal.dungeon.managers.TurnManager turnManager;
+	public final RoundManager roundManager;
+	public final TurnManager turnManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final Betrayal game;
@@ -61,7 +64,8 @@ public class Field extends Group {
 		});
 		addActor(eventLogButton);
 		actionManager = new ActionManager(this);
-		turnManager = new com.jnv.betrayal.dungeon.managers.TurnManager(this);
+		turnManager = new TurnManager(this);
+		roundManager = new RoundManager();
 	}
 
 	public void addCard(Card card) {

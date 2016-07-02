@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.lobby.inventory;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
@@ -12,7 +13,7 @@ import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 import com.jnv.betrayal.scene2d.ui.Label;
 
-public class Inventory extends Popup {
+public class Inventory extends Popup implements InventoryLoadable {
 
 	Label title;
 	Image background;
@@ -77,7 +78,6 @@ public class Inventory extends Popup {
 		userGold.setY(y + 7);
 		popup.addActor(userGold);
 	}
-
 
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
@@ -190,10 +190,34 @@ public class Inventory extends Popup {
 		popup.addActor(button_sort);
 	}
 
-	void refresh() {
+	@Override
+	public Label getTitleActor() {
+		return title;
+	}
+
+	public void refresh() {
 		userGold.setText(Integer.toString(character.inventory.getGold()));
 		itemLoader.refresh();
 		equipLoader.refresh();
+	}
 
+	@Override
+	public Character getCharacter() {
+		return character;
+	}
+
+	@Override
+	public Image getBackground() {
+		return background;
+	}
+
+	@Override
+	public Group getPopup() {
+		return popup;
+	}
+
+	@Override
+	public Betrayal getGame() {
+		return game;
 	}
 }

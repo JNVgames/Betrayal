@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.turns.Event;
+import com.jnv.betrayal.dungeon.effects.Event;
 
 import java.util.ArrayList;
 

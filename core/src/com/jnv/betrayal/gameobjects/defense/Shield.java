@@ -20,8 +20,8 @@ public class Shield extends Equip implements DualWieldable {
 		rightPreview = res.getTexture(ItemNaming.toPreview(name, false));
 	}
 
-	public Shield(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
-		super(id, name, res, cost_buy, health, attack, defense, description);
+	public Shield(int id, String name, BetrayalAssetManager res, int buyCost, int health, int attack, int defense, String description) {
+		super(id, name, res, buyCost, health, attack, defense, description);
 	}
 
 	public Texture getLeftPreview() {

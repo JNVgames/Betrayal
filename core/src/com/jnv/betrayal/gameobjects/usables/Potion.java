@@ -10,11 +10,11 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Potion extends Usables {
 
-	private Effect effect;
 	private int attack, defense, health;
 
-	public Potion(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
-		super(id, name, res, cost_buy, description);
+	public Potion(int id, String name, BetrayalAssetManager res, int buyCost, int health,
+				  int attack, int defense, String description, Effect effect) {
+		super(id, name, res, buyCost, description, effect);
 		this.health = health;
 		this.attack = attack;
 		this.defense = defense;
@@ -41,6 +41,7 @@ public class Potion extends Usables {
 		private int health = 0;
 		private BetrayalAssetManager res;
 		private String description;
+		private Effect effect;
 
 		public PotionFactory(BetrayalAssetManager res) {
 			this.res = res;
@@ -81,8 +82,13 @@ public class Potion extends Usables {
 			return this;
 		}
 
+		public PotionFactory effect(Effect effect) {
+			this.effect = effect;
+			return this;
+		}
+
 		public Potion build() {
-			return new Potion(id, name, res, costBuy, health, attack, defense, description);
+			return new Potion(id, name, res, costBuy, health, attack, defense, description, effect);
 		}
 	}
 

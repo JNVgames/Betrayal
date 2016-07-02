@@ -1,9 +1,10 @@
-package com.jnv.betrayal.dungeon.turns;
+package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
 public class Event {
+	// TODO put turnsleft in effect
 	private Card card;
 	private int turnsLeft;
 	private Effect effect;
@@ -13,7 +14,9 @@ public class Event {
 		this.turnsLeft = turnsLeft;
 		this.effect = effect;
 
-		throw new AssertionError("Turnsleft can't be initialized to 0. make it 1 for instant effects");
+		if (turnsLeft < 1) {
+			throw new AssertionError("Turnsleft can't be initialized to 0. make it 1 for instant effects");
+		}
 	}
 
 	public Card getCard() {

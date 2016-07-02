@@ -426,7 +426,7 @@ public class Shop extends Popup {
 				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
 					@Override
 					public void doAction() {
-						new ShopPurchasePopup(game, new BodyArmor(item, res));
+						new ShopPurchasePopup(game, new Potion(item, res));
 					}
 				});
 				currentGroup.addActor(potions[i - 1]);

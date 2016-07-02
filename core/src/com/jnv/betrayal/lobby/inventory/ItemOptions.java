@@ -7,6 +7,7 @@ package com.jnv.betrayal.lobby.inventory;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
+import com.jnv.betrayal.gameobjects.Usables;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.OKPopup;
@@ -23,16 +24,16 @@ class ItemOptions extends Popup {
 
 	public final Dimension itemBoxDimen;
 	private final int unequipSlot;
-	private Inventory inventory;
+	private InventoryLoadable inventory;
 	private Image background;
 	private Item item;
 	private boolean isEquippable, isEquipped;
 
-	ItemOptions(Inventory inventory, Item item, Dimension itemBoxDimen, Betrayal game) {
+	ItemOptions(InventoryLoadable inventory, Item item, Dimension itemBoxDimen, Betrayal game) {
 		this(inventory, item, itemBoxDimen, game, -1);
 	}
 
-	ItemOptions(Inventory inventory, Item equip, Dimension itemBoxDimen, Betrayal game,
+	ItemOptions(InventoryLoadable inventory, Item equip, Dimension itemBoxDimen, Betrayal game,
 				int unequipSlot) {
 		super(game);
 		this.inventory = inventory;
@@ -80,7 +81,20 @@ class ItemOptions extends Popup {
 		popup.addActor(background);
 
 		// Draw out options
-		setOptions(dimensions);
+		if (inventory instanceof DungeonInventory) {
+			setDungeonOptions(dimensions);
+		}
+		else {
+			setOptions(dimensions);
+		}
+	}
+
+	private void setDungeonOptions(List<Dimension> dimensions) {
+		int counter = 0;
+		// Add options
+		popup.addActor(createDungeonOptions(dimensions.get(counter++), Option.Use));
+		popup.addActor(createDungeonOptions(dimensions.get(counter++), Option.Info));
+		popup.addActor(createDungeonOptions(dimensions.get(counter), Option.Cancel));
 	}
 
 	private void setOptions(List<Dimension> dimensions) {
@@ -94,6 +108,43 @@ class ItemOptions extends Popup {
 		popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Info));
 		if (!isEquipped) popup.addActor(createOptionLabel(dimensions.get(counter++), Option.Sell));
 		popup.addActor(createOptionLabel(dimensions.get(counter), Option.Cancel));
+	}
+
+	private Label createDungeonOptions(Dimension dimens, Option option) {
+		Label label = new Label(option.toString(), FontManager.getFont(60));
+		label.setBounds(dimens);
+		switch (option) {
+			case Use:
+				label.addListener(new InputListener(label) {
+					@Override
+					public void doAction() {
+						inventory.getCharacter().inventory.removeItem(item);
+						((DungeonInventory) inventory).getCard().performEffect(((Usables) item).getEffect());
+						inventory.refresh();
+						remove();
+					}
+				});
+				break;
+			case Info:
+				label.addListener(new InputListener(label) {
+					@Override
+					public void doAction() {
+						new OKPopup(game, item.getDescription());
+					}
+				});
+				break;
+			case Cancel:
+				label.addListener(new InputListener(label) {
+					@Override
+					public void doAction() {
+						remove();
+					}
+				});
+				break;
+			default:
+				throw new AssertionError("ItemOptions.java: Option doesn't exist");
+		}
+		return label;
 	}
 
 	private Label createOptionLabel(Dimension dimens, Option option) {
@@ -136,7 +187,7 @@ class ItemOptions extends Popup {
 						new Confirmation(game, "Are you sure?") {
 							@Override
 							public void doAction() {
-								inventory.character.inventory.sellItem(item);
+								inventory.getCharacter().inventory.sellItem(item);
 								removeThisPopup();
 								inventory.refresh();
 							}

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.lobby.LobbyOptions;
+import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.shop.Shop;
 import com.jnv.betrayal.lobby.social.PartyRoom;

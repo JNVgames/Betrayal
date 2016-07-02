@@ -14,8 +14,8 @@ public class Weapon extends Equip implements DualWieldable {
 
 	private Texture leftPreview, rightPreview;
 
-	public Weapon(int id, String name, BetrayalAssetManager res, int cost_buy, int health, int attack, int defense, String description) {
-		super(id, name, res, cost_buy, health, attack, defense, description);
+	public Weapon(int id, String name, BetrayalAssetManager res, int buyCost, int health, int attack, int defense, String description) {
+		super(id, name, res, buyCost, health, attack, defense, description);
 		this.description = description;
 	}
 

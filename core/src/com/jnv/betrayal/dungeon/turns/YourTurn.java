@@ -7,6 +7,7 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.scene2d.Group;
@@ -40,14 +41,12 @@ public class YourTurn extends Turn {
 		}));
 	}
 
-
 	@Override
 	public void draw() {
 		panels.clearChildren();
 		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
 			public void run() {
-				field.beginSelectMode(1);
-				drawSelectBar(ActionType.ITEM);
+				new DungeonInventory(gsm.game, field.getCurrentCard());
 				// todo change input to what is needed by the specific item
 			}
 		}));

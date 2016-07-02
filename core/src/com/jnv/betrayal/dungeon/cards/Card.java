@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.popup.CardInfo;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -330,6 +332,10 @@ public abstract class Card {
 
 	public void removeDefender(Card card) {
 		defenders.remove(card);
+	}
+
+	public void performEffect(Effect effect) {
+		field.roundManager.addEvent(new Event(this, 1, effect));
 	}
 
 	public abstract String getName();

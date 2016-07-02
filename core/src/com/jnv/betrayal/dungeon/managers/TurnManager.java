@@ -31,13 +31,11 @@ public class TurnManager {
 	private Pool<Button> buttonPool;
 	private BetrayalAssetManager res;
 	private Turn currentTurn;
-	private RoundManager roundManager;
 
 	public TurnManager(Field field) {
 		this.field = field;
 		gsm = field.gsm;
 		res = field.res;
-		roundManager = new RoundManager();
 		buttonPool = new Pool<Button>() {
 			public Button obtain() {
 				Button tmp = super.obtain();

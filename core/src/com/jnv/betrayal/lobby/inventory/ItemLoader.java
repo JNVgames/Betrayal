@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -16,26 +17,26 @@ import com.jnv.betrayal.scene2d.ui.Image;
 
 class ItemLoader {
 
-	private Inventory inventory;
+	private InventoryLoadable inventory;
 	private Group inventoryItems, popup;
 	private Image background;
 	private Character character;
 
-	ItemLoader(Inventory inventory) {
+	ItemLoader(InventoryLoadable inventory) {
 		this.inventory = inventory;
-		popup = inventory.popup;
-		character = inventory.character;
-		background = inventory.background;
+		popup = inventory.getPopup();
+		character = inventory.getCharacter();
+		background = inventory.getBackground();
 	}
 
 	void loadInventory() {
 		inventoryItems = new Group();
-		Item[][] items = character.inventory.getItems(6, 5);
+		Item[][] items = character.inventory.getItems(6, 5, inventory instanceof Inventory);
 		Actor[][] itemsDisplay = new Actor[items.length][items[0].length];
 
 		float padding = 10;
 		float sideLength = (background.getWidth() - (items[0].length + 1) * padding) / items[0].length;
-		float startingX = background.getX(), startingY = inventory.title.getY() - 30;
+		float startingX = background.getX(), startingY = inventory.getTitleActor().getY() - 30;
 
 		for (int row = 0; row < itemsDisplay.length; row++) {
 			for (int col = 0; col < itemsDisplay[row].length; col++) {
@@ -56,7 +57,7 @@ class ItemLoader {
 					itemsDisplay[row][col].addListener(new InputListener(itemsDisplay[row][col]) {
 						@Override
 						public void doAction() {
-							new ItemOptions(inventory, item, itemDimens, inventory.game);
+							new ItemOptions(inventory, item, itemDimens, inventory.getGame());
 						}
 					});
 				}
