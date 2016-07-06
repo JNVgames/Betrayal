@@ -428,297 +428,48 @@ public class ResourceLoader {
 
 	private void loadItemsData() {
 		for (int color = 1; color <= 6; color++) {
-
-			/*******************Swords********************/
-			new Weapon.WeaponFactory(res)
-					.id(color) // id - 1 to 6
-					.name("sword" + color + "1")
-					.costBuy(100)
-					.attack(2)
-					.description("+2 Attack")
-					.build();
-
-			new Weapon.WeaponFactory(res)
-					.id(color + 6) // id - 7 to 12
-					.name("sword" + color + "2")
-					.costBuy(200)
-					.attack(5)
-					.description("+5 Attack")
-					.build();
-
-			new Weapon.WeaponFactory(res)
-					.id(color + 12) // id - 3 to 18
-					.name("sword" + color + "3")
-					.costBuy(400)
-					.attack(10)
-					.description("+10 Attack")
-					.build();
-
-			new Weapon.WeaponFactory(res)
-					.id(color + 18) // id - 19 to 24
-					.name("sword" + color + "4")
-					.costBuy(700)
-					.attack(15)
-					.description("+15 Attack")
-					.build();
-
-			new Weapon.WeaponFactory(res)
-					.id(color + 24) // id - 25 to 30
-					.name("sword" + color + "5")
-					.costBuy(1000)
-					.attack(20)
-					.description("+20 Attack")
-					.build();
-
-			/********************SHIELDS********************/
-
-			new Shield.ShieldFactory(res)
-					.id(color + 30) // id - 31 to 36
-					.name("shield" + color + "1")
-					.costBuy(100)
-					.defense(2)
-					.description("+2 Defense")
-					.build();
-
-			new Shield.ShieldFactory(res)
-					.id(color + 36) // id - 37 to 42
-					.name("shield" + color + "2")
-					.costBuy(200)
-					.defense(4)
-					.description("+4 Defense")
-					.build();
-
-
-			new Shield.ShieldFactory(res)
-					.id(color + 42) // id - 43 to 48
-					.name("shield" + color + "3")
-					.costBuy(400)
-					.defense(6)
-					.description("+6 Defense")
-					.build();
-			new Shield.ShieldFactory(res)
-					.id(color + 48) // id - 49 to 54
-					.name("shield" + color + "4")
-					.costBuy(700)
-					.defense(8)
-					.description("+8 Defense")
-					.build();
-
-			new Shield.ShieldFactory(res)
-					.id(color + 54) // id - 55 to 60
-					.name("shield" + color + "5")
-					.costBuy(1000)
-					.defense(10)
-					.description("+10 Defense")
-					.build();
-
-			/********************ARMOR********************/
-
-			new BodyArmor.ArmorFactory(res)
-					.id(color + 60) // id - 61 to 66
-					.name("armor" + color + "1")
-					.costBuy(100)
-					.defense(2)
-					.description("+2 Defense")
-					.build();
-
-			new BodyArmor.ArmorFactory(res)
-					.id(color + 66) // id - 67 to 72
-					.name("armor" + color + "2")
-					.costBuy(200)
-					.defense(4)
-					.description("+4 Defense")
-					.build();
-
-			new BodyArmor.ArmorFactory(res)
-					.id(color + 72) // id - 73 to 78
-					.name("armor" + color + "3")
-					.costBuy(300)
-					.defense(6)
-					.description("+6 Defense")
-					.build();
-
-			new BodyArmor.ArmorFactory(res)
-					.id(color + 78) // id - 79 to 84
-					.name("armor" + color + "4")
-					.costBuy(400)
-					.defense(8)
-					.description("+8 Defense")
-					.build();
-
-			new BodyArmor.ArmorFactory(res)
-					.id(color + 84) // id - 85 to 90
-					.name("armor" + color + "5s")
-					.costBuy(500)
-					.defense(10)
-					.description("+10 Defense")
-					.build();
-
-			/********************HEADGEAR********************/
-			new Helmet.HelmetFactory(res)
-					.id(color + 90) // id - 91 to 96
-					.name("headgear" + color + "1")
-					.costBuy(100)
-					.defense(2)
-					.description("+2 Defense")
-					.build();
-
-			new Helmet.HelmetFactory(res)
-					.id(color + 96) // id - 97 to 102
-					.name("headgear" + color + "2")
-					.costBuy(200)
-					.defense(4)
-					.description("+4 Defense")
-					.build();
-
-			new Helmet.HelmetFactory(res)
-					.id(color + 102) // id - 103 to 108
-					.name("headgear" + color + "3")
-					.costBuy(300)
-					.defense(6)
-					.description("+6 Defense")
-					.build();
-
-			new Helmet.HelmetFactory(res)
-					.id(color + 108) // id - 109 to 114
-					.name("headgear" + color + "4")
-					.costBuy(400)
-					.defense(8)
-					.description("+8 Defense")
-					.build();
-
-			new Helmet.HelmetFactory(res)
-					.id(color + 114) // id - 115 to 120
-					.name("headgear" + color + "5")
-					.costBuy(500)
-					.defense(10)
-					.description("+10 Defense")
-					.build();
+			loadSwordData(color);
+			loadShieldData(color);
+			loadBodyArmorData(color);
+			loadHelmetData(color);
 		}
+		loadRingData();
+		loadPotionData();
 
-		/********************RINGS********************/
-		new Ring.RingFactory(res)    //Red Health Ring
-				.id(115)
-				.name("ring11")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
+		new Cloak.CloakFactory(res)
+				.id(139)
+				.name("cloak11")
+				.costBuy(750)
+				.description("Revives the player with\n10 HP upon death for\none time only.")
 				.build();
 
-		new Ring.RingFactory(res)
-				.id(116)
-				.name("ring21")
+		loadRunUsables();
+	}
+
+	private void loadRunUsables() {
+		new Run.RunFactory(res)
+				.id(140)
+				.name("run1")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
+				.description("50% Chance to Flee")
 				.build();
 
-		new Ring.RingFactory(res)
-				.id(117)
-				.name("ring12")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
+		new Run.RunFactory(res)
+				.id(141)
+				.name("run2")
+				.costBuy(200)
+				.description("75% Chance to Flee")
 				.build();
 
-		new Ring.RingFactory(res)
-				.id(118)
-				.name("ring22")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
+		new Run.RunFactory(res)
+				.id(142)
+				.name("run3")
+				.costBuy(300)
+				.description("100% Chance to Flee")
 				.build();
+	}
 
-		new Ring.RingFactory(res)
-				.id(119)
-				.name("ring13")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(120)
-				.name("ring23")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(121)
-				.name("ring14")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(122)
-				.name("ring24")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(123)
-				.name("ring15")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(124)
-				.name("ring25")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(125)
-				.name("ring16")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		new Ring.RingFactory(res)
-				.id(126)
-				.name("ring26")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
-				.build();
-
-		/********************POTIONS********************/
-
+	private void loadPotionData() {
 		new Potion.PotionFactory(res)
 				.id(127)
 				.name("potion1")
@@ -838,35 +589,295 @@ public class ResourceLoader {
 				.defense(0)
 				.description("+")
 				.build();
+	}
 
-		new Cloak.CloakFactory(res)
-				.id(139)
-				.name("cloak11")
-				.costBuy(750)
-				.description("Revives the player with\n10 HP upon death for\none time only.")
-				.build();
-
-		/**********************RUN*************************/
-
-		new Run.RunFactory(res)
-				.id(140)
-				.name("run1")
+	private void loadRingData() {
+		new Ring.RingFactory(res)    //Red Health Ring
+				.id(115)
+				.name("ring11")
 				.costBuy(100)
-				.description("50% Chance to Flee")
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
 				.build();
 
-		new Run.RunFactory(res)
-				.id(141)
-				.name("run2")
+		new Ring.RingFactory(res)
+				.id(116)
+				.name("ring21")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(117)
+				.name("ring12")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(118)
+				.name("ring22")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(119)
+				.name("ring13")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(120)
+				.name("ring23")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(121)
+				.name("ring14")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(122)
+				.name("ring24")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(123)
+				.name("ring15")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(124)
+				.name("ring25")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(125)
+				.name("ring16")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+
+		new Ring.RingFactory(res)
+				.id(126)
+				.name("ring26")
+				.costBuy(100)
+				.health(0)
+				.attack(0)
+				.defense(0)
+				.description("+")
+				.build();
+	}
+
+	private void loadHelmetData(int color) {
+		new Helmet.HelmetFactory(res)
+				.id(color + 90) // id - 91 to 96
+				.name("headgear" + color + "1")
+				.costBuy(100)
+				.defense(2)
+				.description("+2 Defense")
+				.build();
+
+		new Helmet.HelmetFactory(res)
+				.id(color + 96) // id - 97 to 102
+				.name("headgear" + color + "2")
 				.costBuy(200)
-				.description("75% Chance to Flee")
+				.defense(4)
+				.description("+4 Defense")
 				.build();
 
-		new Run.RunFactory(res)
-				.id(142)
-				.name("run3")
+		new Helmet.HelmetFactory(res)
+				.id(color + 102) // id - 103 to 108
+				.name("headgear" + color + "3")
 				.costBuy(300)
-				.description("100% Chance to Flee")
+				.defense(6)
+				.description("+6 Defense")
+				.build();
+
+		new Helmet.HelmetFactory(res)
+				.id(color + 108) // id - 109 to 114
+				.name("headgear" + color + "4")
+				.costBuy(400)
+				.defense(8)
+				.description("+8 Defense")
+				.build();
+
+		new Helmet.HelmetFactory(res)
+				.id(color + 114) // id - 115 to 120
+				.name("headgear" + color + "5")
+				.costBuy(500)
+				.defense(10)
+				.description("+10 Defense")
+				.build();
+	}
+
+	private void loadBodyArmorData(int color) {
+		new BodyArmor.ArmorFactory(res)
+				.id(color + 60) // id - 61 to 66
+				.name("armor" + color + "1")
+				.costBuy(100)
+				.defense(2)
+				.description("+2 Defense")
+				.build();
+
+		new BodyArmor.ArmorFactory(res)
+				.id(color + 66) // id - 67 to 72
+				.name("armor" + color + "2")
+				.costBuy(200)
+				.defense(4)
+				.description("+4 Defense")
+				.build();
+
+		new BodyArmor.ArmorFactory(res)
+				.id(color + 72) // id - 73 to 78
+				.name("armor" + color + "3")
+				.costBuy(300)
+				.defense(6)
+				.description("+6 Defense")
+				.build();
+
+		new BodyArmor.ArmorFactory(res)
+				.id(color + 78) // id - 79 to 84
+				.name("armor" + color + "4")
+				.costBuy(400)
+				.defense(8)
+				.description("+8 Defense")
+				.build();
+
+		new BodyArmor.ArmorFactory(res)
+				.id(color + 84) // id - 85 to 90
+				.name("armor" + color + "5s")
+				.costBuy(500)
+				.defense(10)
+				.description("+10 Defense")
+				.build();
+	}
+
+	private void loadShieldData(int color) {
+		new Shield.ShieldFactory(res)
+				.id(color + 30) // id - 31 to 36
+				.name("shield" + color + "1")
+				.costBuy(100)
+				.defense(2)
+				.description("+2 Defense")
+				.build();
+
+		new Shield.ShieldFactory(res)
+				.id(color + 36) // id - 37 to 42
+				.name("shield" + color + "2")
+				.costBuy(200)
+				.defense(4)
+				.description("+4 Defense")
+				.build();
+
+
+		new Shield.ShieldFactory(res)
+				.id(color + 42) // id - 43 to 48
+				.name("shield" + color + "3")
+				.costBuy(400)
+				.defense(6)
+				.description("+6 Defense")
+				.build();
+		new Shield.ShieldFactory(res)
+				.id(color + 48) // id - 49 to 54
+				.name("shield" + color + "4")
+				.costBuy(700)
+				.defense(8)
+				.description("+8 Defense")
+				.build();
+
+		new Shield.ShieldFactory(res)
+				.id(color + 54) // id - 55 to 60
+				.name("shield" + color + "5")
+				.costBuy(1000)
+				.defense(10)
+				.description("+10 Defense")
+				.build();
+	}
+
+	private void loadSwordData(int color) {
+		new Weapon.WeaponFactory(res)
+				.id(color) // id - 1 to 6
+				.name("sword" + color + "1")
+				.costBuy(100)
+				.attack(2)
+				.description("+2 Attack")
+				.build();
+
+		new Weapon.WeaponFactory(res)
+				.id(color + 6) // id - 7 to 12
+				.name("sword" + color + "2")
+				.costBuy(200)
+				.attack(5)
+				.description("+5 Attack")
+				.build();
+
+		new Weapon.WeaponFactory(res)
+				.id(color + 12) // id - 3 to 18
+				.name("sword" + color + "3")
+				.costBuy(400)
+				.attack(10)
+				.description("+10 Attack")
+				.build();
+
+		new Weapon.WeaponFactory(res)
+				.id(color + 18) // id - 19 to 24
+				.name("sword" + color + "4")
+				.costBuy(700)
+				.attack(15)
+				.description("+15 Attack")
+				.build();
+
+		new Weapon.WeaponFactory(res)
+				.id(color + 24) // id - 25 to 30
+				.name("sword" + color + "5")
+				.costBuy(1000)
+				.attack(20)
+				.description("+20 Attack")
 				.build();
 	}
 

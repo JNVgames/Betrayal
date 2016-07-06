@@ -3,8 +3,6 @@ package com.jnv.betrayal.lobby.inventory;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
@@ -16,7 +14,7 @@ import com.jnv.betrayal.scene2d.ui.Label;
 public class DungeonInventory extends Popup implements InventoryLoadable {
 
 	private Field field;
-	private Image lobbyButton, goldIcon;
+	private Image lobbyButton;
 	private Image[] inventorySpots, characterOutline;
 	private Label userGold;
 	private Label[] charOutDescription;
@@ -66,20 +64,18 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadGoldIcon() {
-		goldIcon = new Image(res.getTexture("icon-gold"));
+		Image goldIcon = new Image(res.getTexture("icon-gold"));
 		goldIcon.layout();
 		float x = inventorySpots[0].getX();
 		float y = inventorySpots[0].getTop();
 		goldIcon.setBounds(x, y + 10, 40, 40);
 		popup.addActor(goldIcon);
 
-		userGold = new Label(Integer.toString(character.inventory.getGold()),FontManager.getFont(40));
+		userGold = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
 		userGold.setX(x + goldIcon.getWidth() + 10);
 		userGold.setY(y + 7);
 		popup.addActor(userGold);
 	}
-
-
 
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
@@ -97,7 +93,7 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	private void loadInventorySpots() {
 
 		int padding = 10, itemSize = 92;
-		float startingX = background.getX()+ itemSize + padding, startingY = title.getY() - 30-92;
+		float startingX = background.getX() + itemSize + padding, startingY = title.getY() - 30 - 92;
 
 		for (int i = 0; i < 20; i++) {
 			inventorySpots[i] = new Image(res.getTexture("shop-purchase-background"));
