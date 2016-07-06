@@ -3,17 +3,18 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Effect {
 	private Card src;
-	private ArrayList<Card> dest;
+	private List<Card> dest;
 	private boolean consistent;
 	private int turns;
 
 	protected Effect() {
 	}
 
-	protected Effect(Card src, ArrayList<Card> dest, boolean consistent, int turns) {
+	protected Effect(Card src, List<Card> dest, boolean consistent, int turns) {
 		this.src = src;
 		this.dest = dest;
 		this.consistent = consistent;
@@ -54,7 +55,7 @@ public abstract class Effect {
 		this.src = src;
 	}
 
-	public void setDest(ArrayList<Card> dest) {
+	public void setDest(List<Card> dest) {
 		this.dest = dest;
 	}
 

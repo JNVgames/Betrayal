@@ -16,7 +16,6 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	private Field field;
 	private Image lobbyButton;
 	private Image[] inventorySpots, characterOutline;
-	private Label userGold;
 	private Label[] charOutDescription;
 	private ItemLoader itemLoader;
 	private Card card;
@@ -131,7 +130,6 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	}
 
 	public void refresh() {
-		userGold.setText(Integer.toString(character.inventory.getGold()));
 		itemLoader.refresh();
 	}
 

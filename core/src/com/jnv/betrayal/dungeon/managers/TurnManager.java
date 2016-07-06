@@ -64,10 +64,6 @@ public class TurnManager {
 		field.addActor(panels);
 	}
 
-//	public ArrayList<Card> selectNextPlayerTurn() {
-//
-//	}
-
 	public void nextTurn() {
 		field.setNextCardTurn();
 		if (field.getCurrentCard() instanceof PlayerCard) {

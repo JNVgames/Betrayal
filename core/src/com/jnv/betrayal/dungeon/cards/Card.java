@@ -129,13 +129,18 @@ public abstract class Card {
 
 	public void heal(int value) {
 		currentHealth += value;
-		if (currentHealth > baseHealth)
+		if (currentHealth > baseHealth) {
 			currentHealth = baseHealth;
+		}
+		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
 	}
-
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public Field getField() {
+		return field;
 	}
 
 	public void beginSelectMode(int numTargets) {
@@ -346,7 +351,7 @@ public abstract class Card {
 
 		private final Drawable greenBar, yellowBar, redBar;
 		private Image healthBarBackground, healthBar;
-		private int currentHealthPercentage, finalHealthPercentage;    //change current % to final %
+		private int currentHealthPercentage;    //change current % to final %
 
 		public HealthBar(float height, BetrayalAssetManager res) {
 			// Calibrate health bar coordinates
@@ -364,17 +369,11 @@ public abstract class Card {
 
 			// Health percentage starts at full
 			currentHealthPercentage = 100;
-			finalHealthPercentage = 100;
 			initialize(x, y);
 
 			// Add actors to the group
 			addActor(healthBarBackground);
 			addActor(healthBar);
-		}
-
-		public void heal(int healAmount) {
-			currentHealth += healAmount;
-			setNewHealthPercent(currentHealth * 100 / baseHealth);
 		}
 
 		private void initialize(float x, float y) {

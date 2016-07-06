@@ -5,6 +5,8 @@
 package com.jnv.betrayal.lobby.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
@@ -83,8 +85,7 @@ class ItemOptions extends Popup {
 		// Draw out options
 		if (inventory instanceof DungeonInventory) {
 			setDungeonOptions(dimensions);
-		}
-		else {
+		} else {
 			setOptions(dimensions);
 		}
 	}
@@ -119,9 +120,18 @@ class ItemOptions extends Popup {
 					@Override
 					public void doAction() {
 						inventory.getCharacter().inventory.removeItem(item);
-						((DungeonInventory) inventory).getCard().performEffect(((Usables) item).getEffect());
-						inventory.refresh();
+
+						Effect effect = ((Usables) item).getEffect();
+						Card src = ((DungeonInventory) inventory).getCard();
+						List<Card> dest = new ArrayList<Card>();
+
+						effect.setSrc(src);
+						dest.add(src);
+						effect.setDest(dest);
+						src.performEffect(effect);
 						remove();
+						((DungeonInventory) inventory).remove();
+						src.getField().turnManager.nextTurn();
 					}
 				});
 				break;
