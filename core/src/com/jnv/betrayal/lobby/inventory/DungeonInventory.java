@@ -36,22 +36,21 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 		loadButtons();
 		itemLoader = new ItemLoader(this);
 		itemLoader.loadInventory();
-		loadGoldIcon();
 	}
 
 	private void loadButtons() {
 		loadBackground();
 		loadTitle();
 		loadInventorySpots();
-		loadEquipSpots();
 		loadReturnToLobbyButton();
 		loadSortButton();
+		loadHelp();
 	}
 
 	private void loadBackground() {
 		background = new Image(res.getTexture("shop-background"));
 		background.layout();
-		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
+		background.setBounds(100, 400, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 500);
 		popup.addActor(background);
 	}
 
@@ -61,26 +60,21 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
 		popup.addActor(title);
+
 	}
 
-	private void loadGoldIcon() {
-		Image goldIcon = new Image(res.getTexture("icon-gold"));
-		goldIcon.layout();
-		float x = inventorySpots[0].getX();
-		float y = inventorySpots[0].getTop();
-		goldIcon.setBounds(x, y + 10, 40, 40);
-		popup.addActor(goldIcon);
-
-		userGold = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
-		userGold.setX(x + goldIcon.getWidth() + 10);
-		userGold.setY(y + 7);
-		popup.addActor(userGold);
+	private void loadHelp(){
+		Label help = new Label( "Tap Item to use",FontManager.getFont(40));
+		help.setX((Betrayal.WIDTH - help.getPrefWidth())/2);
+		help.setY(lobbyButton.getTop()+70);
+		popup.addActor(help);
 	}
+
 
 	private void loadReturnToLobbyButton() {
-		lobbyButton = new Image(res.getTexture("back-to-lobby"));
+		lobbyButton = new Image(res.getTexture("back-button"));
 		lobbyButton.layout();
-		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
+		lobbyButton.setBounds((Betrayal.WIDTH - 312) / 2 , background.getY()+10, 312, 100);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
@@ -113,63 +107,6 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 						startingY - (itemSize + padding) * 3, itemSize, itemSize);
 			}
 			popup.addActor(inventorySpots[i]);
-		}
-	}
-
-	private void loadEquipSpots() {
-		int itemSize = 92;
-		// character outline
-		characterOutline[7] = new Image(res.getTexture("character-outline"));
-		characterOutline[7].layout();
-		characterOutline[7].setBounds(137, 225, 240, 400);
-		for (int i = 0; i < 7; i++) {
-			characterOutline[i] = new Image(res.getTexture("instructions-background"));
-			characterOutline[i].layout();
-		}
-		// head
-		characterOutline[0].setBounds(212, 525, itemSize, itemSize);
-		// body armor
-		characterOutline[1].setBounds(212, 425, itemSize, itemSize);
-		// left hand
-		characterOutline[2].setBounds(112, 325, itemSize, itemSize);
-		// right hand
-		characterOutline[3].setBounds(312, 325, itemSize, itemSize);
-		// ring1
-		characterOutline[4].setBounds(518, 325, itemSize, itemSize);
-		// ring2
-		characterOutline[5].setBounds(518, 225, itemSize, itemSize);
-		// cloak
-		characterOutline[6].setBounds(518, 525, itemSize, itemSize);
-
-		// Labels
-		// head
-		charOutDescription[0] = new Label("Head", FontManager.getFont(40));
-		charOutDescription[0].setBounds(112, 525, itemSize, itemSize);
-		// body armor
-		charOutDescription[1] = new Label("Body", FontManager.getFont(40));
-		charOutDescription[1].setBounds(112, 425, itemSize, itemSize);
-		//left hand
-		charOutDescription[2] = new Label("Hand", FontManager.getFont(40));
-		charOutDescription[2].setBounds(112, 265, itemSize, itemSize);
-		// right hand
-		charOutDescription[3] = new Label("Hand", FontManager.getFont(40));
-		charOutDescription[3].setBounds(312, 265, itemSize, itemSize);
-		// ring1
-		charOutDescription[4] = new Label("Ring", FontManager.getFont(40));
-		charOutDescription[4].setBounds(428, 325, itemSize, itemSize);
-		// ring2
-		charOutDescription[5] = new Label("Ring", FontManager.getFont(40));
-		charOutDescription[5].setBounds(428, 225, itemSize, itemSize);
-		// cloak
-		charOutDescription[6] = new Label("Cloak", FontManager.getFont(40));
-		charOutDescription[6].setBounds(413, 525, itemSize, itemSize);
-
-		for (int i = 0; i < 8; i++) {
-			popup.addActor(characterOutline[i]);
-		}
-
-		for (int i = 0; i < 7; i++) {
-			popup.addActor(charOutDescription[i]);
 		}
 	}
 

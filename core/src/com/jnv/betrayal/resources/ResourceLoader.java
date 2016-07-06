@@ -93,6 +93,7 @@ public class ResourceLoader {
 		res.loadTexture("button/play_now_pressed512x144.png", "play-now-pressed");
 		res.loadTexture("button/main_menu512x144.png", "main-menu");
 		res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
+		res.loadTexture("button/back512x144.png", "back-button");
 		res.loadTexture("button/arrow256x256.png", "arrow-right");
 		res.loadTexture("button/arrow_left256x256.png", "arrow-left");
 		res.loadTexture("button/circle_x150x150.png", "x");

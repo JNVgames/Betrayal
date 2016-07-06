@@ -19,6 +19,7 @@ import com.jnv.betrayal.gameobjects.usables.Potion;
 import com.jnv.betrayal.gameobjects.special.Ring;
 import com.jnv.betrayal.gameobjects.defense.Shield;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
+import com.jnv.betrayal.gameobjects.usables.Run;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.OKPopup;
@@ -440,7 +441,7 @@ public class Shop extends Popup {
 
 
 		for (int i=1; i<4; i++){
-			final String item = "Run" + i;
+			final String item = "run" + i;
 			run[i - 1] = new Image(res.getTexture("run"+i));
 			run[i - 1].layout();;
 			run[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
@@ -448,7 +449,7 @@ public class Shop extends Popup {
 				@Override
 				public void doAction() {
 					//todo Created Run Item,
-					//new ShopPurchasePopup(game, new Run(item, res));
+					new ShopPurchasePopup(game, new Run(item,res));
 				}
 			});
 			currentGroup.addActor(run[i - 1]);
