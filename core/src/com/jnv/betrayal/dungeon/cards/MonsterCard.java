@@ -19,6 +19,7 @@ public class MonsterCard extends Card {
 	private List<ActionType> allActions;
 	private int actionIndex;
 	private String name;
+	private int numAttackTargets;
 
 	public MonsterCard(Dimension dimension, Monster monster, BetrayalAssetManager res) {
 		this(dimension.getX(), dimension.getY(), dimension.getWidth(), dimension.getHeight(),
@@ -32,6 +33,8 @@ public class MonsterCard extends Card {
 		baseHealth = currentHealth = monster.getHealth();
 		baseAttack = currentAttack = monster.getAttack();
 		baseDefense = currentDefense = monster.getDefense();
+		numAttackTargets = monster.getNumTargets();
+
 		cardImage = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
@@ -45,6 +48,10 @@ public class MonsterCard extends Card {
 		allActions = new ArrayList<ActionType>();
 		allActions.add(ActionType.ATTACK);
 		initializeCardListener();
+	}
+
+	public int getNumAttackTargets() {
+		return numAttackTargets;
 	}
 
 	public ActionType getActionType() {
