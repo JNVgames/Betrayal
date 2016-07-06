@@ -11,8 +11,8 @@ public class Poison extends Effect {
 	public Poison() {
 	}
 
-	public Poison(Card src, ArrayList<Card> dest, boolean consistent, int value) {
-		super(src, dest, consistent);
+	public Poison(Card src, ArrayList<Card> dest, boolean consistent, int value, int turns) {
+		super(src, dest, consistent, turns);
 		this.value = value;
 	}
 

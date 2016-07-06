@@ -6,24 +6,25 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import java.util.ArrayList;
 
 public class AttackUp extends Effect {
-	private int value;
+	private int attack;
 
-	public AttackUp() {
+	public AttackUp(int attack) {
+		this.attack = attack;
 	}
 
-	public AttackUp(Card src, ArrayList<Card> dest, boolean consistent, int value) {
-		super(src, dest, consistent);
-		this.value = value;
+	public AttackUp(Card src, ArrayList<Card> dest, boolean consistent, int attack, int turns) {
+		super(src, dest, consistent, turns);
+		this.attack = attack;
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.increaseCurrentAttack(value);
+		card.increaseCurrentAttack(attack);
 	}
 
 	@Override
 	public void endEffect(Card card) {
-		card.decreaseCurrentAttack(value);
+		card.decreaseCurrentAttack(attack);
 	}
 
 	@Override

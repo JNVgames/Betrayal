@@ -8,14 +8,20 @@ public abstract class Effect {
 	private Card src;
 	private ArrayList<Card> dest;
 	private boolean consistent;
+	private int turns;
 
 	protected Effect() {
 	}
 
-	protected Effect(Card src, ArrayList<Card> dest, boolean consistent) {
+	protected Effect(Card src, ArrayList<Card> dest, boolean consistent, int turns) {
 		this.src = src;
 		this.dest = dest;
 		this.consistent = consistent;
+		this.turns = turns;
+	}
+
+	public int getTurns() {
+		return turns;
 	}
 
 	public void doStartEffect() {
@@ -42,6 +48,14 @@ public abstract class Effect {
 
 	public void setConsistent(boolean consistent) {
 		this.consistent = consistent;
+	}
+
+	public void setSrc(Card src) {
+		this.src = src;
+	}
+
+	public void setDest(ArrayList<Card> dest) {
+		this.dest = dest;
 	}
 
 	public abstract void startEffect(Card card);

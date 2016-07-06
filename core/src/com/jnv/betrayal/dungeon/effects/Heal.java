@@ -6,19 +6,20 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import java.util.ArrayList;
 
 public class Heal extends Effect {
-	private int value;
+	private int health;
 
-	public Heal() {
+	public Heal(int health) {
+		this.health = health;
 	}
 
-	public Heal(Card src, ArrayList<Card> dest, boolean consistent, int value) {
-		super(src, dest, consistent);
-		this.value = value;
+	public Heal(Card src, ArrayList<Card> dest, boolean consistent, int health, int turns) {
+		super(src, dest, consistent, turns);
+		this.health = health;
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.heal(value);
+		card.heal(health);
 	}
 
 	@Override

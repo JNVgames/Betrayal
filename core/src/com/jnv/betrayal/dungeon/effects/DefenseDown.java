@@ -6,24 +6,25 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import java.util.ArrayList;
 
 public class DefenseDown extends Effect {
-	private int value;
+	private int defense;
 
-	public DefenseDown() {
+	public DefenseDown(int defense) {
+		this.defense = defense;
 	}
 
-	public DefenseDown(Card src, ArrayList<Card> dest, boolean consistent, int value) {
-		super(src, dest, consistent);
-		this.value = value;
+	public DefenseDown(Card src, ArrayList<Card> dest, boolean consistent, int defense, int turns) {
+		super(src, dest, consistent, turns);
+		this.defense = defense;
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.decreaseCurrentDefense(value);
+		card.decreaseCurrentDefense(defense);
 	}
 
 	@Override
 	public void endEffect(Card card) {
-		card.increaseCurrentDefense(value);
+		card.increaseCurrentDefense(defense);
 	}
 
 	@Override

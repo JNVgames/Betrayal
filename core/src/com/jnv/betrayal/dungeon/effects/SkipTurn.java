@@ -10,8 +10,8 @@ public class SkipTurn extends Effect implements Skippable {
     public SkipTurn() {
     }
 
-    public SkipTurn(Card src, ArrayList<Card> dest, boolean consistent) {
-        super(src, dest, consistent);
+    public SkipTurn(Card src, ArrayList<Card> dest, boolean consistent, int turns) {
+        super(src, dest, consistent, turns);
     }
 
     @Override

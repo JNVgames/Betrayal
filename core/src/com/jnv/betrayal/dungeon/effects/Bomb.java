@@ -6,14 +6,15 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import java.util.ArrayList;
 
 public class Bomb extends Effect {
-	private int value;
+	private int attack;
 
-	public Bomb() {
+	public Bomb(int attack) {
+		this.attack = attack;
 	}
 
-	public Bomb(Card src, ArrayList<Card> dest, boolean consistent, int value) {
-		super(src, dest, consistent);
-		this.value = value;
+	public Bomb(Card src, ArrayList<Card> dest, boolean consistent, int attack, int turns) {
+		super(src, dest, consistent, turns);
+		this.attack = attack;
 	}
 
 	@Override
@@ -23,7 +24,7 @@ public class Bomb extends Effect {
 
 	@Override
 	public void endEffect(Card card) {
-		card.takeDamage(value);
+		card.takeDamage(attack);
 	}
 
 	@Override

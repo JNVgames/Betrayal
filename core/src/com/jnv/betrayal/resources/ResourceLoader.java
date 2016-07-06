@@ -4,6 +4,10 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.AttackUp;
+import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.Heal;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
 import com.jnv.betrayal.gameobjects.defense.BodyArmor;
@@ -475,19 +479,14 @@ public class ResourceLoader {
 				.id(127)
 				.name("potion1")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
+				.effect(new Heal(10))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(128)
 				.name("potion2")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -495,9 +494,6 @@ public class ResourceLoader {
 				.id(129)
 				.name("potion3")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -505,9 +501,6 @@ public class ResourceLoader {
 				.id(130)
 				.name("potion4")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -515,9 +508,6 @@ public class ResourceLoader {
 				.id(131)
 				.name("potion5")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -525,9 +515,6 @@ public class ResourceLoader {
 				.id(132)
 				.name("potion6")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -535,9 +522,6 @@ public class ResourceLoader {
 				.id(133)
 				.name("potion7")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -545,9 +529,6 @@ public class ResourceLoader {
 				.id(134)
 				.name("potion8")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -555,9 +536,6 @@ public class ResourceLoader {
 				.id(135)
 				.name("potion9")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -565,9 +543,6 @@ public class ResourceLoader {
 				.id(136)
 				.name("potion10")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -575,9 +550,6 @@ public class ResourceLoader {
 				.id(137)
 				.name("potion11")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 
@@ -585,9 +557,6 @@ public class ResourceLoader {
 				.id(138)
 				.name("potion12")
 				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
 				.description("+")
 				.build();
 	}
