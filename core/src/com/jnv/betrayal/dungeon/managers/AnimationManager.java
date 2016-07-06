@@ -14,6 +14,7 @@ public class AnimationManager {
 				CardAnimation.jump(action.getSrc());
 				for (Card card : action.getDest()) {
 					CardAnimation.damaged(card);
+
 				}
 
 				break;

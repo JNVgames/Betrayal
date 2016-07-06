@@ -6,6 +6,7 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.jnv.betrayal.dungeon.actions.Action;
 
 public class CardAnimation {
 
@@ -55,5 +56,27 @@ public class CardAnimation {
 	public static void fadeOut(Card card) {
 		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
+	}
+
+	public static void heal(Card card){
+		useItem(card);
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.YELLOW)));
+		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
+		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(Color.YELLOW)));
+		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
+	}
+
+	public static void squishHorizontally(Card card){
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(10,192,.5f)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(64, 0, 0.5f)));
+		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128,192,.5f)));
+		card.getCardImage().addAction(Actions.delay(1f, Actions.moveBy(-64, 0, 0.5f)));
+
+	}
+	public static void squishVertically(Card card){
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(128,10,.5f)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(0, 96, 0.2f)));
+		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128,192,.5f)));
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(0, -96, 0.2f)));
 	}
 }
