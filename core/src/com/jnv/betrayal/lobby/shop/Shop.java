@@ -27,16 +27,18 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
 
+import java.awt.Font;
+
 public class Shop extends Popup {
 
 	private Image leftArrow, rightArrow, cloakBuyButton;
-	private Image[] potions, ring1, ring2;
+	private Image[] potions, ring1, ring2, run;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
 	private Image[] headgear1, headgear2, headgear3, headgear4, headgear5;
 	private Image[] armor1, armor2, armor3, armor4, armor5;
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
-	private Label cloakPrice;
+	private Label cloakPrice, comingSoon, runTitle;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Group currentGroup;
 	private Character character;
@@ -78,6 +80,7 @@ public class Shop extends Popup {
 		titleArmor = new Label[5];
 		titleHeadgear = new Label[5];
 		titleShield = new Label[5];
+		run = new Image[3];
 		loadButtons();
 		loadCurrentActors();
 	}
@@ -432,6 +435,29 @@ public class Shop extends Popup {
 				currentGroup.addActor(potions[i - 1]);
 			}
 		}
+
+		//TODO TRY THIS LATER
+
+
+		for (int i=1; i<4; i++){
+			final String item = "Run" + i;
+			run[i - 1] = new Image(res.getTexture("run"+i));
+			run[i - 1].layout();;
+			run[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
+			run[i - 1].addListener(new InputListener(run[i - 1]) {
+				@Override
+				public void doAction() {
+					//todo Created Run Item,
+					//new ShopPurchasePopup(game, new Run(item, res));
+				}
+			});
+			currentGroup.addActor(run[i - 1]);
+		}
+
+		runTitle = new Label("Run", FontManager.getFont(40));
+		runTitle.setX(110);
+		runTitle.setY(run[0].getTop()+10);
+		currentGroup.addActor(runTitle);
 	}
 
 	private void loadRingTitle() {
@@ -641,6 +667,10 @@ public class Shop extends Popup {
 	}
 
 	private void loadItems() {
+		comingSoon = new Label("Coming Soon", FontManager.getFont(40));
+		comingSoon.setX(Betrayal.WIDTH/2 - comingSoon.getPrefWidth()/2);
+		comingSoon.setY(Betrayal.HEIGHT);
+		currentGroup.addActor(comingSoon);
 	}
 
 	private void loadSwordAndShieldPage() {

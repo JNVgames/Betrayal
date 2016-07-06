@@ -12,6 +12,7 @@ import com.jnv.betrayal.gameobjects.defense.Shield;
 import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.special.Ring;
 import com.jnv.betrayal.gameobjects.usables.Potion;
+import com.jnv.betrayal.gameobjects.usables.Run;
 
 public class ResourceLoader {
 
@@ -32,6 +33,7 @@ public class ResourceLoader {
 		loadShopButtons();
 		loadCombatIcons();
 		loadItems();
+		loadItemsAndSkills();
 		loadCharacterPreviewsImages();
 		loadMonsters();
 		loadHealthBar();
@@ -192,6 +194,27 @@ public class ResourceLoader {
 		res.loadTexture("item/potion10.png", "potion10");
 		res.loadTexture("item/potion11.png", "potion11");
 		res.loadTexture("item/potion12.png", "potion12");
+	}
+
+	private void loadItemsAndSkills(){
+		res.loadTexture("item/skills/monsterblock.png", "skill1");
+		res.loadTexture("item/skills/monsterbomb.png", "skill2");
+		res.loadTexture("item/skills/monsterchain.png", "skill3");
+		res.loadTexture("item/skills/monsterdeath.png", "skill4");
+		res.loadTexture("item/skills/monsterfire.png", "skill5");
+		res.loadTexture("item/skills/monsterheal.png", "skill6");
+		res.loadTexture("item/skills/monsterlockon.png", "skill7");
+		res.loadTexture("item/skills/monstermelee.png", "skill8");
+		res.loadTexture("item/skills/monsterpoison.png", "skill9");
+		res.loadTexture("item/skills/monsterpowerdown.png", "skill10");
+		res.loadTexture("item/skills/monsterpowerup.png", "skill11");
+		res.loadTexture("item/skills/monsterscythe.png", "skill12");
+		res.loadTexture("item/skills/monstershieldbreak.png", "skill13");
+		res.loadTexture("item/skills/run50.png", "run1");
+		res.loadTexture("item/skills/run75.png", "run2");
+		res.loadTexture("item/skills/run100.png", "run3");
+
+
 	}
 
 	private void loadRings() {
@@ -821,6 +844,29 @@ public class ResourceLoader {
 				.name("cloak11")
 				.costBuy(750)
 				.description("Revives the player with\n10 HP upon death for\none time only.")
+				.build();
+
+		/**********************RUN*************************/
+
+		new Run.RunFactory(res)
+				.id(140)
+				.name("run1")
+				.costBuy(100)
+				.description("50% Chance to Flee")
+				.build();
+
+		new Run.RunFactory(res)
+				.id(141)
+				.name("run2")
+				.costBuy(200)
+				.description("75% Chance to Flee")
+				.build();
+
+		new Run.RunFactory(res)
+				.id(142)
+				.name("run3")
+				.costBuy(300)
+				.description("100% Chance to Flee")
 				.build();
 	}
 
