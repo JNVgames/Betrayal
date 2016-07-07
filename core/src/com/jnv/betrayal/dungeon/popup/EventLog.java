@@ -1,5 +1,6 @@
 package com.jnv.betrayal.dungeon.popup;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -43,7 +44,7 @@ public class EventLog extends Popup {
 	private void loadBackground() {
 		Image background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
-		background.setBounds(100, 200, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 100);
+		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
 		popup.addActor(background);
 	}
 
@@ -68,7 +69,16 @@ public class EventLog extends Popup {
 	private void loadHistory() {
 		for (Action action : actionHistory) {
 			Label newEvent = new Label(action.toString(), FontManager.getFont(40));
+			Label separate = new Label(
+					 "------------------------------------------------------------"
+					+"------------------------------------------------------------"
+					+"------------------------------------------------------------"
+					, FontManager.getFont(12));
+			separate.setColor(Color.WHITE);
 			verticalGroup.addActor(newEvent);
+			verticalGroup.addActor(separate);
+
+
 		}
 	}
 }
