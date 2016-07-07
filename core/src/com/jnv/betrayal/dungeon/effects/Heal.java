@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
@@ -9,11 +10,7 @@ public class Heal extends Effect {
 	private int health;
 
 	public Heal(int health) {
-		this.health = health;
-	}
-
-	public Heal(Card src, ArrayList<Card> dest, boolean consistent, int health, int turns) {
-		super(src, dest, consistent, turns);
+		super(ActionType.HEAL);
 		this.health = health;
 	}
 

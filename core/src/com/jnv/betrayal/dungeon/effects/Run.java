@@ -12,11 +12,8 @@ public class Run extends Effect {
 	private int fleeChance;
 
 	public Run(int fleeChance) {
+		super(ActionType.FLEE);
 		this.fleeChance = fleeChance;
-	}
-
-	public Run(Card src, List<Card> dest, boolean consistent, int turns) {
-		super(src, dest, consistent, turns);
 	}
 
 	@Override

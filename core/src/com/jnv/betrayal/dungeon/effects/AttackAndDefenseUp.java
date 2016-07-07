@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
@@ -9,13 +10,8 @@ public class AttackAndDefenseUp extends Effect {
 	private int attack;
 	private int defense;
 
-	public AttackAndDefenseUp(int attack, int defense) {
-		this.attack = attack;
-		this.defense = defense;
-	}
-
-	public AttackAndDefenseUp(Card src, ArrayList<Card> dest, boolean consistent, int attack, int defense, int turns) {
-		super(src, dest, consistent, turns);
+	public AttackAndDefenseUp(int attack, int defense, int turns) {
+		super(ActionType.BUFF_ATTACK_DEFENSE, turns, ActionType.E_BUFF_ATTACK_DEFENSE);
 		this.attack = attack;
 		this.defense = defense;
 	}

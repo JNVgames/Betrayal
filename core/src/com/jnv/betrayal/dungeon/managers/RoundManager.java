@@ -1,9 +1,11 @@
 package com.jnv.betrayal.dungeon.managers;
 
+import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Event;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoundManager {
 	private ArrayList<Event> events;
@@ -12,26 +14,40 @@ public class RoundManager {
 		events = new ArrayList<Event>();
 	}
 
-	public void checkEvents(Card card) {
-		for (int i=0; i< events.size(); i++) {
-			if (card == events.get(i).getCard()) {
-				events.get(i).decreaseTurns();
-				if (events.get(i).turnIsZero()) {
-					events.get(i).getEffect().doEndEffect();
-					events.remove(i);
-					i--;				//makes sure you dont skip anything
+
+	/**
+	 * Check for events to go off during each turn
+	 * @param card card to check events for
+	 * @return the events performed to put into the event log
+	 */
+	public List<Action> checkEvents(Card card) {
+		List<Event> eventsToRemove = new ArrayList<Event>();
+		List<Action> actions = new ArrayList<Action>();
+		for (Event event : events) {
+			if (card == event.getCard()) {
+				event.decreaseTurns();
+				if (event.turnIsZero()) {
+					event.getEffect().doEndEffect();
+					eventsToRemove.add(event);
+					actions.add(new Action(event.getEffect().getSrc(), event.getEffect().getDest(),
+							event.getEffect().getEndType()));
 				}
 				//if effect is consistent
-				if(events.get(i).getEffect().isConsistent()){
-					events.get(i).getEffect().doConsistentEffect();
+				if (event.getEffect().isConsistent()) {
+					event.getEffect().doConsistentEffect();
+					actions.add(new Action(event.getEffect().getSrc(), event.getEffect().getDest(),
+							event.getEffect().getConsistentType()));
 				}
 			}
 		}
+		for (Event event : eventsToRemove) {
+			events.remove(event);
+		}
+		return actions;
 	}
 
 	public void addEvent(Event event) {
 		events.add(event);
 		event.getEffect().doStartEffect();
 	}
-
 }

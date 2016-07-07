@@ -133,7 +133,7 @@ public class Field extends Group {
 		}
 	}
 
-	public void setNextCardTurn() {
+	public void setNextCardIndex() {
 		refreshAllCards();
 		currentCardTurn = (currentCardTurn + 1) % getAllCards().size();
 	}
@@ -178,5 +178,4 @@ public class Field extends Group {
 		monsterZone.remove(card);
 		refreshAllCards();
 	}
-
 }

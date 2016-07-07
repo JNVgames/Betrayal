@@ -1,19 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
-
-import java.util.ArrayList;
 
 public class DefenseDown extends Effect {
 	private int defense;
 
-	public DefenseDown(int defense) {
-		this.defense = defense;
-	}
-
-	public DefenseDown(Card src, ArrayList<Card> dest, boolean consistent, int defense, int turns) {
-		super(src, dest, consistent, turns);
+	public DefenseDown(int defense, int turns) {
+		super(ActionType.DEBUFF_DEFENSE, turns, ActionType.E_DEBUFF_DEFENSE);
 		this.defense = defense;
 	}
 

@@ -14,9 +14,7 @@ public class AnimationManager {
 				CardAnimation.jump(action.getSrc());
 				for (Card card : action.getDest()) {
 					CardAnimation.damaged(card);
-
 				}
-
 				break;
 			case DEFEND:
 				CardAnimation.jump(action.getSrc());
@@ -29,9 +27,6 @@ public class AnimationManager {
 				break;
 			case FAIL_TO_FLEE:
 				CardAnimation.failToFlee(action.getSrc());
-				break;
-			case ITEM:
-				CardAnimation.useItem(action.getSrc());
 				break;
 			case DIED:
 				CardAnimation.fadeOut(action.getSrc());

@@ -1,8 +1,8 @@
 package com.jnv.betrayal.dungeon.effects;
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Effect {
@@ -10,19 +10,56 @@ public abstract class Effect {
 	private List<Card> dest;
 	private boolean consistent;
 	private int turns;
+	private final ActionType startType, consistentType, endType;
 
-	protected Effect() {
+	protected Effect(ActionType startType) {
+		this(startType, false, null, 0, null);
 	}
 
-	protected Effect(Card src, List<Card> dest, boolean consistent, int turns) {
-		this.src = src;
-		this.dest = dest;
+	protected Effect(ActionType startType, int turns) {
+		this(startType, false, null, turns, null);
+	}
+
+	protected Effect(ActionType startType, int turns, ActionType endType) {
+		this(startType, false, null, turns, endType);
+	}
+
+	protected Effect(ActionType startType, int turns, boolean consistent, ActionType consistentType,
+					 ActionType endType) {
+		this(startType, consistent, consistentType, turns, endType);
+	}
+
+	protected Effect(ActionType startType, boolean consistent, ActionType consistentType, int turns,
+					 ActionType endType) {
+		this.startType = startType;
+		this.consistentType = consistentType;
+		this.endType = endType;
 		this.consistent = consistent;
 		this.turns = turns;
 	}
 
 	public int getTurns() {
 		return turns;
+	}
+
+	public ActionType getStartType() {
+		return startType;
+	}
+
+	public ActionType getConsistentType() {
+		return consistentType;
+	}
+
+	public ActionType getEndType() {
+		return endType;
+	}
+
+	public Card getSrc() {
+		return src;
+	}
+
+	public List<Card> getDest() {
+		return dest;
 	}
 
 	public void doStartEffect() {

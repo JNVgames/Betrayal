@@ -1,21 +1,15 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
-
-import java.util.ArrayList;
 
 public class AttackAndDefenseDown extends Effect {
 	private int attack;
 	private int defense;
 
-	public AttackAndDefenseDown(int attack) {
-		this.attack = attack;
-		this.defense = defense;
-	}
-
-	public AttackAndDefenseDown(Card src, ArrayList<Card> dest, boolean consistent, int attack, int defense, int turns) {
-		super(src, dest, consistent, turns);
+	public AttackAndDefenseDown(int attack, int defense, int turns) {
+		super(ActionType.BUFF_ATTACK_DEFENSE, turns, ActionType.E_DEBUFF_ATTACK_DEFENSE);
 		this.attack = attack;
 		this.defense = defense;
 	}

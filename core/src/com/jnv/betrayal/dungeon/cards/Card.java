@@ -301,6 +301,7 @@ public abstract class Card {
 
 	public void performEffect(Effect effect) {
 		field.roundManager.addEvent(new Event(this, effect));
+		field.actionManager.addToHistory(new Action(effect.getSrc(), effect.getDest(), effect.getStartType()));
 	}
 
 	public abstract String getName();

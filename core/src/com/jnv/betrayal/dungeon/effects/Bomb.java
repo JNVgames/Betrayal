@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
@@ -8,12 +9,8 @@ import java.util.ArrayList;
 public class Bomb extends Effect {
 	private int attack;
 
-	public Bomb(int attack) {
-		this.attack = attack;
-	}
-
-	public Bomb(Card src, ArrayList<Card> dest, boolean consistent, int attack, int turns) {
-		super(src, dest, consistent, turns);
+	public Bomb(int attack, int turns) {
+		super(ActionType.BOMB, turns);
 		this.attack = attack;
 	}
 

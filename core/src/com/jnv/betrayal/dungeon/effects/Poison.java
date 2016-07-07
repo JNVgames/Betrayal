@@ -1,19 +1,16 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.ArrayList;
 
 public class Poison extends Effect {
-	private int value;
+	private int damage;
 
-	public Poison() {
-	}
-
-	public Poison(Card src, ArrayList<Card> dest, boolean consistent, int value, int turns) {
-		super(src, dest, consistent, turns);
-		this.value = value;
+	public Poison(int damage, int turns) {
+		super(ActionType.POISON, turns, true, ActionType.C_POISON, ActionType.E_POISON);
 	}
 
 	@Override

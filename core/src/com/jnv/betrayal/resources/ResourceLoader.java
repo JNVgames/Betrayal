@@ -509,7 +509,7 @@ public class ResourceLoader {
 				.name("potion4")
 				.costBuy(100)
 				.description("Increase 25 defense\nLasts 3 turns")
-				.effect(new DefenseUp(25))
+				.effect(new DefenseUp(25, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
@@ -517,7 +517,7 @@ public class ResourceLoader {
 				.name("potion5")
 				.costBuy(100)
 				.description("Increase 50 defense\nLasts 3 turns")
-				.effect(new DefenseUp(50))
+				.effect(new DefenseUp(50, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
@@ -525,7 +525,7 @@ public class ResourceLoader {
 				.name("potion6")
 				.costBuy(100)
 				.description("Increase 75 defense\nLasts 3 turns")
-				.effect(new DefenseUp(75))
+				.effect(new DefenseUp(75, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
@@ -533,7 +533,7 @@ public class ResourceLoader {
 				.name("potion7")
 				.costBuy(100)
 				.description("Increase 10 attack\nLasts 3 turns")
-				.effect(new AttackUp(10))
+				.effect(new AttackUp(10, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
@@ -541,7 +541,7 @@ public class ResourceLoader {
 				.name("potion8")
 				.costBuy(100)
 				.description("Increase 25 attack\nLasts 3 turns")
-				.effect(new AttackUp(25))
+				.effect(new AttackUp(25, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
@@ -549,31 +549,31 @@ public class ResourceLoader {
 				.name("potion9")
 				.costBuy(100)
 				.description("Increase 50 attack\nLasts 3 turns")
-				.effect(new AttackUp(50))
+				.effect(new AttackUp(50, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(136)
 				.name("potion10")
 				.costBuy(100)
-				.description("+")
-				.effect(new AttackAndDefenseUp(10, 25))
+				.description("Increase 10 atk/25 def\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(10, 25, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(137)
 				.name("potion11")
 				.costBuy(100)
-				.description("+")
-				.effect(new AttackAndDefenseUp(25, 50))
+				.description("Increase 25 atk/50 def\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(25, 50, 3))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(138)
 				.name("potion12")
 				.costBuy(100)
-				.description("+")
-				.effect(new AttackAndDefenseUp(50, 75))
+				.description("Increase 50 atk/75 def\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(50, 75, 3))
 				.build();
 	}
 

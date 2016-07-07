@@ -39,9 +39,6 @@ public class ActionManager {
 
 	//update field, update all card's data
 	public void performAction(Action action) {
-		actionHistory.addLast(action);
-		// todo add to event log
-
 		AnimationManager.performAnimation(action);
 		// If dest card is null, perform action on self
 		switch (action.getActionType()) {
@@ -63,6 +60,7 @@ public class ActionManager {
 			default:
 				throw new AssertionError();
 		}
+		actionHistory.addLast(action);
 	}
 
 	private void attack(Action action) {
@@ -103,7 +101,7 @@ public class ActionManager {
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
-					new OKPopup(field.game, "Flee Successfull") {
+					new OKPopup(field.game, "Flee Successful") {
 						@Override
 						public void onConfirm() {
 							field.game.gsm.setState(GameStateManager.State.LOBBY);
@@ -112,7 +110,6 @@ public class ActionManager {
 				}
 			};
 			card.getCardImage().addAction(Actions.delay(2.5f, Actions.run(r)));
-
 		} else if (card instanceof PlayerCard) {
 			//Teammate died
 			field.removePlayerCard((PlayerCard) card);
