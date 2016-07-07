@@ -71,7 +71,7 @@ public class YourTurn extends Turn {
 						if (PlayerCard.canFlee(1)) {
 							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FLEE));
 						} else {
-							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FAILTOFLEE));
+							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FAIL_TO_FLEE));
 						}
 					}
 				};

@@ -459,6 +459,7 @@ public class ResourceLoader {
 				.name("run1")
 				.costBuy(100)
 				.description("50% Chance to Flee")
+				.effect(new com.jnv.betrayal.dungeon.effects.Run(50))
 				.build();
 
 		new Run.RunFactory(res)
@@ -466,6 +467,7 @@ public class ResourceLoader {
 				.name("run2")
 				.costBuy(200)
 				.description("75% Chance to Flee")
+				.effect(new com.jnv.betrayal.dungeon.effects.Run(75))
 				.build();
 
 		new Run.RunFactory(res)
@@ -473,6 +475,7 @@ public class ResourceLoader {
 				.name("run3")
 				.costBuy(300)
 				.description("100% Chance to Flee")
+				.effect(new com.jnv.betrayal.dungeon.effects.Run(100))
 				.build();
 	}
 

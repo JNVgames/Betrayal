@@ -25,9 +25,9 @@ public class AnimationManager {
 				}
 				break;
 			case FLEE:
-				CardAnimation.fadeOut(action.getSrc());
+				CardAnimation.flee(action.getSrc());
 				break;
-			case FAILTOFLEE:
+			case FAIL_TO_FLEE:
 				CardAnimation.failToFlee(action.getSrc());
 				break;
 			case ITEM:

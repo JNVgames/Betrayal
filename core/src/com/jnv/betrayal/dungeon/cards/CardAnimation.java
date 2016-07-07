@@ -63,7 +63,6 @@ public class CardAnimation {
 		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
 	}
 
-
 	public static void failToFlee(Card card){
 		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
 		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));

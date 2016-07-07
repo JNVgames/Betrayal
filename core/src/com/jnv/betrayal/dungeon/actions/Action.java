@@ -33,7 +33,7 @@ public class Action {
 	}
 
 	public boolean destExist() {
-		return dest == null || dest.size() != 0;
+		return dest != null && dest.size() != 0;
 	}
 
 	@Override

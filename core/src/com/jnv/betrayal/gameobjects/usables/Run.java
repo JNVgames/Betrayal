@@ -21,8 +21,6 @@ public class Run extends Usables {
 		super(name, res);
 	}
 
-
-
 	public static class RunFactory {
 		private int id = -1;
 		private String name = "";

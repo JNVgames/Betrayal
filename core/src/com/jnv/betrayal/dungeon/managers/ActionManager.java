@@ -44,29 +44,28 @@ public class ActionManager {
 
 		AnimationManager.performAnimation(action);
 		// If dest card is null, perform action on self
-		if (action.destExist()) {
-			switch (action.getActionType()) {
-				case ATTACK:
-					attack(action);
-					break;
-				case DEFEND:
-					defend(action);
-					break;
-				case FLEE:
-					flee(action);
-					break;
-				case FAILTOFLEE:
-					failedToFlee(action);
-					break;
-				case DIED:
-					died(action);
-					break;
-				default:
-					throw new AssertionError();
-			}
+		switch (action.getActionType()) {
+			case ATTACK:
+				attack(action);
+				break;
+			case DEFEND:
+				defend(action);
+				break;
+			case FLEE:
+				flee(action);
+				break;
+			case FAIL_TO_FLEE:
+				failedToFlee(action);
+				break;
+			case DIED:
+				died(action);
+				break;
+			default:
+				throw new AssertionError();
 		}
 	}
-	private void attack(Action action){
+
+	private void attack(Action action) {
 		for (Card card : action.getDest()) {
 			// Check if there are defenders
 			if (card.isBeingDefended()) {
@@ -77,7 +76,8 @@ public class ActionManager {
 			}
 		}
 	}
-	private void defend(Action action){
+
+	private void defend(Action action) {
 		((PlayerCard) action.getSrc()).defendCard(action.getDest().get(0));
 		action.getDest().get(0).addDefender((PlayerCard) action.getSrc());
 	}
@@ -94,7 +94,7 @@ public class ActionManager {
 		card.getCardImage().addAction(Actions.delay(2.5f, Actions.run(r)));
 	}
 
-	private void flee(Action action){
+	private void flee(Action action) {
 		final Card card = action.getSrc();
 		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
 			// Flee Successful
@@ -111,7 +111,7 @@ public class ActionManager {
 					};
 				}
 			};
-			card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+			card.getCardImage().addAction(Actions.delay(2.5f, Actions.run(r)));
 
 		} else if (card instanceof PlayerCard) {
 			//Teammate died
@@ -121,7 +121,7 @@ public class ActionManager {
 		}
 	}
 
-	private void died(Action action){
+	private void died(Action action) {
 		Card card = action.getSrc();
 		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
