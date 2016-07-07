@@ -27,13 +27,19 @@ public class AnimationManager {
 			case FLEE:
 				CardAnimation.fadeOut(action.getSrc());
 				break;
+			case FAILTOFLEE:
+				CardAnimation.failToFlee(action.getSrc());
+				break;
 			case ITEM:
 				CardAnimation.useItem(action.getSrc());
+				break;
+			case DIED:
+				CardAnimation.fadeOut(action.getSrc());
+				break;
+			default:
+				CardAnimation.squishHorizontally(action.getSrc());
 				break;
 		}
 	}
 
-	public static void healthBarAnimation() {
-
-	}
 }

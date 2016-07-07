@@ -4,7 +4,8 @@ public enum ActionType {
 	ATTACK("attacked"),
 	DEFEND("defended"),
 	ITEM("used an item"),
-	FLEE("fleed"),
+	FLEE("fled"),
+	FAILTOFLEE("failed to flee"),
 	DIED("died");
 
 	private String action;

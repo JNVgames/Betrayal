@@ -18,9 +18,8 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class ShopPurchasePopup extends Popup {
 
-	private Image backButton, background, goldIcon, buyButton, leftArrow, rightArrow;
-	private Label description;
-	private int currentSide;
+	private Image leftArrow;
+	private Image rightArrow;
 	private Character character;
 	private Item item;
 	private Preview preview;
@@ -29,7 +28,6 @@ public class ShopPurchasePopup extends Popup {
 		super(game);
 		character = game.getCurrentCharacter();
 		this.item = item;
-		currentSide = 0;
 		loadButtons();
 	}
 
@@ -45,16 +43,16 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadBackground() {
-		background = new Image(res.getTexture("shop-purchase-background"));
+		Image background = new Image(res.getTexture("shop-purchase-background"));
 		background.layout();
 		background.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
 		popup.addActor(background);
 	}
 
 	private void loadGoldIcon() {
-		goldIcon = new Image(res.getTexture("icon-gold"));
+		Image goldIcon = new Image(res.getTexture("icon-gold"));
 		goldIcon.layout();
-		goldIcon.setBounds(410, 850, 40, 40);
+		goldIcon.setBounds(410, 800, 40, 40);
 		popup.addActor(goldIcon);
 	}
 
@@ -62,7 +60,7 @@ public class ShopPurchasePopup extends Popup {
 		Label price = new Label("Price: " + Integer.toString(item.getBuyCost()), FontManager.getFont(40));
 		price.setHeight(50);
 		price.setX(365);
-		price.setY(900);
+		price.setY(850);
 		popup.addActor(price);
 	}
 
@@ -70,19 +68,19 @@ public class ShopPurchasePopup extends Popup {
 		Label userMoney = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
 		userMoney.setHeight(50);
 		userMoney.setX(450);
-		userMoney.setY(850);
+		userMoney.setY(800);
 		popup.addActor(userMoney);
 	}
 
 	private void loadDescription() {
-		description = new Label(item.getDescription(), FontManager.getFont(40));
+		Label description = new Label(item.getDescription(), FontManager.getFont(40));
 		description.setX((Betrayal.WIDTH - description.getWidth()) / 2);
-		description.setY(1000);
+		description.setY(1048 - description.getPrefHeight());
 		popup.addActor(description);
 	}
 
 	private void loadBuyButton() {
-		buyButton = new Image(res.getTexture("buy"));
+		Image buyButton = new Image(res.getTexture("buy"));
 		buyButton.layout();
 		buyButton.setBounds(Betrayal.WIDTH / 2 + 50, 220, 100, 50);
 		buyButton.addListener(new InputListener(buyButton) {
@@ -118,7 +116,7 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadReturnToShopButton() {
-		backButton = new Image(res.getTexture("back"));
+		Image backButton = new Image(res.getTexture("back"));
 		backButton.layout();
 		backButton.setBounds(Betrayal.WIDTH / 2 - 150, 220, 100, 50);
 		backButton.addListener(new InputListener(backButton) {

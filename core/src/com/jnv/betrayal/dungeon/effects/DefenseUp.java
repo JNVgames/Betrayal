@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class DefenseUp extends Effect {
 	private int defense;
 
-	public DefenseUp() {
+	public DefenseUp(int defense) {
+		this.defense = defense;
 	}
 
 	public DefenseUp(Card src, ArrayList<Card> dest, boolean consistent, int defense, int turns) {

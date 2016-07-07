@@ -58,6 +58,20 @@ public class CardAnimation {
 		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 	}
 
+	public static void flee(Card card) {
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+	}
+
+
+	public static void failToFlee(Card card){
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+
+		card.getCardImage().addAction(Actions.delay(2f, Actions.fadeIn(.5f)));
+		card.healthBar.addAction(Actions.delay(2f, Actions.fadeIn(.5f)));
+	}
+
 	public static void heal(Card card){
 		useItem(card);
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.YELLOW)));

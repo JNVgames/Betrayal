@@ -9,7 +9,7 @@ public class AttackAndDefenseUp extends Effect {
 	private int attack;
 	private int defense;
 
-	public AttackAndDefenseUp(int attack) {
+	public AttackAndDefenseUp(int attack, int defense) {
 		this.attack = attack;
 		this.defense = defense;
 	}
@@ -22,14 +22,14 @@ public class AttackAndDefenseUp extends Effect {
 
 	@Override
 	public void startEffect(Card card) {
-		card.decreaseCurrentAttack(attack);
-		card.decreaseCurrentDefense(defense);
+		card.increaseCurrentAttack(attack);
+		card.increaseCurrentDefense(defense);
 	}
 
 	@Override
 	public void endEffect(Card card) {
-		card.increaseCurrentAttack(attack);
-		card.increaseCurrentDefense(defense);
+		card.decreaseCurrentAttack(attack);
+		card.decreaseCurrentDefense(defense);
 	}
 
 	@Override

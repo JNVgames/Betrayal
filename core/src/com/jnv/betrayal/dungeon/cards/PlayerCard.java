@@ -6,13 +6,20 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.character.utils.Rotation;
+import com.jnv.betrayal.dungeon.actions.Action;
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
+import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
+
+import java.util.Random;
 
 public class PlayerCard extends Card {
 
@@ -70,4 +77,11 @@ public class PlayerCard extends Card {
 	public boolean isDefending() {
 		return cardToDefend != null;
 	}
+
+	public static boolean canFlee(int x){
+		Random random = new Random();
+		int rand = random.nextInt(4) + 1;
+		return x >= rand;
+	}
+
 }

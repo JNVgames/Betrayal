@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.jnv.betrayal.dungeon.actions.Action;
+import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
@@ -243,55 +245,10 @@ public abstract class Card {
 
 	//check if character is you, switch to death screen, else fade out correct card
 	public void cardDeath(Card card) {
-		CardAnimation.fadeOut(card);
-		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
-			// You have died
-			field.removePlayerCard((PlayerCard) card);
-
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					new OKPopup(field.game, "You Have Died") {
-						@Override
-						public void onConfirm() {
-							field.game.characters.remove(field.game.getCurrentCharacter());
-							field.game.gsm.setState(GameStateManager.State.MENU);
-						}
-					};
-				}
-			};
-			healthBar.addAction(Actions.delay(4f, Actions.run(r)));
-
-		} else if (card instanceof PlayerCard) {
-			//Teammate died
-			field.removePlayerCard((PlayerCard) card);
-
-		} else if (card instanceof MonsterCard) {
-			//Monster Card
-			field.removeMonsterCard((MonsterCard) card);
-			if (field.isMonsterZoneEmpty()) {
-				Runnable r = new Runnable() {
-					@Override
-					public void run() {
-						new OKPopup(field.game, "Floor Completed!") {
-							@Override
-							public void onConfirm() {
-								for (Card c : field.getAllPlayerCards()) {
-									((PlayerCard) c).levelUpCharacter();
-								}
-								field.game.gsm.setState(GameStateManager.State.LOBBY);
-							}
-						};
-					}
-				};
-				healthBar.addAction(Actions.delay(4f, Actions.run(r)));
-			}
-		} else {
-			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard");
-		}
+		card.getField().actionManager.performAction(new Action(card, ActionType.DIED));
 	}
 
-	public void poison(){
+	public void poison() {
 		double newhealth = Math.floor(currentHealth*.8);
 		currentHealth = (int) newhealth;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
@@ -309,6 +266,9 @@ public abstract class Card {
 	}
 
 	private int calculateDamageWithDefense(int damage, int armor) {
+		if (armor < 0) {
+			armor = 0;
+		}
 		double newDamage = (50.0 / (50 + armor)) * damage;
 		return (int) Math.ceil(newDamage);
 	}

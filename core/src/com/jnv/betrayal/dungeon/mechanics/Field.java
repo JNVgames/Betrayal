@@ -20,6 +20,7 @@ import com.jnv.betrayal.scene2d.ui.Image;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Field extends Group {
 
@@ -177,4 +178,5 @@ public class Field extends Group {
 		monsterZone.remove(card);
 		refreshAllCards();
 	}
+
 }

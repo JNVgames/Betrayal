@@ -4,9 +4,9 @@ import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
-import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
@@ -65,11 +65,14 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
 			@Override
 			public void run() {
-				new Confirmation(gsm.game, "Are you sure you want to flee?" + "\n20% Chance") {
+				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						field.actionManager.addToHistory(new Action(field.getCurrentCard(), ActionType.FLEE));
-						gsm.setState(GameStateManager.State.LOBBY);
+						if (PlayerCard.canFlee(1)) {
+							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FLEE));
+						} else {
+							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FAILTOFLEE));
+						}
 					}
 				};
 			}

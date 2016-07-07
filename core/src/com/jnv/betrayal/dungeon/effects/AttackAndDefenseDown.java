@@ -22,14 +22,14 @@ public class AttackAndDefenseDown extends Effect {
 
 	@Override
 	public void startEffect(Card card) {
-		card.increaseCurrentAttack(attack);
-		card.increaseCurrentDefense(defense);
+		card.decreaseCurrentAttack(attack);
+		card.decreaseCurrentDefense(defense);
 	}
 
 	@Override
 	public void endEffect(Card card) {
-		card.decreaseCurrentAttack(attack);
-		card.decreaseCurrentDefense(defense);
+		card.increaseCurrentAttack(attack);
+		card.increaseCurrentDefense(defense);
 	}
 
 	@Override
