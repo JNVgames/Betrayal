@@ -269,6 +269,8 @@ public abstract class Card {
 		if (armor < 0) {
 			armor = 0;
 		}
+		if(damage < 0)
+			damage = 0;
 		double newDamage = (50.0 / (50 + armor)) * damage;
 		return (int) Math.ceil(newDamage);
 	}
@@ -301,7 +303,6 @@ public abstract class Card {
 
 	public void performEffect(Effect effect) {
 		field.roundManager.addEvent(new Event(this, effect));
-		field.actionManager.addToHistory(new Action(effect.getSrc(), effect.getDest(), effect.getStartType()));
 	}
 
 	public abstract String getName();

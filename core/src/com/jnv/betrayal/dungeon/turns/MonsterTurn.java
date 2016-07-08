@@ -6,6 +6,7 @@ import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
+import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
@@ -28,8 +29,7 @@ public class MonsterTurn extends Turn {
 		createPanel("Monster's turn", 80, Panel.full, new Runnable() {
 			@Override
 			public void run() {
-				field.actionManager.performAction(new Action(field.getCurrentCard(),
-						monsterAttack(), ActionType.ATTACK));
+				monsterAttack();
 
 				// TODO REMOVE THIS LINE
 				field.turnManager.nextTurn();
@@ -37,10 +37,12 @@ public class MonsterTurn extends Turn {
 		});
 	}
 
-	private ArrayList<Card> monsterAttack() {
+	private void monsterAttack() {
+		MonsterCard card = ((MonsterCard) field.getCurrentCard());
 		int numTargets = ((MonsterCard) field.getCurrentCard()).getNumAttackTargets();
 		int max = field.playerZone.size();
 		int x;
+
 		ArrayList<Integer> target = new ArrayList<Integer>();
 		ArrayList<Card> dst = new ArrayList<Card>();
 		Random randomNumberGenerator = new Random();
@@ -54,6 +56,24 @@ public class MonsterTurn extends Turn {
 			dst.add(field.playerZone.get(i));
 		}
 
-		return dst;
+		System.out.println(card.effectCounter);
+		if(card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
+			card.effectCounter = 1;
+			//do EFFECT
+			Event event = new Event(card, card.getEffect());
+			event.getEffect().setSrc(card);
+			if (!event.getEffect().isHostile()) {
+				dst.clear();
+				dst.add(card);
+			}
+			event.getEffect().setDest(dst);
+			card.getField().roundManager.addEvent(event);
+		}else{
+			card.effectCounter++;
+
+			field.actionManager.performAction(new Action(field.getCurrentCard(),
+					dst, ActionType.ATTACK));
+		}
+
 	}
 }

@@ -34,6 +34,7 @@ public class ActionManager {
 	}
 
 	public void addToHistory(Action action) {
+		AnimationManager.performAnimation(action);
 		actionHistory.addLast(action);
 	}
 

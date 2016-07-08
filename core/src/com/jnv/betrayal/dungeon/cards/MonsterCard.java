@@ -6,6 +6,7 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -20,11 +21,8 @@ public class MonsterCard extends Card {
 	private int actionIndex;
 	private String name;
 	private int numAttackTargets;
-
-	public MonsterCard(Dimension dimension, Monster monster, BetrayalAssetManager res) {
-		this(dimension.getX(), dimension.getY(), dimension.getWidth(), dimension.getHeight(),
-				monster, res);
-	}
+	private Effect effect;
+	public int effectCounter = 1;
 
 	public MonsterCard(final float x, final float y, final float width, final float height,
 					   final Monster monster, BetrayalAssetManager res) {
@@ -34,6 +32,7 @@ public class MonsterCard extends Card {
 		baseAttack = currentAttack = monster.getAttack();
 		baseDefense = currentDefense = monster.getDefense();
 		numAttackTargets = monster.getNumTargets();
+		this.effect = monster.getEffect();
 
 		cardImage = new Actor() {
 			@Override
@@ -52,6 +51,14 @@ public class MonsterCard extends Card {
 
 	public int getNumAttackTargets() {
 		return numAttackTargets;
+	}
+
+	public boolean hasEffect(){
+		return effect != null;
+	}
+
+	public Effect getEffect() {
+		return effect;
 	}
 
 	public ActionType getActionType() {

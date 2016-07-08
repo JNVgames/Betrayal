@@ -18,8 +18,10 @@ public class MonsterManager {
 	public MonsterManager(int floor, BetrayalAssetManager res, Field field) {
 		this.res = res;
 		int tier = 10;  //CHANGE accord to floor level
-		tier = generateMonster(tier); // TODO: take this out later. fully randomizes
-		int monsterID = generateMonster(tier);
+		//tier = generateMonster(tier); // TODO: take this out later. fully randomizes
+		//int monsterID = generateMonster(tier);
+		tier = 0;
+		int monsterID = 0;
 		this.monster = new DungeonMonster(res, tier, monsterID, field);
 	}
 
@@ -56,6 +58,5 @@ public class MonsterManager {
 				break;
 		}
 		return x;
-		//return new Monster("monster-tier1-" + x, res);
 	}
 }

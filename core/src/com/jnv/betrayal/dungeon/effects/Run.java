@@ -14,6 +14,7 @@ public class Run extends Effect {
 	public Run(int fleeChance) {
 		super(ActionType.FLEE);
 		this.fleeChance = fleeChance;
+		isHostile = false;
 	}
 
 	@Override

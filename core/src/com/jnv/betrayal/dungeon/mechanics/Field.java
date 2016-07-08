@@ -66,7 +66,7 @@ public class Field extends Group {
 		addActor(eventLogButton);
 		actionManager = new ActionManager(this);
 		turnManager = new TurnManager(this);
-		roundManager = new RoundManager();
+		roundManager = new RoundManager(actionManager);
 	}
 
 	public void addCard(Card card) {

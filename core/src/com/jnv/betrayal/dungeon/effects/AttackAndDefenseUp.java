@@ -14,6 +14,7 @@ public class AttackAndDefenseUp extends Effect {
 		super(ActionType.BUFF_ATTACK_DEFENSE, turns, ActionType.E_BUFF_ATTACK_DEFENSE);
 		this.attack = attack;
 		this.defense = defense;
+		isHostile = false;
 	}
 
 	@Override

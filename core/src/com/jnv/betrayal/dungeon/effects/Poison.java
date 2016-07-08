@@ -11,6 +11,7 @@ public class Poison extends Effect {
 
 	public Poison(int damage, int turns) {
 		super(ActionType.POISON, turns, true, ActionType.C_POISON, ActionType.E_POISON);
+		isHostile = true;
 	}
 
 	@Override

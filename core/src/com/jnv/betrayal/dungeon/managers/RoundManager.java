@@ -8,19 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundManager {
+
 	private ArrayList<Event> events;
+	public final ActionManager actionManager;
 
-	public RoundManager() {
+	public RoundManager(ActionManager actionManager) {
 		events = new ArrayList<Event>();
+		this.actionManager = actionManager;
 	}
-
 
 	/**
 	 * Check for events to go off during each turn
 	 * @param card card to check events for
-	 * @return the events performed to put into the event log
 	 */
-	public List<Action> checkEvents(Card card) {
+	public void checkEvents(Card card) {
 		List<Event> eventsToRemove = new ArrayList<Event>();
 		List<Action> actions = new ArrayList<Action>();
 		for (Event event : events) {
@@ -43,11 +44,15 @@ public class RoundManager {
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
-		return actions;
+		for (Action action : actions) {
+			actionManager.addToHistory(action);
+		}
 	}
 
 	public void addEvent(Event event) {
 		events.add(event);
 		event.getEffect().doStartEffect();
+		actionManager.addToHistory(new Action(event.getEffect().getSrc(),
+				event.getEffect().getDest(), event.getEffect().getStartType()));
 	}
 }

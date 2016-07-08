@@ -70,10 +70,7 @@ public class TurnManager {
 	public void nextTurn() {
 		field.setNextCardIndex();
 		if (field.getCurrentCard() instanceof PlayerCard) {
-			List<Action> actions = field.roundManager.checkEvents(field.getCurrentCard());
-			for (Action action : actions) {
-				field.actionManager.addToHistory(action);
-			}
+			field.roundManager.checkEvents(field.getCurrentCard());
 			currentTurn.doAtStartOfTurn();
 		}
 		draw();

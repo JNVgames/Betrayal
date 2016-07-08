@@ -12,6 +12,7 @@ public class Heal extends Effect {
 	public Heal(int health) {
 		super(ActionType.HEAL);
 		this.health = health;
+		isHostile = false;
 	}
 
 	@Override

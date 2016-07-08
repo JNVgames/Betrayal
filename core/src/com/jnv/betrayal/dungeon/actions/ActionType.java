@@ -11,12 +11,12 @@ public enum ActionType {
 	HEAL("healed"),
 	BOMB("bombed"),
 	POISON("poisoned"),
-	BUFF_ATTACK("was buffed (atk) by"),
-	BUFF_DEFENSE("was buffed (def) by"),
-	BUFF_ATTACK_DEFENSE("was buffed (atk, def) by"),
-	DEBUFF_ATTACK("was debuffed (atk) by"),
-	DEBUFF_DEFENSE("was debuffed (def) by"),
-	DEBUFF_ATTACK_DEFENSE("was debuffed (atk, def)"),
+	BUFF_ATTACK("buffed (atk)"),
+	BUFF_DEFENSE("buffed (def)"),
+	BUFF_ATTACK_DEFENSE("buffed (atk, def)"),
+	DEBUFF_ATTACK("debuffed (atk)"),
+	DEBUFF_DEFENSE("debuffed (def)"),
+	DEBUFF_ATTACK_DEFENSE("debuffed (atk, def)"),
 	//SKIP_TURN("skipped")
 
 	// Consistent effects
@@ -37,16 +37,7 @@ public enum ActionType {
 		this.action = action;
 	}
 
-	ActionType(String action, String consistentAction) {
-		this.action = action;
-		this.consistentAction = consistentAction;
-	}
-
 	public String toString() {
 		return action;
-	}
-
-	public String toConsistentActionString() {
-		return consistentAction;
 	}
 }

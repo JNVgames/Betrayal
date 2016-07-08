@@ -12,6 +12,7 @@ public class Bomb extends Effect {
 	public Bomb(int attack, int turns) {
 		super(ActionType.BOMB, turns);
 		this.attack = attack;
+		isHostile = true;
 	}
 
 	@Override

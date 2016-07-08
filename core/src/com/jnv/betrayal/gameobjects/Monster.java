@@ -1,6 +1,7 @@
 package com.jnv.betrayal.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Monster {
@@ -8,8 +9,11 @@ public class Monster {
 	private Texture monsterTexture;
 	private String textureName, nickname;
 	private int id, health, attack, defense, width, height, xPos, yPos, numTargets;
+	private Effect effect;
 
-	public Monster(int id, BetrayalAssetManager res, String textureName, String nickname, int health, int attack, int defense, int width, int height, int xPos, int yPos, int numTargets) {
+	public Monster(int id, BetrayalAssetManager res, String textureName, String nickname,
+				   int health, int attack, int defense, int width, int height, int xPos, int yPos,
+				   int numTargets, Effect effect) {
 		this.textureName = textureName;
 		this.nickname = nickname;
 		this.id = id;
@@ -21,6 +25,7 @@ public class Monster {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.numTargets = numTargets;
+		this.effect = effect;
 		monsterTexture = res.getTexture(textureName);
 		res.loadMonster(textureName, this);
 	}
@@ -37,6 +42,7 @@ public class Monster {
 		xPos = src.getxPos();
 		yPos = src.getyPos();
 		numTargets = src.getNumTargets();
+		this.effect = src.getEffect();
 		nickname = src.getNickname();
 		monsterTexture = src.getMonsterTexture();
 	}
@@ -48,6 +54,10 @@ public class Monster {
 
 	public String getName() {
 		return textureName;
+	}
+
+	public Effect getEffect() {
+		return effect;
 	}
 
 	// Setters
@@ -134,6 +144,7 @@ public class Monster {
 		private String textureName = "stub";
 		private BetrayalAssetManager res;
 		private int id, health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
+		private Effect effect;
 
 		public MonsterFactory() {
 		}
@@ -198,9 +209,14 @@ public class Monster {
 			return this;
 		}
 
+		public MonsterFactory effect(Effect effect) {
+			this.effect = effect;
+			return this;
+		}
+
 		public Monster build() {
 			return new Monster(id, res, textureName, nickname, health, attack, defense, textureWidth,
-					textureHeight, x, y, numTargets);
+					textureHeight, x, y, numTargets, effect);
 		}
 	}
 }

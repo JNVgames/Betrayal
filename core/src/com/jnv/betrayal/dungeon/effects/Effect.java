@@ -11,6 +11,7 @@ public abstract class Effect {
 	private boolean consistent;
 	private int turns;
 	private final ActionType startType, consistentType, endType;
+	protected boolean isHostile;
 
 	protected Effect(ActionType startType) {
 		this(startType, false, null, 0, null);
@@ -36,6 +37,10 @@ public abstract class Effect {
 		this.endType = endType;
 		this.consistent = consistent;
 		this.turns = turns;
+	}
+
+	public boolean isHostile() {
+		return isHostile;
 	}
 
 	public int getTurns() {

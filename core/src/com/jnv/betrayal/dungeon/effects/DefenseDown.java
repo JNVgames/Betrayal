@@ -10,6 +10,7 @@ public class DefenseDown extends Effect {
 	public DefenseDown(int defense, int turns) {
 		super(ActionType.DEBUFF_DEFENSE, turns, ActionType.E_DEBUFF_DEFENSE);
 		this.defense = defense;
+		isHostile = true;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ public class DefenseUp extends Effect {
 	public DefenseUp(int defense, int turns) {
 		super(ActionType.BUFF_DEFENSE, turns, ActionType.E_BUFF_DEFENSE);
 		this.defense = defense;
+		isHostile = false;
 	}
 
 	@Override

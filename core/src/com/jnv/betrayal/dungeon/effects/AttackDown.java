@@ -12,6 +12,7 @@ public class AttackDown extends Effect {
 	public AttackDown(int attack, int turns) {
 		super(ActionType.DEBUFF_ATTACK, turns, ActionType.E_DEBUFF_ATTACK);
 		this.attack = attack;
+		isHostile = true;
 	}
 
 	@Override

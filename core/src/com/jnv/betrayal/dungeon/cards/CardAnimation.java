@@ -10,11 +10,20 @@ import com.jnv.betrayal.dungeon.actions.Action;
 
 public class CardAnimation {
 
-	public static void damaged(Card card) {
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.RED)));
-		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
-		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(Color.RED)));
+	public static void flashColor(Card card, Color color) {
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
+		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.CLEAR)));
+		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(color)));
 		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
+	}
+
+	public static void longFlashColor(Card card, Color color){
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
+		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
+	}
+
+	public static void changeColor(Card card, Color color){
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
 	}
 
 	public static void freeze(Card card) {
@@ -27,6 +36,10 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.color(
 				new Color(30 / 255f, 153 / 255f, 73 / 255f, 1)
 		));
+	}
+
+	public static void removeColor(Card card){
+		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.WHITE)));
 	}
 
 	public static void jump(Card card) {
@@ -45,12 +58,6 @@ public class CardAnimation {
 
 	public static void broBlock(Card src, Card dest) {
 		src.getCardImage().addAction(Actions.delay(0.5f, Actions.moveTo(dest.getCardImage().getX(), dest.getCardImage().getTop())));
-	}
-
-	public static void useItem(Card card) {
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(30, 2)));
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.rotateBy(-30, 1)));
 	}
 
 	public static void fadeOut(Card card) {
@@ -72,7 +79,6 @@ public class CardAnimation {
 	}
 
 	public static void heal(Card card){
-		useItem(card);
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.YELLOW)));
 		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
 		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(Color.YELLOW)));
