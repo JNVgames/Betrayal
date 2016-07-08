@@ -256,6 +256,15 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
+	public void takeTrueDamage(int damage){
+		currentHealth -= damage;
+		if (currentHealth < 0)
+			currentHealth = 0;
+		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
+		if (checkIfDied())
+			cardDeath(this);
+	}
+
 	public void takeDamage(int damage) {
 		currentHealth -= calculateDamageWithDefense(damage, this.getCurrentDefense());
 		if (currentHealth < 0)

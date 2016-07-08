@@ -6,7 +6,6 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.jnv.betrayal.dungeon.actions.Action;
 
 public class CardAnimation {
 
@@ -17,12 +16,12 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
 	}
 
-	public static void longFlashColor(Card card, Color color){
+	public static void longFlashColor(Card card, Color color) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
 		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
 	}
 
-	public static void changeColor(Card card, Color color){
+	public static void changeColor(Card card, Color color) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
 	}
 
@@ -38,7 +37,7 @@ public class CardAnimation {
 		));
 	}
 
-	public static void removeColor(Card card){
+	public static void removeColor(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.WHITE)));
 	}
 
@@ -70,7 +69,7 @@ public class CardAnimation {
 		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
 	}
 
-	public static void failToFlee(Card card){
+	public static void failToFlee(Card card) {
 		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
 		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
 
@@ -78,24 +77,25 @@ public class CardAnimation {
 		card.healthBar.addAction(Actions.delay(2f, Actions.fadeIn(.5f)));
 	}
 
-	public static void heal(Card card){
+	public static void heal(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.YELLOW)));
 		card.getCardImage().addAction(Actions.delay(0.6f, Actions.color(Color.WHITE)));
 		card.getCardImage().addAction(Actions.delay(0.7f, Actions.color(Color.YELLOW)));
 		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
 	}
 
-	public static void squishHorizontally(Card card){
-		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(10,192,.5f)));
+	public static void squishHorizontally(Card card) {
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(10, 192, .5f)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(64, 0, 0.5f)));
-		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128,192,.5f)));
+		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128, 192, .5f)));
 		card.getCardImage().addAction(Actions.delay(1f, Actions.moveBy(-64, 0, 0.5f)));
 
 	}
-	public static void squishVertically(Card card){
-		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(128,10,.5f)));
+
+	public static void squishVertically(Card card) {
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.sizeTo(128, 10, .5f)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(0, 96, 0.2f)));
-		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128,192,.5f)));
+		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128, 192, .5f)));
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(0, -96, 0.2f)));
 	}
 }

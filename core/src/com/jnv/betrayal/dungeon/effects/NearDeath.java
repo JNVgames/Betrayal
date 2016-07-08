@@ -4,19 +4,17 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
-import java.util.ArrayList;
-
-public class IncreasedAttack extends Effect {
+public class NearDeath extends Effect {
 	private int attack;
 
-	public IncreasedAttack(int attack, int turns) {
+	public NearDeath(int attack, int turns) {
 		super(ActionType.ATTACK, turns);
 		isHostile = true;
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.takeDamage(attack);
+		card.takeTrueDamage(card.getCurrentHealth()-1);
 	}
 
 	@Override
