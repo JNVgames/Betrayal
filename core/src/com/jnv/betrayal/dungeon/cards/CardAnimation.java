@@ -25,18 +25,6 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
 	}
 
-	public static void freeze(Card card) {
-		card.getCardImage().addAction(Actions.color(
-				new Color(64 / 255f, 112 / 255f, 236 / 255f, 1)
-		));
-	}
-
-	public static void poison(Card card) {
-		card.getCardImage().addAction(Actions.color(
-				new Color(30 / 255f, 153 / 255f, 73 / 255f, 1)
-		));
-	}
-
 	public static void removeColor(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.WHITE)));
 	}
@@ -65,17 +53,16 @@ public class CardAnimation {
 	}
 
 	public static void flee(Card card) {
-		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
-		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.f)));
+		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.f)));
 	}
 
 	public static void failToFlee(Card card) {
-		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
-		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.5f)));
+		flee(card);
 
-		card.getCardImage().addAction(Actions.delay(2f, Actions.fadeIn(.5f)));
-		card.healthBar.addAction(Actions.delay(2f, Actions.fadeIn(.5f)));
-	}
+		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
+		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
+}
 
 	public static void heal(Card card) {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.YELLOW)));

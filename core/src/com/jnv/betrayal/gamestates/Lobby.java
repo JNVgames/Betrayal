@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.lobby.LobbyOptions;
-import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.shop.Shop;
 import com.jnv.betrayal.lobby.social.PartyRoom;
@@ -23,8 +22,8 @@ import com.jnv.betrayal.scene2d.InputListener;
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
-	private Texture image_button_play;
-	private Actor button_play_now;
+	private Texture playButtonTexture;
+	private Actor playNowButton;
 
 	public Lobby(GameStateManager gsm) {
 		super(gsm);
@@ -180,36 +179,36 @@ public class Lobby extends GameState {
    */
 
 	private void loadPlayNowButton() {
-		image_button_play = res.getTexture("play-now");
-		button_play_now = new Actor() {
+		playButtonTexture = res.getTexture("play-now");
+		playNowButton = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
-				batch.draw(image_button_play, button_play_now.getX(), button_play_now.getY(),
-						button_play_now.getWidth(), button_play_now.getHeight());
+				batch.draw(playButtonTexture, playNowButton.getX(), playNowButton.getY(),
+						playNowButton.getWidth(), playNowButton.getHeight());
 			}
 		};
-		button_play_now.setWidth(512);
-		button_play_now.setBounds((Betrayal.WIDTH - button_play_now.getWidth()) / 2, 20, 512, 144);
-		button_play_now.addListener(new InputListener(button_play_now) {
+		playNowButton.setWidth(512);
+		playNowButton.setBounds((Betrayal.WIDTH - playNowButton.getWidth()) / 2, 20, 512, 144);
+		playNowButton.addListener(new InputListener(playNowButton) {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				image_button_play = res.getTexture("play-now-pressed");
+				playButtonTexture = res.getTexture("play-now-pressed");
 				return true;
 			}
 
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if (x >= button_play_now.getX()
-						&& x <= button_play_now.getX() + button_play_now.getWidth()
-						&& y >= button_play_now.getY()
-						&& y <= button_play_now.getY() + button_play_now.getHeight()) {
+				if (x >= playNowButton.getX()
+						&& x <= playNowButton.getX() + playNowButton.getWidth()
+						&& y >= playNowButton.getY()
+						&& y <= playNowButton.getY() + playNowButton.getHeight()) {
 					gsm.setState(GameStateManager.State.DUNGEON);
-				} else image_button_play = res.getTexture("play-now");
+				} else playButtonTexture = res.getTexture("play-now");
 			}
 
 			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				image_button_play = res.getTexture("play-now");
+				playButtonTexture = res.getTexture("play-now");
 			}
 		});
-		stage.addActor(button_play_now);
+		stage.addActor(playNowButton);
 	}
 
 

@@ -311,7 +311,7 @@ public abstract class Card {
 	}
 
 	public void performEffect(Effect effect) {
-		field.roundManager.addEvent(new Event(this, effect));
+		field.roundManager.addEvent(new Event(effect));
 	}
 
 	public abstract String getName();

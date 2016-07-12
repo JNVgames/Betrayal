@@ -2,19 +2,15 @@ package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
 
+import java.util.List;
+
 public class Event {
-	private Card card;
 	private Effect effect;
 	private int turnsLeft;
 
-	public Event(Card card, Effect effect) {
-		this.card = card;
+	public Event(Effect effect) {
 		this.effect = effect;
 		turnsLeft = effect.getTurns();
-	}
-
-	public Card getCard() {
-		return card;
 	}
 
 	public boolean turnIsZero() {
@@ -29,4 +25,11 @@ public class Event {
 		return effect;
 	}
 
+	public Card getSrc() {
+		return effect.getSrc();
+	}
+
+	public List<Card> getDest() {
+		return effect.getDest();
+	}
 }

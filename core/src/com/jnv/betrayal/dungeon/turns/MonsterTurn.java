@@ -60,7 +60,7 @@ public class MonsterTurn extends Turn {
 		if(card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
 			card.effectCounter = 1;
 			//do EFFECT
-			Event event = new Event(card, card.getEffect());
+			Event event = new Event(card.getEffect());
 			event.getEffect().setSrc(card);
 			if (!event.getEffect().isHostile()) {
 				dst.clear();

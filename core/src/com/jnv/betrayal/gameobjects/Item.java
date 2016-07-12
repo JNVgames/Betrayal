@@ -19,22 +19,22 @@ public abstract class Item implements Json.Serializable {
 	protected int id, buyCost, sellCost;
 	protected boolean isEquippable = false;
 
-	public Item(int id, String name, BetrayalAssetManager res, int buyCost, String description) {
+	public Item(int id, String textureName, BetrayalAssetManager res, int buyCost, String description) {
 		this.res = res;
 		this.id = id;
-		textureName = name;
-		itemIcon = res.getTexture(name);
+		this.textureName = textureName;
+		itemIcon = res.getTexture(textureName);
 		this.buyCost = buyCost;
 		sellCost = buyCost / 2;
 		this.description = description;
-		res.loadItem(name, this);
+		res.loadItem(textureName, this);
 
 	}
 
-	public Item(String name, BetrayalAssetManager res) {
-		Item src = res.getItem(name);
+	public Item(String textureName, BetrayalAssetManager res) {
+		Item src = res.getItem(textureName);
 		id = src.getID();
-		textureName = name;
+		this.textureName = textureName;
 		description = src.getDescription();
 		buyCost = src.getBuyCost();
 		sellCost = src.getSellCost();

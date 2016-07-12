@@ -25,7 +25,7 @@ public class RoundManager {
 		List<Event> eventsToRemove = new ArrayList<Event>();
 		List<Action> actions = new ArrayList<Action>();
 		for (Event event : events) {
-			if (card == event.getCard()) {
+			if (card == event.getSrc()) {
 				event.decreaseTurns();
 				if (event.turnIsZero()) {
 					event.getEffect().doEndEffect();
