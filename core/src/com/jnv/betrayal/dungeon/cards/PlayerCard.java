@@ -60,6 +60,14 @@ public class PlayerCard extends Card {
 		return cardToDefend;
 	}
 
+	public boolean hasCloak() {
+		return character.equips.isCloakSlotEmpty();
+	}
+
+	public void removeCloak() {
+		character.equips.removeCloak();
+	}
+
 	@Override
 	public int getID() {
 		return character.getId();

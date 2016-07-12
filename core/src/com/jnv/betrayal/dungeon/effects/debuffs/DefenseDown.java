@@ -1,8 +1,9 @@
-package com.jnv.betrayal.dungeon.effects;
+package com.jnv.betrayal.dungeon.effects.debuffs;
 
 
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 
 public class DefenseDown extends Effect {
 	private int defense;

@@ -1,8 +1,9 @@
-package com.jnv.betrayal.dungeon.effects;
+package com.jnv.betrayal.dungeon.effects.buffs;
 
 
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 
 public class AttackUp extends Effect {
 	private int attack;

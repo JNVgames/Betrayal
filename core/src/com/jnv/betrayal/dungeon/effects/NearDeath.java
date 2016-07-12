@@ -14,7 +14,7 @@ public class NearDeath extends Effect {
 
 	@Override
 	public void startEffect(Card card) {
-		card.takeTrueDamage(card.getCurrentHealth()-1);
+		card.takeTrueDamage(card.getCurrentHealth() - 1);
 	}
 
 	@Override

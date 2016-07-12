@@ -1,8 +1,9 @@
-package com.jnv.betrayal.dungeon.effects;
+package com.jnv.betrayal.dungeon.effects.debuffs;
 
 
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 
 public class Poison extends Effect {
 	private int damage;
@@ -18,7 +19,8 @@ public class Poison extends Effect {
 	}
 
 	@Override
-	public void endEffect(Card card) {	}
+	public void endEffect(Card card) {
+	}
 
 	@Override
 	public void consistentEffect(Card card) {

@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.effects.Attack;
+import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;

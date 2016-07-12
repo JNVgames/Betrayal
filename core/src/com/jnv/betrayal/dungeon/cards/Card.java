@@ -242,8 +242,22 @@ public abstract class Card {
 	}
 
 	//check if character is you, switch to death screen, else fade out correct card
-	public void cardDeath(Card card) {
-		card.getField().roundManager.addEvent(new Died(card));
+	public void cardDeath(final Card card) {
+		// Check if card is a playercard. if it is, check for cloak. if cloak exists, burn the cloak
+		//  and set hp to
+		if (card instanceof PlayerCard && !((PlayerCard) card).hasCloak()) {
+			cardImage.addAction(Actions.delay(1.5f, Actions.run(new Runnable() {
+				@Override
+				public void run() {
+					((PlayerCard) card).removeCloak();
+					heal(10);
+					System.out.println("CLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOAK");
+				}
+			})));
+		}
+		else {
+			card.getField().roundManager.addEvent(new Died(card));
+		}
 	}
 
 	public void poison() {
@@ -472,7 +486,7 @@ public abstract class Card {
 					};
 				}
 			};
-			card.getCardImage().addAction(Actions.delay(2.5f, Actions.run(r)));
+			card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
 		} else if (card instanceof PlayerCard) {
 			//Teammate fled
 			field.removePlayerCard((PlayerCard) card);

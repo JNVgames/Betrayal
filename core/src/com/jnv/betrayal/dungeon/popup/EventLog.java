@@ -24,6 +24,7 @@ public class EventLog extends Popup {
 	public EventLog(Betrayal game, Deque<Event> eventHistory) {
 		super(game);
 		loadBackground();
+
 		verticalGroup = new VerticalGroup();
 		verticalGroup.layout();
 		verticalGroup.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
@@ -36,6 +37,7 @@ public class EventLog extends Popup {
 		scrollPane.setOverscroll(false, false);
 		popup.addActor(scrollPane);
 
+		this.eventHistory = eventHistory;
 		loadButtons();
 		loadHistory();
 	}

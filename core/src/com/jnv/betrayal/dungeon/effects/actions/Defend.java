@@ -1,9 +1,10 @@
-package com.jnv.betrayal.dungeon.effects;
+package com.jnv.betrayal.dungeon.effects.actions;
 
 
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.Effect;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Defend extends Effect {
 	}
 
 	@Override
-	public void endEffect(Card card){
+	public void endEffect(Card card) {
 		card.removeDefender(getSrc());
 		((PlayerCard) src).defendCard(null);
 	}

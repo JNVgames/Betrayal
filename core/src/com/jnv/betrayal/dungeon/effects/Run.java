@@ -3,6 +3,8 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
+import com.jnv.betrayal.dungeon.effects.actions.Flee;
 
 public class Run extends Effect {
 

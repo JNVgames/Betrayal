@@ -1,15 +1,16 @@
-package com.jnv.betrayal.dungeon.effects;
+package com.jnv.betrayal.dungeon.effects.actions;
 
 
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 
 import java.util.ArrayList;
 
-public class Died extends Effect {
+public class FailedToFlee extends Effect {
 
-	public Died(Card src) {
-		super(EventType.DIED);
+	public FailedToFlee(Card src) {
+		super(EventType.FAIL_TO_FLEE);
 		isHostile = false;
 		this.src = src;
 		dest = new ArrayList<Card>();
@@ -18,7 +19,7 @@ public class Died extends Effect {
 
 	@Override
 	public void startEffect(Card card) {
-		card.died();
+		card.failedToFlee();
 	}
 
 	@Override

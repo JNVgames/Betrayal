@@ -4,11 +4,11 @@
 
 package com.jnv.betrayal.resources;
 
-import com.jnv.betrayal.dungeon.effects.AttackAndDefenseUp;
-import com.jnv.betrayal.dungeon.effects.AttackDown;
-import com.jnv.betrayal.dungeon.effects.AttackUp;
-import com.jnv.betrayal.dungeon.effects.DefenseUp;
-import com.jnv.betrayal.dungeon.effects.Heal;
+import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
+import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
+import com.jnv.betrayal.dungeon.effects.buffs.AttackUp;
+import com.jnv.betrayal.dungeon.effects.buffs.DefenseUp;
+import com.jnv.betrayal.dungeon.effects.actions.Heal;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
 import com.jnv.betrayal.gameobjects.defense.BodyArmor;
@@ -902,7 +902,7 @@ public class ResourceLoader {
 				.health(25).attack(10).defense(1)
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.numTargets(1)
-				.effect(new AttackDown(9, 1))
+				.effect(new AttackDown(9, 3))
 				.build();
 
 		// Tier 1

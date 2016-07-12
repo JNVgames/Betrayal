@@ -165,6 +165,10 @@ public class Equips implements Json.Serializable {
 		return isUnequipped;
 	}
 
+	public void removeCloak() {
+		equips[EquipSlot.CLOAK] = null;
+	}
+
 	public void write(Json json) {
 		json.writeField(this, "equips", Equip[].class);
 	}
