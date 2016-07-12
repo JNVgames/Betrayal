@@ -1,10 +1,13 @@
 package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.actions.Action;
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.Attack;
+import com.jnv.betrayal.dungeon.effects.Defend;
+import com.jnv.betrayal.dungeon.effects.FailedToFlee;
+import com.jnv.betrayal.dungeon.effects.Flee;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;
@@ -23,12 +26,17 @@ public class YourTurn extends Turn {
 		super(field, panelPool, buttonPool, panels, game);
 	}
 
-	private void drawSelectBar(final ActionType actionType) {
+	private void drawSelectBar(final EventType eventType) {
 		panels.clearChildren();
 		panels.addActor(createPanel("Done", 70, Panel.top, new Runnable() {
 			public void run() {
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
-				field.actionManager.performAction(new Action(field.getCurrentCard(), dest, actionType));
+				if (eventType == EventType.ATTACK) {
+					field.roundManager.addEvent(new Attack(field.getCurrentCard(), dest));
+				}
+				else {
+					field.roundManager.addEvent(new Defend(field.getCurrentCard(), dest));
+				}
 				field.turnManager.nextTurn();
 				field.endSelectMode();
 			}
@@ -53,13 +61,13 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawSelectBar(ActionType.ATTACK);
+				drawSelectBar(EventType.ATTACK);
 			}
 		}));
 		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
 			public void run() {
 				field.beginSelectMode(1);
-				drawSelectBar(ActionType.DEFEND);
+				drawSelectBar(EventType.DEFEND);
 			}
 		}));
 		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
@@ -69,9 +77,9 @@ public class YourTurn extends Turn {
 					@Override
 					public void doAction() {
 						if (PlayerCard.canFlee(1)) {
-							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FLEE));
+							field.roundManager.addEvent(new Flee(field.getCurrentCard()));
 						} else {
-							field.actionManager.performAction(new Action(field.getCurrentCard(), ActionType.FAIL_TO_FLEE));
+							field.roundManager.addEvent(new FailedToFlee(field.getCurrentCard()));
 						}
 					}
 				};

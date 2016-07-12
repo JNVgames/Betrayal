@@ -1,14 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 public class NearDeath extends Effect {
 	private int attack;
 
 	public NearDeath(int attack, int turns) {
-		super(ActionType.ATTACK, turns);
+		super(EventType.ATTACK, turns);
 		isHostile = true;
 	}
 

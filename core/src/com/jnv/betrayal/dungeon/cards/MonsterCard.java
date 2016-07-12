@@ -5,19 +5,18 @@
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
-import com.jnv.betrayal.scene2d.Dimension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonsterCard extends Card {
 
-	private List<ActionType> allActions;
+	private List<EventType> allActions;
 	private int actionIndex;
 	private String name;
 	private int numAttackTargets;
@@ -44,8 +43,8 @@ public class MonsterCard extends Card {
 		cardImage.setBounds(0, 0, width, height);
 		group.addActor(cardImage);
 		cardImage.toBack();
-		allActions = new ArrayList<ActionType>();
-		allActions.add(ActionType.ATTACK);
+		allActions = new ArrayList<EventType>();
+		allActions.add(EventType.ATTACK);
 		initializeCardListener();
 	}
 
@@ -61,7 +60,7 @@ public class MonsterCard extends Card {
 		return effect;
 	}
 
-	public ActionType getActionType() {
+	public EventType getActionType() {
 		return allActions.get(actionIndex);
 	}
 

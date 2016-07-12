@@ -1,16 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
-
-import java.util.ArrayList;
 
 public class AttackUp extends Effect {
 	private int attack;
 
 	public AttackUp(int attack, int turns) {
-		super(ActionType.BUFF_ATTACK, turns, ActionType.E_BUFF_ATTACK);
+		super(EventType.BUFF_ATTACK, turns, EventType.E_BUFF_ATTACK);
 		this.attack = attack;
 		isHostile = false;
 	}

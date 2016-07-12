@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.managers.ActionManager;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
 import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
@@ -20,11 +19,9 @@ import com.jnv.betrayal.scene2d.ui.Image;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Field extends Group {
 
-	public final ActionManager actionManager;
 	public final RoundManager roundManager;
 	public final TurnManager turnManager;
 	public final GameStateManager gsm;
@@ -60,13 +57,12 @@ public class Field extends Group {
 		eventLogButton.addListener(new InputListener(eventLogButton) {
 			@Override
 			public void doAction() {
-				new EventLog(game, actionManager.actionHistory);
+				new EventLog(game, roundManager.eventHistory);
 			}
 		});
 		addActor(eventLogButton);
-		actionManager = new ActionManager(this);
 		turnManager = new TurnManager(this);
-		roundManager = new RoundManager(actionManager);
+		roundManager = new RoundManager();
 	}
 
 	public void addCard(Card card) {

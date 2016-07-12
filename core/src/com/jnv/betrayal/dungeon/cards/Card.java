@@ -10,10 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.jnv.betrayal.dungeon.actions.Action;
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.effects.Died;
 import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.popup.CardInfo;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -245,7 +243,7 @@ public abstract class Card {
 
 	//check if character is you, switch to death screen, else fade out correct card
 	public void cardDeath(Card card) {
-		card.getField().actionManager.performAction(new Action(card, ActionType.DIED));
+		card.getField().roundManager.addEvent(new Died(card));
 	}
 
 	public void poison() {
@@ -270,8 +268,9 @@ public abstract class Card {
 		if (currentHealth < 0)
 			currentHealth = 0;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
-		if (checkIfDied())
+		if (checkIfDied()) {
 			cardDeath(this);
+		}
 	}
 
 	private int calculateDamageWithDefense(int damage, int armor) {
@@ -292,10 +291,6 @@ public abstract class Card {
 		defenders.add(defender);
 	}
 
-	public void removeDefender(PlayerCard defender) {
-		defenders.remove(defender);
-	}
-
 	public boolean isBeingDefended() {
 		return defenders.size() > 0;
 	}
@@ -311,7 +306,7 @@ public abstract class Card {
 	}
 
 	public void performEffect(Effect effect) {
-		field.roundManager.addEvent(new Event(effect));
+		field.roundManager.addEvent(effect);
 	}
 
 	public abstract String getName();
@@ -447,4 +442,93 @@ public abstract class Card {
 			currentHealthPercentage = newHealthPercent;
 		}
 	}
+
+	public void failedToFlee() {
+		Card card = thisCard;
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				new OKPopup(field.game, "Flee Failed");
+				field.turnManager.nextTurn();
+			}
+		};
+		card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+	}
+
+	public void flee() {
+		Card card = thisCard;
+		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
+			// Flee Successful
+			field.removePlayerCard((PlayerCard) card);
+
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					new OKPopup(field.game, "Flee Successful") {
+						@Override
+						public void onConfirm() {
+							field.game.gsm.setState(GameStateManager.State.LOBBY);
+						}
+					};
+				}
+			};
+			card.getCardImage().addAction(Actions.delay(2.5f, Actions.run(r)));
+		} else if (card instanceof PlayerCard) {
+			//Teammate fled
+			field.removePlayerCard((PlayerCard) card);
+		} else {
+			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not a playercard");
+		}
+	}
+
+	public void died() {
+		Card card = thisCard;
+		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
+			// You have died
+			field.removePlayerCard((PlayerCard) card);
+
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					new OKPopup(field.game, "You Have Died") {
+						@Override
+						public void onConfirm() {
+							field.game.characters.remove(field.game.getCurrentCharacter());
+							field.game.gsm.setState(GameStateManager.State.MENU);
+						}
+					};
+				}
+			};
+			card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+
+		} else if (card instanceof PlayerCard) {
+			//Teammate died
+			field.removePlayerCard((PlayerCard) card);
+
+		} else if (card instanceof MonsterCard) {
+			//Monster Card
+			field.removeMonsterCard((MonsterCard) card);
+			if (field.isMonsterZoneEmpty()) {
+				Runnable r = new Runnable() {
+					@Override
+					public void run() {
+						new OKPopup(field.game, "Floor Completed!") {
+							@Override
+							public void onConfirm() {
+								for (Card c : field.getAllPlayerCards()) {
+									((PlayerCard) c).levelUpCharacter();
+								}
+								field.game.gsm.setState(GameStateManager.State.LOBBY);
+							}
+						};
+					}
+				};
+				card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+			}
+		} else {
+			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard");
+		}
+	}
+
+
 }

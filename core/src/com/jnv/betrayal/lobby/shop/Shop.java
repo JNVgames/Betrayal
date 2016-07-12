@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.Equips;
 import com.jnv.betrayal.character.Preview;
-import com.jnv.betrayal.gameobjects.defense.BodyArmor;
-import com.jnv.betrayal.gameobjects.special.Cloak;
-import com.jnv.betrayal.gameobjects.defense.Helmet;
-import com.jnv.betrayal.gameobjects.usables.Potion;
-import com.jnv.betrayal.gameobjects.special.Ring;
-import com.jnv.betrayal.gameobjects.defense.Shield;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
+import com.jnv.betrayal.gameobjects.defense.BodyArmor;
+import com.jnv.betrayal.gameobjects.defense.Helmet;
+import com.jnv.betrayal.gameobjects.defense.Shield;
+import com.jnv.betrayal.gameobjects.special.Cloak;
+import com.jnv.betrayal.gameobjects.special.Ring;
+import com.jnv.betrayal.gameobjects.usables.Potion;
 import com.jnv.betrayal.gameobjects.usables.Run;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
@@ -27,8 +27,6 @@ import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
-
-import java.awt.Font;
 
 public class Shop extends Popup {
 

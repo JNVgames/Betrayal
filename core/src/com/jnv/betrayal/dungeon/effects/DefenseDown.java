@@ -1,14 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 public class DefenseDown extends Effect {
 	private int defense;
 
 	public DefenseDown(int defense, int turns) {
-		super(ActionType.DEBUFF_DEFENSE, turns, ActionType.E_DEBUFF_DEFENSE);
+		super(EventType.DEBUFF_DEFENSE, turns, EventType.E_DEBUFF_DEFENSE);
 		this.defense = defense;
 		isHostile = true;
 	}

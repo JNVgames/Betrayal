@@ -1,20 +1,22 @@
 package com.jnv.betrayal.dungeon.managers;
 
-import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class RoundManager {
 
 	private ArrayList<Event> events;
-	public final ActionManager actionManager;
+	public final Deque<Event> eventHistory;
 
-	public RoundManager(ActionManager actionManager) {
+	public RoundManager() {
 		events = new ArrayList<Event>();
-		this.actionManager = actionManager;
+		eventHistory = new ArrayDeque<Event>();
 	}
 
 	/**
@@ -23,36 +25,38 @@ public class RoundManager {
 	 */
 	public void checkEvents(Card card) {
 		List<Event> eventsToRemove = new ArrayList<Event>();
-		List<Action> actions = new ArrayList<Action>();
 		for (Event event : events) {
 			if (card == event.getSrc()) {
 				event.decreaseTurns();
 				if (event.turnIsZero()) {
 					event.getEffect().doEndEffect();
 					eventsToRemove.add(event);
-					actions.add(new Action(event.getEffect().getSrc(), event.getEffect().getDest(),
-							event.getEffect().getEndType()));
+					addEvent(event.getEffect());
 				}
 				//if effect is consistent
 				if (event.getEffect().isConsistent()) {
 					event.getEffect().doConsistentEffect();
-					actions.add(new Action(event.getEffect().getSrc(), event.getEffect().getDest(),
-							event.getEffect().getConsistentType()));
+					addEvent(event.getEffect());
 				}
 			}
 		}
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
-		for (Action action : actions) {
-			actionManager.addToHistory(action);
-		}
 	}
 
 	public void addEvent(Event event) {
 		events.add(event);
 		event.getEffect().doStartEffect();
-		actionManager.addToHistory(new Action(event.getEffect().getSrc(),
-				event.getEffect().getDest(), event.getEffect().getStartType()));
+		eventHistory.addLast(event);
+		AnimationManager.performAnimation(event);
+	}
+
+	public void addEvent(Effect effect) {
+		Event event = new Event(effect);
+		events.add(new Event(effect));
+		effect.doStartEffect();
+		eventHistory.addLast(event);
+		AnimationManager.performAnimation(event);
 	}
 }

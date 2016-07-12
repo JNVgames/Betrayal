@@ -1,16 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
-
-import java.util.ArrayList;
 
 public class Heal extends Effect {
 	private int health;
 
 	public Heal(int health) {
-		super(ActionType.HEAL);
+		super(EventType.HEAL);
 		this.health = health;
 		isHostile = false;
 	}

@@ -4,12 +4,17 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
-public class IncreasedAttack extends Effect {
+import java.util.List;
+
+public class Attack extends Effect {
 	private int attack;
 
-	public IncreasedAttack(int attack, int turns) {
-		super(EventType.ATTACK, turns);
-		isHostile = true;
+	public Attack(Card src, List<Card> dest) {
+		super(EventType.ATTACK);
+		isHostile = false;
+		attack = src.getCurrentAttack();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
-import com.jnv.betrayal.dungeon.actions.Action;
+import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
@@ -19,12 +19,11 @@ public class EventLog extends Popup {
 	private Image okayButton;
 	private ScrollPane scrollPane;
 	private VerticalGroup verticalGroup;
-	private Deque<Action> actionHistory;
+	private Deque<Event> eventHistory;
 
-	public EventLog(Betrayal game, Deque<Action> actionHistory) {
+	public EventLog(Betrayal game, Deque<Event> eventHistory) {
 		super(game);
 		loadBackground();
-		this.actionHistory = actionHistory;
 		verticalGroup = new VerticalGroup();
 		verticalGroup.layout();
 		verticalGroup.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
@@ -67,8 +66,8 @@ public class EventLog extends Popup {
 	}
 
 	private void loadHistory() {
-		for (Action action : actionHistory) {
-			Label newEvent = new Label(action.toString(), FontManager.getFont(40));
+		for (Event event : eventHistory) {
+			Label newEvent = new Label(event.toString(), FontManager.getFont(40));
 			Label separate = new Label(
 					 "------------------------------------------------------------"
 					+"------------------------------------------------------------"

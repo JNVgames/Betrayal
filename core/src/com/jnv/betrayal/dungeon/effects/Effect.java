@@ -1,37 +1,38 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.List;
 
 public abstract class Effect {
-	private Card src;
-	private List<Card> dest;
-	private boolean consistent;
-	private int turns;
-	private final ActionType startType, consistentType, endType;
+
+	protected Card src;
+	protected List<Card> dest;
+	protected boolean consistent;
+	protected int turns = 1;
+	protected final EventType startType, consistentType, endType;
 	protected boolean isHostile;
 
-	protected Effect(ActionType startType) {
+	protected Effect(EventType startType) {
 		this(startType, false, null, 0, null);
 	}
 
-	protected Effect(ActionType startType, int turns) {
+	protected Effect(EventType startType, int turns) {
 		this(startType, false, null, turns, null);
 	}
 
-	protected Effect(ActionType startType, int turns, ActionType endType) {
+	protected Effect(EventType startType, int turns, EventType endType) {
 		this(startType, false, null, turns, endType);
 	}
 
-	protected Effect(ActionType startType, int turns, boolean consistent, ActionType consistentType,
-					 ActionType endType) {
+	protected Effect(EventType startType, int turns, boolean consistent, EventType consistentType,
+					 EventType endType) {
 		this(startType, consistent, consistentType, turns, endType);
 	}
 
-	protected Effect(ActionType startType, boolean consistent, ActionType consistentType, int turns,
-					 ActionType endType) {
+	protected Effect(EventType startType, boolean consistent, EventType consistentType, int turns,
+					 EventType endType) {
 		this.startType = startType;
 		this.consistentType = consistentType;
 		this.endType = endType;
@@ -47,15 +48,15 @@ public abstract class Effect {
 		return turns;
 	}
 
-	public ActionType getStartType() {
+	public EventType getStartType() {
 		return startType;
 	}
 
-	public ActionType getConsistentType() {
+	public EventType getConsistentType() {
 		return consistentType;
 	}
 
-	public ActionType getEndType() {
+	public EventType getEndType() {
 		return endType;
 	}
 

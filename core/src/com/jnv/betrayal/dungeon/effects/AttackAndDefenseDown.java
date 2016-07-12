@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 public class AttackAndDefenseDown extends Effect {
@@ -9,7 +9,7 @@ public class AttackAndDefenseDown extends Effect {
 	private int defense;
 
 	public AttackAndDefenseDown(int attack, int defense, int turns) {
-		super(ActionType.BUFF_ATTACK_DEFENSE, turns, ActionType.E_DEBUFF_ATTACK_DEFENSE);
+		super(EventType.BUFF_ATTACK_DEFENSE, turns, EventType.E_DEBUFF_ATTACK_DEFENSE);
 		this.attack = attack;
 		this.defense = defense;
 		isHostile = true;

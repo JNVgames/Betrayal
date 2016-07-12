@@ -5,10 +5,10 @@
 package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.EquipSlot;
-import com.jnv.betrayal.gameobjects.defense.BodyArmor;
-import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.Equip;
+import com.jnv.betrayal.gameobjects.defense.BodyArmor;
 import com.jnv.betrayal.gameobjects.defense.Helmet;
+import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.special.Ring;
 
 /**

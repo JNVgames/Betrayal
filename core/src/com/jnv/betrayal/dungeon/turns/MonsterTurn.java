@@ -1,11 +1,9 @@
 package com.jnv.betrayal.dungeon.turns;
 
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.actions.Action;
-import com.jnv.betrayal.dungeon.actions.ActionType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
+import com.jnv.betrayal.dungeon.effects.Attack;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
@@ -57,7 +55,7 @@ public class MonsterTurn extends Turn {
 		}
 
 		System.out.println(card.effectCounter);
-		if(card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
+		if (card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
 			card.effectCounter = 1;
 			//do EFFECT
 			Event event = new Event(card.getEffect());
@@ -68,11 +66,10 @@ public class MonsterTurn extends Turn {
 			}
 			event.getEffect().setDest(dst);
 			card.getField().roundManager.addEvent(event);
-		}else{
+		} else {
 			card.effectCounter++;
 
-			field.actionManager.performAction(new Action(field.getCurrentCard(),
-					dst, ActionType.ATTACK));
+			field.roundManager.addEvent(new Attack(field.getCurrentCard(), dst));
 		}
 
 	}

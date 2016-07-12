@@ -8,15 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.EquipSlot;
-import com.jnv.betrayal.gameobjects.defense.BodyArmor;
-import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
-import com.jnv.betrayal.gameobjects.defense.Helmet;
 import com.jnv.betrayal.gameobjects.Previewable;
-import com.jnv.betrayal.gameobjects.special.Ring;
-import com.jnv.betrayal.gameobjects.defense.Shield;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
+import com.jnv.betrayal.gameobjects.defense.BodyArmor;
+import com.jnv.betrayal.gameobjects.defense.Helmet;
+import com.jnv.betrayal.gameobjects.defense.Shield;
+import com.jnv.betrayal.gameobjects.special.Cloak;
+import com.jnv.betrayal.gameobjects.special.Ring;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 /**

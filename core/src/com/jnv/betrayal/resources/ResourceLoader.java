@@ -4,12 +4,10 @@
 
 package com.jnv.betrayal.resources;
 
-import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.AttackAndDefenseUp;
 import com.jnv.betrayal.dungeon.effects.AttackDown;
 import com.jnv.betrayal.dungeon.effects.AttackUp;
 import com.jnv.betrayal.dungeon.effects.DefenseUp;
-import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Heal;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.attack.Weapon;

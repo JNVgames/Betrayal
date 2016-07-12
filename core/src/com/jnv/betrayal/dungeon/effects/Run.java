@@ -1,18 +1,15 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.Action;
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-
-import java.util.List;
 
 public class Run extends Effect {
 
 	private int fleeChance;
 
 	public Run(int fleeChance) {
-		super(ActionType.FLEE);
+		super(EventType.FLEE);
 		this.fleeChance = fleeChance;
 		isHostile = false;
 	}
@@ -20,10 +17,10 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card card) {
 		if (PlayerCard.canFlee(fleeChance / 25)) {
-			card.getField().actionManager.performAction(new Action(card, ActionType.FLEE));
+			card.getField().roundManager.addEvent(new Flee(card));
 		}
 		else {
-			card.getField().actionManager.performAction(new Action(card, ActionType.FAIL_TO_FLEE));
+			card.getField().roundManager.addEvent(new FailedToFlee(card));
 		}
 	}
 

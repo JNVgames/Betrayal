@@ -1,8 +1,7 @@
 package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.actions.Action;
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.effects.Attack;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
@@ -24,8 +23,7 @@ public class TeamMemberTurn extends Turn {
 			@Override
 			public void run() {
 				// TODO animation not working
-				field.actionManager.performAction(new Action(field.getCurrentCard(), field.getAllMonsterCards(),
-						ActionType.ATTACK));
+				field.roundManager.addEvent(new Attack(field.getCurrentCard(), field.getAllMonsterCards()));
 				field.turnManager.nextTurn();
 			}
 		});

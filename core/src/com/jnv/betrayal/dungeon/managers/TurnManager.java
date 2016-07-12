@@ -3,7 +3,6 @@ package com.jnv.betrayal.dungeon.managers;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -19,8 +18,6 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
-
-import java.util.List;
 
 /**
  * Keeps track of user/party member/monster's turns.
@@ -71,7 +68,6 @@ public class TurnManager {
 		field.setNextCardIndex();
 		if (field.getCurrentCard() instanceof PlayerCard) {
 			field.roundManager.checkEvents(field.getCurrentCard());
-			currentTurn.doAtStartOfTurn();
 		}
 		draw();
 	}

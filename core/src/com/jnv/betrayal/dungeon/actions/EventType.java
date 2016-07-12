@@ -1,6 +1,6 @@
 package com.jnv.betrayal.dungeon.actions;
 
-public enum ActionType {
+public enum EventType {
 	ATTACK("attacked"),
 	DEFEND("defended"),
 	FLEE("fled"),
@@ -33,7 +33,7 @@ public enum ActionType {
 
 	private String action, consistentAction;
 
-	ActionType(String action) {
+	EventType(String action) {
 		this.action = action;
 	}
 

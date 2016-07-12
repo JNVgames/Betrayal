@@ -1,16 +1,14 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.ActionType;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
-
-import java.util.ArrayList;
 
 public class Poison extends Effect {
 	private int damage;
 
 	public Poison(int damage, int turns) {
-		super(ActionType.POISON, turns, true, ActionType.C_POISON, ActionType.E_POISON);
+		super(EventType.POISON, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
 	}
 

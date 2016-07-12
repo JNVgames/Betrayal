@@ -1,49 +1,48 @@
 package com.jnv.betrayal.dungeon.managers;
 
-
 import com.badlogic.gdx.graphics.Color;
-import com.jnv.betrayal.dungeon.actions.Action;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.CardAnimation;
+import com.jnv.betrayal.dungeon.effects.Event;
 
 public class AnimationManager {
 
-	public static void performAnimation(Action action) {
+	public static void performAnimation(Event event) {
 
-		switch (action.getActionType()) {
+		switch (event.getEffect().getStartType()) {
 
-			/************************BASIC MOVES *************************/
+			/************************ BASIC MOVES *************************/
 			case ATTACK:
-				CardAnimation.jump(action.getSrc());
-				for (Card card : action.getDest()) {
+				CardAnimation.jump(event.getSrc());
+				for (Card card : event.getDest()) {
 					CardAnimation.flashColor(card, Color.RED);
 				}
 				break;
 			case DEFEND:
-				CardAnimation.jump(action.getSrc());
-				for (Card card : action.getDest()) {
+				CardAnimation.jump(event.getSrc());
+				for (Card card : event.getDest()) {
 					CardAnimation.defend(card);
 				}
 				break;
 			case FLEE:
-				CardAnimation.flee(action.getSrc());
+				CardAnimation.flee(event.getSrc());
 				break;
 			case FAIL_TO_FLEE:
-				CardAnimation.failToFlee(action.getSrc());
+				CardAnimation.failToFlee(event.getSrc());
 				break;
 			case DIED:
-				CardAnimation.fadeOut(action.getSrc());
+				CardAnimation.fadeOut(event.getSrc());
 				break;
 
 			/********************Item abd Skills*************************/
 			case HEAL:
-				CardAnimation.jump(action.getSrc());
-				CardAnimation.flashColor(action.getSrc(), Color.YELLOW);
+				CardAnimation.jump(event.getSrc());
+				CardAnimation.flashColor(event.getSrc(), Color.YELLOW);
 				break;
 			case BOMB:
 				break;
 			case POISON:
-				CardAnimation.changeColor(action.getSrc(), Color.GREEN);
+				CardAnimation.changeColor(event.getSrc(), Color.GREEN);
 				break;
 			case BUFF_ATTACK:
 				break;
@@ -52,7 +51,7 @@ public class AnimationManager {
 			case BUFF_ATTACK_DEFENSE:
 				break;
 			case DEBUFF_ATTACK:
-				CardAnimation.jump(action.getSrc());
+				CardAnimation.jump(event.getSrc());
 				break;
 			case DEBUFF_DEFENSE:
 				break;
@@ -61,7 +60,7 @@ public class AnimationManager {
 
 			/********************Consistent Effects*********************/
 			case C_POISON:
-				CardAnimation.flashColor(action.getSrc(),Color.RED);
+				CardAnimation.flashColor(event.getSrc(),Color.RED);
 				break;
 
 			/**********************End Effects**************************/
@@ -82,7 +81,7 @@ public class AnimationManager {
 
 			/**********************Shouldn't Happen*********************/
 			default:
-				CardAnimation.removeColor(action.getSrc());
+				CardAnimation.removeColor(event.getSrc());
 				break;
 		}
 	}
