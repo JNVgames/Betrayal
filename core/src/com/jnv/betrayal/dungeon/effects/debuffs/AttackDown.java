@@ -12,6 +12,8 @@ public class AttackDown extends Effect {
 		super(EventType.DEBUFF_ATTACK, turns, EventType.E_DEBUFF_ATTACK);
 		this.attack = attack;
 		isHostile = true;
+		description = "Attack Debuff\nLowers your attack by " + attack + "\n"
+				+ "for " + turns + " turns.";
 	}
 
 	@Override

@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.dungeon.cards;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.effects.Effect;
@@ -21,6 +22,7 @@ public class MonsterCard extends Card {
 	private String name;
 	private int numAttackTargets;
 	private Effect effect;
+	private Texture skillTexture;
 	public int effectCounter = 1;
 
 	public MonsterCard(final float x, final float y, final float width, final float height,
@@ -32,6 +34,7 @@ public class MonsterCard extends Card {
 		baseDefense = currentDefense = monster.getDefense();
 		numAttackTargets = monster.getNumTargets();
 		this.effect = monster.getEffect();
+		this.skillTexture = monster.getSkillTexture();
 
 		cardImage = new Actor() {
 			@Override
@@ -70,6 +73,10 @@ public class MonsterCard extends Card {
 
 	public String getName() {
 		return name;
+	}
+
+	public Texture getSkillTexture() {
+		return skillTexture;
 	}
 
 	@Override

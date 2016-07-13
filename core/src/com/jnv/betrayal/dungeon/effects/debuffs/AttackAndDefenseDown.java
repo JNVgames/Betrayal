@@ -14,6 +14,8 @@ public class AttackAndDefenseDown extends Effect {
 		this.attack = attack;
 		this.defense = defense;
 		isHostile = true;
+		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
+				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
 	}
 
 	@Override

@@ -12,6 +12,8 @@ public class DefenseDown extends Effect {
 		super(EventType.DEBUFF_DEFENSE, turns, EventType.E_DEBUFF_DEFENSE);
 		this.defense = defense;
 		isHostile = true;
+		description = "Defense Debuff\nLowers your defense by "
+				+ defense + "\n" + "for " + turns + " turns.";
 	}
 
 	@Override

@@ -203,24 +203,22 @@ public class ResourceLoader {
 	}
 
 	private void loadItemsAndSkills(){
-		res.loadTexture("item/skills/monsterblock.png", "skill1");
-		res.loadTexture("item/skills/monsterbomb.png", "skill2");
-		res.loadTexture("item/skills/monsterchain.png", "skill3");
-		res.loadTexture("item/skills/monsterdeath.png", "skill4");
-		res.loadTexture("item/skills/monsterfire.png", "skill5");
-		res.loadTexture("item/skills/monsterheal.png", "skill6");
-		res.loadTexture("item/skills/monsterlockon.png", "skill7");
-		res.loadTexture("item/skills/monstermelee.png", "skill8");
-		res.loadTexture("item/skills/monsterpoison.png", "skill9");
-		res.loadTexture("item/skills/monsterpowerdown.png", "skill10");
-		res.loadTexture("item/skills/monsterpowerup.png", "skill11");
-		res.loadTexture("item/skills/monsterscythe.png", "skill12");
-		res.loadTexture("item/skills/monstershieldbreak.png", "skill13");
+		res.loadTexture("item/skills/monsterblock.png", "monsterskill1");
+		res.loadTexture("item/skills/monsterbomb.png", "monsterskill2");
+		res.loadTexture("item/skills/monsterchain.png", "monsterskill3");
+		res.loadTexture("item/skills/monsterdeath.png", "monsterskill4");
+		res.loadTexture("item/skills/monsterfire.png", "monsterskill5");
+		res.loadTexture("item/skills/monsterheal.png", "monsterskill6");
+		res.loadTexture("item/skills/monsterlockon.png", "monsterskill7");
+		res.loadTexture("item/skills/monstermelee.png", "monsterskill8");
+		res.loadTexture("item/skills/monsterpoison.png", "monsterskill9");
+		res.loadTexture("item/skills/monsterpowerdown.png", "monsterskill10");
+		res.loadTexture("item/skills/monsterpowerup.png", "monsterskill11");
+		res.loadTexture("item/skills/monsterscythe.png", "monsterskill12");
+		res.loadTexture("item/skills/monstershieldbreak.png", "monsterskill13");
 		res.loadTexture("item/skills/run50.png", "run1");
 		res.loadTexture("item/skills/run75.png", "run2");
 		res.loadTexture("item/skills/run100.png", "run3");
-
-
 	}
 
 	private void loadRings() {
@@ -899,6 +897,7 @@ public class ResourceLoader {
 				.id(0)
 				.nickname("Skeleton Kelly")
 				.textureName("monster-tier0-0")
+				.skillTextureName("monsterskill10")
 				.health(25).attack(10).defense(1)
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.numTargets(1)

@@ -10,13 +10,29 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class OKPopup extends Popup {
 
-	private Image okayButton, noButton, background;
-	private Label title;
+	private int x = 150, y = 500, width = Betrayal.WIDTH - 300, height = Betrayal.HEIGHT - 1000;
+	private Image okayButton, background;
 	private String string;
 
 	public OKPopup(Betrayal game, String string) {
 		super(game);
 		this.string = string;
+		loadButtons();
+		setMaskAction(new Runnable() {
+			@Override
+			public void run() {
+				onConfirm();
+			}
+		});
+	}
+
+	public OKPopup(int width, int height, Betrayal game, String string) {
+		super(game);
+		this.string = string;
+		this.width = width;
+		this.height = height;
+		x = (Betrayal.WIDTH - width) / 2;
+		y = (Betrayal.HEIGHT - height) / 2;
 		loadButtons();
 		setMaskAction(new Runnable() {
 			@Override
@@ -35,17 +51,17 @@ public class OKPopup extends Popup {
 	private void loadBackground() {
 		background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
-		background.setBounds(150, 500, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 1000);
+		background.setBounds(x, y, width, height);
 		popup.addActor(background);
 	}
 
 	private void loadTitle() {
 		Label.LabelStyle font = FontManager.getFont(40);
 		font.fontColor = Color.WHITE;
-		title = new Label(string, font);
+		Label title = new Label(string, font);
 		title.layout();
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
-				okayButton.getY() + okayButton.getHeight() + 50, background.getWidth(),
+				(background.getTop() + okayButton.getTop() - title.getPrefHeight()) / 2, background.getWidth(),
 				title.getPrefHeight());
 		title.setAlignment(Align.center);
 		popup.addActor(title);
@@ -55,7 +71,7 @@ public class OKPopup extends Popup {
 		okayButton = new Image(res.getTexture("ok"));
 		okayButton.layout();
 		okayButton.setBounds(Betrayal.WIDTH / 2 - 75,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				background.getY() + 30, 150, 75);
 		okayButton.addListener(new InputListener(okayButton) {
 			@Override
 			public void doAction() {

@@ -4,15 +4,16 @@
 
 package com.jnv.betrayal.dungeon.cards;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 public class DungeonMonster {
 
-	private MonsterCard[] monsterCards;
-	private Monster[] monster;
-
-	public DungeonMonster(BetrayalAssetManager res, int tier, int monsterID, com.jnv.betrayal.dungeon.mechanics.Field field) {
+	public DungeonMonster(final BetrayalAssetManager res, int tier, int monsterID, final com.jnv.betrayal.dungeon.mechanics.Field field) {
 		int numMonsters = 1;
 		//tier = 4;
 		//monsterID = 7;
@@ -23,14 +24,23 @@ public class DungeonMonster {
 		} else if ((tier == 4 && monsterID == 7)) {
 			numMonsters = 6;
 		}
-		monsterCards = new MonsterCard[6];
-		monster = new Monster[6];
 		for (int i = 0; i < numMonsters; i++) {
-			monster[i] = new Monster("monster-tier" + tier + "-" + monsterID, res);
-			// todo simplify this code
-			monsterCards[i] = new MonsterCard(monster[i].getxPos(), monster[i].getyPos(),
-					monster[i].getWidth(), monster[i].getHeight(), monster[i], res);
-			field.addCard(monsterCards[i]);
+			final Monster monster = new Monster("monster-tier" + tier + "-" + monsterID, res);
+			MonsterCard monsterCard = new MonsterCard(monster.getxPos(), monster.getyPos(),
+					monster.getWidth(), monster.getHeight(), monster, res);
+			field.addCard(monsterCard);
+			if (monster.getSkillTexture() != null) {
+				Image image = new Image(monster.getSkillTexture());
+				int side = 100;
+				image.setBounds(Betrayal.WIDTH - side - 10, Betrayal.HEIGHT - side - 10, side, side);
+				field.addActor(image);
+				image.addListener(new InputListener(image) {
+					@Override
+					public void doAction() {
+						new OKPopup(500, 400, field.game, monster.getEffect().getDescription());
+					}
+				});
+			}
 			monsterID += 10;
 		}
 	}

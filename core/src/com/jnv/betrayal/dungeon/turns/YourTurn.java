@@ -1,5 +1,6 @@
 package com.jnv.betrayal.dungeon.turns;
 
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
@@ -33,8 +34,7 @@ public class YourTurn extends Turn {
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
 				if (eventType == EventType.ATTACK) {
 					field.roundManager.addEvent(new Attack(field.getCurrentCard(), dest));
-				}
-				else {
+				} else {
 					field.roundManager.addEvent(new Defend(field.getCurrentCard(), dest));
 				}
 				field.turnManager.nextTurn();
@@ -52,38 +52,48 @@ public class YourTurn extends Turn {
 	@Override
 	public void draw() {
 		panels.clearChildren();
-		panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
-			public void run() {
-				new DungeonInventory(gsm.game, field.getCurrentCard());
-				// todo change input to what is needed by the specific item
-			}
-		}));
-		panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
-			public void run() {
-				field.beginSelectMode(1);
-				drawSelectBar(EventType.ATTACK);
-			}
-		}));
-		panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
-			public void run() {
-				field.beginSelectMode(1);
-				drawSelectBar(EventType.DEFEND);
-			}
-		}));
-		panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
+		panels.addActor(createGrayPanel("Items", 70, Panel.bottomLeft));
+		panels.addActor(createGrayPanel("Attack", 70, Panel.topLeft));
+		panels.addActor(createGrayPanel("Defend", 70, Panel.topRight));
+		panels.addActor(createGrayPanel("Flee", 70, Panel.bottomRight));
+		panels.addAction(Actions.delay(1.5f, Actions.run(new Runnable() {
 			@Override
 			public void run() {
-				new Confirmation(gsm.game, "Flee? 25% Chance") {
-					@Override
-					public void doAction() {
-						if (PlayerCard.canFlee(1)) {
-							field.roundManager.addEvent(new Flee(field.getCurrentCard()));
-						} else {
-							field.roundManager.addEvent(new FailedToFlee(field.getCurrentCard()));
-						}
+				panels.clearChildren();
+				panels.addActor(createPanel("Items", 70, Panel.bottomLeft, new Runnable() {
+					public void run() {
+						new DungeonInventory(gsm.game, field.getCurrentCard());
+						// todo change input to what is needed by the specific item
 					}
-				};
+				}));
+				panels.addActor(createPanel("Attack", 70, Panel.topLeft, new Runnable() {
+					public void run() {
+						field.beginSelectMode(1);
+						drawSelectBar(EventType.ATTACK);
+					}
+				}));
+				panels.addActor(createPanel("Defend", 70, Panel.topRight, new Runnable() {
+					public void run() {
+						field.beginSelectMode(1);
+						drawSelectBar(EventType.DEFEND);
+					}
+				}));
+				panels.addActor(createPanel("Flee", 70, Panel.bottomRight, new Runnable() {
+					@Override
+					public void run() {
+						new Confirmation(gsm.game, "Flee? 25% Chance") {
+							@Override
+							public void doAction() {
+								if (PlayerCard.canFlee(1)) {
+									field.roundManager.addEvent(new Flee(field.getCurrentCard()));
+								} else {
+									field.roundManager.addEvent(new FailedToFlee(field.getCurrentCard()));
+								}
+							}
+						};
+					}
+				}));
 			}
-		}));
+		})));
 	}
 }

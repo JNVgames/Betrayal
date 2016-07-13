@@ -6,14 +6,14 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class Monster {
 
-	private Texture monsterTexture;
+	private Texture monsterTexture, skillTexture;
 	private String textureName, nickname;
 	private int id, health, attack, defense, width, height, xPos, yPos, numTargets;
 	private Effect effect;
 
 	public Monster(int id, BetrayalAssetManager res, String textureName, String nickname,
 				   int health, int attack, int defense, int width, int height, int xPos, int yPos,
-				   int numTargets, Effect effect) {
+				   int numTargets, Effect effect, String skillTextureName) {
 		this.textureName = textureName;
 		this.nickname = nickname;
 		this.id = id;
@@ -27,6 +27,7 @@ public class Monster {
 		this.numTargets = numTargets;
 		this.effect = effect;
 		monsterTexture = res.getTexture(textureName);
+		if (skillTextureName != null) skillTexture = res.getTexture(skillTextureName);
 		res.loadMonster(textureName, this);
 	}
 
@@ -34,17 +35,18 @@ public class Monster {
 		Monster src = res.getMonster(name);
 		id = src.getID();
 		textureName = name;
-		health = src.getHealth();
-		attack = src.getAttack();
-		defense = src.getDefense();
-		width = src.getWidth();
-		height = src.getHeight();
-		xPos = src.getxPos();
-		yPos = src.getyPos();
-		numTargets = src.getNumTargets();
-		this.effect = src.getEffect();
-		nickname = src.getNickname();
-		monsterTexture = src.getMonsterTexture();
+		health = src.health;
+		attack = src.attack;
+		defense = src.defense;
+		width = src.width;
+		height = src.height;
+		xPos = src.xPos;
+		yPos = src.yPos;
+		numTargets = src.numTargets;
+		this.effect = src.effect;
+		nickname = src.nickname;
+		monsterTexture = src.monsterTexture;
+		skillTexture = src.skillTexture;
 	}
 
 	// Getters
@@ -74,24 +76,12 @@ public class Monster {
 		return health;
 	}
 
-	public void setHealth(int new_health) {
-		health = new_health;
-	}
-
 	public int getAttack() {
 		return attack;
 	}
 
-	public void setAttack(int new_attack) {
-		attack = new_attack;
-	}
-
 	public int getDefense() {
 		return defense;
-	}
-
-	public void setDefense(int new_defense) {
-		defense = new_defense;
 	}
 
 	public int getNumTargets() {
@@ -100,10 +90,6 @@ public class Monster {
 
 	public int getWidth() {
 		return width;
-	}
-
-	public void setWidth(int new_Width) {
-		width = new_Width;
 	}
 
 	public String getNickname() {
@@ -130,18 +116,19 @@ public class Monster {
 		return yPos;
 	}
 
-	public void setyPos(int new_yPos) {
-		yPos = new_yPos;
-	}
-
 	public Texture getMonsterTexture() {
 		return monsterTexture;
+	}
+
+	public Texture getSkillTexture() {
+		return skillTexture;
 	}
 
 	public static class MonsterFactory {
 
 		private String nickname = "stub";
 		private String textureName = "stub";
+		private String skillTextureName;
 		private BetrayalAssetManager res;
 		private int id, health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
 		private Effect effect;
@@ -214,9 +201,14 @@ public class Monster {
 			return this;
 		}
 
+		public MonsterFactory skillTextureName(String textureName) {
+			skillTextureName = textureName;
+			return this;
+		}
+
 		public Monster build() {
 			return new Monster(id, res, textureName, nickname, health, attack, defense, textureWidth,
-					textureHeight, x, y, numTargets, effect);
+					textureHeight, x, y, numTargets, effect, skillTextureName);
 		}
 	}
 }

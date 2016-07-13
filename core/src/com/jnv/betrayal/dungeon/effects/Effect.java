@@ -13,6 +13,7 @@ public abstract class Effect {
 	protected int turns = 1;
 	protected final EventType startType, consistentType, endType;
 	protected boolean isHostile;
+	protected String description;
 
 	protected Effect(EventType startType) {
 		this(startType, false, null, 0, null);
@@ -66,6 +67,10 @@ public abstract class Effect {
 
 	public List<Card> getDest() {
 		return dest;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public void doStartEffect() {

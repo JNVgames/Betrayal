@@ -78,7 +78,7 @@ public abstract class Turn {
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
 		Label.LabelStyle font = FontManager.getFont(fontSize);
-		font.fontColor = Color.LIGHT_GRAY;
+		font.fontColor = Color.DARK_GRAY;
 		panel.setStyle(font);
 		panel.setBounds(dimension);
 		panel.setAlignment(Align.center);
