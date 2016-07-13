@@ -256,7 +256,8 @@ public abstract class Card {
 			})));
 		}
 		else {
-			card.getField().roundManager.addEvent(new Died(card));
+			Effect effect = new Died(card);
+			card.getField().roundManager.addEvent(effect, effect.getStartType());
 		}
 	}
 
@@ -320,7 +321,7 @@ public abstract class Card {
 	}
 
 	public void performEffect(Effect effect) {
-		field.roundManager.addEvent(effect);
+		field.roundManager.addEvent(effect, effect.getStartType());
 	}
 
 	public abstract String getName();

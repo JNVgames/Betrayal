@@ -1,13 +1,16 @@
 package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
@@ -24,7 +27,7 @@ public class MonsterTurn extends Turn {
 	@Override
 	public void draw() {
 		panels.clearChildren();
-		createPanel("Monster's turn", 80, Panel.full, new Runnable() {
+		createPanel("Monster's turn", FontManager.getFont80(), Panel.full, new Runnable() {
 			@Override
 			public void run() {
 				monsterAttack();
@@ -58,7 +61,7 @@ public class MonsterTurn extends Turn {
 		if (card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
 			card.effectCounter = 1;
 			//do EFFECT
-			Event event = new Event(card.getEffect());
+			Event event = new Event(card.getEffect(), card.getEffect().getStartType());
 			event.getEffect().setSrc(card);
 			if (!event.getEffect().isHostile()) {
 				dst.clear();
@@ -68,8 +71,8 @@ public class MonsterTurn extends Turn {
 			card.getField().roundManager.addEvent(event);
 		} else {
 			card.effectCounter++;
-
-			field.roundManager.addEvent(new Attack(field.getCurrentCard(), dst));
+			Effect attack = new Attack(field.getCurrentCard(), dst);
+			field.roundManager.addEvent(attack, attack.getStartType());
 		}
 
 	}

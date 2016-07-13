@@ -34,21 +34,19 @@ public abstract class Turn {
 		gsm = game.gsm;
 	}
 
-
 	public abstract void draw();
 
 	/**
 	 * Function to make creating 4-button action bars easier
 	 *
 	 * @param panelText text you want your button to say
-	 * @param fontSize  text size
 	 */
-	protected Group createPanel(String panelText, int fontSize, Dimension dimension,
+	protected Group createPanel(String panelText, Label.LabelStyle font, Dimension dimension,
 								final Runnable action) {
 		Group group = new Group();
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
-		panel.setStyle(FontManager.getFont(fontSize));
+		panel.setStyle(font);
 		panel.setBounds(dimension);
 		panel.setAlignment(Align.center);
 		panel.layout();
@@ -73,13 +71,13 @@ public abstract class Turn {
 		return group;
 	}
 
-	protected Group createGrayPanel(String panelText, int fontSize, Dimension dimension) {
+	protected Group createGrayPanel(String panelText, Label.LabelStyle font, Dimension dimension) {
 		Group group = new Group();
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
-		Label.LabelStyle font = FontManager.getFont(fontSize);
-		font.fontColor = Color.DARK_GRAY;
-		panel.setStyle(font);
+		Label.LabelStyle fontStyle = font;
+		fontStyle.fontColor = Color.DARK_GRAY;
+		panel.setStyle(fontStyle);
 		panel.setBounds(dimension);
 		panel.setAlignment(Align.center);
 		panel.layout();

@@ -68,7 +68,7 @@ public class SplashScreen extends GameState {
 	}
 
 	private void loadPercentText() {
-		percentText = new Label("Loading... 99%", FontManager.getFont(50));
+		percentText = new Label("Loading... 99%", FontManager.getFont50());
 		percentText.setBounds((Betrayal.WIDTH - percentText.getPrefWidth()) / 2, 300,
 				percentText.getPrefWidth(), percentText.getPrefHeight());
 		percentText.layout();

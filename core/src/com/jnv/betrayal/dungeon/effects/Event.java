@@ -1,16 +1,20 @@
 package com.jnv.betrayal.dungeon.effects;
 
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import java.util.List;
 
 public class Event {
+
 	private Effect effect;
 	private int turnsLeft;
+	private EventType eventType;
 
-	public Event(Effect effect) {
+	public Event(Effect effect, EventType eventType) {
 		this.effect = effect;
 		turnsLeft = effect.getTurns();
+		this.eventType = eventType;
 	}
 
 	public boolean turnIsZero() {
@@ -31,5 +35,20 @@ public class Event {
 
 	public List<Card> getDest() {
 		return effect.getDest();
+	}
+
+	@Override
+	public String toString() {
+		String event = "";
+		event += effect.getSrc().getName();
+		event += " " + eventType.toString() + " ";
+		if (effect.getDest().size() > 0) {
+			for (int i = 0; i < effect.getDest().size(); i++) {
+				event += effect.getDest().get(i).getName();
+				if (i < effect.getDest().size() - 1)
+					event += ", ";
+			}
+		}
+		return event;
 	}
 }

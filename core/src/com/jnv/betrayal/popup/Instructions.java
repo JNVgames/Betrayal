@@ -24,7 +24,7 @@ public class Instructions extends Popup {
 		super(game);
 		currentContent = 0;
 		totalContent = 5;
-		font40 = FontManager.getFont(40);
+		font40 = FontManager.getFont40();
 		loadButtons();
 	}
 

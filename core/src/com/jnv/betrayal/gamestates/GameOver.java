@@ -40,7 +40,7 @@ public class GameOver extends GameState {
 	}
 
 	private void loadFont() {
-		labelStyle = FontManager.getFont(60);
+		labelStyle = FontManager.getFont60();
 	}
 
 	private void loadButtons() {

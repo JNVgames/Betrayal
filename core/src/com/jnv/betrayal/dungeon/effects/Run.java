@@ -19,10 +19,12 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card card) {
 		if (PlayerCard.canFlee(fleeChance / 25)) {
-			card.getField().roundManager.addEvent(new Flee(card));
+			Effect flee = new Flee(card);
+			card.getField().roundManager.addEvent(flee, flee.startType);
 		}
 		else {
-			card.getField().roundManager.addEvent(new FailedToFlee(card));
+			Effect failToFlee = new FailedToFlee(card);
+			card.getField().roundManager.addEvent(failToFlee, failToFlee.startType);
 		}
 	}
 

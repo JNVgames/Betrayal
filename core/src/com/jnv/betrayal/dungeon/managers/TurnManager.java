@@ -58,7 +58,7 @@ public class TurnManager {
 			}
 
 			protected Label newObject() {
-				return new Label(null, new Label.LabelStyle(FontManager.getFont(70)));
+				return new Label(null, new Label.LabelStyle(FontManager.getFont70()));
 			}
 		};
 		field.addActor(panels);

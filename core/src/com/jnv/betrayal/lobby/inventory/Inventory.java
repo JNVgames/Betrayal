@@ -58,7 +58,7 @@ public class Inventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadTitle() {
-		title = new Label("Inventory", FontManager.getFont(40));
+		title = new Label("Inventory", FontManager.getFont40());
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -73,7 +73,7 @@ public class Inventory extends Popup implements InventoryLoadable {
 		goldIcon.setBounds(x, y + 10, 40, 40);
 		popup.addActor(goldIcon);
 
-		userGold = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
+		userGold = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont40());
 		userGold.setX(x + goldIcon.getWidth() + 10);
 		userGold.setY(y + 7);
 		popup.addActor(userGold);
@@ -145,25 +145,25 @@ public class Inventory extends Popup implements InventoryLoadable {
 
 		// Labels
 		// head
-		charOutDescription[0] = new Label("Head", FontManager.getFont(40));
+		charOutDescription[0] = new Label("Head", FontManager.getFont40());
 		charOutDescription[0].setBounds(112, 525, itemSize, itemSize);
 		// body armor
-		charOutDescription[1] = new Label("Body", FontManager.getFont(40));
+		charOutDescription[1] = new Label("Body", FontManager.getFont40());
 		charOutDescription[1].setBounds(112, 425, itemSize, itemSize);
 		//left hand
-		charOutDescription[2] = new Label("Hand", FontManager.getFont(40));
+		charOutDescription[2] = new Label("Hand", FontManager.getFont40());
 		charOutDescription[2].setBounds(112, 265, itemSize, itemSize);
 		// right hand
-		charOutDescription[3] = new Label("Hand", FontManager.getFont(40));
+		charOutDescription[3] = new Label("Hand", FontManager.getFont40());
 		charOutDescription[3].setBounds(312, 265, itemSize, itemSize);
 		// ring1
-		charOutDescription[4] = new Label("Ring", FontManager.getFont(40));
+		charOutDescription[4] = new Label("Ring", FontManager.getFont40());
 		charOutDescription[4].setBounds(428, 325, itemSize, itemSize);
 		// ring2
-		charOutDescription[5] = new Label("Ring", FontManager.getFont(40));
+		charOutDescription[5] = new Label("Ring", FontManager.getFont40());
 		charOutDescription[5].setBounds(428, 225, itemSize, itemSize);
 		// cloak
-		charOutDescription[6] = new Label("Cloak", FontManager.getFont(40));
+		charOutDescription[6] = new Label("Cloak", FontManager.getFont40());
 		charOutDescription[6].setBounds(413, 525, itemSize, itemSize);
 
 		for (int i = 0; i < 8; i++) {
@@ -176,7 +176,7 @@ public class Inventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadSortButton() {
-		Label button_sort = new Label("Sort", FontManager.getFont(40));
+		Label button_sort = new Label("Sort", FontManager.getFont40());
 		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
 				button_sort.getPrefHeight());

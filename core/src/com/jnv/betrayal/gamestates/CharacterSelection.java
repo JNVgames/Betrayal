@@ -37,7 +37,6 @@ public class CharacterSelection extends GameState {
 	private Image backButton, previewFrame;
 	private Character character;
 	private TextureRegion leftArrowImage, rightArrowImage;
-	private Label.LabelStyle font60, font45;
 	private TextField fieldUsernameEnter;
 
 	public CharacterSelection(GameStateManager gsm) {
@@ -46,8 +45,6 @@ public class CharacterSelection extends GameState {
 		leftArrowImage = new TextureRegion(res.getTexture("arrow-right"));
 		leftArrowImage.flip(true, false);
 		rightArrowImage = new TextureRegion(res.getTexture("arrow-right"));
-		font60 = FontManager.getFont(60);
-		font45 = FontManager.getFont(45);
 
 		character = new Character(res);
 
@@ -112,7 +109,7 @@ public class CharacterSelection extends GameState {
 		backButton.setY(Betrayal.HEIGHT - backButton.getHeight() - 10);
 		stage.addActor(backButton);
 
-		Actor actor = new Label("Back", font60);
+		Actor actor = new Label("Back", FontManager.getFont60());
 		actor.setX(backButton.getX() + backButton.getWidth() + 10);
 		actor.setY(backButton.getY());
 		stage.addActor(actor);
@@ -154,14 +151,14 @@ public class CharacterSelection extends GameState {
 
 	private void loadUsernameField() {
 		// Username "Name:" text
-		Label usernameTextField = new Label("Name: ", FontManager.getFont(60));
+		Label usernameTextField = new Label("Name: ", FontManager.getFont60());
 		usernameTextField.setX(10);
 		usernameTextField.setY(backButton.getY() - backButton.getHeight() - 10);
 		stage.addActor(usernameTextField);
 
 		// Username input text field
 		TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
-		tfs.font = FontManager.getFont(60).font;
+		tfs.font = FontManager.getFont60().font;
 		tfs.messageFont = tfs.font;
 		tfs.fontColor = Color.LIGHT_GRAY;
 		tfs.messageFontColor = Color.GRAY;
@@ -255,7 +252,7 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadJobDescription() {
-		Label jobDescription = new Label("", font45) {
+		Label jobDescription = new Label("", FontManager.getFont45()) {
 			@Override
 			public void act(float delta) {
 				super.act(delta);
@@ -292,7 +289,7 @@ public class CharacterSelection extends GameState {
 		Dimension dimRef = new Dimension();
 
 		// Create label
-		Actor actor = new Label(label, font60);
+		Actor actor = new Label(label, FontManager.getFont60());
 		actor.setBounds(previewFrame.getRight() + 20, reference.getY() -
 				actor.getHeight() - 30, Betrayal.WIDTH - reference.getX() - 20, 60);
 		((Label) actor).setAlignment(Align.center);
@@ -316,7 +313,7 @@ public class CharacterSelection extends GameState {
 		dimRef.setBounds(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		// Create serial number
-		actor = new Label("", font60) {
+		actor = new Label("", FontManager.getFont60()) {
 			@Override
 			public void act(float delta) {
 				super.act(delta);

@@ -45,7 +45,7 @@ public class LobbyOptions extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Options", FontManager.getFont(40));
+		title = new Label("Options", FontManager.getFont40());
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 350);

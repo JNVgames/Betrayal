@@ -54,7 +54,7 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadTitle() {
-		title = new Label("Inventory", FontManager.getFont(40));
+		title = new Label("Inventory", FontManager.getFont40());
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -63,7 +63,7 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadHelp(){
-		Label help = new Label( "Tap Item to use",FontManager.getFont(40));
+		Label help = new Label( "Tap Item to use",FontManager.getFont40());
 		help.setX((Betrayal.WIDTH - help.getPrefWidth())/2);
 		help.setY(lobbyButton.getTop()+70);
 		popup.addActor(help);
@@ -110,7 +110,7 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadSortButton() {
-		Label sortButton = new Label("Sort", FontManager.getFont(40));
+		Label sortButton = new Label("Sort", FontManager.getFont40());
 		sortButton.setBounds(background.getX() + background.getWidth() - 30 - sortButton.getPrefWidth(),
 				lobbyButton.getY() + lobbyButton.getHeight() + 842, sortButton.getPrefWidth(),
 				sortButton.getPrefHeight());

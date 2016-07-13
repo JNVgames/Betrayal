@@ -69,17 +69,15 @@ public class EventLog extends Popup {
 
 	private void loadHistory() {
 		for (Event event : eventHistory) {
-			Label newEvent = new Label(event.toString(), FontManager.getFont(40));
+			Label newEvent = new Label(event.toString(), FontManager.getFont40());
 			Label separate = new Label(
-					 "------------------------------------------------------------"
-					+"------------------------------------------------------------"
-					+"------------------------------------------------------------"
-					, FontManager.getFont(12));
-			separate.setColor(Color.WHITE);
+					"------------------------------------------------------------"
+							+ "------------------------------------------------------------"
+							+ "------------------------------------------------------------"
+					, FontManager.getFont12());
+//			separate.setColor(Color.WHITE);
 			verticalGroup.addActor(newEvent);
 			verticalGroup.addActor(separate);
-
-
 		}
 	}
 }

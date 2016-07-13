@@ -25,6 +25,7 @@ public class ResourceLoader {
 
 	public ResourceLoader(BetrayalAssetManager res) {
 		this.res = res;
+		FontManager.loadFonts();
 	}
 
 	public void loadLoadingScreen() {
@@ -901,7 +902,7 @@ public class ResourceLoader {
 				.health(25).attack(10).defense(1)
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.numTargets(1)
-				.effect(new AttackDown(9, 3))
+				.effect(new AttackDown(9, 1))
 				.build();
 
 		// Tier 1

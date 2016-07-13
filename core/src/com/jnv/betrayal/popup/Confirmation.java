@@ -34,7 +34,7 @@ public class Confirmation extends Popup {
 	}
 
 	private void loadTitle() {
-		Label.LabelStyle font = FontManager.getFont(40);
+		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
 		title = new Label(string, font);
 		title.layout();

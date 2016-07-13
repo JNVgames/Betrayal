@@ -23,7 +23,7 @@ public class PartyRoom extends Popup {
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
-		partyTitle = new Label("", FontManager.getFont(60));            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
+		partyTitle = new Label("", FontManager.getFont60());            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
 	}
@@ -94,7 +94,7 @@ public class PartyRoom extends Popup {
 	private void loadFriendsList(List<String> listOfFriends) {
 		VerticalGroup verticalGroup = new VerticalGroup();
 		for (String name : listOfFriends) {
-			Label label = new Label(name, FontManager.getFont(50));
+			Label label = new Label(name, FontManager.getFont50());
 			verticalGroup.addActor(label);
 		}
 		ScrollPane scrollPane = new ScrollPane(verticalGroup);

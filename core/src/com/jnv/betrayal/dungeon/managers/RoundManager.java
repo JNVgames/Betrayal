@@ -1,5 +1,6 @@
 package com.jnv.betrayal.dungeon.managers;
 
+import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
@@ -31,12 +32,12 @@ public class RoundManager {
 				if (event.turnIsZero()) {
 					event.getEffect().doEndEffect();
 					eventsToRemove.add(event);
-					addEvent(event.getEffect());
+					addEvent(event.getEffect(), event.getEffect().getEndType());
 				}
 				//if effect is consistent
 				if (event.getEffect().isConsistent()) {
 					event.getEffect().doConsistentEffect();
-					addEvent(event.getEffect());
+					addEvent(event.getEffect(), event.getEffect().getConsistentType());
 				}
 			}
 		}
@@ -52,9 +53,9 @@ public class RoundManager {
 		AnimationManager.performAnimation(event);
 	}
 
-	public void addEvent(Effect effect) {
-		Event event = new Event(effect);
-		events.add(new Event(effect));
+	public void addEvent(Effect effect, EventType eventType) {
+		Event event = new Event(effect, eventType);
+		events.add(event);
 		effect.doStartEffect();
 		eventHistory.addLast(event);
 		AnimationManager.performAnimation(event);

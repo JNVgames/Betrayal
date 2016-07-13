@@ -43,7 +43,7 @@ public class Options extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("Options", FontManager.getFont(60));
+		title = new Label("Options", FontManager.getFont60());
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 300);

@@ -56,7 +56,7 @@ public class OKPopup extends Popup {
 	}
 
 	private void loadTitle() {
-		Label.LabelStyle font = FontManager.getFont(40);
+		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
 		Label title = new Label(string, font);
 		title.layout();

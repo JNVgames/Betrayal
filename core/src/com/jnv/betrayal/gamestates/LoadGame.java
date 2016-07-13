@@ -62,10 +62,6 @@ public class LoadGame extends GameState {
 	}
 
 	// Helpers
-	private Label.LabelStyle loadFont(int fontSize) {
-		return FontManager.getFont(fontSize);
-	}
-
 	private void loadBackButton() {
 		Group group_button_back = new Group();
 
@@ -76,7 +72,7 @@ public class LoadGame extends GameState {
 		button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
 		group_button_back.addActor(button_back);
 
-		Label button_text_back = new Label("Back", loadFont(60));
+		Label button_text_back = new Label("Back", FontManager.getFont60());
 		button_text_back.setX(button_back.getX() + button_back.getWidth() + 10);
 		button_text_back.setY(button_back.getY());
 		group_button_back.addActor(button_text_back);
@@ -120,28 +116,28 @@ public class LoadGame extends GameState {
 			preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);
 			preview.addActor(preview_charPrev);
 
-			Label classPreview = new Label(c.job.toString(), loadFont(50));
+			Label classPreview = new Label(c.job.toString(), FontManager.getFont50());
 			classPreview.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
 			classPreview.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
 					- classPreview.getPrefHeight());
 			classPreview.setColor(Color.WHITE);
 			preview.addActor(classPreview);
 
-			Label preview_floor = new Label("FLOOR", loadFont(40));
+			Label preview_floor = new Label("FLOOR", FontManager.getFont40());
 			preview_floor.setX(Betrayal.WIDTH - 10 - preview_floor.getPrefWidth());
 			preview_floor.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
 					- preview_floor.getPrefHeight());
 			preview_floor.setColor(Color.WHITE);
 			preview.addActor(preview_floor);
 
-			Label preview_floorNum =
+			Label floorNumLabel =
 					new Label(Integer.toString(c.stats.getStat(Stat.FLOOR)),
-							loadFont(100));
-			preview_floorNum.setBounds(preview_floor.getX(), preview_charPrev.getY(),
+							FontManager.getFont100());
+			floorNumLabel.setBounds(preview_floor.getX(), preview_charPrev.getY(),
 					preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());
-			preview_floorNum.setColor(Color.LIGHT_GRAY);
-			preview_floorNum.setAlignment(Align.center);
-			preview.addActor(preview_floorNum);
+			floorNumLabel.setColor(Color.LIGHT_GRAY);
+			floorNumLabel.setAlignment(Align.center);
+			preview.addActor(floorNumLabel);
 
 			addPreviewListener(preview, preview_frame, c);
 
@@ -153,7 +149,7 @@ public class LoadGame extends GameState {
 	}
 
 	private void loadDeleteButton() {
-		final Label buttonDelete = new Label("Delete tmp", loadFont(60));
+		final Label buttonDelete = new Label("Delete tmp", FontManager.getFont60());
 		buttonDelete.setBounds(Betrayal.WIDTH - 30 - buttonDelete.getPrefWidth(),
 				50, buttonDelete.getPrefWidth(), buttonDelete.getPrefHeight());
 		buttonDelete.layout();
@@ -169,7 +165,7 @@ public class LoadGame extends GameState {
 	}
 
 	private void loadCancelButton() {
-		final Label button_cancel = new Label("Cancel tmp", loadFont(60));
+		final Label button_cancel = new Label("Cancel tmp", FontManager.getFont60());
 		button_cancel.setBounds(Betrayal.WIDTH - 30 - button_cancel.getPrefWidth(),
 				50, button_cancel.getPrefWidth(), button_cancel.getPrefHeight());
 		button_cancel.layout();

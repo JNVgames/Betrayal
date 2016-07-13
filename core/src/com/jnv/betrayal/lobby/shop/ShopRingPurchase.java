@@ -42,7 +42,7 @@ public class ShopRingPurchase extends Popup {
 	}
 
 	private void loadPrice() {
-		price = new Label("$$$$$", FontManager.getFont(40));
+		price = new Label("$$$$$", FontManager.getFont40());
 		price.setHeight(50);
 		price.setX(450);
 		price.setY(500);
@@ -50,7 +50,7 @@ public class ShopRingPurchase extends Popup {
 	}
 
 	private void loadDescription() {
-		description = new Label("+5 Attack", FontManager.getFont(40));
+		description = new Label("+5 Attack", FontManager.getFont40());
 		description.setHeight(50);
 		description.setX(300);
 		description.setY(700);

@@ -13,7 +13,7 @@ public class Timer {
 	private java.util.Timer timer;
 
 	public Timer() {
-		timerDisplay = new Label("----", FontManager.getFont(70));
+		timerDisplay = new Label("----", FontManager.getFont70());
 		timer = new java.util.Timer();
 	}
 }

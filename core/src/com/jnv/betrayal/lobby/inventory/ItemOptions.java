@@ -112,7 +112,7 @@ class ItemOptions extends Popup {
 	}
 
 	private Label createDungeonOptions(Dimension dimens, Option option) {
-		Label label = new Label(option.toString(), FontManager.getFont(60));
+		Label label = new Label(option.toString(), FontManager.getFont60());
 		label.setBounds(dimens);
 		switch (option) {
 			case Use:
@@ -158,7 +158,7 @@ class ItemOptions extends Popup {
 	}
 
 	private Label createOptionLabel(Dimension dimens, Option option) {
-		Label label = new Label(option.toString(), FontManager.getFont(60));
+		Label label = new Label(option.toString(), FontManager.getFont60());
 		label.setBounds(dimens);
 		switch (option) {
 			case Equip:

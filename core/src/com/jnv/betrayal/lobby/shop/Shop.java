@@ -363,7 +363,7 @@ public class Shop extends Popup {
 	private void loadSwordTitles() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleSword[i - 1] = new Label("Sword (Tier " + i + ")", FontManager.getFont(40));
+			titleSword[i - 1] = new Label("Sword (Tier " + i + ")", FontManager.getFont40());
 			titleSword[i - 1].setX(110);
 			titleSword[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleSword[i - 1]);
@@ -373,7 +373,7 @@ public class Shop extends Popup {
 	private void loadShieldTitles() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleShield[i - 1] = new Label("Shield (Tier" + i + ")", FontManager.getFont(40));
+			titleShield[i - 1] = new Label("Shield (Tier" + i + ")", FontManager.getFont40());
 			titleShield[i - 1].setX(110);
 			titleShield[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleShield[i - 1]);
@@ -453,24 +453,24 @@ public class Shop extends Popup {
 			currentGroup.addActor(run[i - 1]);
 		}
 
-		runTitle = new Label("Run", FontManager.getFont(40));
+		runTitle = new Label("Run", FontManager.getFont40());
 		runTitle.setX(110);
 		runTitle.setY(run[0].getTop()+10);
 		currentGroup.addActor(runTitle);
 	}
 
 	private void loadRingTitle() {
-		Label titleRing1 = new Label("Rings (Tier 1)", FontManager.getFont(40));
+		Label titleRing1 = new Label("Rings (Tier 1)", FontManager.getFont40());
 		titleRing1.setX(110);
 		titleRing1.setY(Betrayal.HEIGHT - 250);
 		currentGroup.addActor(titleRing1);
 
-		Label titleRing2 = new Label("Rings (Tier 2)", FontManager.getFont(40));
+		Label titleRing2 = new Label("Rings (Tier 2)", FontManager.getFont40());
 		titleRing2.setX(110);
 		titleRing2.setY(Betrayal.HEIGHT - 422);
 		currentGroup.addActor(titleRing2);
 
-		Label titleItems = new Label("Potions", FontManager.getFont(40));
+		Label titleItems = new Label("Potions", FontManager.getFont40());
 		titleItems.setX(110);
 		titleItems.setY(Betrayal.HEIGHT - 250 - 172 * 2);
 		currentGroup.addActor(titleItems);
@@ -645,7 +645,7 @@ public class Shop extends Popup {
 	private void loadHeadgearTitle() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleHeadgear[i - 1] = new Label("Helmet (Tier " + i + ")", FontManager.getFont(40));
+			titleHeadgear[i - 1] = new Label("Helmet (Tier " + i + ")", FontManager.getFont40());
 			titleHeadgear[i - 1].setX(110);
 			titleHeadgear[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleHeadgear[i - 1]);
@@ -655,7 +655,7 @@ public class Shop extends Popup {
 	private void loadArmorTitle() {
 		int spacing = 172;
 		for (int i = 1; i <= 5; i++) {
-			titleArmor[i - 1] = new Label("Armor (Tier " + i + ")", FontManager.getFont(40));
+			titleArmor[i - 1] = new Label("Armor (Tier " + i + ")", FontManager.getFont40());
 			titleArmor[i - 1].setX(110);
 			titleArmor[i - 1].setY(Betrayal.HEIGHT - 250 - (i - 1) * spacing);
 			currentGroup.addActor(titleArmor[i - 1]);
@@ -666,7 +666,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadItems() {
-		comingSoon = new Label("Coming Soon", FontManager.getFont(40));
+		comingSoon = new Label("Coming Soon", FontManager.getFont40());
 		comingSoon.setX(Betrayal.WIDTH/2 - comingSoon.getPrefWidth()/2);
 		comingSoon.setY(Betrayal.HEIGHT);
 		currentGroup.addActor(comingSoon);
@@ -701,7 +701,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadCloakDescription(Image cloakIcon) {
-		Label description = new Label("Cloak\n" + new Cloak("cloak11", res).getDescription(), FontManager.getFont(40));
+		Label description = new Label("Cloak\n" + new Cloak("cloak11", res).getDescription(), FontManager.getFont40());
 		description.setX(cloakIcon.getRight() + 30);
 		description.setY(cloakIcon.getY() - 55);
 		description.setWidth(600);
@@ -801,7 +801,7 @@ public class Shop extends Popup {
 		});
 
 		currentGroup.addActor(cloakBuyButton);
-		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont((60)));
+		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont60());
 		cloakPrice.setX((leftArrow.getX() + 40));
 		cloakPrice.setY(cloakBuyButton.getY() + 110);
 		currentGroup.addActor(cloakPrice);

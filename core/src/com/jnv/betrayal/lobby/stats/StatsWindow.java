@@ -49,7 +49,7 @@ public class StatsWindow extends Popup {
 		if (!character.equips.isHeadSlotEmpty()) {
 			final String showHairText = "Show\nhair";
 			final String showHelmetText = "Show\nhelmet";
-			hair = new Label(character.preview.isShowingHead() ? showHelmetText : showHairText, FontManager.getFont(40));
+			hair = new Label(character.preview.isShowingHead() ? showHelmetText : showHairText, FontManager.getFont40());
 			hair.setX(120);
 			hair.setY(Betrayal.HEIGHT - 800);
 			hair.addListener(new InputListener(title) {
@@ -100,7 +100,7 @@ public class StatsWindow extends Popup {
 	}
 
 	private void loadTitle() {
-		title = new Label("My Stats", FontManager.getFont(40));
+		title = new Label("My Stats", FontManager.getFont40());
 		title.setHeight(120);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
@@ -130,15 +130,15 @@ public class StatsWindow extends Popup {
 
 		// Floor Label
 		int fontSize = 40;
-		floorLabel = new Label("", FontManager.getFont(fontSize));
+		floorLabel = new Label("", FontManager.getFont40());
 
 		character.stats.updateStats();
 		equipHealthLabel = new Label(" + " + Integer.toString(character.stats.getEquipHealth()),
-				FontManager.getFont(fontSize));
+				FontManager.getFont40());
 		equipAttackLabel = new Label(" + " + Integer.toString(character.stats.getEquipAttack()),
-				FontManager.getFont(fontSize));
+				FontManager.getFont40());
 		equipDefenseLabel = new Label(" + " + Integer.toString(character.stats.getEquipDefense()),
-				FontManager.getFont(fontSize));
+				FontManager.getFont40());
 
 		// Get stats from character
 		floorLabel.setText(character.stats.toString(Stat.FLOOR));
@@ -150,7 +150,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(floorLabel);
 
 		// SET HEALTH LABEL INITIALLY
-		healthLabel = new Label("", FontManager.getFont(40));
+		healthLabel = new Label("", FontManager.getFont40());
 		healthLabel.setX(background.getX() + 60);
 		healthLabel.setY(yRef - fontSize - 50);
 		yRef = healthLabel.getY();
@@ -159,7 +159,7 @@ public class StatsWindow extends Popup {
 		popup.addActor(healthLabel);
 
 		// SET ATTACK LABEL INITIALLY
-		attackLabel = new Label("", FontManager.getFont(40));
+		attackLabel = new Label("", FontManager.getFont40());
 		attackLabel.setX(background.getX() + 60);
 		attackLabel.setY(yRef - fontSize - 50);
 		yRef = attackLabel.getY();
@@ -168,7 +168,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(attackLabel);
 
 		// SET DEFENSE LABEL INITIALLY
-		defenseLabel = new Label("", FontManager.getFont(40));
+		defenseLabel = new Label("", FontManager.getFont40());
 		defenseLabel.setX(background.getX() + 60);
 		defenseLabel.setY(yRef - fontSize - 50);
 		yRef = defenseLabel.getY();
@@ -177,7 +177,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(defenseLabel);
 
 		// SET EQUIP HEALTH LABEL
-		equipHealthLabel = new Label("", FontManager.getFont(40));
+		equipHealthLabel = new Label("", FontManager.getFont40());
 		equipHealthLabel.setColor(Color.GREEN);
 		equipHealthLabel.setX(healthLabel.getRight());
 		equipHealthLabel.setY(healthLabel.getY());
@@ -186,7 +186,7 @@ public class StatsWindow extends Popup {
 		popup.addActor(equipHealthLabel);
 
 		// SET EQUIP ATTACK LABEL
-		equipAttackLabel = new Label("", FontManager.getFont(40));
+		equipAttackLabel = new Label("", FontManager.getFont40());
 		equipAttackLabel.setColor(Color.GREEN);
 		equipAttackLabel.setX(attackLabel.getRight());
 		equipAttackLabel.setY(attackLabel.getY());
@@ -195,7 +195,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(equipAttackLabel);
 
 		// SET EQUIP DEFENSE LABEL
-		equipDefenseLabel = new Label("", FontManager.getFont(40));
+		equipDefenseLabel = new Label("", FontManager.getFont40());
 		equipDefenseLabel.setColor(Color.GREEN);
 		equipDefenseLabel.setX(defenseLabel.getRight());
 		equipDefenseLabel.setY(defenseLabel.getY());
@@ -295,7 +295,7 @@ public class StatsWindow extends Popup {
 	}
 
 	private void loadAvailablePoints() {
-		availablePoints = new Label("Available Points: " + Integer.toString(applyPoints.getAvailablePoints()), FontManager.getFont(40));
+		availablePoints = new Label("Available Points: " + Integer.toString(applyPoints.getAvailablePoints()), FontManager.getFont40());
 		availablePoints.setX(Betrayal.WIDTH / 2 - 150);
 		availablePoints.setY(Betrayal.HEIGHT - 225);
 		popup.addActor(availablePoints);

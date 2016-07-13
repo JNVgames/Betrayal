@@ -57,7 +57,7 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadPrice() {
-		Label price = new Label("Price: " + Integer.toString(item.getBuyCost()), FontManager.getFont(40));
+		Label price = new Label("Price: " + Integer.toString(item.getBuyCost()), FontManager.getFont40());
 		price.setHeight(50);
 		price.setX(365);
 		price.setY(850);
@@ -65,7 +65,7 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadYourMoney() {
-		Label userMoney = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont(40));
+		Label userMoney = new Label(Integer.toString(character.inventory.getGold()), FontManager.getFont40());
 		userMoney.setHeight(50);
 		userMoney.setX(450);
 		userMoney.setY(800);
@@ -73,7 +73,7 @@ public class ShopPurchasePopup extends Popup {
 	}
 
 	private void loadDescription() {
-		Label description = new Label(item.getDescription(), FontManager.getFont(40));
+		Label description = new Label(item.getDescription(), FontManager.getFont40());
 		description.setX((Betrayal.WIDTH - description.getWidth()) / 2);
 		description.setY(1048 - description.getPrefHeight());
 		popup.addActor(description);

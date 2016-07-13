@@ -64,7 +64,7 @@ public class Dungeon extends GameState {
 
 	// Helpers
 	private void loadTimer() {
-		Label label = new Label("0:25", FontManager.getFont(70));
+		Label label = new Label("0:25", FontManager.getFont70());
 		label.setX((Betrayal.WIDTH - label.getWidth()) / 2);
 		label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
 		stage.addActor(label);
