@@ -5,8 +5,6 @@
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
@@ -17,12 +15,17 @@ import com.jnv.betrayal.gameobjects.defense.Helmet;
 import com.jnv.betrayal.gameobjects.defense.Shield;
 import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.special.Ring;
+import com.jnv.betrayal.online.JsonSerializable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Manages the character's equips
  */
-public class Equips implements Json.Serializable {
+public class Equips implements JsonSerializable {
 
 	public final Equip[] equips;
 	Inventory inventory;
@@ -169,11 +172,23 @@ public class Equips implements Json.Serializable {
 		equips[EquipSlot.CLOAK] = null;
 	}
 
-	public void write(Json json) {
-		json.writeField(this, "equips", Equip[].class);
+	@Override
+	public void write(JSONObject json) {
+		try {
+			JSONArray array = new JSONArray();
+			for (Equip equip : equips) {
+				if (equip != null) {
+					array.put(equip.getTextureName());
+				}
+			}
+			json.put("equips", array);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void read(Json json, JsonValue jsonData) {
+	@Override
+	public void read(JSONObject json) {
 
 	}
 }

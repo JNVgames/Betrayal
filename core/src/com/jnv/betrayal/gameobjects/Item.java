@@ -7,11 +7,15 @@ package com.jnv.betrayal.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.jnv.betrayal.online.JsonSerializable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Comparator;
 
-public abstract class Item implements Json.Serializable {
+public abstract class Item {
 
 	protected BetrayalAssetManager res;
 	protected Texture itemIcon;
@@ -67,7 +71,7 @@ public abstract class Item implements Json.Serializable {
 		return id;
 	}
 
-	public String getName() {
+	public String getTextureName() {
 		return textureName;
 	}
 
@@ -84,12 +88,6 @@ public abstract class Item implements Json.Serializable {
 		return buyCost;
 	}
 
-	/*
-	public static void setCosts(String name, int newBuyCost, int newSellCost) {
-		Item src = res.getItem(name);
-		src.setBuyCost(newBuyCost);
-		src.setSellCost(newSellCost);
-	} */
 	public void setBuyCost(int new_cost) {
 		buyCost = new_cost;
 	}
@@ -116,14 +114,6 @@ public abstract class Item implements Json.Serializable {
 	 */
 	public int compareTo(Item item) {
 		return this.id < item.getID() ? -1 : ((this.id == item.getID()) ? 0 : 1);
-	}
-
-	public void write(Json json) {
-		json.writeField(this, "textureName", String.class);
-	}
-
-	public void read(Json json, JsonValue jsonData) {
-
 	}
 
 	public static class ItemComparator implements Comparator<Item> {

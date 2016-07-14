@@ -4,10 +4,13 @@
 
 package com.jnv.betrayal.character;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
+import com.jnv.betrayal.online.JsonSerializable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
 /**
  * Manages a character's inventory
  */
-public class Inventory implements Json.Serializable {
+public class Inventory implements JsonSerializable {
 
 	private int gold, maxItems;
 	private List<Item> items;
@@ -60,7 +63,7 @@ public class Inventory implements Json.Serializable {
 	public void sellItem(Item item) {
 		// if item isn't in the inventory, crash the game
 		if (!items.contains(item))
-			throw new AssertionError("Item does not exist in the character's inventory: " + item.getName());
+			throw new AssertionError("Item does not exist in the character's inventory: " + item.getTextureName());
 		items.remove(item);
 		gold += item.getSellCost();
 	}
@@ -129,14 +132,22 @@ public class Inventory implements Json.Serializable {
 		return items.size() == maxItems;
 	}
 
-	public void write(Json json) {
-		json.writeObjectStart("inventory");
-		json.writeField(this, "gold", Integer.class);
-		json.writeField(this, "items", List.class);
-		json.writeObjectEnd();
+	@Override
+	public void write(JSONObject json) {
+		try {
+			json.put("gold", gold);
+			JSONArray arr = new JSONArray();
+			for (Item item : items) {
+				arr.put(item.getTextureName());
+			}
+			json.put("items", arr);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void read(Json json, JsonValue jsonData) {
+	@Override
+	public void read(JSONObject json) {
 
 	}
 }

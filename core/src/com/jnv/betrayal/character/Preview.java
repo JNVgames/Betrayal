@@ -11,16 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.PreviewSlot;
+import com.jnv.betrayal.online.JsonSerializable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Manages a character's preview
  */
-public class Preview implements Json.Serializable {
+public class Preview implements JsonSerializable {
 
 	protected boolean isShowingHead;
 	PreviewHandler previewHandler;
@@ -211,16 +213,20 @@ public class Preview implements Json.Serializable {
 		return previewRotatorsGroup;
 	}
 
-	public void write(Json json) {
-		json.writeObjectStart("traits");
-		json.writeField(this, "gender", String.class);
-		if (gender == Gender.MALE) json.writeField(this, "maleHair", Integer.class);
-		else json.writeField(this, "femaleHair", Integer.class);
-		json.writeField(this, "hairColor", Integer.class);
-		json.writeObjectEnd();
+	@Override
+	public void write(JSONObject json) {
+		try {
+			json.put("gender", gender.toString());
+			json.put("maleHair", maleHair);
+			json.put("femaleHair", femaleHair);
+			json.put("hairColor", hairColor);
+		} catch (JSONException e) {
+			System.out.println(e);
+		}
 	}
 
-	public void read(Json json, JsonValue jsonData) {
+	@Override
+	public void read(JSONObject json) {
 
 	}
 }

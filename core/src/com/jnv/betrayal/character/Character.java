@@ -5,18 +5,23 @@
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
+import com.jnv.betrayal.online.JsonSerializable;
+import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Random;
 
 /**
  * Holds information regarding a game character's traits
  */
-public class Character implements Json.Serializable {
+public class Character implements JsonSerializable {
 
+	private Room room;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -82,16 +87,32 @@ public class Character implements Json.Serializable {
 	}
 
 	// Json methods
-	public void write(Json json) {
-		json.writeField(this, "id", Integer.class);
-		json.writeField(job, "job", Job.class);
-		preview.write(json);
-		equips.write(json);
-		inventory.write(json);
-		stats.write(json);
+	public void write(JSONObject json) {
+		try {
+			json.put("id", id);
+			json.put("job", job.toString());
+
+			JSONObject previewJson = new JSONObject();
+			preview.write(previewJson);
+			json.put("preview", previewJson);
+
+			JSONObject equipsJson = new JSONObject();
+			equips.write(equipsJson);
+			json.put("equips", equipsJson);
+
+			JSONObject invJson = new JSONObject();
+			inventory.write(invJson);
+			json.put("inventory", invJson);
+
+			JSONObject statsJson = new JSONObject();
+			stats.write(statsJson);
+			json.put("stats", statsJson);
+		} catch (JSONException e) {
+			System.out.println(e);
+		}
 	}
 
-	public void read(Json json, JsonValue jsonData) {
+	public void read(JSONObject json) {
 
 	}
 

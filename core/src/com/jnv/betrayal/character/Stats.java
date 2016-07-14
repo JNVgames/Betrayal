@@ -7,11 +7,15 @@ package com.jnv.betrayal.character;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Stat;
+import com.jnv.betrayal.online.JsonSerializable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Manages a character's stats
  */
-public class Stats implements Json.Serializable {
+public class Stats implements JsonSerializable {
 
 	private int baseHealth, baseDefense, baseAttack, floor, availablePoints;
 	private int equipHealth, equipAttack, equipDefense;
@@ -152,6 +156,23 @@ public class Stats implements Json.Serializable {
 
 	public ApplyPoints getApplyPointsObject() {
 		return applyPoints;
+	}
+
+	@Override
+	public void write(JSONObject json) {
+		try {
+			json.put("baseHealth", baseHealth);
+			json.put("baseAttack", baseAttack);
+			json.put("baseDefense", baseDefense);
+			json.put("floor", floor);
+		} catch (JSONException e) {
+			System.out.println(e);
+		}
+	}
+
+	@Override
+	public void read(JSONObject json) {
+
 	}
 
 	/**

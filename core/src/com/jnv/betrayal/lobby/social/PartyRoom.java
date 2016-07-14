@@ -2,7 +2,9 @@ package com.jnv.betrayal.lobby.social;
 
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -17,9 +19,11 @@ public class PartyRoom extends Popup {
 
 	public final Image partyBackground, lobbyButton, createRoom, leaveRoom;
 	public final Label partyTitle;
+	private Character currentCharacter;
 
 	public PartyRoom(Betrayal game) {
 		super(game);
+		currentCharacter = game.getCurrentCharacter();
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
@@ -70,7 +74,7 @@ public class PartyRoom extends Popup {
 		createRoom.addListener(new InputListener(createRoom) {
 			@Override
 			public void doAction() {
-
+				doCreateRoom();
 			}
 		});
 		popup.addActor(createRoom);
@@ -84,6 +88,16 @@ public class PartyRoom extends Popup {
 			}
 		});
 		popup.addActor(leaveRoom);
+	}
+
+	private void doCreateRoom() {
+		Room room = new Room(currentCharacter);
+		room.connectToServer();
+		room.createRoom();
+		// Emit createRoom event
+
+		// Send Character data
+
 	}
 
 	/**

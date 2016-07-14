@@ -16,14 +16,8 @@ import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import io.socket.client.IO;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 public class Betrayal extends Game {
 
@@ -42,7 +36,6 @@ public class Betrayal extends Game {
 	private Character currentCharacter;
 
 	public void create() {
-		nodeJarninShit();
 		Gdx.graphics.setContinuousRendering(false);
 
 		init();
@@ -53,32 +46,6 @@ public class Betrayal extends Game {
 		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
 
 		resume();
-	}
-
-	private void nodeJarninShit() {
-		try {
-			Socket socket = IO.socket("http://localhost:8080");
-			socket.connect();
-			socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-				@Override
-				public void call(Object... args) {
-					System.out.println("Connected");
-				}
-			}).on("socketID", new Emitter.Listener() {
-				@Override
-				public void call(Object... args) {
-					JSONObject data = (JSONObject) args[0];
-					try {
-						String id = data.getString("id");
-						System.out.println("My ID: " + id);
-					} catch (Exception e) {
-						System.out.println(e);
-					}
-				}
-			});
-		} catch (Exception e) {
-			System.out.println(e);
-		}
 	}
 
 	public void dispose() {

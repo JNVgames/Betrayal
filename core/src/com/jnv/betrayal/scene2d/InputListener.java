@@ -37,7 +37,9 @@ public class InputListener extends com.badlogic.gdx.scenes.scene2d.InputListener
 	}
 
 	public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-		if (x >= 0 && x <= width && y >= 0 && y <= height) doAction();
+		if (x >= 0 && x <= width && y >= 0 && y <= height) {
+			doAction();
+		}
 		else if (hasPressedEffect && isPressed) {
 			actor.addAction(Actions.moveBy(-5, 5));
 			isPressed = false;
