@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public interface JsonSerializable {
 
-	void write(JSONObject json);
+	JSONObject toJson();
 
-	void read(JSONObject json);
+	void fromJson(JSONObject data);
 }

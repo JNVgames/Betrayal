@@ -527,17 +527,21 @@ public abstract class Card {
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
-						new OKPopup(field.game, "Floor Completed!") {
+						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward +" Gold") {
 							@Override
 							public void onConfirm() {
 								for (Card c : field.getAllPlayerCards()) {
 									((PlayerCard) c).levelUpCharacter();
+									((PlayerCard) c).getReward();
+									System.out.println("field reward" + field.reward);
 								}
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
+
 							}
 						};
 					}
 				};
+
 				card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {

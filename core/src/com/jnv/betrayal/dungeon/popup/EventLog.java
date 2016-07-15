@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.popup;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -69,15 +70,21 @@ public class EventLog extends Popup {
 
 	private void loadHistory() {
 		for (Event event : eventHistory) {
-			Label newEvent = new Label(event.toString(), FontManager.getFont40());
-			Label separate = new Label(
-					"------------------------------------------------------------"
-							+ "------------------------------------------------------------"
-							+ "------------------------------------------------------------"
-					, FontManager.getFont12());
-//			separate.setColor(Color.WHITE);
-			verticalGroup.addActor(newEvent);
-			verticalGroup.addActor(separate);
+			// todo get this to werk
+			verticalGroup.addActor(new Label(
+					"-------------------------------------",
+					FontManager.getFont12()));
+//			Actor blank = new Actor();
+//			blank.setWidth(400);
+//			blank.setHeight(4);
+//			Actor actor = new Actor();
+//			actor.setWidth(400);
+//			actor.setHeight(2);
+//			actor.setColor(Color.WHITE);
+//			verticalGroup.addActor(blank);
+//			verticalGroup.addActor(actor);
+//			verticalGroup.addActor(blank);
+			verticalGroup.addActor(new Label(event.toString(), FontManager.getFont40()));
 		}
 	}
 }

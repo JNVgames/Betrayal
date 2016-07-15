@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
+import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Previewable;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
 import com.jnv.betrayal.gameobjects.defense.BodyArmor;
@@ -21,6 +22,8 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Constructor;
 
 /**
  * Manages the character's equips
@@ -173,22 +176,44 @@ public class Equips implements JsonSerializable {
 	}
 
 	@Override
-	public void write(JSONObject json) {
+	public JSONObject toJson() {
+		JSONObject data = new JSONObject();
 		try {
-			JSONArray array = new JSONArray();
-			for (Equip equip : equips) {
-				if (equip != null) {
-					array.put(equip.getTextureName());
+			for (int i = 0; i < EquipSlot.SLOTS; i++) {
+				if (equips[i] != null) {
+					JSONObject obj = new JSONObject();
+					obj.put("class", equips[i].getClass().getCanonicalName());
+					obj.put("textureName", equips[i].getTextureName());
+					data.put(EquipSlot.SLOT_STRING[i], obj);
+				} else {
+					data.put(EquipSlot.SLOT_STRING[i], "empty");
 				}
 			}
-			json.put("equips", array);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return data;
 	}
 
 	@Override
-	public void read(JSONObject json) {
+	public void fromJson(JSONObject data) {
+		try {
+			Class<?> clazz;
+			Constructor<?> constructor;
+			Object item;
 
+			for (int i = 0; i < EquipSlot.SLOTS; i++) {
+				if (data.get(EquipSlot.SLOT_STRING[i]) instanceof JSONObject) {
+					JSONObject object = (JSONObject) data.get(EquipSlot.SLOT_STRING[i]);
+					clazz = Class.forName(object.getString("class"));
+					constructor = clazz.getConstructor(String.class, BetrayalAssetManager.class);
+					item = constructor.newInstance(object.getString("textureName"), res);
+					equip((Equip) item);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

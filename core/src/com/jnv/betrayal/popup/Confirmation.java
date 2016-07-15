@@ -10,20 +10,20 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Confirmation extends Popup {
 
-	private Image yesButton, noButton, background;
-	private Label title;
-	private String string;
+	private Image yesButton;
+	private Image background;
+	private String text;
 
-	public Confirmation(Betrayal game, String string) {
+	public Confirmation(Betrayal game, String text) {
 		super(game);
-		this.string = string;
+		this.text = text;
 		loadButtons();
 	}
 
 	private void loadButtons() {
 		loadBackground();
 		loadAnswer();
-		loadTitle();
+		loadText();
 	}
 
 	private void loadBackground() {
@@ -33,10 +33,10 @@ public class Confirmation extends Popup {
 		popup.addActor(background);
 	}
 
-	private void loadTitle() {
+	private void loadText() {
 		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
-		title = new Label(string, font);
+		Label title = new Label(text, font);
 		title.layout();
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
 				yesButton.getY() + yesButton.getHeight() + 50, background.getWidth(),
@@ -59,7 +59,7 @@ public class Confirmation extends Popup {
 		});
 		popup.addActor(yesButton);
 
-		noButton = new Image(res.getTexture("no"));
+		Image noButton = new Image(res.getTexture("no"));
 		noButton.layout();
 		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
 				Betrayal.HEIGHT / 2 - 100, 150, 75);

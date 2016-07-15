@@ -141,38 +141,34 @@ public class Stats implements JsonSerializable {
 		this.floor = floor;
 	}
 
-	public void write(Json json) {
-		json.writeObjectStart("stats");
-		json.writeField(this, "baseHealth", Integer.class);
-		json.writeField(this, "baseAttack", Integer.class);
-		json.writeField(this, "baseDefense", Integer.class);
-		json.writeField(this, "floor", Integer.class);
-		json.writeObjectEnd();
-	}
-
-	public void read(Json json, JsonValue jsonData) {
-
-	}
-
 	public ApplyPoints getApplyPointsObject() {
 		return applyPoints;
 	}
 
 	@Override
-	public void write(JSONObject json) {
+	public JSONObject toJson() {
+		JSONObject data = new JSONObject();
 		try {
-			json.put("baseHealth", baseHealth);
-			json.put("baseAttack", baseAttack);
-			json.put("baseDefense", baseDefense);
-			json.put("floor", floor);
+			data.put("baseHealth", baseHealth);
+			data.put("baseAttack", baseAttack);
+			data.put("baseDefense", baseDefense);
+			data.put("floor", floor);
 		} catch (JSONException e) {
 			System.out.println(e);
 		}
+		return data;
 	}
 
 	@Override
-	public void read(JSONObject json) {
-
+	public void fromJson(JSONObject data) {
+		try {
+			baseHealth = data.getInt("baseHealth");
+			baseAttack = data.getInt("baseAttack");
+			baseDefense = data.getInt("baseDefense");
+			floor = data.getInt("floor");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

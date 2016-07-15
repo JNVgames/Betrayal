@@ -35,6 +35,18 @@ public class Job {
 		job = job.getPrevJob();
 	}
 
+	public void setJob(String job) {
+		if (job.equals(Jobs.WARRIOR.toString())) {
+			this.job = Jobs.WARRIOR;
+		} else if (job.equals(Jobs.KNIGHT.toString())) {
+			this.job = Jobs.KNIGHT;
+		} else if (job.equals(Jobs.PRIEST.toString())) {
+			this.job = Jobs.PRIEST;
+		} else if (job.equals(Jobs.THIEF.toString())) {
+			this.job = Jobs.THIEF;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return job.toString();

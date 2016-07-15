@@ -56,6 +56,10 @@ public class PlayerCard extends Card {
 		character.stats.advanceFloor();
 	}
 
+	public void getReward(){
+		character.inventory.addGold(field.reward);
+	}
+
 	public Card getCardToDefend() {
 		return cardToDefend;
 	}

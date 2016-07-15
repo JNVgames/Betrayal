@@ -213,20 +213,37 @@ public class Preview implements JsonSerializable {
 		return previewRotatorsGroup;
 	}
 
-	@Override
-	public void write(JSONObject json) {
-		try {
-			json.put("gender", gender.toString());
-			json.put("maleHair", maleHair);
-			json.put("femaleHair", femaleHair);
-			json.put("hairColor", hairColor);
-		} catch (JSONException e) {
-			System.out.println(e);
+	public void setGender(String gender) {
+		if (gender.equals(Gender.MALE.toString())) {
+			this.gender = Gender.MALE;
+		} else {
+			this.gender = Gender.FEMALE;
 		}
 	}
 
 	@Override
-	public void read(JSONObject json) {
+	public JSONObject toJson() {
+		JSONObject data = new JSONObject();
+		try {
+			data.put("gender", gender.toString());
+			data.put("maleHair", maleHair);
+			data.put("femaleHair", femaleHair);
+			data.put("hairColor", hairColor);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
 
+	@Override
+	public void fromJson(JSONObject data) {
+		try {
+			setGender(data.getString("gender"));
+			maleHair = data.getInt("maleHair");
+			femaleHair = data.getInt("femaleHair");
+			hairColor = data.getInt("hairColor");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

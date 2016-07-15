@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Manages a character's inventory
  */
-public class Inventory implements JsonSerializable {
+public class Inventory {
 
 	private int gold, maxItems;
 	private List<Item> items;
@@ -105,6 +105,10 @@ public class Inventory implements JsonSerializable {
 		return gold;
 	}
 
+	public void addGold(int amount){
+		gold +=amount;
+	}
+
 	/**
 	 * Returns items in a 2D array. *Used for inventory in lobby
 	 *
@@ -130,24 +134,5 @@ public class Inventory implements JsonSerializable {
 
 	public boolean isFull() {
 		return items.size() == maxItems;
-	}
-
-	@Override
-	public void write(JSONObject json) {
-		try {
-			json.put("gold", gold);
-			JSONArray arr = new JSONArray();
-			for (Item item : items) {
-				arr.put(item.getTextureName());
-			}
-			json.put("items", arr);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void read(JSONObject json) {
-
 	}
 }

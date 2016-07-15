@@ -13,4 +13,14 @@ public final class EquipSlot {
 	public static final int RING2 = 5;
 	public static final int CLOAK = 6;
 	public static final int SLOTS = 7;
+
+	public static final String[] SLOT_STRING = {
+			"head",
+			"body",
+			"leftHand",
+			"rightHand",
+			"ring1",
+			"ring2",
+			"cloak"
+	};
 }

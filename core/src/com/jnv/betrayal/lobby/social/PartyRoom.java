@@ -1,10 +1,14 @@
 package com.jnv.betrayal.lobby.social;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
+import com.jnv.betrayal.popup.CreateRoomPopup;
+import com.jnv.betrayal.popup.JoinRoomPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -17,13 +21,15 @@ import java.util.List;
 
 public class PartyRoom extends Popup {
 
-	public final Image partyBackground, lobbyButton, createRoom, leaveRoom;
+	public final Image partyBackground, lobbyButton, createRoom, leaveRoom, joinRoom;
 	public final Label partyTitle;
 	private Character currentCharacter;
+	private Room room;
 
 	public PartyRoom(Betrayal game) {
 		super(game);
 		currentCharacter = game.getCurrentCharacter();
+		joinRoom = new Image(res.getTexture("ok"));
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
@@ -74,30 +80,78 @@ public class PartyRoom extends Popup {
 		createRoom.addListener(new InputListener(createRoom) {
 			@Override
 			public void doAction() {
-				doCreateRoom();
+				new CreateRoomPopup(game, "Create Room") {
+					@Override
+					public void doAction() {
+						doCreateRoom(getPasswordString());
+					}
+				};
 			}
 		});
 		popup.addActor(createRoom);
+
+		joinRoom.layout();
+		joinRoom.setBounds(372, partyTitle.getY() - 220, 200, 65);
+		joinRoom.addListener(new InputListener(joinRoom) {
+			@Override
+			public void doAction() {
+				new JoinRoomPopup(game, "Join Room") {
+					@Override
+					public void doAction() {
+						doJoinRoom(getPasswordString(), getRoomID());
+					}
+				};
+			}
+		});
+		popup.addActor(joinRoom);
 
 		leaveRoom.layout();
 		leaveRoom.setBounds(372, partyTitle.getY() - 20, 200, 65);
 		leaveRoom.addListener(new InputListener(leaveRoom) {
 			@Override
 			public void doAction() {
-
+				doLeaveRoom();
+				refresh();
 			}
 		});
 		popup.addActor(leaveRoom);
 	}
 
-	private void doCreateRoom() {
-		Room room = new Room(currentCharacter);
+	public void refresh() {
+		if (room.getRoomID() == -1) {
+			createRoom.setColor(Color.WHITE);
+			createRoom.setTouchable(Touchable.enabled);
+			leaveRoom.setColor(Color.GRAY);
+			leaveRoom.setTouchable(Touchable.disabled);
+		}
+		else {
+			createRoom.setColor(Color.GRAY);
+			createRoom.setTouchable(Touchable.disabled);
+			leaveRoom.setColor(Color.WHITE);
+			leaveRoom.setTouchable(Touchable.enabled);
+		}
+	}
+
+	private void doLeaveRoom() {
+		room.leaveRoom();
+
+
+	}
+
+	private void doCreateRoom(String password) {
+		room = new Room(currentCharacter);
 		room.connectToServer();
-		room.createRoom();
+		room.createRoom(password);
 		// Emit createRoom event
 
 		// Send Character data
 
+	}
+
+	private void doJoinRoom(String password, int roomID) {
+		room = new Room(currentCharacter);
+		room.connectToServer();
+		room.joinRoom(password, roomID);
 	}
 
 	/**

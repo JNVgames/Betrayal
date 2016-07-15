@@ -31,6 +31,7 @@ public class Field extends Group {
 	public final List<MonsterCard> monsterZone;
 	List<Card> allCards;
 	private int currentCardTurn;
+	public int reward;
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
@@ -42,6 +43,7 @@ public class Field extends Group {
 		this.gsm = gsm;
 		game = gsm.game;
 		res = gsm.game.res;
+		reward = 0;
 		Image background = new Image(res.getTexture("map-1"));
 		currentCardTurn = 0;
 		allCards = new ArrayList<Card>();

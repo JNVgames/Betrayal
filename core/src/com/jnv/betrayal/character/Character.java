@@ -22,6 +22,7 @@ import java.util.Random;
 public class Character implements JsonSerializable {
 
 	private Room room;
+	public final BetrayalAssetManager res;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
@@ -36,6 +37,7 @@ public class Character implements JsonSerializable {
 	public Character(BetrayalAssetManager res) {
 		id = generateRandomID();
 
+		this.res = res;
 		inventory = new Inventory();
 		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);
@@ -46,10 +48,9 @@ public class Character implements JsonSerializable {
 		preview.update();
 	}
 
-	// TODO REMOVE THIS WE WILL NOT BE USING THIS WE WILL USE ACCOUNT ID
 	private static int generateRandomID() {
 		Random random = new Random();
-		return random.nextInt(999999);
+		return random.nextInt(89999999) + 10000000;
 	}
 
 	public String getTrait(Trait trait) {
@@ -81,40 +82,6 @@ public class Character implements JsonSerializable {
 		this.name = name;
 	}
 
-	public String toJson() {
-		Json json = new Json();
-		return json.prettyPrint(this);
-	}
-
-	// Json methods
-	public void write(JSONObject json) {
-		try {
-			json.put("id", id);
-			json.put("job", job.toString());
-
-			JSONObject previewJson = new JSONObject();
-			preview.write(previewJson);
-			json.put("preview", previewJson);
-
-			JSONObject equipsJson = new JSONObject();
-			equips.write(equipsJson);
-			json.put("equips", equipsJson);
-
-			JSONObject invJson = new JSONObject();
-			inventory.write(invJson);
-			json.put("inventory", invJson);
-
-			JSONObject statsJson = new JSONObject();
-			stats.write(statsJson);
-			json.put("stats", statsJson);
-		} catch (JSONException e) {
-			System.out.println(e);
-		}
-	}
-
-	public void read(JSONObject json) {
-
-	}
 
 	public void setNextTrait(Trait trait) {
 		switch (trait) {
@@ -164,6 +131,35 @@ public class Character implements JsonSerializable {
 				job.setPreviousJob();
 			default:
 				break;
+		}
+	}
+
+	// Json methods
+	@Override
+	public JSONObject toJson() {
+		JSONObject data = new JSONObject();
+		try {
+			data.put("id", id);
+			data.put("job", job.toString());
+			data.put("preview", preview.toJson());
+			data.put("equips", equips.toJson());
+			data.put("stats", stats.toJson());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	@Override
+	public void fromJson(JSONObject data) {
+		try {
+			id = data.getInt("id");
+			job.setJob(data.getString("job"));
+			preview.fromJson(data.getJSONObject("preview"));
+			equips.fromJson(data.getJSONObject("equips"));
+			stats.fromJson(data.getJSONObject("stats"));
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 }

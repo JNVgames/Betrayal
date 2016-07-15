@@ -12,11 +12,11 @@ public class OKPopup extends Popup {
 
 	private int x = 150, y = 500, width = Betrayal.WIDTH - 300, height = Betrayal.HEIGHT - 1000;
 	private Image okayButton, background;
-	private String string;
+	private String text;
 
-	public OKPopup(Betrayal game, String string) {
+	public OKPopup(Betrayal game, String text) {
 		super(game);
-		this.string = string;
+		this.text = text;
 		loadButtons();
 		setMaskAction(new Runnable() {
 			@Override
@@ -26,9 +26,9 @@ public class OKPopup extends Popup {
 		});
 	}
 
-	public OKPopup(int width, int height, Betrayal game, String string) {
+	public OKPopup(int width, int height, Betrayal game, String text) {
 		super(game);
-		this.string = string;
+		this.text = text;
 		this.width = width;
 		this.height = height;
 		x = (Betrayal.WIDTH - width) / 2;
@@ -45,7 +45,7 @@ public class OKPopup extends Popup {
 	private void loadButtons() {
 		loadBackground();
 		loadAnswer();
-		loadTitle();
+		loadText();
 	}
 
 	private void loadBackground() {
@@ -55,10 +55,10 @@ public class OKPopup extends Popup {
 		popup.addActor(background);
 	}
 
-	private void loadTitle() {
+	private void loadText() {
 		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
-		Label title = new Label(string, font);
+		Label title = new Label(text, font);
 		title.layout();
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
 				(background.getTop() + okayButton.getTop() - title.getPrefHeight()) / 2, background.getWidth(),
