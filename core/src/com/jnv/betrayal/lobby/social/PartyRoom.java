@@ -36,6 +36,12 @@ public class PartyRoom extends Popup {
 		partyTitle = new Label("", FontManager.getFont60());            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
+
+		// todo organize later
+		createRoom.setColor(Color.WHITE);
+		createRoom.setTouchable(Touchable.enabled);
+		leaveRoom.setColor(Color.GRAY);
+		leaveRoom.setTouchable(Touchable.disabled);
 	}
 
 	public void loadStage() {
@@ -121,12 +127,16 @@ public class PartyRoom extends Popup {
 		if (room.getRoomID() == -1) {
 			createRoom.setColor(Color.WHITE);
 			createRoom.setTouchable(Touchable.enabled);
+			joinRoom.setColor(Color.WHITE);
+			joinRoom.setTouchable(Touchable.enabled);
 			leaveRoom.setColor(Color.GRAY);
 			leaveRoom.setTouchable(Touchable.disabled);
 		}
 		else {
 			createRoom.setColor(Color.GRAY);
 			createRoom.setTouchable(Touchable.disabled);
+			joinRoom.setColor(Color.GRAY);
+			joinRoom.setTouchable(Touchable.disabled);
 			leaveRoom.setColor(Color.WHITE);
 			leaveRoom.setTouchable(Touchable.enabled);
 		}
@@ -134,24 +144,20 @@ public class PartyRoom extends Popup {
 
 	private void doLeaveRoom() {
 		room.leaveRoom();
-
-
 	}
 
 	private void doCreateRoom(String password) {
 		room = new Room(currentCharacter);
 		room.connectToServer();
 		room.createRoom(password);
-		// Emit createRoom event
-
-		// Send Character data
-
+		refresh();
 	}
 
 	private void doJoinRoom(String password, int roomID) {
 		room = new Room(currentCharacter);
 		room.connectToServer();
 		room.joinRoom(password, roomID);
+		refresh();
 	}
 
 	/**

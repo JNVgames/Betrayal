@@ -19,16 +19,11 @@ public class Room implements Json.Serializable {
 
 	private int roomID;
 	private Character currentCharacter;
-	private List<Character> characters;
+	private List<Character> characters = new ArrayList<Character>();
 	private Socket socket;
 
 	public Room(Character character) {
 		currentCharacter = character;
-	}
-
-	public Room(int roomID, List<Character> characters) {
-		this.roomID = roomID;
-		this.characters = characters;
 	}
 
 	public int getRoomID() {
@@ -56,23 +51,33 @@ public class Room implements Json.Serializable {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				characters.add(currentCharacter);
+				printCharacters();
 			}
 		}).on("joinedRoom", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
+				System.out.println("Someone joined the room!");
 				JSONArray data = (JSONArray) args[0];
 				List<Character> characters = new ArrayList<Character>();
 				int counter = 0;
 				try {
 					while (!data.isNull(counter)) {
 						Character c = new Character(currentCharacter.res);
-						c.fromJson(data.getJSONObject(0));
-						if (c.getId() != currentCharacter.getId()) characters.add(c);
+						c.fromJson(data.getJSONObject(counter));
+						// If the character is currentCharacter, add currentCharacter to array instead
+						if (c.getId() == currentCharacter.getId()) {
+							characters.add(currentCharacter);
+						} else {
+							characters.add(c);
+						}
 						counter++;
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				Room.this.characters = characters;
+				printCharacters();
 			}
 		});
 	}
@@ -89,6 +94,15 @@ public class Room implements Json.Serializable {
 	}
 
 	public void leaveRoom() {
+		JSONObject player = new JSONObject();
+		try {
+			player.put("id", currentCharacter.getId());
+			player.put("roomID", roomID);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		roomID = -1;
+		socket.emit("leaveRoom", player);
 		socket.disconnect();
 	}
 
@@ -124,11 +138,6 @@ public class Room implements Json.Serializable {
 
 	}
 
-	// Check if room number is open
-	private int findAvailableRoom() {
-		return 0;
-	}
-
 	@Override
 	public void write(Json json) {
 
@@ -137,5 +146,13 @@ public class Room implements Json.Serializable {
 	@Override
 	public void read(Json json, JsonValue jsonData) {
 
+	}
+
+	public void printCharacters() {
+		System.out.print("Characters: ");
+		for (Character character : characters) {
+			System.out.print(character.getId() + ", ");
+		}
+		System.out.println();
 	}
 }
