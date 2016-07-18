@@ -32,8 +32,11 @@ public class Room implements Json.Serializable {
 
 	public void connectToServer() {
 		try {
-			socket = IO.socket("http://localhost:8080");
-			socket.connect();
+			// If socket is already connected, don't make a new socket
+			if (socket == null || !socket.connected()) {
+				socket = IO.socket("http://localhost:8080");
+				socket.connect();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,6 +68,7 @@ public class Room implements Json.Serializable {
 					while (!data.isNull(counter)) {
 						Character c = new Character(currentCharacter.res);
 						c.fromJson(data.getJSONObject(counter));
+						c.preview.update();
 						// If the character is currentCharacter, add currentCharacter to array instead
 						if (c.getId() == currentCharacter.getId()) {
 							characters.add(currentCharacter);
@@ -101,9 +105,10 @@ public class Room implements Json.Serializable {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		roomID = -1;
 		socket.emit("leaveRoom", player);
-		socket.disconnect();
+		roomID = -1;
+		// todo get disconnect to work
+		//socket.disconnect();
 	}
 
 	public void joinRoom(String password, int roomID) {
@@ -154,5 +159,9 @@ public class Room implements Json.Serializable {
 			System.out.print(character.getId() + ", ");
 		}
 		System.out.println();
+	}
+
+	public List<Character> getCharacters() {
+		return characters;
 	}
 }

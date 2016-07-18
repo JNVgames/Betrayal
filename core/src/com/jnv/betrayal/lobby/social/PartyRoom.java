@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.popup.CreateRoomPopup;
@@ -29,6 +30,7 @@ public class PartyRoom extends Popup {
 	public PartyRoom(Betrayal game) {
 		super(game);
 		currentCharacter = game.getCurrentCharacter();
+		room = currentCharacter.getRoom();
 		joinRoom = new Image(res.getTexture("ok"));
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
@@ -42,6 +44,8 @@ public class PartyRoom extends Popup {
 		createRoom.setTouchable(Touchable.enabled);
 		leaveRoom.setColor(Color.GRAY);
 		leaveRoom.setTouchable(Touchable.disabled);
+
+
 	}
 
 	public void loadStage() {
@@ -144,17 +148,16 @@ public class PartyRoom extends Popup {
 
 	private void doLeaveRoom() {
 		room.leaveRoom();
+		refresh();
 	}
 
 	private void doCreateRoom(String password) {
-		room = new Room(currentCharacter);
 		room.connectToServer();
 		room.createRoom(password);
 		refresh();
 	}
 
 	private void doJoinRoom(String password, int roomID) {
-		room = new Room(currentCharacter);
 		room.connectToServer();
 		room.joinRoom(password, roomID);
 		refresh();

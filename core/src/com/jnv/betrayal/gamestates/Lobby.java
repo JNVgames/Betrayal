@@ -5,31 +5,49 @@
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.jnv.betrayal.character.*;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.lobby.LobbyOptions;
 import com.jnv.betrayal.lobby.inventory.Inventory;
 import com.jnv.betrayal.lobby.shop.Shop;
 import com.jnv.betrayal.lobby.social.PartyRoom;
 import com.jnv.betrayal.lobby.stats.StatsWindow;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.online.Room;
+import com.jnv.betrayal.popup.OKPopup;
+import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
+import com.jnv.betrayal.scene2d.ui.Label;
+
+import java.awt.Font;
+import java.util.EventListener;
 
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
+	private Image allPlayersBackground;
 	private Texture playButtonTexture;
 	private Actor playNowButton;
+	private Group partyMembers;
+	private Room room;
 
 	public Lobby(GameStateManager gsm) {
 		super(gsm);
 		buttonHeight = 150;
 		buttonWidth = 144;
 		spacing = 5;
+		room = gsm.game.getCurrentCharacter().getRoom();
+		System.out.println("awsraftsd" + room);
+		partyMembers= new Group();
 		loadContent();
 	}
 
@@ -125,9 +143,9 @@ public class Lobby extends GameState {
 	}
 
 	private void loadAllPlayersBackground() {
-		Image allPlayersBackground = new Image(res.getTexture("lobby-screen"));
+		allPlayersBackground = new Image(res.getTexture("player-background"));
 		allPlayersBackground.layout();
-		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10, 510, Betrayal.WIDTH / 2 - 20, Betrayal.HEIGHT / 3 + 175);
+		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10 - 100, 510, Betrayal.WIDTH / 2 - 20 + 100, Betrayal.HEIGHT / 3 + 175);
 		stage.addActor(allPlayersBackground);
 	}
 
@@ -142,6 +160,12 @@ public class Lobby extends GameState {
 		Image tower = new Image(res.getTexture("lobby-tower"));
 		tower.layout();
 		tower.setBounds(20, 510, 175, Betrayal.HEIGHT / 3 + 175);
+		tower.addListener(new InputListener(tower) {
+			@Override
+			public void doAction() {
+				Lobby.this.refresh();
+			}
+		});
 		stage.addActor(tower);
 	}
 
@@ -211,5 +235,83 @@ public class Lobby extends GameState {
 		stage.addActor(playNowButton);
 	}
 
+	public void refresh() {
+		partyMembers.clear();
+		loadRoomParty();
+	}
+
+	private void loadRoomParty(){
+		float width = allPlayersBackground.getImageWidth()-20;
+		float height = (allPlayersBackground.getImageHeight()-50)/4;
+		float x = allPlayersBackground.getX() + 10;
+		float y = allPlayersBackground.getTop() - 10;
+		int i = 1;
+		for(Character character : room.getCharacters()){
+			addPlayerImage(character, x, (y - (i * height) - (i * 10)), width, height);
+			i++;
+		}
+		stage.addActor(partyMembers);
+	}
+
+
+	private void addPlayerImage(final Character character, float x, float y,float width, float height){
+		Group player = new Group();
+
+		//creating the teammate preview
+		final float xPos = x -20;
+		final float yPos = y + (height - 72) / 2 - 115;
+		final float previewWidth = 48 * 3;
+		final float previewHeight = 72 * 3;
+
+		Actor preview = new Actor() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				character.preview.drawHeadPreview(batch, xPos, yPos, previewWidth, previewHeight);
+			}
+		};
+		preview.setWidth(previewWidth);
+		preview.setHeight(previewHeight);
+		preview.setX(xPos);
+		preview.setY(yPos);
+		preview.setTouchable(Touchable.disabled);
+		player.addActor(preview);
+
+		//create name label
+		Label name = new Label(character.getName(), FontManager.getFont40());
+		name.setX(x + 20 + (width - name.getPrefWidth()) / 2);
+		name.setY(y + ((height - name.getPrefHeight()) / 2)+20);
+		player.addActor(name);
+
+		//create floor Label
+		Label floor = new Label("Floor: "+ character.stats.getFloor(), FontManager.getFont40());
+		floor.setX(x + 20 + (width - floor.getPrefWidth()) / 2);
+		floor.setY(name.getY() - floor.getPrefHeight() - 5 + 15);
+		player.addActor(floor);
+
+		//Create Ready Light
+		Image ready = new Image(res.getTexture("green-circle"));	//todo check if ready or not
+		ready.setWidth(20);
+		ready.setHeight(20);
+		ready.setX(x + width - 30);
+		ready.setY(y + (height + 20) / 2 - 25);
+		player.addActor(ready);
+
+		//used so player is clickable
+		Image mask = new Image();
+		mask.setWidth(width);
+		mask.setHeight(height);
+		mask.setX(x);
+		mask.setY(y);
+		mask.addListener(new InputListener(mask) {
+			@Override
+			public void doAction() {
+				new OKPopup(game, "STUB");
+				//new OKPopup(character.stats.getTotalAttack());
+			}
+		});
+
+		partyMembers.addActor(player);
+
+	}
 
 }

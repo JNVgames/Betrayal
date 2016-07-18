@@ -162,7 +162,7 @@ class PreviewHandler {
 			}
 			TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
 			preview.frontLeft[PreviewSlot.HEAD] = head_split[0][0];
-			preview.frontStill[PreviewSlot.HEAD] = head_split[0][1];
+			preview.frontStill[PreviewSlot.HEAD] = preview.headPreview = head_split[0][1];
 			preview.frontRight[PreviewSlot.HEAD] = head_split[0][2];
 			preview.rightLeft[PreviewSlot.HEAD] = head_split[1][0];
 			preview.rightStill[PreviewSlot.HEAD] = head_split[1][1];

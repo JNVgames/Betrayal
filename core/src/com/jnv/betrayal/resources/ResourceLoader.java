@@ -62,7 +62,9 @@ public class ResourceLoader {
 	}
 
 	private void loadBackgrounds() {
+		res.loadTexture("about/whtie.png", "gray");
 		res.loadTexture("about/empty.png", "empty");
+		res.loadTexture("about/player-background.png", "player-background");
 		res.loadTexture("about/start_screen720x1280.png", "start-background");
 		res.loadTexture("about/hall_of_fame720x2000.png", "hall-of-fame-background");
 		res.loadTexture("about/instructions_background720x1280.png", "instructions-background");
@@ -97,6 +99,8 @@ public class ResourceLoader {
 		res.loadTexture("button/hall_of_fame512x144.png", "hall-of-fame");
 		res.loadTexture("button/play_now512x144.png", "play-now");
 		res.loadTexture("button/play_now_pressed512x144.png", "play-now-pressed");
+		res.loadTexture("button/ready512x144.png", "ready");
+		res.loadTexture("button/ready_pressed512x144.png", "ready-pressed");
 		res.loadTexture("button/main_menu512x144.png", "main-menu");
 		res.loadTexture("button/back_to_lobby512x144.png", "back-to-lobby");
 		res.loadTexture("button/back512x144.png", "back-button");
@@ -120,8 +124,8 @@ public class ResourceLoader {
 		res.loadTexture("button/shields360x144.png", "shield-button");
 		res.loadTexture("button/Swords360x144.png", "sword-button");
 		res.loadTexture("button/Headgear360x144.png", "headgear-button");
-
-
+		res.loadTexture("icon/greencircle100x100.png", "green-circle");
+		res.loadTexture("icon/redcircle100x100.png", "red-circle");
 	}
 
 	private void loadLobbyButtons() {

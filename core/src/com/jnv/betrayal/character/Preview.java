@@ -37,6 +37,7 @@ public class Preview implements JsonSerializable {
 	TextureRegion[] leftLeft, leftStill, leftRight;
 	TextureRegion[] backLeft, backStill, backRight;
 	TextureRegion[][] front, right, left, back;
+	TextureRegion headPreview;
 	/**
 	 * Holds character trait values
 	 */
@@ -127,6 +128,10 @@ public class Preview implements JsonSerializable {
 				}
 			}
 		}
+	}
+
+	public void drawHeadPreview(Batch batch, float x, float y, float width, float height) {
+		batch.draw(headPreview, x, y, width, height);
 	}
 
 	public boolean isShowingHead() {

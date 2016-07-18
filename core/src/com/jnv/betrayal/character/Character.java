@@ -22,14 +22,14 @@ import java.util.Random;
 public class Character implements JsonSerializable {
 
 	private Room room;
+	private int id;
+	private String name;
 	public final BetrayalAssetManager res;
 	public final Preview preview;
 	public final Job job;
 	public final Equips equips;
 	public final Inventory inventory;
 	public final Stats stats;
-	private int id;
-	private String name;
 
 	/**
 	 * Creates a character with default traits
@@ -78,10 +78,13 @@ public class Character implements JsonSerializable {
 		return name;
 	}
 
+	public Room getRoom() {
+		return room;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public void setNextTrait(Trait trait) {
 		switch (trait) {
@@ -132,6 +135,10 @@ public class Character implements JsonSerializable {
 			default:
 				break;
 		}
+	}
+
+	public void instantializeRoom() {
+		room = new Room(this);
 	}
 
 	// Json methods
