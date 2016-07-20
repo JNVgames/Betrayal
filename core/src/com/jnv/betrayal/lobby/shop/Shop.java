@@ -666,9 +666,9 @@ public class Shop extends Popup {
 	}
 
 	private void loadItems() {
-		comingSoon = new Label("Coming Soon", FontManager.getFont40());
+		comingSoon = new Label("Coming Soon", FontManager.getFont60());
 		comingSoon.setX(Betrayal.WIDTH/2 - comingSoon.getPrefWidth()/2);
-		comingSoon.setY(Betrayal.HEIGHT);
+		comingSoon.setY(Betrayal.HEIGHT/2 );
 		currentGroup.addActor(comingSoon);
 	}
 

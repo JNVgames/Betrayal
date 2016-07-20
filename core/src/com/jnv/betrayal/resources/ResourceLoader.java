@@ -183,6 +183,10 @@ public class ResourceLoader {
 		res.loadTexture("dungeon/healthbar/yellow_bar102x17.png", "yellow-bar");
 		res.loadTexture("dungeon/healthbar/health_bar_background330x40.png", "bar-background");
 		res.loadTexture("dungeon/monster_select312x312.png", "cross-hair");
+		res.loadTexture("dungeon/bluetriangle.png", "blueT");
+		res.loadTexture("dungeon/redtriangle.png", "redT");
+		res.loadTexture("dungeon/purpletriangle.png", "purpleT");
+		res.loadTexture("dungeon/greentriangle.png", "greenT");
 	}
 
 	private void loadHeadGear() {
