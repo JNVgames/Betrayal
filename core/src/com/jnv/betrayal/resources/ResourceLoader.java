@@ -89,6 +89,8 @@ public class ResourceLoader {
 		res.loadTexture("button/event_log512x144.png", "event-log-button");
 		res.loadTexture("button/create_room_button512x144.png", "create-room");
 		res.loadTexture("button/leave_room_button512x144.png", "leave-room");
+		res.loadTexture("button/join_room_button512x144.png", "join-room");
+		res.loadTexture("button/join_room_grey_button512x144.png", "join-room-grey");
 		res.loadTexture("button/create_room_grey_button512x144.png", "create-room-grey");
 		res.loadTexture("button/leave_room_grey_button512x144.png", "leave-room-grey");
 		res.loadTexture("button/load_game_button512x144.png", "load-game");

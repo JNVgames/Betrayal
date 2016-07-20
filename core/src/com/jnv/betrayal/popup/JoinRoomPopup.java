@@ -43,14 +43,14 @@ public class JoinRoomPopup extends Popup {
 		roomID = new TextField("", tfs);
 		roomID.setMessageText("Enter Room ID Here");
 		roomID.setBounds((Betrayal.WIDTH - INPUT_WIDTH) / 2,
-				titleLabel.getY() - 50 - roomID.getPrefHeight(),
+				titleLabel.getY() - 20 - roomID.getPrefHeight(),
 				INPUT_WIDTH, roomID.getPrefHeight());
 		roomID.setMaxLength(8);
 		popup.addActor(roomID);
 
 		password = new TextField("", tfs);
 		password.setMessageText("Enter Password Here");
-		password.setBounds(roomID.getX(), roomID.getY() - 30 - roomID.getHeight(),
+		password.setBounds(roomID.getX(), roomID.getY() - 5 - roomID.getHeight(),
 				INPUT_WIDTH, roomID.getHeight());
 		password.setMaxLength(8);
 		popup.addActor(password);
@@ -71,7 +71,7 @@ public class JoinRoomPopup extends Popup {
 	private void loadBackground() {
 		background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
-		background.setBounds((Betrayal.WIDTH - 500) / 2, 700, Betrayal.WIDTH - 500, Betrayal.HEIGHT - 1400);
+		background.setBounds(100, 450, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 900);
 		popup.addActor(background);
 	}
 
@@ -88,7 +88,7 @@ public class JoinRoomPopup extends Popup {
 		yesButton = new Image(res.getTexture("yes"));
 		yesButton.layout();
 		yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				Betrayal.HEIGHT / 2 - 150, 150, 75);
 		yesButton.addListener(new InputListener(yesButton) {
 			@Override
 			public void doAction() {
@@ -101,7 +101,7 @@ public class JoinRoomPopup extends Popup {
 		Image noButton = new Image(res.getTexture("no"));
 		noButton.layout();
 		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				Betrayal.HEIGHT / 2 - 150, 150, 75);
 		noButton.addListener(new InputListener(noButton) {
 			@Override
 			public void doAction() {

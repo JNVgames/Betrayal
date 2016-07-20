@@ -190,6 +190,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				Lobby.this.refresh();
+				game.getCurrentCharacter().stats.advanceFloor();
 			}
 		});
 		stage.addActor(tower);

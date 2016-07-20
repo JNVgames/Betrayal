@@ -31,7 +31,7 @@ public class PartyRoom extends Popup {
 		super(game);
 		currentCharacter = game.getCurrentCharacter();
 		room = currentCharacter.getRoom();
-		joinRoom = new Image(res.getTexture("ok"));
+		joinRoom = new Image(res.getTexture("join-room"));
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
@@ -44,14 +44,14 @@ public class PartyRoom extends Popup {
 
 	public void loadStage() {
 		loadBackground();
-		loadReturnToLobbyButton();
 		loadTitle();
 		loadRoomButtons();
+		loadReturnToLobbyButton();
 	}
 
 	private void loadBackground() {
 		partyBackground.layout();
-		partyBackground.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
+		partyBackground.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
 		popup.addActor(partyBackground);
 
 	}
@@ -68,7 +68,7 @@ public class PartyRoom extends Popup {
 
 	private void loadReturnToLobbyButton() {
 		lobbyButton.layout();
-		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 110, 312, 100);
+		lobbyButton.setBounds((Betrayal.WIDTH - 312) / 2 ,leaveRoom.getY() - 180 , 312, 100);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
@@ -80,7 +80,7 @@ public class PartyRoom extends Popup {
 
 	private void loadRoomButtons() {
 		createRoom.layout();
-		createRoom.setBounds(142, partyTitle.getY() - 20, 200, 65);
+		createRoom.setBounds((Betrayal.WIDTH - 312) / 2 , partyTitle.getY() - 120, 312, 100);
 		createRoom.addListener(new InputListener(createRoom) {
 			@Override
 			public void doAction() {
@@ -97,7 +97,7 @@ public class PartyRoom extends Popup {
 		popup.addActor(createRoom);
 
 		joinRoom.layout();
-		joinRoom.setBounds(372, partyTitle.getY() - 220, 200, 65);
+		joinRoom.setBounds((Betrayal.WIDTH - 312) / 2 , createRoom.getY() - 180, 312, 100);
 		joinRoom.addListener(new InputListener(joinRoom) {
 			@Override
 			public void doAction() {
@@ -114,7 +114,7 @@ public class PartyRoom extends Popup {
 		popup.addActor(joinRoom);
 
 		leaveRoom.layout();
-		leaveRoom.setBounds(372, partyTitle.getY() - 20, 200, 65);
+		leaveRoom.setBounds((Betrayal.WIDTH - 312) / 2 , joinRoom.getY() - 180, 312, 100);
 		leaveRoom.addListener(new InputListener(leaveRoom) {
 			@Override
 			public void doAction() {

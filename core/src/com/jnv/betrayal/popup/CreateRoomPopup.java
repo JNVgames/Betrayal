@@ -64,7 +64,7 @@ public class CreateRoomPopup extends Popup {
 	private void loadBackground() {
 		background = new Image(res.getTexture("confirmation-background"));
 		background.layout();
-		background.setBounds((Betrayal.WIDTH - 500) / 2, 700, Betrayal.WIDTH - 500, Betrayal.HEIGHT - 1400);
+		background.setBounds(100, 450, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 900);
 		popup.addActor(background);
 	}
 
@@ -81,7 +81,7 @@ public class CreateRoomPopup extends Popup {
 		yesButton = new Image(res.getTexture("yes"));
 		yesButton.layout();
 		yesButton.setBounds(Betrayal.WIDTH / 2 - 175,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				Betrayal.HEIGHT / 2 - 150, 150, 75);
 		yesButton.addListener(new InputListener(yesButton) {
 			@Override
 			public void doAction() {
@@ -94,7 +94,7 @@ public class CreateRoomPopup extends Popup {
 		Image noButton = new Image(res.getTexture("no"));
 		noButton.layout();
 		noButton.setBounds(Betrayal.WIDTH / 2 + 25,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				Betrayal.HEIGHT / 2 - 150, 150, 75);
 		noButton.addListener(new InputListener(noButton) {
 			@Override
 			public void doAction() {

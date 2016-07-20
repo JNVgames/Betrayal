@@ -101,9 +101,8 @@ public class StatsWindow extends Popup {
 
 	private void loadTitle() {
 		title = new Label("My Stats", FontManager.getFont40());
-		title.setHeight(120);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
-		title.setY(Betrayal.HEIGHT - 200);
+		title.setY(background.getTop() - title.getPrefHeight()-10);
 		popup.addActor(title);
 	}
 
@@ -143,7 +142,7 @@ public class StatsWindow extends Popup {
 		// Get stats from character
 		floorLabel.setText(character.stats.toString(Stat.FLOOR));
 		floorLabel.setX(background.getX() + 60);
-		floorLabel.setY(yRef - fontSize - 50);
+		floorLabel.setY(yRef - fontSize - 50 - 37);
 		yRef = floorLabel.getY();
 		floorLabel.setWidth(floorLabel.getPrefWidth());
 		floorLabel.setHeight(fontSize);
