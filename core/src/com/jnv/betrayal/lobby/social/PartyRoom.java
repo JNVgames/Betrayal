@@ -39,13 +39,7 @@ public class PartyRoom extends Popup {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
 
-		// todo organize later
-		createRoom.setColor(Color.WHITE);
-		createRoom.setTouchable(Touchable.enabled);
-		leaveRoom.setColor(Color.GRAY);
-		leaveRoom.setTouchable(Touchable.disabled);
-
-
+		refresh();
 	}
 
 	public void loadStage() {
@@ -94,6 +88,8 @@ public class PartyRoom extends Popup {
 					@Override
 					public void doAction() {
 						doCreateRoom(getPasswordString());
+						remove();
+						PartyRoom.this.remove();
 					}
 				};
 			}
@@ -109,6 +105,8 @@ public class PartyRoom extends Popup {
 					@Override
 					public void doAction() {
 						doJoinRoom(getPasswordString(), getRoomID());
+						remove();
+						PartyRoom.this.remove();
 					}
 				};
 			}
@@ -121,7 +119,8 @@ public class PartyRoom extends Popup {
 			@Override
 			public void doAction() {
 				doLeaveRoom();
-				refresh();
+				remove();
+				PartyRoom.this.remove();
 			}
 		});
 		popup.addActor(leaveRoom);

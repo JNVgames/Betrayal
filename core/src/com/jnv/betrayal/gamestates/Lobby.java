@@ -5,15 +5,15 @@
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.character.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.lobby.LobbyOptions;
 import com.jnv.betrayal.lobby.inventory.Inventory;
@@ -22,21 +22,19 @@ import com.jnv.betrayal.lobby.social.PartyRoom;
 import com.jnv.betrayal.lobby.stats.StatsWindow;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
+import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Label;
 
-import java.awt.Font;
-import java.util.EventListener;
-
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
 	private Image allPlayersBackground;
-	private Texture playButtonTexture;
-	private Actor playNowButton;
+	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, UnReadyTexture;
+	private Actor playNowButton, readyButton, UnReadyButton;
 	private Group partyMembers;
 	private Room room;
 
@@ -46,9 +44,10 @@ public class Lobby extends GameState {
 		buttonWidth = 144;
 		spacing = 5;
 		room = gsm.game.getCurrentCharacter().getRoom();
-		System.out.println("awsraftsd" + room);
-		partyMembers= new Group();
+		room.setLobby(this);
+		partyMembers = new Group();
 		loadContent();
+		refresh();
 	}
 
 	public void update(float dt) {
@@ -63,6 +62,10 @@ public class Lobby extends GameState {
 	}
 
 	public void dispose() {
+	}
+
+	public Betrayal getGame() {
+		return gsm.game;
 	}
 
 	// Helpers
@@ -122,7 +125,13 @@ public class Lobby extends GameState {
 		partyButton.addListener(new InputListener(partyButton) {
 			@Override
 			public void doAction() {
-				new PartyRoom(game);
+				new PartyRoom(game) {
+					@Override
+					public void remove() {
+						super.remove();
+						Lobby.this.refresh();
+					}
+				};
 			}
 		});
 		stage.addActor(partyButton);
@@ -174,6 +183,7 @@ public class Lobby extends GameState {
 	}
 
 	private void loadContent() {
+		loadTextures();
 		loadBackground();
 		loadAllPlayersBackground();
 		loadChatBackground();
@@ -184,26 +194,36 @@ public class Lobby extends GameState {
 		loadPartyButton();
 		loadStatsButton();
 		loadInventoryButton();
-
-		//loadLobbyLabel(); ERror>/ FIX later
-
-		// VINECNTS SHIT DELETE LOOK AT BOTTOM TO SEE WHY
 		loadPlayNowButton();
-
+		loadReadyButton();
+		loadUnReadyButton();
 	}
 
-    /*
-	private void loadLobbyLabel() {
-        lobby = new Label("Lobby", labelStyle);
-        lobby.setX(0);
-        lobby.setY(Betrayal.HEIGHT - buttonHeight-lobby.getHeight());
-        stage.addActor(lobby);
-    }
+	private void loadTextures() {
+		greenCircle = res.getTexture("green-circle");
+		redCircle = res.getTexture("red-circle");
+		readyTexture = res.getTexture("ready");
+		playButtonTexture = res.getTexture("play-now");
+		UnReadyTexture = res.getTexture("unready");
+	}
 
-   */
+	private void setReadyPlayButton() {
+		if (room.getRoomID() == -1) {
+			playNowButton.setVisible(true);
+			readyButton.setVisible(false);
+			UnReadyButton.setVisible(false);
+		} else if(game.getCurrentCharacter().isReady()){
+			playNowButton.setVisible(false);
+			readyButton.setVisible(false);
+			UnReadyButton.setVisible(true);
+		}else{
+			playNowButton.setVisible(false);
+			readyButton.setVisible(true);
+			UnReadyButton.setVisible(false);
+		}
+	}
 
 	private void loadPlayNowButton() {
-		playButtonTexture = res.getTexture("play-now");
 		playNowButton = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
@@ -224,7 +244,12 @@ public class Lobby extends GameState {
 						&& x <= playNowButton.getX() + playNowButton.getWidth()
 						&& y >= playNowButton.getY()
 						&& y <= playNowButton.getY() + playNowButton.getHeight()) {
-					gsm.setState(GameStateManager.State.DUNGEON);
+					new Confirmation(game, "Enter Dungeon?") {
+						@Override
+						public void doAction() {
+							gsm.setState(GameStateManager.State.DUNGEON);
+						}
+					};
 				} else playButtonTexture = res.getTexture("play-now");
 			}
 
@@ -232,21 +257,65 @@ public class Lobby extends GameState {
 				playButtonTexture = res.getTexture("play-now");
 			}
 		});
+		playNowButton.setVisible(false);
 		stage.addActor(playNowButton);
 	}
+
+	private void loadUnReadyButton() {
+		UnReadyButton = new Actor() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				batch.draw(UnReadyTexture, UnReadyButton.getX(), UnReadyButton.getY(),
+						UnReadyButton.getWidth(), UnReadyButton.getHeight());
+			}
+		};
+		UnReadyButton.setWidth(512);
+		UnReadyButton.setBounds((Betrayal.WIDTH - UnReadyButton.getWidth()) / 2, 20, 512, 144);
+		UnReadyButton.addListener(new InputListener(UnReadyButton, true) {
+			@Override
+			public void doAction() {
+				room.ready(false);
+			}
+		});
+		UnReadyButton.setVisible(false);
+		stage.addActor(UnReadyButton);
+	}
+
+
+	private void loadReadyButton() {
+		readyButton = new Actor() {
+			@Override
+			public void draw(Batch batch, float parentAlpha) {
+				batch.draw(readyTexture, readyButton.getX(), readyButton.getY(),
+						readyButton.getWidth(), readyButton.getHeight());
+			}
+		};
+		readyButton.setWidth(512);
+		readyButton.setBounds((Betrayal.WIDTH - readyButton.getWidth()) / 2, 20, 512, 144);
+		readyButton.addListener(new InputListener(readyButton, true) {
+			@Override
+			public void doAction() {
+				room.ready(true);
+			}
+		});
+		readyButton.setVisible(false);
+		stage.addActor(readyButton);
+	}
+
 
 	public void refresh() {
 		partyMembers.clear();
 		loadRoomParty();
+		setReadyPlayButton();
 	}
 
-	private void loadRoomParty(){
-		float width = allPlayersBackground.getImageWidth()-20;
-		float height = (allPlayersBackground.getImageHeight()-50)/4;
+	private void loadRoomParty() {
+		float width = allPlayersBackground.getImageWidth() - 20;
+		float height = (allPlayersBackground.getImageHeight() - 50) / 4;
 		float x = allPlayersBackground.getX() + 10;
 		float y = allPlayersBackground.getTop() - 10;
 		int i = 1;
-		for(Character character : room.getCharacters()){
+		for (Character character : room.getCharacters()) {
 			addPlayerImage(character, x, (y - (i * height) - (i * 10)), width, height);
 			i++;
 		}
@@ -254,11 +323,11 @@ public class Lobby extends GameState {
 	}
 
 
-	private void addPlayerImage(final Character character, float x, float y,float width, float height){
+	private void addPlayerImage(final Character character, float x, float y, float width, float height) {
 		Group player = new Group();
 
 		//creating the teammate preview
-		final float xPos = x -20;
+		final float xPos = x - 20;
 		final float yPos = y + (height - 72) / 2 - 115;
 		final float previewWidth = 48 * 3;
 		final float previewHeight = 72 * 3;
@@ -279,17 +348,22 @@ public class Lobby extends GameState {
 		//create name label
 		Label name = new Label(character.getName(), FontManager.getFont40());
 		name.setX(x + 20 + (width - name.getPrefWidth()) / 2);
-		name.setY(y + ((height - name.getPrefHeight()) / 2)+20);
+		name.setY(y + ((height - name.getPrefHeight()) / 2) + 20);
 		player.addActor(name);
 
 		//create floor Label
-		Label floor = new Label("Floor: "+ character.stats.getFloor(), FontManager.getFont40());
+		Label floor = new Label("Floor: " + character.stats.getFloor(), FontManager.getFont40());
 		floor.setX(x + 20 + (width - floor.getPrefWidth()) / 2);
 		floor.setY(name.getY() - floor.getPrefHeight() - 5 + 15);
 		player.addActor(floor);
 
 		//Create Ready Light
-		Image ready = new Image(res.getTexture("green-circle"));	//todo check if ready or not
+		Image ready = new Image();
+		if (character.isReady()) {
+			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(greenCircle)));
+		} else {
+			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(redCircle)));
+		}
 		ready.setWidth(20);
 		ready.setHeight(20);
 		ready.setX(x + width - 30);
@@ -311,7 +385,5 @@ public class Lobby extends GameState {
 		});
 
 		partyMembers.addActor(player);
-
 	}
-
 }

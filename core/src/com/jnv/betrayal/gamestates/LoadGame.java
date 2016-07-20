@@ -24,14 +24,14 @@ import com.jnv.betrayal.scene2d.InputListener;
 public class LoadGame extends GameState {
 
 	private Group[] savedSessions;
-	private Image button_back;
-	private TextureRegion image_leftArrow;
+	private Image backButton;
+	private TextureRegion leftArrowImage;
 
-	private boolean mode_delete = false;
+	private boolean deleteMode = false;
 
 	public LoadGame(GameStateManager gsm) {
 		super(gsm);
-		image_leftArrow = new TextureRegion(res.getTexture("arrow-left"));
+		leftArrowImage = new TextureRegion(res.getTexture("arrow-left"));
 
 		savedSessions = new Group[game.characters.size()];
 
@@ -65,23 +65,23 @@ public class LoadGame extends GameState {
 	private void loadBackButton() {
 		Group group_button_back = new Group();
 
-		button_back = new Image(image_leftArrow);
-		button_back.setHeight(60);
-		button_back.setWidth(80);
-		button_back.setX(10);
-		button_back.setY(Betrayal.HEIGHT - button_back.getHeight() - 10);
-		group_button_back.addActor(button_back);
+		backButton = new Image(leftArrowImage);
+		backButton.setHeight(60);
+		backButton.setWidth(80);
+		backButton.setX(10);
+		backButton.setY(Betrayal.HEIGHT - backButton.getHeight() - 10);
+		group_button_back.addActor(backButton);
 
 		Label button_text_back = new Label("Back", FontManager.getFont60());
-		button_text_back.setX(button_back.getX() + button_back.getWidth() + 10);
-		button_text_back.setY(button_back.getY());
+		button_text_back.setX(backButton.getX() + backButton.getWidth() + 10);
+		button_text_back.setY(backButton.getY());
 		group_button_back.addActor(button_text_back);
 
 		Actor button_back_clickArea = new Actor();
-		button_back_clickArea.setWidth(button_back.getWidth() + button_text_back.getWidth() + 10);
+		button_back_clickArea.setWidth(backButton.getWidth() + button_text_back.getWidth() + 10);
 		button_back_clickArea.setHeight(button_text_back.getHeight());
-		button_back_clickArea.setX(button_back.getX());
-		button_back_clickArea.setY(button_back.getY());
+		button_back_clickArea.setX(backButton.getX());
+		button_back_clickArea.setY(backButton.getY());
 		button_back_clickArea.addListener(new InputListener(button_back_clickArea) {
 			@Override
 			public void doAction() {
@@ -102,7 +102,7 @@ public class LoadGame extends GameState {
 			Group preview = new Group();
 
 			final Actor preview_frame = new Actor();
-			preview_frame.setBounds(5, button_back.getY() - 230 * counter, Betrayal.WIDTH - 10,
+			preview_frame.setBounds(5, backButton.getY() - 230 * counter, Betrayal.WIDTH - 10,
 					48 * scale + 10);
 			preview.addActor(preview_frame);
 
@@ -113,7 +113,7 @@ public class LoadGame extends GameState {
 							preview_frame.getY() + 5, 32 * 4, 48 * 4);
 				}
 			};
-			preview_charPrev.setBounds(10, button_back.getY() - 230 * i + 5, 32 * scale, 48 * scale);
+			preview_charPrev.setBounds(10, backButton.getY() - 230 * i + 5, 32 * scale, 48 * scale);
 			preview.addActor(preview_charPrev);
 
 			Label classPreview = new Label(c.job.toString(), FontManager.getFont50());
@@ -156,7 +156,7 @@ public class LoadGame extends GameState {
 		buttonDelete.addListener(new InputListener(buttonDelete) {
 			@Override
 			public void doAction() {
-				mode_delete = true;
+				deleteMode = true;
 				buttonDelete.remove();
 				loadCancelButton();
 			}
@@ -172,7 +172,7 @@ public class LoadGame extends GameState {
 		button_cancel.addListener(new InputListener(button_cancel) {
 			@Override
 			public void doAction() {
-				mode_delete = false;
+				deleteMode = false;
 				button_cancel.remove();
 				loadDeleteButton();
 			}
@@ -196,7 +196,7 @@ public class LoadGame extends GameState {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if (x >= frame.getX() && x <= frame.getX() + frame.getWidth()
 						&& y >= frame.getY() && y <= frame.getY() + frame.getHeight()) {
-					if (!mode_delete) { // Delete mode is off
+					if (!deleteMode) { // Delete mode is off
 						game.setCurrentCharacter(character);
 						gsm.setState(GameStateManager.State.LOBBY);
 					} else { // Delete mode is on

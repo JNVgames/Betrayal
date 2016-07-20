@@ -24,6 +24,7 @@ public class Character implements JsonSerializable {
 	private Room room;
 	private int id;
 	private String name;
+	private boolean isReady;
 	public final BetrayalAssetManager res;
 	public final Preview preview;
 	public final Job job;
@@ -141,6 +142,14 @@ public class Character implements JsonSerializable {
 		room = new Room(this);
 	}
 
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
+	}
+
+	public boolean isReady() {
+		return isReady;
+	}
+
 	// Json methods
 	@Override
 	public JSONObject toJson() {
@@ -151,6 +160,7 @@ public class Character implements JsonSerializable {
 			data.put("preview", preview.toJson());
 			data.put("equips", equips.toJson());
 			data.put("stats", stats.toJson());
+			data.put("isReady", isReady);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -161,6 +171,7 @@ public class Character implements JsonSerializable {
 	public void fromJson(JSONObject data) {
 		try {
 			id = data.getInt("id");
+			isReady = data.getBoolean("isReady");
 			job.setJob(data.getString("job"));
 			preview.fromJson(data.getJSONObject("preview"));
 			equips.fromJson(data.getJSONObject("equips"));

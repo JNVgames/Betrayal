@@ -1,8 +1,8 @@
 package com.jnv.betrayal.online;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.gamestates.Lobby;
+import com.jnv.betrayal.popup.OKPopup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,18 +11,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.Ack;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class Room implements Json.Serializable {
+public class Room {
 
 	private int roomID;
 	private Character currentCharacter;
 	private List<Character> characters = new ArrayList<Character>();
 	private Socket socket;
+	private Lobby lobby;
 
 	public Room(Character character) {
+		roomID = -1;
 		currentCharacter = character;
 	}
 
@@ -54,20 +57,23 @@ public class Room implements Json.Serializable {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				characters.clear();
 				characters.add(currentCharacter);
+				refreshLobby();
 				printCharacters();
 			}
 		}).on("joinedRoom", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
 				System.out.println("Someone joined the room!");
-				JSONArray data = (JSONArray) args[0];
+				JSONObject data = (JSONObject) args[0];
 				List<Character> characters = new ArrayList<Character>();
 				int counter = 0;
 				try {
-					while (!data.isNull(counter)) {
+					JSONArray players = data.getJSONArray("players");
+					while (!players.isNull(counter)) {
 						Character c = new Character(currentCharacter.res);
-						c.fromJson(data.getJSONObject(counter));
+						c.fromJson(players.getJSONObject(counter));
 						c.preview.update();
 						// If the character is currentCharacter, add currentCharacter to array instead
 						if (c.getId() == currentCharacter.getId()) {
@@ -77,16 +83,49 @@ public class Room implements Json.Serializable {
 						}
 						counter++;
 					}
+					roomID = data.getInt("roomID");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				Room.this.characters = characters;
+				refreshLobby();
 				printCharacters();
+			}
+		}).on("readyChanged", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				System.out.println("readyChanged");
+				JSONObject data = (JSONObject) args[0];
+				try {
+					for (Character character : characters) {
+						if (data.getInt("playerID") == character.getId()) {
+							character.setReady(data.getBoolean("ready"));
+							break;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				refreshLobby();
+			}
+		}).on("failedJoinRoom", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				if (lobby != null) {
+					new OKPopup(lobby.getGame(), "Failed to join room");
+				}
 			}
 		});
 	}
 
+	private void refreshLobby() {
+		if (lobby != null) {
+			lobby.refresh();
+		}
+	}
+
 	public void createRoom(String password) {
+		currentCharacter.setReady(false);
 		JSONObject data = new JSONObject();
 		try {
 			data.put("password", password);
@@ -107,11 +146,14 @@ public class Room implements Json.Serializable {
 		}
 		socket.emit("leaveRoom", player);
 		roomID = -1;
+		characters.clear();
+		currentCharacter.setReady(false);
 		// todo get disconnect to work
 		//socket.disconnect();
 	}
 
 	public void joinRoom(String password, int roomID) {
+		currentCharacter.setReady(false);
 		JSONObject data = new JSONObject();
 		try {
 			data.put("password", password);
@@ -121,6 +163,25 @@ public class Room implements Json.Serializable {
 			e.printStackTrace();
 		}
 		socket.emit("joinRoom", data);
+	}
+
+	public void ready(boolean isReady) {
+		JSONObject data = new JSONObject();
+		currentCharacter.setReady(isReady);
+		try {
+			data.put("ready", isReady);
+			data.put("playerID", currentCharacter.getId());
+			data.put("room", roomID);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		Object[] readyData = {data};
+		socket.emit("clientReady", readyData, new Ack() {
+			@Override
+			public void call(Object... args) {
+				refreshLobby();
+			}
+		});
 	}
 
 	// Whenever someone makes a change to their character that changes their preview
@@ -143,16 +204,6 @@ public class Room implements Json.Serializable {
 
 	}
 
-	@Override
-	public void write(Json json) {
-
-	}
-
-	@Override
-	public void read(Json json, JsonValue jsonData) {
-
-	}
-
 	public void printCharacters() {
 		System.out.print("Characters: ");
 		for (Character character : characters) {
@@ -163,5 +214,9 @@ public class Room implements Json.Serializable {
 
 	public List<Character> getCharacters() {
 		return characters;
+	}
+
+	public void setLobby(Lobby lobby) {
+		this.lobby = lobby;
 	}
 }
