@@ -16,6 +16,7 @@ import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dungeon extends GameState {
@@ -34,9 +35,13 @@ public class Dungeon extends GameState {
 		//dungeonManager = new DungeonManager(player.characters, monster, gsm);
 		//loadStage();
 		field = new Field(gsm);
-
-		addCardsToStage(game.characters);
-
+		if(game.getCurrentCharacter().getRoom().getRoomID()<0){
+			ArrayList<Character> tmp = new ArrayList<Character>();
+			tmp.add(game.getCurrentCharacter());
+			addCardsToStage(tmp);
+		}else {
+			addCardsToStage(game.getCurrentCharacter().getRoom().getCharacters());
+		}
 		MonsterManager monsterManager = new MonsterManager(1, res, field);
 		field.turnManager.draw();
 		stage.addActor(field);

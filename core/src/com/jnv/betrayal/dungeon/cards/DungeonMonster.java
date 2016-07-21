@@ -43,7 +43,6 @@ public class DungeonMonster {
 			}
 			monsterID += 10;
 			field.reward += monster.getGoldReward();
-			System.out.println("wtghfghfghfhgfh" + monster.getGoldReward());
 		}
 	}
 }

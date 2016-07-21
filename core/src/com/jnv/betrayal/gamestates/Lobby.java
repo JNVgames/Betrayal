@@ -78,6 +78,8 @@ public class Lobby extends GameState {
 		return gsm.game;
 	}
 
+	public GameStateManager getGSM() { return gsm;}
+
 	// Helpers
 	private void loadBackground() {
 		Image lobbyBackground = new Image(res.getTexture("instructions-background"));
@@ -148,9 +150,9 @@ public class Lobby extends GameState {
 	}
 
 	private void loadRoomLabel(){
-		roomNum = new Label("Room #:  ", FontManager.getFont80());
+		roomNum = new Label("Room #:  ", FontManager.getFont60());
 		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 100);
-		roomNum.setY(chatBackground.getY() + (chatBackground.getHeight() - roomNum.getPrefHeight()) / 2);
+		roomNum.setY(chatBackground.getTop() - roomNum.getPrefHeight() - 20);
 		stage.addActor(roomNum);
 	}
 
@@ -356,7 +358,7 @@ public class Lobby extends GameState {
 
 	private void loadLevelTriangle(float width, float height, int counter, int floor){
 		triangles[counter-1].setX(tower.getX()+tower.getWidth() + counter * 7 - 10);
-		triangles[counter-1].setY(tower.getY() + (floor * tower.getHeight() / 25f));
+		triangles[counter-1].setY(tower.getY() + (floor * tower.getHeight() / 25f) - 20);
 		triangles[counter-1].setWidth(width);
 		triangles[counter-1].setHeight(height);
 		partyMembers.addActor(triangles[counter-1]);

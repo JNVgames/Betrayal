@@ -22,11 +22,15 @@ public class GameStateManager {
 	}
 
 	public void update(float dt) {
-		gameStates.peek().update(dt);
+		if (!gameStates.isEmpty()) {
+			gameStates.peek().update(dt);
+		}
 	}
 
 	public void render() {
-		gameStates.peek().render();
+		if (!gameStates.isEmpty()) {
+			gameStates.peek().render();
+		}
 	}
 
 	public void pause() {
@@ -82,8 +86,12 @@ public class GameStateManager {
 	public void setState(State state) {
 		if (gameStates.isEmpty()) pushState(state);
 		else {
+			System.out.println("pop");
 			popState();
+			System.out.println("push");
 			pushState(state);
+			System.out.println("after push");
+			System.out.println(gameStates.size());
 		}
 	}
 
