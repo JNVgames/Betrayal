@@ -86,12 +86,8 @@ public class GameStateManager {
 	public void setState(State state) {
 		if (gameStates.isEmpty()) pushState(state);
 		else {
-			System.out.println("pop");
 			popState();
-			System.out.println("push");
 			pushState(state);
-			System.out.println("after push");
-			System.out.println(gameStates.size());
 		}
 	}
 
