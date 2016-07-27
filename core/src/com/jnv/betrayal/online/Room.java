@@ -1,6 +1,7 @@
 package com.jnv.betrayal.online;
 
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.popup.OKPopup;
@@ -116,13 +117,13 @@ public class Room {
 					new OKPopup(lobby.getGame(), "Failed to join room");
 				}
 			}
-		}).on("sendToDungeon",  new Emitter.Listener() {
+		}).on("sendToDungeon", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
 				//new OKPopup(lobby.getGame(),"GOING TO DUNGEON");
 
 				System.out.println("sendToDungeon: before");
-				if(lobby != null) {
+				if (lobby != null) {
 					lobby.getGSM().setState(GameStateManager.State.DUNGEON);
 					lobby = null;
 				}
@@ -231,5 +232,9 @@ public class Room {
 
 	public void setLobby(Lobby lobby) {
 		this.lobby = lobby;
+	}
+
+	public Socket getSocket() {
+		return socket;
 	}
 }

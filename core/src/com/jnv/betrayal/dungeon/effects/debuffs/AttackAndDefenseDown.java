@@ -5,6 +5,11 @@ import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class AttackAndDefenseDown extends Effect {
 	private int attack;
 	private int defense;
@@ -16,6 +21,24 @@ public class AttackAndDefenseDown extends Effect {
 		isHostile = true;
 		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
 				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
+
+		addToObject();
+	}
+
+	// JSON Constructor
+	public AttackAndDefenseDown(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.BUFF_ATTACK_DEFENSE, turns, EventType.E_DEBUFF_ATTACK_DEFENSE);
+		try {
+			this.attack = data.getInt("attack");
+			this.defense = data.getInt("defense");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		isHostile = true;
+		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
+				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
+
+		addToObject();
 	}
 
 	@Override
@@ -33,5 +56,15 @@ public class AttackAndDefenseDown extends Effect {
 	@Override
 	public void consistentEffect(Card card) {
 
+	}
+	@Override
+	protected void addToObject() {
+		try {
+			data.put("attack", attack);
+			data.put("description", description);
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

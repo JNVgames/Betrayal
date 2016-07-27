@@ -6,11 +6,22 @@ import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
 
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class Run extends Effect {
 
 	private int fleeChance;
 
 	public Run(int fleeChance) {
+		super(EventType.FLEE);
+		this.fleeChance = fleeChance;
+		isHostile = false;
+	}
+
+	// JSON Constructor
+	public Run(JSONObject data, int turns, Card src, List<Card> dest) {
 		super(EventType.FLEE);
 		this.fleeChance = fleeChance;
 		isHostile = false;
@@ -35,6 +46,11 @@ public class Run extends Effect {
 
 	@Override
 	public void consistentEffect(Card card) {
+
+	}
+
+	@Override
+	protected void addToObject() {
 
 	}
 }

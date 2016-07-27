@@ -23,6 +23,8 @@ import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -548,6 +550,4 @@ public abstract class Card {
 			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard");
 		}
 	}
-
-
 }

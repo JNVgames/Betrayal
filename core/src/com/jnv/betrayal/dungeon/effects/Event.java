@@ -3,6 +3,9 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class Event {
@@ -41,7 +44,7 @@ public class Event {
 	public String toString() {
 		String event = "";
 		event += effect.getSrc().getName();
-		event += " " + eventType.toString() + " ";
+		event += " " + eventType.getActionString() + " ";
 		if (effect.getDest().size() > 0) {
 			for (int i = 0; i < effect.getDest().size(); i++) {
 				event += effect.getDest().get(i).getName();
@@ -50,5 +53,17 @@ public class Event {
 			}
 		}
 		return event;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject data = new JSONObject();
+		try {
+			data.put("turnsLeft", turnsLeft);
+			data.put("effect", effect.getJSON());
+			data.put("eventType", eventType.getActionString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return data;
 	}
 }

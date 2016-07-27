@@ -3,6 +3,10 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public abstract class Effect {
@@ -14,6 +18,8 @@ public abstract class Effect {
 	protected final EventType startType, consistentType, endType;
 	protected boolean isHostile;
 	protected String description;
+	protected JSONObject data;
+	protected JSONArray destData;
 
 	protected Effect(EventType startType) {
 		this(startType, false, null, 0, null);
@@ -39,6 +45,7 @@ public abstract class Effect {
 		this.endType = endType;
 		this.consistent = consistent;
 		this.turns = turns;
+		createJSON();
 	}
 
 	public boolean isHostile() {
@@ -112,4 +119,39 @@ public abstract class Effect {
 	public abstract void endEffect(Card card);
 
 	public abstract void consistentEffect(Card card);
+
+	private JSONObject createJSON() {
+		data = new JSONObject();
+		destData = new JSONArray();
+		if (dest != null)
+			for (Card card : dest) {
+				destData.put(card.getID());
+			}
+		try {
+			data.put("src", src.getID());
+			data.put("dest", destData);
+			data.put("consistent", consistent);
+			data.put("turns", turns);
+			data.put("startType", startType.toString());
+			data.put("consistentType", consistentType.toString());
+			data.put("endType", endType.toString());
+			data.put("isHostile", isHostile);
+			data.put("description", description);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return data;
+	}
+
+	public JSONObject getJSON() {
+		return data;
+	}
+
+	public void fromJSON(JSONObject effect) {
+
+	}
+
+	protected abstract void addToObject();
+
 }

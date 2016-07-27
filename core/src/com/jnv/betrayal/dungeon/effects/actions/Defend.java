@@ -6,6 +6,9 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class Defend extends Effect {
@@ -15,6 +18,16 @@ public class Defend extends Effect {
 		isHostile = false;
 		this.src = src;
 		this.dest = dst;
+		addToObject();
+	}
+
+	// JSON Construction
+	public Defend(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.ATTACK);
+		isHostile = false;
+		this.src = src;
+		this.dest = dest;
+		addToObject();
 	}
 
 	@Override
@@ -32,5 +45,14 @@ public class Defend extends Effect {
 	@Override
 	public void consistentEffect(Card card) {
 
+	}
+
+	@Override
+	protected void addToObject() {
+		try {
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

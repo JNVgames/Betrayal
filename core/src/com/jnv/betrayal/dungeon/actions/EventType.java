@@ -37,7 +37,7 @@ public enum EventType {
 		this.action = action;
 	}
 
-	public String toString() {
+	public String getActionString() {
 		return action;
 	}
 }

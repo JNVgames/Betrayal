@@ -5,7 +5,11 @@ import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class FailedToFlee extends Effect {
 
@@ -15,6 +19,17 @@ public class FailedToFlee extends Effect {
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
+		addToObject();
+	}
+
+	// JSON Constructor
+	public FailedToFlee(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.FAIL_TO_FLEE);
+		isHostile = false;
+		this.src = src;
+		dest = new ArrayList<Card>();
+		dest.add(src);
+		addToObject();
 	}
 
 	@Override
@@ -30,5 +45,14 @@ public class FailedToFlee extends Effect {
 	@Override
 	public void consistentEffect(Card card) {
 
+	}
+
+	@Override
+	protected void addToObject() {
+		try {
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

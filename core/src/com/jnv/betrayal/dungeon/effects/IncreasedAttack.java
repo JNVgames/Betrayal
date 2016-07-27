@@ -4,11 +4,29 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class IncreasedAttack extends Effect {
+
 	private int attack;
 
 	public IncreasedAttack(int attack, int turns) {
 		super(EventType.ATTACK, turns);
+		this.attack = attack;
+		isHostile = true;
+	}
+
+	// JSON Constructor
+	public IncreasedAttack(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.ATTACK, turns);
+		try {
+			this.attack = data.getInt("attack");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		isHostile = true;
 	}
 
@@ -24,6 +42,11 @@ public class IncreasedAttack extends Effect {
 
 	@Override
 	public void consistentEffect(Card card) {
+
+	}
+
+	@Override
+	protected void addToObject() {
 
 	}
 }

@@ -5,6 +5,11 @@ import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class AttackUp extends Effect {
 	private int attack;
 
@@ -12,6 +17,23 @@ public class AttackUp extends Effect {
 		super(EventType.BUFF_ATTACK, turns, EventType.E_BUFF_ATTACK);
 		this.attack = attack;
 		isHostile = false;
+		description = "Attack Buff\n" + "increase attack by  "+ attack + "\n"
+				+ "\nfor" + turns + " turns.";
+		addToObject();
+	}
+
+	// JSON Constructor
+	public AttackUp(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.BUFF_ATTACK, turns, EventType.E_BUFF_ATTACK);
+		try {
+			this.attack = data.getInt("attack");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		isHostile = false;
+		description = "Attack Buff\n" + "increase attack by  "+ attack + "\n"
+				+ "\nfor" + turns + " turns.";
+		addToObject();
 	}
 
 	@Override
@@ -27,5 +49,16 @@ public class AttackUp extends Effect {
 	@Override
 	public void consistentEffect(Card card) {
 
+	}
+
+	@Override
+	protected void addToObject() {
+		try {
+			data.put("attack", attack);
+			data.put("description", description);
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

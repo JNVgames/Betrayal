@@ -5,6 +5,11 @@ import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class AttackAndDefenseUp extends Effect {
 	private int attack;
 	private int defense;
@@ -14,7 +19,26 @@ public class AttackAndDefenseUp extends Effect {
 		this.attack = attack;
 		this.defense = defense;
 		isHostile = false;
+		description = "Attack Defense Buff\n" + "increase attack by  " + attack + "\n" +
+				"increase defense by " + defense + "\nfor" + turns + " turns.";
+		addToObject();
 	}
+
+	// JSON Constructor
+	public AttackAndDefenseUp(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.BUFF_ATTACK_DEFENSE, turns, EventType.E_BUFF_ATTACK_DEFENSE);
+		try {
+			this.attack = data.getInt("attack");
+			this.defense = data.getInt("defense");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		isHostile = false;
+		description = "Attack Defense Buff\n" + "increase attack by  " + attack + "\n" +
+				"increase defense by " + defense + "\nfor" + turns + " turns.";
+		addToObject();
+	}
+
 
 	@Override
 	public void startEffect(Card card) {
@@ -31,5 +55,16 @@ public class AttackAndDefenseUp extends Effect {
 	@Override
 	public void consistentEffect(Card card) {
 
+	}
+
+	@Override
+	protected void addToObject() {
+		try {
+			data.put("attack", attack);
+			data.put("defense", defense);
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

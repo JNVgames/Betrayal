@@ -10,14 +10,21 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+import io.socket.client.Socket;
+
 public class RoundManager {
 
 	private ArrayList<Event> events;
+	private Socket socket;
 	public final Deque<Event> eventHistory;
 
 	public RoundManager() {
 		events = new ArrayList<Event>();
 		eventHistory = new ArrayDeque<Event>();
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
 	}
 
 	/**
@@ -51,6 +58,7 @@ public class RoundManager {
 		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
 		AnimationManager.performAnimation(event);
+		emitEvent(event);
 	}
 
 	public void addEvent(Effect effect, EventType eventType) {
@@ -59,5 +67,12 @@ public class RoundManager {
 		effect.doStartEffect();
 		eventHistory.addLast(event);
 		AnimationManager.performAnimation(event);
+		emitEvent(event);
+	}
+
+	private void emitEvent(Event event) {
+		if (socket != null && socket.connected()) {
+			socket.emit("newEvent", event.toJSON());
+		}
 	}
 }
