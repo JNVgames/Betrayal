@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -20,7 +20,6 @@ public class Heal extends Effect {
 		isHostile = false;
 		description = "Heal\n"
 				+ "heal "+ health + " health";
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -34,7 +33,8 @@ public class Heal extends Effect {
 		isHostile = false;
 		description = "Heal\n"
 				+ "heal "+ health + " health";
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

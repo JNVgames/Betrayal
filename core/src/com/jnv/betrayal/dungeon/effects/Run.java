@@ -1,11 +1,11 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -23,8 +23,14 @@ public class Run extends Effect {
 	// JSON Constructor
 	public Run(JSONObject data, int turns, Card src, List<Card> dest) {
 		super(EventType.FLEE);
-		this.fleeChance = fleeChance;
+		try {
+			this.fleeChance = data.getInt("fleeChance");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		isHostile = false;
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

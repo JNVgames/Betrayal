@@ -156,6 +156,7 @@ public class Character implements JsonSerializable {
 		JSONObject data = new JSONObject();
 		try {
 			data.put("id", id);
+			data.put("name", name);
 			data.put("job", job.toString());
 			data.put("preview", preview.toJson());
 			data.put("equips", equips.toJson());
@@ -171,6 +172,7 @@ public class Character implements JsonSerializable {
 	public void fromJson(JSONObject data) {
 		try {
 			id = data.getInt("id");
+			name = data.getString("name");
 			isReady = data.getBoolean("isReady");
 			job.setJob(data.getString("job"));
 			preview.fromJson(data.getJSONObject("preview"));

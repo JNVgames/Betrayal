@@ -69,7 +69,6 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 		popup.addActor(help);
 	}
 
-
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-button"));
 		lobbyButton.layout();

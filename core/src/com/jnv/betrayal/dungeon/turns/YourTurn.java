@@ -2,16 +2,14 @@ package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Pool;
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.effects.actions.Defend;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
-import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;

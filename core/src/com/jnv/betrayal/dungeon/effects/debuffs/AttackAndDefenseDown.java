@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.debuffs;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -21,8 +21,8 @@ public class AttackAndDefenseDown extends Effect {
 		isHostile = true;
 		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
 				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
-
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	// JSON Constructor
@@ -38,7 +38,6 @@ public class AttackAndDefenseDown extends Effect {
 		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
 				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
 
-		addToObject();
 	}
 
 	@Override

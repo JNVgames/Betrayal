@@ -1,6 +1,6 @@
 package com.jnv.betrayal.dungeon.managers;
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
@@ -39,12 +39,12 @@ public class RoundManager {
 				if (event.turnIsZero()) {
 					event.getEffect().doEndEffect();
 					eventsToRemove.add(event);
-					addEvent(event.getEffect(), event.getEffect().getEndType());
+					addEventClient(event.getEffect(), event.getEffect().getEndType());
 				}
 				//if effect is consistent
 				if (event.getEffect().isConsistent()) {
 					event.getEffect().doConsistentEffect();
-					addEvent(event.getEffect(), event.getEffect().getConsistentType());
+					addEventClient(event.getEffect(), event.getEffect().getConsistentType());
 				}
 			}
 		}
@@ -53,25 +53,34 @@ public class RoundManager {
 		}
 	}
 
-	public void addEvent(Event event) {
+	public void addEventClient(Event event) {
 		events.add(event);
 		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
 		AnimationManager.performAnimation(event);
-		emitEvent(event);
 	}
 
-	public void addEvent(Effect effect, EventType eventType) {
+	public Event addEventClient(Effect effect, EventType eventType) {
 		Event event = new Event(effect, eventType);
 		events.add(event);
 		effect.doStartEffect();
 		eventHistory.addLast(event);
 		AnimationManager.performAnimation(event);
+		return event;
+	}
+
+	public void addEvent(Event event) {
+		addEventClient(event);
 		emitEvent(event);
+	}
+
+	public void addEvent(Effect effect, EventType eventType) {
+		emitEvent(addEventClient(effect, eventType));
 	}
 
 	private void emitEvent(Event event) {
 		if (socket != null && socket.connected()) {
+			System.out.println("send");
 			socket.emit("newEvent", event.toJSON());
 		}
 	}

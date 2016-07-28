@@ -1,6 +1,5 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import org.json.JSONException;
@@ -17,7 +16,6 @@ public class Cloak extends Effect {
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
-		addToObject();
 	}
 
 	public Cloak(JSONObject data, int turns, Card src, List<Card> dest) {
@@ -26,7 +24,6 @@ public class Cloak extends Effect {
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
-		addToObject();
 	}
 
 	@Override

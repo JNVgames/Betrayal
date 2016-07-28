@@ -1,7 +1,6 @@
 package com.jnv.betrayal.dungeon.effects;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import org.json.JSONException;
@@ -28,6 +27,8 @@ public class NearDeath extends Effect {
 			e.printStackTrace();
 		}
 		isHostile = true;
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

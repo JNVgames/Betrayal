@@ -1,6 +1,5 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import org.json.JSONArray;
@@ -22,15 +21,15 @@ public abstract class Effect {
 	protected JSONArray destData;
 
 	protected Effect(EventType startType) {
-		this(startType, false, null, 0, null);
+		this(startType, false, EventType.NONE, 0, EventType.NONE);
 	}
 
 	protected Effect(EventType startType, int turns) {
-		this(startType, false, null, turns, null);
+		this(startType, false, EventType.NONE, turns, EventType.NONE);
 	}
 
 	protected Effect(EventType startType, int turns, EventType endType) {
-		this(startType, false, null, turns, endType);
+		this(startType, false, EventType.NONE, turns, endType);
 	}
 
 	protected Effect(EventType startType, int turns, boolean consistent, EventType consistentType,
@@ -45,7 +44,6 @@ public abstract class Effect {
 		this.endType = endType;
 		this.consistent = consistent;
 		this.turns = turns;
-		createJSON();
 	}
 
 	public boolean isHostile() {
@@ -120,7 +118,7 @@ public abstract class Effect {
 
 	public abstract void consistentEffect(Card card);
 
-	private JSONObject createJSON() {
+	public JSONObject toJSON() {
 		data = new JSONObject();
 		destData = new JSONArray();
 		if (dest != null)
@@ -140,11 +138,8 @@ public abstract class Effect {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		addToObject();
 
-		return data;
-	}
-
-	public JSONObject getJSON() {
 		return data;
 	}
 

@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.debuffs;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -18,7 +18,6 @@ public class Poison extends Effect {
 		isHostile = true;
 		description = "Poison\n"
 				+ "take "+ damage + "\n" + "for " + turns + " turns.";
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -27,7 +26,8 @@ public class Poison extends Effect {
 		isHostile = true;
 		description = "Poison\n"
 				+ "take "+ damage + "\n" + "for " + turns + " turns.";
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

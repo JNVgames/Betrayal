@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.debuffs;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -19,7 +19,6 @@ public class AttackDown extends Effect {
 		isHostile = true;
 		description = "Attack Debuff\nLowers your attack by " + attack + "\n"
 				+ "for " + turns + " turns.";
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -33,7 +32,8 @@ public class AttackDown extends Effect {
 		isHostile = true;
 		description = "Attack Debuff\nLowers your attack by " + attack + "\n"
 				+ "for " + turns + " turns.";
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override
@@ -52,10 +52,12 @@ public class AttackDown extends Effect {
 	}
 	@Override
 	protected void addToObject() {
+		JSONObject values = new JSONObject();
 		try {
-			data.put("attack", attack);
+			values.put("attack", attack);
 			data.put("description", description);
 			data.put("class", getClass().getCanonicalName());
+			data.put("values", values);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

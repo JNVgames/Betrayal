@@ -20,15 +20,6 @@ public class TeamMemberTurn extends Turn {
 	@Override
 	public void draw() {
 		panels.clearChildren();
-		// TODO change ____ to user string
-		createPanel("'s turn", FontManager.getFont80(), Panel.full, new Runnable() {
-			@Override
-			public void run() {
-				// TODO animation not working
-				Effect effect = new Attack(field.getCurrentCard(), field.getAllMonsterCards());
-				field.roundManager.addEvent(effect, effect.getStartType());
-				field.turnManager.nextTurn();
-			}
-		});
+		createGrayPanel(field.getCurrentCard().getName() + "'s turn", FontManager.getFont80(), Panel.full);
 	}
 }

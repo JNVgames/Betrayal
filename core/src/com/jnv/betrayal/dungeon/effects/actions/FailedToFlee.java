@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -19,7 +19,6 @@ public class FailedToFlee extends Effect {
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -29,7 +28,6 @@ public class FailedToFlee extends Effect {
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
-		addToObject();
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -18,7 +18,6 @@ public class Bomb extends Effect {
 		super(EventType.BOMB, turns);
 		this.attack = attack;
 		isHostile = true;
-		addToObject();
 	}
 
 	// JSON constructor
@@ -30,7 +29,8 @@ public class Bomb extends Effect {
 			e.printStackTrace();
 		}
 		isHostile = true;
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

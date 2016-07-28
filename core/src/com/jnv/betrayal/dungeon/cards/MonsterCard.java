@@ -6,7 +6,7 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;

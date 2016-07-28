@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.buffs;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 
@@ -19,7 +19,6 @@ public class DefenseUp extends Effect {
 		isHostile = false;
 		description = "Defense Buff\n"  +
 				"increase defense by " + defense + "\nfor" + turns + " turns.";
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -33,7 +32,8 @@ public class DefenseUp extends Effect {
 		isHostile = false;
 		description = "Defense Buff\n"  +
 				"increase defense by " + defense + "\nfor" + turns + " turns.";
-		addToObject();
+		this.src = src;
+		this.dest = dest;
 	}
 
 	@Override

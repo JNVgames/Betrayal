@@ -1,16 +1,13 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class Attack extends Effect {
@@ -23,7 +20,6 @@ public class Attack extends Effect {
 		attack = src.getCurrentAttack();
 		this.src = src;
 		this.dest = dest;
-		addToObject();
 	}
 
 	// JSON Constructor
@@ -33,7 +29,6 @@ public class Attack extends Effect {
 		attack = src.getCurrentAttack();
 		this.src = src;
 		this.dest = dest;
-		addToObject();
 	}
 
 	@Override

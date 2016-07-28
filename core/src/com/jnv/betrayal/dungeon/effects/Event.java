@@ -1,6 +1,5 @@
 package com.jnv.betrayal.dungeon.effects;
 
-import com.jnv.betrayal.dungeon.actions.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 
 import org.json.JSONException;
@@ -59,8 +58,8 @@ public class Event {
 		JSONObject data = new JSONObject();
 		try {
 			data.put("turnsLeft", turnsLeft);
-			data.put("effect", effect.getJSON());
-			data.put("eventType", eventType.getActionString());
+			data.put("effect", effect.toJSON());
+			data.put("eventType", eventType.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

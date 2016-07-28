@@ -1,7 +1,7 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.actions.EventType;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
@@ -18,7 +18,6 @@ public class Defend extends Effect {
 		isHostile = false;
 		this.src = src;
 		this.dest = dst;
-		addToObject();
 	}
 
 	// JSON Construction
@@ -27,7 +26,6 @@ public class Defend extends Effect {
 		isHostile = false;
 		this.src = src;
 		this.dest = dest;
-		addToObject();
 	}
 
 	@Override

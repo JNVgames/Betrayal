@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
 import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
@@ -18,6 +20,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
@@ -189,52 +192,51 @@ public class Field extends Group {
 	}
 
 	public void sendDungeonEvent(Event event) {
+		System.out.println("newEvent Sent");
 		socket.emit("newEvent", event.toJSON());
 	}
 
 	public void configSocket() {
 		socket.on("newEvent", new Emitter.Listener() {
-			int srcID;
-			ArrayList<Integer> dstID = new ArrayList<Integer>();
-			Card src;
-			ArrayList<Card> dst = new ArrayList<Card>();
-
 			@Override
 			public void call(Object... args) {
+				System.out.println("newEvent Received");
 				// Send to Round Manager
 				JSONObject data = (JSONObject) args[0];
 
 				// Take out src and dest, recreate them into actual Cards
-				// Get src id
 
 				//resetting values
-				dstID.clear();
-				dst.clear();
-				src = null;
-				srcID = -1;
+				List<Integer> dstID = new ArrayList<Integer>();
+				int srcID = -1;
 
 				try {
-					srcID = data.getInt("src");
-					for (int i = 0; i < data.getJSONArray("dest").length(); i++) {
-						dstID.add(data.getJSONArray("dest").getInt(i));
+					srcID = data.getJSONObject("effect").getInt("src");
+					JSONArray destArray = data.getJSONObject("effect").getJSONArray("dest");
+					for (int i = 0; i < destArray.length(); i++) {
+						dstID.add(destArray.getInt(i));
 					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				// FInd Card corresponding to id
-				createSrcDst(srcID, dstID, src, dst);
+				Card src = setSrcCard(srcID);
+				List<Card> dst = setDstCard(dstID);
 
-				//
-
+				// Create event
 				Class<?> clazz;
 				Constructor<?> constructor;
-				Object item;
+				Effect effect;
 
 				try {
-					clazz = Class.forName(data.getString("class"));
+					clazz = Class.forName(data.getJSONObject("effect").getString("class"));
 					constructor = clazz.getConstructor(JSONObject.class, int.class, Card.class, List.class);
-					item = constructor.newInstance(data.getJSONObject("values"),data.getInt("turns") , src, dst);
+					effect = (Effect) constructor.newInstance(data.getJSONObject("effect").getJSONObject("values"),
+							data.getJSONObject("effect").getInt("turns"), src, dst);
+					roundManager.addEventClient(effect, EventType.valueOf(data.getString("eventType")));
+					turnManager.nextTurn();
+					System.out.println("next turn");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -242,28 +244,29 @@ public class Field extends Group {
 		});
 	}
 
-	private void createSrcDst(int srcID, ArrayList<Integer> dstID, Card src, ArrayList<Card> dst) {
+
+
+	private Card setSrcCard(int srcID) {
 		//check if there is a src or dest card in the playerzone
-		for (Card card : playerZone) {
+		for (Card card : allCards) {
 			if (card.getID() == srcID) {
-				src = card;
-			}
-			for (int i : dstID) {
-				if (i == card.getID())
-					dst.add(card);
+				return card;
 			}
 		}
-		//check is a src or dst card is in the monster zone
-		for (Card card : monsterZone) {
-			if (card.getID() == srcID) {
-				src = card;
-			}
-			for (int i : dstID) {
-				if (i == card.getID())
-					dst.add(card);
-			}
-		}
-
-
+		return null;
 	}
+
+	private List<Card> setDstCard(List<Integer> dstID) {
+		List<Card> dst = new ArrayList<Card>();
+		for (Card card : allCards) {
+			for (int i : dstID) {
+				if (i == card.getID()) {
+					dst.add(card);
+				}
+			}
+		}
+		return dst;
+	}
+
+
 }

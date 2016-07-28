@@ -1,6 +1,7 @@
-package com.jnv.betrayal.dungeon.actions;
+package com.jnv.betrayal.dungeon.effects;
 
 public enum EventType {
+	NONE(""),
 	ATTACK("attacked"),
 	DEFEND("defended"),
 	FLEE("fled"),
