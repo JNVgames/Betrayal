@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.lobby.LobbyOptions;
 import com.jnv.betrayal.lobby.inventory.Inventory;
@@ -40,7 +41,11 @@ public class Lobby extends GameState {
 	private Actor playNowButton, readyButton, UnReadyButton;
 	private Group partyMembers;
 	private Room room;
-	private Label roomNum;
+	private Label roomNum, timeTilEnter,timerValue;
+	private Timer timer;
+	private Timer.Task task;
+	private long savedTime;
+	private int delay, timeLeft;
 
 	public Lobby(GameStateManager gsm) {
 		super(gsm);
@@ -58,6 +63,23 @@ public class Lobby extends GameState {
 		triangles[3] = new Image(new TextureRegion(purpleT));
 		loadContent();
 		refresh();
+		timer = new Timer();
+		timer.start();
+		delay = 5;
+		task = new Timer.Task(){
+			@Override
+			public void run() {
+				// Do your work
+				//getGSM().setState(GameStateManager.State.DUNGEON);
+			}
+		};
+		enterDungeonCountDown();
+	}
+
+	public void enterDungeonCountDown(){
+		new OKPopup(game, "Entering Dungeon");
+		savedTime = System.currentTimeMillis();
+		Timer.schedule(task, delay);
 	}
 
 	public void update(float dt) {
@@ -69,7 +91,20 @@ public class Lobby extends GameState {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		stage.draw();
+
+		if(task.isScheduled()) {
+			timerValue.setColor(new Color(195f/256f, 66f/256f, 66f/256f, 1));
+			timeLeft = (int)(System.currentTimeMillis() - savedTime);
+			timeLeft /= 1000;
+			timeLeft = 5 - timeLeft;
+			timerValue.setText(Integer.toString(timeLeft));
+		}else{
+			timerValue.setColor(Color.WHITE);
+			timerValue.setText("...");
+
+		}
 	}
+
 
 	public void dispose() {
 	}
@@ -149,6 +184,19 @@ public class Lobby extends GameState {
 		stage.addActor(partyButton);
 	}
 
+	private void loadTimeLeftLabel(){
+		timeTilEnter = new Label("Entering in " , FontManager.getFont60());
+		timeTilEnter.setX(chatBackground.getX() + (chatBackground.getWidth() - timeTilEnter.getPrefWidth()) / 2 - 50);
+		timeTilEnter.setY(roomNum.getY() - timeTilEnter.getPrefHeight() - 20);
+		stage.addActor(timeTilEnter);
+
+		timerValue = new Label("...", FontManager.getFont60());
+		timerValue.setX(timeTilEnter.getX()+timeTilEnter.getPrefWidth());
+		timerValue.setY(timeTilEnter.getY());
+		stage.addActor(timerValue);
+		//todo SET z INDEX SO IT DOESNT INTERFERE WITH SHOP ETC
+	}
+
 	private void loadRoomLabel(){
 		roomNum = new Label("Room #:  ", FontManager.getFont60());
 		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 100);
@@ -212,6 +260,7 @@ public class Lobby extends GameState {
 		loadSettingsButton();
 		loadPartyButton();
 		loadRoomLabel();
+		loadTimeLeftLabel();
 		loadStatsButton();
 		loadInventoryButton();
 		loadPlayNowButton();

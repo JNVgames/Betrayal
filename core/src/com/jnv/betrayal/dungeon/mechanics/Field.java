@@ -4,7 +4,10 @@
 
 package com.jnv.betrayal.dungeon.mechanics;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -12,12 +15,15 @@ import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.managers.AnimationManager;
+import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
 import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
+import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
@@ -44,6 +50,11 @@ public class Field extends Group {
 	public final Socket socket;
 	List<Card> allCards;
 	private int currentCardTurn;
+	private Label timeLeft;
+	private Timer timer;
+	private Timer.Task task;
+	private long savedTime;
+	private int delay, t;
 	public int reward;
 
 	/**
@@ -82,6 +93,54 @@ public class Field extends Group {
 		animationMgr = new AnimationManager(res);
 		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
+
+		timer = new Timer();
+		timer.start();
+		delay = 5;
+		task = new Timer.Task(){
+			@Override
+			public void run() {
+				// Do your work
+				defaultEvent();
+			}
+		};
+
+		timeLeft = new Label("" , FontManager.getFont60()) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				t = (int)(System.currentTimeMillis() - savedTime);
+				t /= 1000;
+				t = 5 - t;
+				timeLeft.setText(Integer.toString(t));
+			}
+		};
+	}
+
+	public void clearTimerTask(){
+
+		timer.clear();
+	}
+
+	public void startTimer(){
+		savedTime = System.currentTimeMillis();
+		Timer.schedule(task, delay);
+	}
+
+	private void defaultEvent(){
+		List<Card> dst = new ArrayList<Card>();
+		dst.add(monsterZone.get(0));
+		Event event = new Event(new Attack(getCurrentCard(), dst), EventType.ATTACK);
+		roundManager.addEvent(event);
+
+		//monster should never call this
+	}
+
+	public void setTimerLabel(){
+		timeLeft = new com.jnv.betrayal.scene2d.ui.Label("", FontManager.getFont60());
+		timeLeft.setX(Betrayal.WIDTH/2 - timeLeft.getPrefWidth() / 2);
+		timeLeft.setY(1000);
+		addActor(timeLeft);
 	}
 
 	public void addCard(Card card) {
