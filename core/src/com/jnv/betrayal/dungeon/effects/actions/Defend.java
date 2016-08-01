@@ -14,7 +14,7 @@ import java.util.List;
 public class Defend extends Effect {
 
 	public Defend(Card src, List<Card> dst) {
-		super(EventType.ATTACK);
+		super(EventType.DEFEND);
 		isHostile = false;
 		this.src = src;
 		this.dest = dst;
@@ -22,7 +22,7 @@ public class Defend extends Effect {
 
 	// JSON Construction
 	public Defend(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.ATTACK);
+		super(EventType.DEFEND);
 		isHostile = false;
 		this.src = src;
 		this.dest = dest;

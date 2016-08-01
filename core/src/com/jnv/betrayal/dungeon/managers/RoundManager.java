@@ -15,12 +15,14 @@ import io.socket.client.Socket;
 public class RoundManager {
 
 	private ArrayList<Event> events;
+	private AnimationManager animation;
 	private Socket socket;
 	public final Deque<Event> eventHistory;
 
-	public RoundManager() {
+	public RoundManager(AnimationManager animation) {
 		events = new ArrayList<Event>();
 		eventHistory = new ArrayDeque<Event>();
+		this.animation = animation;
 	}
 
 	public void setSocket(Socket socket) {
@@ -57,7 +59,7 @@ public class RoundManager {
 		events.add(event);
 		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
-		AnimationManager.performAnimation(event);
+		animation.performAnimation(event);
 	}
 
 	public Event addEventClient(Effect effect, EventType eventType) {
@@ -65,7 +67,7 @@ public class RoundManager {
 		events.add(event);
 		effect.doStartEffect();
 		eventHistory.addLast(event);
-		AnimationManager.performAnimation(event);
+		animation.performAnimation(event);
 		return event;
 	}
 

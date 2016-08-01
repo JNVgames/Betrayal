@@ -37,7 +37,7 @@ public abstract class Card {
 	protected Actor cardImage;
 	protected Group group;
 	private List<Card> defenders = new ArrayList<Card>();
-	private TextureRegion selectedTexture, shieldTexture;
+	private TextureRegion selectedTexture;
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener, cardInfoListener;
 	private boolean isTurn;
@@ -73,7 +73,6 @@ public abstract class Card {
 		group.addAction(Actions.delay(1, Actions.fadeIn(2)));
 		healthBar = new HealthBar(group.getHeight(), res);
 		selectedTexture = new TextureRegion(res.getTexture("cross-hair"));
-		shieldTexture = new TextureRegion(res.getTexture("defense"));
 		group.addActor(healthBar);
 		healthBar.toFront();
 		isTurn = false;

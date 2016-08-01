@@ -110,4 +110,14 @@ public class Dimension {
 		this.y = y;
 		isCenterY = true;
 	}
+
+	@Override
+	public String toString() {
+		return "Dimension{" +
+				"x=" + x +
+				", y=" + y +
+				", width=" + width +
+				", height=" + height +
+				'}';
+	}
 }

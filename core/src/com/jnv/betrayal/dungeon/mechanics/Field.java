@@ -11,6 +11,7 @@ import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
+import com.jnv.betrayal.dungeon.managers.AnimationManager;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
 import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
@@ -34,6 +35,7 @@ public class Field extends Group {
 
 	public final RoundManager roundManager;
 	public final TurnManager turnManager;
+	public final AnimationManager animationMgr;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final Betrayal game;
@@ -55,7 +57,7 @@ public class Field extends Group {
 		game = gsm.game;
 		res = gsm.game.res;
 		socket = gsm.game.getCurrentCharacter().getRoom().getSocket();
-		configSocket();
+		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
 		Image background = new Image(res.getTexture("map-1"));
 		currentCardTurn = 0;
@@ -77,7 +79,8 @@ public class Field extends Group {
 		});
 		addActor(eventLogButton);
 		turnManager = new TurnManager(this);
-		roundManager = new RoundManager();
+		animationMgr = new AnimationManager(res);
+		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
 	}
 

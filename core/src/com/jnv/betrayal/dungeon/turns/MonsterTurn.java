@@ -1,6 +1,5 @@
 package com.jnv.betrayal.dungeon.turns;
 
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.Pool;
@@ -30,7 +29,7 @@ public class MonsterTurn extends Turn {
 	public void draw() {
 		panels.clearChildren();
 		createGrayPanel( "monster's turn", FontManager.getFont80(), Panel.full);
-		field.addAction(Actions.delay(3f,new RunnableAction(){
+		field.addAction(Actions.delay(3f, new RunnableAction(){
 			@Override
 			public void run() {
 				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()) {
