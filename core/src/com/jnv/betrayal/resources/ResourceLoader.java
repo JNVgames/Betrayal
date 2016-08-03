@@ -346,7 +346,11 @@ public class ResourceLoader {
 	}
 
 	private void loadMonsters() {
+		//Tier 0
+		res.loadTexture("monster/monster1.png", "monster-tier0-0");
+
 		// Tier 1
+
 		res.loadTexture("monster/monster2.png", "monster-tier1-0");
 		res.loadTexture("monster/monster3.png", "monster-tier1-1");
 		res.loadTexture("monster/monster4.png", "monster-tier1-2");
@@ -426,7 +430,6 @@ public class ResourceLoader {
 		res.loadTexture("monster/monster50.png", "monster-tier5-5");
 
 		//Other
-		res.loadTexture("monster/monster1.png", "monster-tier0-0");
 		res.loadTexture("monster/monster16.png", "monster-tier0-1");
 		res.loadTexture("monster/monster51.png", "monster-tier0-2");
 	}
