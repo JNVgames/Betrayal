@@ -50,6 +50,7 @@ public class AttackDown extends Effect {
 	public void consistentEffect(Card card) {
 
 	}
+
 	@Override
 	protected void addToObject() {
 		JSONObject values = new JSONObject();

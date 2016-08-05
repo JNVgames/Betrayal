@@ -54,7 +54,6 @@ public class Betrayal extends Game {
 	}
 
 	public void pause() {
-		Gdx.app.log("Betrayal", "pause()");
 		gamePaused = true;
 		gsm.pause();
 	}
@@ -65,7 +64,6 @@ public class Betrayal extends Game {
 			gsm.resume();
 		}
 		Timer timer = new Timer();
-		Gdx.app.log("Betrayal", "resume()");
 	}
 
 	public void render() {

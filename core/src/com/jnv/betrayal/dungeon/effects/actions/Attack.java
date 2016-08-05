@@ -27,13 +27,12 @@ public class Attack extends Effect {
 		super(EventType.ATTACK);
 		isHostile = false;
 		attack = src.getCurrentAttack();
-		this.src = src;
-		this.dest = dest;
+		init(turns, src, dest);
 	}
 
 	@Override
 	public void startEffect(Card card) {
-		card.takeDamage(attack);
+		card.attack(attack);
 	}
 
 	@Override

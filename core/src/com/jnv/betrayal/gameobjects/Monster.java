@@ -8,12 +8,12 @@ public class Monster {
 
 	private Texture monsterTexture, skillTexture;
 	private String textureName, nickname;
-	private int id, health, attack, defense, width, height, xPos, yPos, numTargets, goldReward;
+	private int id, health, attack, defense, width, height, xPos, yPos, numTargets, goldReward, effectCD;
 	private Effect effect;
 
 	public Monster(int id, BetrayalAssetManager res, String textureName, String nickname,
 				   int health, int attack, int defense, int width, int height, int xPos, int yPos,
-				   int numTargets, int goldReward, Effect effect, String skillTextureName) {
+				   int numTargets, int effectCD, int goldReward, Effect effect, String skillTextureName) {
 		this.textureName = textureName;
 		this.nickname = nickname;
 		this.id = id;
@@ -26,6 +26,7 @@ public class Monster {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.numTargets = numTargets;
+		this.effectCD = effectCD;
 		this.effect = effect;
 		monsterTexture = res.getTexture(textureName);
 		if (skillTextureName != null) skillTexture = res.getTexture(skillTextureName);
@@ -46,6 +47,7 @@ public class Monster {
 		goldReward = src.goldReward;
 		numTargets = src.numTargets;
 		this.effect = src.effect;
+		effectCD = src.effectCD;
 		nickname = src.nickname;
 		monsterTexture = src.monsterTexture;
 		skillTexture = src.skillTexture;
@@ -64,16 +66,6 @@ public class Monster {
 		return effect;
 	}
 
-	// Setters
-	public void setAutoAttackTimer(int new_normalAattackTimer) {
-		numTargets = new_normalAattackTimer;
-	}
-
-	public void setXPos(int new_xPos) {
-		xPos = new_xPos;
-	}
-
-	// Getters
 	public int getHealth() {
 		return health;
 	}
@@ -102,23 +94,15 @@ public class Monster {
 		return nickname;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
 	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(int new_Height) {
-		height = new_Height;
-	}
-
-	public int getxPos() {
+	public int getX() {
 		return xPos;
 	}
 
-	public int getyPos() {
+	public int getY() {
 		return yPos;
 	}
 
@@ -130,13 +114,17 @@ public class Monster {
 		return skillTexture;
 	}
 
+	public int getEffectCD() {
+		return effectCD;
+	}
+
 	public static class MonsterFactory {
 
 		private String nickname = "stub";
 		private String textureName = "stub";
 		private String skillTextureName;
 		private BetrayalAssetManager res;
-		private int id, health, attack, defense, textureWidth, textureHeight, x, y, numTargets;
+		private int id, health, attack, defense, textureWidth, textureHeight, x, y, numTargets, effectCD;
 		private Effect effect;
 		private int goldReward = 100;
 
@@ -213,14 +201,19 @@ public class Monster {
 			return this;
 		}
 
-		public MonsterFactory goldReward(int gold){
+		public MonsterFactory goldReward(int gold) {
 			goldReward = gold;
+			return this;
+		}
+
+		public MonsterFactory effectCooldown(int turns) {
+			effectCD = turns;
 			return this;
 		}
 
 		public Monster build() {
 			return new Monster(id, res, textureName, nickname, health, attack, defense, textureWidth,
-					textureHeight, x, y, numTargets, goldReward, effect, skillTextureName);
+					textureHeight, x, y, numTargets, effectCD, goldReward, effect, skillTextureName);
 		}
 	}
 }

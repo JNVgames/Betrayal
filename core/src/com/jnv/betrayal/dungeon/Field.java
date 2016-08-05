@@ -2,12 +2,9 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.mechanics;
+package com.jnv.betrayal.dungeon;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Timer;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -15,15 +12,12 @@ import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.managers.AnimationManager;
-import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
 import com.jnv.betrayal.dungeon.managers.TurnManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
-import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
@@ -50,11 +44,6 @@ public class Field extends Group {
 	public final Socket socket;
 	List<Card> allCards;
 	private int currentCardTurn;
-	private Label timeLeft;
-	private Timer timer;
-	private Timer.Task task;
-	private long savedTime;
-	private int delay, t;
 	public int reward;
 
 	/**
@@ -76,7 +65,18 @@ public class Field extends Group {
 
 		// Add things to stage
 		addActor(background);
+		createEventLogButton();
 
+		turnManager = new TurnManager(this);
+		animationMgr = new AnimationManager(res);
+		roundManager = new RoundManager(animationMgr);
+		roundManager.setSocket(socket);
+
+		// todo REMOVE THIS LINE
+		System.out.println("ASDKLFJA;SLDKFJASL;KDFASL;DFK   " + gsm.game.getCurrentCharacter().getName());
+	}
+
+	private void createEventLogButton() {
 		// Load event log button
 		float scale = 0.5f;
 		Image eventLogButton = new Image(res.getTexture("event-log-button"));
@@ -89,58 +89,6 @@ public class Field extends Group {
 			}
 		});
 		addActor(eventLogButton);
-		turnManager = new TurnManager(this);
-		animationMgr = new AnimationManager(res);
-		roundManager = new RoundManager(animationMgr);
-		roundManager.setSocket(socket);
-
-		timer = new Timer();
-		timer.start();
-		delay = 5;
-		task = new Timer.Task(){
-			@Override
-			public void run() {
-				// Do your work
-				defaultEvent();
-			}
-		};
-
-		timeLeft = new Label("" , FontManager.getFont60()) {
-			@Override
-			public void act(float delta) {
-				super.act(delta);
-				t = (int)(System.currentTimeMillis() - savedTime);
-				t /= 1000;
-				t = 5 - t;
-				timeLeft.setText(Integer.toString(t));
-			}
-		};
-	}
-
-	public void clearTimerTask(){
-
-		timer.clear();
-	}
-
-	public void startTimer(){
-		savedTime = System.currentTimeMillis();
-		Timer.schedule(task, delay);
-	}
-
-	private void defaultEvent(){
-		List<Card> dst = new ArrayList<Card>();
-		dst.add(monsterZone.get(0));
-		Event event = new Event(new Attack(getCurrentCard(), dst), EventType.ATTACK);
-		roundManager.addEvent(event);
-
-		//monster should never call this
-	}
-
-	public void setTimerLabel(){
-		timeLeft = new com.jnv.betrayal.scene2d.ui.Label("", FontManager.getFont60());
-		timeLeft.setX(Betrayal.WIDTH/2 - timeLeft.getPrefWidth() / 2);
-		timeLeft.setY(1000);
-		addActor(timeLeft);
 	}
 
 	public void addCard(Card card) {
@@ -149,6 +97,12 @@ public class Field extends Group {
 		else throw new AssertionError("Card is neither a PlayerCard or MonsterCard");
 		addActor(card.getGroup());
 		card.setField(this);
+	}
+
+	public void adjustMonsterHealth() {
+		for (MonsterCard card : monsterZone) {
+			card.multiplyHealth(playerZone.size());
+		}
 	}
 
 	/**
@@ -175,7 +129,6 @@ public class Field extends Group {
 	 * Ends select mode on all cards
 	 */
 	public void endSelectMode() {
-		refreshAllCards();
 		for (Card card : allCards) {
 			card.endSelectMode();
 			card.unselect();
@@ -187,7 +140,6 @@ public class Field extends Group {
 	 */
 	public List<Card> getCardsSelected() {
 		List<Card> selectedCards = new ArrayList<Card>();
-		refreshAllCards();
 		for (Card card : allCards) {
 			if (card.isSelected()) selectedCards.add(card);
 		}
@@ -195,7 +147,6 @@ public class Field extends Group {
 	}
 
 	public void unselectAll() {
-		refreshAllCards();
 		for (Card card : allCards) {
 			card.unselect();
 		}
@@ -213,7 +164,6 @@ public class Field extends Group {
 	}
 
 	public Card getCurrentCard() {
-		refreshAllCards();
 		return allCards.get(currentCardTurn);
 	}
 
@@ -253,22 +203,13 @@ public class Field extends Group {
 		refreshAllCards();
 	}
 
-	public void sendDungeonEvent(Event event) {
-		System.out.println("newEvent Sent");
-		socket.emit("newEvent", event.toJSON());
-	}
-
 	public void configSocket() {
 		socket.on("newEvent", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				System.out.println("newEvent Received");
-				// Send to Round Manager
 				JSONObject data = (JSONObject) args[0];
 
-				// Take out src and dest, recreate them into actual Cards
-
-				//resetting values
+				// Initializing values
 				List<Integer> dstID = new ArrayList<Integer>();
 				int srcID = -1;
 
@@ -279,26 +220,20 @@ public class Field extends Group {
 						dstID.add(destArray.getInt(i));
 					}
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				// FInd Card corresponding to id
-				Card src = setSrcCard(srcID);
-				List<Card> dst = setDstCard(dstID);
+					// FInd Card corresponding to id
+					Card src = findSrcCard(srcID);
+					List<Card> dst = findDestCard(dstID);
 
-				// Create event
-				Class<?> clazz;
-				Constructor<?> constructor;
-				Effect effect;
-
-				try {
-					clazz = Class.forName(data.getJSONObject("effect").getString("class"));
-					constructor = clazz.getConstructor(JSONObject.class, int.class, Card.class, List.class);
-					effect = (Effect) constructor.newInstance(data.getJSONObject("effect").getJSONObject("values"),
+					// Recreate event
+					Class<?> clazz = Class.forName(data.getJSONObject("effect").getString("class"));
+					Constructor<?> constructor = clazz.getConstructor(JSONObject.class, int.class, Card.class, List.class);
+					Effect effect = (Effect) constructor.newInstance(data.getJSONObject("effect").getJSONObject("values"),
 							data.getJSONObject("effect").getInt("turns"), src, dst);
-					roundManager.addEventClient(effect, EventType.valueOf(data.getString("eventType")));
+
+					// Register recreated event with roundManager
+					Event event = roundManager.addEventClient(effect, EventType.valueOf(data.getString("eventType")));
+					System.out.println("RECEIVED EVENT: " + event);
 					turnManager.nextTurn();
-					System.out.println("next turn");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -306,9 +241,7 @@ public class Field extends Group {
 		});
 	}
 
-
-
-	private Card setSrcCard(int srcID) {
+	private Card findSrcCard(int srcID) {
 		//check if there is a src or dest card in the playerzone
 		for (Card card : allCards) {
 			if (card.getID() == srcID) {
@@ -318,7 +251,7 @@ public class Field extends Group {
 		return null;
 	}
 
-	private List<Card> setDstCard(List<Integer> dstID) {
+	private List<Card> findDestCard(List<Integer> dstID) {
 		List<Card> dst = new ArrayList<Card>();
 		for (Card card : allCards) {
 			for (int i : dstID) {
@@ -330,5 +263,37 @@ public class Field extends Group {
 		return dst;
 	}
 
+	public void adjustPlayerCardStatsBasedOnJobs(){
+		boolean hasWarrior, hasThief, hasPriest, hasKnight;
+		hasWarrior = hasThief = hasPriest = hasKnight = false;
 
+		//Determines what jobs are in the party
+		for( PlayerCard card : playerZone ){
+			switch (card.getJob()){
+
+				case WARRIOR:
+					hasWarrior = true;
+					break;
+				case THIEF:
+					hasThief = true;
+					break;
+				case KNIGHT:
+					hasKnight = true;
+					break;
+				case PRIEST:
+					hasPriest = true;
+					break;
+			}
+		}
+
+		//adjusts all stats according to which Jobs are present
+		for( PlayerCard card : playerZone ){
+			if(hasWarrior) card.multiplyAttack();
+			if(hasPriest) card.multiplyHealth();
+			if(hasKnight) card.multiplyDefense();
+		}
+
+		if(hasThief) reward  *= 2;
+
+	}
 }

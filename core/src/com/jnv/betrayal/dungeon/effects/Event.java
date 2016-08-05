@@ -19,16 +19,24 @@ public class Event {
 		this.eventType = eventType;
 	}
 
-	public boolean turnIsZero() {
-		return turnsLeft == 0;
+	public boolean effectEnded() {
+		return turnsLeft <= 0;
 	}
 
 	public void decreaseTurns() {
 		turnsLeft--;
 	}
 
+	public int getTurnsLeft() {
+		return turnsLeft;
+	}
+
 	public Effect getEffect() {
 		return effect;
+	}
+
+	public EventType getEventType() {
+		return eventType;
 	}
 
 	public Card getSrc() {
@@ -39,8 +47,7 @@ public class Event {
 		return effect.getDest();
 	}
 
-	@Override
-	public String toString() {
+	public String toEventLogString() {
 		String event = "";
 		event += effect.getSrc().getName();
 		event += " " + eventType.getActionString() + " ";
@@ -52,6 +59,15 @@ public class Event {
 			}
 		}
 		return event;
+	}
+
+	@Override
+	public String toString() {
+		return "Event{" +
+				"src=" + effect.src.getName() +
+				", eventType=" + eventType +
+				", turnsLeft=" + turnsLeft +
+				'}';
 	}
 
 	public JSONObject toJSON() {

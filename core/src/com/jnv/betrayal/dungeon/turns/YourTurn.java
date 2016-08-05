@@ -10,7 +10,7 @@ import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.effects.actions.Defend;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.main.Betrayal;

@@ -1,7 +1,6 @@
 package com.jnv.betrayal.online;
 
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.popup.OKPopup;
@@ -117,17 +116,22 @@ public class Room {
 					new OKPopup(lobby.getGame(), "Failed to join room");
 				}
 			}
-		}).on("sendToDungeon", new Emitter.Listener() {
+		}).on("startDungeonCountdown", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
 				//new OKPopup(lobby.getGame(),"GOING TO DUNGEON");
 
-				System.out.println("sendToDungeon: before");
+				if (lobby != null) {
+					lobby.enterDungeonCountDown();
+				}
+			}
+		}).on("enterDungeon", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
 				if (lobby != null) {
 					lobby.getGSM().setState(GameStateManager.State.DUNGEON);
 					lobby = null;
 				}
-				System.out.println("sendToDungeon: after");
 			}
 		});
 	}
@@ -158,12 +162,10 @@ public class Room {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		socket.emit("leaveRoom", player);
 		roomID = -1;
 		characters.clear();
 		currentCharacter.setReady(false);
-		// todo get disconnect to work
-		//socket.disconnect();
+		socket.disconnect();
 	}
 
 	public void joinRoom(String password, int roomID) {
@@ -200,21 +202,24 @@ public class Room {
 
 	// Whenever someone makes a change to their character that changes their preview
 	public void updateCharactersInfo() {
-
+// todo
 	}
 
 	// Emit event to server on this character preview change
 	public void updateServerCharacters() {
+// todo
 
 	}
 
 	// When someone joins/leaves the room
 	public void updateCharactersArray() {
+// todo
 
 	}
 
 	// Remove room from server when last person leaves
 	public void removeRoom() {
+// todo
 
 	}
 

@@ -46,6 +46,10 @@ public abstract class Effect {
 		this.turns = turns;
 	}
 
+	protected void init(Card src, List<Card> dest) {
+
+	}
+
 	public boolean isHostile() {
 		return isHostile;
 	}
@@ -148,5 +152,7 @@ public abstract class Effect {
 	}
 
 	protected abstract void addToObject();
+
+
 
 }

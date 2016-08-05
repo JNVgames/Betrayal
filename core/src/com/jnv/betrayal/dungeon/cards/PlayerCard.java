@@ -7,7 +7,9 @@ package com.jnv.betrayal.dungeon.cards;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Preview;
+import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -20,7 +22,7 @@ public class PlayerCard extends Card {
 
 	private Preview preview;
 	private Character character;
-	private Card cardToDefend;
+	private Jobs characterJob;
 
 	public PlayerCard(Vector2 coords, Character character,
 					  BetrayalAssetManager res) {
@@ -34,6 +36,7 @@ public class PlayerCard extends Card {
 		baseHealth = currentHealth = character.stats.getTotalHealth();
 		baseAttack = currentAttack = character.stats.getTotalAttack();
 		baseDefense = currentDefense = character.stats.getTotalDefense();
+		characterJob = character.job.getJob();
 		preview = character.preview;
 		cardImage = new Actor() {
 			@Override
@@ -60,10 +63,6 @@ public class PlayerCard extends Card {
 		character.inventory.addGold(field.reward);
 	}
 
-	public Card getCardToDefend() {
-		return cardToDefend;
-	}
-
 	public boolean hasCloak() {
 		return character.equips.isCloakSlotEmpty();
 	}
@@ -72,22 +71,37 @@ public class PlayerCard extends Card {
 		character.equips.removeCloak();
 	}
 
+	public void multiplyHealth(){
+		baseHealth = currentHealth = (int) (currentHealth * 1.5);
+	}
+
+	public void multiplyAttack(){
+		baseAttack = currentAttack = (int)(currentAttack * 1.5);
+	}
+
+	public void multiplyDefense(){
+		baseDefense = currentDefense = (int)(currentDefense * 1.5);
+	}
+
+	public Jobs getJob(){
+		return characterJob;
+	}
+
 	@Override
 	public int getID() {
 		return character.getId();
-	}
-
-	public void defendCard(Card defending) {
-		this.cardToDefend = defending;
-	}
-
-	public boolean isDefending() {
-		return cardToDefend != null;
 	}
 
 	public static boolean canFlee(int x){
 		Random random = new Random();
 		int rand = random.nextInt(4) + 1;
 		return x >= rand;
+	}
+
+	@Override
+	public String toString() {
+		return "PlayerCard{" +
+				"name=" + character.getName() +
+				'}';
 	}
 }

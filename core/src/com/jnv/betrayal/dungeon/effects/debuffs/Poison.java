@@ -11,23 +11,23 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class Poison extends Effect {
-	private int damage;
 
-	public Poison(int damage, int turns) {
+	private static final String DESCRIPTION = "Poison\n"
+			+ "Take damage equivalent\nto 10% of target's\ncurrent health for\n";
+
+	public Poison(int turns) {
 		super(EventType.POISON, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
-		description = "Poison\n"
-				+ "take "+ damage + "\n" + "for " + turns + " turns.";
+		description = DESCRIPTION + turns + " turns.";
 	}
 
 	// JSON Constructor
 	public Poison(JSONObject data, int turns, Card src, List<Card> dest) {
 		super(EventType.POISON, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
-		description = "Poison\n"
-				+ "take "+ damage + "\n" + "for " + turns + " turns.";
 		this.src = src;
 		this.dest = dest;
+		description = DESCRIPTION + turns + " turns.";
 	}
 
 	@Override
@@ -46,8 +46,6 @@ public class Poison extends Effect {
 	@Override
 	protected void addToObject() {
 		try {
-			data.put("damage", damage);
-			data.put("description", description);
 			data.put("class", getClass().getCanonicalName());
 		} catch (JSONException e) {
 			e.printStackTrace();

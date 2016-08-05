@@ -35,24 +35,34 @@ public class RoundManager {
 	 */
 	public void checkEvents(Card card) {
 		List<Event> eventsToRemove = new ArrayList<Event>();
+		System.out.println("-----------ROUND MANAGER: " + card.getName() + "------------");
+		System.out.println("events before = " + events);
 		for (Event event : events) {
 			if (card == event.getSrc()) {
+				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
-				if (event.turnIsZero()) {
+				if (event.effectEnded()) {
+					// Perform the event when it ends
 					event.getEffect().doEndEffect();
-					eventsToRemove.add(event);
-					addEventClient(event.getEffect(), event.getEffect().getEndType());
+					// Add the end effect to event history
+					eventHistory.addLast(new Event(event.getEffect(), event.getEffect().getEndType()));
 				}
-				//if effect is consistent
+				// If effect is consistent
 				if (event.getEffect().isConsistent()) {
 					event.getEffect().doConsistentEffect();
-					addEventClient(event.getEffect(), event.getEffect().getConsistentType());
+					eventHistory.addLast(new Event(event.getEffect(), event.getEffect().getConsistentType()));
 				}
+			}
+			// Flush out all ended effects
+			if (event.effectEnded()) {
+				eventsToRemove.add(event);
 			}
 		}
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
+//		System.out.println("events after = " + events);
+//		System.out.println("DEFENDERS FOR PLAYER " + card.getName() + ": " + card.getDefenders());
 	}
 
 	public void addEventClient(Event event) {
@@ -82,7 +92,6 @@ public class RoundManager {
 
 	private void emitEvent(Event event) {
 		if (socket != null && socket.connected()) {
-			System.out.println("send");
 			socket.emit("newEvent", event.toJSON());
 		}
 	}

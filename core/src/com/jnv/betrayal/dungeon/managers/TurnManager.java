@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.turns.MonsterTurn;
 import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
@@ -66,9 +66,7 @@ public class TurnManager {
 
 	public void nextTurn() {
 		field.setNextCardIndex();
-		if (field.getCurrentCard() instanceof PlayerCard) {
-			field.roundManager.checkEvents(field.getCurrentCard());
-		}
+		field.roundManager.checkEvents(field.getCurrentCard());
 		draw();
 	}
 

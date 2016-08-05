@@ -6,15 +6,11 @@ package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.MonsterManager;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
-import com.jnv.betrayal.gameobjects.Monster;
-import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.resources.FontManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,29 +18,28 @@ import java.util.List;
 public class Dungeon extends GameState {
 
 	private Field field;
-	private Monster monster;
-
-	private int floor, numPlayers, strongestPlayer;
 
 	public Dungeon(GameStateManager gsm) {
 		super(gsm);
-		//this.floor = floor;
-		//this.numPlayers = numPlayers;
-
-		// todo player.getCharacters() should be other real life characters
-		//dungeonManager = new DungeonManager(player.characters, monster, gsm);
-		//loadStage();
 		field = new Field(gsm);
-		if(game.getCurrentCharacter().getRoom().getRoomID()<0){
+		if (game.getCurrentCharacter().getRoom().getRoomID() < 0) {
+			// If not in online room, add only yourself
 			ArrayList<Character> tmp = new ArrayList<Character>();
 			tmp.add(game.getCurrentCharacter());
 			addCardsToStage(tmp);
-		}else {
+		} else {
+			// If in online room, get all characters in the room
 			addCardsToStage(game.getCurrentCharacter().getRoom().getCharacters());
 		}
 		MonsterManager monsterManager = new MonsterManager(1, res, field);
+		System.out.println("All cards: " + field.getAllCards());
 		field.turnManager.draw();
+		field.adjustPlayerCardStatsBasedOnJobs();
+		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
 		stage.addActor(field);
+
+		// Start first turn
+		field.roundManager.checkEvents(field.getCurrentCard());
 	}
 
 	public void update(float dt) {
@@ -60,19 +55,6 @@ public class Dungeon extends GameState {
 
 	public void dispose() {
 
-	}
-
-	private void loadStage() {
-		loadTimer();
-		//loadMonster();
-	}
-
-	// Helpers
-	private void loadTimer() {
-		Label label = new Label("0:25", FontManager.getFont70());
-		label.setX((Betrayal.WIDTH - label.getWidth()) / 2);
-		label.setY(Betrayal.HEIGHT - label.getHeight() - 20);
-		stage.addActor(label);
 	}
 
 	private void addCardsToStage(List<Character> characters) {

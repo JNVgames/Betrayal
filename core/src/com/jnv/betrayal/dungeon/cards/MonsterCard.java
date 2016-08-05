@@ -24,10 +24,12 @@ public class MonsterCard extends Card {
 	private Effect effect;
 	private Texture skillTexture;
 	public int effectCounter = 1;
+	private Monster monster;
 
 	public MonsterCard(final float x, final float y, final float width, final float height,
-					   final Monster monster, BetrayalAssetManager res) {
+					   Monster monster, BetrayalAssetManager res) {
 		super(x, y, width, height, res);
+		this.monster = monster;
 		name = monster.getNickname();
 		baseHealth = currentHealth = monster.getHealth();
 		baseAttack = currentAttack = monster.getAttack();
@@ -40,7 +42,7 @@ public class MonsterCard extends Card {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
 				batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
-				batch.draw(monster.getMonsterTexture(), getX(), getY(), width, height);
+				batch.draw(MonsterCard.this.monster.getMonsterTexture(), getX(), getY(), width, height);
 			}
 		};
 		cardImage.setBounds(0, 0, width, height);
@@ -79,8 +81,23 @@ public class MonsterCard extends Card {
 		return skillTexture;
 	}
 
+	public void multiplyHealth(int mFactor){
+		baseHealth = currentHealth = mFactor * currentHealth;
+	}
+
+	public Monster getMonster() {
+		return monster;
+	}
+
 	@Override
 	public int getID() {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "MonsterCard{" +
+				"name='" + name + '\'' +
+				'}';
 	}
 }

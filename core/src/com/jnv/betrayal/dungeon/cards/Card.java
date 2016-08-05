@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.effects.Died;
 import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.mechanics.Field;
 import com.jnv.betrayal.dungeon.popup.CardInfo;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.OKPopup;
@@ -22,8 +22,6 @@ import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,6 @@ public abstract class Card {
 	private boolean wasSelected, isSelected, selecting;
 	private InputListener selectListener, cardInfoListener;
 	private boolean isTurn;
-	private Card thisCard = this;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -82,7 +79,7 @@ public abstract class Card {
 		cardInfoListener = new InputListener(cardImage) {
 			@Override
 			public void doAction() {
-				new CardInfo(field.game, thisCard);
+				new CardInfo(field.game, Card.this);
 			}
 		};
 		group.addListener(cardInfoListener);
@@ -190,7 +187,7 @@ public abstract class Card {
 			return new InputListener(cardImage) {
 				@Override
 				public void doAction() {
-					new CardInfo(field.game, thisCard);
+					new CardInfo(field.game, Card.this);
 				}
 			};
 		} catch (NullPointerException e) {
@@ -255,28 +252,41 @@ public abstract class Card {
 					System.out.println("CLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOAK");
 				}
 			})));
-		}
-		else {
+		} else {
 			Effect effect = new Died(card);
 			card.getField().roundManager.addEvent(effect, effect.getStartType());
 		}
 	}
 
 	public void poison() {
-		double newhealth = Math.floor(currentHealth*.8);
+		double newhealth = Math.floor(currentHealth * .9);
 		currentHealth = (int) newhealth;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
 		if (checkIfDied())
 			cardDeath(this);
 	}
 
-	public void takeTrueDamage(int damage){
+	public void takeTrueDamage(int damage) {
 		currentHealth -= damage;
 		if (currentHealth < 0)
 			currentHealth = 0;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
 		if (checkIfDied())
 			cardDeath(this);
+	}
+
+	public void attack(int damage) {
+		if (!defenders.isEmpty()) {
+			// has defenders, should split damage among defenders
+			for (Card card : defenders) {
+				card.takeDamage((int) Math.ceil(damage / defenders.size()));
+				System.out.println("DEFENDER TOOK DAMAGE");
+			}
+		} else {
+			//does not have defenders, this card takes the damage
+			takeDamage(damage);
+			System.out.println("I TOOK DAMAGE");
+		}
 	}
 
 	public void takeDamage(int damage) {
@@ -290,17 +300,28 @@ public abstract class Card {
 	}
 
 	private int calculateDamageWithDefense(int damage, int armor) {
+		if (damage <= 0) {
+			// If damage is negative, it's a miss
+			return 0;
+		}
 		if (armor < 0) {
 			armor = 0;
 		}
-		if(damage < 0)
-			damage = 0;
-		double newDamage = (50.0 / (50 + armor)) * damage;
-		return (int) Math.ceil(newDamage);
+		int newDamage = damage - armor;
+		// If new damage is reduced to less than 0 for
+		if (newDamage < 1) {
+			newDamage = 1;
+		}
+		return newDamage;
 	}
 
 	public HealthBar getHealthBar() {
 		return healthBar;
+	}
+
+	// todo REMOVE THIS
+	public List<Card> getDefenders() {
+		return defenders;
 	}
 
 	public void addDefender(PlayerCard defender) {
@@ -311,14 +332,14 @@ public abstract class Card {
 		return defenders.size() > 0;
 	}
 
-	public void damageDefender(Card src) {
-		for (Card defender : defenders) {
-			defender.takeDamage(src.getCurrentAttack() / defenders.size());
+	public void removeDefender(int id) {
+		int counter = 0;
+		for (counter = 0; counter < defenders.size(); counter++) {
+			if (defenders.get(counter).getID() == id) {
+				break;
+			}
 		}
-	}
-
-	public void removeDefender(Card card) {
-		defenders.remove(card);
+		defenders.remove(counter);
 	}
 
 	public void performEffect(Effect effect) {
@@ -460,7 +481,7 @@ public abstract class Card {
 	}
 
 	public void failedToFlee() {
-		Card card = thisCard;
+		Card card = this;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -472,7 +493,7 @@ public abstract class Card {
 	}
 
 	public void flee() {
-		Card card = thisCard;
+		Card card = this;
 		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
 			// Flee Successful
 			field.removePlayerCard((PlayerCard) card);
@@ -498,10 +519,9 @@ public abstract class Card {
 	}
 
 	public void died() {
-		Card card = thisCard;
-		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
+		if (this instanceof PlayerCard && getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
-			field.removePlayerCard((PlayerCard) card);
+			field.removePlayerCard((PlayerCard) this);
 
 			Runnable r = new Runnable() {
 				@Override
@@ -515,20 +535,20 @@ public abstract class Card {
 					};
 				}
 			};
-			card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 
-		} else if (card instanceof PlayerCard) {
+		} else if (this instanceof PlayerCard) {
 			//Teammate died
-			field.removePlayerCard((PlayerCard) card);
+			field.removePlayerCard((PlayerCard) this);
 
-		} else if (card instanceof MonsterCard) {
+		} else if (this instanceof MonsterCard) {
 			//Monster Card
-			field.removeMonsterCard((MonsterCard) card);
+			field.removeMonsterCard((MonsterCard) this);
 			if (field.isMonsterZoneEmpty()) {
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
-						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward +" Gold") {
+						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward + " Gold") {
 							@Override
 							public void onConfirm() {
 								for (Card c : field.getAllPlayerCards()) {
@@ -543,7 +563,7 @@ public abstract class Card {
 					}
 				};
 
-				card.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {
 			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not mosnter or palyercard");

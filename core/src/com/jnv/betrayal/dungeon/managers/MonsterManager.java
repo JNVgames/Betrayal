@@ -4,25 +4,69 @@
 
 package com.jnv.betrayal.dungeon.managers;
 
-import com.jnv.betrayal.dungeon.cards.DungeonMonster;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.jnv.betrayal.dungeon.cards.MonsterCard;
+import com.jnv.betrayal.dungeon.Field;
+import com.jnv.betrayal.gameobjects.Monster;
+import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.scene2d.InputListener;
 
 import java.util.Random;
 
 public class MonsterManager {
 
-	private DungeonMonster monster;
+	private Field field;
 	private BetrayalAssetManager res;
 
 	public MonsterManager(int floor, BetrayalAssetManager res, Field field) {
+		this.field = field;
 		this.res = res;
 		int tier = 10;  //CHANGE accord to floor level
 		//tier = generateMonster(tier); // TODO: take this out later. fully randomizes
 		//int monsterID = generateMonster(tier);
 		tier = 0;
 		int monsterID = 0;
-		this.monster = new DungeonMonster(res, tier, monsterID, field);
+		addDungeonMonster(tier, monsterID);
+	}
+
+	private void addDungeonMonster(int tier, int monsterID) {
+		// Configure amount of monsters in dungeon. For example, mobs will have more than one monster
+		int numMonsters = 1;
+
+		if ((tier == 1 && monsterID == 9)
+				|| (tier == 3 && monsterID == 0)
+				|| (tier == 3 && monsterID == 2)
+				|| (tier == 4 && monsterID == 6)) {
+			numMonsters = 2;
+		} else if ((tier == 2 && monsterID == 2)
+				|| (tier == 3 && monsterID == 8)
+				|| (tier == 4 && monsterID == 5)) {
+			numMonsters = 3;
+		} else if ((tier == 4 && monsterID == 7)) {
+			numMonsters = 6;
+		}
+		for (int i = 0; i < numMonsters; i++) {
+			final Monster monster = new Monster("monster-tier" + tier + "-" + monsterID, res);
+			MonsterCard monsterCard = new MonsterCard(monster.getX(), monster.getY(),
+					monster.getWidth(), monster.getHeight(), monster, res);
+			field.addCard(monsterCard);
+			if (monster.getSkillTexture() != null) {
+				Image image = new Image(monster.getSkillTexture());
+				int side = 100;
+				image.setBounds(Betrayal.WIDTH - side - 10, Betrayal.HEIGHT - side - 10, side, side);
+				field.addActor(image);
+				image.addListener(new InputListener(image) {
+					@Override
+					public void doAction() {
+						new OKPopup(500, 400, field.game, monster.getEffect().getDescription());
+					}
+				});
+			}
+			monsterID += 10;
+			field.reward += monster.getGoldReward();
+		}
 	}
 
 	/**

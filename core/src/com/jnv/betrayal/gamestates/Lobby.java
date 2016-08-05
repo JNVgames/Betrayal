@@ -41,7 +41,7 @@ public class Lobby extends GameState {
 	private Actor playNowButton, readyButton, UnReadyButton;
 	private Group partyMembers;
 	private Room room;
-	private Label roomNum, timeTilEnter,timerValue;
+	private Label roomNum, timeTilEnter, timerValue;
 	private Timer timer;
 	private Timer.Task task;
 	private long savedTime;
@@ -66,17 +66,18 @@ public class Lobby extends GameState {
 		timer = new Timer();
 		timer.start();
 		delay = 5;
-		task = new Timer.Task(){
+		task = new Timer.Task() {
 			@Override
 			public void run() {
 				// Do your work
 				//getGSM().setState(GameStateManager.State.DUNGEON);
+				timerValue.setText("0");
 			}
 		};
-		enterDungeonCountDown();
+		//enterDungeonCountDown();
 	}
 
-	public void enterDungeonCountDown(){
+	public void enterDungeonCountDown() {
 		new OKPopup(game, "Entering Dungeon");
 		savedTime = System.currentTimeMillis();
 		Timer.schedule(task, delay);
@@ -91,20 +92,7 @@ public class Lobby extends GameState {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		stage.draw();
-
-		if(task.isScheduled()) {
-			timerValue.setColor(new Color(195f/256f, 66f/256f, 66f/256f, 1));
-			timeLeft = (int)(System.currentTimeMillis() - savedTime);
-			timeLeft /= 1000;
-			timeLeft = 5 - timeLeft;
-			timerValue.setText(Integer.toString(timeLeft));
-		}else{
-			timerValue.setColor(Color.WHITE);
-			timerValue.setText("...");
-
-		}
 	}
-
 
 	public void dispose() {
 	}
@@ -113,7 +101,9 @@ public class Lobby extends GameState {
 		return gsm.game;
 	}
 
-	public GameStateManager getGSM() { return gsm;}
+	public GameStateManager getGSM() {
+		return gsm;
+	}
 
 	// Helpers
 	private void loadBackground() {
@@ -184,20 +174,35 @@ public class Lobby extends GameState {
 		stage.addActor(partyButton);
 	}
 
-	private void loadTimeLeftLabel(){
-		timeTilEnter = new Label("Entering in " , FontManager.getFont60());
+	private void loadTimeLeftLabel() {
+		timeTilEnter = new Label("Entering in ", FontManager.getFont60());
 		timeTilEnter.setX(chatBackground.getX() + (chatBackground.getWidth() - timeTilEnter.getPrefWidth()) / 2 - 50);
 		timeTilEnter.setY(roomNum.getY() - timeTilEnter.getPrefHeight() - 20);
 		stage.addActor(timeTilEnter);
 
-		timerValue = new Label("...", FontManager.getFont60());
-		timerValue.setX(timeTilEnter.getX()+timeTilEnter.getPrefWidth());
+		timerValue = new Label("...", FontManager.getFont60()) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				if (task.isScheduled()) {
+					timerValue.setColor(new Color(195f / 256f, 66f / 256f, 66f / 256f, 1));
+					timeLeft = (int) (System.currentTimeMillis() - savedTime);
+					timeLeft /= 1000;
+					timeLeft = 5 - timeLeft;
+					timerValue.setText(Integer.toString(timeLeft));
+				} else {
+					timerValue.setColor(Color.WHITE);
+					timerValue.setText("...");
+				}
+			}
+		};
+		timerValue.setX(timeTilEnter.getX() + timeTilEnter.getPrefWidth());
 		timerValue.setY(timeTilEnter.getY());
 		stage.addActor(timerValue);
 		//todo SET z INDEX SO IT DOESNT INTERFERE WITH SHOP ETC
 	}
 
-	private void loadRoomLabel(){
+	private void loadRoomLabel() {
 		roomNum = new Label("Room #:  ", FontManager.getFont60());
 		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 100);
 		roomNum.setY(chatBackground.getTop() - roomNum.getPrefHeight() - 20);
@@ -354,7 +359,6 @@ public class Lobby extends GameState {
 		stage.addActor(UnReadyButton);
 	}
 
-
 	private void loadReadyButton() {
 		readyButton = new Actor() {
 			@Override
@@ -375,7 +379,6 @@ public class Lobby extends GameState {
 		stage.addActor(readyButton);
 	}
 
-
 	public void refresh() {
 		partyMembers.clear();
 		loadRoomParty();
@@ -391,26 +394,26 @@ public class Lobby extends GameState {
 		int i = 1;
 		for (Character character : room.getCharacters()) {
 			addPlayerImage(character, x, (y - (i * height) - (i * 10)), width, height, i);
-			loadLevelTriangle(50,50,i,character.stats.getFloor());
+			loadLevelTriangle(50, 50, i, character.stats.getFloor());
 			i++;
 		}
 		stage.addActor(partyMembers);
 	}
 
-	private void setRoomLabel(){
+	private void setRoomLabel() {
 		String ID = "";
 		int roomID = game.getCurrentCharacter().getRoom().getRoomID();
-		if(roomID >=0)
+		if (roomID >= 0)
 			ID += Integer.toString(roomID);
 		roomNum.setText("RoomNum: " + ID);
 	}
 
-	private void loadLevelTriangle(float width, float height, int counter, int floor){
-		triangles[counter-1].setX(tower.getX()+tower.getWidth() + counter * 7 - 10);
-		triangles[counter-1].setY(tower.getY() + (floor * tower.getHeight() / 25f) - 20);
-		triangles[counter-1].setWidth(width);
-		triangles[counter-1].setHeight(height);
-		partyMembers.addActor(triangles[counter-1]);
+	private void loadLevelTriangle(float width, float height, int counter, int floor) {
+		triangles[counter - 1].setX(tower.getX() + tower.getWidth() + counter * 7 - 10);
+		triangles[counter - 1].setY(tower.getY() + (floor * tower.getHeight() / 25f) - 20);
+		triangles[counter - 1].setWidth(width);
+		triangles[counter - 1].setHeight(height);
+		partyMembers.addActor(triangles[counter - 1]);
 	}
 
 	private void addPlayerImage(final Character character, float x, float y, float width, float height, int counter) {
@@ -446,18 +449,18 @@ public class Lobby extends GameState {
 		floor.setX(x + 20 + (width - floor.getPrefWidth()) / 2);
 		floor.setY(name.getY() - floor.getPrefHeight() - 5 + 15);
 		player.addActor(floor);
-		switch (counter){
+		switch (counter) {
 			case 1:
-				floor.setColor(new Color(195f/256f, 66f/256f, 66f/256f, 1)); // red
+				floor.setColor(new Color(195f / 256f, 66f / 256f, 66f / 256f, 1)); // red
 				break;
 			case 2:
-				floor.setColor(new Color(46f/256f, 138f/256f, 138f/256f, 1)); // blue
+				floor.setColor(new Color(46f / 256f, 138f / 256f, 138f / 256f, 1)); // blue
 				break;
 			case 3:
-				floor.setColor(new Color(74f/256f,145f/256f,38f/256f,1));	//green
+				floor.setColor(new Color(74f / 256f, 145f / 256f, 38f / 256f, 1));    //green
 				break;
 			case 4:
-				floor.setColor(new Color(179f/256f,60f/256f,179f/256f,1)); //purple
+				floor.setColor(new Color(179f / 256f, 60f / 256f, 179f / 256f, 1)); //purple
 				break;
 		}
 

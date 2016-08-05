@@ -4,11 +4,16 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.dungeon.effects.SkipTurn;
+import com.jnv.betrayal.dungeon.effects.actions.Bomb;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
+import com.jnv.betrayal.dungeon.effects.debuffs.AttackAndDefenseDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackUp;
 import com.jnv.betrayal.dungeon.effects.buffs.DefenseUp;
 import com.jnv.betrayal.dungeon.effects.actions.Heal;
+import com.jnv.betrayal.dungeon.effects.debuffs.DefenseDown;
+import com.jnv.betrayal.dungeon.effects.debuffs.Poison;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.gameobjects.attack.Weapon;
 import com.jnv.betrayal.gameobjects.defense.BodyArmor;
@@ -913,9 +918,10 @@ public class ResourceLoader {
 				.nickname("Skeleton Kelly")
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterskill10")
-				.health(25).attack(10).defense(1)
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.numTargets(1)
+				.health(15).attack(7).defense(0)
+				.numTargets(1).effectCooldown(3)
+				.goldReward(100)
 				.effect(new AttackDown(9, 3))
 				.build();
 
@@ -925,26 +931,31 @@ public class ResourceLoader {
 				.id(1)
 				.nickname("The Green Lantern")
 				.textureName("monster-tier1-0")
-				.health(0).attack(0).defense(0)
 				.textureWidth(0).textureHeight(0).x(0).y(0)
-				.numTargets(1)
+				.health(12).attack(10).defense(3)
+				.goldReward(100)
+				.effect(new AttackAndDefenseUp(10, 25, 2))
+				.numTargets(1).effectCooldown(4)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(2)
 				.nickname("Muriel the Mummy")
 				.textureName("monster-tier1-1")
-				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.numTargets(1)
+				.health(20).attack(20).defense(0)
+				.goldReward(100)
+				.effect(new SkipTurn())
+				.numTargets(1).effectCooldown(2)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(3)
 				.nickname("Knight of the Underworld, Fred")
 				.textureName("monster-tier1-2")
-				.health(25).attack(10).defense(1)
+				.health(25).attack(15).defense(5)
 				.textureWidth(250).textureHeight(300).x(235).y(740)
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -952,8 +963,10 @@ public class ResourceLoader {
 				.id(4)
 				.nickname("Big Chest")
 				.textureName("monster-tier1-3")
-				.health(25).attack(10).defense(1)
+				.health(5).attack(5).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
+				// todo high reward
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -961,8 +974,10 @@ public class ResourceLoader {
 				.id(5)
 				.nickname("Arthur")
 				.textureName("monster-tier1-4")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(17).defense(0)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.goldReward(100)
+				.effect(new AttackUp(5, 3)).effectCooldown(3)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -970,8 +985,10 @@ public class ResourceLoader {
 				.id(6)
 				.nickname("Sir Cumference")
 				.textureName("monster-tier1-5")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(10).defense(7)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.goldReward(100)
+				.effect(new DefenseUp(3, 3)).effectCooldown(3)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -979,8 +996,10 @@ public class ResourceLoader {
 				.id(7)
 				.nickname("Peeping Tom")
 				.textureName("monster-tier1-6")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(17).defense(5)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.goldReward(100)
+				.effect(new SkipTurn()).effectCooldown(3)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -988,8 +1007,10 @@ public class ResourceLoader {
 				.id(8)
 				.nickname("Lil Jimmy")
 				.textureName("monster-tier1-7")
-				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.health(20).attack(12).defense(7)
+				.effect(new AttackAndDefenseUp(5, 5, 3)).effectCooldown(3)
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -997,9 +1018,11 @@ public class ResourceLoader {
 				.id(9)
 				.nickname("Jeff the Killer")
 				.textureName("monster-tier1-8")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(20).defense(0)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
+				.goldReward(100)
 				.numTargets(1)
+				.effect(new SkipTurn()).effectCooldown(3)
 				.build();
 
 		// Tier 1 Mob
@@ -1008,8 +1031,9 @@ public class ResourceLoader {
 				.id(10)
 				.nickname("Skeleton Kelly")
 				.textureName("monster-tier1-9")
-				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(50).y(720)
+				.health(20).attack(10).defense(10)
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1017,8 +1041,9 @@ public class ResourceLoader {
 				.id(11)
 				.nickname("Knight of the Underworld, Fred")
 				.textureName("monster-tier1-19")
-				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(370).y(740)
+				.health(20).attack(10).defense(10)
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 
@@ -1028,72 +1053,85 @@ public class ResourceLoader {
 				.id(12)
 				.nickname("Ghost Rider")
 				.textureName("monster-tier2-0")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(10).defense(10)
 				.textureWidth(400).textureHeight(450).x(160).y(700)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(4)
+				.effect(new AttackAndDefenseDown(10, 10, 2))
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(13)
 				.nickname("Moose")
 				.textureName("monster-tier2-1")
-				.health(25).attack(10).defense(1)
+				.health(50).attack(25).defense(10)
 				.textureWidth(350).textureHeight(450).x(185).y(700)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new SkipTurn()).effectCooldown(2)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(14)
 				.nickname("Samurai Joe")
 				.textureName("monster-tier2-2")
-				.health(25).attack(10).defense(1)
+				.health(25).attack(20).defense(5)
 				.textureWidth(250).textureHeight(300).x(30).y(690)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(2).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(15)
 				.nickname("David the Tiger")
 				.textureName("monster-tier2-3")
-				.health(25).attack(10).defense(1)
+				.health(40).attack(15).defense(0)
 				.textureWidth(500).textureHeight(450).x(110).y(680)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new Poison(3)).effectCooldown(5)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(16)
 				.nickname("Ed Edd and Eddy")
 				.textureName("monster-tier2-4")
-				.health(25).attack(10).defense(1)
+				.health(50).attack(5).defense(0)
 				.textureWidth(650).textureHeight(550).x(35).y(690)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(3).effectCooldown(3)
+				.effect(new AttackUp(25, 2)).effectCooldown(4)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(17)
 				.nickname("Angry Susan")
 				.textureName("monster-tier2-5")
-				.health(25).attack(10).defense(1)
+				.health(40).attack(17).defense(8)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new DefenseDown(20, 2)).effectCooldown(4)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(18)
 				.nickname("Purple Delight")
 				.textureName("monster-tier2-6")
-				.health(25).attack(10).defense(1)
+				.health(60).attack(14).defense(15)
 				.textureWidth(500).textureHeight(500).x(110).y(640)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(19)
 				.nickname("Horny Trevor")
 				.textureName("monster-tier2-7")
-				.health(25).attack(10).defense(1)
+				.health(45).attack(15).defense(3)
 				.textureWidth(400).textureHeight(450).x(160).y(650)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1102,16 +1140,19 @@ public class ResourceLoader {
 				.textureName("monster-tier2-8")
 				.health(25).attack(10).defense(1)
 				.textureWidth(400).textureHeight(500).x(160).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(21)
 				.nickname("It's Your Girlfriend")
 				.textureName("monster-tier2-9")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(0).defense(0)
 				.textureWidth(400).textureHeight(500).x(160).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new AttackAndDefenseDown(5, 5, 10)).effectCooldown(1)
 				.build();
 
 		// Tier 2 Mob
@@ -1120,18 +1161,20 @@ public class ResourceLoader {
 				.id(22)
 				.nickname("Samurai Poe")
 				.textureName("monster-tier2-12")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(15).defense(3)
 				.textureWidth(250).textureHeight(300).x(230).y(760)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(23)
 				.nickname("Samurai Low")
 				.textureName("monster-tier2-22")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(16).defense(3)
 				.textureWidth(250).textureHeight(300).x(430).y(690)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 3
@@ -1140,26 +1183,29 @@ public class ResourceLoader {
 				.id(24)
 				.nickname("Pack o' Wolves")
 				.textureName("monster-tier3-0")
-				.health(25).attack(10).defense(1)
+				.health(60).attack(15).defense(10)
 				.textureWidth(350).textureHeight(300).x(340).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(3).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(25)
 				.nickname("Hagrid")
 				.textureName("monster-tier3-1")
-				.health(25).attack(10).defense(1)
+				.health(40).attack(20).defense(20)
 				.textureWidth(600).textureHeight(500).x(60).y(640)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(26)
 				.nickname("Tiki To")
 				.textureName("monster-tier3-2")
-				.health(25).attack(10).defense(1)
+				.health(50).attack(28).defense(10)
 				.textureWidth(400).textureHeight(450).x(0).y(690)
+				.goldReward(100)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1167,9 +1213,11 @@ public class ResourceLoader {
 				.id(27)
 				.nickname("Ghost")
 				.textureName("monster-tier3-3")
-				.health(25).attack(10).defense(1)
+				.health(50).attack(0).defense(0)
 				.textureWidth(400).textureHeight(450).x(160).y(690)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new AttackUp(50, 2)).effectCooldown(5)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1178,43 +1226,51 @@ public class ResourceLoader {
 				.textureName("monster-tier3-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(550).textureHeight(500).x(85).y(740)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(29)
 				.nickname("Fire Dragon")
 				.textureName("monster-tier3-5")
-				.health(25).attack(10).defense(1)
+				.health(45).attack(15).defense(15)
 				.textureWidth(500).textureHeight(550).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(30)
 				.nickname("Envious Kevin")
 				.textureName("monster-tier3-6")
-				.health(25).attack(10).defense(1)
+				.health(20).attack(18).defense(24)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
+				.effect(new SkipTurn()).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(31)
 				.nickname("Terrible Terry")
 				.textureName("monster-tier3-7")
-				.health(25).attack(10).defense(1)
+				.health(40).attack(12).defense(8)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(4)
+				.effect(new DefenseUp(10, 3))
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(32)
 				.nickname("No Body Greg")
 				.textureName("monster-tier3-9")
-				.health(25).attack(10).defense(1)
+				.health(40).attack(17).defense(9)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 3 Mob 1
@@ -1223,27 +1279,31 @@ public class ResourceLoader {
 				.id(33)
 				.nickname("Ghost Rider")
 				.textureName("monster-tier3-8")
-				.health(25).attack(10).defense(1)
+				.health(15).attack(10).defense(10)
 				.textureWidth(400).textureHeight(400).x(160).y(750)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(4).effectCooldown(3)
+				.effect(new AttackAndDefenseDown(10, 10, 2))
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(34)
 				.nickname("Skeleton Kelly")
 				.textureName("monster-tier3-18")
-				.health(25).attack(10).defense(1)
+				.health(15).attack(10).defense(5)
 				.textureWidth(250).textureHeight(300).x(20).y(660)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(35)
 				.nickname("Knight of the Underworld Fred")
 				.textureName("monster-tier3-28")
-				.health(25).attack(10).defense(1)
+				.health(15).attack(10).defense(10)
 				.textureWidth(250).textureHeight(300).x(480).y(680)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 3 Mob 2
@@ -1252,10 +1312,12 @@ public class ResourceLoader {
 				.id(36)
 				.nickname("Pack o' Wolves")
 				.textureName("monster-tier3-10")
-				.health(25).attack(10).defense(1)
+				.health(30).attack(15).defense(0)
 				.textureWidth(350).textureHeight(300).x(50).y(710)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(2).effectCooldown(3)
 				.build();
+
 
 		// Tier 3 Mob 3
 		new Monster.MonsterFactory()
@@ -1263,9 +1325,10 @@ public class ResourceLoader {
 				.id(37)
 				.nickname("Tiki Ta")
 				.textureName("monster-tier3-12")
-				.health(25).attack(10).defense(1)
+				.health(30).attack(17).defense(10)
 				.textureWidth(400).textureHeight(450).x(360).y(690)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 4
@@ -1274,9 +1337,11 @@ public class ResourceLoader {
 				.id(38)
 				.nickname("Magic Mike")
 				.textureName("monster-tier4-0")
-				.health(25).attack(10).defense(1)
+				.health(70).attack(15).defense(10)
 				.textureWidth(500).textureHeight(475).x(110).y(675)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(2)
+				.effect(new Bomb(60, 4))
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1285,7 +1350,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-1")
 				.health(25).attack(10).defense(1)
 				.textureWidth(350).textureHeight(400).x(185).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1294,7 +1360,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-2")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1303,7 +1370,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-3")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1312,7 +1380,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 4 Mob 1
@@ -1323,7 +1392,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-5")
 				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(0).y(655)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1332,7 +1402,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-15")
 				.health(25).attack(10).defense(1)
 				.textureWidth(350).textureHeight(400).x(185).y(765)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1341,7 +1412,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-25")
 				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(420).y(655)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 4 Mob 2
@@ -1352,7 +1424,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-6")
 				.health(25).attack(10).defense(1)
 				.textureWidth(425).textureHeight(475).x(40).y(675)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1361,7 +1434,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-16")
 				.health(25).attack(10).defense(1)
 				.textureWidth(225).textureHeight(250).x(400).y(740)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 4 Mob 3
@@ -1372,7 +1446,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-7")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(260).y(675)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1381,7 +1456,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-17")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(0).y(725)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1390,7 +1466,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-27")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(520).y(725)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1399,7 +1476,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-37")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(120).y(815)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1408,7 +1486,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-47")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(400).y(815)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1417,7 +1496,8 @@ public class ResourceLoader {
 				.textureName("monster-tier4-57")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(260).y(870)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 
 		// Tier 5
@@ -1428,7 +1508,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-0")
 				.health(25).attack(10).defense(1)
 				.textureWidth(600).textureHeight(525).x(60).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1437,7 +1518,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-1")
 				.health(25).attack(10).defense(1)
 				.textureWidth(450).textureHeight(550).x(135).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1446,7 +1528,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-2")
 				.health(25).attack(10).defense(1)
 				.textureWidth(620).textureHeight(500).x(50).y(640)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1455,7 +1538,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-3")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1464,7 +1548,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1473,7 +1558,8 @@ public class ResourceLoader {
 				.textureName("monster-tier5-5")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.numTargets(1)
+				.goldReward(100)
+				.numTargets(1).effectCooldown(3)
 				.build();
 	}
 }

@@ -3,7 +3,7 @@ package com.jnv.betrayal.lobby.inventory;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;

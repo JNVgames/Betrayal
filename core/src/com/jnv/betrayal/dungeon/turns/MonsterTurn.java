@@ -8,7 +8,7 @@ import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.actions.Attack;
-import com.jnv.betrayal.dungeon.mechanics.Field;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
@@ -28,26 +28,17 @@ public class MonsterTurn extends Turn {
 	@Override
 	public void draw() {
 		panels.clearChildren();
-		createGrayPanel( "monster's turn", FontManager.getFont80(), Panel.full);
+		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
 		field.addAction(Actions.delay(3f, new RunnableAction(){
 			@Override
 			public void run() {
 				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()) {
-					System.out.println("Monster Sending signal here BEEP BEEP BEEP");
 					monsterAttack();
 				}
 			}
 		}));
 
 	}
-
-//	private boolean sendMonsterAttack(){
-//		for(Card card : field.playerZone){
-//			if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID())
-//				return true;
-//		}
-//		return false;
-//	}
 
 	private void monsterAttack() {
 		MonsterCard card = ((MonsterCard) field.getCurrentCard());
@@ -68,10 +59,9 @@ public class MonsterTurn extends Turn {
 			dst.add(field.playerZone.get(i));
 		}
 
-		System.out.println(card.effectCounter);
-		if (card.hasEffect() && card.effectCounter == card.getEffect().getTurns()) {
+		if (card.hasEffect() && card.effectCounter == card.getMonster().getEffectCD()) {
 			card.effectCounter = 1;
-			//do EFFECT
+			// Make monster do effect
 			Event event = new Event(card.getEffect(), card.getEffect().getStartType());
 			event.getEffect().setSrc(card);
 			if (!event.getEffect().isHostile()) {
@@ -79,15 +69,14 @@ public class MonsterTurn extends Turn {
 				dst.add(card);
 			}
 			event.getEffect().setDest(dst);
-			System.out.println(event.toJSON().toString());
 			card.getField().roundManager.addEvent(event);
 			field.turnManager.nextTurn();
 		} else {
+			// Make monster do normal attack
 			card.effectCounter++;
 			Effect attack = new Attack(field.getCurrentCard(), dst);
 			field.roundManager.addEvent(attack, attack.getStartType());
 			field.turnManager.nextTurn();
 		}
-
 	}
 }
