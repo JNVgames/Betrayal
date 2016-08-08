@@ -24,9 +24,9 @@ public class Stats implements JsonSerializable {
 	private Equips equips;
 
 	public Stats(Equips equips) {
-		baseHealth = 25;
-		baseAttack = 5;
-		baseDefense = 5;
+		baseHealth = 50;
+		baseAttack = 10;
+		baseDefense = 10;
 		floor = 0;
 		//availablePoints = 0;
 		//todo change back

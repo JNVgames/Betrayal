@@ -37,7 +37,7 @@ public class Dungeon extends GameState {
 					highestPartyMemberFloor = character.stats.getFloor();
 			}
 		}
-		MonsterManager monsterManager = new MonsterManager(0, res, field); //todo FORtesTING
+		MonsterManager monsterManager = new MonsterManager(1, res, field); //todo FORtesTING
 		//todo change back
 		//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
 		System.out.println("All cards: " + field.getAllCards());

@@ -141,6 +141,8 @@ public class Room {
 			@Override
 			public void call(Object... args) {
 				if (lobby != null) {
+					currentCharacter.setReady(false);
+					ready(currentCharacter.isReady());
 					lobby.getGSM().setState(GameStateManager.State.DUNGEON);
 					lobby = null;
 				}

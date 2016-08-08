@@ -6,6 +6,7 @@ package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.dungeon.effects.SkipTurn;
 import com.jnv.betrayal.dungeon.effects.actions.Bomb;
+import com.jnv.betrayal.dungeon.effects.actions.TrueDamage;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackAndDefenseDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
@@ -919,10 +920,10 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterskill10")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(15).attack(7).defense(0)
+				.health(25).attack(12).defense(3)
 				.numTargets(1).effectCooldown(3)
 				.goldReward(100)
-				.effect(new AttackDown(9, 3))
+				.effect(new AttackDown(3, 2))
 				.build();
 
 		// Tier 1
@@ -932,9 +933,9 @@ public class ResourceLoader {
 				.nickname("The Green Lantern")
 				.textureName("monster-tier1-0")
 				.textureWidth(0).textureHeight(0).x(0).y(0)
-				.health(12).attack(10).defense(3)
+				.health(36).attack(25).defense(5)
 				.goldReward(100)
-				.effect(new AttackAndDefenseUp(10, 25, 2))
+				.effect(new AttackAndDefenseUp(25, 5, 2))
 				.numTargets(1).effectCooldown(4)
 				.build();
 		new Monster.MonsterFactory()
@@ -943,7 +944,7 @@ public class ResourceLoader {
 				.nickname("Muriel the Mummy")
 				.textureName("monster-tier1-1")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.health(20).attack(20).defense(0)
+				.health(20).attack(40).defense(0)
 				.goldReward(100)
 				.effect(new SkipTurn())
 				.numTargets(1).effectCooldown(2)
@@ -953,7 +954,7 @@ public class ResourceLoader {
 				.id(3)
 				.nickname("Knight of the Underworld, Fred")
 				.textureName("monster-tier1-2")
-				.health(25).attack(15).defense(5)
+				.health(20).attack(20).defense(20)
 				.textureWidth(250).textureHeight(300).x(235).y(740)
 				.goldReward(100)
 				.numTargets(1)
@@ -963,7 +964,7 @@ public class ResourceLoader {
 				.id(4)
 				.nickname("Big Chest")
 				.textureName("monster-tier1-3")
-				.health(5).attack(5).defense(200)
+				.health(10).attack(20).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
 				// todo high reward
 				.goldReward(100)
@@ -974,10 +975,10 @@ public class ResourceLoader {
 				.id(5)
 				.nickname("Arthur")
 				.textureName("monster-tier1-4")
-				.health(20).attack(17).defense(0)
+				.health(50).attack(10).defense(0)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(100)
-				.effect(new AttackUp(5, 3)).effectCooldown(3)
+				.effect(new TrueDamage(20)).effectCooldown(2)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -996,7 +997,7 @@ public class ResourceLoader {
 				.id(7)
 				.nickname("Peeping Tom")
 				.textureName("monster-tier1-6")
-				.health(20).attack(17).defense(5)
+				.health(28).attack(22).defense(10)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(100)
 				.effect(new SkipTurn()).effectCooldown(3)
@@ -1008,8 +1009,8 @@ public class ResourceLoader {
 				.nickname("Lil Jimmy")
 				.textureName("monster-tier1-7")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.health(20).attack(12).defense(7)
-				.effect(new AttackAndDefenseUp(5, 5, 3)).effectCooldown(3)
+				.health(20).attack(1).defense(1)
+				.effect(new AttackAndDefenseUp(40, 40, 3)).effectCooldown(4)
 				.goldReward(100)
 				.numTargets(1)
 				.build();
@@ -1022,7 +1023,7 @@ public class ResourceLoader {
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(100)
 				.numTargets(1)
-				.effect(new SkipTurn()).effectCooldown(3)
+				.effect(new AttackUp(50,2)).effectCooldown(4)
 				.build();
 
 		// Tier 1 Mob

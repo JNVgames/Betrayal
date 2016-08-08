@@ -279,6 +279,20 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
+	public void attackTrueDamage(int damage){
+		if (!defenders.isEmpty()) {
+			// has defenders, should split damage among defenders
+			for (Card card : defenders) {
+				card.takeTrueDamage((int) Math.ceil(damage / defenders.size()));
+				System.out.println("DEFENDER TOOK DAMAGE");
+			}
+		} else {
+			//does not have defenders, this card takes the damage
+			takeTrueDamage(damage);
+			System.out.println("I TOOK DAMAGE");
+		}
+	}
+
 	public void attack(int damage) {
 		if (!defenders.isEmpty()) {
 			// has defenders, should split damage among defenders
