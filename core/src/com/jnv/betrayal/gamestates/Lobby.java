@@ -117,7 +117,7 @@ public class Lobby extends GameState {
 		Image shopButton = new Image(res.getTexture("lobby-shop"));
 		shopButton.layout();
 		shopButton.setBounds(0, Betrayal.HEIGHT - buttonHeight - 5, buttonWidth, buttonHeight);
-		shopButton.addListener(new InputListener(shopButton) {
+		shopButton.addListener(new InputListener(shopButton, true) {
 			@Override
 			public void doAction() {
 				new Shop(game);
@@ -131,7 +131,7 @@ public class Lobby extends GameState {
 		inventoryButton.layout();
 		inventoryButton.setBounds(buttonWidth, Betrayal.HEIGHT - buttonHeight - spacing,
 				buttonWidth, buttonHeight);
-		inventoryButton.addListener(new InputListener(inventoryButton) {
+		inventoryButton.addListener(new InputListener(inventoryButton, true) {
 			@Override
 			public void doAction() {
 				new Inventory(game);
@@ -145,7 +145,7 @@ public class Lobby extends GameState {
 		statsButton.layout();
 		statsButton.setBounds(buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - spacing,
 				buttonWidth, buttonHeight);
-		statsButton.addListener(new InputListener(statsButton) {
+		statsButton.addListener(new InputListener(statsButton, true) {
 			@Override
 			public void doAction() {
 				new StatsWindow(game);
@@ -159,7 +159,7 @@ public class Lobby extends GameState {
 		partyButton.layout();
 		partyButton.setBounds(buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - spacing,
 				buttonWidth, buttonHeight);
-		partyButton.addListener(new InputListener(partyButton) {
+		partyButton.addListener(new InputListener(partyButton, true) {
 			@Override
 			public void doAction() {
 				new PartyRoom(game) {
@@ -214,7 +214,7 @@ public class Lobby extends GameState {
 		settingsButton.layout();
 		settingsButton.setBounds(buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - spacing,
 				buttonWidth, buttonHeight);
-		settingsButton.addListener(new InputListener(settingsButton) {
+		settingsButton.addListener(new InputListener(settingsButton, true) {
 			@Override
 			public void doAction() {
 				new LobbyOptions(game);

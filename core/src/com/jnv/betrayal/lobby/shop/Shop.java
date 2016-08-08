@@ -123,7 +123,7 @@ public class Shop extends Popup {
 		Image weapons = new Image(res.getTexture("shop-weapons"));
 		weapons.layout();
 		weapons.setBounds(100, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
-		weapons.addListener(new InputListener(weapons) {
+		weapons.addListener(new InputListener(weapons, true) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -138,7 +138,7 @@ public class Shop extends Popup {
 		Image armors = new Image(res.getTexture("shop-armor"));
 		armors.layout();
 		armors.setBounds(100 + buttonWidth, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
-		armors.addListener(new InputListener(armors) {
+		armors.addListener(new InputListener(armors, true) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -153,7 +153,7 @@ public class Shop extends Popup {
 		Image extras = new Image(res.getTexture("shop-extra"));
 		extras.layout();
 		extras.setBounds(100 + buttonWidth * 2, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
-		extras.addListener(new InputListener(extras) {
+		extras.addListener(new InputListener(extras, true) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -168,7 +168,7 @@ public class Shop extends Popup {
 		Image items = new Image(res.getTexture("shop-item"));
 		items.layout();
 		items.setBounds(100 + buttonWidth * 3, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
-		items.addListener(new InputListener(items) {
+		items.addListener(new InputListener(items, true) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -183,7 +183,7 @@ public class Shop extends Popup {
 		Image money = new Image(res.getTexture("shop-money"));
 		money.layout();
 		money.setBounds(100 + buttonWidth * 4, Betrayal.HEIGHT - buttonHeight - 90, buttonWidth, buttonHeight);
-		money.addListener(new InputListener(money) {
+		money.addListener(new InputListener(money, true) {
 			@Override
 			public void doAction() {
 				removeCurrentContent();
@@ -205,7 +205,7 @@ public class Shop extends Popup {
 			sword1[i - 1].layout();
 			sword1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			sword1[i - 1].addListener(new InputListener(sword1[i - 1]) {
+			sword1[i - 1].addListener(new InputListener(sword1[i - 1], true) {
 				@Override
 				public void doAction() {
 					Weapon sword = new Weapon(item1, res);
@@ -218,7 +218,7 @@ public class Shop extends Popup {
 			sword2[i - 1].layout();
 			sword2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			sword2[i - 1].addListener(new InputListener(sword2[i - 1]) {
+			sword2[i - 1].addListener(new InputListener(sword2[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Weapon(item2, res));
@@ -230,7 +230,7 @@ public class Shop extends Popup {
 			sword3[i - 1].layout();
 			sword3[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			sword3[i - 1].addListener(new InputListener(sword3[i - 1]) {
+			sword3[i - 1].addListener(new InputListener(sword3[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Weapon(item3, res));
@@ -242,7 +242,7 @@ public class Shop extends Popup {
 			sword4[i - 1].layout();
 			sword4[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			sword4[i - 1].addListener(new InputListener(sword4[i - 1]) {
+			sword4[i - 1].addListener(new InputListener(sword4[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Weapon(item4, res));
@@ -254,7 +254,7 @@ public class Shop extends Popup {
 			sword5[i - 1].layout();
 			sword5[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			sword5[i - 1].addListener(new InputListener(sword5[i - 1]) {
+			sword5[i - 1].addListener(new InputListener(sword5[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Weapon(item5, res));
@@ -289,7 +289,7 @@ public class Shop extends Popup {
 			shield1[i - 1].layout();
 			shield1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 1, itemSize, itemSize);
-			shield1[i - 1].addListener(new InputListener(shield1[i - 1]) {
+			shield1[i - 1].addListener(new InputListener(shield1[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item1, res));
@@ -302,7 +302,7 @@ public class Shop extends Popup {
 			shield2[i - 1].layout();
 			shield2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			shield2[i - 1].addListener(new InputListener(shield2[i - 1]) {
+			shield2[i - 1].addListener(new InputListener(shield2[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item2, res));
@@ -314,7 +314,7 @@ public class Shop extends Popup {
 			shield3[i - 1].layout();
 			shield3[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			shield3[i - 1].addListener(new InputListener(shield3[i - 1]) {
+			shield3[i - 1].addListener(new InputListener(shield3[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item3, res));
@@ -326,7 +326,7 @@ public class Shop extends Popup {
 			shield4[i - 1].layout();
 			shield4[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			shield4[i - 1].addListener(new InputListener(shield2[i - 1]) {
+			shield4[i - 1].addListener(new InputListener(shield2[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item4, res));
@@ -338,7 +338,7 @@ public class Shop extends Popup {
 			shield5[i - 1].layout();
 			shield5[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			shield5[i - 1].addListener(new InputListener(shield5[i - 1]) {
+			shield5[i - 1].addListener(new InputListener(shield5[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Shield(item5, res));
@@ -388,7 +388,7 @@ public class Shop extends Popup {
 			ring1[i - 1].layout();
 			ring1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			ring1[i - 1].addListener(new InputListener(ring1[i - 1]) {
+			ring1[i - 1].addListener(new InputListener(ring1[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Ring(item1, res));
@@ -400,7 +400,7 @@ public class Shop extends Popup {
 			ring2[i - 1].layout();
 			ring2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			ring2[i - 1].addListener(new InputListener(ring2[i - 1]) {
+			ring2[i - 1].addListener(new InputListener(ring2[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Ring(item2, res));
@@ -416,7 +416,7 @@ public class Shop extends Popup {
 			potions[i - 1].layout();
 			if (i <= 6) {
 				potions[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
+				potions[i - 1].addListener(new InputListener(potions[i - 1], true) {
 					@Override
 					public void doAction() {
 						new ShopPurchasePopup(game, new Potion(item, res));
@@ -425,7 +425,7 @@ public class Shop extends Popup {
 				currentGroup.addActor(potions[i - 1]);
 			} else {
 				potions[i - 1].setBounds(100 + itemSize * (i - 7), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-				potions[i - 1].addListener(new InputListener(potions[i - 1]) {
+				potions[i - 1].addListener(new InputListener(potions[i - 1], true) {
 					@Override
 					public void doAction() {
 						new ShopPurchasePopup(game, new Potion(item, res));
@@ -435,15 +435,12 @@ public class Shop extends Popup {
 			}
 		}
 
-		//TODO TRY THIS LATER
-
-
 		for (int i=1; i<4; i++){
 			final String item = "run" + i;
 			run[i - 1] = new Image(res.getTexture("run"+i));
 			run[i - 1].layout();;
 			run[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			run[i - 1].addListener(new InputListener(run[i - 1]) {
+			run[i - 1].addListener(new InputListener(run[i - 1], true) {
 				@Override
 				public void doAction() {
 					//todo Created Run Item,
@@ -488,7 +485,7 @@ public class Shop extends Popup {
 			headgear1[i - 1].layout();
 			headgear1[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize, itemSize, itemSize);
-			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1]) {
+			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Helmet(tier1, res));
@@ -501,7 +498,7 @@ public class Shop extends Popup {
 			headgear2[i - 1].layout();
 			headgear2[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1]) {
+			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Helmet(tier2, res));
@@ -513,7 +510,7 @@ public class Shop extends Popup {
 			headgear3[i - 1].layout();
 			headgear3[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			headgear3[i - 1].addListener(new InputListener(headgear3[i - 1]) {
+			headgear3[i - 1].addListener(new InputListener(headgear3[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Helmet(tier3, res));
@@ -525,7 +522,7 @@ public class Shop extends Popup {
 			headgear4[i - 1].layout();
 			headgear4[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			headgear4[i - 1].addListener(new InputListener(headgear4[i - 1]) {
+			headgear4[i - 1].addListener(new InputListener(headgear4[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Helmet(tier4, res));
@@ -537,7 +534,7 @@ public class Shop extends Popup {
 			headgear5[i - 1].layout();
 			headgear5[i - 1].setBounds(100 + itemSize * (i - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			headgear5[i - 1].addListener(new InputListener(headgear5[i - 1]) {
+			headgear5[i - 1].addListener(new InputListener(headgear5[i - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new Helmet(tier5, res));
@@ -571,7 +568,7 @@ public class Shop extends Popup {
 			armor1[color - 1].layout();
 			armor1[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 1, itemSize, itemSize);
-			armor1[color - 1].addListener(new InputListener(armor1[color - 1]) {
+			armor1[color - 1].addListener(new InputListener(armor1[color - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new BodyArmor(tier1String, res));
@@ -583,7 +580,7 @@ public class Shop extends Popup {
 			armor2[color - 1].layout();
 			armor2[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 3, itemSize, itemSize);
-			armor2[color - 1].addListener(new InputListener(armor2[color - 1]) {
+			armor2[color - 1].addListener(new InputListener(armor2[color - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new BodyArmor(tier2String, res));
@@ -595,7 +592,7 @@ public class Shop extends Popup {
 			armor3[color - 1].layout();
 			armor3[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 5, itemSize, itemSize);
-			armor3[color - 1].addListener(new InputListener(armor3[color - 1]) {
+			armor3[color - 1].addListener(new InputListener(armor3[color - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new BodyArmor(tier3String, res));
@@ -607,7 +604,7 @@ public class Shop extends Popup {
 			armor4[color - 1].layout();
 			armor4[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 7, itemSize, itemSize);
-			armor4[color - 1].addListener(new InputListener(armor4[color - 1]) {
+			armor4[color - 1].addListener(new InputListener(armor4[color - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new BodyArmor(tier4String, res));
@@ -620,7 +617,7 @@ public class Shop extends Popup {
 			armor5[color - 1].layout();
 			armor5[color - 1].setBounds(100 + itemSize * (color - 1),
 					Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
-			armor5[color - 1].addListener(new InputListener(armor5[color - 1]) {
+			armor5[color - 1].addListener(new InputListener(armor5[color - 1], true) {
 				@Override
 				public void doAction() {
 					new ShopPurchasePopup(game, new BodyArmor(tier5String, res));
@@ -807,7 +804,6 @@ public class Shop extends Popup {
 		currentGroup.addActor(cloakPrice);
 
 	}
-
 
 	private void removeCurrentContent() {
 		currentGroup.clear();
