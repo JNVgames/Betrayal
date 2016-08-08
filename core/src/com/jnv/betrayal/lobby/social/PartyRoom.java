@@ -10,6 +10,7 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.popup.CreateRoomPopup;
 import com.jnv.betrayal.popup.JoinRoomPopup;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -104,9 +105,14 @@ public class PartyRoom extends Popup {
 				new JoinRoomPopup(game, "Join Room") {
 					@Override
 					public void doAction() {
-						doJoinRoom(getPasswordString(), getRoomID());
-						remove();
-						PartyRoom.this.remove();
+						// If room string is empty, show OKPopup saying enter a room number
+						if (!isRoomIDFieldEmpty()) {
+							doJoinRoom(getPasswordString(), getRoomID());
+							remove();
+							PartyRoom.this.remove();
+						} else {
+							new OKPopup(game, "Please enter\na room number");
+						}
 					}
 				};
 			}

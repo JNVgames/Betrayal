@@ -116,6 +116,13 @@ public class Room {
 					new OKPopup(lobby.getGame(), "Failed to join room");
 				}
 			}
+		}).on("roomNull", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				if (lobby != null) {
+					new OKPopup(lobby.getGame(), "Room doesn't exist.");
+				}
+			}
 		}).on("startDungeonCountdown", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {

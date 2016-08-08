@@ -42,6 +42,7 @@ public class JoinRoomPopup extends Popup {
 
 		roomID = new TextField("", tfs);
 		roomID.setMessageText("Enter Room ID Here");
+		roomID.setTextFieldFilter(new TextField.TextFieldFilter.DigitsOnlyFilter());
 		roomID.setBounds((Betrayal.WIDTH - INPUT_WIDTH) / 2,
 				titleLabel.getY() - 20 - roomID.getPrefHeight(),
 				INPUT_WIDTH, roomID.getPrefHeight());
@@ -122,6 +123,10 @@ public class JoinRoomPopup extends Popup {
 
 	public String getPasswordString() {
 		return password.getText();
+	}
+
+	public boolean isRoomIDFieldEmpty() {
+		return roomID.getText().isEmpty();
 	}
 
 	public int getRoomID() {
