@@ -85,6 +85,11 @@ public class Room {
 						counter++;
 					}
 					roomID = data.getInt("roomID");
+
+					// Emit the players back to server so server can update the list of players
+					JSONObject emitData = new JSONObject();
+					emitData.put("players", data.getJSONArray("players"));
+					socket.emit("joinedRoom", emitData);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -140,6 +145,28 @@ public class Room {
 					lobby = null;
 				}
 			}
+		}).on("playerLeftRoom", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				JSONObject data = (JSONObject) args[0];
+
+				int indexToRemove = -1;
+				try {
+					for (int i = 0; i < characters.size(); i++) {
+						if (characters.get(i).getId() == data.getInt("id")) {
+							indexToRemove = i;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				// In case something weird happens and indexToRemove is still -1
+				if (indexToRemove != -1) {
+					characters.remove(indexToRemove);
+				}
+				refreshLobby();
+			}
 		});
 	}
 
@@ -162,13 +189,6 @@ public class Room {
 	}
 
 	public void leaveRoom() {
-		JSONObject player = new JSONObject();
-		try {
-			player.put("id", currentCharacter.getId());
-			player.put("roomID", roomID);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 		roomID = -1;
 		characters.clear();
 		currentCharacter.setReady(false);
@@ -214,18 +234,6 @@ public class Room {
 
 	// Emit event to server on this character preview change
 	public void updateServerCharacters() {
-// todo
-
-	}
-
-	// When someone joins/leaves the room
-	public void updateCharactersArray() {
-// todo
-
-	}
-
-	// Remove room from server when last person leaves
-	public void removeRoom() {
 // todo
 
 	}
