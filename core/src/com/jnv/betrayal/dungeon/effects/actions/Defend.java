@@ -23,11 +23,9 @@ public class Defend extends Effect {
 
 	// JSON Construction
 	public Defend(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DEFEND);
+		super(EventType.DEFEND, turns);
 		isHostile = false;
-		this.turns = turns;
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

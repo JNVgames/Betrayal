@@ -16,11 +16,10 @@ public class SkipTurn extends Effect {
 
 	// JSON Constructor
 	public SkipTurn(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.NONE);
+		super(EventType.NONE, turns);
 		isHostile = false;
 		this.turns = turns;
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
     @Override

@@ -32,8 +32,7 @@ public class AttackUp extends Effect {
 		isHostile = false;
 		description = "Attack Buff\n" + "increase attack by  "+ attack + "\n"
 				+ "\nfor" + turns + " turns.";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

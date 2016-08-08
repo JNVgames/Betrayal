@@ -32,8 +32,7 @@ public class DefenseUp extends Effect {
 		isHostile = false;
 		description = "Defense Buff\n"  +
 				"increase defense by " + defense + "\nfor" + turns + " turns.";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

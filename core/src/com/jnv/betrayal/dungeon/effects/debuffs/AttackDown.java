@@ -32,8 +32,7 @@ public class AttackDown extends Effect {
 		isHostile = true;
 		description = "Attack Debuff\nLowers your attack by " + attack + "\n"
 				+ "for " + turns + " turns.";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

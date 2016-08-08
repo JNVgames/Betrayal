@@ -32,8 +32,7 @@ public class DefenseDown extends Effect {
 		isHostile = true;
 		description = "Defense Debuff\nLowers your defense by "
 				+ defense + "\n" + "for " + turns + " turns.";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

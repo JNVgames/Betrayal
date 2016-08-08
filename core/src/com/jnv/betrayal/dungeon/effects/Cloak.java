@@ -19,11 +19,11 @@ public class Cloak extends Effect {
 	}
 
 	public Cloak(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.ATTACK);
+		super(EventType.ATTACK, turns);
 		isHostile = false;
-		this.src = src;
-		dest = new ArrayList<Card>();
-		dest.add(src);
+		List<Card> destCards = new ArrayList<Card>();
+		destCards.add(src);
+		init(src, destCards);
 	}
 
 	@Override

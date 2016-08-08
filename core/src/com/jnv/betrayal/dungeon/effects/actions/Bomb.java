@@ -29,8 +29,7 @@ public class Bomb extends Effect {
 			e.printStackTrace();
 		}
 		isHostile = true;
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

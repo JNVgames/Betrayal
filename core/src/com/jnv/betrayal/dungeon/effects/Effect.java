@@ -47,7 +47,8 @@ public abstract class Effect {
 	}
 
 	protected void init(Card src, List<Card> dest) {
-
+		this.src = src;
+		this.dest = dest;
 	}
 
 	public boolean isHostile() {

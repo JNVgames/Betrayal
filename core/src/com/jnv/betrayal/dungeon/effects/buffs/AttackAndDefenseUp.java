@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class AttackAndDefenseUp extends Effect {
+
 	private int attack;
 	private int defense;
 
@@ -35,8 +36,7 @@ public class AttackAndDefenseUp extends Effect {
 		isHostile = false;
 		description = "Attack Defense Buff\n" + "increase attack by  " + attack + "\n" +
 				"increase defense by " + defense + "\nfor" + turns + " turns.";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 

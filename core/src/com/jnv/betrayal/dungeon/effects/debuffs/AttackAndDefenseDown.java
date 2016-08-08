@@ -37,6 +37,7 @@ public class AttackAndDefenseDown extends Effect {
 		isHostile = true;
 		description = "Attack and Defense Debuff\nLowers your attack by " + attack + "\n"
 				+ "and defense by " + defense + "\n" + "for " + turns + " turns.";
+		init(src, dest);
 
 	}
 

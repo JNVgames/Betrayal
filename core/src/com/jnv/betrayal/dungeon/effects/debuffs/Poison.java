@@ -25,9 +25,8 @@ public class Poison extends Effect {
 	public Poison(JSONObject data, int turns, Card src, List<Card> dest) {
 		super(EventType.POISON, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
-		this.src = src;
-		this.dest = dest;
 		description = DESCRIPTION + turns + " turns.";
+		init(src, dest);
 	}
 
 	@Override

@@ -20,11 +20,11 @@ public class Died extends Effect {
 	}
 
 	public Died(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DIED);
+		super(EventType.DIED, turns);
 		isHostile = false;
-		this.src = src;
-		dest = new ArrayList<Card>();
-		dest.add(src);
+		List<Card> destCards = new ArrayList<Card>();
+		destCards.add(src);
+		init(src, destCards);
 	}
 
 	@Override

@@ -22,15 +22,14 @@ public class Run extends Effect {
 
 	// JSON Constructor
 	public Run(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.FLEE);
+		super(EventType.FLEE, turns);
 		try {
 			this.fleeChance = data.getInt("fleeChance");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		isHostile = false;
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

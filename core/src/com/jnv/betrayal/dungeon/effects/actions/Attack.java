@@ -24,10 +24,10 @@ public class Attack extends Effect {
 
 	// JSON Constructor
 	public Attack(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.ATTACK);
+		super(EventType.ATTACK, turns);
 		isHostile = false;
 		attack = src.getCurrentAttack();
-		init(turns, src, dest);
+		init(src, dest);
 	}
 
 	@Override

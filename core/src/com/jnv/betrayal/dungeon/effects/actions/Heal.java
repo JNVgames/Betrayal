@@ -24,7 +24,7 @@ public class Heal extends Effect {
 
 	// JSON Constructor
 	public Heal(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.HEAL);
+		super(EventType.HEAL, turns);
 		try {
 			this.health = data.getInt("health");
 		} catch (JSONException e) {
@@ -33,8 +33,7 @@ public class Heal extends Effect {
 		isHostile = false;
 		description = "Heal\n"
 				+ "heal "+ health + " health";
-		this.src = src;
-		this.dest = dest;
+		init(src, dest);
 	}
 
 	@Override

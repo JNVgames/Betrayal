@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.JobDescription;
 import com.jnv.betrayal.scene2d.Dimension;
@@ -140,11 +141,16 @@ public class CharacterSelection extends GameState {
 		playNowButton.addListener(new InputListener(playNowButton) {
 			@Override
 			public void doAction() {
-				character.setName(fieldUsernameEnter.getText());
-				game.characters.add(character);
-				game.setCurrentCharacter(character);
-				character.instantializeRoom();
-				gsm.setState(GameStateManager.State.LOBBY);
+				if (fieldUsernameEnter.getText().isEmpty()) {
+					// Prompt user to enter a name
+					new OKPopup(game, "Please enter\na username.");
+				} else {
+					character.setName(fieldUsernameEnter.getText());
+					game.characters.add(character);
+					game.setCurrentCharacter(character);
+					character.instantializeRoom();
+					gsm.setState(GameStateManager.State.LOBBY);
+				}
 			}
 		});
 		stage.addActor(playNowButton);
