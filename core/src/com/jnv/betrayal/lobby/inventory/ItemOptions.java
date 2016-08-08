@@ -175,7 +175,7 @@ class ItemOptions extends Popup {
 				label.addListener(new InputListener(label) {
 					@Override
 					public void doAction() {
-						if (Betrayal.debug && unequipSlot != -1)
+						if (Betrayal.DEBUG && unequipSlot != -1)
 							game.getCurrentCharacter().equips.unequip(unequipSlot);
 						inventory.refresh();
 						remove();

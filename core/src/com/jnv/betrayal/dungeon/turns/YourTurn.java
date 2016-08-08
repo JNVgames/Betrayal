@@ -15,6 +15,7 @@ import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
@@ -77,15 +78,20 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Done", FontManager.getFont70(), Panel.top, new Runnable() {
 			public void run() {
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());
-				if (eventType == EventType.ATTACK) {
-					Effect effect = new Attack(field.getCurrentCard(), dest);
-					field.roundManager.addEvent(effect, effect.getStartType());
+				// If no cards are selected, show OKPopup saying to select a target
+				if (dest.isEmpty()) {
+					new OKPopup(field.game, "Please select a target.");
 				} else {
-					Effect effect = new Defend(field.getCurrentCard(), dest);
-					field.roundManager.addEvent(effect, effect.getStartType());
+					if (eventType == EventType.ATTACK) {
+						Effect effect = new Attack(field.getCurrentCard(), dest);
+						field.roundManager.addEvent(effect, effect.getStartType());
+					} else {
+						Effect effect = new Defend(field.getCurrentCard(), dest);
+						field.roundManager.addEvent(effect, effect.getStartType());
+					}
+					field.turnManager.nextTurn();
+					field.endSelectMode();
 				}
-				field.turnManager.nextTurn();
-				field.endSelectMode();
 			}
 		}));
 		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {

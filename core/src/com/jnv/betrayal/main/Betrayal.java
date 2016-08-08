@@ -23,7 +23,7 @@ public class Betrayal extends Game {
 
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 1280;
-	public static boolean debug = true;
+	public static boolean DEBUG = true;
 	private static boolean gamePaused;
 	public final BetrayalAssetManager res = new BetrayalAssetManager();
 	public final List<Character> characters = new ArrayList<Character>();
@@ -63,7 +63,6 @@ public class Betrayal extends Game {
 			gamePaused = false;
 			gsm.resume();
 		}
-		Timer timer = new Timer();
 	}
 
 	public void render() {
@@ -87,7 +86,7 @@ public class Betrayal extends Game {
 		sb = new SpriteBatch();
 		stage = new Stage(stretchViewport, sb);
 		Gdx.input.setInputProcessor(stage);
-		stage.setDebugUnderMouse(debug);
+		stage.setDebugUnderMouse(DEBUG);
 		worldCam.position.set(worldCam.viewportWidth / 2, worldCam.viewportHeight / 2, 0);
 	}
 

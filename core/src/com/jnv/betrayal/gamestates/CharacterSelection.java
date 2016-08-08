@@ -141,9 +141,11 @@ public class CharacterSelection extends GameState {
 		playNowButton.addListener(new InputListener(playNowButton) {
 			@Override
 			public void doAction() {
-				if (fieldUsernameEnter.getText().isEmpty()) {
+				if (fieldUsernameEnter.getText().isEmpty() && !Betrayal.DEBUG) {
 					// Prompt user to enter a name
 					new OKPopup(game, "Please enter\na username.");
+				} else if (isNameAllSpaces(fieldUsernameEnter.getText()) && !Betrayal.DEBUG) {
+					new OKPopup(game, "Add some letters\nto your name, please.");
 				} else {
 					character.setName(fieldUsernameEnter.getText());
 					game.characters.add(character);
@@ -154,6 +156,15 @@ public class CharacterSelection extends GameState {
 			}
 		});
 		stage.addActor(playNowButton);
+	}
+
+	private boolean isNameAllSpaces(String text) {
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) != ' ') {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void loadUsernameField() {

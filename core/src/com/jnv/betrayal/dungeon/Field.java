@@ -71,9 +71,6 @@ public class Field extends Group {
 		animationMgr = new AnimationManager(res);
 		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
-
-		// todo REMOVE THIS LINE
-		System.out.println("ASDKLFJA;SLDKFJASL;KDFASL;DFK   " + gsm.game.getCurrentCharacter().getName());
 	}
 
 	private void createEventLogButton() {
