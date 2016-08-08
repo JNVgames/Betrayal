@@ -24,7 +24,7 @@ public class Inventory {
 	private List<Item> items;
 
 	public Inventory() {
-		gold = 2000;
+		gold = 10000;
 		maxItems = 20;
 
 		items = new ArrayList<Item>();

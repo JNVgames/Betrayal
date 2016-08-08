@@ -20,15 +20,11 @@ public class MonsterManager {
 	private Field field;
 	private BetrayalAssetManager res;
 
-	public MonsterManager(int floor, BetrayalAssetManager res, Field field) {
+	public MonsterManager(int highestFloor, BetrayalAssetManager res, Field field) {
 		this.field = field;
 		this.res = res;
-		int tier = 10;  //CHANGE accord to floor level
-		//tier = generateMonster(tier); // TODO: take this out later. fully randomizes
-		//int monsterID = generateMonster(tier);
-		tier = 0;
-		int monsterID = 0;
-		addDungeonMonster(tier, monsterID);
+		int monsterID = generateMonster(highestFloor);
+		addDungeonMonster(highestFloor, monsterID);
 	}
 
 	private void addDungeonMonster(int tier, int monsterID) {

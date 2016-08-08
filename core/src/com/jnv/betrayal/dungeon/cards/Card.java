@@ -253,6 +253,10 @@ public abstract class Card {
 				}
 			})));
 		} else {
+
+			//todo remove this later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			if(card instanceof PlayerCard)
+				return;
 			Effect effect = new Died(card);
 			card.getField().roundManager.addEvent(effect, effect.getStartType());
 		}

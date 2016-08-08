@@ -28,7 +28,9 @@ public class Stats implements JsonSerializable {
 		baseAttack = 5;
 		baseDefense = 5;
 		floor = 0;
-		availablePoints = 0;
+		//availablePoints = 0;
+		//todo change back
+		availablePoints = 500;
 		applyPoints = new ApplyPoints();
 		this.equips = equips;
 		updateStats();

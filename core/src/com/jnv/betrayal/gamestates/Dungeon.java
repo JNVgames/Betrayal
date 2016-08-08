@@ -22,16 +22,24 @@ public class Dungeon extends GameState {
 	public Dungeon(GameStateManager gsm) {
 		super(gsm);
 		field = new Field(gsm);
+		int highestPartyMemberFloor = 0;
 		if (game.getCurrentCharacter().getRoom().getRoomID() < 0) {
 			// If not in online room, add only yourself
 			ArrayList<Character> tmp = new ArrayList<Character>();
 			tmp.add(game.getCurrentCharacter());
 			addCardsToStage(tmp);
+			highestPartyMemberFloor = game.getCurrentCharacter().stats.getFloor();
 		} else {
 			// If in online room, get all characters in the room
 			addCardsToStage(game.getCurrentCharacter().getRoom().getCharacters());
+			for(Character character : game.getCurrentCharacter().getRoom().getCharacters()){
+				if(character.stats.getFloor() > highestPartyMemberFloor)
+					highestPartyMemberFloor = character.stats.getFloor();
+			}
 		}
-		MonsterManager monsterManager = new MonsterManager(1, res, field);
+		MonsterManager monsterManager = new MonsterManager(0, res, field); //todo FORtesTING
+		//todo change back
+		//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
 		System.out.println("All cards: " + field.getAllCards());
 		field.turnManager.draw();
 		field.adjustPlayerCardStatsBasedOnJobs();
