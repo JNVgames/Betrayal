@@ -19,7 +19,6 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
-import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
@@ -74,7 +73,7 @@ public class LoadGame extends GameState {
 		loadHintText();
 		loadSavedSessions();
 		initDeleteButton();
-		loadDeleteButton();
+		setLoadMode();
 	}
 
 	// Helpers
@@ -187,6 +186,7 @@ public class LoadGame extends GameState {
 								game.fools.add(character);
 								game.characters.remove(character);
 								loadSavedSessions();
+								setLoadMode();
 							}
 						};
 					}
@@ -202,9 +202,22 @@ public class LoadGame extends GameState {
 		}
 	}
 
-	private void loadDeleteButton() {
+	private void setLoadMode() {
 		deleteButton.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture("delete-button"))));
+		deleteButton.clearListeners();
 		deleteButton.addListener(deleteListener);
+		deleteMode = false;
+		hintText.setText(PLAY_TEXT);
+		centerHintText();
+	}
+
+	private void setDeleteMode() {
+		deleteButton.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture("cancel"))));
+		deleteButton.clearListeners();
+		deleteButton.addListener(cancelListener);
+		deleteMode = true;
+		hintText.setText(DELETE_TEXT);
+		centerHintText();
 	}
 
 	private void initDeleteButton() {
@@ -217,27 +230,15 @@ public class LoadGame extends GameState {
 		deleteListener = new InputListener(deleteButton) {
 			@Override
 			public void doAction() {
-				deleteMode = true;
-				loadCancelButton();
-				hintText.setText(DELETE_TEXT);
-				centerHintText();
+				setDeleteMode();
 			}
 		};
 		cancelListener = new InputListener(deleteButton) {
 			@Override
 			public void doAction() {
-				deleteMode = false;
-				loadDeleteButton();
-				hintText.setText(PLAY_TEXT);
-				centerHintText();
+				setLoadMode();
 			}
 		};
-	}
-
-	private void loadCancelButton() {
-		deleteButton.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture("cancel"))));
-		deleteButton.clearListeners();
-		deleteButton.addListener(cancelListener);
 	}
 
 	private void removeSavedSessions() {

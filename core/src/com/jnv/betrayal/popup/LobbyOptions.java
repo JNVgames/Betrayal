@@ -37,8 +37,8 @@ public class LobbyOptions extends Popup {
 		loadTitle();
 		loadInstructionsButton();
 	//	loadOptionsButton();
-		loadReturnToLobbyButton();
 		loadReturnToMainMenuButton();
+		loadReturnToLobbyButton();
 	}
 
 	private void loadBackground() {
@@ -88,7 +88,7 @@ public class LobbyOptions extends Popup {
 	private void loadReturnToLobbyButton() {
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		lobbyButton.setX(xCoord);
-		lobbyButton.setY(instructions.getY() - height - padding);
+		lobbyButton.setY(mainMenuButton.getY() - height - padding);
 		lobbyButton.setWidth(width);
 		lobbyButton.setHeight(height);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
@@ -103,7 +103,7 @@ public class LobbyOptions extends Popup {
 	private void loadReturnToMainMenuButton() {
 		mainMenuButton = new Image(res.getTexture("main-menu"));
 		mainMenuButton.setX(xCoord);
-		mainMenuButton.setY(lobbyButton.getY() - height - padding);
+		mainMenuButton.setY(instructions.getY() - height - padding);
 		mainMenuButton.setWidth(width);
 		mainMenuButton.setHeight(height);
 		mainMenuButton.addListener(new InputListener(mainMenuButton) {
