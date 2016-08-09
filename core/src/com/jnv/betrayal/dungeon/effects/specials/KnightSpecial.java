@@ -1,28 +1,26 @@
-package com.jnv.betrayal.dungeon.effects.actions;
+package com.jnv.betrayal.dungeon.effects.specials;
 
-
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class Defend extends Effect {
+public class KnightSpecial extends Effect {
 
-	public Defend(Card src, List<Card> dst) {
-		super(EventType.DEFEND);
+	public KnightSpecial(Card src, List<Card> dest) {
+		super(EventType.KNIGHT_SPECIAL);
 		turns = 1;
 		isHostile = false;
-		init(src, dst);
+		init(src, dest);
 	}
 
-	// JSON Construction
-	public Defend(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DEFEND, turns);
+	// JSON Constructor
+	public KnightSpecial(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.KNIGHT_SPECIAL, turns);
 		isHostile = false;
 		init(src, dest);
 	}
@@ -44,11 +42,6 @@ public class Defend extends Effect {
 
 	@Override
 	protected void addToObject() {
-		try {
-			data.put("values", new JSONObject());
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+
 	}
 }

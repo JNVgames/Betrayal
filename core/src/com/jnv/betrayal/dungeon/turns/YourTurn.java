@@ -119,6 +119,8 @@ public class YourTurn extends Turn {
 						drawThiefSpecialBar();
 						break;
 					case KNIGHT:
+						field.beginSelectMode(2);
+						drawKnightSpecialBar();
 						break;
 					case PRIEST:
 						field.beginSelectMode(1);
@@ -130,6 +132,28 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
 			@Override
 			public void run() {
+				drawMainBar();
+			}
+		}));
+	}
+
+	private void drawKnightSpecialBar() {
+		panels.clearChildren();
+		panels.addActor(createPanel("Select up to 2\ntargets to defend.", FontManager.getFont50(),
+				Panel.top, new Runnable() {
+					@Override
+					public void run() {
+						if (doesTargetExist()) {
+							doEvent(new Defend(field.getCurrentCard(),
+									new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+							field.endSelectMode();
+						}
+					}
+				}));
+		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
+			@Override
+			public void run() {
+				field.endSelectMode();
 				drawMainBar();
 			}
 		}));

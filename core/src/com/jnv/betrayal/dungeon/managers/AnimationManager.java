@@ -29,6 +29,7 @@ public class AnimationManager {
 				}
 				break;
 			case DEFEND:
+			case KNIGHT_SPECIAL:
 				animation.jump(event.getSrc());
 				for (Card card : event.getDest()) {
 					animation.defend(card);
