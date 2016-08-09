@@ -152,20 +152,20 @@ public class LoadGame extends GameState {
 
 			Label name = new Label(c.getName(), FontManager.getFont70());
 			name.setX(characterPreview.getX() + characterPreview.getWidth() + 30);
-			name.setY((characterPreview.getY() + classPreview.getY() - name.getPrefHeight()) / 2);
+			name.setY((characterPreview.getY() + classPreview.getY() - name.getPrefHeight()) / 2 + 5);
 			preview.addActor(name);
 
 			Label floorLabel = new Label("FLOOR", FontManager.getFont40());
 			floorLabel.setX(Betrayal.WIDTH - 20 - floorLabel.getPrefWidth());
 			floorLabel.setY(characterPreview.getY() + characterPreview.getHeight()
-					- floorLabel.getPrefHeight());
+					- floorLabel.getPrefHeight() - 10);
 			floorLabel.setColor(Color.WHITE);
 			preview.addActor(floorLabel);
 
 			Label floorNumLabel =
 					new Label(Integer.toString(c.stats.getStat(Stat.FLOOR)),
 							FontManager.getFont100());
-			floorNumLabel.setBounds(floorLabel.getX(), characterPreview.getY(),
+			floorNumLabel.setBounds(floorLabel.getX(), characterPreview.getY() + 5,
 					floorLabel.getWidth(), floorLabel.getY() - 10 - characterPreview.getY());
 			floorNumLabel.setColor(Color.LIGHT_GRAY);
 			floorNumLabel.setAlignment(Align.center);
