@@ -31,6 +31,7 @@ public class LobbyOptions extends Popup {
 		loadButtons();
 	}
 
+
 	private void loadButtons() {
 		loadBackground();
 		loadTitle();

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Instructions;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Options;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -48,6 +49,7 @@ public class Menu extends GameState {
 		loadLoadGameButton();
 		loadInstructionsButton();
 		loadHallOfFameButton();
+		loadAboutButton();
 		//loadOptionsButton();
 	}
 
@@ -136,11 +138,25 @@ public class Menu extends GameState {
 //		stage.addActor(button_options);
 //	}
 
+	private void loadAboutButton() {
+		Image aboutButton = new Image(res.getTexture("about-button"));
+		aboutButton.layout();
+		aboutButton.setBounds((Betrayal.WIDTH - aboutButton.getImageWidth() / 2) / 2,
+				272, 256, 72);
+		aboutButton.addListener(new InputListener(aboutButton) {
+			@Override
+			public void doAction() {
+				new OKPopup(game,"Developers: \nJoseph Phan\nVincent Wang");
+			}
+		});
+		stage.addActor(aboutButton);
+	}
+
 	private void loadHallOfFameButton() {
 		Image button_hallOfFame = new Image(res.getTexture("hall-of-fame"));
 		button_hallOfFame.layout();
 		button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth() / 2) / 2,
-				272 - 32, 256, 72);
+				172, 256, 72);
 		button_hallOfFame.addListener(new InputListener(button_hallOfFame) {
 			@Override
 			public void doAction() {

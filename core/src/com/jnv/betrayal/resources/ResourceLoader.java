@@ -97,6 +97,7 @@ public class ResourceLoader {
 	}
 
 	private void loadButtons() {
+		res.loadTexture("button/about.png", "about-button");
 		res.loadTexture("button/event_log512x144.png", "event-log-button");
 		res.loadTexture("button/create_room_button512x144.png", "create-room");
 		res.loadTexture("button/leave_room_button512x144.png", "leave-room");
