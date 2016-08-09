@@ -95,7 +95,7 @@ public class LobbyOptions extends Popup {
 			@Override
 			public void doAction() {
 				Room room = game.getCurrentCharacter().getRoom();
-				if (room != null && room.getSocket().connected()) {
+				if (room.getSocket() != null && room.getSocket().connected()) {
 					room.getSocket().disconnect();
 				}
 				remove();
