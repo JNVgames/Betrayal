@@ -36,17 +36,17 @@ public class AttackUp extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.increaseCurrentAttack(attack);
+	public void startEffect(Card destCard) {
+		destCard.increaseCurrentAttack(attack);
 	}
 
 	@Override
-	public void endEffect(Card card) {
-		card.decreaseCurrentAttack(attack);
+	public void endEffect(Card destCard) {
+		destCard.decreaseCurrentAttack(attack);
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

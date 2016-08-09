@@ -33,24 +33,24 @@ public class Run extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
+	public void startEffect(Card destCard) {
 		if (PlayerCard.canFlee(fleeChance / 25)) {
-			Effect flee = new Flee(card);
-			card.getField().roundManager.addEvent(flee, flee.startType);
+			Effect flee = new Flee(destCard);
+			destCard.getField().roundManager.addEvent(flee, flee.startType);
 		}
 		else {
-			Effect failToFlee = new FailedToFlee(card);
-			card.getField().roundManager.addEvent(failToFlee, failToFlee.startType);
+			Effect failToFlee = new FailedToFlee(destCard);
+			destCard.getField().roundManager.addEvent(failToFlee, failToFlee.startType);
 		}
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

@@ -31,17 +31,17 @@ public class FailedToFlee extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.failedToFlee();
+	public void startEffect(Card destCard) {
+		destCard.failedToFlee();
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

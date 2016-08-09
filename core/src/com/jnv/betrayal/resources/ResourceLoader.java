@@ -162,7 +162,9 @@ public class ResourceLoader {
 	private void loadCombatIcons() {
 		res.loadTexture("icon/icon_gold34x32.png", "icon-gold");
 		res.loadTexture("icon/attack250x250.png", "attack");
+		res.loadTexture("icon/attack_boost250x250.png", "attack-boost");
 		res.loadTexture("icon/defense250x250.png", "defense");
+		res.loadTexture("icon/defense_boost250x250.png", "defense-boost");
 		res.loadTexture("icon/health250x250.png", "health");
 		res.loadTexture("icon/heal250x250.png", "heal");
 		res.loadTexture("icon/damage250x250.png", "damage");

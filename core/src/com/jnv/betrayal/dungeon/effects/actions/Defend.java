@@ -29,23 +29,23 @@ public class Defend extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
+	public void startEffect(Card destCard) {
 		System.out.println("-------------DEFEND START EFFECT-------------");
-		card.addDefender((PlayerCard) src);
+		destCard.addDefender((PlayerCard) src);
 		System.out.println("src = [" + src + "], dest = [" + dest + "]");
 		System.out.println("-------------------------------------------");
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 		System.out.println("-------------DEFEND END EFFECT-------------");
-		card.removeDefender(src.getID());
+		destCard.removeDefender(src.getID());
 		System.out.println("src = [" + src + "], dest = [" + dest + "]");
 		System.out.println("-------------------------------------------");
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

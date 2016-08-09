@@ -31,17 +31,17 @@ public class Flee extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.flee();
+	public void startEffect(Card destCard) {
+		destCard.flee();
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 	@Override

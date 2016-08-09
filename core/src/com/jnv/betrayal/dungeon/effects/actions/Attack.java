@@ -31,17 +31,17 @@ public class Attack extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.attack(attack);
+	public void startEffect(Card destCard) {
+		destCard.attack(attack);
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

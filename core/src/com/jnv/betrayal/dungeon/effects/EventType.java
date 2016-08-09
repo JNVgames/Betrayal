@@ -8,6 +8,14 @@ public enum EventType {
 	FAIL_TO_FLEE("failed to flee"),
 	DIED("died"),
 
+	// Class special attacks
+	WARRIOR_SPECIAL("critically smacked"),
+	PRIEST_ATTACK_SPECIAL("reluctantly buffed (atk)"),
+	PRIEST_DEFENSE_SPECIAL("reluctantly buffed (def)"),
+	PRIEST_HEAL_SPECIAL("reluctantly healed"),
+	THIEF_SPECIAL("sinisterly backstabbed"),
+	KNIGHT_SPECIAL("bro-tected"),
+
 	// Item effects
 	HEAL("healed"),
 	BOMB("bombed"),

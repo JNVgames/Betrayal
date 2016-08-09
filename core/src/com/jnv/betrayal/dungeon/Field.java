@@ -5,6 +5,7 @@
 package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -42,9 +43,10 @@ public class Field extends Group {
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
 	public final Socket socket;
-	List<Card> allCards;
-	private int currentCardTurn;
 	public int reward;
+	private List<Card> allCards;
+	private int currentCardTurn;
+	private Character clientCharacter;
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
@@ -57,6 +59,7 @@ public class Field extends Group {
 		game = gsm.game;
 		res = gsm.game.res;
 		socket = gsm.game.getCurrentCharacter().getRoom().getSocket();
+		clientCharacter = gsm.game.getCurrentCharacter();
 		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
 		Image background = new Image(res.getTexture("map-1"));
@@ -291,6 +294,9 @@ public class Field extends Group {
 		}
 
 		if(hasThief) reward  *= 2;
+	}
 
+	public Character getClientCharacter() {
+		return clientCharacter;
 	}
 }

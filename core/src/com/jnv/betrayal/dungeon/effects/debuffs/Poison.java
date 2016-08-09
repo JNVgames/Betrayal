@@ -30,17 +30,17 @@ public class Poison extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.poison();
+	public void startEffect(Card destCard) {
+		destCard.poison();
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
-		card.poison();
+	public void consistentEffect(Card destCard) {
+		destCard.poison();
 	}
 	@Override
 	protected void addToObject() {

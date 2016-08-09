@@ -36,17 +36,17 @@ public class DefenseDown extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.decreaseCurrentDefense(defense);
+	public void startEffect(Card destCard) {
+		destCard.decreaseCurrentDefense(defense);
 	}
 
 	@Override
-	public void endEffect(Card card) {
-		card.increaseCurrentDefense(defense);
+	public void endEffect(Card destCard) {
+		destCard.increaseCurrentDefense(defense);
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 	@Override

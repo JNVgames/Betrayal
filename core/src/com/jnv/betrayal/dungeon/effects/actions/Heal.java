@@ -37,17 +37,17 @@ public class Heal extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.heal(health);
+	public void startEffect(Card destCard) {
+		destCard.heal(health);
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

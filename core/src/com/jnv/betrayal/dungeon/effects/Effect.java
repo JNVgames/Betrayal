@@ -117,11 +117,11 @@ public abstract class Effect {
 		this.dest = dest;
 	}
 
-	public abstract void startEffect(Card card);
+	public abstract void startEffect(Card destCard);
 
-	public abstract void endEffect(Card card);
+	public abstract void endEffect(Card destCard);
 
-	public abstract void consistentEffect(Card card);
+	public abstract void consistentEffect(Card destCard);
 
 	public JSONObject toJSON() {
 		data = new JSONObject();
@@ -153,7 +153,4 @@ public abstract class Effect {
 	}
 
 	protected abstract void addToObject();
-
-
-
 }

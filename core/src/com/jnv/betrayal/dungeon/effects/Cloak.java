@@ -27,17 +27,17 @@ public class Cloak extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
+	public void startEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

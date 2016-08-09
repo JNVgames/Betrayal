@@ -37,17 +37,17 @@ public class TrueDamage extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.attackTrueDamage(damage);
+	public void startEffect(Card destCard) {
+		destCard.attackTrueDamage(damage);
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

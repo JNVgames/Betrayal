@@ -33,17 +33,17 @@ public class Bomb extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
+	public void startEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void endEffect(Card card) {
-		card.takeDamage(attack);
+	public void endEffect(Card destCard) {
+		destCard.takeDamage(attack);
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

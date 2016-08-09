@@ -109,23 +109,23 @@ public abstract class Card {
 		return currentDefense;
 	}
 
-	public void increaseCurrentAttack(int value) {
+	public void increaseCurrentAttack(float value) {
 		currentAttack += value;
 	}
 
-	public void decreaseCurrentAttack(int value) {
+	public void decreaseCurrentAttack(float value) {
 		currentAttack -= value;
 	}
 
-	public void increaseCurrentDefense(int value) {
+	public void increaseCurrentDefense(float value) {
 		currentDefense += value;
 	}
 
-	public void decreaseCurrentDefense(int value) {
+	public void decreaseCurrentDefense(float value) {
 		currentDefense -= value;
 	}
 
-	public void heal(int value) {
+	public void heal(float value) {
 		currentHealth += value;
 		if (currentHealth > baseHealth) {
 			currentHealth = baseHealth;
@@ -270,7 +270,7 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
-	public void takeTrueDamage(int damage) {
+	public void takeTrueDamage(float damage) {
 		currentHealth -= damage;
 		if (currentHealth < 0)
 			currentHealth = 0;
@@ -307,7 +307,7 @@ public abstract class Card {
 		}
 	}
 
-	public void takeDamage(int damage) {
+	public void takeDamage(float damage) {
 		currentHealth -= calculateDamageWithDefense(damage, this.getCurrentDefense());
 		if (currentHealth < 0)
 			currentHealth = 0;
@@ -317,7 +317,7 @@ public abstract class Card {
 		}
 	}
 
-	private int calculateDamageWithDefense(int damage, int armor) {
+	private float calculateDamageWithDefense(float damage, int armor) {
 		if (damage <= 0) {
 			// If damage is negative, it's a miss
 			return 0;
@@ -325,7 +325,7 @@ public abstract class Card {
 		if (armor < 0) {
 			armor = 0;
 		}
-		int newDamage = damage - armor;
+		float newDamage = damage - armor;
 		// If new damage is reduced to less than 0 for
 		if (newDamage < 1) {
 			newDamage = 1;

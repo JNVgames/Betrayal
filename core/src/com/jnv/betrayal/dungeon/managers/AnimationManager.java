@@ -20,10 +20,12 @@ public class AnimationManager {
 
 			/************************ BASIC MOVES *************************/
 			case ATTACK:
+			case WARRIOR_SPECIAL:
+			case THIEF_SPECIAL:
 				animation.jump(event.getSrc());
 				for (Card card : event.getDest()) {
 					animation.flashColor(card, Color.RED);
-					animation.damanged(card);
+					animation.damaged(card);
 				}
 				break;
 			case DEFEND:
@@ -44,7 +46,11 @@ public class AnimationManager {
 
 			/********************Item abd Skills*************************/
 			case HEAL:
-				animation.heal(event.getSrc());
+			case PRIEST_HEAL_SPECIAL:
+				animation.jump(event.getSrc());
+				for (Card card : event.getDest()) {
+					animation.heal(card);
+				}
 				break;
 			case BOMB:
 				break;
@@ -52,8 +58,18 @@ public class AnimationManager {
 				animation.changeColor(event.getSrc(), Color.GREEN);
 				break;
 			case BUFF_ATTACK:
+			case PRIEST_ATTACK_SPECIAL:
+				animation.jump(event.getSrc());
+				for (Card card : event.getDest()) {
+					animation.buffAttack(card);
+				}
 				break;
 			case BUFF_DEFENSE:
+			case PRIEST_DEFENSE_SPECIAL:
+				animation.jump(event.getSrc());
+				for (Card card : event.getDest()) {
+					animation.buffDefense(card);
+				}
 				break;
 			case BUFF_ATTACK_DEFENSE:
 				break;
@@ -67,7 +83,7 @@ public class AnimationManager {
 
 			/********************Consistent Effects*********************/
 			case C_POISON:
-				animation.flashColor(event.getSrc(),Color.RED);
+				animation.flashColor(event.getSrc(), Color.RED);
 				break;
 
 			/**********************End Effects**************************/
@@ -92,35 +108,4 @@ public class AnimationManager {
 				break;
 		}
 	}
-
-//	ATTACK("attacked"),
-//	DEFEND("defended"),
-//	FLEE("fled"),
-//	FAIL_TO_FLEE("failed to flee"),
-//	DIED("died"),
-//
-//	// Item effects
-//	HEAL("healed"),
-//	BOMB("bombed"),
-//	POISON("poisoned"),
-//	BUFF_ATTACK("was buffed (atk) by"),
-//	BUFF_DEFENSE("was buffed (def) by"),
-//	BUFF_ATTACK_DEFENSE("was buffed (atk, def) by"),
-//	DEBUFF_ATTACK("was debuffed (atk) by"),
-//	DEBUFF_DEFENSE("was debuffed (def) by"),
-//	DEBUFF_ATTACK_DEFENSE("was debuffed (atk, def)"),
-//	//SKIP_TURN("skipped")
-//
-//	// Consistent effects
-//	C_POISON("dealt poison dmg to"),
-//
-//	// End effects
-//	E_POISON("was freed from the poison of"),
-//	E_BUFF_ATTACK("lost their buff (atk) from"),
-//	E_BUFF_DEFENSE("lost their buff (def) from"),
-//	E_BUFF_ATTACK_DEFENSE("lost their buff (atk, def) from"),
-//	E_DEBUFF_ATTACK("regained stats (atk) from debuff of"),
-//	E_DEBUFF_DEFENSE("regained stats (def) from debuff of"),
-//	E_DEBUFF_ATTACK_DEFENSE("regained stats (atk, def) from debuff of");
-
 }

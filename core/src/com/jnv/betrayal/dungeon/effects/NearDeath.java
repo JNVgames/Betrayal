@@ -31,17 +31,17 @@ public class NearDeath extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.takeTrueDamage(card.getCurrentHealth() - 1);
+	public void startEffect(Card destCard) {
+		destCard.takeTrueDamage(destCard.getCurrentHealth() - 1);
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 

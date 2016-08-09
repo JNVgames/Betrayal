@@ -28,17 +28,17 @@ public class Died extends Effect {
 	}
 
 	@Override
-	public void startEffect(Card card) {
-		card.died();
+	public void startEffect(Card destCard) {
+		destCard.died();
 	}
 
 	@Override
-	public void endEffect(Card card) {
+	public void endEffect(Card destCard) {
 
 	}
 
 	@Override
-	public void consistentEffect(Card card) {
+	public void consistentEffect(Card destCard) {
 
 	}
 
