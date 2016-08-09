@@ -74,6 +74,8 @@ public class Room {
 				int counter = 0;
 				try {
 					JSONArray players = data.getJSONArray("players");
+
+					System.out.println(players);
 					while (!players.isNull(counter)) {
 						Character c = new Character(currentCharacter.res);
 						c.fromJson(players.getJSONObject(counter));
@@ -91,7 +93,7 @@ public class Room {
 					// Emit the players back to server so server can update the list of players
 					JSONObject emitData = new JSONObject();
 					emitData.put("players", data.getJSONArray("players"));
-					socket.emit("joinedRoom", emitData);
+					socket.emit("joinedRoom");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -177,13 +179,13 @@ public class Room {
 					for (Character character : characters) {
 						if (character.getId() == data.getJSONObject("character").getInt("id")) {
 							// Make new character
-							character = new Character(currentCharacter.res);
 							character.fromJson(data.getJSONObject("character"));
 						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				refreshLobby();
 				socket.emit("updateCharacters");
 			}
 		});

@@ -54,7 +54,6 @@ public class PartyRoom extends Popup {
 		partyBackground.layout();
 		partyBackground.setBounds(150, 200, Betrayal.WIDTH - 300, Betrayal.HEIGHT - 400);
 		popup.addActor(partyBackground);
-
 	}
 
 	private void loadTitle() {

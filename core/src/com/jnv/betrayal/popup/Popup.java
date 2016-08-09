@@ -47,4 +47,8 @@ public abstract class Popup {
 	protected void setMaskAction(Runnable r) {
 		this.maskAction = r;
 	}
+
+	public Group getGroup() {
+		return popup;
+	}
 }

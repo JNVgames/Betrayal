@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
@@ -99,12 +98,12 @@ public class HallOfFame extends GameState {
 	}
 
 	private void loadBackground() {
-		Image border = new Image(res.getTexture("hall-of-fame-background"));
-		border.setX(0);
-		border.setY(0);
-		border.setWidth(Betrayal.WIDTH);
-		border.setHeight(Betrayal.HEIGHT);
-		stage.addActor(border);
+		Image background = new Image(res.getTexture("hall-of-fame-background"));
+		background.setX(0);
+		background.setY(0);
+		background.setWidth(Betrayal.WIDTH);
+		background.setHeight(Betrayal.HEIGHT);
+		stage.addActor(background);
 	}
 
 	private void loadXButton() {

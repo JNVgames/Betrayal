@@ -102,8 +102,9 @@ public class StatsWindow extends Popup {
 	private void loadTitle() {
 		title = new Label("My Stats", FontManager.getFont40());
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
-		title.setY(background.getTop() - title.getPrefHeight()-10);
+		title.setY(background.getTop() - title.getPrefHeight() - 10);
 		popup.addActor(title);
+		System.out.println("title.getZIndex() = " + title.getZIndex());
 	}
 
 	private void loadIcons() {
@@ -233,6 +234,7 @@ public class StatsWindow extends Popup {
 			}
 		});
 		popup.addActor(lobbyButton);
+		System.out.println("lobbyButton.getZIndex() = " + lobbyButton.getZIndex());
 	}
 
 	private void loadStatsAdjustButton() {

@@ -24,7 +24,6 @@ import com.jnv.betrayal.lobby.stats.StatsWindow;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.popup.Confirmation;
-import com.jnv.betrayal.popup.CreateRoomPopup;
 import com.jnv.betrayal.popup.LobbyOptions;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
@@ -39,14 +38,15 @@ public class Lobby extends GameState {
 	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, unReadyTexture;
 	private Texture redT, blueT, purpleT, greenT;
 	private Image[] triangles;
-	private Actor playNowButton, readyButton, UnReadyButton;
-	private Group partyMembers;
+	private Actor playNowButton, readyButton, unReadyButton;
+	private Group partyMembers, bottom, buttons, middle;
 	private Room room;
 	private Label roomNum, timeTilEnter, timerValue;
 	private Timer timer;
 	private Timer.Task task;
 	private long savedTime;
 	private int delay, timeLeft;
+	private int zIndex;
 
 	public Lobby(GameStateManager gsm) {
 		super(gsm);
@@ -67,6 +67,8 @@ public class Lobby extends GameState {
 		timer = new Timer();
 		timer.start();
 		delay = 5;
+		zIndex = 2;
+		System.out.println(zIndex);
 		task = new Timer.Task() {
 			@Override
 			public void run() {
@@ -111,7 +113,31 @@ public class Lobby extends GameState {
 		Image lobbyBackground = new Image(res.getTexture("instructions-background"));
 		lobbyBackground.layout();
 		lobbyBackground.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
-		stage.addActor(lobbyBackground);
+		bottom.addActor(lobbyBackground);
+	}
+
+	private void loadContent() {
+		bottom = new Group();
+		buttons = new Group();
+		middle = new Group();
+		stage.addActor(bottom);
+		stage.addActor(buttons);
+		stage.addActor(middle);
+		stage.addActor(partyMembers);
+		loadBackground();
+		loadAllPlayersBackground();
+		loadChatBackground();
+		loadTower();
+		loadShopButton();
+		loadSettingsButton();
+		loadPartyButton();
+		loadRoomLabel();
+		loadTimeLeftLabel();
+		loadStatsButton();
+		loadInventoryButton();
+		loadPlayNowButton();
+		loadReadyButton();
+		loadUnReadyButton();
 	}
 
 	private void loadShopButton() {
@@ -124,7 +150,9 @@ public class Lobby extends GameState {
 				new Shop(game);
 			}
 		});
-		stage.addActor(shopButton);
+		buttons.addActor(shopButton);
+
+		System.out.println("shopButton.getZIndex() = " + shopButton.getZIndex());
 	}
 
 	private void loadInventoryButton() {
@@ -138,7 +166,10 @@ public class Lobby extends GameState {
 				new Inventory(game);
 			}
 		});
-		stage.addActor(inventoryButton);
+		buttons.addActor(inventoryButton);
+
+		System.out.println("inventoryButton.getZIndex() = " + inventoryButton.getZIndex());
+
 	}
 
 	private void loadStatsButton() {
@@ -152,7 +183,10 @@ public class Lobby extends GameState {
 				new StatsWindow(game);
 			}
 		});
-		stage.addActor(statsButton);
+		buttons.addActor(statsButton);
+
+		System.out.println("statsButton.getZIndex() = " + statsButton.getZIndex());
+
 	}
 
 	private void loadPartyButton() {
@@ -172,14 +206,14 @@ public class Lobby extends GameState {
 				};
 			}
 		});
-		stage.addActor(partyButton);
+		buttons.addActor(partyButton);
 	}
 
 	private void loadTimeLeftLabel() {
 		timeTilEnter = new Label("Entering in ", FontManager.getFont60());
 		timeTilEnter.setX(chatBackground.getX() + (chatBackground.getWidth() - timeTilEnter.getPrefWidth()) / 2 - 50);
 		timeTilEnter.setY(roomNum.getY() - timeTilEnter.getPrefHeight() - 20);
-		stage.addActor(timeTilEnter);
+		middle.addActor(timeTilEnter);
 
 		timerValue = new Label("...", FontManager.getFont60()) {
 			@Override
@@ -199,15 +233,14 @@ public class Lobby extends GameState {
 		};
 		timerValue.setX(timeTilEnter.getX() + timeTilEnter.getPrefWidth());
 		timerValue.setY(timeTilEnter.getY());
-		stage.addActor(timerValue);
-		//todo SET z INDEX SO IT DOESNT INTERFERE WITH SHOP ETC
+		middle.addActor(timerValue);
 	}
 
 	private void loadRoomLabel() {
 		roomNum = new Label("Room #:  ", FontManager.getFont60());
 		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 100);
 		roomNum.setY(chatBackground.getTop() - roomNum.getPrefHeight() - 20);
-		stage.addActor(roomNum);
+		bottom.addActor(roomNum);
 	}
 
 	private void loadSettingsButton() {
@@ -221,21 +254,21 @@ public class Lobby extends GameState {
 				new LobbyOptions(game);
 			}
 		});
-		stage.addActor(settingsButton);
+		buttons.addActor(settingsButton);
 	}
 
 	private void loadAllPlayersBackground() {
 		allPlayersBackground = new Image(res.getTexture("player-background"));
 		allPlayersBackground.layout();
 		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10 - 100, 510, Betrayal.WIDTH / 2 - 20 + 100, Betrayal.HEIGHT / 3 + 175);
-		stage.addActor(allPlayersBackground);
+		bottom.addActor(allPlayersBackground);
 	}
 
 	private void loadChatBackground() {
 		chatBackground = new Image(res.getTexture("lobby-screen"));
 		chatBackground.layout();
 		chatBackground.setBounds(10, 175, Betrayal.WIDTH - 20, Betrayal.HEIGHT / 4);
-		stage.addActor(chatBackground);
+		bottom.addActor(chatBackground);
 	}
 
 	private void loadTower() {
@@ -249,29 +282,7 @@ public class Lobby extends GameState {
 				game.getCurrentCharacter().stats.advanceFloor();
 			}
 		});
-		stage.addActor(tower);
-	}
-
-	private void loadPartyLevels() {
-		//TODO: Finish this
-	}
-
-	private void loadContent() {
-		loadBackground();
-		loadAllPlayersBackground();
-		loadChatBackground();
-		loadTower();
-		loadPartyLevels();
-		loadShopButton();
-		loadSettingsButton();
-		loadPartyButton();
-		loadRoomLabel();
-		loadTimeLeftLabel();
-		loadStatsButton();
-		loadInventoryButton();
-		loadPlayNowButton();
-		loadReadyButton();
-		loadUnReadyButton();
+		bottom.addActor(tower);
 	}
 
 	private void loadTextures() {
@@ -290,15 +301,15 @@ public class Lobby extends GameState {
 		if (room.getRoomID() == -1) {
 			playNowButton.setVisible(true);
 			readyButton.setVisible(false);
-			UnReadyButton.setVisible(false);
+			unReadyButton.setVisible(false);
 		} else if (game.getCurrentCharacter().isReady()) {
 			playNowButton.setVisible(false);
 			readyButton.setVisible(false);
-			UnReadyButton.setVisible(true);
+			unReadyButton.setVisible(true);
 		} else {
 			playNowButton.setVisible(false);
 			readyButton.setVisible(true);
-			UnReadyButton.setVisible(false);
+			unReadyButton.setVisible(false);
 		}
 	}
 
@@ -338,27 +349,27 @@ public class Lobby extends GameState {
 			}
 		});
 		playNowButton.setVisible(false);
-		stage.addActor(playNowButton);
+		buttons.addActor(playNowButton);
 	}
 
 	private void loadUnReadyButton() {
-		UnReadyButton = new Actor() {
+		unReadyButton = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
-				batch.draw(unReadyTexture, UnReadyButton.getX(), UnReadyButton.getY(),
-						UnReadyButton.getWidth(), UnReadyButton.getHeight());
+				batch.draw(unReadyTexture, unReadyButton.getX(), unReadyButton.getY(),
+						unReadyButton.getWidth(), unReadyButton.getHeight());
 			}
 		};
-		UnReadyButton.setWidth(512);
-		UnReadyButton.setBounds((Betrayal.WIDTH - UnReadyButton.getWidth()) / 2, 20, 512, 144);
-		UnReadyButton.addListener(new InputListener(UnReadyButton, true) {
+		unReadyButton.setWidth(512);
+		unReadyButton.setBounds((Betrayal.WIDTH - unReadyButton.getWidth()) / 2, 20, 512, 144);
+		unReadyButton.addListener(new InputListener(unReadyButton, true) {
 			@Override
 			public void doAction() {
 				room.ready(false);
 			}
 		});
-		UnReadyButton.setVisible(false);
-		stage.addActor(UnReadyButton);
+		unReadyButton.setVisible(false);
+		buttons.addActor(unReadyButton);
 	}
 
 	private void loadReadyButton() {
@@ -378,7 +389,7 @@ public class Lobby extends GameState {
 			}
 		});
 		readyButton.setVisible(false);
-		stage.addActor(readyButton);
+		buttons.addActor(readyButton);
 	}
 
 	public void refresh() {
@@ -399,7 +410,6 @@ public class Lobby extends GameState {
 			loadLevelTriangle(50, 50, i, character.stats.getFloor());
 			i++;
 		}
-		stage.addActor(partyMembers);
 	}
 
 	private void setRoomLabel() {
@@ -413,6 +423,7 @@ public class Lobby extends GameState {
 	private void loadLevelTriangle(float width, float height, int counter, int floor) {
 		triangles[counter - 1].setX(tower.getX() + tower.getWidth() + counter * 7 - 10);
 		triangles[counter - 1].setY(tower.getY() + (floor * tower.getHeight() / 25f) - 20);
+		triangles[counter - 1].setZIndex(zIndex);
 		triangles[counter - 1].setWidth(width);
 		triangles[counter - 1].setHeight(height);
 		partyMembers.addActor(triangles[counter - 1]);
@@ -437,6 +448,7 @@ public class Lobby extends GameState {
 		preview.setHeight(previewHeight);
 		preview.setX(xPos);
 		preview.setY(yPos);
+
 		preview.setTouchable(Touchable.disabled);
 		player.addActor(preview);
 
@@ -444,12 +456,14 @@ public class Lobby extends GameState {
 		Label name = new Label(character.getName(), FontManager.getFont40());
 		name.setX(x + 20 + (width - name.getPrefWidth()) / 2);
 		name.setY(y + ((height - name.getPrefHeight()) / 2) + 20);
+		name.setZIndex(zIndex);
 		player.addActor(name);
 
 		//create floor Label
 		Label floor = new Label("Floor: " + character.stats.getFloor(), FontManager.getFont40());
 		floor.setX(x + 20 + (width - floor.getPrefWidth()) / 2);
 		floor.setY(name.getY() - floor.getPrefHeight() - 5 + 15);
+		floor.setZIndex(zIndex);
 		player.addActor(floor);
 		switch (counter) {
 			case 1:
@@ -477,6 +491,7 @@ public class Lobby extends GameState {
 		ready.setHeight(20);
 		ready.setX(x + width - 30);
 		ready.setY(y + (height + 20) / 2 - 25);
+
 		player.addActor(ready);
 
 		//used so player is clickable
@@ -485,14 +500,22 @@ public class Lobby extends GameState {
 		mask.setHeight(height);
 		mask.setX(x);
 		mask.setY(y);
+
 		mask.addListener(new InputListener(mask) {
 			@Override
 			public void doAction() {
-				new OKPopup(game, "STUB");
+				new OKPopup(420, 380, game, "Stats" +
+						"\nHealth: " + character.stats.getTotalHealth() +
+						"\nAttack: " + character.stats.getTotalAttack() +
+						"\nDefense: " + character.stats.getTotalDefense()
+				);
 				//new OKPopup(character.stats.getTotalAttack());
 			}
 		});
+		player.addActor(mask);
 
 		partyMembers.addActor(player);
+		System.out.println("partyMembers = " + partyMembers.getZIndex());
+		System.out.println("preview.getZIndex() = " + preview.getZIndex());
 	}
 }
