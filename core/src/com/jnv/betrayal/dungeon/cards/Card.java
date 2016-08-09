@@ -522,6 +522,7 @@ public abstract class Card {
 					new OKPopup(field.game, "Flee Successful") {
 						@Override
 						public void onConfirm() {
+							field.getClientCharacter().getRoom().setInDungeon(false);
 							field.game.gsm.setState(GameStateManager.State.LOBBY);
 						}
 					};
@@ -547,6 +548,7 @@ public abstract class Card {
 					new OKPopup(field.game, "You Have Died") {
 						@Override
 						public void onConfirm() {
+							field.game.fools.add(field.game.getCurrentCharacter());
 							field.game.characters.remove(field.game.getCurrentCharacter());
 							field.game.gsm.setState(GameStateManager.State.MENU);
 						}

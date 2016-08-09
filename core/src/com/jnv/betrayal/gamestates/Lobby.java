@@ -326,6 +326,7 @@ public class Lobby extends GameState {
 					new Confirmation(game, "Enter Dungeon?") {
 						@Override
 						public void doAction() {
+							room.setInDungeon(true);
 							gsm.setState(GameStateManager.State.DUNGEON);
 						}
 					};

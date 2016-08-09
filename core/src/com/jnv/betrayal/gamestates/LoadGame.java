@@ -184,6 +184,7 @@ public class LoadGame extends GameState {
 							@Override
 							public void doAction() {
 								removeSavedSessions();
+								game.fools.add(character);
 								game.characters.remove(character);
 								loadSavedSessions();
 							}

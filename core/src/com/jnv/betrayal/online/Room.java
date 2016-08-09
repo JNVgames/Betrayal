@@ -24,10 +24,12 @@ public class Room {
 	private List<Character> characters = new ArrayList<Character>();
 	private Socket socket;
 	private Lobby lobby;
+	private boolean inDungeon;
 
 	public Room(Character character) {
 		roomID = -1;
 		currentCharacter = character;
+		inDungeon = false;
 	}
 
 	public int getRoomID() {
@@ -130,16 +132,14 @@ public class Room {
 			}
 		}).on("startDungeonCountdown", new Emitter.Listener() {
 			@Override
-			public void call(Object... args) {
-				//new OKPopup(lobby.getGame(),"GOING TO DUNGEON");
-
-				if (lobby != null) {
+			public void call(Object... args) {if (lobby != null) {
 					lobby.enterDungeonCountDown();
 				}
 			}
 		}).on("enterDungeon", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
+				setInDungeon(true);
 				if (lobby != null) {
 					currentCharacter.setReady(false);
 					ready(currentCharacter.isReady());
@@ -168,6 +168,23 @@ public class Room {
 					characters.remove(indexToRemove);
 				}
 				refreshLobby();
+			}
+		}).on("updateCharacters", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				JSONObject data = (JSONObject) args[0];
+				try {
+					for (Character character : characters) {
+						if (character.getId() == data.getJSONObject("character").getInt("id")) {
+							// Make new character
+							character = new Character(currentCharacter.res);
+							character.fromJson(data.getJSONObject("character"));
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				socket.emit("updateCharacters");
 			}
 		});
 	}
@@ -229,15 +246,17 @@ public class Room {
 		});
 	}
 
-	// Whenever someone makes a change to their character that changes their preview
-	public void updateCharactersInfo() {
-// todo
-	}
-
 	// Emit event to server on this character preview change
 	public void updateServerCharacters() {
-// todo
-
+		if (socket != null && socket.connected()) {
+			JSONObject data = new JSONObject();
+			try {
+				data.put("character", currentCharacter.toJson());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			socket.emit("characterChanged", data);
+		}
 	}
 
 	public void printCharacters() {
@@ -258,5 +277,13 @@ public class Room {
 
 	public Socket getSocket() {
 		return socket;
+	}
+
+	public void setInDungeon(boolean inDungeon) {
+		this.inDungeon = inDungeon;
+	}
+
+	public boolean getInDungeon() {
+		return inDungeon;
 	}
 }

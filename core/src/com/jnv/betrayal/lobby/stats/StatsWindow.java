@@ -213,6 +213,7 @@ public class StatsWindow extends Popup {
 				new Confirmation(game, "Are You Sure?") {
 					public void doAction() {
 						applyPoints.applyPoints();
+						character.getRoom().updateServerCharacters();
 					}
 				};
 			}

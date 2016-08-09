@@ -176,18 +176,18 @@ public class Inventory extends Popup implements InventoryLoadable {
 	}
 
 	private void loadSortButton() {
-		Label button_sort = new Label("Sort", FontManager.getFont40());
-		button_sort.setBounds(background.getX() + background.getWidth() - 30 - button_sort.getPrefWidth(),
-				lobbyButton.getY() + lobbyButton.getHeight() + 842, button_sort.getPrefWidth(),
-				button_sort.getPrefHeight());
-		button_sort.addListener(new InputListener(button_sort) {
+		Label sortButton = new Label("Sort", FontManager.getFont40());
+		sortButton.setBounds(background.getX() + background.getWidth() - 30 - sortButton.getPrefWidth(),
+				lobbyButton.getY() + lobbyButton.getHeight() + 842, sortButton.getPrefWidth(),
+				sortButton.getPrefHeight());
+		sortButton.addListener(new InputListener(sortButton) {
 			@Override
 			public void doAction() {
 				character.inventory.sortItems();
 				refresh();
 			}
 		});
-		popup.addActor(button_sort);
+		popup.addActor(sortButton);
 	}
 
 	@Override

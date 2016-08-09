@@ -27,6 +27,7 @@ public class Betrayal extends Game {
 	private static boolean gamePaused;
 	public final BetrayalAssetManager res = new BetrayalAssetManager();
 	public final List<Character> characters = new ArrayList<Character>();
+	public final List<Character> fools = new ArrayList<Character>();
 	public GameStateManager gsm;
 	private SpriteBatch sb;
 	private OrthographicCamera worldCam;
