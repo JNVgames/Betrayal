@@ -89,6 +89,11 @@ public class ResourceLoader {
 		for (int i = 1; i <= 5; i++) {
 			res.loadTexture("map/dungeon_map" + i + ".png", "map-" + i);
 		}
+		for(int i = 1; i <=5; i++){
+			for(int j = 1; j<=6; j++) {
+				res.loadTexture("map/tier" + i + "/" + j + ".png", "map" + i + j );
+			}
+		}
 	}
 
 	private void loadButtons() {
@@ -136,6 +141,7 @@ public class ResourceLoader {
 		res.loadTexture("button/Headgear360x144.png", "headgear-button");
 		res.loadTexture("icon/greencircle100x100.png", "green-circle");
 		res.loadTexture("icon/redcircle100x100.png", "red-circle");
+		res.loadTexture("button/character_preview_border.png", "cpb");
 	}
 
 	private void loadLobbyButtons() {
