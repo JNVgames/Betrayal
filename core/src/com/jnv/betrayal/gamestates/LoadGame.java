@@ -63,83 +63,82 @@ public class LoadGame extends GameState {
 
 	// Helpers
 	private void loadBackButton() {
-		Group group_button_back = new Group();
+		Group backButtonGroup = new Group();
 
 		backButton = new Image(leftArrowImage);
 		backButton.setHeight(60);
 		backButton.setWidth(80);
 		backButton.setX(10);
 		backButton.setY(Betrayal.HEIGHT - backButton.getHeight() - 10);
-		group_button_back.addActor(backButton);
+		backButtonGroup.addActor(backButton);
 
-		Label button_text_back = new Label("Back", FontManager.getFont60());
-		button_text_back.setX(backButton.getX() + backButton.getWidth() + 10);
-		button_text_back.setY(backButton.getY());
-		group_button_back.addActor(button_text_back);
+		Label backButtonText = new Label("Back", FontManager.getFont60());
+		backButtonText.setX(backButton.getX() + backButton.getWidth() + 10);
+		backButtonText.setY(backButton.getY());
+		backButtonGroup.addActor(backButtonText);
 
-		Actor button_back_clickArea = new Actor();
-		button_back_clickArea.setWidth(backButton.getWidth() + button_text_back.getWidth() + 10);
-		button_back_clickArea.setHeight(button_text_back.getHeight());
-		button_back_clickArea.setX(backButton.getX());
-		button_back_clickArea.setY(backButton.getY());
-		button_back_clickArea.addListener(new InputListener(button_back_clickArea) {
+		Actor backButtonClickArea = new Actor();
+		backButtonClickArea.setWidth(backButton.getWidth() + backButtonText.getWidth() + 10);
+		backButtonClickArea.setHeight(backButtonText.getHeight());
+		backButtonClickArea.setX(backButton.getX());
+		backButtonClickArea.setY(backButton.getY());
+		backButtonClickArea.addListener(new InputListener(backButtonClickArea) {
 			@Override
 			public void doAction() {
 				gsm.setState(GameStateManager.State.MENU);
 			}
 		});
-		group_button_back.addActor(button_back_clickArea);
+		backButtonGroup.addActor(backButtonClickArea);
 
-		stage.addActor(group_button_back);
+		stage.addActor(backButtonGroup);
 	}
 
 	private void loadSavedSessions() {
-		// TODO @vincent loads kinda slow and code is kinda long
 		int counter = 1, scale = 4;
 
 		for (Character c : game.characters) {
 			final Character character = c;
 			Group preview = new Group();
 
-			final Actor preview_frame = new Actor();
-			preview_frame.setBounds(5, backButton.getY() - 230 * counter, Betrayal.WIDTH - 10,
+			final Actor previewFrame = new Actor();
+			previewFrame.setBounds(5, backButton.getY() - 230 * counter, Betrayal.WIDTH - 10,
 					48 * scale + 10);
-			preview.addActor(preview_frame);
+			preview.addActor(previewFrame);
 
 			final int i = counter;
-			Actor preview_charPrev = new Actor() {
+			Actor characterPreview = new Actor() {
 				public void draw(Batch sb, float pa) {
-					character.preview.drawPreview(sb, 0, preview_frame.getX() + 5,
-							preview_frame.getY() + 5, 32 * 4, 48 * 4);
+					character.preview.drawPreview(sb, 0, previewFrame.getX() + 5,
+							previewFrame.getY() + 5, 32 * 4, 48 * 4);
 				}
 			};
-			preview_charPrev.setBounds(10, backButton.getY() - 230 * i + 5, 32 * scale, 48 * scale);
-			preview.addActor(preview_charPrev);
+			characterPreview.setBounds(10, backButton.getY() - 230 * i + 5, 32 * scale, 48 * scale);
+			preview.addActor(characterPreview);
 
 			Label classPreview = new Label(c.job.toString(), FontManager.getFont50());
-			classPreview.setX(preview_charPrev.getX() + preview_charPrev.getWidth() + 30);
-			classPreview.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
+			classPreview.setX(characterPreview.getX() + characterPreview.getWidth() + 30);
+			classPreview.setY(characterPreview.getY() + characterPreview.getHeight()
 					- classPreview.getPrefHeight());
 			classPreview.setColor(Color.WHITE);
 			preview.addActor(classPreview);
 
-			Label preview_floor = new Label("FLOOR", FontManager.getFont40());
-			preview_floor.setX(Betrayal.WIDTH - 10 - preview_floor.getPrefWidth());
-			preview_floor.setY(preview_charPrev.getY() + preview_charPrev.getHeight()
-					- preview_floor.getPrefHeight());
-			preview_floor.setColor(Color.WHITE);
-			preview.addActor(preview_floor);
+			Label floorLabel = new Label("FLOOR", FontManager.getFont40());
+			floorLabel.setX(Betrayal.WIDTH - 10 - floorLabel.getPrefWidth());
+			floorLabel.setY(characterPreview.getY() + characterPreview.getHeight()
+					- floorLabel.getPrefHeight());
+			floorLabel.setColor(Color.WHITE);
+			preview.addActor(floorLabel);
 
 			Label floorNumLabel =
 					new Label(Integer.toString(c.stats.getStat(Stat.FLOOR)),
 							FontManager.getFont100());
-			floorNumLabel.setBounds(preview_floor.getX(), preview_charPrev.getY(),
-					preview_floor.getWidth(), preview_floor.getY() - 10 - preview_charPrev.getY());
+			floorNumLabel.setBounds(floorLabel.getX(), characterPreview.getY(),
+					floorLabel.getWidth(), floorLabel.getY() - 10 - characterPreview.getY());
 			floorNumLabel.setColor(Color.LIGHT_GRAY);
 			floorNumLabel.setAlignment(Align.center);
 			preview.addActor(floorNumLabel);
 
-			addPreviewListener(preview, preview_frame, c);
+			addPreviewListener(preview, previewFrame, c);
 
 			stage.addActor(preview);
 
@@ -149,9 +148,10 @@ public class LoadGame extends GameState {
 	}
 
 	private void loadDeleteButton() {
-		final Label buttonDelete = new Label("Delete tmp", FontManager.getFont60());
-		buttonDelete.setBounds(Betrayal.WIDTH - 30 - buttonDelete.getPrefWidth(),
-				50, buttonDelete.getPrefWidth(), buttonDelete.getPrefHeight());
+		float scale = 0.8f;
+		final Image buttonDelete = new Image(res.getTexture("delete-button"));
+		buttonDelete.setBounds(Betrayal.WIDTH - 30 - buttonDelete.getPrefWidth() * scale,
+				50, buttonDelete.getPrefWidth() * scale, buttonDelete.getPrefHeight() * scale);
 		buttonDelete.layout();
 		buttonDelete.addListener(new InputListener(buttonDelete) {
 			@Override
@@ -165,19 +165,20 @@ public class LoadGame extends GameState {
 	}
 
 	private void loadCancelButton() {
-		final Label button_cancel = new Label("Cancel tmp", FontManager.getFont60());
-		button_cancel.setBounds(Betrayal.WIDTH - 30 - button_cancel.getPrefWidth(),
-				50, button_cancel.getPrefWidth(), button_cancel.getPrefHeight());
-		button_cancel.layout();
-		button_cancel.addListener(new InputListener(button_cancel) {
+		float scale = 0.8f;
+		final Image cancelButton = new Image(res.getTexture("cancel"));
+		cancelButton.setBounds(Betrayal.WIDTH - 30 - cancelButton.getPrefWidth() * scale,
+				50, cancelButton.getPrefWidth() * scale, cancelButton.getPrefHeight() * scale);
+		cancelButton.layout();
+		cancelButton.addListener(new InputListener(cancelButton) {
 			@Override
 			public void doAction() {
 				deleteMode = false;
-				button_cancel.remove();
+				cancelButton.remove();
 				loadDeleteButton();
 			}
 		});
-		stage.addActor(button_cancel);
+		stage.addActor(cancelButton);
 	}
 
 	private void removeSavedSessions() {
