@@ -195,6 +195,8 @@ public class ResourceLoader {
 		res.loadTexture("dungeon/redtriangle.png", "redT");
 		res.loadTexture("dungeon/purpletriangle.png", "purpleT");
 		res.loadTexture("dungeon/greentriangle.png", "greenT");
+		res.loadTexture("dungeon/eventlog-border.png", "eventlog-border");
+
 	}
 
 	private void loadHeadGear() {

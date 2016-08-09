@@ -12,6 +12,7 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
 import java.util.Deque;
+import java.util.List;
 
 public class EventLog extends Popup {
 
@@ -24,12 +25,23 @@ public class EventLog extends Popup {
 		super(game);
 		loadBackground();
 
+		Image border = new Image(res.getTexture("eventlog-border"));
+		border.setX(100);
+		border.setY(250);
+		border.setWidth(Betrayal.WIDTH - 200);
+		border.setHeight(Betrayal.HEIGHT - 350);
+		popup.addActor(border);
+
+
 		verticalGroup = new VerticalGroup();
 		verticalGroup.layout();
 		verticalGroup.setBounds(0, 0, Betrayal.WIDTH, Betrayal.HEIGHT);
 		verticalGroup.align(Align.left);
 		scrollPane = new ScrollPane(verticalGroup);
-		scrollPane.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
+		scrollPane.setX(border.getX()+10);
+		scrollPane.setY(border.getY()+10);
+		scrollPane.setWidth(border.getWidth() - 20);
+		scrollPane.setHeight(border.getHeight() - 20);
 		scrollPane.layout();
 		scrollPane.setZIndex(0);
 		scrollPane.setScrollingDisabled(true, false);
@@ -55,7 +67,7 @@ public class EventLog extends Popup {
 	private void loadAnswer() {
 		okayButton = new Image(res.getTexture("ok"));
 		okayButton.layout();
-		okayButton.setBounds(Betrayal.WIDTH / 2 - 75, 110, 150, 75);
+		okayButton.setBounds(Betrayal.WIDTH / 2 - 75, 140, 150, 75);
 
 		okayButton.addListener(new InputListener(okayButton) {
 			@Override
@@ -67,11 +79,14 @@ public class EventLog extends Popup {
 	}
 
 	private void loadHistory() {
+		int index;
+		String eventString, backupString;
+		Label testLabel = new Label("", FontManager.getFont50());
 		for (Event event : eventHistory) {
 			// todo get this to werk
 			verticalGroup.addActor(new Label(
-					"-------------------------------------",
-					FontManager.getFont12()));
+					"------------------------------------------",
+					FontManager.getFont40()));
 //			Actor blank = new Actor();
 //			blank.setWidth(400);
 //			blank.setHeight(4);
@@ -82,7 +97,41 @@ public class EventLog extends Popup {
 //			verticalGroup.addActor(blank);
 //			verticalGroup.addActor(actor);
 //			verticalGroup.addActor(blank);
-			verticalGroup.addActor(new Label(event.toEventLogString(), FontManager.getFont40()));
+			eventString = event.toEventLogString();
+			Label label = new Label("", FontManager.getFont50());
+
+			String[] splited = eventString.split("\\s+");
+
+			testLabel.setText("");
+			for (int i = 0; i < splited.length; i++){
+				System.out.println("SPLITED: " + splited[i]);
+				testLabel.setText(label.getText()+ " " + splited[i]);
+				if (testLabel.getPrefWidth() > Betrayal.WIDTH - 220){
+					label.setText(label.getText() + "\n" + " " + splited[i]);
+					testLabel.setText("");
+				}else
+					label.setText(label.getText() +" " + splited[i]);
+			}
+
+
+//
+//
+//			System.out.println("label.getPrefWidth() = " + label.getPrefWidth());
+//			System.out.println(" scrollPane.getPrefWidth() = " + scrollPane.getPrefWidth());
+//			if (label.getPrefWidth() > Betrayal.WIDTH - 220){
+//				System.out.println("CHECKPOINT  BITCH");
+//				index = eventString.indexOf(' ', 10);
+//				System.out.println("index = " + index);
+//				label = new Label(eventString, FontManager.getFont50());
+//
+//				backupString = "";
+//				backupString += eventString.substring(0,index-1) + "\n" + eventString.substring(index+1);
+//				//eventString.replace(eventString.substring(0,index), eventString.substring(0,index-1) + "\n");
+//				label = new Label(backupString, FontManager.getFont50());
+//			}else {
+//				label = new Label(eventString, FontManager.getFont50());
+//			}
+			verticalGroup.addActor(label);
 		}
 	}
 }
