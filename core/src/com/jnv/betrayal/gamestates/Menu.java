@@ -48,7 +48,7 @@ public class Menu extends GameState {
 		loadLoadGameButton();
 		loadInstructionsButton();
 		loadHallOfFameButton();
-		loadOptionsButton();
+		//loadOptionsButton();
 	}
 
 	private void loadBackground() {
@@ -122,25 +122,25 @@ public class Menu extends GameState {
 		stage.addActor(button_instructions);
 	}
 
-	private void loadOptionsButton() {
-		Image button_options = new Image(res.getTexture("options"));
-		button_options.layout();
-		button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth() / 2) / 2,
-				272, 256, 72);
-		button_options.addListener(new InputListener(button_options) {
-			@Override
-			public void doAction() {
-				new Options(game);
-			}
-		});
-		stage.addActor(button_options);
-	}
+//	private void loadOptionsButton() {
+//		Image button_options = new Image(res.getTexture("options"));
+//		button_options.layout();
+//		button_options.setBounds((Betrayal.WIDTH - button_options.getImageWidth() / 2) / 2,
+//				272, 256, 72);
+//		button_options.addListener(new InputListener(button_options) {
+//			@Override
+//			public void doAction() {
+//				new Options(game);
+//			}
+//		});
+//		stage.addActor(button_options);
+//	}
 
 	private void loadHallOfFameButton() {
 		Image button_hallOfFame = new Image(res.getTexture("hall-of-fame"));
 		button_hallOfFame.layout();
 		button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth() / 2) / 2,
-				172, 256, 72);
+				272 - 32, 256, 72);
 		button_hallOfFame.addListener(new InputListener(button_hallOfFame) {
 			@Override
 			public void doAction() {

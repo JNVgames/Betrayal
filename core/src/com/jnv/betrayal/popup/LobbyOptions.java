@@ -2,7 +2,7 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.lobby;
+package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -17,8 +17,17 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class LobbyOptions extends Popup {
 
+	Image background, lobbyButton, instructions, mainMenuButton;
+	Label title;
+	int width, height, padding;
+	float xCoord;
+
 	public LobbyOptions(Betrayal game) {
 		super(game);
+		width = 312;
+		height = 100;
+		padding = 50;
+		xCoord = (Betrayal.WIDTH - width) / 2;
 		loadButtons();
 	}
 
@@ -26,31 +35,32 @@ public class LobbyOptions extends Popup {
 		loadBackground();
 		loadTitle();
 		loadInstructionsButton();
-		loadOptionsButton();
+	//	loadOptionsButton();
 		loadReturnToLobbyButton();
 		loadReturnToMainMenuButton();
 	}
 
 	private void loadBackground() {
-		Image background = new Image(res.getTexture("shop-background"));
+		background = new Image(res.getTexture("shop-background"));
 		background.layout();
-		background.setBounds(175, 300, Betrayal.WIDTH - 350, Betrayal.HEIGHT - 550);
+		background.setBounds(175, 350, Betrayal.WIDTH - 350, Betrayal.HEIGHT - 650);
 		popup.addActor(background);
 	}
 
 	private void loadTitle() {
-		Label title = new Label("Options", FontManager.getFont40());
+		title = new Label("Options", FontManager.getFont40());
 		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
-		title.setY(Betrayal.HEIGHT - 350);
+		title.setY(background.getTop()- padding - title.getPrefHeight());
 		popup.addActor(title);
 	}
 
 	private void loadInstructionsButton() {
-		Image instructions = new Image(res.getTexture("instructions"));
-		instructions.layout();
-		instructions.setBounds((Betrayal.WIDTH - instructions.getImageWidth()) / 2 + 100,
-				800, 312, 100);
+		instructions = new Image(res.getTexture("instructions"));
+		instructions.setWidth(width);
+		instructions.setHeight(height);
+		instructions.setX(xCoord);
+		instructions.setY(title.getY() - height - padding);
 		instructions.addListener(new InputListener(instructions) {
 			@Override
 			public void doAction() {
@@ -60,24 +70,26 @@ public class LobbyOptions extends Popup {
 		popup.addActor(instructions);
 	}
 
-	private void loadOptionsButton() {
-		Image options = new Image(res.getTexture("options"));
-		options.layout();
-		options.setBounds((Betrayal.WIDTH - options.getImageWidth()) / 2 + 100,
-				650, 312, 100);
-		options.addListener(new InputListener(options) {
-			@Override
-			public void doAction() {
-				new Options(game);
-			}
-		});
-		popup.addActor(options);
-	}
+//	private void loadOptionsButton() {
+//		Image options = new Image(res.getTexture("options"));
+//		options.layout();
+//		options.setBounds((Betrayal.WIDTH - options.getImageWidth()) / 2 + 100,
+//				650, 312, 100);
+//		options.addListener(new InputListener(options) {
+//			@Override
+//			public void doAction() {
+//				new Options(game);
+//			}
+//		});
+//		popup.addActor(options);
+//	}
 
 	private void loadReturnToLobbyButton() {
-		Image lobbyButton = new Image(res.getTexture("back-to-lobby"));
-		lobbyButton.layout();
-		lobbyButton.setBounds((Betrayal.WIDTH - lobbyButton.getWidth()) / 2 + 100, 350, 312, 100);
+		lobbyButton = new Image(res.getTexture("back-to-lobby"));
+		lobbyButton.setX(xCoord);
+		lobbyButton.setY(instructions.getY() - height - padding);
+		lobbyButton.setWidth(width);
+		lobbyButton.setHeight(height);
 		lobbyButton.addListener(new InputListener(lobbyButton) {
 			@Override
 			public void doAction() {
@@ -88,9 +100,11 @@ public class LobbyOptions extends Popup {
 	}
 
 	private void loadReturnToMainMenuButton() {
-		Image mainMenuButton = new Image(res.getTexture("main-menu"));
-		mainMenuButton.layout();
-		mainMenuButton.setBounds((Betrayal.WIDTH - mainMenuButton.getWidth()) / 2 + 100, 500, 312, 100);
+		mainMenuButton = new Image(res.getTexture("main-menu"));
+		mainMenuButton.setX(xCoord);
+		mainMenuButton.setY(lobbyButton.getY() - height - padding);
+		mainMenuButton.setWidth(width);
+		mainMenuButton.setHeight(height);
 		mainMenuButton.addListener(new InputListener(mainMenuButton) {
 			@Override
 			public void doAction() {
