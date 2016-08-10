@@ -42,6 +42,10 @@ public class WarriorSpecial extends Effect {
 
 	@Override
 	protected void addToObject() {
-
+		try {
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -135,7 +135,8 @@ public class Room {
 			}
 		}).on("startDungeonCountdown", new Emitter.Listener() {
 			@Override
-			public void call(Object... args) {if (lobby != null) {
+			public void call(Object... args) {
+				if (lobby != null) {
 					lobby.enterDungeonCountDown();
 				}
 			}
@@ -175,7 +176,9 @@ public class Room {
 		}).on("updateCharacters", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
+				System.out.println("RECEIVED UPDATE CHARACTERS EVENT");
 				JSONObject data = (JSONObject) args[0];
+				System.out.println(data);
 				try {
 					for (Character character : characters) {
 						if (character.getId() == data.getJSONObject("character").getInt("id")) {

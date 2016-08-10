@@ -42,6 +42,7 @@ public class Poison extends Effect {
 	public void consistentEffect(Card destCard) {
 		destCard.poison();
 	}
+
 	@Override
 	protected void addToObject() {
 		try {

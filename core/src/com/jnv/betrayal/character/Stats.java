@@ -154,6 +154,12 @@ public class Stats implements JsonSerializable {
 			data.put("baseHealth", baseHealth);
 			data.put("baseAttack", baseAttack);
 			data.put("baseDefense", baseDefense);
+			data.put("equipHealth", equipHealth);
+			data.put("equipAttack", equipAttack);
+			data.put("equipDefense", equipDefense);
+			data.put("totalHealth", totalHealth);
+			data.put("totalAttack", totalAttack);
+			data.put("totalDefense", totalDefense);
 			data.put("floor", floor);
 		} catch (JSONException e) {
 			System.out.println(e);
@@ -167,6 +173,12 @@ public class Stats implements JsonSerializable {
 			baseHealth = data.getInt("baseHealth");
 			baseAttack = data.getInt("baseAttack");
 			baseDefense = data.getInt("baseDefense");
+			equipHealth = data.getInt("equipHealth");
+			equipAttack = data.getInt("equipAttack");
+			equipDefense = data.getInt("equipDefense");
+			totalHealth = data.getInt("totalHealth");
+			totalAttack = data.getInt("totalAttack");
+			totalDefense = data.getInt("totalDefense");
 			floor = data.getInt("floor");
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -151,8 +151,6 @@ public class Lobby extends GameState {
 			}
 		});
 		buttons.addActor(shopButton);
-
-		System.out.println("shopButton.getZIndex() = " + shopButton.getZIndex());
 	}
 
 	private void loadInventoryButton() {
@@ -167,8 +165,6 @@ public class Lobby extends GameState {
 			}
 		});
 		buttons.addActor(inventoryButton);
-
-		System.out.println("inventoryButton.getZIndex() = " + inventoryButton.getZIndex());
 
 	}
 

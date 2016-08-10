@@ -5,6 +5,7 @@ import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.EventType;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -42,6 +43,10 @@ public class KnightSpecial extends Effect {
 
 	@Override
 	protected void addToObject() {
-
+		try {
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }
