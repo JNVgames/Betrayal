@@ -39,7 +39,7 @@ public class Bomb extends Effect {
 
 	@Override
 	public void endEffect(Card destCard) {
-		destCard.takeDamage(attack);
+		destCard.attack(attack);
 	}
 
 	@Override

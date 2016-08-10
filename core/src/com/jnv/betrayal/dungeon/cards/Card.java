@@ -270,16 +270,7 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
-	public void takeTrueDamage(float damage) {
-		currentHealth -= damage;
-		if (currentHealth < 0)
-			currentHealth = 0;
-		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
-		if (checkIfDied())
-			cardDeath(this);
-	}
-
-	public void attackTrueDamage(int damage){
+	public void attackTrueDamage(float damage){
 		if (!defenders.isEmpty()) {
 			// has defenders, should split damage among defenders
 			for (Card card : defenders) {
@@ -293,21 +284,32 @@ public abstract class Card {
 		}
 	}
 
-	public void attack(int damage) {
+	public void attack(float damage) {
 		if (!defenders.isEmpty()) {
 			// has defenders, should split damage among defenders
 			for (Card card : defenders) {
 				card.takeDamage((int) Math.ceil(damage / defenders.size()));
-				System.out.println("DEFENDER TOOK DAMAGE");
+				System.out.println("DEFENDER TOOK DAMAGE. " + this);
+				System.out.println("defenders = " + defenders);
 			}
 		} else {
 			//does not have defenders, this card takes the damage
 			takeDamage(damage);
-			System.out.println("I TOOK DAMAGE");
+			System.out.println("I TOOK DAMAGE. " + this);
+			System.out.println("defenders = " + defenders);
 		}
 	}
 
-	public void takeDamage(float damage) {
+	private void takeTrueDamage(float damage) {
+		currentHealth -= damage;
+		if (currentHealth < 0)
+			currentHealth = 0;
+		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
+		if (checkIfDied())
+			cardDeath(this);
+	}
+
+	private void takeDamage(float damage) {
 		currentHealth -= calculateDamageWithDefense(damage, this.getCurrentDefense());
 		if (currentHealth < 0)
 			currentHealth = 0;
@@ -495,45 +497,6 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1.0f, Actions.sizeTo(newHealthPercent * 2, 8, 1f)));
 			}
 			currentHealthPercentage = newHealthPercent;
-		}
-	}
-
-	public void failedToFlee() {
-		Card card = this;
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				new OKPopup(field.game, "Flee Failed");
-				field.turnManager.nextTurn();
-			}
-		};
-		card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
-	}
-
-	public void flee() {
-		Card card = this;
-		if (card instanceof PlayerCard && card.getID() == field.game.getCurrentCharacter().getId()) {
-			// Flee Successful
-			field.removePlayerCard((PlayerCard) card);
-
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					new OKPopup(field.game, "Flee Successful") {
-						@Override
-						public void onConfirm() {
-							field.getClientCharacter().getRoom().setInDungeon(false);
-							field.game.gsm.setState(GameStateManager.State.LOBBY);
-						}
-					};
-				}
-			};
-			card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
-		} else if (card instanceof PlayerCard) {
-			//Teammate fled
-			field.removePlayerCard((PlayerCard) card);
-		} else {
-			throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not a playercard");
 		}
 	}
 

@@ -180,9 +180,6 @@ public class Lobby extends GameState {
 			}
 		});
 		buttons.addActor(statsButton);
-
-		System.out.println("statsButton.getZIndex() = " + statsButton.getZIndex());
-
 	}
 
 	private void loadPartyButton() {
@@ -505,13 +502,10 @@ public class Lobby extends GameState {
 						"\nAttack: " + character.stats.getTotalAttack() +
 						"\nDefense: " + character.stats.getTotalDefense()
 				);
-				//new OKPopup(character.stats.getTotalAttack());
 			}
 		});
 		player.addActor(mask);
 
 		partyMembers.addActor(player);
-		System.out.println("partyMembers = " + partyMembers.getZIndex());
-		System.out.println("preview.getZIndex() = " + preview.getZIndex());
 	}
 }

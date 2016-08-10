@@ -249,7 +249,7 @@ public class Field extends Group {
 					System.out.println("RECEIVED EVENT: " + event);
 					turnManager.nextTurn();
 				} catch (Exception e) {
-					e.getCause();
+					e.printStackTrace();
 				}
 			}
 		});

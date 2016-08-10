@@ -32,7 +32,7 @@ public class Flee extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.flee();
+
 	}
 
 	@Override

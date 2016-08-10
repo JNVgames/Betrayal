@@ -56,9 +56,4 @@ public class Attack extends Effect {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void fromJSON(JSONObject effect) {
-
-	}
 }

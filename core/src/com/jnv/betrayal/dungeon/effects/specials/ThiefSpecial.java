@@ -26,7 +26,7 @@ public class ThiefSpecial extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.takeTrueDamage(src.getCurrentAttack() * 0.5f);
+		destCard.attackTrueDamage(src.getCurrentAttack() * 0.5f);
 	}
 
 	@Override

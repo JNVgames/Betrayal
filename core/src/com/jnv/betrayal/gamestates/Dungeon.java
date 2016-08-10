@@ -7,11 +7,10 @@ package com.jnv.betrayal.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.MonsterManager;
-import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
-import com.jnv.betrayal.scene2d.Group;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class Dungeon extends GameState {
 	public Dungeon(GameStateManager gsm) {
 		super(gsm);
 		field = new Field(gsm);
-		int highestPartyMemberFloor = 0;
+		float highestPartyMemberFloor = 0;
 		if (game.getCurrentCharacter().getRoom().getRoomID() < 0) {
 			// If not in online room, add only yourself
 			ArrayList<Character> tmp = new ArrayList<Character>();
@@ -33,16 +32,20 @@ public class Dungeon extends GameState {
 		} else {
 			// If in online room, get all characters in the room
 			addCardsToStage(game.getCurrentCharacter().getRoom().getCharacters());
-			for(Character character : game.getCurrentCharacter().getRoom().getCharacters()){
-				if(character.stats.getFloor() > highestPartyMemberFloor)
+			for (Character character : game.getCurrentCharacter().getRoom().getCharacters()) {
+				if (character.stats.getFloor() > highestPartyMemberFloor)
 					highestPartyMemberFloor = character.stats.getFloor();
 			}
 		}
-		field.setBackgroundForField("map"+highestPartyMemberFloor + "1");
-		if(game.getCurrentCharacter().getRoom().getRoomID()<=0){
-
-		}else{
-			MonsterManager monsterManager = new MonsterManager(1, res, field); //todo FORtesTING
+		int tier = (int) Math.ceil(highestPartyMemberFloor/5);
+		System.out.println("highestPartyMemberFloor = " + highestPartyMemberFloor);
+		System.out.println("tier = " + tier);
+		field.setBackgroundForField("map" + tier + "1");
+		if (game.getCurrentCharacter().getRoom().getRoomID() > 0) {
+			int MID = game.getCurrentCharacter().getRoom().getMonsterID();
+			MonsterManager monsterManager = new MonsterManager(tier, res, field, MID);
+		} else {
+			MonsterManager monsterManager = new MonsterManager(tier, res, field); //todo FORtesTING
 			//todo change back
 			//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
 		}

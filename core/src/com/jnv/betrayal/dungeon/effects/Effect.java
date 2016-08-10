@@ -140,16 +140,13 @@ public abstract class Effect {
 			data.put("endType", endType.toString());
 			data.put("isHostile", isHostile);
 			data.put("description", description);
+			data.put("values", new JSONObject());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		addToObject();
 
 		return data;
-	}
-
-	public void fromJSON(JSONObject effect) {
-
 	}
 
 	protected abstract void addToObject();

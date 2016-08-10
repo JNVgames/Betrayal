@@ -27,7 +27,7 @@ public class WarriorSpecial extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.takeDamage(src.getCurrentAttack() * 1.5f);
+		destCard.attack(src.getCurrentAttack() * 1.5f);
 	}
 
 	@Override

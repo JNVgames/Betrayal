@@ -25,6 +25,7 @@ public class Room {
 	private Socket socket;
 	private Lobby lobby;
 	private boolean inDungeon;
+	private int monsterID;
 
 
 	public Room(Character character) {
@@ -136,9 +137,16 @@ public class Room {
 		}).on("startDungeonCountdown", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
+				JSONObject data = (JSONObject) args[0];
+				try {
+					monsterID = data.getInt("monsterID");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 				if (lobby != null) {
 					lobby.enterDungeonCountDown();
 				}
+
 			}
 		}).on("enterDungeon", new Emitter.Listener() {
 			@Override
@@ -218,6 +226,14 @@ public class Room {
 		characters.clear();
 		currentCharacter.setReady(false);
 		socket.disconnect();
+	}
+
+	public void setMonsterID(){
+		socket.emit("setMonsterID");
+	}
+
+	public int getMonsterID(){
+		return monsterID;
 	}
 
 	public void joinRoom(String password, int roomID) {

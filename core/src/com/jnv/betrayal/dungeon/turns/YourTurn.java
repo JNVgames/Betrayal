@@ -17,6 +17,7 @@ import com.jnv.betrayal.dungeon.effects.specials.PriestHealSpecial;
 import com.jnv.betrayal.dungeon.effects.specials.ThiefSpecial;
 import com.jnv.betrayal.dungeon.effects.specials.WarriorSpecial;
 import com.jnv.betrayal.dungeon.utils.Panel;
+import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.lobby.inventory.DungeonInventory;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
@@ -87,9 +88,42 @@ public class YourTurn extends Turn {
 						if (PlayerCard.canFlee(1)) {
 							Effect effect = new Flee(field.getCurrentCard());
 							field.roundManager.addEvent(effect, effect.getStartType());
+							Card card = field.getCurrentCard();
+							if (card instanceof PlayerCard
+									&& card.getID() == field.game.getCurrentCharacter().getId()) {
+								// Flee Successful
+								field.removePlayerCard((PlayerCard) card);
+
+								Runnable r = new Runnable() {
+									@Override
+									public void run() {
+										new OKPopup(field.game, "Flee Successful") {
+											@Override
+											public void onConfirm() {
+												field.getClientCharacter().getRoom().setInDungeon(false);
+												field.game.gsm.setState(GameStateManager.State.LOBBY);
+											}
+										};
+									}
+								};
+								card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+							} else if (card instanceof PlayerCard) {
+								//Teammate fled
+								field.removePlayerCard((PlayerCard) card);
+							} else {
+								throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not a playercard");
+							}
 						} else {
 							Effect effect = new FailedToFlee(field.getCurrentCard());
 							field.roundManager.addEvent(effect, effect.getStartType());
+							Runnable r = new Runnable() {
+								@Override
+								public void run() {
+									new OKPopup(field.game, "Flee Failed");
+									field.turnManager.nextTurn();
+								}
+							};
+							field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
 						}
 					}
 				};
