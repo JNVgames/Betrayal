@@ -94,6 +94,7 @@ public class ResourceLoader {
 				res.loadTexture("map/tier" + i + "/" + j + ".png", "map" + i + j );
 			}
 		}
+		res.loadTexture("map/tier1/1" + ".png", "map" + "0" + "1" );
 	}
 
 	private void loadButtons() {

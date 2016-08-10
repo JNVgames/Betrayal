@@ -11,6 +11,7 @@ import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.MonsterManager;
 import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
+import com.jnv.betrayal.scene2d.Group;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class Dungeon extends GameState {
 					highestPartyMemberFloor = character.stats.getFloor();
 			}
 		}
+		field.setBackgroundForField("map"+highestPartyMemberFloor + "1");
 		MonsterManager monsterManager = new MonsterManager(1, res, field); //todo FORtesTING
 		//todo change back
 		//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);

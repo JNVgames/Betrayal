@@ -4,7 +4,10 @@
 
 package com.jnv.betrayal.dungeon;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
@@ -42,17 +45,21 @@ public class Field extends Group {
 	public final Betrayal game;
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
+	private Image background;
 	public final Socket socket;
 	public int reward;
 	private List<Card> allCards;
 	private int currentCardTurn;
 	private Character clientCharacter;
+	private Group cardGroup = new Group();
+
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
 	 */
 	public Field(GameStateManager gsm) {
 		// Initialize card zones and instance variables
+
 		playerZone = new ArrayList<PlayerCard>();
 		monsterZone = new ArrayList<MonsterCard>();
 		this.gsm = gsm;
@@ -62,18 +69,21 @@ public class Field extends Group {
 		clientCharacter = gsm.game.getCurrentCharacter();
 		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
-		Image background = new Image(res.getTexture("map-1"));
+		background = new Image(res.getTexture("map-1"));
 		currentCardTurn = 0;
 		allCards = new ArrayList<Card>();
 
 		// Add things to stage
 		addActor(background);
 		createEventLogButton();
-
+		addActor(cardGroup);
 		turnManager = new TurnManager(this);
 		animationMgr = new AnimationManager(res);
 		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
+	}
+	public void setBackgroundForField(String s){
+		background.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture(s))));
 	}
 
 	private void createEventLogButton() {
@@ -91,11 +101,15 @@ public class Field extends Group {
 		addActor(eventLogButton);
 	}
 
+	public Group getCardGroup() {
+		return cardGroup;
+	}
+
 	public void addCard(Card card) {
 		if (card instanceof PlayerCard) playerZone.add((PlayerCard) card);
 		else if (card instanceof MonsterCard) monsterZone.add((MonsterCard) card);
 		else throw new AssertionError("Card is neither a PlayerCard or MonsterCard");
-		addActor(card.getGroup());
+		cardGroup.addActor(card.getGroup());
 		card.setField(this);
 	}
 

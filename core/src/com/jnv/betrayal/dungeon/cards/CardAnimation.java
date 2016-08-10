@@ -29,7 +29,7 @@ public class CardAnimation {
 		damaged.addAction(Actions.delay(0.2f, Actions.alpha(0)));
 		damaged.addAction(Actions.delay(0.3f, Actions.alpha(1f)));
 		damaged.addAction(Actions.delay(0.4f, Actions.alpha(0)));
-		card.getCardImage().getStage().addActor(damaged);
+		card.getField().getCardGroup().addActor(damaged);
 		damaged.addAction(Actions.delay(1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
@@ -76,7 +76,7 @@ public class CardAnimation {
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
-		card.getCardImage().getStage().addActor(shield);
+		card.getField().getCardGroup().addActor(shield);
 		shield.addAction(Actions.delay(0.7f + 1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
@@ -111,7 +111,7 @@ public class CardAnimation {
 		healImg.addAction(Actions.alpha(0));
 		healImg.addAction(Actions.alpha(0.7f, 1f));
 		healImg.addAction(Actions.delay(1, Actions.alpha(0, 1)));
-		card.getCardImage().getStage().addActor(healImg);
+		card.getField().getCardGroup().addActor(healImg);
 		healImg.addAction(Actions.delay(3, Actions.run(new Runnable() {
 			@Override
 			public void run() {
@@ -144,7 +144,7 @@ public class CardAnimation {
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
-		card.getCardImage().getStage().addActor(shield);
+		card.getField().getCardGroup().addActor(shield);
 		shield.addAction(Actions.delay(0.7f + 1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
@@ -162,7 +162,7 @@ public class CardAnimation {
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
-		card.getCardImage().getStage().addActor(shield);
+		card.getField().getCardGroup().addActor(shield);
 		shield.addAction(Actions.delay(0.7f + 1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
