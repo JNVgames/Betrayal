@@ -20,12 +20,19 @@ public class MonsterManager {
 	private Field field;
 	private BetrayalAssetManager res;
 
-	public MonsterManager(int highestFloor, BetrayalAssetManager res, Field field) {
+	public MonsterManager(int highestTier, BetrayalAssetManager res, Field field) {
 		this.field = field;
 		this.res = res;
-		int monsterID = generateMonster(highestFloor);
-		addDungeonMonster(highestFloor, monsterID);
+		int monsterID = generateMonster(highestTier);
+		addDungeonMonster(highestTier, monsterID);
 	}
+
+	public MonsterManager(int highestTier, BetrayalAssetManager res, Field field, int monsterID){
+		this.field = field;
+		this.res = res;
+		addDungeonMonster(highestTier, monsterID);
+	}
+
 
 	private void addDungeonMonster(int tier, int monsterID) {
 		// Configure amount of monsters in dungeon. For example, mobs will have more than one monster

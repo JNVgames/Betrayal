@@ -39,9 +39,14 @@ public class Dungeon extends GameState {
 			}
 		}
 		field.setBackgroundForField("map"+highestPartyMemberFloor + "1");
-		MonsterManager monsterManager = new MonsterManager(1, res, field); //todo FORtesTING
-		//todo change back
-		//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
+		if(game.getCurrentCharacter().getRoom().getRoomID()<=0){
+
+		}else{
+			MonsterManager monsterManager = new MonsterManager(1, res, field); //todo FORtesTING
+			//todo change back
+			//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
+		}
+
 		System.out.println("All cards: " + field.getAllCards());
 		field.turnManager.draw();
 		field.adjustPlayerCardStatsBasedOnJobs();

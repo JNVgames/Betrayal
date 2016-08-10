@@ -26,6 +26,7 @@ public class Room {
 	private Lobby lobby;
 	private boolean inDungeon;
 
+
 	public Room(Character character) {
 		roomID = -1;
 		currentCharacter = character;
