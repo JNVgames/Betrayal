@@ -143,6 +143,7 @@ public class ResourceLoader {
 		res.loadTexture("button/Headgear360x144.png", "headgear-button");
 		res.loadTexture("icon/greencircle100x100.png", "green-circle");
 		res.loadTexture("icon/redcircle100x100.png", "red-circle");
+		res.loadTexture("icon/tellowcircle100x100.png", "yellow-circle");
 		res.loadTexture("button/character_preview_border.png", "cpb");
 	}
 

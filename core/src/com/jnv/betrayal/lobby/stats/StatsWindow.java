@@ -131,8 +131,6 @@ public class StatsWindow extends Popup {
 		// Floor Label
 		int fontSize = 40;
 		floorLabel = new Label("", FontManager.getFont40());
-		classLabel = new Label("", FontManager.getFont40());
-
 		character.stats.updateStats();
 		equipHealthLabel = new Label(" + " + Integer.toString(character.stats.getEquipHealth()),
 				FontManager.getFont40());
@@ -141,7 +139,7 @@ public class StatsWindow extends Popup {
 		equipDefenseLabel = new Label(" + " + Integer.toString(character.stats.getEquipDefense()),
 				FontManager.getFont40());
 
-		classLabel = new Label("", FontManager.getFont40());
+
 
 		// Get stats from character
 		floorLabel.setText(character.stats.toString(Stat.FLOOR));
@@ -151,6 +149,12 @@ public class StatsWindow extends Popup {
 		floorLabel.setWidth(floorLabel.getPrefWidth());
 		floorLabel.setHeight(fontSize);
 		characterStats.addActor(floorLabel);
+
+		classLabel = new Label("", FontManager.getFont40());
+		classLabel.setText("Job: " + character.job.toString());
+		classLabel.setX( floorLabel.getX() + floorLabel.getPrefWidth() + 75);
+		classLabel.setY(title.getY() - 20 - 50 - 37);
+		characterStats.addActor(classLabel);
 
 		// SET HEALTH LABEL INITIALLY
 		healthLabel = new Label("", FontManager.getFont40());
