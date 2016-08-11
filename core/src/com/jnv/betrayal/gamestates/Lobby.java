@@ -35,7 +35,7 @@ public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
 	private Image allPlayersBackground, chatBackground, tower;
-	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, yellowCircle, unReadyTexture;
+	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, unReadyTexture;
 	private Texture redT, blueT, purpleT, greenT;
 	private Image[] triangles;
 	private Actor playNowButton, readyButton, unReadyButton;
@@ -281,7 +281,6 @@ public class Lobby extends GameState {
 	private void loadTextures() {
 		greenCircle = res.getTexture("green-circle");
 		redCircle = res.getTexture("red-circle");
-		yellowCircle = res.getTexture("yellow-circle");
 		readyTexture = res.getTexture("ready");
 		playButtonTexture = res.getTexture("play-now");
 		unReadyTexture = res.getTexture("unready");
@@ -331,7 +330,6 @@ public class Lobby extends GameState {
 					new Confirmation(game, "Enter Dungeon?") {
 						@Override
 						public void doAction() {
-							room.setInDungeon(true);
 							gsm.setState(GameStateManager.State.DUNGEON);
 						}
 					};
@@ -476,9 +474,7 @@ public class Lobby extends GameState {
 
 		//Create Ready Light
 		Image ready = new Image();
-		if(character.isInDungeon()){
-			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(yellowCircle)));
-		} else if (character.isReady()) {
+		if (character.isReady()) {
 			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(greenCircle)));
 		} else {
 			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(redCircle)));

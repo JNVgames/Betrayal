@@ -62,7 +62,7 @@ public class DungeonInventory extends Popup implements InventoryLoadable {
 
 	}
 
-	private void loadHelp(){
+	private void loadHelp() {
 		Label help = new Label( "Tap Item to use",FontManager.getFont40());
 		help.setX((Betrayal.WIDTH - help.getPrefWidth())/2);
 		help.setY(lobbyButton.getTop()+70);

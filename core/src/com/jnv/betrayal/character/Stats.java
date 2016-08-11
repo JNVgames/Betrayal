@@ -22,12 +22,9 @@ public class Stats implements JsonSerializable {
 	private Equips equips;
 
 	public Stats(Equips equips) {
-		int health = 15;		// Warrior: 5, 	Thief: 5, 	Knight: 5	Priest: 15,
-		int attack = 5;	// Warrior: 20, Thief: 15, 	Knight: 0	Priest: 5,
-		int defense = 5;	// Warrior: 0, 	Thief: 5, 	Knight: 20	Priest: 5,
-		baseHealth = 50 + health;
-		baseAttack = 10 + attack;
-		baseDefense = 10 + defense;
+		baseHealth = 50;
+		baseAttack = 10;
+		baseDefense = 10;
 		floor = 0;
 		//availablePoints = 0;
 		//todo change back

@@ -51,7 +51,7 @@ public class Dungeon extends GameState {
 		}
 
 		System.out.println("All cards: " + field.getAllCards());
-		field.turnManager.draw();
+		field.turnManager.drawUI();
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
 		stage.addActor(field);

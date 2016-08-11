@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.character;
 
-import com.badlogic.gdx.utils.Json;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.Trait;
 import com.jnv.betrayal.online.JsonSerializable;
@@ -31,7 +30,6 @@ public class Character implements JsonSerializable {
 	public final Equips equips;
 	public final Inventory inventory;
 	public final Stats stats;
-	private boolean inDungeon;
 
 	/**
 	 * Creates a character with default traits
@@ -46,7 +44,6 @@ public class Character implements JsonSerializable {
 		job = new Job();
 		stats = new Stats(equips);
 		equips.setStats(stats);
-		inDungeon = false;
 		preview.update();
 	}
 
@@ -70,14 +67,6 @@ public class Character implements JsonSerializable {
 			default:
 				return null;
 		}
-	}
-
-	public boolean isInDungeon() {
-		return inDungeon;
-	}
-
-	public void setInDungeon(boolean inDungeon) {
-		this.inDungeon = inDungeon;
 	}
 
 	public int getId() {
@@ -171,7 +160,6 @@ public class Character implements JsonSerializable {
 			data.put("equips", equips.toJson());
 			data.put("stats", stats.toJson());
 			data.put("isReady", isReady);
-			data.put("inDungeon", inDungeon);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +176,6 @@ public class Character implements JsonSerializable {
 			preview.fromJson(data.getJSONObject("preview"));
 			equips.fromJson(data.getJSONObject("equips"));
 			stats.fromJson(data.getJSONObject("stats"));
-			inDungeon = data.getBoolean("inDungeon");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

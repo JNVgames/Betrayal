@@ -74,9 +74,6 @@ public abstract class Turn {
 		Group group = new Group();
 		Label panel = panelPool.obtain();
 		panel.setText(panelText);
-		Label.LabelStyle fontStyle = font;
-		fontStyle.fontColor = Color.DARK_GRAY;
-		panel.setStyle(fontStyle);
 		panel.setBounds(dimension);
 		panel.setAlignment(Align.center);
 		panel.layout();

@@ -24,15 +24,11 @@ public class Room {
 	private List<Character> characters = new ArrayList<Character>();
 	private Socket socket;
 	private Lobby lobby;
-	private boolean inDungeon;
 	private int monsterID;
-
-
 
 	public Room(Character character) {
 		roomID = -1;
 		currentCharacter = character;
-		inDungeon = false;
 	}
 
 	public int getRoomID() {
@@ -152,7 +148,6 @@ public class Room {
 		}).on("enterDungeon", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				setInDungeon(true);
 				if (lobby != null) {
 					currentCharacter.setReady(false);
 					ready(currentCharacter.isReady());
@@ -189,17 +184,22 @@ public class Room {
 				JSONObject data = (JSONObject) args[0];
 				System.out.println(data);
 				try {
-					for (Character character : characters) {
-						if (character.getId() == data.getJSONObject("character").getInt("id")) {
-							// Make new character
-							character.fromJson(data.getJSONObject("character"));
+					int counter = 0;
+					while (counter < data.getJSONArray("players").length()) {
+						if (characters.get(counter) != null) {
+							characters.get(counter).fromJson(data.getJSONArray("players").getJSONObject(counter));
+						} else {
+							Character character = new Character(currentCharacter.res);
+							character.fromJson(data.getJSONArray("players").getJSONObject(counter));
+							characters.add(character);
 						}
+						counter++;
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				refreshLobby();
-				socket.emit("updateCharacters");
+				socket.emit("updateServerCharacters");
 			}
 		});
 	}
@@ -300,13 +300,5 @@ public class Room {
 
 	public Socket getSocket() {
 		return socket;
-	}
-
-	public void setInDungeon(boolean inDungeon) {
-		this.inDungeon = inDungeon;
-	}
-
-	public boolean getInDungeon() {
-		return inDungeon;
 	}
 }

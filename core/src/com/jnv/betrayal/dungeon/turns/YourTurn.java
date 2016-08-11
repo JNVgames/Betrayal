@@ -33,8 +33,8 @@ import java.util.List;
 public class YourTurn extends Turn {
 
 	private boolean isFirstAppearance = true;
-	private static final int SPECIAL_COOLDOWN = 3;
-	private static int counter = 0;
+	private static final int SPECIAL_COOLDOWN = 2;
+	private int counter = 0;
 
 	public YourTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
 		super(field, panelPool, buttonPool, panels, game);
@@ -57,6 +57,17 @@ public class YourTurn extends Turn {
 			isFirstAppearance = false;
 		} else {
 			drawMainBar();
+		}
+	}
+
+	public void setFirstAppearance() {
+		isFirstAppearance = true;
+	}
+
+	public void decreaseTurnsLeft() {
+		counter--;
+		if (counter < 0) {
+			counter = 0;
 		}
 	}
 
@@ -102,7 +113,7 @@ public class YourTurn extends Turn {
 										new OKPopup(field.game, "Flee Successful") {
 											@Override
 											public void onConfirm() {
-												field.getClientCharacter().getRoom().setInDungeon(false);
+												field.getClientCharacter().getRoom().updateServerCharacters();
 												field.game.gsm.setState(GameStateManager.State.LOBBY);
 											}
 										};
@@ -147,25 +158,25 @@ public class YourTurn extends Turn {
 			public void run() {
 				switch (field.getClientCharacter().job.getJob()) {
 					case WARRIOR:
-						if (counter <= 0) {
+						if (counter == 0) {
 							field.beginSelectMode(1);
 						}
 						drawWarriorSpecialBar();
 						break;
 					case THIEF:
-						if (counter <= 0) {
+						if (counter == 0) {
 							field.beginSelectMode(1);
 						}
 						drawThiefSpecialBar();
 						break;
 					case KNIGHT:
-						if (counter <= 0) {
+						if (counter == 0) {
 							field.beginSelectMode(2);
 						}
 						drawKnightSpecialBar();
 						break;
 					case PRIEST:
-						if (counter <= 0) {
+						if (counter == 0) {
 							field.beginSelectMode(1);
 						}
 						drawPriestSpecialBar();
@@ -183,7 +194,7 @@ public class YourTurn extends Turn {
 
 	private void drawWarriorSpecialBar() {
 		panels.clearChildren();
-		if (counter <= 0) {
+		if (counter == 0) {
 			panels.addActor(createPanel("Deal 150% damage to target", FontManager.getFont50(), Panel.top, new Runnable() {
 				@Override
 				public void run() {
@@ -209,7 +220,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawSpecialMoveOnCooldownBar() {
-		panels.addActor(createGrayPanel("Special move up in " + counter + " turns.", FontManager.getFont50(), Panel.top));
+		panels.addActor(createGrayPanel("Cooldown: " + counter + " turns left", FontManager.getFont50(), Panel.top));
 		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
 			@Override
 			public void run() {
@@ -221,14 +232,16 @@ public class YourTurn extends Turn {
 
 	private void drawThiefSpecialBar() {
 		panels.clearChildren();
-		if (counter <= 0) {
-			panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(), Panel.top, new Runnable() {
+		if (counter == 0) {
+			panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(),
+					Panel.top, new Runnable() {
 				@Override
 				public void run() {
 					if (doesTargetExist() && !isTargetSelf()) {
 						// Deal damage to dest cards
 						doEvent(new ThiefSpecial(field.getCurrentCard(),
 								new ArrayList<Card>(field.getCardsSelected())), EventType.THIEF_SPECIAL);
+						counter = SPECIAL_COOLDOWN;
 						field.endSelectMode();
 					}
 				}
@@ -247,7 +260,7 @@ public class YourTurn extends Turn {
 
 	private void drawKnightSpecialBar() {
 		panels.clearChildren();
-		if (counter <= 0) {
+		if (counter == 0) {
 			panels.addActor(createPanel("Select up to 2\ntargets to defend.", FontManager.getFont50(),
 					Panel.top, new Runnable() {
 						@Override
@@ -255,6 +268,7 @@ public class YourTurn extends Turn {
 							if (doesTargetExist()) {
 								doEvent(new Defend(field.getCurrentCard(),
 										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+								counter = SPECIAL_COOLDOWN;
 								field.endSelectMode();
 							}
 						}
@@ -273,7 +287,7 @@ public class YourTurn extends Turn {
 
 	private void drawPriestSpecialBar() {
 		panels.clearChildren();
-		if (counter <= 0) {
+		if (counter == 0) {
 			panels.addActor(createPanel("Boost target's\nattack", FontManager.getFont50(),
 					Panel.topLeft, new Runnable() {
 						@Override
@@ -282,6 +296,7 @@ public class YourTurn extends Turn {
 								// Deal damage to dest cards
 								doEvent(new PriestAttackSpecial(field.getCurrentCard(),
 										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+								counter = SPECIAL_COOLDOWN;
 								field.endSelectMode();
 							}
 						}
@@ -294,6 +309,7 @@ public class YourTurn extends Turn {
 								// Deal damage to dest cards
 								doEvent(new PriestDefenseSpecial(field.getCurrentCard(),
 										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_DEFENSE_SPECIAL);
+								counter = SPECIAL_COOLDOWN;
 								field.endSelectMode();
 							}
 						}
@@ -306,6 +322,7 @@ public class YourTurn extends Turn {
 								// Deal damage to dest cards
 								doEvent(new PriestHealSpecial(field.getCurrentCard(),
 										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_HEAL_SPECIAL);
+								counter = SPECIAL_COOLDOWN;
 								field.endSelectMode();
 							}
 						}

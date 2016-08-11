@@ -11,7 +11,6 @@ import com.jnv.betrayal.dungeon.turns.MonsterTurn;
 import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
-import com.jnv.betrayal.dungeon.utils.Turns;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
@@ -31,12 +30,16 @@ public class TurnManager {
 	private Pool<Button> buttonPool;
 	private BetrayalAssetManager res;
 	private Turn currentTurn;
+	private YourTurn yourTurn;
+	private TeamMemberTurn teamMemberTurn;
+	private MonsterTurn monsterTurn;
 
 	public TurnManager(Field field) {
 		this.field = field;
 		gsm = field.gsm;
 		res = field.res;
 		buttonPool = new Pool<Button>() {
+			@Override
 			public Button obtain() {
 				Button tmp = super.obtain();
 				ClickListener clickListener = tmp.getClickListener();
@@ -46,59 +49,58 @@ public class TurnManager {
 				return tmp;
 			}
 
+			@Override
 			protected Button newObject() {
 				return new Button();
 			}
 		};
 		panelPool = new Pool<Label>() {
+			@Override
 			public Label obtain() {
 				Label tmp = super.obtain();
 				tmp.clearListeners();
 				return tmp;
 			}
 
+			@Override
 			protected Label newObject() {
 				return new Label(null, new Label.LabelStyle(FontManager.getFont70()));
 			}
 		};
 		field.addActor(panels);
+
+		yourTurn = new YourTurn(field, panelPool, buttonPool, panels, field.game);
+		teamMemberTurn = new TeamMemberTurn(field, panelPool, buttonPool, panels, field.game);
+		monsterTurn = new MonsterTurn(field, panelPool, buttonPool, panels, field.game);
 	}
 
 	public void nextTurn() {
+		// If your turn is ending, decrease skill cooldown counter
+		if (currentTurn instanceof YourTurn) {
+			yourTurn.decreaseTurnsLeft();
+		}
 		field.setNextCardIndex();
 		field.roundManager.checkEvents(field.getCurrentCard());
-		draw();
+		drawUI();
 	}
 
-	public void draw() {
+	public void drawUI() {
 		Card currentCard = field.getCurrentCard();
 
 		// Team member turn
 		if (currentCard instanceof PlayerCard
 				&& currentCard.getID() != field.game.getCurrentCharacter().getId()) {
-			currentTurn = getTurn(Turns.TEAM_MEMBER_TURN);
+			currentTurn = teamMemberTurn;
 		}
 		// Monster turn
 		else if (currentCard instanceof MonsterCard) {
-			currentTurn = getTurn(Turns.MONSTER_TURN);
+			currentTurn = monsterTurn;
 		}
 		// Your turn
 		else {
-			currentTurn = getTurn(Turns.YOUR_TURN);
+			currentTurn = yourTurn;
+			yourTurn.setFirstAppearance();
 		}
 		currentTurn.draw();
-	}
-
-	private Turn getTurn(Turns turnType) {
-		switch (turnType) {
-			case YOUR_TURN:
-				return new YourTurn(field, panelPool, buttonPool, panels, field.game);
-			case TEAM_MEMBER_TURN:
-				return new TeamMemberTurn(field, panelPool, buttonPool, panels, field.game);
-			case MONSTER_TURN:
-				return new MonsterTurn(field, panelPool, buttonPool, panels, field.game);
-			default:
-				throw new AssertionError("TurnManager: Turns turntype does not exist");
-		}
 	}
 }
