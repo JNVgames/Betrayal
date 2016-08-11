@@ -28,6 +28,7 @@ public class Room {
 	private int monsterID;
 
 
+
 	public Room(Character character) {
 		roomID = -1;
 		currentCharacter = character;

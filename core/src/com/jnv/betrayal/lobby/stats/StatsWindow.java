@@ -24,7 +24,7 @@ public class StatsWindow extends Popup {
 
 	private Image lobbyButton, applyButton, background;
 	private Image[] icons, statPlusButtons, statMinusButtons;
-	private Label title, availablePoints, floorLabel, healthLabel, attackLabel, defenseLabel;
+	private Label title, availablePoints, floorLabel, healthLabel, attackLabel, defenseLabel, classLabel;
 	private Label equipHealthLabel, equipAttackLabel, equipDefenseLabel, hair;
 	private Group characterStats;
 	private float yRef;
@@ -131,6 +131,7 @@ public class StatsWindow extends Popup {
 		// Floor Label
 		int fontSize = 40;
 		floorLabel = new Label("", FontManager.getFont40());
+		classLabel = new Label("", FontManager.getFont40());
 
 		character.stats.updateStats();
 		equipHealthLabel = new Label(" + " + Integer.toString(character.stats.getEquipHealth()),
@@ -139,6 +140,8 @@ public class StatsWindow extends Popup {
 				FontManager.getFont40());
 		equipDefenseLabel = new Label(" + " + Integer.toString(character.stats.getEquipDefense()),
 				FontManager.getFont40());
+
+		classLabel = new Label("", FontManager.getFont40());
 
 		// Get stats from character
 		floorLabel.setText(character.stats.toString(Stat.FLOOR));
