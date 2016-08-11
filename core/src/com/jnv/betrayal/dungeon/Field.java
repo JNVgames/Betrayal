@@ -6,7 +6,6 @@ package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
@@ -147,7 +146,6 @@ public class Field extends Group {
 	public void endSelectMode() {
 		for (Card card : allCards) {
 			card.endSelectMode();
-			card.unselect();
 		}
 	}
 
@@ -165,12 +163,6 @@ public class Field extends Group {
 	public void unselectAll() {
 		for (Card card : allCards) {
 			card.unselect();
-		}
-	}
-
-	public void resetCards() {
-		for (Card card : getAllCards()) {
-			card.reset();
 		}
 	}
 
@@ -265,8 +257,8 @@ public class Field extends Group {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				for(Card card : playerZone){
-					if (card.getID() == disconnectID){
+				for (Card card : playerZone) {
+					if (card.getID() == disconnectID) {
 						//checks if it's that current person's turn
 						if (getCurrentCard() == card)
 							turnManager.nextTurn();

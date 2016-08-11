@@ -36,9 +36,8 @@ public abstract class Card {
 	protected Group group;
 	private List<Card> defenders = new ArrayList<Card>();
 	private TextureRegion selectedTexture;
-	private boolean wasSelected, isSelected, selecting;
+	private boolean isSelected, selecting;
 	private InputListener selectListener, cardInfoListener;
-	private boolean isTurn;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -72,7 +71,6 @@ public abstract class Card {
 		selectedTexture = new TextureRegion(res.getTexture("cross-hair"));
 		group.addActor(healthBar);
 		healthBar.toFront();
-		isTurn = false;
 	}
 
 	protected void initializeCardListener() {
@@ -148,24 +146,17 @@ public abstract class Card {
 		selectListener = createSelectListener(numTargets);
 		group.addListener(selectListener);
 		group.removeListener(cardInfoListener);
+		isSelected = false;
 		selecting = true;
 	}
 
 	public void endSelectMode() {
-		group.removeListener(selectListener);
-		group.addListener(cardInfoListener);
-		wasSelected = isSelected;
-		selecting = false;
-	}
-
-	public void cancelSelectMode() {
-		isSelected = wasSelected;
-		endSelectMode();
-	}
-
-	public void reset() {
-		isSelected = false;
-		wasSelected = false;
+		if (selecting) {
+			group.removeListener(selectListener);
+			group.addListener(cardInfoListener);
+			isSelected = false;
+			selecting = false;
+		}
 	}
 
 	public void select() {
@@ -180,29 +171,16 @@ public abstract class Card {
 		return isSelected;
 	}
 
-	public InputListener createCardInfoListener() {
-		try {
-			return new InputListener(cardImage) {
-				@Override
-				public void doAction() {
-					new CardInfo(field.game, Card.this);
-				}
-			};
-		} catch (NullPointerException e) {
-			System.out.println("Card: Actor cardImage was not created properly");
-			Gdx.app.exit();
-		}
-		return null;
-	}
-
 	public InputListener createSelectListener(final int numTargets) {
 		try {
 			return new InputListener(cardImage) {
 				@Override
 				public void doAction() {
 					// If it's selected, unselect
-					if (isSelected) unselect();
-					else { // if not selected
+					if (isSelected) {
+						unselect();
+					}
+					else {
 						// If limit is one, unselect all and select this one
 						if (numTargets == 1) {
 							field.unselectAll();
@@ -223,14 +201,6 @@ public abstract class Card {
 
 	public Group getGroup() {
 		return group;
-	}
-
-	public boolean isTurn() {
-		return isTurn;
-	}
-
-	public void setTurn(boolean turn) {
-		isTurn = turn;
 	}
 
 	public boolean checkIfDied() {
@@ -518,6 +488,7 @@ public abstract class Card {
 
 		} else if (this instanceof MonsterCard) {
 			//Monster Card
+			endSelectMode();
 			field.removeMonsterCard((MonsterCard) this);
 			if (field.isMonsterZoneEmpty()) {
 				Runnable r = new Runnable() {

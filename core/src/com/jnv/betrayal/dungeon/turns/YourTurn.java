@@ -203,6 +203,7 @@ public class YourTurn extends Turn {
 						doEvent(new WarriorSpecial(field.getCurrentCard(),
 								new ArrayList<Card>(field.getCardsSelected())), EventType.WARRIOR_SPECIAL);
 						counter = SPECIAL_COOLDOWN;
+						System.out.println("end");
 						field.endSelectMode();
 					}
 				}
