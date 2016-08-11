@@ -217,13 +217,13 @@ public abstract class Card {
 				public void run() {
 					((PlayerCard) card).removeCloak();
 					heal(10);
-					System.out.println("CLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOAK");
 				}
 			})));
 		} else {
-			//todo remove this later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if (card instanceof PlayerCard)
+			//todo remove this later (WE FORGOT WHY)
+			if (card instanceof PlayerCard) {
 				return;
+			}
 			Effect effect = new Died(card);
 			card.getField().roundManager.addEvent(effect, effect.getStartType());
 		}
@@ -300,11 +300,6 @@ public abstract class Card {
 
 	public HealthBar getHealthBar() {
 		return healthBar;
-	}
-
-	// todo REMOVE THIS
-	public List<Card> getDefenders() {
-		return defenders;
 	}
 
 	public void addDefender(PlayerCard defender) {

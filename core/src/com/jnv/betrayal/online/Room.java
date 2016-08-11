@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class Room {
 	private Socket socket;
 	private Lobby lobby;
 	private int monsterID;
+	private boolean isServerOnline;
 
 	public Room(Character character) {
 		roomID = -1;
@@ -36,6 +39,15 @@ public class Room {
 	}
 
 	public void connectToServer() {
+		isServerOnline = true;
+		try {
+			URL url = new URL("http://localhost:8080");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.connect();
+		} catch (Exception e) {
+			isServerOnline = false;
+		}
 		try {
 			// If socket is already connected, don't make a new socket
 			if (socket == null || !socket.connected()) {
@@ -185,6 +197,7 @@ public class Room {
 			@Override
 			public void call(Object... args) {
 				refreshLobby();
+				new OKPopup(lobby.getGame(), "Player Left\n Enter Dungeon Canceled ");
 			}
 		});
 	}
@@ -243,6 +256,9 @@ public class Room {
 			e.printStackTrace();
 		}
 		socket.emit("createRoom", data);
+		if (!isServerOnline) {
+			new OKPopup(lobby.getGame(), "Connection failed\n Try again later");
+		}
 	}
 
 	public void leaveRoom() {

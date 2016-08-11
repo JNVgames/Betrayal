@@ -70,7 +70,13 @@ public class Field extends Group {
 		clientCharacter = gsm.game.getCurrentCharacter();
 		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
-		background = new Image(res.getTexture("map-1"));
+		background = new Image(res.getTexture("map-1")) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				System.out.println("currentCardTurn = " + currentCardTurn);
+			}
+		};
 		currentCardTurn = 0;
 		allCards = new ArrayList<Card>();
 
@@ -252,21 +258,27 @@ public class Field extends Group {
 				//takes in character of disconnected player
 				JSONObject data = (JSONObject) args[0];
 				int disconnectID = -1;
-				try {
-					disconnectID = data.getJSONObject("character").getInt("id");
+				try {	disconnectID = data.getJSONObject("player").getInt("id");
+
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				Card deleteThisCard = null;
 				for (Card card : playerZone) {
 					if (card.getID() == disconnectID) {
 						//checks if it's that current person's turn
 						if (getCurrentCard() == card)
 							turnManager.nextTurn();
-
+						deleteThisCard = card;
 						//removes person from playerzone and perform animation
-						roundManager.addEventClient(new Died(card), EventType.DIED);
+
 					}
 				}
+				if(deleteThisCard!=null)
+					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
+				System.out.println("deleteThisCard.getName() = " + deleteThisCard.getName());
+				refreshAllCards();
+				if(currentCardTurn!=0) currentCardTurn--;
 			}
 		});
 	}

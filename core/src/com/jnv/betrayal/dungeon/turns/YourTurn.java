@@ -76,7 +76,6 @@ public class YourTurn extends Turn {
 		panels.addActor(createPanel("Items", FontManager.getFont70(), Panel.bottomLeft, new Runnable() {
 			public void run() {
 				new DungeonInventory(gsm.game, field.getCurrentCard());
-				// todo change input to what is needed by the specific item
 			}
 		}));
 		panels.addActor(createPanel("Attack", FontManager.getFont70(), Panel.topLeft, new Runnable() {

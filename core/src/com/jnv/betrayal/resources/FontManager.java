@@ -18,7 +18,7 @@ public class FontManager {
 			new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 	private static Label.LabelStyle labelStyle12, labelStyle45, labelStyle40, labelStyle50;
-	private static Label.LabelStyle labelStyle60, labelStyle70, labelStyle80, labelStyle100;
+	private static Label.LabelStyle labelStyle60, labelStyle70, labelStyle80, labelStyle100, labelStyle120;
 	private static Label.LabelStyle labelStyleDarkGray70;
 
 	public static void loadFonts() {
@@ -53,6 +53,10 @@ public class FontManager {
 		fontDetails.size = 100;
 		labelStyle100 = new Label.LabelStyle();
 		labelStyle100.font = generator.generateFont(fontDetails);
+
+		fontDetails.size = 120;
+		labelStyle120 = new Label.LabelStyle();
+		labelStyle120.font = generator.generateFont(fontDetails);
 
 		fontDetails.size = 70;
 		fontDetails.color = Color.DARK_GRAY;
@@ -94,5 +98,9 @@ public class FontManager {
 
 	public static Label.LabelStyle getFont100() {
 		return labelStyle100;
+	}
+
+	public static Label.LabelStyle getFont120() {
+		return labelStyle120;
 	}
 }

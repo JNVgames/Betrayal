@@ -83,20 +83,9 @@ public class EventLog extends Popup {
 		String eventString, backupString;
 		Label testLabel = new Label("", FontManager.getFont50());
 		for (Event event : eventHistory) {
-			// todo get this to werk
 			verticalGroup.addActor(new Label(
 					"------------------------------------------",
 					FontManager.getFont40()));
-//			Actor blank = new Actor();
-//			blank.setWidth(400);
-//			blank.setHeight(4);
-//			Actor actor = new Actor();
-//			actor.setWidth(400);
-//			actor.setHeight(2);
-//			actor.setColor(Color.WHITE);
-//			verticalGroup.addActor(blank);
-//			verticalGroup.addActor(actor);
-//			verticalGroup.addActor(blank);
 			eventString = event.toEventLogString();
 			Label label = new Label("", FontManager.getFont50());
 
@@ -104,7 +93,6 @@ public class EventLog extends Popup {
 
 			testLabel.setText("");
 			for (int i = 0; i < splited.length; i++){
-				System.out.println("SPLITED: " + splited[i]);
 				testLabel.setText(label.getText()+ " " + splited[i]);
 				if (testLabel.getPrefWidth() > Betrayal.WIDTH - 220){
 					label.setText(label.getText() + "\n" + " " + splited[i]);
@@ -112,25 +100,6 @@ public class EventLog extends Popup {
 				}else
 					label.setText(label.getText() +" " + splited[i]);
 			}
-
-
-//
-//
-//			System.out.println("label.getPrefWidth() = " + label.getPrefWidth());
-//			System.out.println(" scrollPane.getPrefWidth() = " + scrollPane.getPrefWidth());
-//			if (label.getPrefWidth() > Betrayal.WIDTH - 220){
-//				System.out.println("CHECKPOINT  BITCH");
-//				index = eventString.indexOf(' ', 10);
-//				System.out.println("index = " + index);
-//				label = new Label(eventString, FontManager.getFont50());
-//
-//				backupString = "";
-//				backupString += eventString.substring(0,index-1) + "\n" + eventString.substring(index+1);
-//				//eventString.replace(eventString.substring(0,index), eventString.substring(0,index-1) + "\n");
-//				label = new Label(backupString, FontManager.getFont50());
-//			}else {
-//				label = new Label(eventString, FontManager.getFont50());
-//			}
 			verticalGroup.addActor(label);
 		}
 	}

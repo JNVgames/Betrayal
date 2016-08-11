@@ -435,16 +435,16 @@ public class Shop extends Popup {
 			}
 		}
 
-		for (int i=1; i<4; i++){
+		for (int i = 1; i < 4; i++) {
 			final String item = "run" + i;
-			run[i - 1] = new Image(res.getTexture("run"+i));
-			run[i - 1].layout();;
+			run[i - 1] = new Image(res.getTexture("run" + i));
+			run[i - 1].layout();
+			;
 			run[i - 1].setBounds(100 + itemSize * (i - 1), Betrayal.HEIGHT - buttonHeight - 150 - itemSize * 9, itemSize, itemSize);
 			run[i - 1].addListener(new InputListener(run[i - 1], true) {
 				@Override
 				public void doAction() {
-					//todo Created Run Item,
-					new ShopPurchasePopup(game, new Run(item,res));
+					new ShopPurchasePopup(game, new Run(item, res));
 				}
 			});
 			currentGroup.addActor(run[i - 1]);
@@ -452,7 +452,7 @@ public class Shop extends Popup {
 
 		runTitle = new Label("Run", FontManager.getFont40());
 		runTitle.setX(110);
-		runTitle.setY(run[0].getTop()+10);
+		runTitle.setY(run[0].getTop() + 10);
 		currentGroup.addActor(runTitle);
 	}
 
@@ -664,8 +664,8 @@ public class Shop extends Popup {
 
 	private void loadItems() {
 		comingSoon = new Label("Coming Soon", FontManager.getFont60());
-		comingSoon.setX(Betrayal.WIDTH/2 - comingSoon.getPrefWidth()/2);
-		comingSoon.setY(Betrayal.HEIGHT/2 );
+		comingSoon.setX(Betrayal.WIDTH / 2 - comingSoon.getPrefWidth() / 2);
+		comingSoon.setY(Betrayal.HEIGHT / 2);
 		currentGroup.addActor(comingSoon);
 	}
 

@@ -41,7 +41,7 @@ public class Lobby extends GameState {
 	private Actor playNowButton, readyButton, unReadyButton;
 	private Group partyMembers, bottom, buttons, middle;
 	private Room room;
-	private Label roomNum, timeTilEnter, timerValue;
+	private Label roomNum, timeTilEnter, timerValue, joinARoom;
 	private Timer timer;
 	private Timer.Task task;
 	private long savedTime;
@@ -73,8 +73,8 @@ public class Lobby extends GameState {
 			@Override
 			public void run() {
 				// Do your work
-				//getGSM().setState(GameStateManager.State.DUNGEON);
-				timerValue.setText("0");
+				if(room.getRoomID()<=0)
+					getGSM().setState(GameStateManager.State.DUNGEON);
 			}
 		};
 		//enterDungeonCountDown();
@@ -207,12 +207,22 @@ public class Lobby extends GameState {
 	}
 
 	private void loadTimeLeftLabel() {
-		timeTilEnter = new Label("Entering in ", FontManager.getFont60());
-		timeTilEnter.setX(chatBackground.getX() + (chatBackground.getWidth() - timeTilEnter.getPrefWidth()) / 2 - 50);
+		timeTilEnter = new Label("Entering in ", FontManager.getFont60()) {
+			@Override
+			public void act(float delta) {
+				super.act(delta);
+				if (task.isScheduled()) {
+					timeTilEnter.setVisible(true);
+				}else{
+					timeTilEnter.setVisible(false);
+				}
+			}
+		};
+		timeTilEnter.setX(chatBackground.getX() + (chatBackground.getWidth() - timeTilEnter.getPrefWidth()) / 2);
 		timeTilEnter.setY(roomNum.getY() - timeTilEnter.getPrefHeight() - 20);
 		middle.addActor(timeTilEnter);
 
-		timerValue = new Label("...", FontManager.getFont60()) {
+		timerValue = new Label("...", FontManager.getFont120()) {
 			@Override
 			public void act(float delta) {
 				super.act(delta);
@@ -221,23 +231,34 @@ public class Lobby extends GameState {
 					timeLeft = (int) (System.currentTimeMillis() - savedTime);
 					timeLeft /= 1000;
 					timeLeft = 5 - timeLeft;
-					timerValue.setText(Integer.toString(timeLeft));
+					if(timeLeft <0){
+						timerValue.setText("");
+					}else {
+						timerValue.setText(Integer.toString(timeLeft));
+					}
 				} else {
 					timerValue.setColor(Color.WHITE);
-					timerValue.setText("...");
+					timerValue.setText("");
 				}
 			}
 		};
-		timerValue.setX(timeTilEnter.getX() + timeTilEnter.getPrefWidth());
-		timerValue.setY(timeTilEnter.getY());
+		timerValue.setX(Betrayal.WIDTH / 2 - timerValue.getPrefWidth() / 2);
+		timerValue.setY(timeTilEnter.getY() - timerValue.getPrefHeight());
 		middle.addActor(timerValue);
 	}
 
 	private void loadRoomLabel() {
-		roomNum = new Label("Room #:  ", FontManager.getFont60());
-		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 100);
+		joinARoom = new Label("Join a room?", FontManager.getFont60());
+		joinARoom.setX(chatBackground.getX() + (chatBackground.getWidth() - joinARoom.getPrefWidth()) / 2);
+		joinARoom.setY(chatBackground.getY() + (chatBackground.getHeight() / 2 - joinARoom.getPrefHeight() / 2));
+		bottom.addActor(joinARoom);
+
+		roomNum = new Label("Room Number:  ", FontManager.getFont60());
+		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 40);
 		roomNum.setY(chatBackground.getTop() - roomNum.getPrefHeight() - 20);
+		roomNum.setVisible(false);
 		bottom.addActor(roomNum);
+
 	}
 
 	private void loadSettingsButton() {
@@ -334,7 +355,7 @@ public class Lobby extends GameState {
 					new Confirmation(game, "Enter Dungeon?") {
 						@Override
 						public void doAction() {
-							gsm.setState(GameStateManager.State.DUNGEON);
+							enterDungeonCountDown();
 						}
 					};
 				} else playButtonTexture = res.getTexture("play-now");
@@ -410,11 +431,20 @@ public class Lobby extends GameState {
 	}
 
 	private void setRoomLabel() {
+		//in a room
 		String ID = "";
 		int roomID = game.getCurrentCharacter().getRoom().getRoomID();
-		if (roomID >= 0)
+		if(roomID>0){
+			joinARoom.setVisible(false);
+			roomNum.setVisible(true);
 			ID += Integer.toString(roomID);
-		roomNum.setText("RoomNum: " + ID);
+			roomNum.setText("Room Number: " +ID);
+		}else{
+			//not in a room
+			joinARoom.setVisible(true);
+			roomNum.setVisible(false);
+		}
+
 	}
 
 	private void loadLevelTriangle(float width, float height, int counter, int floor) {
