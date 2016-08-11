@@ -27,7 +27,7 @@ public class MonsterTurn extends Turn {
 
 	@Override
 	public void draw() {
-		panels.clearChildren();
+		panels.clear();
 		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
 		field.addAction(Actions.delay(3f, new RunnableAction(){
 			@Override
@@ -37,7 +37,6 @@ public class MonsterTurn extends Turn {
 				}
 			}
 		}));
-
 	}
 
 	private void monsterAttack() {

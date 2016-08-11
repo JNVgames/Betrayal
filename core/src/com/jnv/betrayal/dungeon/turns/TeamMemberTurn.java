@@ -17,7 +17,7 @@ public class TeamMemberTurn extends Turn {
 
 	@Override
 	public void draw() {
-		panels.clearChildren();
+		panels.clear();
 		createGrayPanel(field.getCurrentCard().getName() + "'s turn", FontManager.getFont80(), Panel.full);
 	}
 }

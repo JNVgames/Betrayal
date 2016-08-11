@@ -42,7 +42,7 @@ public class YourTurn extends Turn {
 
 	@Override
 	public void draw() {
-		panels.clearChildren();
+		panels.clear();
 		if (isFirstAppearance) {
 			panels.addActor(createGrayPanel("Items", FontManager.getDarkFont70(), Panel.bottomLeft));
 			panels.addActor(createGrayPanel("Attack", FontManager.getDarkFont70(), Panel.topLeft));
@@ -72,7 +72,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawMainBar() {
-		panels.clearChildren();
+		panels.clear();
 		panels.addActor(createPanel("Items", FontManager.getFont70(), Panel.bottomLeft, new Runnable() {
 			public void run() {
 				new DungeonInventory(gsm.game, field.getCurrentCard());
@@ -96,7 +96,7 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						panels.clearChildren();
+						panels.clear();
 						panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getDarkFont70(), Panel.full));
 						if (PlayerCard.canFlee(1)) {
 							Effect effect = new Flee(field.getCurrentCard());
@@ -145,7 +145,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawAttackBar() {
-		panels.clearChildren();
+		panels.clear();
 		panels.addActor(createPanel("Normal Attack", FontManager.getFont50(), Panel.topLeft, new Runnable() {
 			@Override
 			public void run() {
@@ -193,7 +193,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawWarriorSpecialBar() {
-		panels.clearChildren();
+		panels.clear();
 		if (counter == 0) {
 			panels.addActor(createPanel("Deal 150% damage to target", FontManager.getFont50(), Panel.top, new Runnable() {
 				@Override
@@ -231,7 +231,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawThiefSpecialBar() {
-		panels.clearChildren();
+		panels.clear();
 		if (counter == 0) {
 			panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(),
 					Panel.top, new Runnable() {
@@ -259,7 +259,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawKnightSpecialBar() {
-		panels.clearChildren();
+		panels.clear();
 		if (counter == 0) {
 			panels.addActor(createPanel("Select up to 2\ntargets to defend.", FontManager.getFont50(),
 					Panel.top, new Runnable() {
@@ -286,7 +286,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawPriestSpecialBar() {
-		panels.clearChildren();
+		panels.clear();
 		if (counter == 0) {
 			panels.addActor(createPanel("Boost target's\nattack", FontManager.getFont50(),
 					Panel.topLeft, new Runnable() {
@@ -340,7 +340,7 @@ public class YourTurn extends Turn {
 	}
 
 	private void drawSelectBar(final EventType eventType) {
-		panels.clearChildren();
+		panels.clear();
 		panels.addActor(createPanel("Done", FontManager.getFont70(), Panel.top, new Runnable() {
 			public void run() {
 				List<Card> dest = new ArrayList<Card>(field.getCardsSelected());

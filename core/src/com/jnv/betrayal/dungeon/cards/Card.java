@@ -251,9 +251,8 @@ public abstract class Card {
 				}
 			})));
 		} else {
-
 			//todo remove this later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if(card instanceof PlayerCard)
+			if (card instanceof PlayerCard)
 				return;
 			Effect effect = new Died(card);
 			card.getField().roundManager.addEvent(effect, effect.getStartType());
@@ -268,7 +267,7 @@ public abstract class Card {
 			cardDeath(this);
 	}
 
-	public void attackTrueDamage(float damage){
+	public void attackTrueDamage(float damage) {
 		if (!defenders.isEmpty()) {
 			// has defenders, should split damage among defenders
 			for (Card card : defenders) {
@@ -287,14 +286,10 @@ public abstract class Card {
 			// has defenders, should split damage among defenders
 			for (Card card : defenders) {
 				card.takeDamage((int) Math.ceil(damage / defenders.size()));
-				System.out.println("DEFENDER TOOK DAMAGE. " + this);
-				System.out.println("defenders = " + defenders);
 			}
 		} else {
 			//does not have defenders, this card takes the damage
 			takeDamage(damage);
-			System.out.println("I TOOK DAMAGE. " + this);
-			System.out.println("defenders = " + defenders);
 		}
 	}
 
@@ -351,13 +346,12 @@ public abstract class Card {
 	}
 
 	public void removeDefender(int id) {
-		int counter = 0;
-		for (counter = 0; counter < defenders.size(); counter++) {
+		for (int counter = 0; counter < defenders.size(); counter++) {
 			if (defenders.get(counter).getID() == id) {
-				break;
+				defenders.remove(counter);
+				return;
 			}
 		}
-		defenders.remove(counter);
 	}
 
 	public void performEffect(Effect effect) {
@@ -538,12 +532,13 @@ public abstract class Card {
 									System.out.println("field reward" + field.reward);
 								}
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
-
 							}
 						};
+						System.out.println("floor comp");
 					}
 				};
-
+				field.turnManager.dungeonEnded();
+				System.out.println("cleared");
 				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {

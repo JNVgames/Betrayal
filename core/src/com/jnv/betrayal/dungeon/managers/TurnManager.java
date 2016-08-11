@@ -1,18 +1,19 @@
 package com.jnv.betrayal.dungeon.managers;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.turns.MonsterTurn;
 import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
-import com.jnv.betrayal.gamestates.GameStateManager;
-import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
@@ -25,20 +26,15 @@ public class TurnManager {
 
 	public final Group panels = new Group();
 	private Field field;
-	private GameStateManager gsm;
-	private Pool<Label> panelPool;
-	private Pool<Button> buttonPool;
-	private BetrayalAssetManager res;
 	private Turn currentTurn;
 	private YourTurn yourTurn;
 	private TeamMemberTurn teamMemberTurn;
 	private MonsterTurn monsterTurn;
+	private boolean dungeonEnded = false;
 
 	public TurnManager(Field field) {
 		this.field = field;
-		gsm = field.gsm;
-		res = field.res;
-		buttonPool = new Pool<Button>() {
+		Pool<Button> buttonPool = new Pool<Button>() {
 			@Override
 			public Button obtain() {
 				Button tmp = super.obtain();
@@ -54,7 +50,7 @@ public class TurnManager {
 				return new Button();
 			}
 		};
-		panelPool = new Pool<Label>() {
+		Pool<Label> panelPool = new Pool<Label>() {
 			@Override
 			public Label obtain() {
 				Label tmp = super.obtain();
@@ -76,12 +72,15 @@ public class TurnManager {
 
 	public void nextTurn() {
 		// If your turn is ending, decrease skill cooldown counter
-		if (currentTurn instanceof YourTurn) {
-			yourTurn.decreaseTurnsLeft();
+		if (!dungeonEnded) {
+			if (currentTurn instanceof YourTurn) {
+				yourTurn.decreaseTurnsLeft();
+			}
+			field.setNextCardIndex();
+			field.roundManager.checkEvents(field.getCurrentCard());
+			drawUI();
+			System.out.println("nextturn");
 		}
-		field.setNextCardIndex();
-		field.roundManager.checkEvents(field.getCurrentCard());
-		drawUI();
 	}
 
 	public void drawUI() {
@@ -102,5 +101,13 @@ public class TurnManager {
 			yourTurn.setFirstAppearance();
 		}
 		currentTurn.draw();
+	}
+
+	public void dungeonEnded() {
+		dungeonEnded = true;
+		for (Actor actor : panels.getChildren()) {
+			actor.setTouchable(Touchable.disabled);
+			actor.addAction(Actions.fadeOut(1));
+		}
 	}
 }
