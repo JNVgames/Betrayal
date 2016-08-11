@@ -152,15 +152,15 @@ class PreviewHandler {
 	 */
 	private void updateHeadSprites() {
 		if (preview.equips.isCloakSlotEmpty()) {
-			Texture head_all;
+			Texture allHeadTextures;
 			if (preview.gender == Gender.MALE) {
-				head_all = preview.res.getTexture("hair-male-"
+				allHeadTextures = preview.res.getTexture("hair-male-"
 						+ preview.maleHair + "-" + preview.hairColor + "-all");
 			} else {
-				head_all = preview.res.getTexture("hair-female-"
+				allHeadTextures = preview.res.getTexture("hair-female-"
 						+ preview.femaleHair + "-" + preview.hairColor + "-all");
 			}
-			TextureRegion[][] head_split = TextureRegion.split(head_all, 32, 48);
+			TextureRegion[][] head_split = TextureRegion.split(allHeadTextures, 32, 48);
 			preview.frontLeft[PreviewSlot.HEAD] = head_split[0][0];
 			preview.frontStill[PreviewSlot.HEAD] = preview.headPreview = head_split[0][1];
 			preview.frontRight[PreviewSlot.HEAD] = head_split[0][2];

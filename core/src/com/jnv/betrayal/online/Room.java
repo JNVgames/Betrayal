@@ -62,7 +62,6 @@ public class Room {
 				characters.clear();
 				characters.add(currentCharacter);
 				refreshLobby();
-				printCharacters();
 			}
 		}).on("joinedRoom", new Emitter.Listener() {
 			@Override
@@ -98,7 +97,6 @@ public class Room {
 				}
 				Room.this.characters = characters;
 				refreshLobby();
-				printCharacters();
 			}
 		}).on("readyChanged", new Emitter.Listener() {
 			@Override
@@ -155,58 +153,83 @@ public class Room {
 					lobby = null;
 				}
 			}
-		}).on("playerLeftRoom", new Emitter.Listener() {
+		}).on("playerLeftRoomInLobby", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				JSONObject data = (JSONObject) args[0];
-
-				int indexToRemove = -1;
+				// Stop countdown
+				System.out.println("playerLeftRoomInLobby");
+				for (Character character : characters) {
+					character.setReady(false);
+				}
 				try {
-					for (int i = 0; i < characters.size(); i++) {
-						if (characters.get(i).getId() == data.getInt("id")) {
-							indexToRemove = i;
-						}
-					}
+					removeCharacter(((JSONObject) args[0]).getJSONObject("character"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
-				// In case something weird happens and indexToRemove is still -1
-				if (indexToRemove != -1) {
-					characters.remove(indexToRemove);
-				}
+				endLobbyCountdownTimer();
 				refreshLobby();
 			}
-		}).on("updateCharacters", new Emitter.Listener() {
+		}).on("updateCharacter", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				System.out.println("RECEIVED UPDATE CHARACTERS EVENT");
-				JSONObject data = (JSONObject) args[0];
-				System.out.println(data);
+				System.out.println("updateCharacters");
 				try {
-					int counter = 0;
-					while (counter < data.getJSONArray("players").length()) {
-						if (characters.get(counter) != null) {
-							characters.get(counter).fromJson(data.getJSONArray("players").getJSONObject(counter));
-						} else {
-							Character character = new Character(currentCharacter.res);
-							character.fromJson(data.getJSONArray("players").getJSONObject(counter));
-							characters.add(character);
-						}
-						counter++;
-					}
+					updateCharacter(((JSONObject) args[0]).getJSONObject("character"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				refreshLobby();
 				socket.emit("updateServerCharacters");
 			}
+		}).on("stopEnterDungeon", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				refreshLobby();
+			}
 		});
+	}
+
+	private void removeCharacter(JSONObject data) {
+		try {
+			// Extract id
+			int id = data.getInt("id");
+
+			// Loop through and find character with id
+			for (int i = 0; i < characters.size(); i++) {
+				if (characters.get(i).getId() == id) {
+					characters.remove(i);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateCharacter(JSONObject data) {
+		try {
+			// Extract id
+			int id = data.getInt("id");
+
+			// Loop through and find character with id
+			for (Character character : characters) {
+				if (character.getId() == id) {
+					character.fromJson(data);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void refreshLobby() {
 		if (lobby != null) {
 			lobby.refresh();
+		}
+	}
+
+	private void endLobbyCountdownTimer() {
+		if (lobby != null) {
+			lobby.endTimer();
 		}
 	}
 
@@ -226,14 +249,11 @@ public class Room {
 		roomID = -1;
 		characters.clear();
 		currentCharacter.setReady(false);
+		endLobbyCountdownTimer();
 		socket.disconnect();
 	}
 
-	public void setMonsterID(){
-		socket.emit("setMonsterID");
-	}
-
-	public int getMonsterID(){
+	public int getMonsterID() {
 		return monsterID;
 	}
 

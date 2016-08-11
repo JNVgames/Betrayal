@@ -201,7 +201,8 @@ public class Lobby extends GameState {
 		});
 		buttons.addActor(partyButton);
 	}
-	private void endTimer(){
+
+	public void endTimer() {
 		task.cancel();
 	}
 
@@ -401,6 +402,7 @@ public class Lobby extends GameState {
 		float y = allPlayersBackground.getTop() - 10;
 		int i = 1;
 		for (Character character : room.getCharacters()) {
+			character.preview.update();
 			addPlayerImage(character, x, (y - (i * height) - (i * 10)), width, height, i);
 			loadLevelTriangle(50, 50, i, character.stats.getFloor());
 			i++;
