@@ -35,6 +35,7 @@ public class MonsterManager {
 
 
 	private void addDungeonMonster(int tier, int monsterID) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!monsterID = " + monsterID);
 		// Configure amount of monsters in dungeon. For example, mobs will have more than one monster
 		int numMonsters = 1;
 

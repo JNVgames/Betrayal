@@ -72,15 +72,15 @@ public class PlayerCard extends Card {
 	}
 
 	public void multiplyHealth(){
-		baseHealth = currentHealth = (int) (currentHealth * 1.5);
+		baseHealth = currentHealth = (int) (Math.ceil(currentHealth * 1.25));
 	}
 
 	public void multiplyAttack(){
-		baseAttack = currentAttack = (int)(currentAttack * 1.5);
+		baseAttack = currentAttack = (int)(Math.ceil(currentAttack * 1.25));
 	}
 
 	public void multiplyDefense(){
-		baseDefense = currentDefense = (int)(currentDefense * 1.5);
+		baseDefense = currentDefense = (int)(Math.ceil(currentDefense * 1.25));
 	}
 
 	public Jobs getJob(){

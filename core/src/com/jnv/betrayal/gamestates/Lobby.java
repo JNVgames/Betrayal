@@ -272,7 +272,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				Lobby.this.refresh();
-				game.getCurrentCharacter().stats.advanceFloor();
+				game.getCurrentCharacter().stats.advanceFloor2();
 			}
 		});
 		bottom.addActor(tower);

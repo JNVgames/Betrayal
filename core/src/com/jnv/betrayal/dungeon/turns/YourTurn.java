@@ -33,6 +33,8 @@ import java.util.List;
 public class YourTurn extends Turn {
 
 	private boolean isFirstAppearance = true;
+	private static final int SPECIAL_COOLDOWN = 3;
+	private static int counter = 0;
 
 	public YourTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
 		super(field, panelPool, buttonPool, panels, game);
@@ -145,19 +147,27 @@ public class YourTurn extends Turn {
 			public void run() {
 				switch (field.getClientCharacter().job.getJob()) {
 					case WARRIOR:
-						field.beginSelectMode(1);
+						if (counter <= 0) {
+							field.beginSelectMode(1);
+						}
 						drawWarriorSpecialBar();
 						break;
 					case THIEF:
-						field.beginSelectMode(1);
+						if (counter <= 0) {
+							field.beginSelectMode(1);
+						}
 						drawThiefSpecialBar();
 						break;
 					case KNIGHT:
-						field.beginSelectMode(2);
+						if (counter <= 0) {
+							field.beginSelectMode(2);
+						}
 						drawKnightSpecialBar();
 						break;
 					case PRIEST:
-						field.beginSelectMode(1);
+						if (counter <= 0) {
+							field.beginSelectMode(1);
+						}
 						drawPriestSpecialBar();
 						break;
 				}
@@ -171,88 +181,35 @@ public class YourTurn extends Turn {
 		}));
 	}
 
-	private void drawKnightSpecialBar() {
-		panels.clearChildren();
-		panels.addActor(createPanel("Select up to 2\ntargets to defend.", FontManager.getFont50(),
-				Panel.top, new Runnable() {
-					@Override
-					public void run() {
-						if (doesTargetExist()) {
-							doEvent(new Defend(field.getCurrentCard(),
-									new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
-							field.endSelectMode();
-						}
-					}
-				}));
-		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
-			@Override
-			public void run() {
-				field.endSelectMode();
-				drawMainBar();
-			}
-		}));
-	}
-
-	private void drawPriestSpecialBar() {
-		panels.clearChildren();
-		panels.addActor(createPanel("Boost target's\nattack", FontManager.getFont50(),
-				Panel.topLeft, new Runnable() {
-					@Override
-					public void run() {
-						if (doesTargetExist()) {
-							// Deal damage to dest cards
-							doEvent(new PriestAttackSpecial(field.getCurrentCard(),
-									new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
-							field.endSelectMode();
-						}
-					}
-				}));
-		panels.addActor(createPanel("Boost target's\ndefense", FontManager.getFont50(),
-				Panel.topRight, new Runnable() {
-					@Override
-					public void run() {
-						if (doesTargetExist()) {
-							// Deal damage to dest cards
-							doEvent(new PriestDefenseSpecial(field.getCurrentCard(),
-									new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_DEFENSE_SPECIAL);
-							field.endSelectMode();
-						}
-					}
-				}));
-		panels.addActor(createPanel("Heal target", FontManager.getFont50(),
-				Panel.bottomLeft, new Runnable() {
-					@Override
-					public void run() {
-						if (doesTargetExist()) {
-							// Deal damage to dest cards
-							doEvent(new PriestHealSpecial(field.getCurrentCard(),
-									new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_HEAL_SPECIAL);
-							field.endSelectMode();
-						}
-					}
-				}));
-		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottomRight, new Runnable() {
-			@Override
-			public void run() {
-				field.endSelectMode();
-				drawMainBar();
-			}
-		}));
-	}
-
 	private void drawWarriorSpecialBar() {
 		panels.clearChildren();
-		panels.addActor(createPanel("Deal 150% damage to target", FontManager.getFont50(), Panel.top, new Runnable() {
-			@Override
-			public void run() {
-				if (doesTargetExist() && !isTargetSelf()) {
-					// Deal damage to dest cards
-					doEvent(new WarriorSpecial(field.getCurrentCard(),
-							new ArrayList<Card>(field.getCardsSelected())), EventType.WARRIOR_SPECIAL);
-					field.endSelectMode();
+		if (counter <= 0) {
+			panels.addActor(createPanel("Deal 150% damage to target", FontManager.getFont50(), Panel.top, new Runnable() {
+				@Override
+				public void run() {
+					if (doesTargetExist() && !isTargetSelf()) {
+						// Deal damage to dest cards
+						doEvent(new WarriorSpecial(field.getCurrentCard(),
+								new ArrayList<Card>(field.getCardsSelected())), EventType.WARRIOR_SPECIAL);
+						counter = SPECIAL_COOLDOWN;
+						field.endSelectMode();
+					}
 				}
-			}
-		}));
+			}));
+			panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
+				@Override
+				public void run() {
+					field.endSelectMode();
+					drawMainBar();
+				}
+			}));
+		} else {
+			drawSpecialMoveOnCooldownBar();
+		}
+	}
+
+	private void drawSpecialMoveOnCooldownBar() {
+		panels.addActor(createGrayPanel("Special move up in " + counter + " turns.", FontManager.getFont50(), Panel.top));
 		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
 			@Override
 			public void run() {
@@ -264,24 +221,105 @@ public class YourTurn extends Turn {
 
 	private void drawThiefSpecialBar() {
 		panels.clearChildren();
-		panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(), Panel.top, new Runnable() {
-			@Override
-			public void run() {
-				if (doesTargetExist() && !isTargetSelf()) {
-					// Deal damage to dest cards
-					doEvent(new ThiefSpecial(field.getCurrentCard(),
-							new ArrayList<Card>(field.getCardsSelected())), EventType.THIEF_SPECIAL);
-					field.endSelectMode();
+		if (counter <= 0) {
+			panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(), Panel.top, new Runnable() {
+				@Override
+				public void run() {
+					if (doesTargetExist() && !isTargetSelf()) {
+						// Deal damage to dest cards
+						doEvent(new ThiefSpecial(field.getCurrentCard(),
+								new ArrayList<Card>(field.getCardsSelected())), EventType.THIEF_SPECIAL);
+						field.endSelectMode();
+					}
 				}
-			}
-		}));
-		panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
-			@Override
-			public void run() {
-				field.endSelectMode();
-				drawMainBar();
-			}
-		}));
+			}));
+			panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
+				@Override
+				public void run() {
+					field.endSelectMode();
+					drawMainBar();
+				}
+			}));
+		} else {
+			drawSpecialMoveOnCooldownBar();
+		}
+	}
+
+	private void drawKnightSpecialBar() {
+		panels.clearChildren();
+		if (counter <= 0) {
+			panels.addActor(createPanel("Select up to 2\ntargets to defend.", FontManager.getFont50(),
+					Panel.top, new Runnable() {
+						@Override
+						public void run() {
+							if (doesTargetExist()) {
+								doEvent(new Defend(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+								field.endSelectMode();
+							}
+						}
+					}));
+			panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
+				@Override
+				public void run() {
+					field.endSelectMode();
+					drawMainBar();
+				}
+			}));
+		} else {
+			drawSpecialMoveOnCooldownBar();
+		}
+	}
+
+	private void drawPriestSpecialBar() {
+		panels.clearChildren();
+		if (counter <= 0) {
+			panels.addActor(createPanel("Boost target's\nattack", FontManager.getFont50(),
+					Panel.topLeft, new Runnable() {
+						@Override
+						public void run() {
+							if (doesTargetExist()) {
+								// Deal damage to dest cards
+								doEvent(new PriestAttackSpecial(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+								field.endSelectMode();
+							}
+						}
+					}));
+			panels.addActor(createPanel("Boost target's\ndefense", FontManager.getFont50(),
+					Panel.topRight, new Runnable() {
+						@Override
+						public void run() {
+							if (doesTargetExist()) {
+								// Deal damage to dest cards
+								doEvent(new PriestDefenseSpecial(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_DEFENSE_SPECIAL);
+								field.endSelectMode();
+							}
+						}
+					}));
+			panels.addActor(createPanel("Heal target", FontManager.getFont50(),
+					Panel.bottomLeft, new Runnable() {
+						@Override
+						public void run() {
+							if (doesTargetExist()) {
+								// Deal damage to dest cards
+								doEvent(new PriestHealSpecial(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_HEAL_SPECIAL);
+								field.endSelectMode();
+							}
+						}
+					}));
+			panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottomRight, new Runnable() {
+				@Override
+				public void run() {
+					field.endSelectMode();
+					drawMainBar();
+				}
+			}));
+		} else {
+			drawSpecialMoveOnCooldownBar();
+		}
 	}
 
 	private void drawSelectBar(final EventType eventType) {

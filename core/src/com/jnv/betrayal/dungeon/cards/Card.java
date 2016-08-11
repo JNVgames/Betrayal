@@ -152,8 +152,6 @@ public abstract class Card {
 	}
 
 	public void endSelectMode() {
-		if (!selecting)
-			throw new IllegalStateException("Card.beginSelectMode must be called before endSelectMode");
 		group.removeListener(selectListener);
 		group.addListener(cardInfoListener);
 		wasSelected = isSelected;

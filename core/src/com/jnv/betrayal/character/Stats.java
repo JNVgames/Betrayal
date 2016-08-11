@@ -4,8 +4,6 @@
 
 package com.jnv.betrayal.character;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.online.JsonSerializable;
 
@@ -24,9 +22,12 @@ public class Stats implements JsonSerializable {
 	private Equips equips;
 
 	public Stats(Equips equips) {
-		baseHealth = 50;
-		baseAttack = 10;
-		baseDefense = 10;
+		int health = 15;		// Warrior: 5, 	Thief: 5, 	Knight: 5	Priest: 15,
+		int attack = 5;	// Warrior: 20, Thief: 15, 	Knight: 0	Priest: 5,
+		int defense = 5;	// Warrior: 0, 	Thief: 5, 	Knight: 20	Priest: 5,
+		baseHealth = 50 + health;
+		baseAttack = 10 + attack;
+		baseDefense = 10 + defense;
 		floor = 0;
 		//availablePoints = 0;
 		//todo change back
@@ -130,6 +131,12 @@ public class Stats implements JsonSerializable {
 	 * Called when the character levels up
 	 */
 	public void advanceFloor() {
+		//floor++; //todo add back delete other
+		availablePoints += 5;
+		applyPoints.updateValues();
+	}
+
+	public void advanceFloor2() {
 		floor++;
 		availablePoints += 5;
 		applyPoints.updateValues();
