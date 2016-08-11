@@ -201,6 +201,9 @@ public class Lobby extends GameState {
 		});
 		buttons.addActor(partyButton);
 	}
+	private void endTimer(){
+		task.cancel();
+	}
 
 	private void loadTimeLeftLabel() {
 		timeTilEnter = new Label("Entering in ", FontManager.getFont60());

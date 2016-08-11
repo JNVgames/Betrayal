@@ -12,6 +12,7 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.Died;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
@@ -26,6 +27,7 @@ import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
@@ -250,6 +252,28 @@ public class Field extends Group {
 					turnManager.nextTurn();
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
+			}
+		}).on("disconnectInDungeon", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				//takes in character of disconnected player
+				JSONObject data = (JSONObject) args[0];
+				int disconnectID = -1;
+				try {
+					disconnectID = data.getJSONObject("character").getInt("id");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				for(Card card : playerZone){
+					if (card.getID() == disconnectID){
+						//checks if it's that current person's turn
+						if (getCurrentCard() == card)
+							turnManager.nextTurn();
+
+						//removes person from playerzone and perform animation
+						roundManager.addEventClient(new Died(card), EventType.DIED);
+					}
 				}
 			}
 		});
