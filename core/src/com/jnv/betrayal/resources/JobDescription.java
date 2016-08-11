@@ -5,14 +5,16 @@
 package com.jnv.betrayal.resources;
 
 public class JobDescription {
-	private static final String warriorDescription = "Warrior:" + "\n (Passive) +25% Attack" +
-			"\n (Team Passive) +10% Attack" + "\n (Ability) 150% strike";
-	private static final String knightDescription = "Knight:" + "\n (Passive) +25% Defense" +
-			"\n (Team Passive) +10% Defense" + "\n (Ability) Grants Shield";
-	private static final String priestDescription = "Priest:" + "\n (Passive) +25% Health" +
-			"\n (Team Passive) +10% Health" + "\n (Ability) Buffs";
-	private static final String thiefDescription = "Thief:" + "\n (Passive) +50% Gold drop rate" +
-			"\n (*TP) +25% Gold drop rate" + "\n (Ability) 25% Chance to Steal " + "\n *TP is Team Passive";
+	private static final String warriorDescription = "Warrior:"  +
+			"\n (Team Passive) +25% Attack" + "\n (Ability) Strike a target with \nan extra 50% damage";
+	private static final String knightDescription = "Knight:" +
+			"\n (Team Passive) +25% Defense" + "\n (Ability) Defends two targets \n and increase Defense"
+			+ "\n lasts 2 turns";
+	private static final String priestDescription = "Priest:" +
+			"\n (Team Passive) +25% Health" + "\n (Ability) Heal/ Buff Atk/Buff Def of \ntarget *effect (x.25 of your own stat)"
+			+"\n(lasts 1 turn)";
+	private static final String thiefDescription = "Thief:" +	"\n (Team Passive) +50% Gold Reward" +
+			"\n (Ability) True Damage Strike \n(50% your current attack)" ;
 
 	public static String getWarriorDescription() {
 		return warriorDescription;

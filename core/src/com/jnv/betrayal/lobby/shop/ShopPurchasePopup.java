@@ -75,7 +75,7 @@ public class ShopPurchasePopup extends Popup {
 	private void loadDescription() {
 		Label description = new Label(item.getDescription(), FontManager.getFont40());
 		description.setX((Betrayal.WIDTH - description.getWidth()) / 2);
-		description.setY(1048 - description.getPrefHeight());
+		description.setY(1048 - description.getPrefHeight() + 10);
 		popup.addActor(description);
 	}
 

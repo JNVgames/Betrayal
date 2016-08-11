@@ -489,15 +489,15 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(140)
 				.name("run1")
-				.costBuy(100)
-				.description("50% Chance to Flee")
+				.costBuy(500)
+				.description("50% Chance to Flee\n")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(50))
 				.build();
 
 		new Run.RunFactory(res)
 				.id(141)
 				.name("run2")
-				.costBuy(200)
+				.costBuy(750)
 				.description("75% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(75))
 				.build();
@@ -505,7 +505,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(142)
 				.name("run3")
-				.costBuy(300)
+				.costBuy(1000)
 				.description("100% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(100))
 				.build();
@@ -515,97 +515,97 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(127)
 				.name("potion1")
-				.costBuy(100)
-				.description("Recover 15 health")
+				.costBuy(250)
+				.description("Recover 25 health")
 				.effect(new Heal(15))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(128)
 				.name("potion2")
-				.costBuy(300)
-				.description("Recover 30 health")
+				.costBuy(750)
+				.description("Recover 50 health")
 				.effect(new Heal(30))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(129)
 				.name("potion3")
-				.costBuy(750)
-				.description("Recover 60 health")
+				.costBuy(2000)
+				.description("Recover 100 health")
 				.effect(new Heal(60))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(130)
 				.name("potion4")
-				.costBuy(100)
-				.description("Increase 25 defense\nLasts 3 turns")
-				.effect(new DefenseUp(25, 3))
+				.costBuy(250)
+				.description("Increase defense by 10\nLasts 3 turns")
+				.effect(new DefenseUp(10, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(131)
 				.name("potion5")
-				.costBuy(100)
-				.description("Increase 50 defense\nLasts 3 turns")
-				.effect(new DefenseUp(50, 3))
+				.costBuy(750)
+				.description("Increase defense by 20\nLasts 3 turns")
+				.effect(new DefenseUp(20, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(132)
 				.name("potion6")
-				.costBuy(100)
-				.description("Increase 75 defense\nLasts 3 turns")
-				.effect(new DefenseUp(75, 3))
+				.costBuy(1500)
+				.description("Increase defense by 30\nLasts 3 turns")
+				.effect(new DefenseUp(30, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(133)
 				.name("potion7")
-				.costBuy(100)
-				.description("Increase 10 attack\nLasts 3 turns")
-				.effect(new AttackUp(10, 3))
+				.costBuy(250)
+				.description("Increase attack by 10\nLasts 3 turns")
+				.effect(new AttackUp(10, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(134)
 				.name("potion8")
-				.costBuy(100)
-				.description("Increase 25 attack\nLasts 3 turns")
-				.effect(new AttackUp(25, 3))
+				.costBuy(750)
+				.description("Increase attack by 20\nLasts 3 turns")
+				.effect(new AttackUp(20, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(135)
 				.name("potion9")
-				.costBuy(100)
-				.description("Increase 50 attack\nLasts 3 turns")
-				.effect(new AttackUp(50, 3))
+				.costBuy(1500)
+				.description("Increase attack by 30\nLasts 3 turns")
+				.effect(new AttackUp(30, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(136)
 				.name("potion10")
-				.costBuy(100)
-				.description("Increase 10 atk/25 def\nLasts 3 turns")
-				.effect(new AttackAndDefenseUp(10, 25, 3))
+				.costBuy(500)
+				.description("Increase attack by 10,\nIncrease def by 10\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(10, 10, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(137)
 				.name("potion11")
-				.costBuy(100)
-				.description("Increase 25 atk/50 def\nLasts 3 turns")
-				.effect(new AttackAndDefenseUp(25, 50, 3))
+				.costBuy(1250)
+				.description("Increase attack by 20,\nIncrease def by 20\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(20, 20, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(138)
 				.name("potion12")
-				.costBuy(100)
-				.description("Increase 50 atk/75 def\nLasts 3 turns")
-				.effect(new AttackAndDefenseUp(50, 75, 3))
+				.costBuy(2500)
+				.description("Increase attack by 30,\nIncrease def by 30\nLasts 3 turns")
+				.effect(new AttackAndDefenseUp(30, 30, 4))
 				.build();
 	}
 
@@ -613,121 +613,121 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)    //Red Health Ring
 				.id(115)
 				.name("ring11")
-				.costBuy(100)
-				.health(0)
+				.costBuy(800)
+				.health(15)
 				.attack(0)
 				.defense(0)
-				.description("+")
+				.description("+15 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(116)
 				.name("ring21")
-				.costBuy(100)
-				.health(0)
+				.costBuy(1600)
+				.health(30)
 				.attack(0)
 				.defense(0)
-				.description("+")
+				.description("+30 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(117)
 				.name("ring12")
-				.costBuy(100)
+				.costBuy(800)
 				.health(0)
-				.attack(0)
+				.attack(10)
 				.defense(0)
-				.description("+")
+				.description("+10 attack")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(118)
 				.name("ring22")
-				.costBuy(100)
+				.costBuy(1600)
 				.health(0)
-				.attack(0)
+				.attack(20)
 				.defense(0)
-				.description("+")
+				.description("+20 attack")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(119)
 				.name("ring13")
-				.costBuy(100)
+				.costBuy(800)
 				.health(0)
 				.attack(0)
-				.defense(0)
-				.description("+")
+				.defense(10)
+				.description("+10 defense")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(120)
 				.name("ring23")
-				.costBuy(100)
+				.costBuy(1600)
 				.health(0)
 				.attack(0)
-				.defense(0)
-				.description("+")
+				.defense(20)
+				.description("+20 defense")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(121)
 				.name("ring14")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
+				.costBuy(800)
+				.health(5)
+				.attack(5)
 				.defense(0)
-				.description("+")
+				.description("+5 attack, \n+5 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(122)
 				.name("ring24")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
+				.costBuy(1600)
+				.health(10)
+				.attack(10)
 				.defense(0)
-				.description("+")
+				.description("+10 attack, \n+10 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(123)
 				.name("ring15")
-				.costBuy(100)
+				.costBuy(800)
 				.health(0)
 				.attack(0)
 				.defense(0)
-				.description("+")
+				.description("+5 defense, \n+5 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(124)
 				.name("ring25")
-				.costBuy(100)
-				.health(0)
+				.costBuy(1600)
+				.health(10)
 				.attack(0)
-				.defense(0)
-				.description("+")
+				.defense(10)
+				.description("+10 defense, \n+10 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(125)
 				.name("ring16")
-				.costBuy(100)
+				.costBuy(1200)
 				.health(0)
 				.attack(0)
 				.defense(0)
-				.description("+")
+				.description("+10 attack, \n+10 defense, \n+10 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(126)
 				.name("ring26")
-				.costBuy(100)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+")
+				.costBuy(2400)
+				.health(20)
+				.attack(20)
+				.defense(20)
+				.description("+20 attack, \n+20 defense, \n+20 health")
 				.build();
 	}
 
@@ -736,40 +736,40 @@ public class ResourceLoader {
 				.id(color + 90) // id - 91 to 96
 				.name("headgear" + color + "1")
 				.costBuy(100)
-				.defense(2)
-				.description("+2 Defense")
+				.defense(3)
+				.description("+3 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
 				.id(color + 96) // id - 97 to 102
 				.name("headgear" + color + "2")
-				.costBuy(200)
-				.defense(4)
-				.description("+4 Defense")
-				.build();
-
-		new Helmet.HelmetFactory(res)
-				.id(color + 102) // id - 103 to 108
-				.name("headgear" + color + "3")
 				.costBuy(300)
 				.defense(6)
 				.description("+6 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
+				.id(color + 102) // id - 103 to 108
+				.name("headgear" + color + "3")
+				.costBuy(600)
+				.defense(9)
+				.description("+9 Defense")
+				.build();
+
+		new Helmet.HelmetFactory(res)
 				.id(color + 108) // id - 109 to 114
 				.name("headgear" + color + "4")
-				.costBuy(400)
-				.defense(8)
-				.description("+8 Defense")
+				.costBuy(1000)
+				.defense(12)
+				.description("+12 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
 				.id(color + 114) // id - 115 to 120
 				.name("headgear" + color + "5")
-				.costBuy(500)
-				.defense(10)
-				.description("+10 Defense")
+				.costBuy(1500)
+				.defense(15)
+				.description("+15 Defense")
 				.build();
 	}
 
@@ -777,41 +777,41 @@ public class ResourceLoader {
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 60) // id - 61 to 66
 				.name("armor" + color + "1")
-				.costBuy(100)
-				.defense(2)
-				.description("+2 Defense")
+				.costBuy(200)
+				.defense(5)
+				.description("+5 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 66) // id - 67 to 72
 				.name("armor" + color + "2")
-				.costBuy(200)
-				.defense(4)
-				.description("+4 Defense")
+				.costBuy(400)
+				.defense(10)
+				.description("+10 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 72) // id - 73 to 78
 				.name("armor" + color + "3")
-				.costBuy(300)
-				.defense(6)
-				.description("+6 Defense")
+				.costBuy(800)
+				.defense(15)
+				.description("+15 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 78) // id - 79 to 84
 				.name("armor" + color + "4")
-				.costBuy(400)
-				.defense(8)
-				.description("+8 Defense")
+				.costBuy(1600)
+				.defense(20)
+				.description("+20 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 84) // id - 85 to 90
 				.name("armor" + color + "5s")
-				.costBuy(500)
-				.defense(10)
-				.description("+10 Defense")
+				.costBuy(3200)
+				.defense(25)
+				.description("+25 Defense")
 				.build();
 	}
 
@@ -820,16 +820,16 @@ public class ResourceLoader {
 				.id(color + 30) // id - 31 to 36
 				.name("shield" + color + "1")
 				.costBuy(100)
-				.defense(2)
-				.description("+2 Defense")
+				.defense(8)
+				.description("+8 Defense")
 				.build();
 
 		new Shield.ShieldFactory(res)
 				.id(color + 36) // id - 37 to 42
 				.name("shield" + color + "2")
 				.costBuy(200)
-				.defense(4)
-				.description("+4 Defense")
+				.defense(16)
+				.description("+16 Defense")
 				.build();
 
 
@@ -837,23 +837,23 @@ public class ResourceLoader {
 				.id(color + 42) // id - 43 to 48
 				.name("shield" + color + "3")
 				.costBuy(400)
-				.defense(6)
-				.description("+6 Defense")
+				.defense(24)
+				.description("+24 Defense")
 				.build();
 		new Shield.ShieldFactory(res)
 				.id(color + 48) // id - 49 to 54
 				.name("shield" + color + "4")
 				.costBuy(700)
-				.defense(8)
-				.description("+8 Defense")
+				.defense(32)
+				.description("+32 Defense")
 				.build();
 
 		new Shield.ShieldFactory(res)
 				.id(color + 54) // id - 55 to 60
 				.name("shield" + color + "5")
 				.costBuy(1000)
-				.defense(10)
-				.description("+10 Defense")
+				.defense(40)
+				.description("+40 Defense")
 				.build();
 	}
 
@@ -861,41 +861,41 @@ public class ResourceLoader {
 		new Weapon.WeaponFactory(res)
 				.id(color) // id - 1 to 6
 				.name("sword" + color + "1")
-				.costBuy(100)
+				.costBuy(200)
 				.attack(2)
-				.description("+2 Attack")
+				.description("+5 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 6) // id - 7 to 12
 				.name("sword" + color + "2")
-				.costBuy(200)
+				.costBuy(400)
 				.attack(5)
-				.description("+5 Attack")
+				.description("+10 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 12) // id - 3 to 18
 				.name("sword" + color + "3")
-				.costBuy(400)
+				.costBuy(800)
 				.attack(10)
-				.description("+10 Attack")
+				.description("+15 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 18) // id - 19 to 24
 				.name("sword" + color + "4")
-				.costBuy(700)
+				.costBuy(1600)
 				.attack(15)
-				.description("+15 Attack")
+				.description("+20 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 24) // id - 25 to 30
 				.name("sword" + color + "5")
-				.costBuy(1000)
+				.costBuy(3200)
 				.attack(20)
-				.description("+20 Attack")
+				.description("+25 Attack")
 				.build();
 	}
 
@@ -946,11 +946,11 @@ public class ResourceLoader {
 				.id(1)
 				.nickname("The Green Lantern")
 				.textureName("monster-tier1-0")
-				.textureWidth(300).textureHeight(300).x(310).y(740)
+				.textureWidth(300).textureHeight(300).x(250).y(740)
 				.health(42).attack(27).defense(15)
-				.goldReward(100)
+				.goldReward(300)
 				.effect(new AttackAndDefenseUp(25, 5, 2))
-				.numTargets(1).effectCooldown(4)
+				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -959,7 +959,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-1")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.health(50).attack(30).defense(5)
-				.goldReward(100)
+				.goldReward(250)
 				.effect(new SkipTurn())
 				.numTargets(1).effectCooldown(2)
 				.build();
@@ -970,7 +970,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-2")
 				.health(30).attack(30).defense(30)
 				.textureWidth(250).textureHeight(300).x(235).y(740)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -981,7 +981,7 @@ public class ResourceLoader {
 				.health(10).attack(30).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
 				// todo high reward
-				.goldReward(100)
+				.goldReward(500)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -991,7 +991,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-4")
 				.health(50).attack(25).defense(10)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.goldReward(100)
+				.goldReward(150)
 				.effect(new TrueDamage(25)).effectCooldown(2)
 				.numTargets(1)
 				.build();
@@ -1002,7 +1002,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-5")
 				.health(60).attack(25).defense(15)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.goldReward(100)
+				.goldReward(150)
 				.effect(new DefenseUp(3, 3)).effectCooldown(3)
 				.numTargets(1)
 				.build();
@@ -1013,7 +1013,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-6")
 				.health(28).attack(60).defense(10)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.goldReward(100)
+				.goldReward(150)
 				.effect(new SkipTurn()).effectCooldown(3)
 				.numTargets(1)
 				.build();
@@ -1025,7 +1025,7 @@ public class ResourceLoader {
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.health(60).attack(1).defense(1)
 				.effect(new AttackAndDefenseUp(60, 60, 3)).effectCooldown(4)
-				.goldReward(100)
+				.goldReward(150)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1035,7 +1035,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-8")
 				.health(30).attack(30).defense(0)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.goldReward(100)
+				.goldReward(150)
 				.numTargets(1)
 				.effect(new AttackUp(50,2)).effectCooldown(4)
 				.build();
@@ -1048,7 +1048,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-9")
 				.textureWidth(300).textureHeight(350).x(50).y(720)
 				.health(20).attack(10).defense(10)
-				.goldReward(100)
+				.goldReward(175)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1058,7 +1058,7 @@ public class ResourceLoader {
 				.textureName("monster-tier1-19")
 				.textureWidth(300).textureHeight(350).x(370).y(740)
 				.health(20).attack(10).defense(10)
-				.goldReward(100)
+				.goldReward(175)
 				.numTargets(1)
 				.build();
 
@@ -1070,7 +1070,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-0")
 				.health(20).attack(10).defense(10)
 				.textureWidth(400).textureHeight(450).x(160).y(700)
-				.goldReward(100)
+				.goldReward(375)
 				.numTargets(4)
 				.effect(new AttackAndDefenseDown(10, 10, 2))
 				.build();
@@ -1081,7 +1081,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-1")
 				.health(50).attack(25).defense(10)
 				.textureWidth(350).textureHeight(450).x(185).y(700)
-				.goldReward(100)
+				.goldReward(650)
 				.numTargets(1).effectCooldown(3)
 				.effect(new SkipTurn()).effectCooldown(2)
 				.build();
@@ -1092,7 +1092,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-2")
 				.health(25).attack(20).defense(5)
 				.textureWidth(250).textureHeight(300).x(30).y(690)
-				.goldReward(100)
+				.goldReward(400)
 				.numTargets(2).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1102,7 +1102,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-3")
 				.health(40).attack(15).defense(0)
 				.textureWidth(500).textureHeight(450).x(110).y(680)
-				.goldReward(100)
+				.goldReward(500)
 				.numTargets(1).effectCooldown(3)
 				.effect(new Poison(3)).effectCooldown(5)
 				.build();
@@ -1113,7 +1113,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-4")
 				.health(50).attack(5).defense(0)
 				.textureWidth(650).textureHeight(550).x(35).y(690)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(3).effectCooldown(3)
 				.effect(new AttackUp(25, 2)).effectCooldown(4)
 				.build();
@@ -1145,7 +1145,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-7")
 				.health(45).attack(15).defense(3)
 				.textureWidth(400).textureHeight(450).x(160).y(650)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1155,7 +1155,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-8")
 				.health(25).attack(10).defense(1)
 				.textureWidth(400).textureHeight(500).x(160).y(670)
-				.goldReward(100)
+				.goldReward(400)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1165,7 +1165,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-9")
 				.health(20).attack(0).defense(0)
 				.textureWidth(400).textureHeight(500).x(160).y(670)
-				.goldReward(100)
+				.goldReward(500)
 				.numTargets(1).effectCooldown(3)
 				.effect(new AttackAndDefenseDown(5, 5, 10)).effectCooldown(1)
 				.build();
@@ -1178,7 +1178,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-12")
 				.health(20).attack(15).defense(3)
 				.textureWidth(250).textureHeight(300).x(230).y(760)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1188,7 +1188,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-22")
 				.health(20).attack(16).defense(3)
 				.textureWidth(250).textureHeight(300).x(430).y(690)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1200,7 +1200,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-0")
 				.health(60).attack(15).defense(10)
 				.textureWidth(350).textureHeight(300).x(340).y(670)
-				.goldReward(100)
+				.goldReward(250)
 				.numTargets(3).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1210,7 +1210,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-1")
 				.health(40).attack(20).defense(20)
 				.textureWidth(600).textureHeight(500).x(60).y(640)
-				.goldReward(100)
+				.goldReward(250)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1220,7 +1220,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-2")
 				.health(50).attack(28).defense(10)
 				.textureWidth(400).textureHeight(450).x(0).y(690)
-				.goldReward(100)
+				.goldReward(400)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1230,7 +1230,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-3")
 				.health(50).attack(0).defense(0)
 				.textureWidth(400).textureHeight(450).x(160).y(690)
-				.goldReward(100)
+				.goldReward(600)
 				.numTargets(1).effectCooldown(3)
 				.effect(new AttackUp(50, 2)).effectCooldown(5)
 				.build();
@@ -1241,7 +1241,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(550).textureHeight(500).x(85).y(740)
-				.goldReward(100)
+				.goldReward(400)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1251,7 +1251,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-5")
 				.health(45).attack(15).defense(15)
 				.textureWidth(500).textureHeight(550).x(110).y(665)
-				.goldReward(100)
+				.goldReward(650)
 				.numTargets(1).effectCooldown(3)
 
 				.build();
@@ -1262,7 +1262,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-6")
 				.health(20).attack(18).defense(24)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(100)
+				.goldReward(50)
 				.numTargets(1).effectCooldown(3)
 				.effect(new SkipTurn()).effectCooldown(3)
 				.build();
@@ -1273,7 +1273,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-7")
 				.health(40).attack(12).defense(8)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(100)
+				.goldReward(800)
 				.numTargets(1).effectCooldown(4)
 				.effect(new DefenseUp(10, 3))
 				.build();
@@ -1284,7 +1284,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-9")
 				.health(40).attack(17).defense(9)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(100)
+				.goldReward(550)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1296,7 +1296,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-8")
 				.health(15).attack(10).defense(10)
 				.textureWidth(400).textureHeight(400).x(160).y(750)
-				.goldReward(100)
+				.goldReward(250)
 				.numTargets(4).effectCooldown(3)
 				.effect(new AttackAndDefenseDown(10, 10, 2))
 				.build();
@@ -1307,7 +1307,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-18")
 				.health(15).attack(10).defense(5)
 				.textureWidth(250).textureHeight(300).x(20).y(660)
-				.goldReward(100)
+				.goldReward(150)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1329,7 +1329,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-10")
 				.health(30).attack(15).defense(0)
 				.textureWidth(350).textureHeight(300).x(50).y(710)
-				.goldReward(100)
+				.goldReward(400)
 				.numTargets(2).effectCooldown(3)
 				.build();
 
@@ -1342,7 +1342,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-12")
 				.health(30).attack(17).defense(10)
 				.textureWidth(400).textureHeight(450).x(360).y(690)
-				.goldReward(100)
+				.goldReward(600)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1354,7 +1354,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-0")
 				.health(70).attack(15).defense(10)
 				.textureWidth(500).textureHeight(475).x(110).y(675)
-				.goldReward(100)
+				.goldReward(1000)
 				.numTargets(1).effectCooldown(2)
 				.effect(new Bomb(60, 4))
 				.build();
@@ -1365,7 +1365,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-1")
 				.health(25).attack(10).defense(1)
 				.textureWidth(350).textureHeight(400).x(185).y(665)
-				.goldReward(100)
+				.goldReward(800)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1375,7 +1375,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-2")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.goldReward(100)
+				.goldReward(750)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1385,7 +1385,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-3")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.goldReward(100)
+				.goldReward(800)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1395,7 +1395,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.goldReward(100)
+				.goldReward(1200)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1407,7 +1407,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-5")
 				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(0).y(655)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1417,7 +1417,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-15")
 				.health(25).attack(10).defense(1)
 				.textureWidth(350).textureHeight(400).x(185).y(765)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1427,7 +1427,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-25")
 				.health(25).attack(10).defense(1)
 				.textureWidth(300).textureHeight(350).x(420).y(655)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1439,7 +1439,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-6")
 				.health(25).attack(10).defense(1)
 				.textureWidth(425).textureHeight(475).x(40).y(675)
-				.goldReward(100)
+				.goldReward(600)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1449,7 +1449,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-16")
 				.health(25).attack(10).defense(1)
 				.textureWidth(225).textureHeight(250).x(400).y(740)
-				.goldReward(100)
+				.goldReward(200)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1461,7 +1461,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-7")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(260).y(675)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1471,7 +1471,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-17")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(0).y(725)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1480,8 +1480,8 @@ public class ResourceLoader {
 				.nickname("Sir Cumference")
 				.textureName("monster-tier4-27")
 				.health(25).attack(10).defense(1)
-				.textureWidth(200).textureHeight(250).x(520).y(725)
-				.goldReward(100)
+				.textureWidth(400).textureHeight(250).x(520).y(725)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1490,8 +1490,8 @@ public class ResourceLoader {
 				.nickname("Peeping Tom")
 				.textureName("monster-tier4-37")
 				.health(25).attack(10).defense(1)
-				.textureWidth(200).textureHeight(250).x(120).y(815)
-				.goldReward(100)
+				.textureWidth(100).textureHeight(250).x(120).y(815)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1501,7 +1501,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-47")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(400).y(815)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1511,7 +1511,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-57")
 				.health(25).attack(10).defense(1)
 				.textureWidth(200).textureHeight(250).x(260).y(870)
-				.goldReward(100)
+				.goldReward(300)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1523,7 +1523,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-0")
 				.health(25).attack(10).defense(1)
 				.textureWidth(600).textureHeight(525).x(60).y(665)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1533,7 +1533,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-1")
 				.health(25).attack(10).defense(1)
 				.textureWidth(450).textureHeight(550).x(135).y(665)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1543,7 +1543,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-2")
 				.health(25).attack(10).defense(1)
 				.textureWidth(620).textureHeight(500).x(50).y(640)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1553,7 +1553,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-3")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1563,7 +1563,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-4")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1573,7 +1573,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-5")
 				.health(25).attack(10).defense(1)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(100)
+				.goldReward(1500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 	}

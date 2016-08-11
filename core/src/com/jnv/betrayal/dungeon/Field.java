@@ -307,7 +307,7 @@ public class Field extends Group {
 			if(hasKnight) card.multiplyDefense();
 		}
 
-		if(hasThief) reward  *= 2;
+		if(hasThief) reward  *= 1.5;
 	}
 
 	public Character getClientCharacter() {

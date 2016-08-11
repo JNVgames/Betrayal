@@ -26,7 +26,7 @@ public class PriestHealSpecial extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.heal(src.getBaseHealth() * 0.1f);
+		destCard.heal(src.getBaseHealth() * 0.25f);
 	}
 
 	@Override
