@@ -56,14 +56,15 @@ public class Instructions extends Popup {
 	private void nextContent(){
 		System.out.println("currentContent = " + currentContent);
 		System.out.println("textures.size() = " + textures.size());
-		currentContent = (currentContent + 1) % textures.size();
+		currentContent++;
+		if (currentContent==textures.size()) currentContent--;
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
 	private void previousContent(){
 		System.out.println("currentContent = " + currentContent);
 		System.out.println("textures.size() = " + textures.size());
 		currentContent--;
-		if(currentContent<0) currentContent = textures.size()-1;
+		if(currentContent<0) currentContent++;
 		System.out.println("currentContent = " + currentContent);
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
