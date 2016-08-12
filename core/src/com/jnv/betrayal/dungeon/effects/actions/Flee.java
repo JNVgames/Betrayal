@@ -27,12 +27,16 @@ public class Flee extends Effect {
 	public Flee(JSONObject data, int turns, Card src, List<Card> dest) {
 		super(EventType.FLEE, turns);
 		isHostile = false;
-		init(src, new ArrayList<Card>());
+		init(src, dest);
 	}
 
 	@Override
 	public void startEffect(Card destCard) {
-		src.getField().playerZone.remove(src);
+		for (int i = 0; i < src.getField().playerZone.size(); i++) {
+			if (src.getField().playerZone.get(i).getID() == src.getID()) {
+				src.getField().queueRemovePlayer(src);
+			}
+		}
 	}
 
 	@Override

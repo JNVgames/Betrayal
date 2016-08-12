@@ -32,7 +32,9 @@ public class MonsterTurn extends Turn {
 		field.addAction(Actions.delay(3f, new RunnableAction(){
 			@Override
 			public void run() {
+				System.out.println("field.playerZone = " + field.playerZone);
 				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()) {
+
 					monsterAttack();
 				}
 			}

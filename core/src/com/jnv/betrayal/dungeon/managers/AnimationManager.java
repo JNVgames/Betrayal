@@ -47,7 +47,7 @@ public class AnimationManager {
 				animation.fadeOut(event.getSrc());
 				break;
 
-			/********************Item abd Skills*************************/
+			/********************Item and Skills*************************/
 			case HEAL:
 			case PRIEST_HEAL_SPECIAL:
 				animation.jump(event.getSrc());

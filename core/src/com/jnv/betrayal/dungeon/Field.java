@@ -46,21 +46,20 @@ public class Field extends Group {
 	public final Betrayal game;
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
+	public final List<Card> allCards;
+	public final List<Card> cardsToRemove = new ArrayList<Card>();
 	private Image background;
 	public final Socket socket;
 	public int reward;
-	private List<Card> allCards;
 	private int currentCardTurn;
 	private Character clientCharacter;
 	private Group cardGroup = new Group();
-
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
 	 */
 	public Field(GameStateManager gsm) {
 		// Initialize card zones and instance variables
-
 		playerZone = new ArrayList<PlayerCard>();
 		monsterZone = new ArrayList<MonsterCard>();
 		this.gsm = gsm;
@@ -273,7 +272,7 @@ public class Field extends Group {
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
 				}
 				refreshAllCards();
-				if (currentCardTurn != 0) currentCardTurn--;
+				calibrateCurrentCardTurnIndex();
 			}
 		});
 	}
@@ -335,5 +334,13 @@ public class Field extends Group {
 
 	public Character getClientCharacter() {
 		return clientCharacter;
+	}
+
+	public void queueRemovePlayer(Card src) {
+		cardsToRemove.add(src);
+	}
+
+	public void calibrateCurrentCardTurnIndex() {
+		if (currentCardTurn != 0) currentCardTurn--;
 	}
 }

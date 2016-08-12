@@ -74,6 +74,7 @@ public class TurnManager {
 
 	public void nextTurn() {
 		System.out.println("TurnManager.nextTurn");
+		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 		// If your turn is ending, decrease skill cooldown counter
 		if (!dungeonEnded) {
 			if (currentTurn instanceof YourTurn) {
@@ -82,6 +83,11 @@ public class TurnManager {
 			field.setNextCardIndex();
 			field.roundManager.checkEvents(field.getCurrentCard());
 			drawUI();
+			for (Card card : field.cardsToRemove) {
+				field.playerZone.remove(card);
+				field.calibrateCurrentCardTurnIndex();
+			}
+			field.cardsToRemove.clear();
 			System.out.println("Next Turn...");
 		}
 	}

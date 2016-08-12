@@ -81,7 +81,7 @@ public class MonsterCard extends Card {
 		return skillTexture;
 	}
 
-	public void multiplyHealth(int mFactor){
+	public void multiplyHealth(int mFactor) {
 		baseHealth = currentHealth = mFactor * currentHealth;
 	}
 
