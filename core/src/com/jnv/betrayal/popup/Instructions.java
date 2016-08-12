@@ -66,30 +66,32 @@ public class Instructions extends Popup {
 	}
 
 	private void loadTextures(){
-		textures.add(getNewTexture("createCharacterCustomize"));
-		textures.add(getNewTexture("createCharacterName"));
-		textures.add(getNewTexture("createRoomPassword"));
-		textures.add(getNewTexture("inventoryEject"));
-		textures.add(getNewTexture("inventoryEquip"));
-		textures.add(getNewTexture("joinRoomPassword"));
-		textures.add(getNewTexture("loadGameSelect"));
-		textures.add(getNewTexture("lobbyEnterDungeon"));
-		textures.add(getNewTexture("lobbyInventory"));
-		textures.add(getNewTexture("lobbyOption"));
-		textures.add(getNewTexture("lobbyReady"));
-		textures.add(getNewTexture("lobbyRoom"));
-		textures.add(getNewTexture("lobbyShop"));
-		textures.add(getNewTexture("lobbyStats"));
-		textures.add(getNewTexture("mainMenuHallOfFame"));
-		textures.add(getNewTexture("mainMenuLoadGame"));
+		textures.add(getNewTexture("instruction"));
 		textures.add(getNewTexture("mainMenuNewGame"));
-		textures.add(getNewTexture("onlineCreateRoom"));
-		textures.add(getNewTexture("onlineLeaveRoom"));
-		textures.add(getNewTexture("onlineRoomJoin"));
+		textures.add(getNewTexture("createCharacterName"));
+		textures.add(getNewTexture("createCharacterCustomize"));
+ 		textures.add(getNewTexture("mainMenuLoadGame"));
+		textures.add(getNewTexture("loadGameSelect"));
+		textures.add(getNewTexture("lobbyShop"));
 		textures.add(getNewTexture("shopItemTap"));
 		textures.add(getNewTexture("shopTab"));
+		textures.add(getNewTexture("lobbyInventory"));
+		textures.add(getNewTexture("inventoryEquip"));
+		textures.add(getNewTexture("inventoryEject"));
+		textures.add(getNewTexture("lobbyStats"));
 		textures.add(getNewTexture("statsAdjust"));
 		textures.add(getNewTexture("statsApply"));
+		textures.add(getNewTexture("lobbyRoom"));
+		textures.add(getNewTexture("onlineCreateRoom"));
+		textures.add(getNewTexture("createRoomPassword"));
+		textures.add(getNewTexture("onlineRoomJoin"));
+		textures.add(getNewTexture("joinRoomPassword"));
+		textures.add(getNewTexture("onlineLeaveRoom"));
+		textures.add(getNewTexture("lobbyEnterDungeon"));
+		textures.add(getNewTexture("lobbyOption"));
+		textures.add(getNewTexture("lobbyReady"));
+
+		textures.add(getNewTexture("mainMenuHallOfFame"));
 	}
 
 	private void loadTitle() {

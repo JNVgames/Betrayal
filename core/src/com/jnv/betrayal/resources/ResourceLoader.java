@@ -122,6 +122,7 @@ public class ResourceLoader {
 		res.loadTexture("instructions/shopTab.png","shopTab");
 		res.loadTexture("instructions/statsAdjust.png","statsAdjust");
 		res.loadTexture("instructions/statsApply.png","statsApply");
+		res.loadTexture("instructions/instructions.png", "instruction");
 
 	}
 
