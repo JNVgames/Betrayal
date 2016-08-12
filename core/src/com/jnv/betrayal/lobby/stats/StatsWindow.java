@@ -105,6 +105,13 @@ public class StatsWindow extends Popup {
 		title.setY(background.getTop() - title.getPrefHeight() - 10);
 		popup.addActor(title);
 		System.out.println("title.getZIndex() = " + title.getZIndex());
+
+		com.jnv.betrayal.scene2d.ui.Image whiteLine = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(title.getWidth()+20);
+		whiteLine.setHeight(2);
+		whiteLine.setX(title.getX()-10);
+		whiteLine.setY(title.getY() - whiteLine.getHeight());
+		popup.addActor(whiteLine);
 	}
 
 	private void loadIcons() {

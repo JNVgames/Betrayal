@@ -49,6 +49,14 @@ public class JoinRoomPopup extends Popup {
 		roomID.setMaxLength(8);
 		popup.addActor(roomID);
 
+		//add white line under
+		Image whiteLinee = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
+		whiteLinee.setWidth(500);
+		whiteLinee.setHeight(3);
+		whiteLinee.setX(roomID.getX());
+		whiteLinee.setY(roomID.getY() - whiteLinee.getHeight());
+		popup.addActor(whiteLinee);
+
 		password = new TextField("", tfs);
 		password.setMessageText("Enter Password Here");
 		password.setBounds(roomID.getX(), roomID.getY() - 5 - roomID.getHeight(),
@@ -67,6 +75,14 @@ public class JoinRoomPopup extends Popup {
 			}
 		};
 		game.getStage().getRoot().addCaptureListener(keyboardListener);
+
+		//add white line under
+		Image whiteLine = new Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(500);
+		whiteLine.setHeight(3);
+		whiteLine.setX(password.getX());
+		whiteLine.setY(password.getY() - whiteLine.getHeight());
+		popup.addActor(whiteLine);
 	}
 
 	private void loadBackground() {

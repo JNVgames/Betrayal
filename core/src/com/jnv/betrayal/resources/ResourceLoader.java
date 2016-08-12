@@ -84,6 +84,7 @@ public class ResourceLoader {
 		res.loadTexture("character/character_outline.png", "character-outline");
 		res.loadTexture("about/option_background.png", "4option-background");
 		res.loadTexture("about/option_background200x213.png", "3option-background");
+		res.loadTexture("about/whitepixel.png", "white-pixel");
 
 		// Dungeon backgrounds
 		for (int i = 1; i <= 5; i++) {

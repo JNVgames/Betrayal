@@ -59,6 +59,15 @@ public class CreateRoomPopup extends Popup {
 			}
 		};
 		game.getStage().getRoot().addCaptureListener(keyboardListener);
+
+		//add white line under
+		com.jnv.betrayal.scene2d.ui.Image whiteLine = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(500);
+		whiteLine.setHeight(3);
+		whiteLine.setX(password.getX());
+		whiteLine.setY(password.getY() - whiteLine.getHeight());
+		popup.addActor(whiteLine);
+
 	}
 
 	private void loadBackground() {

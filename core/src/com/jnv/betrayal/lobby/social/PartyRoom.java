@@ -36,7 +36,7 @@ public class PartyRoom extends Popup {
 		createRoom = new Image(res.getTexture("create-room"));
 		leaveRoom = new Image(res.getTexture("leave-room"));
 		partyBackground = new Image(res.getTexture("shop-background"));
-		partyTitle = new Label("", FontManager.getFont60());            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
+		partyTitle = new Label("Online", FontManager.getFont40());            //VINCENT DO NOT DELETE THIS. USING IT IN RELATION
 		lobbyButton = new Image(res.getTexture("back-to-lobby"));
 		loadStage();
 
@@ -57,12 +57,18 @@ public class PartyRoom extends Popup {
 	}
 
 	private void loadTitle() {
-		partyTitle.layout();
 		partyTitle.setBounds(new Dimension(partyBackground.getX() + partyBackground.getWidth() / 2,
 				partyBackground.getTop() - 20 - partyTitle.getPrefHeight(), partyTitle.getPrefWidth(),
 				partyTitle.getPrefHeight(), true, false));
 		popup.addActor(partyTitle);
 
+		//add white line under
+		com.jnv.betrayal.scene2d.ui.Image whiteLine = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(partyTitle.getWidth()+20);
+		whiteLine.setHeight(2);
+		whiteLine.setX(partyTitle.getX()-10);
+		whiteLine.setY(partyTitle.getY() - whiteLine.getHeight());
+		popup.addActor(whiteLine);
 
 	}
 

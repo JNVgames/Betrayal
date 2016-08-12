@@ -89,7 +89,7 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadBackground() {
-		Image background = new Image(res.getTexture("instructions-background")) {
+		Image background = new Image(res.getTexture("map31")) {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
 				batch.disableBlending();
@@ -197,6 +197,15 @@ public class CharacterSelection extends GameState {
 				return false;
 			}
 		});
+
+
+		//add white line under
+		Image whiteLine = new Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(400);
+		whiteLine.setHeight(3);
+		whiteLine.setX(fieldUsernameEnter.getX());
+		whiteLine.setY(fieldUsernameEnter.getY() - whiteLine.getHeight());
+		stage.addActor(whiteLine);
 	}
 
 	private void loadImagePreview() {

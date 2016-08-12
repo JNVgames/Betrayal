@@ -59,10 +59,17 @@ public class Inventory extends Popup implements InventoryLoadable {
 
 	private void loadTitle() {
 		title = new Label("Inventory", FontManager.getFont40());
-		title.setHeight(100);
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(Betrayal.HEIGHT - 200);
 		popup.addActor(title);
+
+		//add white line under
+		com.jnv.betrayal.scene2d.ui.Image whiteLine = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
+		whiteLine.setWidth(title.getWidth()+20);
+		whiteLine.setHeight(2);
+		whiteLine.setX(title.getX()-10);
+		whiteLine.setY(title.getY() - whiteLine.getHeight());
+		popup.addActor(whiteLine);
 	}
 
 	private void loadGoldIcon() {
