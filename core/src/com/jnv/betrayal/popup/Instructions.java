@@ -23,7 +23,7 @@ import java.util.List;
 public class Instructions extends Popup {
 
 	private Image rightArrow, leftArrow, exitButton, background, content;
-	private Label title;
+	private Label title, pageNum;
 	private List<Texture> textures;
 	private Label.LabelStyle font40;
 	private int currentContent;
@@ -43,6 +43,7 @@ public class Instructions extends Popup {
 		loadContent();
 		loadLeftArrow();
 		loadRightArrow();
+		setPageNumber();
 		loadXButton();
 		loadTitle();
 	}
@@ -61,24 +62,33 @@ public class Instructions extends Popup {
 	private void previousContent(){
 		System.out.println("currentContent = " + currentContent);
 		System.out.println("textures.size() = " + textures.size());
-		currentContent = (currentContent - 1) % textures.size();
+		currentContent--;
+		if(currentContent<0) currentContent = textures.size()-1;
+		System.out.println("currentContent = " + currentContent);
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
 
 	private void loadTextures(){
 		textures.add(getNewTexture("instruction"));
 		textures.add(getNewTexture("mainMenuNewGame"));
+ 		textures.add(getNewTexture("mainMenuLoadGame"));
+		textures.add(getNewTexture("mainMenuHallOfFame"));
+		textures.add(getNewTexture("characterCreation"));
 		textures.add(getNewTexture("createCharacterName"));
 		textures.add(getNewTexture("createCharacterCustomize"));
- 		textures.add(getNewTexture("mainMenuLoadGame"));
+		textures.add(getNewTexture("loadGamePage"));
 		textures.add(getNewTexture("loadGameSelect"));
+		textures.add(getNewTexture("lobby"));
 		textures.add(getNewTexture("lobbyShop"));
+		textures.add(getNewTexture("shop"));
 		textures.add(getNewTexture("shopItemTap"));
 		textures.add(getNewTexture("shopTab"));
 		textures.add(getNewTexture("lobbyInventory"));
+		textures.add(getNewTexture("inventory"));
 		textures.add(getNewTexture("inventoryEquip"));
 		textures.add(getNewTexture("inventoryEject"));
 		textures.add(getNewTexture("lobbyStats"));
+		textures.add(getNewTexture("stats"));
 		textures.add(getNewTexture("statsAdjust"));
 		textures.add(getNewTexture("statsApply"));
 		textures.add(getNewTexture("lobbyRoom"));
@@ -87,11 +97,23 @@ public class Instructions extends Popup {
 		textures.add(getNewTexture("onlineRoomJoin"));
 		textures.add(getNewTexture("joinRoomPassword"));
 		textures.add(getNewTexture("onlineLeaveRoom"));
-		textures.add(getNewTexture("lobbyEnterDungeon"));
 		textures.add(getNewTexture("lobbyOption"));
+		textures.add(getNewTexture("lobbyCheckTeammateStats"));
 		textures.add(getNewTexture("lobbyReady"));
+		textures.add(getNewTexture("lobbyEnterDungeon"));
+		textures.add(getNewTexture("dungeon"));
+		textures.add(getNewTexture("dungeonAttack"));
+		textures.add(getNewTexture("dungeonDefend"));
+		textures.add(getNewTexture("dungeonFlee"));
+		textures.add(getNewTexture("dungeonItems"));
+		textures.add(getNewTexture("dungeonTapForStats"));
+		textures.add(getNewTexture("dungeonKillMonster"));
+		textures.add(getNewTexture("dungeonMonsterAttackExplanation"));
+		textures.add(getNewTexture("dungeonMonsterSkill"));
+		textures.add(getNewTexture("dungeonEventLog"));
+		textures.add(getNewTexture("dungeonDeathWarning"));
 
-		textures.add(getNewTexture("mainMenuHallOfFame"));
+
 	}
 
 	private void loadTitle() {
@@ -146,7 +168,7 @@ public class Instructions extends Popup {
 		this.leftArrow = new Image(leftArrow);
 		this.leftArrow.setWidth(125);
 		this.leftArrow.setHeight(62);
-		this.leftArrow.setX(210);
+		this.leftArrow.setX(175);
 		this.leftArrow.setY(background.getY()+10);
 		this.leftArrow.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -155,6 +177,7 @@ public class Instructions extends Popup {
 
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				previousContent();
+				updatePageNumber();
 			}
 		});
 		popup.addActor(this.leftArrow);
@@ -173,7 +196,7 @@ public class Instructions extends Popup {
 		rightArrow = new Image(res.getTexture("arrow-right"));
 		rightArrow.setWidth(125);
 		rightArrow.setHeight(62);
-		rightArrow.setX(385);
+		rightArrow.setX(425);
 		rightArrow.setY(background.getY()+10);
 		rightArrow.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -182,6 +205,7 @@ public class Instructions extends Popup {
 
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				nextContent();
+				updatePageNumber();
 			}
 		});
 		popup.addActor(rightArrow);
@@ -194,6 +218,20 @@ public class Instructions extends Popup {
 				rightArrow.getX()-8,
 				rightArrow.getY()-3);
 
+	}
+
+
+	private void setPageNumber(){
+		pageNum = new Label("1/"+textures.size(), FontManager.getFont40());
+		pageNum.setX(Betrayal.WIDTH/2 - pageNum.getPrefWidth()/2);
+		pageNum.setY(rightArrow.getY() + (rightArrow.getHeight()/2 - pageNum.getPrefHeight()/2));
+		popup.addActor(pageNum);
+	}
+
+	private void updatePageNumber(){
+		int page = currentContent + 1;
+		pageNum.setText( page + "/" + textures.size() );
+		pageNum.setX(Betrayal.WIDTH/2 - pageNum.getPrefWidth()/2);
 	}
 
 

@@ -123,6 +123,26 @@ public class ResourceLoader {
 		res.loadTexture("instructions/statsAdjust.png","statsAdjust");
 		res.loadTexture("instructions/statsApply.png","statsApply");
 		res.loadTexture("instructions/instructions.png", "instruction");
+		res.loadTexture("instructions/characterCreation.png", "characterCreation");
+		res.loadTexture("instructions/dungeon.png", "dungeon");
+		res.loadTexture("instructions/dungeonAttack.png", "dungeonAttack");
+		res.loadTexture("instructions/dungeonDeathWarning.png", "dungeonDeathWarning");
+		res.loadTexture("instructions/dungeonDefend.png", "dungeonDefend");
+		res.loadTexture("instructions/dungeonEventLog.png", "dungeonEventLog");
+		res.loadTexture("instructions/dungeonFlee.png", "dungeonFlee");
+		res.loadTexture("instructions/dungeonItems.png", "dungeonItems");
+		res.loadTexture("instructions/dungeonKillMonster.png", "dungeonKillMonster");
+		res.loadTexture("instructions/dungeonMonsterAttackExplanation.png", "dungeonMonsterAttackExplanation");
+		res.loadTexture("instructions/dungeonMonsterSkill.png", "dungeonMonsterSkill");
+		res.loadTexture("instructions/dungeonTapForStats.png", "dungeonTapForStats");
+		res.loadTexture("instructions/inventory.png", "inventory");
+		res.loadTexture("instructions/loadGamePage.png", "loadGamePage");
+		res.loadTexture("instructions/lobby.png", "lobby");
+		res.loadTexture("instructions/lobbyCheckTeammateStats.png", "lobbyCheckTeammateStats");
+		res.loadTexture("instructions/shop.png", "shop");
+		res.loadTexture("instructions/stats.png", "stats");
+
+
 
 	}
 
