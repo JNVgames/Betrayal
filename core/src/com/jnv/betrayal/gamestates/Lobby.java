@@ -279,7 +279,8 @@ public class Lobby extends GameState {
 	private void loadAllPlayersBackground() {
 		allPlayersBackground = new Image(res.getTexture("player-background"));
 		allPlayersBackground.layout();
-		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10 - 100, 510, Betrayal.WIDTH / 2 - 20 + 100, Betrayal.HEIGHT / 3 + 175);
+		allPlayersBackground.setBounds(Betrayal.WIDTH / 2 + 10 - 100, 510,
+				Betrayal.WIDTH / 2 - 20 + 100, Betrayal.HEIGHT / 3 + 175);
 		bottom.addActor(allPlayersBackground);
 	}
 
@@ -462,7 +463,7 @@ public class Lobby extends GameState {
 	private void addPlayerImage(final Character character, float x, float y, float width, float height, int counter) {
 		Group player = new Group();
 
-		//creating the teammate preview
+		// Creating the teammate preview
 		final float xPos = x - 20;
 		final float yPos = y + (height - 72) / 2 - 115;
 		final float previewWidth = 48 * 3;
@@ -482,14 +483,14 @@ public class Lobby extends GameState {
 		preview.setTouchable(Touchable.disabled);
 		player.addActor(preview);
 
-		//create name label
+		// Create name label
 		Label name = new Label(character.getName(), FontManager.getFont40());
 		name.setX(x + 20 + (width - name.getPrefWidth()) / 2);
 		name.setY(y + ((height - name.getPrefHeight()) / 2) + 20);
 		name.setZIndex(zIndex);
 		player.addActor(name);
 
-		//create floor Label
+		// Create floor Label
 		Label floor = new Label("Floor: " + character.stats.getFloor(), FontManager.getFont40());
 		floor.setX(x + 20 + (width - floor.getPrefWidth()) / 2);
 		floor.setY(name.getY() - floor.getPrefHeight() - 5 + 15);
@@ -510,7 +511,7 @@ public class Lobby extends GameState {
 				break;
 		}
 
-		//Create Ready Light
+		// Create Ready Light
 		Image ready = new Image();
 		if (character.isReady()) {
 			ready.setDrawable(new TextureRegionDrawable(new TextureRegion(greenCircle)));
@@ -524,7 +525,7 @@ public class Lobby extends GameState {
 
 		player.addActor(ready);
 
-		//used so player is clickable
+		// Used so player is clickable
 		Image mask = new Image();
 		mask.setWidth(width);
 		mask.setHeight(height);
