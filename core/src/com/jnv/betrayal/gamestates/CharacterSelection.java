@@ -21,7 +21,9 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.JobDescription;
+import com.jnv.betrayal.resources.WhiteBoxOutline;
 import com.jnv.betrayal.scene2d.Dimension;
+import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Image;
@@ -103,12 +105,17 @@ public class CharacterSelection extends GameState {
 	}
 
 	private void loadBackButton() {
+		Group group = new Group();
+		stage.addActor(group);
+
+
 		backButton = new Image(leftArrowImage);
 		backButton.setHeight(60);
 		backButton.setWidth(80);
 		backButton.setX(10);
 		backButton.setY(Betrayal.HEIGHT - backButton.getHeight() - 10);
 		stage.addActor(backButton);
+
 
 		Actor actor = new Label("Back", FontManager.getFont60());
 		actor.setX(backButton.getX() + backButton.getWidth() + 10);
@@ -129,6 +136,15 @@ public class CharacterSelection extends GameState {
 			}
 		});
 		stage.addActor(actor);
+
+		new WhiteBoxOutline(game,
+				group,
+				actor.getWidth() + 16,
+				backButton.getHeight()+6,
+				3,
+				backButton.getX()-3,
+				backButton.getY()-3);
+
 	}
 
 	private void loadPlayNowButton() {
@@ -221,6 +237,7 @@ public class CharacterSelection extends GameState {
 		previewFrame.setX(10);
 		previewFrame.setY(backButton.getY() - 71 - previewFrame.getHeight());
 		stage.addActor(previewFrame);
+
 	}
 
 	private void loadPreviewRotators() {
@@ -276,6 +293,8 @@ public class CharacterSelection extends GameState {
 		previewField.setX(previewFrame.getX());
 		previewField.setY(previewFrame.getY());
 		stage.addActor(previewField);
+
+
 	}
 
 	private void loadJobDescription() {
@@ -309,6 +328,10 @@ public class CharacterSelection extends GameState {
 		jobDescription.setY(previewFrame.getY() - 80 - jobDescription.getHeight());
 		jobDescription.setAlignment(Align.topLeft);
 		stage.addActor(jobDescription);
+
+		Group group = new Group();
+		stage.addActor(group);
+		new WhiteBoxOutline(game, group, 710,330,3,jobDescription.getX()-5,jobDescription.getY()-20);
 	}
 
 	public void createSelectionField(String label, final Trait trait) {
