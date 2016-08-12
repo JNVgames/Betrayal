@@ -50,6 +50,7 @@ public class ResourceLoader {
 		loadHealthBar();
 		loadSkills();
 		loadDungeonTextures();
+		loadInstructions();
 	}
 
 	public void loadAllData() {
@@ -95,6 +96,33 @@ public class ResourceLoader {
 			}
 		}
 		res.loadTexture("map/tier1/1" + ".png", "map" + "0" + "1" );
+	}
+	private void loadInstructions(){
+		res.loadTexture("instructions/createCharacterCustomize.png","createCharacterCustomize");
+		res.loadTexture("instructions/createCharacterName.png","createCharacterName");
+		res.loadTexture("instructions/createRoomPassword.png","createRoomPassword");
+		res.loadTexture("instructions/inventoryEject.png","inventoryEject");
+		res.loadTexture("instructions/inventoryEquip.png","inventoryEquip");
+		res.loadTexture("instructions/joinRoomPassword.png","joinRoomPassword");
+		res.loadTexture("instructions/LoadGameSelect.png","loadGameSelect");
+		res.loadTexture("instructions/lobbyEnterDungeon.png","lobbyEnterDungeon");
+		res.loadTexture("instructions/lobbyInventory.png","lobbyInventory");
+		res.loadTexture("instructions/lobbyOption.png","lobbyOption");
+		res.loadTexture("instructions/lobbyReady.png","lobbyReady");
+		res.loadTexture("instructions/lobbyRoom.png","lobbyRoom");
+		res.loadTexture("instructions/lobbyShop.png","lobbyShop");
+		res.loadTexture("instructions/lobbyStats.png","lobbyStats");
+		res.loadTexture("instructions/mainMenuHallOfFame.png","mainMenuHallOfFame");
+		res.loadTexture("instructions/mainMenuLoadGame.png","mainMenuLoadGame");
+		res.loadTexture("instructions/mainMenuNewGame.png","mainMenuNewGame");
+		res.loadTexture("instructions/onlineCreateRoom.png","onlineCreateRoom");
+		res.loadTexture("instructions/onlineLeaveRoom.png","onlineLeaveRoom");
+		res.loadTexture("instructions/onlineRoomJoin.png","onlineRoomJoin");
+		res.loadTexture("instructions/shopItemTap.png","shopItemTap");
+		res.loadTexture("instructions/shopTab.png","shopTab");
+		res.loadTexture("instructions/statsAdjust.png","statsAdjust");
+		res.loadTexture("instructions/statsApply.png","statsApply");
+
 	}
 
 	private void loadButtons() {
