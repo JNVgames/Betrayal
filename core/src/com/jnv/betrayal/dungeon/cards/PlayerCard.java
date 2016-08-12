@@ -90,34 +90,15 @@ public class PlayerCard extends Card {
 		return characterJob;
 	}
 
-	public void flee() {
-		// Flee Successful
-		field.removePlayerCard(this);
-
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				new OKPopup(field.game, "Flee Successful") {
-					@Override
-					public void onConfirm() {
-						field.getClientCharacter().getRoom().updateServerCharacters();
-						field.game.gsm.setState(GameStateManager.State.LOBBY);
-					}
-				};
-			}
-		};
-		getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
-	}
-
 	@Override
 	public int getID() {
 		return character.getId();
 	}
 
-	public static boolean canFlee(int x){
+	public static boolean canFlee(int chance) {
 		Random random = new Random();
-		int rand = random.nextInt(4) + 1;
-		return x >= rand;
+		int rand = random.nextInt(100) + 1;
+		return rand <= chance;
 	}
 
 	@Override

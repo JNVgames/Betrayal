@@ -54,7 +54,7 @@ public class Heal extends Effect {
 	@Override
 	protected void addToObject() {
 		try {
-			data.put("health", health);
+			data.getJSONObject("values").put("health", health);
 			data.put("description", description);
 			data.put("class", getClass().getCanonicalName());
 		} catch (JSONException e) {

@@ -319,10 +319,6 @@ public abstract class Card {
 		}
 	}
 
-	public void performEffect(Effect effect) {
-		field.roundManager.addEventClient(effect, effect.getStartType());
-	}
-
 	public abstract String getName();
 
 	public abstract int getID();

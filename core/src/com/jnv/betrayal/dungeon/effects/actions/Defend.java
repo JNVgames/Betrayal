@@ -45,7 +45,6 @@ public class Defend extends Effect {
 	@Override
 	protected void addToObject() {
 		try {
-			data.put("values", new JSONObject());
 			data.put("class", getClass().getCanonicalName());
 		} catch (JSONException e) {
 			e.printStackTrace();

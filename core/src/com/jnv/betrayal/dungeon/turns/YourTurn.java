@@ -95,37 +95,47 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						panels.clear();
-						panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getDarkFont70(), Panel.full));
-						if (PlayerCard.canFlee(1)) {
-							Effect effect = new Flee(field.getCurrentCard());
-							field.roundManager.addEvent(effect, effect.getStartType());
-							Card card = field.getCurrentCard();
-							if (card instanceof PlayerCard
-									&& card.getID() == field.game.getCurrentCharacter().getId()) {
-								((PlayerCard) card).flee();
-							} else if (card instanceof PlayerCard) {
-								//Teammate fled
-								field.removePlayerCard((PlayerCard) card);
-							} else {
-								throw new AssertionError("create assertion error thingy. This shouldnt be happening - means not a playercard");
-							}
-						} else {
-							Effect effect = new FailedToFlee(field.getCurrentCard());
-							field.roundManager.addEvent(effect, effect.getStartType());
-							Runnable r = new Runnable() {
-								@Override
-								public void run() {
-									new OKPopup(field.game, "Flee Failed");
-									field.turnManager.nextTurn();
-								}
-							};
-							field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
-						}
+						attemptFlee(25);
 					}
 				};
 			}
 		}));
+	}
+
+	public void attemptFlee(int fleeChance) {
+		panels.clear();
+		panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getDarkFont70(), Panel.full));
+		if (PlayerCard.canFlee(fleeChance)) {
+			Effect effect = new Flee(field.getCurrentCard());
+			field.roundManager.addEvent(effect, effect.getStartType());
+			final Card card = field.getCurrentCard();
+			// Flee Successful
+			field.removePlayerCard((PlayerCard) card);
+
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					new OKPopup(field.game, "Flee Successful") {
+						@Override
+						public void onConfirm() {
+							field.game.gsm.setState(GameStateManager.State.LOBBY);
+						}
+					};
+				}
+			};
+			field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+		} else {
+			Effect effect = new FailedToFlee(field.getCurrentCard());
+			field.roundManager.addEvent(effect, effect.getStartType());
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					new OKPopup(field.game, "Flee Failed");
+					field.turnManager.nextTurn();
+				}
+			};
+			field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+		}
 	}
 
 	private void drawAttackBar() {
@@ -220,17 +230,17 @@ public class YourTurn extends Turn {
 		if (counter == 0) {
 			panels.addActor(createPanel("Deal 50% damage to\ntarget as true damage", FontManager.getFont50(),
 					Panel.top, new Runnable() {
-				@Override
-				public void run() {
-					if (doesTargetExist() && !isTargetSelf()) {
-						// Deal damage to dest cards
-						doEvent(new ThiefSpecial(field.getCurrentCard(),
-								new ArrayList<Card>(field.getCardsSelected())), EventType.THIEF_SPECIAL);
-						counter = SPECIAL_COOLDOWN;
-						field.endSelectMode();
-					}
-				}
-			}));
+						@Override
+						public void run() {
+							if (doesTargetExist() && !isTargetSelf()) {
+								// Deal damage to dest cards
+								doEvent(new ThiefSpecial(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.THIEF_SPECIAL);
+								counter = SPECIAL_COOLDOWN;
+								field.endSelectMode();
+							}
+						}
+					}));
 			panels.addActor(createPanel("Cancel", FontManager.getFont70(), Panel.bottom, new Runnable() {
 				@Override
 				public void run() {

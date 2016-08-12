@@ -4,6 +4,7 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
+import com.jnv.betrayal.dungeon.turns.YourTurn;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,33 +16,23 @@ public class Run extends Effect {
 	private int fleeChance;
 
 	public Run(int fleeChance) {
-		super(EventType.FLEE);
+		super(EventType.RUN);
 		this.fleeChance = fleeChance;
 		isHostile = false;
 	}
 
 	// JSON Constructor
 	public Run(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.FLEE, turns);
-		try {
-			this.fleeChance = data.getInt("fleeChance");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		super(EventType.RUN, turns);
 		isHostile = false;
 		init(src, dest);
 	}
 
 	@Override
 	public void startEffect(Card destCard) {
-		if (PlayerCard.canFlee(fleeChance / 25)) {
-			Effect flee = new Flee(destCard);
-			destCard.getField().roundManager.addEvent(flee, flee.startType);
-			((PlayerCard) src).flee();
-		}
-		else {
-			Effect failToFlee = new FailedToFlee(destCard);
-			destCard.getField().roundManager.addEvent(failToFlee, failToFlee.startType);
+		if (src.getID() == src.getField().getClientCharacter().getId()) {
+			System.out.println("doing run start effect");
+			((YourTurn) src.getField().turnManager.getCurrentTurn()).attemptFlee(fleeChance);
 		}
 	}
 
@@ -58,7 +49,6 @@ public class Run extends Effect {
 	@Override
 	protected void addToObject() {
 		try {
-			data.getJSONObject("values").put("fleeChance", fleeChance);
 			data.put("class", getClass().getCanonicalName());
 		} catch (JSONException e) {
 			e.printStackTrace();

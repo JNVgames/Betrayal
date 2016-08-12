@@ -6,6 +6,8 @@ import com.jnv.betrayal.dungeon.cards.CardAnimation;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
+import java.util.Arrays;
+
 public class AnimationManager {
 
 	private CardAnimation animation;
@@ -36,11 +38,9 @@ public class AnimationManager {
 				}
 				break;
 			case FLEE:
-				System.out.println("FLEE");
 				animation.flee(event.getSrc());
 				break;
 			case FAIL_TO_FLEE:
-				System.out.println("FAILED FLEE");
 				animation.failToFlee(event.getSrc());
 				break;
 			case DIED:

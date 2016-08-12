@@ -83,7 +83,8 @@ public class Field extends Group {
 		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
 	}
-	public void setBackgroundForField(String s){
+
+	public void setBackgroundForField(String s) {
 		background.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture(s))));
 	}
 
@@ -252,8 +253,8 @@ public class Field extends Group {
 				//takes in character of disconnected player
 				JSONObject data = (JSONObject) args[0];
 				int disconnectID = -1;
-				try {	disconnectID = data.getJSONObject("player").getInt("id");
-
+				try {
+					disconnectID = data.getJSONObject("player").getInt("id");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -268,11 +269,11 @@ public class Field extends Group {
 
 					}
 				}
-				if(deleteThisCard!=null)
+				if (deleteThisCard != null) {
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
-				System.out.println("deleteThisCard.getName() = " + deleteThisCard.getName());
+				}
 				refreshAllCards();
-				if(currentCardTurn!=0) currentCardTurn--;
+				if (currentCardTurn != 0) currentCardTurn--;
 			}
 		});
 	}
@@ -299,13 +300,13 @@ public class Field extends Group {
 		return dst;
 	}
 
-	public void adjustPlayerCardStatsBasedOnJobs(){
+	public void adjustPlayerCardStatsBasedOnJobs() {
 		boolean hasWarrior, hasThief, hasPriest, hasKnight;
 		hasWarrior = hasThief = hasPriest = hasKnight = false;
 
 		//Determines what jobs are in the party
-		for( PlayerCard card : playerZone ){
-			switch (card.getJob()){
+		for (PlayerCard card : playerZone) {
+			switch (card.getJob()) {
 
 				case WARRIOR:
 					hasWarrior = true;
@@ -323,13 +324,13 @@ public class Field extends Group {
 		}
 
 		//adjusts all stats according to which Jobs are present
-		for( PlayerCard card : playerZone ){
-			if(hasWarrior) card.multiplyAttack();
-			if(hasPriest) card.multiplyHealth();
-			if(hasKnight) card.multiplyDefense();
+		for (PlayerCard card : playerZone) {
+			if (hasWarrior) card.multiplyAttack();
+			if (hasPriest) card.multiplyHealth();
+			if (hasKnight) card.multiplyDefense();
 		}
 
-		if(hasThief) reward  *= 1.5;
+		if (hasThief) reward *= 1.5;
 	}
 
 	public Character getClientCharacter() {

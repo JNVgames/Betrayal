@@ -71,7 +71,7 @@ public class Menu extends GameState {
 		button_newGame.layout();
 		button_newGame.setBounds((Betrayal.WIDTH - button_newGame.getImageWidth()) / 2,
 				800, 512, 144);
-		button_newGame.addListener(new InputListener(button_newGame) {
+		button_newGame.addListener(new InputListener(button_newGame, true) {
 			@Override
 			public void doAction() {
 				if (game.characters.size() < 4)
@@ -101,7 +101,7 @@ public class Menu extends GameState {
 				600, 512, 144);
 		if (game.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
 
-		button_loadGame.addListener(new InputListener(button_loadGame) {
+		button_loadGame.addListener(new InputListener(button_loadGame, true) {
 			@Override
 			public void doAction() {
 				gsm.setState(GameStateManager.State.LOAD_GAME);
@@ -115,7 +115,7 @@ public class Menu extends GameState {
 		button_instructions.layout();
 		button_instructions.setBounds((Betrayal.WIDTH - button_instructions.getImageWidth()) / 2,
 				400, 512, 144);
-		button_instructions.addListener(new InputListener(button_instructions) {
+		button_instructions.addListener(new InputListener(button_instructions, true) {
 			@Override
 			public void doAction() {
 				new Instructions(game);
@@ -143,7 +143,7 @@ public class Menu extends GameState {
 		aboutButton.layout();
 		aboutButton.setBounds((Betrayal.WIDTH - aboutButton.getImageWidth() / 2) / 2,
 				272, 256, 72);
-		aboutButton.addListener(new InputListener(aboutButton) {
+		aboutButton.addListener(new InputListener(aboutButton, true) {
 			@Override
 			public void doAction() {
 				new OKPopup(game,"Developers: \nJoseph Phan\nVincent Wang");
@@ -157,7 +157,7 @@ public class Menu extends GameState {
 		button_hallOfFame.layout();
 		button_hallOfFame.setBounds((Betrayal.WIDTH - button_hallOfFame.getImageWidth() / 2) / 2,
 				172, 256, 72);
-		button_hallOfFame.addListener(new InputListener(button_hallOfFame) {
+		button_hallOfFame.addListener(new InputListener(button_hallOfFame, true) {
 			@Override
 			public void doAction() {
 				gsm.setState(GameStateManager.State.HALL_OF_FAME);

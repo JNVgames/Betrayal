@@ -19,6 +19,8 @@ import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+import java.util.Arrays;
+
 /**
  * Keeps track of user/party member/monster's turns.
  */
@@ -71,6 +73,7 @@ public class TurnManager {
 	}
 
 	public void nextTurn() {
+		System.out.println("TurnManager.nextTurn");
 		// If your turn is ending, decrease skill cooldown counter
 		if (!dungeonEnded) {
 			if (currentTurn instanceof YourTurn) {
@@ -109,5 +112,9 @@ public class TurnManager {
 			actor.setTouchable(Touchable.disabled);
 			actor.addAction(Actions.fadeOut(1));
 		}
+	}
+
+	public Turn getCurrentTurn() {
+		return currentTurn;
 	}
 }

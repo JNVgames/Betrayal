@@ -26,6 +26,7 @@ public enum EventType {
 	DEBUFF_ATTACK("debuffed (atk)"),
 	DEBUFF_DEFENSE("debuffed (def)"),
 	DEBUFF_ATTACK_DEFENSE("debuffed (atk, def)"),
+	RUN("used a run item"),
 	//SKIP_TURN("skipped")
 
 	// Consistent effects
