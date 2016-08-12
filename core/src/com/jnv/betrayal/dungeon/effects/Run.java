@@ -37,6 +37,7 @@ public class Run extends Effect {
 		if (PlayerCard.canFlee(fleeChance / 25)) {
 			Effect flee = new Flee(destCard);
 			destCard.getField().roundManager.addEvent(flee, flee.startType);
+			((PlayerCard) src).flee();
 		}
 		else {
 			Effect failToFlee = new FailedToFlee(destCard);
@@ -56,6 +57,11 @@ public class Run extends Effect {
 
 	@Override
 	protected void addToObject() {
-
+		try {
+			data.getJSONObject("values").put("fleeChance", fleeChance);
+			data.put("class", getClass().getCanonicalName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

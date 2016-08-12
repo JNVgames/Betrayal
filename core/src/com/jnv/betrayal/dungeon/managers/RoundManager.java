@@ -42,30 +42,35 @@ public class RoundManager {
 				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
+					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the event when it ends
 					event.getEffect().doEndEffect();
+					// Perform the animation
+					animation.performAnimation(tmpEvent);
 					// Add the end effect to event history
-					eventHistory.addLast(new Event(event.getEffect(), event.getEffect().getEndType()));
+					eventHistory.addLast(tmpEvent);
 				}
 				// If effect is consistent
 				if (event.getEffect().isConsistent()) {
+					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
 					event.getEffect().doConsistentEffect();
-					eventHistory.addLast(new Event(event.getEffect(), event.getEffect().getConsistentType()));
+					animation.performAnimation(tmpEvent);
+					eventHistory.addLast(tmpEvent);
 				}
 			}
 			// Flush out all ended effects
 			if (event.effectEnded()) {
 				eventsToRemove.add(event);
+				System.out.println("Flushing event: " + event);
 			}
 		}
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
-//		System.out.println("events after = " + events);
-//		System.out.println("DEFENDERS FOR PLAYER " + card.getName() + ": " + card.getDefenders());
 	}
 
 	public void addEventClient(Event event) {
+		System.out.println("addEventClient(1p): New event received: " + event.getEventType());
 		events.add(event);
 		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
@@ -73,6 +78,7 @@ public class RoundManager {
 	}
 
 	public Event addEventClient(Effect effect, EventType eventType) {
+		System.out.println("addEventClient(2p): New event received: " + eventType);
 		Event event = new Event(effect, eventType);
 		events.add(event);
 		effect.doStartEffect();

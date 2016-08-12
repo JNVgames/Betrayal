@@ -16,7 +16,7 @@ public class AnimationManager {
 
 	public void performAnimation(Event event) {
 
-		switch (event.getEffect().getStartType()) {
+		switch (event.getEventType()) {
 
 			/************************ BASIC MOVES *************************/
 			case ATTACK:
@@ -36,9 +36,11 @@ public class AnimationManager {
 				}
 				break;
 			case FLEE:
+				System.out.println("FLEE");
 				animation.flee(event.getSrc());
 				break;
 			case FAIL_TO_FLEE:
+				System.out.println("FAILED FLEE");
 				animation.failToFlee(event.getSrc());
 				break;
 			case DIED:
@@ -56,7 +58,9 @@ public class AnimationManager {
 			case BOMB:
 				break;
 			case POISON:
-				animation.changeColor(event.getSrc(), Color.GREEN);
+				for (Card card : event.getDest()) {
+					animation.longFlashColor(card, Color.GREEN);
+				}
 				break;
 			case BUFF_ATTACK:
 			case PRIEST_ATTACK_SPECIAL:
@@ -84,7 +88,10 @@ public class AnimationManager {
 
 			/********************Consistent Effects*********************/
 			case C_POISON:
-				animation.flashColor(event.getSrc(), Color.RED);
+				System.out.println("C_POISON");
+				for (Card card : event.getDest()) {
+					animation.flashColor(card, Color.GREEN);
+				}
 				break;
 
 			/**********************End Effects**************************/

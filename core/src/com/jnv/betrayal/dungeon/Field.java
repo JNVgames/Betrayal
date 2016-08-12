@@ -70,13 +70,7 @@ public class Field extends Group {
 		clientCharacter = gsm.game.getCurrentCharacter();
 		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
-		background = new Image(res.getTexture("map-1")) {
-			@Override
-			public void act(float delta) {
-				super.act(delta);
-				System.out.println("currentCardTurn = " + currentCardTurn);
-			}
-		};
+		background = new Image(res.getTexture("map-1"));
 		currentCardTurn = 0;
 		allCards = new ArrayList<Card>();
 

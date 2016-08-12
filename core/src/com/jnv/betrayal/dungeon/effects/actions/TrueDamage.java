@@ -11,8 +11,8 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class TrueDamage extends Effect {
-	private int damage;
 
+	private int damage;
 
 	public TrueDamage(int damage) {
 		super(EventType.BUFF_ATTACK, 1, EventType.E_BUFF_ATTACK);

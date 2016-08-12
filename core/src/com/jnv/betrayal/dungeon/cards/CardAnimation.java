@@ -100,7 +100,7 @@ public class CardAnimation {
 
 		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
 		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
-}
+	}
 
 	public void heal(Card card) {
 		// Display shield image

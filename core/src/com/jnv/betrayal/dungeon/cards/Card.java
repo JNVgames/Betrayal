@@ -320,7 +320,7 @@ public abstract class Card {
 	}
 
 	public void performEffect(Effect effect) {
-		field.roundManager.addEvent(effect, effect.getStartType());
+		field.roundManager.addEventClient(effect, effect.getStartType());
 	}
 
 	public abstract String getName();

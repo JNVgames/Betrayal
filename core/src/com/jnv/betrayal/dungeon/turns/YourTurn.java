@@ -103,22 +103,7 @@ public class YourTurn extends Turn {
 							Card card = field.getCurrentCard();
 							if (card instanceof PlayerCard
 									&& card.getID() == field.game.getCurrentCharacter().getId()) {
-								// Flee Successful
-								field.removePlayerCard((PlayerCard) card);
-
-								Runnable r = new Runnable() {
-									@Override
-									public void run() {
-										new OKPopup(field.game, "Flee Successful") {
-											@Override
-											public void onConfirm() {
-												field.getClientCharacter().getRoom().updateServerCharacters();
-												field.game.gsm.setState(GameStateManager.State.LOBBY);
-											}
-										};
-									}
-								};
-								card.getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+								((PlayerCard) card).flee();
 							} else if (card instanceof PlayerCard) {
 								//Teammate fled
 								field.removePlayerCard((PlayerCard) card);

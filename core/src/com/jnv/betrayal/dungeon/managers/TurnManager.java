@@ -79,7 +79,7 @@ public class TurnManager {
 			field.setNextCardIndex();
 			field.roundManager.checkEvents(field.getCurrentCard());
 			drawUI();
-			System.out.println("nextturn");
+			System.out.println("Next Turn...");
 		}
 	}
 

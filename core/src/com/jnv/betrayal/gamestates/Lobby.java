@@ -42,7 +42,6 @@ public class Lobby extends GameState {
 	private Group partyMembers, bottom, buttons, middle;
 	private Room room;
 	private Label roomNum, timeTilEnter, timerValue, joinARoom;
-	private Timer timer;
 	private Timer.Task task;
 	private long savedTime;
 	private int delay, timeLeft;
@@ -64,7 +63,7 @@ public class Lobby extends GameState {
 		triangles[3] = new Image(new TextureRegion(purpleT));
 		loadContent();
 		refresh();
-		timer = new Timer();
+		Timer timer = new Timer();
 		timer.start();
 		delay = 5;
 		zIndex = 2;
@@ -73,14 +72,16 @@ public class Lobby extends GameState {
 			@Override
 			public void run() {
 				// Do your work
-				if(room.getRoomID()<=0)
+				if (room.getRoomID() <= 0)
 					getGSM().setState(GameStateManager.State.DUNGEON);
 			}
 		};
-		//enterDungeonCountDown();
 	}
 
 	public void enterDungeonCountDown() {
+		playNowButton.setVisible(false);
+		readyButton.setVisible(false);
+		unReadyButton.setVisible(false);
 		new OKPopup(game, "Entering Dungeon");
 		savedTime = System.currentTimeMillis();
 		Timer.schedule(task, delay);
@@ -213,7 +214,7 @@ public class Lobby extends GameState {
 				super.act(delta);
 				if (task.isScheduled()) {
 					timeTilEnter.setVisible(true);
-				}else{
+				} else {
 					timeTilEnter.setVisible(false);
 				}
 			}
@@ -231,9 +232,9 @@ public class Lobby extends GameState {
 					timeLeft = (int) (System.currentTimeMillis() - savedTime);
 					timeLeft /= 1000;
 					timeLeft = 5 - timeLeft;
-					if(timeLeft <0){
+					if (timeLeft < 0) {
 						timerValue.setText("");
-					}else {
+					} else {
 						timerValue.setText(Integer.toString(timeLeft));
 					}
 				} else {
@@ -356,6 +357,7 @@ public class Lobby extends GameState {
 						@Override
 						public void doAction() {
 							enterDungeonCountDown();
+							joinARoom.setVisible(false);
 						}
 					};
 				} else playButtonTexture = res.getTexture("play-now");
@@ -434,12 +436,13 @@ public class Lobby extends GameState {
 		//in a room
 		String ID = "";
 		int roomID = game.getCurrentCharacter().getRoom().getRoomID();
-		if(roomID>0){
+		if (roomID > 0) {
 			joinARoom.setVisible(false);
 			roomNum.setVisible(true);
 			ID += Integer.toString(roomID);
-			roomNum.setText("Room Number: " +ID);
-		}else{
+			roomNum.setText("Room Number: " + ID);
+			roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2);
+		} else {
 			//not in a room
 			joinARoom.setVisible(true);
 			roomNum.setVisible(false);
