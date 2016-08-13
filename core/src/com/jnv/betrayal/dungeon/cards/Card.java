@@ -414,7 +414,7 @@ public abstract class Card {
 					}
 				};
 				healthBar.addAction(Actions.delay(1f, Actions.run(r)));
-				healthBar.addAction(Actions.delay(0.5f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
+				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else if (newHealthPercent > 70 && currentHealthPercentage <= 30) {
 				// Red to Green
 				healthBar.addAction(Actions.delay(0.3f, Actions.sizeTo(30 * 2, 8, 0.3f)));
@@ -447,7 +447,7 @@ public abstract class Card {
 				healthBar.addAction(Actions.delay(1f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			} else {
 				// stays in same color range
-				healthBar.addAction(Actions.delay(1.0f, Actions.sizeTo(newHealthPercent * 2, 8, 1f)));
+				healthBar.addAction(Actions.delay(1.0f, Actions.sizeTo(newHealthPercent * 2, 8, 0.5f)));
 			}
 			currentHealthPercentage = newHealthPercent;
 		}

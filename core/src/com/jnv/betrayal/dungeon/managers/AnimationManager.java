@@ -27,7 +27,7 @@ public class AnimationManager {
 		animationQueue.startAnimations();
 	}
 
-	public void queueEventAnimation(final Event event) {
+	public void queueEventAnimation(final Event event, final Runnable eventLogic) {
 
 		System.out.println("EVENT: " + event);
 		Runnable runnable = null;
@@ -211,7 +211,7 @@ public class AnimationManager {
 		}
 
 		if (runnable != null) {
-			animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable));
+			animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable, eventLogic));
 		}
 	}
 }

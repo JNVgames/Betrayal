@@ -38,16 +38,20 @@ public class RoundManager {
 		System.out.println("-----------ROUND MANAGER: " + card.getName() + "------------");
 		System.out.println("events before = " + events);
 		for (Event event : events) {
+			final Event tmp = event;
 			if (card == event.getSrc()) {
 				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
 					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
-					// Perform the event when it ends
-					event.getEffect().doEndEffect();
 					// Perform the animation
-					animation.queueEventAnimation(tmpEvent);
+					animation.queueEventAnimation(tmpEvent, new Runnable() {
+						@Override
+						public void run() {
+							tmp.getEffect().doEndEffect();
+						}
+					});
 					// Add the end effect to event history
 					eventHistory.addLast(tmpEvent);
 				}
@@ -57,8 +61,12 @@ public class RoundManager {
 				if (event.getEffect().isConsistent() && event.getTurnsLeft() != (event.getEffect().getTurns())) {
 					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
-					event.getEffect().doConsistentEffect();
-					animation.queueEventAnimation(tmpEvent);
+					animation.queueEventAnimation(tmpEvent, new Runnable() {
+						@Override
+						public void run() {
+							tmp.getEffect().doConsistentEffect();
+						}
+					});
 					eventHistory.addLast(tmpEvent);
 				}
 			}
@@ -74,19 +82,27 @@ public class RoundManager {
 		animation.animate();
 	}
 
-	public void addEventClient(Event event) {
+	public void addEventClient(final Event event) {
 		events.add(event);
-		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
-		animation.queueEventAnimation(event);
+		animation.queueEventAnimation(event, new Runnable() {
+			@Override
+			public void run() {
+				event.getEffect().doStartEffect();
+			}
+		});
 	}
 
-	public Event addEventClient(Effect effect, EventType eventType) {
+	public Event addEventClient(final Effect effect, EventType eventType) {
 		Event event = new Event(effect, eventType);
 		events.add(event);
-		effect.doStartEffect();
 		eventHistory.addLast(event);
-		animation.queueEventAnimation(event);
+		animation.queueEventAnimation(event, new Runnable() {
+			@Override
+			public void run() {
+				effect.doStartEffect();
+			}
+		});
 		return event;
 	}
 

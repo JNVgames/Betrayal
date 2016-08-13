@@ -3,11 +3,17 @@ package com.jnv.betrayal.dungeon.animations;
 public class AnimationEvent {
 
 	private float animationDuration;
-	private Runnable runnable;
+	private Runnable fullRunnable;
 
-	public AnimationEvent(float animationDuration, Runnable runnable) {
+	public AnimationEvent(float animationDuration, final Runnable animation, final Runnable eventLogic) {
 		this.animationDuration = animationDuration;
-		this.runnable = runnable;
+		fullRunnable = new Runnable() {
+			@Override
+			public void run() {
+				animation.run();
+				eventLogic.run();
+			}
+		};
 	}
 
 	public float getAnimationDuration() {
@@ -15,6 +21,6 @@ public class AnimationEvent {
 	}
 
 	public Runnable getRunnable() {
-		return runnable;
+		return fullRunnable;
 	}
 }
