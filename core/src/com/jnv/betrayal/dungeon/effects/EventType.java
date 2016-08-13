@@ -1,12 +1,12 @@
 package com.jnv.betrayal.dungeon.effects;
 
 public enum EventType {
-	NONE(""),
+	NONE(),
 	ATTACK("attacked"),
 	DEFEND("defended"),
-	FLEE("fled"),
-	FAIL_TO_FLEE("failed to flee"),
-	DIED("died"),
+	FLEE("fled", false),
+	FAIL_TO_FLEE("failed to flee", false),
+	DIED("died", false),
 
 	// Class special attacks
 	WARRIOR_SPECIAL("critically smacked"),
@@ -17,7 +17,7 @@ public enum EventType {
 	KNIGHT_SPECIAL("bro-tected"),
 
 	// Item effects
-	HEAL("healed"),
+	HEAL("healed", false),
 	BOMB("bombed"),
 	POISON("poisoned"),
 	BUFF_ATTACK("buffed (atk)"),
@@ -26,28 +26,61 @@ public enum EventType {
 	DEBUFF_ATTACK("debuffed (atk)"),
 	DEBUFF_DEFENSE("debuffed (def)"),
 	DEBUFF_ATTACK_DEFENSE("debuffed (atk, def)"),
-	RUN("used a run item"),
-	//SKIP_TURN("skipped")
+	RUN("used a run item", false),
+	SKIP_TURN(),
 
 	// Consistent effects
-	C_POISON("dealt poison dmg to"),
+	C_POISON("was poisoned", false, true, false),
 
 	// End effects
-	E_POISON("was freed from the poison of"),
-	E_BUFF_ATTACK("lost their buff (atk) from"),
-	E_BUFF_DEFENSE("lost their buff (def) from"),
-	E_BUFF_ATTACK_DEFENSE("lost their buff (atk, def) from"),
-	E_DEBUFF_ATTACK("regained stats (atk) from debuff of"),
-	E_DEBUFF_DEFENSE("regained stats (def) from debuff of"),
-	E_DEBUFF_ATTACK_DEFENSE("regained stats (atk, def) from debuff of");
+	E_POISON("is no longer poisoned", false),
+	E_BUFF_ATTACK("lost their buff (atk)", false),
+	E_BUFF_DEFENSE("lost their buff (def)", false),
+	E_BUFF_ATTACK_DEFENSE("lost their buff (atk, def)", false),
+	E_DEBUFF_ATTACK("is no longer debuffed (atk)", false),
+	E_DEBUFF_DEFENSE("is no longer debuffed (def)", false),
+	E_DEBUFF_ATTACK_DEFENSE("is no longer debuffed (atk, def)", false);
 
-	private String action, consistentAction;
+	private String action;
+	private boolean showSrc, showDest, showInEventLog, showDestFirst;
+
+	EventType() {
+		showInEventLog = false;
+	}
 
 	EventType(String action) {
+		this(action, true, false, true);
+	}
+
+	EventType(String action, boolean showDest) {
+		this(action, showDest, false, true);
+	}
+
+	EventType(String action, boolean showDest, boolean showDestFirst, boolean showSrc) {
 		this.action = action;
+		this.showDest = showDest;
+		this.showDestFirst = showDestFirst;
+		this.showSrc = showSrc;
+		showInEventLog = true;
 	}
 
 	public String getActionString() {
 		return action;
+	}
+
+	public boolean showDestination() {
+		return showDest;
+	}
+
+	public boolean showInEventLog() {
+		return showInEventLog;
+	}
+
+	public boolean showDestFirst() {
+		return showDestFirst;
+	}
+
+	public boolean showSrc() {
+		return showSrc;
 	}
 }

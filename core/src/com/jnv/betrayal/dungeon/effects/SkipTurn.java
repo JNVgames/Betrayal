@@ -11,12 +11,12 @@ import java.util.List;
 public class SkipTurn extends Effect {
 
     public SkipTurn() {
-        super(EventType.NONE);
+        super(EventType.SKIP_TURN);
     }
 
 	// JSON Constructor
 	public SkipTurn(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.NONE, turns);
+		super(EventType.SKIP_TURN, turns);
 		isHostile = false;
 		this.turns = turns;
 		init(src, dest);

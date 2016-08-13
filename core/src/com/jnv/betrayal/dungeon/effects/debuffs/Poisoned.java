@@ -1,9 +1,8 @@
 package com.jnv.betrayal.dungeon.effects.debuffs;
 
-
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,25 +10,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Poison extends Effect {
+public class Poisoned extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"
 			+ "Take damage equivalent\nto 10% of target's\ncurrent health for ";
 
-	public Poison(int turns) {
-		this(turns, null, null);
-	}
-
-	public Poison(int turns, Card src, List<Card> dest) {
-		super(EventType.POISON, turns);
+	public Poisoned(int turns, Card src) {
+		super(EventType.NONE, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
 		description = DESCRIPTION + turns + " turns.";
+		List<Card> dest = new ArrayList<Card>();
+		dest.add(src);
 		init(src, dest);
 	}
 
 	// JSON Constructor
-	public Poison(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.POISON, turns);
+	public Poisoned(JSONObject data, int turns, Card src, List<Card> dest) {
+		super(EventType.NONE, turns, true, EventType.C_POISON, EventType.E_POISON);
 		isHostile = true;
 		description = DESCRIPTION + turns + " turns.";
 		init(src, dest);
@@ -37,7 +34,6 @@ public class Poison extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		src.getField().roundManager.addEventClient(new Poisoned(turns, destCard), EventType.NONE);
 	}
 
 	@Override
@@ -46,6 +42,7 @@ public class Poison extends Effect {
 
 	@Override
 	public void consistentEffect(Card destCard) {
+		destCard.poison();
 	}
 
 	@Override

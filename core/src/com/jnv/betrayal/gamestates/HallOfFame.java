@@ -53,7 +53,29 @@ public class HallOfFame extends GameState {
 			Group group = new Group();
 			group.setBounds(0, 0, Betrayal.WIDTH - 10, 202);
 
-			Image border = new Image(res.getTexture("cpb"));
+			Image border = null;
+			int tier = c.stats.getFloor() /5;
+			switch(tier){
+				case 0:
+					border = new Image(res.getTexture("cpbWhite"));
+					break;
+				case 1:
+					border = new Image(res.getTexture("cpbSilver"));
+					break;
+				case 2:
+					border = new Image(res.getTexture("cpbBronze"));
+					break;
+				case 3:
+					border = new Image(res.getTexture("cpbGold"));
+					break;
+				case 4:
+					border = new Image(res.getTexture("cpbLegendLegend"));
+					break;
+				default:
+					border = new Image(res.getTexture("cpbLegend"));
+					break;
+
+			}
 			border.setX(0);
 			border.setY(0);
 			group.addActor(border);

@@ -42,19 +42,23 @@ public class RoundManager {
 				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
+					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the event when it ends
 					event.getEffect().doEndEffect();
 					// Perform the animation
-					animation.performAnimation(tmpEvent);
+					animation.queueEventAnimation(tmpEvent);
 					// Add the end effect to event history
 					eventHistory.addLast(tmpEvent);
 				}
 				// If effect is consistent
-				if (event.getEffect().isConsistent()) {
+				// 	and it didn't get its turns decreased for the first time
+				// 	(Basically a check that startEffect() and consistentEffect() weren't called on the same turn)
+				if (event.getEffect().isConsistent() && event.getTurnsLeft() != (event.getEffect().getTurns())) {
+					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
 					event.getEffect().doConsistentEffect();
-					animation.performAnimation(tmpEvent);
+					animation.queueEventAnimation(tmpEvent);
 					eventHistory.addLast(tmpEvent);
 				}
 			}
@@ -67,23 +71,22 @@ public class RoundManager {
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
+		animation.animate();
 	}
 
 	public void addEventClient(Event event) {
-		System.out.println("addEventClient(1p): New event received: " + event.getEventType());
 		events.add(event);
 		event.getEffect().doStartEffect();
 		eventHistory.addLast(event);
-		animation.performAnimation(event);
+		animation.queueEventAnimation(event);
 	}
 
 	public Event addEventClient(Effect effect, EventType eventType) {
-		System.out.println("addEventClient(2p): New event received: " + eventType);
 		Event event = new Event(effect, eventType);
 		events.add(event);
 		effect.doStartEffect();
 		eventHistory.addLast(event);
-		animation.performAnimation(event);
+		animation.queueEventAnimation(event);
 		return event;
 	}
 

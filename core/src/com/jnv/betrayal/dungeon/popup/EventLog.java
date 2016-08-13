@@ -83,24 +83,26 @@ public class EventLog extends Popup {
 		String eventString, backupString;
 		Label testLabel = new Label("", FontManager.getFont50());
 		for (Event event : eventHistory) {
-			verticalGroup.addActor(new Label(
-					"------------------------------------------",
-					FontManager.getFont40()));
-			eventString = event.toEventLogString();
-			Label label = new Label("", FontManager.getFont50());
+			if (event.getEventType().showInEventLog()) {
+				verticalGroup.addActor(new Label(
+						"------------------------------------------",
+						FontManager.getFont40()));
+				eventString = event.toEventLogString();
+				Label label = new Label("", FontManager.getFont50());
 
-			String[] splited = eventString.split("\\s+");
+				String[] splitted = eventString.split("\\s+");
 
-			testLabel.setText("");
-			for (int i = 0; i < splited.length; i++){
-				testLabel.setText(label.getText()+ " " + splited[i]);
-				if (testLabel.getPrefWidth() > Betrayal.WIDTH - 220){
-					label.setText(label.getText() + "\n" + " " + splited[i]);
-					testLabel.setText("");
-				}else
-					label.setText(label.getText() +" " + splited[i]);
+				testLabel.setText("");
+				for (int i = 0; i < splitted.length; i++) {
+					testLabel.setText(label.getText() + " " + splitted[i]);
+					if (testLabel.getPrefWidth() > Betrayal.WIDTH - 220) {
+						label.setText(label.getText() + "\n" + " " + splitted[i]);
+						testLabel.setText("");
+					} else
+						label.setText(label.getText() + " " + splitted[i]);
+				}
+				verticalGroup.addActor(label);
 			}
-			verticalGroup.addActor(label);
 		}
 	}
 }

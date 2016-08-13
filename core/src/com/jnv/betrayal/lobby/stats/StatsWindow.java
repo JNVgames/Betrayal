@@ -104,7 +104,6 @@ public class StatsWindow extends Popup {
 		title.setX((Betrayal.WIDTH - title.getWidth()) / 2);
 		title.setY(background.getTop() - title.getPrefHeight() - 10);
 		popup.addActor(title);
-		System.out.println("title.getZIndex() = " + title.getZIndex());
 
 		com.jnv.betrayal.scene2d.ui.Image whiteLine = new com.jnv.betrayal.scene2d.ui.Image(res.getTexture("white-pixel"));
 		whiteLine.setWidth(title.getWidth()+20);
@@ -249,7 +248,6 @@ public class StatsWindow extends Popup {
 			}
 		});
 		popup.addActor(lobbyButton);
-		System.out.println("lobbyButton.getZIndex() = " + lobbyButton.getZIndex());
 	}
 
 	private void loadStatsAdjustButton() {
@@ -264,9 +262,7 @@ public class StatsWindow extends Popup {
 					if (applyPoints.hasAvailablePoints()) {
 						switch (temp) {
 							case 0:
-								System.out.printf("%d", applyPoints.getHealth());
 								applyPoints.addHealthPoint();
-								System.out.printf("%d", applyPoints.getHealth());
 								break;
 							case 1:
 								applyPoints.addAttackPoint();

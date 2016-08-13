@@ -2,10 +2,12 @@
  * Copyright (c) 2015. JNV Games, All rights reserved.
  */
 
-package com.jnv.betrayal.dungeon.cards;
+package com.jnv.betrayal.dungeon.animations;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.ui.Image;
@@ -50,14 +52,6 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.8f, Actions.color(Color.WHITE)));
 	}
 
-	public void changeColor(Card card, Color color) {
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(color)));
-	}
-
-	public void removeColor(Card card) {
-		card.getCardImage().addAction(Actions.delay(0.5f, Actions.color(Color.WHITE)));
-	}
-
 	public void jump(Card card) {
 		int multiplier = 1;
 		if (card instanceof MonsterCard) {
@@ -87,19 +81,23 @@ public class CardAnimation {
 
 	public void fadeOut(Card card) {
 		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
-		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
+		card.getHealthBar().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 	}
 
 	public void flee(Card card) {
-		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1.f)));
-		card.healthBar.addAction(Actions.delay(.5f, Actions.fadeOut(1.f)));
+		fleeAnimation(card);
 	}
 
 	public void failToFlee(Card card) {
-		flee(card);
+		fleeAnimation(card);
 
 		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
-		card.healthBar.addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
+		card.getHealthBar().addAction(Actions.delay(1.5f, Actions.fadeIn(.5f)));
+	}
+
+	private void fleeAnimation(Card card) {
+		card.getCardImage().addAction(Actions.delay(.5f, Actions.fadeOut(1f)));
+		card.getHealthBar().addAction(Actions.delay(.5f, Actions.fadeOut(1f)));
 	}
 
 	public void heal(Card card) {
@@ -125,7 +123,6 @@ public class CardAnimation {
 		card.getCardImage().addAction(Actions.delay(0.5f, Actions.moveBy(64, 0, 0.5f)));
 		card.getCardImage().addAction(Actions.delay(1f, Actions.sizeTo(128, 192, .5f)));
 		card.getCardImage().addAction(Actions.delay(1f, Actions.moveBy(-64, 0, 0.5f)));
-
 	}
 
 	public void squishVertically(Card card) {

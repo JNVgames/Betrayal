@@ -67,7 +67,6 @@ public class Lobby extends GameState {
 		timer.start();
 		delay = 5;
 		zIndex = 2;
-		System.out.println(zIndex);
 		task = new Timer.Task() {
 			@Override
 			public void run() {

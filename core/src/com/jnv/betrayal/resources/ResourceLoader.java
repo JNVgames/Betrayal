@@ -194,6 +194,12 @@ public class ResourceLoader {
 		res.loadTexture("icon/redcircle100x100.png", "red-circle");
 		res.loadTexture("icon/tellowcircle100x100.png", "yellow-circle");
 		res.loadTexture("button/character_preview_border.png", "cpb");
+		res.loadTexture("button/cpbBronze.png","cpbBronze");
+		res.loadTexture("button/cpbSilver.png","cpbSilver");
+		res.loadTexture("button/cpbGold.png","cpbGold");
+		res.loadTexture("button/cpbLegend.png","cpbLegend");
+		res.loadTexture("button/cpbLegendLegend.png","cpbLegendLegend");
+		res.loadTexture("button/cpbWhite.png","cpbWhite");
 	}
 
 	private void loadLobbyButtons() {
@@ -996,7 +1002,7 @@ public class ResourceLoader {
 				.skillTextureName("monsterpoison")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.health(25).attack(12).defense(3)
-				.numTargets(1).effectCooldown(1)
+				.numTargets(1).effectCooldown(2)
 				.goldReward(100)
 				.effect(new Poison(3))
 				.build();

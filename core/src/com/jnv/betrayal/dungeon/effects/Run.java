@@ -31,7 +31,6 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		if (src.getID() == src.getField().getClientCharacter().getId()) {
-			System.out.println("doing run start effect");
 			((YourTurn) src.getField().turnManager.getCurrentTurn()).attemptFlee(fleeChance);
 		}
 	}

@@ -78,7 +78,7 @@ public class Field extends Group {
 		createEventLogButton();
 		addActor(cardGroup);
 		turnManager = new TurnManager(this);
-		animationMgr = new AnimationManager(res);
+		animationMgr = new AnimationManager(res, this);
 		roundManager = new RoundManager(animationMgr);
 		roundManager.setSocket(socket);
 	}

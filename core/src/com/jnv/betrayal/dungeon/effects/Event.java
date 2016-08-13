@@ -1,6 +1,7 @@
 package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.utils.EventLogStringGenerator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,17 +49,7 @@ public class Event {
 	}
 
 	public String toEventLogString() {
-		String event = "";
-		event += effect.getSrc().getName();
-		event += " " + eventType.getActionString() + " ";
-		if (effect.getDest().size() > 0) {
-			for (int i = 0; i < effect.getDest().size(); i++) {
-				event += effect.getDest().get(i).getName();
-				if (i < effect.getDest().size() - 1)
-					event += ", ";
-			}
-		}
-		return event;
+		return EventLogStringGenerator.generate(getSrc(), getDest(), eventType);
 	}
 
 	@Override
