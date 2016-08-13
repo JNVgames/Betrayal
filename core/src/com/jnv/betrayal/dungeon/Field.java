@@ -87,6 +87,10 @@ public class Field extends Group {
 		background.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture(s))));
 	}
 
+	public void adjustReward(){
+		reward/= playerZone.size();
+	}
+
 	private void createEventLogButton() {
 		// Load event log button
 		float scale = 0.5f;

@@ -43,7 +43,8 @@ public class Dungeon extends GameState {
 		field.setBackgroundForField("map" + tier + "1");
 		if (game.getCurrentCharacter().getRoom().getRoomID() > 0) {
 			int MID = game.getCurrentCharacter().getRoom().getMonsterID();
-			MonsterManager monsterManager = new MonsterManager(tier, res, field, MID);
+			int MT = game.getCurrentCharacter().getRoom().getMonsterTier();
+			MonsterManager monsterManager = new MonsterManager(MT, res, field, MID);
 		} else {
 			MonsterManager monsterManager = new MonsterManager(tier, res, field); //todo FORtesTING
 			//todo change back
@@ -54,6 +55,7 @@ public class Dungeon extends GameState {
 		field.turnManager.drawUI();
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
+		field.adjustReward();
 		stage.addActor(field);
 
 		// Start first turn

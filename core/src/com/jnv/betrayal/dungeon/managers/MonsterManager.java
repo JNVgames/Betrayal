@@ -23,14 +23,15 @@ public class MonsterManager {
 	public MonsterManager(int highestTier, BetrayalAssetManager res, Field field) {
 		this.field = field;
 		this.res = res;
-		int monsterID = generateMonster(highestTier);
-		addDungeonMonster(highestTier, monsterID);
+		int tier = generateMonsterTier(highestTier);
+		int monsterID = generateMonster(tier);
+		addDungeonMonster(tier, monsterID);
 	}
 
-	public MonsterManager(int highestTier, BetrayalAssetManager res, Field field, int monsterID){
+	public MonsterManager(int tier, BetrayalAssetManager res, Field field, int monsterID){
 		this.field = field;
 		this.res = res;
-		addDungeonMonster(highestTier, monsterID);
+		addDungeonMonster(tier, monsterID);
 	}
 
 
@@ -105,5 +106,15 @@ public class MonsterManager {
 				break;
 		}
 		return x;
+	}
+	public int generateMonsterTier(int highestTier){
+		if (highestTier ==0 || highestTier ==5) {
+			return highestTier;
+		}else if(highestTier>5){
+			return 5;
+		}else{
+			Random randomNumberGenerator = new Random();
+			return randomNumberGenerator.nextInt(highestTier+1);
+		}
 	}
 }

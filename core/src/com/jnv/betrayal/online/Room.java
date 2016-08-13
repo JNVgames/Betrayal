@@ -26,7 +26,7 @@ public class Room {
 	private List<Character> characters = new ArrayList<Character>();
 	private Socket socket;
 	private Lobby lobby;
-	private int monsterID;
+	private int monsterID, monsterTier;
 	private boolean isServerOnline;
 
 	public Room(Character character) {
@@ -147,6 +147,7 @@ public class Room {
 				JSONObject data = (JSONObject) args[0];
 				try {
 					monsterID = data.getInt("monsterID");
+					monsterTier = data.getInt("monsterTier");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -271,6 +272,10 @@ public class Room {
 
 	public int getMonsterID() {
 		return monsterID;
+	}
+
+	public int getMonsterTier() {
+		return monsterTier;
 	}
 
 	public void joinRoom(String password, int roomID) {

@@ -54,15 +54,11 @@ public class Instructions extends Popup {
 	}
 
 	private void nextContent(){
-		System.out.println("currentContent = " + currentContent);
-		System.out.println("textures.size() = " + textures.size());
 		currentContent++;
 		if (currentContent==textures.size()) currentContent--;
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
 	private void previousContent(){
-		System.out.println("currentContent = " + currentContent);
-		System.out.println("textures.size() = " + textures.size());
 		currentContent--;
 		if(currentContent<0) currentContent++;
 		System.out.println("currentContent = " + currentContent);
@@ -112,6 +108,8 @@ public class Instructions extends Popup {
 		textures.add(getNewTexture("dungeonMonsterAttackExplanation"));
 		textures.add(getNewTexture("dungeonMonsterSkill"));
 		textures.add(getNewTexture("dungeonEventLog"));
+		textures.add(getNewTexture("dungeonMonsterHealthScale"));
+		textures.add(getNewTexture("dungeonRewardSplit"));
 		textures.add(getNewTexture("dungeonDeathWarning"));
 
 
