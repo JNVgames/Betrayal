@@ -32,9 +32,11 @@ import java.util.List;
 
 public class YourTurn extends Turn {
 
-	private boolean isFirstAppearance = true;
+	public static final float INITIAL_DELAY = 1.5f;
 	private static final int SPECIAL_COOLDOWN = 2;
+	private boolean isFirstAppearance = true;
 	private int counter = 0;
+	private float initialDelay = 1.5f;
 
 	public YourTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
 		super(field, panelPool, buttonPool, panels, game);
@@ -48,20 +50,31 @@ public class YourTurn extends Turn {
 			panels.addActor(createGrayPanel("Attack", FontManager.getDarkFont70(), Panel.topLeft));
 			panels.addActor(createGrayPanel("Defend", FontManager.getDarkFont70(), Panel.topRight));
 			panels.addActor(createGrayPanel("Flee", FontManager.getDarkFont70(), Panel.bottomRight));
-			panels.addAction(Actions.delay(1.5f, Actions.run(new Runnable() {
+			panels.addAction(Actions.delay(initialDelay, Actions.run(new Runnable() {
 				@Override
 				public void run() {
 					drawMainBar();
 				}
 			})));
-			isFirstAppearance = false;
+			reset();
 		} else {
 			drawMainBar();
 		}
 	}
 
+	private void reset() {
+		isFirstAppearance = false;
+		initialDelay = INITIAL_DELAY;
+	}
+
 	public void setFirstAppearance() {
 		isFirstAppearance = true;
+	}
+
+	public void setInitialDelay(float delay) {
+		if (delay > initialDelay) {
+			initialDelay = delay;
+		}
 	}
 
 	public void decreaseTurnsLeft() {

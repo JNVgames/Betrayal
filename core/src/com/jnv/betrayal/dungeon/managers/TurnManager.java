@@ -82,7 +82,7 @@ public class TurnManager {
 			}
 			field.setNextCardIndex();
 			field.roundManager.checkEvents(field.getCurrentCard());
-			drawUI();
+			drawUI(field.animationManager.getTotalAnimationDuration());
 			for (Card card : field.cardsToRemove) {
 				field.playerZone.remove(card);
 				field.calibrateCurrentCardTurnIndex();
@@ -92,7 +92,7 @@ public class TurnManager {
 		}
 	}
 
-	public void drawUI() {
+	public void drawUI(float delayForYourTurn) {
 		Card currentCard = field.getCurrentCard();
 
 		// Team member turn
@@ -108,6 +108,7 @@ public class TurnManager {
 		else {
 			currentTurn = yourTurn;
 			yourTurn.setFirstAppearance();
+			yourTurn.setInitialDelay(delayForYourTurn);
 		}
 		currentTurn.draw();
 	}

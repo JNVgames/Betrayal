@@ -10,6 +10,7 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.MonsterManager;
+import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class Dungeon extends GameState {
 		}
 
 		System.out.println("All cards: " + field.getAllCards());
-		field.turnManager.drawUI();
+		field.turnManager.drawUI(YourTurn.INITIAL_DELAY);
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
 		field.adjustReward();

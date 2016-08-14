@@ -16,6 +16,7 @@ public class AnimationManager {
 	private CardAnimation cardAnimation;
 	private GreatestFloatFinder floatFinder;
 	private AnimationQueue animationQueue;
+	private float totalAnimationDuration;
 
 	public AnimationManager(BetrayalAssetManager res, Actor eventBaseActor) {
 		cardAnimation = new CardAnimation(res);
@@ -23,8 +24,15 @@ public class AnimationManager {
 		animationQueue = new AnimationQueue(eventBaseActor);
 	}
 
+	/**
+	 * Initiates the process of looping through all the animations
+	 */
 	public void animate() {
-		animationQueue.startAnimations();
+		totalAnimationDuration = animationQueue.startAnimations();
+	}
+
+	public float getTotalAnimationDuration() {
+		return totalAnimationDuration;
 	}
 
 	public void queueEventAnimation(final Event event, final Runnable eventLogic) {

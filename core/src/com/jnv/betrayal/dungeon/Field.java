@@ -40,7 +40,7 @@ public class Field extends Group {
 
 	public final RoundManager roundManager;
 	public final TurnManager turnManager;
-	public final AnimationManager animationMgr;
+	public final AnimationManager animationManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final Betrayal game;
@@ -78,8 +78,8 @@ public class Field extends Group {
 		createEventLogButton();
 		addActor(cardGroup);
 		turnManager = new TurnManager(this);
-		animationMgr = new AnimationManager(res, this);
-		roundManager = new RoundManager(animationMgr);
+		animationManager = new AnimationManager(res, this);
+		roundManager = new RoundManager(animationManager);
 		roundManager.setSocket(socket);
 	}
 

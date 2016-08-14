@@ -21,7 +21,11 @@ public class AnimationQueue {
 		animations.add(animation);
 	}
 
-	public void startAnimations() {
+	/**
+	 * Loops through all the animations in order
+	 * @return the total time it'll take to loop through all the animations
+	 */
+	public float startAnimations() {
 		float delay = 0;
 		// Loop through animations until the end
 		for (AnimationEvent event : animations) {
@@ -29,5 +33,6 @@ public class AnimationQueue {
 			delay += event.getAnimationDuration() + 0.3f;
 		}
 		animations.clear();
+		return delay;
 	}
 }
