@@ -16,9 +16,11 @@ public class GreatestFloatFinder {
 		greatestFloat = 0;
 	}
 
-	public void enterFloat(float value) {
-		if (greatestFloat < value) {
-			greatestFloat = value;
+	public void enterFloat(float... value) {
+		for (float val : value) {
+			if (greatestFloat < val) {
+				greatestFloat = val;
+			}
 		}
 	}
 

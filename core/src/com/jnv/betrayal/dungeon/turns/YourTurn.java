@@ -36,7 +36,7 @@ public class YourTurn extends Turn {
 	private static final int SPECIAL_COOLDOWN = 2;
 	private boolean isFirstAppearance = true;
 	private int counter = 0;
-	private float initialDelay = 1.5f;
+	private float initialDelay = 3f;
 
 	public YourTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
 		super(field, panelPool, buttonPool, panels, game);

@@ -70,9 +70,10 @@ public class AnimationManager {
 						floatFinder.enterFloat(AnimationValues.DEFEND_DURATION);
 					}
 				}
-				floatFinder.enterFloat(AnimationValues.FLASH_COLOR_DURATION);
-				floatFinder.enterFloat(AnimationValues.DAMAGED_DURATION);
-				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				floatFinder.enterFloat(AnimationValues.FLASH_COLOR_DURATION,
+						AnimationValues.DAMAGED_DURATION,
+						AnimationValues.JUMP_DURATION,
+						AnimationValues.HEALTH_BAR_ANIM_DURATION);
 				break;
 			case DEFEND:
 			case KNIGHT_SPECIAL:
@@ -133,8 +134,9 @@ public class AnimationManager {
 					}
 				};
 
-				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
-				floatFinder.enterFloat(AnimationValues.HEAL_DURATION);
+				floatFinder.enterFloat(AnimationValues.JUMP_DURATION,
+						AnimationValues.HEAL_DURATION,
+						AnimationValues.HEALTH_BAR_ANIM_DURATION);
 				break;
 			case BOMB:
 				break;
@@ -211,7 +213,8 @@ public class AnimationManager {
 					}
 				};
 
-				floatFinder.enterFloat(AnimationValues.FLASH_COLOR_DURATION);
+				floatFinder.enterFloat(AnimationValues.FLASH_COLOR_DURATION,
+						AnimationValues.HEALTH_BAR_ANIM_DURATION);
 				break;
 
 			/**********************End Effects**************************/
