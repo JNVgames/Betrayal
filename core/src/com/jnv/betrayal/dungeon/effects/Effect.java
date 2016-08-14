@@ -119,9 +119,9 @@ public abstract class Effect {
 
 	public abstract void startEffect(Card destCard);
 
-	public abstract void endEffect(Card destCard);
-
 	public abstract void consistentEffect(Card destCard);
+
+	public abstract void endEffect(Card destCard);
 
 	public JSONObject toJSON() {
 		data = new JSONObject();
@@ -147,6 +147,17 @@ public abstract class Effect {
 		addToObject();
 
 		return data;
+	}
+
+	@Override
+	public String toString() {
+		return "Effect{" +
+				"\n\tsrc=" + src +
+				",\n\tdest=" + dest +
+				",\n\tstartType=" + startType +
+				",\n\tconsistentType=" + consistentType +
+				",\n\tendType=" + endType +
+				"}";
 	}
 
 	protected abstract void addToObject();

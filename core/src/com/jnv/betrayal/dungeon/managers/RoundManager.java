@@ -43,7 +43,7 @@ public class RoundManager {
 				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
-					System.out.println("CONSISTENT EFFECT: " + event);
+					System.out.println("END EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the animation
 					animation.queueEventAnimation(tmpEvent, new Runnable() {

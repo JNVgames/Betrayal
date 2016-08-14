@@ -55,10 +55,10 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event{" +
-				"src=" + effect.src.getName() +
-				", eventType=" + eventType +
-				", turnsLeft=" + turnsLeft +
-				'}';
+				"\n\teventType=" + eventType +
+				",\n\tturnsLeft=" + turnsLeft +
+				",\n\teffect=" + effect +
+				"}";
 	}
 
 	public JSONObject toJSON() {

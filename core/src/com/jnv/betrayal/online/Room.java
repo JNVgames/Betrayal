@@ -154,7 +154,6 @@ public class Room {
 				if (lobby != null) {
 					lobby.enterDungeonCountDown();
 				}
-
 			}
 		}).on("enterDungeon", new Emitter.Listener() {
 			@Override

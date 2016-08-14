@@ -310,6 +310,14 @@ public abstract class Card {
 		return defenders.size() > 0;
 	}
 
+	public int getDefendersSize() {
+		return defenders.size();
+	}
+
+	public Card getDefender(int index) {
+		return defenders.get(index);
+	}
+
 	public void removeDefender(int id) {
 		for (int counter = 0; counter < defenders.size(); counter++) {
 			if (defenders.get(counter).getID() == id) {

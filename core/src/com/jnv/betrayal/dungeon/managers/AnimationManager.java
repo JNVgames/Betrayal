@@ -29,7 +29,6 @@ public class AnimationManager {
 
 	public void queueEventAnimation(final Event event, final Runnable eventLogic) {
 
-		System.out.println("EVENT: " + event);
 		Runnable runnable = null;
 		floatFinder.reset();
 		switch (event.getEventType()) {
@@ -43,15 +42,29 @@ public class AnimationManager {
 					public void run() {
 						cardAnimation.jump(event.getSrc());
 						for (Card card : event.getDest()) {
-							cardAnimation.flashColor(card, Color.RED);
-							cardAnimation.damaged(card);
+							if (card.isBeingDefended()) {
+								// Defenders get flashed color animation
+								for (int i = 0; i < card.getDefendersSize(); i++) {
+									cardAnimation.flashColor(card.getDefender(i), Color.RED);
+								}
+								cardAnimation.defend(card);
+								cardAnimation.damaged(card);
+							} else {
+								cardAnimation.flashColor(card, Color.RED);
+								cardAnimation.damaged(card);
+							}
 						}
 					}
 				};
 
-				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				for (Card card : event.getDest()) {
+					if (card.isBeingDefended()) {
+						floatFinder.enterFloat(AnimationValues.DEFEND_DURATION);
+					}
+				}
 				floatFinder.enterFloat(AnimationValues.FLASH_COLOR_DURATION);
 				floatFinder.enterFloat(AnimationValues.DAMAGED_DURATION);
+				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
 				break;
 			case DEFEND:
 			case KNIGHT_SPECIAL:
@@ -210,8 +223,6 @@ public class AnimationManager {
 //				break;
 		}
 
-		if (runnable != null) {
-			animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable, eventLogic));
-		}
+		animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable, eventLogic));
 	}
 }

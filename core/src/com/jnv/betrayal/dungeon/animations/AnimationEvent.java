@@ -10,7 +10,9 @@ public class AnimationEvent {
 		fullRunnable = new Runnable() {
 			@Override
 			public void run() {
-				animation.run();
+				if (animation != null) {
+					animation.run();
+				}
 				eventLogic.run();
 			}
 		};

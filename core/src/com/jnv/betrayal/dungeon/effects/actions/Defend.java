@@ -30,11 +30,13 @@ public class Defend extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		destCard.addDefender((PlayerCard) src);
+		System.out.println("DEFEND START EFFECT");
 	}
 
 	@Override
 	public void endEffect(Card destCard) {
 		destCard.removeDefender(src.getID());
+		System.out.println("DEFEND END EFFECT");
 	}
 
 	@Override

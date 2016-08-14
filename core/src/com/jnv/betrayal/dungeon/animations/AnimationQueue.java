@@ -27,7 +27,6 @@ public class AnimationQueue {
 		for (AnimationEvent event : animations) {
 			actor.addAction(Actions.delay(delay, Actions.run(event.getRunnable())));
 			delay += event.getAnimationDuration() + 0.3f;
-			System.out.println("--delay = " + delay);
 		}
 		animations.clear();
 	}

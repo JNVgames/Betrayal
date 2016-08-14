@@ -88,7 +88,7 @@ public class TurnManager {
 				field.calibrateCurrentCardTurnIndex();
 			}
 			field.cardsToRemove.clear();
-			System.out.println("Next Turn...");
+			System.out.println("Waiting for input...");
 		}
 	}
 
