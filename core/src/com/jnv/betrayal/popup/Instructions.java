@@ -31,7 +31,6 @@ public class Instructions extends Popup {
 	public Instructions(Betrayal game) {
 		super(game);
 		textures = new ArrayList<Texture>();
-
 		currentContent = 0;
 		font40 = FontManager.getFont40();
 		loadTextures();
@@ -66,6 +65,7 @@ public class Instructions extends Popup {
 
 	private void loadTextures(){
 		textures.add(getNewTexture("instruction"));
+		textures.add(getNewTexture("gameObjective"));
 		textures.add(getNewTexture("mainMenuNewGame"));
  		textures.add(getNewTexture("mainMenuLoadGame"));
 		textures.add(getNewTexture("mainMenuHallOfFame"));

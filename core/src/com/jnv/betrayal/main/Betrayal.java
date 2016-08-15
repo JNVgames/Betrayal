@@ -49,6 +49,16 @@ public class Betrayal extends Game {
 		resume();
 	}
 
+	public void loadCharacters(List<Character> alive, List<Character> dead){
+		characters.clear();
+		fools.clear();
+		for(Character c: alive){
+			characters.add(c);
+		}
+		for (Character c : dead){
+			fools.add(c);
+		}
+	}
 	public void dispose() {
 		stage.dispose();
 		res.clear();

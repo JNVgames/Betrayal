@@ -64,7 +64,7 @@ public class OpeningInstructions extends UncloseablePopup{
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 		if(currentContent == textures.size()-1 && !happenOnce){
 			happenOnce = true;
-			new OKPopup(game, "Completed Instructions!"){
+			new OKPopup(game, "Completed Instructions!\nTap X to exit"){
 				@Override
 				public void onConfirm() {
 					exitButton.setVisible(true);
@@ -81,6 +81,7 @@ public class OpeningInstructions extends UncloseablePopup{
 
 	private void loadTextures(){
 		textures.add(getNewTexture("instruction"));
+		textures.add(getNewTexture("gameObjective"));
 		textures.add(getNewTexture("mainMenuNewGame"));
  		textures.add(getNewTexture("mainMenuLoadGame"));
 		textures.add(getNewTexture("mainMenuHallOfFame"));
