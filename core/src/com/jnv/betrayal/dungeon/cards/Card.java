@@ -341,6 +341,7 @@ public abstract class Card {
 				};
 				field.turnManager.dungeonEnded();
 				System.out.println("cleared");
+				field.clearActions();
 				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {

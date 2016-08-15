@@ -123,7 +123,12 @@ public class YourTurn extends Turn {
 			field.roundManager.addEvent(effect, effect.getStartType());
 			final Card card = field.getCurrentCard();
 			// Flee Successful
+//			field.animationManager.animate();
 			field.removePlayerCard((PlayerCard) card);
+//			if (field.getClientCharacter().getRoom().getSocket() != null
+//					&& field.getClientCharacter().getRoom().getSocket().connected()) {
+//				field.getClientCharacter().getRoom().getSocket().disconnect();
+//			}
 
 			Runnable r = new Runnable() {
 				@Override
@@ -144,9 +149,9 @@ public class YourTurn extends Turn {
 				@Override
 				public void run() {
 					new OKPopup(field.game, "Flee Failed");
-					field.turnManager.nextTurn();
 				}
 			};
+			field.turnManager.nextTurn();
 			field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
 		}
 	}

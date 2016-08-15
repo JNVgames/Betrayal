@@ -12,6 +12,8 @@ import java.util.List;
 
 public class KnightSpecial extends Effect {
 
+	private float increasedDefense;
+
 	public KnightSpecial(Card src, List<Card> dest) {
 		super(EventType.KNIGHT_SPECIAL);
 		turns = 1;
@@ -29,11 +31,14 @@ public class KnightSpecial extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		destCard.addDefender((PlayerCard) src);
+		increasedDefense = src.getBaseDefense() * 1.5f;
+		src.increaseCurrentDefense(increasedDefense);
 	}
 
 	@Override
 	public void endEffect(Card destCard) {
 		destCard.removeDefender(src.getID());
+		src.decreaseCurrentDefense(increasedDefense);
 	}
 
 	@Override

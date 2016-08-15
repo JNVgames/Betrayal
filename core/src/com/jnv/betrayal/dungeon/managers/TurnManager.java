@@ -118,6 +118,12 @@ public class TurnManager {
 		for (Actor actor : panels.getChildren()) {
 			actor.setTouchable(Touchable.disabled);
 			actor.addAction(Actions.fadeOut(1));
+			actor.addAction(Actions.delay(1, Actions.run(new Runnable() {
+				@Override
+				public void run() {
+					panels.clear();
+				}
+			})));
 		}
 	}
 

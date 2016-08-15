@@ -29,7 +29,7 @@ public class MonsterTurn extends Turn {
 	public void draw() {
 		panels.clear();
 		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
-		field.addAction(Actions.delay(3f, new RunnableAction(){
+		field.addAction(Actions.delay(3f, new RunnableAction() {
 			@Override
 			public void run() {
 				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()) {

@@ -8,6 +8,7 @@ import com.jnv.betrayal.dungeon.effects.Effect;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Attack extends Effect {
@@ -33,6 +34,8 @@ public class Attack extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		destCard.attack(attack);
+		System.out.println("attack!!!!!");
+		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 	}
 
 	@Override

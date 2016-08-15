@@ -94,6 +94,7 @@ public class AnimationManager {
 				runnable = new Runnable() {
 					@Override
 					public void run() {
+						System.out.println("FLEE");
 						cardAnimation.flee(event.getSrc());
 					}
 				};
@@ -104,6 +105,7 @@ public class AnimationManager {
 				runnable = new Runnable() {
 					@Override
 					public void run() {
+						System.out.println("FAIL");
 						cardAnimation.failToFlee(event.getSrc());
 					}
 				};
