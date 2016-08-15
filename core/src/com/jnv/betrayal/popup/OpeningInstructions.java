@@ -37,6 +37,7 @@ public class OpeningInstructions extends UncloseablePopup{
 		font40 = FontManager.getFont40();
 		loadTextures();
 		loadButtons();
+		loadXButton();
 		exitButton.setVisible(false);
 		new OKPopup(game, "Please Read Through\n The Instructions");
 
