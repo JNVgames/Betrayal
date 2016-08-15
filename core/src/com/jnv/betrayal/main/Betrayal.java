@@ -37,7 +37,7 @@ public class Betrayal extends Game {
 	private Character currentCharacter;
 
 	public void create() {
-		Gdx.graphics.setContinuousRendering(true);
+		Gdx.graphics.setContinuousRendering(false);	//todo keep false vincent
 
 		init();
 
