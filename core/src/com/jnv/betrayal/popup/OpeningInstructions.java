@@ -20,15 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Instructions extends Popup {
+public class OpeningInstructions extends UncloseablePopup{
 
 	private Image rightArrow, leftArrow, exitButton, background, content;
 	private Label title, pageNum;
 	private List<Texture> textures;
 	private Label.LabelStyle font40;
 	private int currentContent;
+	private boolean happenOnce = false;
 
-	public Instructions(Betrayal game) {
+	public OpeningInstructions(Betrayal game) {
 		super(game);
 		textures = new ArrayList<Texture>();
 
@@ -36,7 +37,11 @@ public class Instructions extends Popup {
 		font40 = FontManager.getFont40();
 		loadTextures();
 		loadButtons();
+		exitButton.setVisible(false);
+		new OKPopup(game, "Please Read Through\n The Instructions");
+
 	}
+
 
 	private void loadButtons() {
 		loadBackground();
@@ -44,7 +49,6 @@ public class Instructions extends Popup {
 		loadLeftArrow();
 		loadRightArrow();
 		setPageNumber();
-		loadXButton();
 		loadTitle();
 	}
 
@@ -55,12 +59,22 @@ public class Instructions extends Popup {
 
 	private void nextContent(){
 		currentContent++;
-		if (currentContent==textures.size()) currentContent=0;
+		if (currentContent==textures.size()) currentContent--;
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
+		if(currentContent == textures.size()-1 && !happenOnce){
+			happenOnce = true;
+			new OKPopup(game, "Completed Instructions!"){
+				@Override
+				public void onConfirm() {
+					exitButton.setVisible(true);
+				}
+			};
+		}
 	}
 	private void previousContent(){
 		currentContent--;
-		if(currentContent<0) currentContent = textures.size()-1;
+		if(currentContent<0) currentContent++;
+		System.out.println("currentContent = " + currentContent);
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
 
@@ -110,7 +124,6 @@ public class Instructions extends Popup {
 		textures.add(getNewTexture("dungeonMonsterHealthScale"));
 		textures.add(getNewTexture("dungeonRewardSplit"));
 		textures.add(getNewTexture("dungeonDeathWarning"));
-
 
 	}
 

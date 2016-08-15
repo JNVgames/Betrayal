@@ -56,7 +56,6 @@ public class Dungeon extends GameState {
 		field.turnManager.drawUI(YourTurn.INITIAL_DELAY);
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
-		field.adjustReward();
 		stage.addActor(field);
 
 		// Start first turn
