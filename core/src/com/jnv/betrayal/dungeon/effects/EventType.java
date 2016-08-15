@@ -39,7 +39,8 @@ public enum EventType {
 	E_BUFF_ATTACK_DEFENSE("lost their buff (atk, def)", false),
 	E_DEBUFF_ATTACK("is no longer debuffed (atk)", false),
 	E_DEBUFF_DEFENSE("is no longer debuffed (def)", false),
-	E_DEBUFF_ATTACK_DEFENSE("is no longer debuffed (atk, def)", false);
+	E_DEBUFF_ATTACK_DEFENSE("is no longer debuffed (atk, def)", false),
+	E_BOMB("Bomb exploded on", true, false, false);
 
 	private String action;
 	private boolean showSrc, showDest, showInEventLog, showDestFirst;

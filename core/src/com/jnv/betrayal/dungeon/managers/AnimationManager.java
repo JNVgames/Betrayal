@@ -139,6 +139,17 @@ public class AnimationManager {
 						AnimationValues.HEALTH_BAR_ANIM_DURATION);
 				break;
 			case BOMB:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						cardAnimation.jump(event.getSrc());
+						for (Card card : event.getDest()) {
+							cardAnimation.attachBomb(card);
+						}
+					}
+				};
+
+				floatFinder.enterFloat(AnimationValues.BOMB_DURATION);
 				break;
 			case POISON:
 				runnable = new Runnable() {
@@ -147,12 +158,14 @@ public class AnimationManager {
 						cardAnimation.jump(event.getSrc());
 						for (Card card : event.getDest()) {
 							cardAnimation.longFlashColor(card, Color.GREEN);
+							cardAnimation.poison(card);
 						}
 					}
 				};
 
 				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
 				floatFinder.enterFloat(AnimationValues.LONG_FLASH_COLOR_DURATION);
+				floatFinder.enterFloat(AnimationValues.POISON_DURATION);
 				break;
 			case BUFF_ATTACK:
 			case PRIEST_ATTACK_SPECIAL:
@@ -218,6 +231,30 @@ public class AnimationManager {
 				break;
 
 			/**********************End Effects**************************/
+			case E_BOMB:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						for (Card card : event.getDest()) {
+							cardAnimation.removeBomb(card);
+							cardAnimation.damaged(card);
+						}
+					}
+				};
+
+				floatFinder.enterFloat(AnimationValues.DAMAGED_DURATION);
+				break;
+
+			case E_POISON:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						for (Card card : event.getDest()) {
+							cardAnimation.removePoison(card);
+						}
+					}
+				};
+				break;
 //			case E_BUFF_ATTACK:
 //				break;
 //			case E_BUFF_ATTACK_DEFENSE:

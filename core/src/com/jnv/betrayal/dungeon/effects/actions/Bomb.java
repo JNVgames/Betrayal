@@ -15,14 +15,14 @@ public class Bomb extends Effect {
 	private int attack;
 
 	public Bomb(int attack, int turns) {
-		super(EventType.BOMB, turns);
+		super(EventType.BOMB, turns, EventType.E_BOMB);
 		this.attack = attack;
 		isHostile = true;
 	}
 
 	// JSON constructor
 	public Bomb(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.BOMB, turns);
+		super(EventType.BOMB, turns, EventType.E_BOMB);
 		try {
 			this.attack = data.getInt("attack");
 		} catch (JSONException e) {
@@ -49,7 +49,6 @@ public class Bomb extends Effect {
 
 	@Override
 	protected void addToObject() {
-		JSONObject values = new JSONObject();
 		try {
 			data.put("attack", attack);
 			data.put("description", description);

@@ -14,6 +14,7 @@ import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.effects.Died;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.popup.CardInfo;
+import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -38,6 +39,7 @@ public abstract class Card {
 	private TextureRegion selectedTexture;
 	private boolean isSelected, selecting;
 	private InputListener selectListener, cardInfoListener;
+	private Image statusIcon;
 
 	protected Card(Dimension dimension, BetrayalAssetManager res) {
 		group = new Group() {
@@ -71,6 +73,15 @@ public abstract class Card {
 		selectedTexture = new TextureRegion(res.getTexture("cross-hair"));
 		group.addActor(healthBar);
 		healthBar.toFront();
+
+		statusIcon = new Image();
+		statusIcon.setBounds(DungeonCoords.PLAYER_WIDTH,
+				(DungeonCoords.PLAYER_HEIGHT - healthBar.getBackgroundHeight()) / 2 - 50, 100, 100);
+		group.addActor(statusIcon);
+	}
+
+	public Image getStatusIcon() {
+		return statusIcon;
 	}
 
 	protected void initializeCardListener() {
@@ -418,6 +429,10 @@ public abstract class Card {
 		private void initialize(float x, float y) {
 			healthBarBackground.setBounds(x, y, 227, 25);
 			healthBar.setBounds(x + 10, y + 8, 200, 8);
+		}
+
+		public float getBackgroundHeight() {
+			return healthBarBackground.getHeight();
 		}
 
 		private void setNewHealthPercent(int newHealthPercent) {

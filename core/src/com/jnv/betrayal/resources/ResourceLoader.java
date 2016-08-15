@@ -234,6 +234,8 @@ public class ResourceLoader {
 		res.loadTexture("icon/heal250x250.png", "heal");
 		res.loadTexture("icon/damage250x250.png", "damage");
 		res.loadTexture("icon/block250x250.png", "block");
+		res.loadTexture("item/skills/poisonImage.png", "poison");
+		res.loadTexture("item/skills/bombImage.png", "bomb");
 	}
 
 	private void loadSwordTier1() {
@@ -1002,10 +1004,10 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpoison")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(25).attack(59).defense(3)
-				.numTargets(1).effectCooldown(2)
+				.health(25).attack(1).defense(3)
+				.numTargets(1).effectCooldown(3)
 				.goldReward(100)
-				.effect(new Poison(3))
+				.effect(new Poison(2))
 				.build();
 
 		// Tier 1

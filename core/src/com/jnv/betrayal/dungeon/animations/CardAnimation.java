@@ -5,7 +5,10 @@
 package com.jnv.betrayal.dungeon.animations;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
@@ -166,5 +169,39 @@ public class CardAnimation {
 				shield.remove();
 			}
 		})));
+	}
+
+	public void attachBomb(final Card card) {
+		addStatusIcon(card, res.getTexture("bomb"));
+	}
+
+	public void removeBomb(final Card card) {
+		removeStatusIcon(card);
+	}
+
+	public void poison(final Card card) {
+		addStatusIcon(card, res.getTexture("poison"));
+	}
+
+	public void removePoison(final Card card) {
+		removeStatusIcon(card);
+	}
+
+	private void addStatusIcon(final Card card, final Texture texture) {
+		card.getGroup().addAction(Actions.delay(0.7f, Actions.run(new Runnable() {
+			@Override
+			public void run() {
+				card.getStatusIcon().setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
+			}
+		})));
+	}
+
+	private void removeStatusIcon(final Card card) {
+		card.getGroup().addAction(Actions.run(new Runnable() {
+			@Override
+			public void run() {
+				card.getStatusIcon().setDrawable(null);
+			}
+		}));
 	}
 }

@@ -28,7 +28,7 @@ public class Menu extends GameState {
 		super(gsm);
 		loadMenuButtons();
 		firstTimeOpen = false;	//todo change this to read from json file
-		if(!firstTimeOpen)
+		if(!firstTimeOpen && !Betrayal.DEBUG)
 			firstTimeOpenPopUps();
 	}
 
