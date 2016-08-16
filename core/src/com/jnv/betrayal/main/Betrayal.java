@@ -15,6 +15,7 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.ResourceLoader;
+import com.jnv.betrayal.resources.SavedDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,10 @@ public class Betrayal extends Game {
 	private Stage stage;
 	private ResourceLoader loader;
 	private Character currentCharacter;
+	public SavedDataHandler savedDataHandler = new SavedDataHandler(this);
 
 	public void create() {
-		Gdx.graphics.setContinuousRendering(true);	//todo keep false vincent
+		Gdx.graphics.setContinuousRendering(false);	//todo keep false vincent
 
 		init();
 

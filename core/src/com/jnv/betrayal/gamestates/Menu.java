@@ -19,6 +19,7 @@ import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.OpeningInstructions;
 import com.jnv.betrayal.popup.Options;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.resources.SavedDataHandler;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class Menu extends GameState {
@@ -27,9 +28,7 @@ public class Menu extends GameState {
 	public Menu(GameStateManager gsm) {
 		super(gsm);
 		loadMenuButtons();
-		firstTimeOpen = false;	//todo change this to read from json file
-		if(!firstTimeOpen && !Betrayal.DEBUG)
-			firstTimeOpenPopUps();
+		firstTimeOpenPopUps();
 	}
 
 	public void update(float dt) {
@@ -61,14 +60,16 @@ public class Menu extends GameState {
 
 	private void firstTimeOpenPopUps(){
 
-		firstTimeOpen = false;
-		new OKPopup(game,"Welcome to Betrayal"){
-			@Override
-			public void onConfirm() {
+		//firstTimeOpen = game.savedDataHandler.retreiveOpenFirstTime();
+		firstTimeOpen = false;		//todo change back!!!
+		if(firstTimeOpen)
+			new OKPopup(game,"Welcome to Betrayal"){
+				@Override
+				public void onConfirm() {
 
-				new OpeningInstructions(game);
-			}
-		};
+					new OpeningInstructions(game);
+				}
+			};
 		//todo update JSON firstTImeOpen. when you first downlaod the game, JSON should be false
 	}
 

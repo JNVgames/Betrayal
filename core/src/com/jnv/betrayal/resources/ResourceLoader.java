@@ -144,6 +144,7 @@ public class ResourceLoader {
 		res.loadTexture("instructions/stats.png", "stats");
 		res.loadTexture("instructions/dungeonMonsterHealthScale.png", "dungeonMonsterHealthScale");
 		res.loadTexture("instructions/dungeonRewardSplit.png", "dungeonRewardSplit");
+		res.loadTexture("instructions/gameObjective.png", "gameObjective");
 
 	}
 

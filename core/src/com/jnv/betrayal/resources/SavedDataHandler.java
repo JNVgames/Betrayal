@@ -3,34 +3,46 @@ package com.jnv.betrayal.resources;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Base64Coder;
-import com.badlogic.gdx.utils.Json;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SavedDataHandler {
     Betrayal game;
-    FileHandle file = Gdx.files.local("bin/Saved.json");
+
     public SavedDataHandler(Betrayal game) {
         this.game = game;
     }
 
-    private void load( JSONObject object) {
-        String s = Base64Coder.decodeString(file.readString());
-        JSONObject data = data = new JSONObject();
+    public void load() {
+        JSONArray alivePlayers = null;
+        JSONArray deadPlayers = null;
+
+        String s = readFile("game.sav");
+
+        JSONObject data = null;
+            try {
+                data = new JSONObject(s);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        if(data == null)
+            return;
         List<Character> aliveCharacters = new ArrayList<Character>();
         /*********************Getting Alive Players*********************/
         int counter = 0;
         try {
-            JSONArray alivePlayers = data.getJSONArray("alivePlayers");
+            alivePlayers = data.getJSONArray("alivePlayers");
 
-            System.out.println(alivePlayers);
             while (!alivePlayers.isNull(counter)) {
                 Character c = new Character(game.res);
                 c.fromJson(alivePlayers.getJSONObject(counter));
@@ -46,7 +58,7 @@ public class SavedDataHandler {
         List<Character> deadCharacters = new ArrayList<Character>();
         counter = 0;
         try {
-            JSONArray deadPlayers = data.getJSONArray("deadPlayers");
+            deadPlayers = data.getJSONArray("deadPlayers");
 
             System.out.println(deadPlayers);
             while (!deadPlayers.isNull(counter)) {
@@ -65,7 +77,12 @@ public class SavedDataHandler {
 
     }
     public boolean retreiveOpenFirstTime(){
-        return false;       //todo change
+        FileHandle file = Gdx.files.local("game.sav");
+        if(file ==null){
+            return false;
+        }
+        return true;
+
     }
 
     public void save(){
@@ -91,21 +108,29 @@ public class SavedDataHandler {
             }
         }
 
-        boolean openFirstTIme = true;       //will always be true when you need to save
-
         JSONObject o = new JSONObject();
         try {
             o.put("alivePlayers",alivePlayers);
             o.put("deadPlayers", deadPlayers);
-            o.put("openFirstTime", openFirstTIme);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        FileHandle file = Gdx.files.local("game.sav");
         file.writeString(Base64Coder.encodeString(o.toString()),false);
 
         //todo put this all in key and value into the json file
 
+    }
+
+    public static String readFile(String filename) {
+        FileHandle file = Gdx.files.local(filename);
+        if (file != null && file.exists()) {
+            String s = file.readString();
+            if (s != null) {
+                return com.badlogic.gdx.utils.Base64Coder.decodeString(s);
+            }
+        }
+        return "";
     }
 
 
