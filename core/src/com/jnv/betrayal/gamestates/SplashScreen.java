@@ -27,10 +27,9 @@ public class SplashScreen extends GameState {
 		loader.loadLoadingScreen();
 		res.finishLoading();
 		loader.loadAll();
-		// todo add back
-		//if (Betrayal.DEBUG) {
+		if (Betrayal.DEBUG) {
 			res.finishLoading();
-		//}
+		}
 
 		format = new DecimalFormat("###");
 

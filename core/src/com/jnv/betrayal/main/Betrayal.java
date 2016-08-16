@@ -24,7 +24,7 @@ public class Betrayal extends Game {
 
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 1280;
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	private static boolean gamePaused;
 	public final BetrayalAssetManager res = new BetrayalAssetManager();
 	public final List<Character> characters = new ArrayList<Character>();
@@ -39,15 +39,11 @@ public class Betrayal extends Game {
 	public SavedDataHandler savedDataHandler = new SavedDataHandler(this);
 
 	public void create() {
-		Gdx.graphics.setContinuousRendering(false);	//todo keep false vincent
-
 		init();
 
 		loader = new ResourceLoader(res);
-
 		gsm = new GameStateManager(this);
 		if (!gamePaused) gsm.setState(GameStateManager.State.SPLASH);
-
 		resume();
 	}
 
@@ -61,6 +57,7 @@ public class Betrayal extends Game {
 			fools.add(c);
 		}
 	}
+
 	public void dispose() {
 		stage.dispose();
 		res.clear();
@@ -106,14 +103,6 @@ public class Betrayal extends Game {
 	// Getters
 	public SpriteBatch getBatch() {
 		return sb;
-	}
-
-	public OrthographicCamera getCamera() {
-		return worldCam;
-	}
-
-	public StretchViewport getStretchViewport() {
-		return stretchViewport;
 	}
 
 	public Stage getStage() {

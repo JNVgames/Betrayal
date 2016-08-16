@@ -166,7 +166,6 @@ public class CharacterSelection extends GameState {
 					character.setName(fieldUsernameEnter.getText());
 					game.characters.add(character);
 					game.setCurrentCharacter(character);
-					character.instantializeRoom();
 					gsm.setState(GameStateManager.State.LOBBY);
 				}
 			}

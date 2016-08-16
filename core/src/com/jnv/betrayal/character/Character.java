@@ -45,6 +45,7 @@ public class Character implements JsonSerializable {
 		stats = new Stats(equips);
 		equips.setStats(stats);
 		preview.update();
+		room = new Room(this);
 	}
 
 	private static int generateRandomID() {
@@ -134,10 +135,6 @@ public class Character implements JsonSerializable {
 			default:
 				break;
 		}
-	}
-
-	public void instantializeRoom() {
-		room = new Room(this);
 	}
 
 	public void setReady(boolean isReady) {

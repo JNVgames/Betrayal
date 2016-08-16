@@ -62,6 +62,4 @@ public class BetrayalAssetManager extends AssetManager {
 	public Monster getMonster(String name) {
 		return monsters.get(name);
 	}
-
-
 }

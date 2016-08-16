@@ -9,8 +9,6 @@ import com.jnv.betrayal.main.Betrayal;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +46,7 @@ public class SavedDataHandler {
                 c.fromJson(alivePlayers.getJSONObject(counter));
                 c.preview.update();
                 aliveCharacters.add(c);
+                counter++;
             }
 
         } catch (JSONException e) {

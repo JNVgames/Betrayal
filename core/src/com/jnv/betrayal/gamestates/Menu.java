@@ -57,19 +57,19 @@ public class Menu extends GameState {
 		//loadOptionsButton();
 	}
 
-
-	private void firstTimeOpenPopUps(){
+	private void firstTimeOpenPopUps() {
 
 		//firstTimeOpen = game.savedDataHandler.retreiveOpenFirstTime();
 		firstTimeOpen = false;		//todo change back!!!
-		if(firstTimeOpen)
-			new OKPopup(game,"Welcome to Betrayal"){
+		if(firstTimeOpen) {
+			new OKPopup(game, "Welcome to Betrayal") {
 				@Override
 				public void onConfirm() {
 
 					new OpeningInstructions(game);
 				}
 			};
+		}
 		//todo update JSON firstTImeOpen. when you first downlaod the game, JSON should be false
 	}
 
@@ -224,5 +224,4 @@ public class Menu extends GameState {
 		});
 		stage.addActor(mask);
 	}
-
 }
