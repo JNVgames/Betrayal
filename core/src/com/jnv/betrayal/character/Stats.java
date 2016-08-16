@@ -5,7 +5,10 @@
 package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.Stat;
+import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.JsonSerializable;
+import com.jnv.betrayal.popup.OKPopup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,10 +130,18 @@ public class Stats implements JsonSerializable {
 	/**
 	 * Called when the character levels up
 	 */
-	public void advanceFloor() {
-		//floor++; //todo add back delete other
+	public void advanceFloor(Betrayal game) {
+
+//		if(floor>=25)
+// 			return;
+//		floor++; //todo add back delete other\
 		availablePoints += 5;
 		applyPoints.updateValues();
+		if(floor==25) {        //won the game\
+			game.fools.add(game.getCurrentCharacter());
+			game.gsm.setState(GameStateManager.State.HALL_OF_FAME);
+			new OKPopup(450,Betrayal.HEIGHT-1000, game, "You beat the game!\nYou can keep playing but\nyou can no longer level up");
+		}
 	}
 
 	public void advanceFloor2() {

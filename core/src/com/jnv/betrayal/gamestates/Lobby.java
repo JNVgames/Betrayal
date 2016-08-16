@@ -74,6 +74,10 @@ public class Lobby extends GameState {
 			public void run() {
 			}
 		};
+		if (gsm.game.getCurrentCharacter().getRoom().getSocket() != null
+				&& gsm.game.getCurrentCharacter().getRoom().getSocket().connected()) {
+			gsm.game.getCurrentCharacter().getRoom().refreshLobby();
+		}
 	}
 
 	public void enterDungeonCountDown() {

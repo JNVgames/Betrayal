@@ -243,7 +243,7 @@ public class Room {
 		}
 	}
 
-	private void refreshLobby() {
+	public void refreshLobby() {
 		if (lobby != null) {
 			lobby.refresh();
 		}

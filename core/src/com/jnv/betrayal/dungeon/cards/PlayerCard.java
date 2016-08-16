@@ -14,6 +14,7 @@ import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gamestates.GameStateManager;
+import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -58,8 +59,8 @@ public class PlayerCard extends Card {
 		return character.getName();
 	}
 
-	public void levelUpCharacter() {
-		character.stats.advanceFloor();
+	public void levelUpCharacter(Betrayal game) {
+		character.stats.advanceFloor(game);
 	}
 
 	public void getReward(){

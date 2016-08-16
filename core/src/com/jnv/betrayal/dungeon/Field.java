@@ -117,6 +117,8 @@ public class Field extends Group {
 		card.setField(this);
 	}
 
+
+
 	public void adjustMonsterHealth() {
 		for (MonsterCard card : monsterZone) {
 			card.multiplyHealth(playerZone.size());

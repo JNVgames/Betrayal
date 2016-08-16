@@ -307,7 +307,7 @@ public abstract class Card {
 					new OKPopup(field.game, "You Have Died") {
 						@Override
 						public void onConfirm() {
-							field.game.fools.add(field.game.getCurrentCharacter());
+							field.game.addFool(field.game.getCurrentCharacter());
 							field.game.characters.remove(field.game.getCurrentCharacter());
 							field.game.gsm.setState(GameStateManager.State.MENU);
 						}
@@ -336,7 +336,7 @@ public abstract class Card {
 							@Override
 							public void onConfirm() {
 								for (Card c : field.getAllPlayerCards()) {
-									((PlayerCard) c).levelUpCharacter();
+									((PlayerCard) c).levelUpCharacter(game);
 									((PlayerCard) c).getReward();
 									System.out.println("field reward" + field.reward);
 								}

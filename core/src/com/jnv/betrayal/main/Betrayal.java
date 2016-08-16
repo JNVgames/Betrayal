@@ -58,6 +58,15 @@ public class Betrayal extends Game {
 		}
 	}
 
+	public void addFool(Character character){
+		boolean notHere = true;
+		for(Character c : fools){
+			if( c.getId() == character.getId())
+				notHere = false;
+		}
+		if(notHere)
+			fools.add(character);
+	}
 	public void dispose() {
 		stage.dispose();
 		res.clear();
