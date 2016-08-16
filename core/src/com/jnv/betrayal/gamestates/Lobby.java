@@ -299,7 +299,6 @@ public class Lobby extends GameState {
 				Lobby.this.refresh();
 				game.getCurrentCharacter().stats.advanceFloor2();
 				game.savedDataHandler.save();
-				game.savedDataHandler.load();
 			}
 		});
 		bottom.addActor(tower);

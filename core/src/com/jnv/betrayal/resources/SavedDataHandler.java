@@ -71,7 +71,8 @@ public class SavedDataHandler {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        System.out.println("---------------------LOADING---------------------");
+        System.out.println(alivePlayers);
         game.loadCharacters(aliveCharacters, deadCharacters);
 
     }
@@ -116,8 +117,15 @@ public class SavedDataHandler {
         }
         FileHandle file = Gdx.files.local("game.sav");
         file.writeString(Base64Coder.encodeString(o.toString()),false);
+        System.out.println("----------SAVING--------");
+        System.out.println(alivePlayers);
+
 
         //todo put this all in key and value into the json file
+        for(int i=0 ; i<game.characters.size(); i++){
+            game.characters.remove(i);      //todo TESTING
+        }
+
 
     }
 

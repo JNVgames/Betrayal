@@ -169,7 +169,7 @@ public class Inventory implements JsonSerializable {
 			gold = data.getInt("gold");
 			JSONArray itemData = data.getJSONArray("items");
 			for(int i = 0; i<itemData.length(); i++) {
-				JSONObject object = null;
+				JSONObject object = itemData.getJSONObject(i);
 				clazz = Class.forName(object.getString("class"));
 				constructor = clazz.getConstructor(String.class, BetrayalAssetManager.class);
 				item = constructor.newInstance(object.getString("textureName"), res);

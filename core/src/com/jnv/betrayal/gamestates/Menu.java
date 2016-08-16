@@ -167,6 +167,7 @@ public class Menu extends GameState {
 			@Override
 			public void doAction() {
 				new OKPopup(game,"Developers: \nJoseph Phan\nVincent Wang");
+				game.savedDataHandler.load();
 			}
 		});
 		stage.addActor(aboutButton);
