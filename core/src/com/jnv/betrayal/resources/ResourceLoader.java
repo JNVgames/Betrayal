@@ -49,7 +49,6 @@ public class ResourceLoader {
 		loadCharacterPreviewsImages();
 		loadMonsters();
 		loadHealthBar();
-		loadSkills();
 		loadDungeonTextures();
 		loadInstructions();
 	}
@@ -79,22 +78,15 @@ public class ResourceLoader {
 		res.loadTexture("about/lobby720x1280.png", "lobby-screen");
 		res.loadTexture("about/shop_background720x1280.png", "shop-background");
 		res.loadTexture("about/shop_purchase_background720x1280.png", "shop-purchase-background");
-		res.loadTexture("about/game_over720x1280.png", "game-over-background");
-		res.loadTexture("about/tower.png", "tower");
 		res.loadTexture("about/lobby-tower.png", "lobby-tower");
 		res.loadTexture("character/character_outline.png", "character-outline");
 		res.loadTexture("about/option_background.png", "4option-background");
 		res.loadTexture("about/option_background200x213.png", "3option-background");
 		res.loadTexture("about/whitepixel.png", "white-pixel");
 
-		// Dungeon backgrounds
-		for (int i = 1; i <= 5; i++) {
-			res.loadTexture("map/dungeon_map" + i + ".png", "map-" + i);
-		}
+		int j = 1;
 		for(int i = 1; i <=5; i++){
-			for(int j = 1; j<=6; j++) {
 				res.loadTexture("map/tier" + i + "/" + j + ".png", "map" + i + j );
-			}
 		}
 		res.loadTexture("map/tier1/1" + ".png", "map" + "0" + "1" );
 	}
@@ -958,31 +950,6 @@ public class ResourceLoader {
 				.build();
 	}
 
-	private void loadSkills() {
-		res.loadTexture("icon/skills/axe.png", "skill1");
-		res.loadTexture("icon/skills/bomb.png", "skill2");
-		res.loadTexture("icon/skills/brokensword.png", "skill3");
-		res.loadTexture("icon/skills/chains.png", "skill4");
-		res.loadTexture("icon/skills/death.png", "skill5");
-		res.loadTexture("icon/skills/defensebreak.png", "skill6");
-		res.loadTexture("icon/skills/demon.png", "skill7");
-		res.loadTexture("icon/skills/explosion.png", "skill8");
-		res.loadTexture("icon/skills/fire.png", "skill9");
-		res.loadTexture("icon/skills/fist.png", "skill10");
-		res.loadTexture("icon/skills/freeze.png", "skill11");
-		res.loadTexture("icon/skills/heal.png", "skill12");
-		res.loadTexture("icon/skills/horn.png", "skill13");
-		res.loadTexture("icon/skills/hourglass.png", "skill14");
-		res.loadTexture("icon/skills/lockon.png", "skill15");
-		res.loadTexture("icon/skills/magesymbol.png", "skill16");
-		res.loadTexture("icon/skills/magesymbol2.png", "skill17");
-		res.loadTexture("icon/skills/poison.png", "skill18");
-		res.loadTexture("icon/skills/powerdown.png", "skill19");
-		res.loadTexture("icon/skills/scythe.png", "skill20");
-		res.loadTexture("icon/skills/shield.png", "skill21");
-		res.loadTexture("icon/skills/male.png", "skill22");
-		res.loadTexture("icon/skills/female.png", "skill23");
-	}
 
 	private void loadMonsterData() {
 		// Tier 0

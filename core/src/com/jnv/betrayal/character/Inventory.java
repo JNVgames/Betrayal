@@ -4,29 +4,33 @@
 
 package com.jnv.betrayal.character;
 
+import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
 import com.jnv.betrayal.online.JsonSerializable;
+import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Manages a character's inventory
  */
-public class Inventory {
+public class Inventory implements JsonSerializable {
 
 	private int gold, maxItems;
 	private List<Item> items;
+	private BetrayalAssetManager res;
 
-	public Inventory() {
+	public Inventory(BetrayalAssetManager res) {
 		gold = 10000;
 		maxItems = 20;
-
+		this.res = res;
 		items = new ArrayList<Item>();
 	}
 
@@ -134,5 +138,46 @@ public class Inventory {
 
 	public boolean isFull() {
 		return items.size() == maxItems;
+	}
+
+	@Override
+	public JSONObject toJson() {
+		JSONObject data = new JSONObject();
+		JSONArray itemData = new JSONArray();
+		try {
+			data.put("gold", gold);
+			for( int i = 0 ; i< items.size(); i++){
+				JSONObject obj = new JSONObject();
+				obj.put("class", items.get(i).getClass().getCanonicalName());
+				obj.put("textureName", items.get(i).getTextureName());
+				itemData.put(i, obj);
+			}
+			data.put("items", itemData);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	@Override
+	public void fromJson(JSONObject data) {
+		Class<?> clazz;
+		Constructor<?> constructor;
+		Object item;
+
+		try {
+			gold = data.getInt("gold");
+			JSONArray itemData = data.getJSONArray("items");
+			for(int i = 0; i<itemData.length(); i++) {
+				JSONObject object = null;
+				clazz = Class.forName(object.getString("class"));
+				constructor = clazz.getConstructor(String.class, BetrayalAssetManager.class);
+				item = constructor.newInstance(object.getString("textureName"), res);
+				items.add((Item) item);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

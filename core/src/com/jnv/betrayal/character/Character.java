@@ -38,7 +38,7 @@ public class Character implements JsonSerializable {
 		id = generateRandomID();
 
 		this.res = res;
-		inventory = new Inventory();
+		inventory = new Inventory(res);
 		equips = new Equips(inventory, res);
 		preview = new Preview(equips, res);
 		job = new Job();
@@ -160,6 +160,8 @@ public class Character implements JsonSerializable {
 			data.put("equips", equips.toJson());
 			data.put("stats", stats.toJson());
 			data.put("isReady", isReady);
+			data.put("inventory", inventory.toJson());
+			data.put("roomid", room.getRoomID());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -176,6 +178,8 @@ public class Character implements JsonSerializable {
 			preview.fromJson(data.getJSONObject("preview"));
 			equips.fromJson(data.getJSONObject("equips"));
 			stats.fromJson(data.getJSONObject("stats"));
+			inventory.fromJson(data.getJSONObject("inventory"));
+			room.setRoomID(data.getInt("roomid"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

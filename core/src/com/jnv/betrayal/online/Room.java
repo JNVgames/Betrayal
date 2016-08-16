@@ -38,6 +38,10 @@ public class Room {
 		return roomID;
 	}
 
+	public void setRoomID(int roomID){
+		this.roomID = roomID;
+	}
+
 	public void connectToServer() {
 		isServerOnline = true;
 		try {

@@ -7,12 +7,14 @@ package com.jnv.betrayal.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.jnv.betrayal.character.utils.EquipSlot;
 import com.jnv.betrayal.online.JsonSerializable;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Constructor;
 import java.util.Comparator;
 
 public abstract class Item {
@@ -123,4 +125,6 @@ public abstract class Item {
 			return item1 - item2;
 		}
 	}
+
+
 }
