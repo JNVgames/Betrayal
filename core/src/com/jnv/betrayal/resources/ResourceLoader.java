@@ -1001,7 +1001,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(0)
-				.nickname("Skeleton Kelly")
+				.nickname("Fred")
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpoison")
 				.textureWidth(250).textureHeight(250).x(235).y(740)

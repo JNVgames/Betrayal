@@ -10,9 +10,9 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
+import com.jnv.betrayal.scene2d.ui.LabelUtils;
 
 import java.util.Deque;
-import java.util.List;
 
 public class EventLog extends Popup {
 
@@ -79,8 +79,7 @@ public class EventLog extends Popup {
 	}
 
 	private void loadHistory() {
-		int index;
-		String eventString, backupString;
+		String eventString;
 		Label testLabel = new Label("", FontManager.getFont50());
 		for (Event event : eventHistory) {
 			if (event.getEventType().showInEventLog()) {
@@ -90,17 +89,7 @@ public class EventLog extends Popup {
 				eventString = event.toEventLogString();
 				Label label = new Label("", FontManager.getFont50());
 
-				String[] splitted = eventString.split("\\s+");
-
-				testLabel.setText("");
-				for (int i = 0; i < splitted.length; i++) {
-					testLabel.setText(label.getText() + " " + splitted[i]);
-					if (testLabel.getPrefWidth() > Betrayal.WIDTH - 220) {
-						label.setText(label.getText() + "\n" + " " + splitted[i]);
-						testLabel.setText("");
-					} else
-						label.setText(label.getText() + " " + splitted[i]);
-				}
+				LabelUtils.splitLabelString(eventString, testLabel, label, Betrayal.WIDTH - 220);
 				verticalGroup.addActor(label);
 			}
 		}

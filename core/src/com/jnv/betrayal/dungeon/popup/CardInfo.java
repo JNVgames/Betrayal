@@ -6,20 +6,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
+import com.jnv.betrayal.scene2d.ui.LabelUtils;
 
-public class CardInfo extends Popup {
+public class CardInfo extends OKPopup {
 
-	private Image okayButton, noButton, background;
+	private Image okayButton, background;
 	private Label title;
-	private String string;
+	private String stats, name;
 
 	public CardInfo(Betrayal game, Card card) {
-		super(game);
-		this.string = "Name: " + card.getName()
-				+ "\nHealth: " + Integer.toString(card.getCurrentHealth()) + "/" + Integer.toString(card.getBaseHealth())
+		super(game, "");
+		name = "Name: " + card.getName();
+		this.stats = "\nHealth: " + Integer.toString(card.getCurrentHealth()) + "/" + Integer.toString(card.getBaseHealth())
 				+ "\nAttack: " + Integer.toString(card.getCurrentAttack()) + "/" + Integer.toString(card.getBaseAttack())
 				+ "\nDefense: " + Integer.toString(card.getCurrentDefense()) + "/" + Integer.toString(card.getBaseDefense());
 		loadButtons();
@@ -41,12 +43,18 @@ public class CardInfo extends Popup {
 	private void loadTitle() {
 		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
-		title = new Label(string, font);
-		title.layout();
+		title = new Label("", font);
+		LabelUtils.splitLabelString(name, new Label("", FontManager.getFont40()), title, background.getWidth());
+		title.setText(title.getText() + "\n-------" + stats);
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,
 				okayButton.getY() + okayButton.getHeight() + 50, background.getWidth(),
 				title.getPrefHeight());
 		title.setAlignment(Align.center);
+		if (title.getPrefHeight() > getGroup().getTop() - okayButton.getTop() - 20) {
+			background.setHeight(title.getPrefHeight() + 50 + okayButton.getHeight());
+			okayButton.setY(background.getY() + 20);
+			title.setY(okayButton.getTop() + 20);
+		}
 		popup.addActor(title);
 	}
 
@@ -54,18 +62,13 @@ public class CardInfo extends Popup {
 		okayButton = new Image(res.getTexture("ok"));
 		okayButton.layout();
 		okayButton.setBounds(Betrayal.WIDTH / 2 - 75,
-				Betrayal.HEIGHT / 2 - 100, 150, 75);
+				background.getY() + 20, 150, 75);
 		okayButton.addListener(new InputListener(okayButton) {
 			@Override
 			public void doAction() {
-				onConfirm();
 				remove();
 			}
 		});
 		popup.addActor(okayButton);
-
-	}
-
-	public void onConfirm() {
 	}
 }

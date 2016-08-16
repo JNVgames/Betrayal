@@ -108,7 +108,7 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						attemptFlee(100);
+						attemptFlee(25);
 					}
 				};
 			}
