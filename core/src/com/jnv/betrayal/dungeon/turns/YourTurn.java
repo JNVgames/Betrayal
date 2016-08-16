@@ -108,7 +108,7 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						attemptFlee(25);
+						attemptFlee(100);
 					}
 				};
 			}
@@ -117,18 +117,18 @@ public class YourTurn extends Turn {
 
 	public void attemptFlee(int fleeChance) {
 		panels.clear();
+		System.out.println("ATTEMPTING TO FLEE");
 		panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getDarkFont70(), Panel.full));
 		if (PlayerCard.canFlee(fleeChance)) {
 			Effect effect = new Flee(field.getCurrentCard());
 			field.roundManager.addEvent(effect, effect.getStartType());
-			final Card card = field.getCurrentCard();
-			// Flee Successful
-//			field.animationManager.animate();
-			field.removePlayerCard((PlayerCard) card);
-//			if (field.getClientCharacter().getRoom().getSocket() != null
-//					&& field.getClientCharacter().getRoom().getSocket().connected()) {
-//				field.getClientCharacter().getRoom().getSocket().disconnect();
-//			}
+			field.playerZone.remove(field.getCurrentCard());
+			field.turnManager.nextTurn();
+			if (field.getClientCharacter().getRoom().getSocket() != null
+					&& field.getClientCharacter().getRoom().getSocket().connected()) {
+				field.getClientCharacter().getRoom().getSocket().emit("flee");
+				field.getClientCharacter().getRoom().leaveRoom();
+			}
 
 			Runnable r = new Runnable() {
 				@Override

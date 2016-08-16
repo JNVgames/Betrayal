@@ -31,6 +31,8 @@ import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+import java.util.Arrays;
+
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
@@ -70,9 +72,6 @@ public class Lobby extends GameState {
 		task = new Timer.Task() {
 			@Override
 			public void run() {
-				// Do your work
-				if (room.getRoomID() <= 0)
-					getGSM().setState(GameStateManager.State.DUNGEON);
 			}
 		};
 	}
@@ -356,8 +355,8 @@ public class Lobby extends GameState {
 					new Confirmation(game, "Enter Dungeon?") {
 						@Override
 						public void doAction() {
-							enterDungeonCountDown();
 							joinARoom.setVisible(false);
+							gsm.setState(GameStateManager.State.DUNGEON);
 						}
 					};
 				} else playButtonTexture = res.getTexture("play-now");

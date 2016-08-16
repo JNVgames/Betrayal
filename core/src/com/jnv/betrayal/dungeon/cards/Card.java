@@ -24,6 +24,9 @@ import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,7 +239,7 @@ public abstract class Card {
 				return;
 			}
 			Effect effect = new Died(card);
-			card.getField().roundManager.addEvent(effect, effect.getStartType());
+			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 		}
 	}
 
@@ -313,6 +316,10 @@ public abstract class Card {
 			};
 			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 
+			if (field.getClientCharacter().getRoom().getSocket() != null
+					&& field.getClientCharacter().getRoom().getSocket().connected()) {
+				field.getClientCharacter().getRoom().getSocket().disconnect();
+			}
 		} else if (this instanceof PlayerCard) {
 			//Teammate died
 			field.removePlayerCard((PlayerCard) this);

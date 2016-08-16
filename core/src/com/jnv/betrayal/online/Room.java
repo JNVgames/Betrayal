@@ -199,6 +199,11 @@ public class Room {
 				refreshLobby();
 				new OKPopup(lobby.getGame(), "Player Left\n Enter Dungeon Canceled ");
 			}
+		}).on("syncServerCharacters", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				socket.emit("updateServerCharacters");
+			}
 		});
 	}
 

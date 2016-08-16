@@ -32,7 +32,15 @@ public class MonsterTurn extends Turn {
 		field.addAction(Actions.delay(3f, new RunnableAction() {
 			@Override
 			public void run() {
-				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()) {
+				if (!(field.getCurrentCard() instanceof MonsterCard)
+						&& Betrayal.DEBUG
+						&& field.getCurrentCard() != null) {
+					throw new AssertionError("Current card should be a MonsterCard, " +
+							"instead it is this player's turn: " + field.getCurrentCard());
+				}
+				if (field.playerZone.size() != 0
+						&& field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()
+						&& field.getCurrentCard() instanceof MonsterCard) {
 					monsterAttack();
 				}
 			}

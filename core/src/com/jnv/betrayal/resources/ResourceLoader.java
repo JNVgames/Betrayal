@@ -1005,7 +1005,7 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpoison")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(25).attack(1).defense(3)
+				.health(25).attack(999).defense(3)
 				.numTargets(1).effectCooldown(3)
 				.goldReward(100)
 				.effect(new Poison(2))

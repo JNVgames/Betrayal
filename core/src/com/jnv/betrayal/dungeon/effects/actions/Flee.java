@@ -1,16 +1,16 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
-
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.jnv.betrayal.dungeon.effects.EventType;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.jnv.betrayal.dungeon.animations.utils.AnimationValues;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Flee extends Effect {
@@ -34,7 +34,12 @@ public class Flee extends Effect {
 	public void startEffect(Card destCard) {
 		for (int i = 0; i < src.getField().playerZone.size(); i++) {
 			if (src.getField().playerZone.get(i).getID() == src.getID()) {
-				src.getField().queueRemovePlayer(src);
+				src.getField().addAction(Actions.delay(AnimationValues.FLEE_DURATION, Actions.run(new Runnable() {
+					@Override
+					public void run() {
+						src.getField().removePlayerCard((PlayerCard) src);
+					}
+				})));
 			}
 		}
 	}

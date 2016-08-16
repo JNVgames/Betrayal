@@ -83,11 +83,6 @@ public class TurnManager {
 			field.setNextCardIndex();
 			field.roundManager.checkEvents(field.getCurrentCard());
 			drawUI(field.animationManager.getTotalAnimationDuration());
-			for (Card card : field.cardsToRemove) {
-				field.playerZone.remove(card);
-				field.calibrateCurrentCardTurnIndex();
-			}
-			field.cardsToRemove.clear();
 			System.out.println("Waiting for input...");
 		}
 	}

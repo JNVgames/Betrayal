@@ -47,7 +47,6 @@ public class Field extends Group {
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
 	public final List<Card> allCards;
-	public final List<Card> cardsToRemove = new ArrayList<Card>();
 	private Image background;
 	public final Socket socket;
 	public int reward;
@@ -204,6 +203,8 @@ public class Field extends Group {
 	 */
 	public void removePlayerCard(PlayerCard card) {
 		playerZone.remove(card);
+		card.getGroup().remove();
+		calibrateCurrentCardTurnIndex();
 		refreshAllCards();
 	}
 
@@ -338,10 +339,6 @@ public class Field extends Group {
 
 	public Character getClientCharacter() {
 		return clientCharacter;
-	}
-
-	public void queueRemovePlayer(Card src) {
-		cardsToRemove.add(src);
 	}
 
 	public void calibrateCurrentCardTurnIndex() {
