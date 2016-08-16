@@ -91,6 +91,7 @@ public class ShopPurchasePopup extends Popup {
 					public void doAction() {
 						switch (character.inventory.buyItem(item)) {
 							case 0:
+								game.savedDataHandler.save();
 								new OKPopup(game, "Item Bought");
 								break;
 							case 1:

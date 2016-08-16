@@ -170,6 +170,7 @@ class ItemOptions extends Popup {
 				label.addListener(new InputListener(label) {
 					@Override
 					public void doAction() {
+						game.savedDataHandler.save();
 						game.getCurrentCharacter().equips.equip((Equip) item);
 						game.getCurrentCharacter().getRoom().updateServerCharacters();
 						inventory.refresh();
@@ -182,6 +183,7 @@ class ItemOptions extends Popup {
 					@Override
 					public void doAction() {
 						if (unequipSlot != -1) {
+							game.savedDataHandler.save();
 							game.getCurrentCharacter().equips.unequip(unequipSlot);
 							game.getCurrentCharacter().getRoom().updateServerCharacters();
 						}
@@ -205,6 +207,7 @@ class ItemOptions extends Popup {
 						new Confirmation(game, "Are you sure?") {
 							@Override
 							public void doAction() {
+								game.savedDataHandler.save();
 								inventory.getCharacter().inventory.sellItem(item);
 								removeThisPopup();
 								inventory.refresh();

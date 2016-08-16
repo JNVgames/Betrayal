@@ -39,7 +39,7 @@ public class Character implements JsonSerializable {
 
 		this.res = res;
 		inventory = new Inventory(res);
-		equips = new Equips(inventory, res);
+		equips = new Equips( inventory, res);
 		preview = new Preview(equips, res);
 		job = new Job();
 		stats = new Stats(equips);

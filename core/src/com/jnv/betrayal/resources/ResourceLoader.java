@@ -288,16 +288,12 @@ public class ResourceLoader {
 	private void loadItemsAndSkills(){
 		res.loadTexture("item/skills/monsterblock.png", "monsterblock");
 		res.loadTexture("item/skills/monsterbomb.png", "monsterbomb");
-		res.loadTexture("item/skills/monsterchain.png", "monsterchain");
 		res.loadTexture("item/skills/monsterdeath.png", "monsterdeath");
-		res.loadTexture("item/skills/monsterfire.png", "monsterfire");
 		res.loadTexture("item/skills/monsterheal.png", "monsterheal");
-		res.loadTexture("item/skills/monsterlockon.png", "monsterlockon");
 		res.loadTexture("item/skills/monstermelee.png", "monstermelee");
 		res.loadTexture("item/skills/monsterpoison.png", "monsterpoison");
 		res.loadTexture("item/skills/monsterpowerdown.png", "monsterpowerdown");
 		res.loadTexture("item/skills/monsterpowerup.png", "monsterpowerup");
-		res.loadTexture("item/skills/monsterscythe.png", "monsterscythe");
 		res.loadTexture("item/skills/monstershieldbreak.png", "monstershieldbreak");
 		res.loadTexture("item/skills/run50.png", "run1");
 		res.loadTexture("item/skills/run75.png", "run2");
@@ -317,7 +313,6 @@ public class ResourceLoader {
 		res.loadTexture("rings/ring2d.png", "ring25");
 		res.loadTexture("rings/ring2e.png", "ring26");
 		res.loadTexture("rings/ring2f.png", "ring23");
-		res.loadTexture("rings/ring3.png", "ring3");
 	}
 
 	private void loadArmor() {
@@ -1027,7 +1022,7 @@ public class ResourceLoader {
 				.assetManager(res)
 				.id(5)
 				.nickname("Arthur")
-				.textureName("monster-tier1-4").skillTextureName("monsterscythe")
+				.textureName("monster-tier1-4").skillTextureName("monstermelee")
 				.health(50).attack(25).defense(10)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
@@ -1262,7 +1257,7 @@ public class ResourceLoader {
 				.textureWidth(400).textureHeight(450).x(0).y(690)
 				.goldReward(1100)
 				.numTargets(1).effectCooldown(3)
-				.effect(new DefenseDown(30,2))
+				.effect(new DefenseDown(30,2)).skillTextureName("monstershieldbreak")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1304,7 +1299,7 @@ public class ResourceLoader {
 				.textureWidth(500).textureHeight(500).x(110).y(670)
 				.goldReward(100)
 				.numTargets(1).effectCooldown(3)
-				.effect(new Heal(50))
+				.effect(new Heal(50)).skillTextureName("monsterheal")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1315,7 +1310,7 @@ public class ResourceLoader {
 				.textureWidth(500).textureHeight(500).x(110).y(670)
 				.goldReward(1500)
 				.numTargets(1).effectCooldown(2)
-				.effect(new AttackUp(100,2))
+				.effect(new AttackUp(100,2)).skillTextureName("monstermelee")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1415,7 +1410,7 @@ public class ResourceLoader {
 				.health(100).attack(10).defense(10)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
 				.goldReward(2900)
-				.effect(new AttackAndDefenseUp(10,10,10))
+				.effect(new AttackAndDefenseUp(10,10,10)).skillTextureName("monsterpowerup")
 				.numTargets(1).effectCooldown(2)
 				.build();
 		new Monster.MonsterFactory()
@@ -1438,7 +1433,7 @@ public class ResourceLoader {
 				.goldReward(3700)
 				.numTargets(1).effectCooldown(3)
 				.effectCooldown(2)
-				.effect(new DefenseDown(50,10))
+				.effect(new DefenseDown(50,10)).skillTextureName("monstershieldbreak")
 				.build();
 
 		// Tier 4 Mob 1
@@ -1567,7 +1562,7 @@ public class ResourceLoader {
 				.textureWidth(600).textureHeight(525).x(60).y(665)
 				.goldReward(6000)
 				.numTargets(1).effectCooldown(4)
-				.effect(new Heal(20))
+				.effect(new Heal(20)).skillTextureName("monsterheal")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1588,7 +1583,7 @@ public class ResourceLoader {
 				.textureWidth(620).textureHeight(500).x(50).y(640)
 				.goldReward(6000)
 				.numTargets(1).effectCooldown(4)
-				.effect(new AttackUp(40,4))
+				.effect(new AttackUp(40,4)).skillTextureName("monstermelee")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1599,7 +1594,7 @@ public class ResourceLoader {
 				.textureWidth(500).textureHeight(500).x(110).y(665)
 				.goldReward(6000)
 				.numTargets(1).effectCooldown(2)
-				.effect(new AttackAndDefenseUp(30,20,10))
+				.effect(new AttackAndDefenseUp(30,20,10)).skillTextureName("monsterpowerup")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)

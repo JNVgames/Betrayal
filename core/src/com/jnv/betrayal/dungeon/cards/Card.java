@@ -340,6 +340,7 @@ public abstract class Card {
 									((PlayerCard) c).getReward();
 									System.out.println("field reward" + field.reward);
 								}
+								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
 							}
 						};

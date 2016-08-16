@@ -96,6 +96,7 @@ public class PartyRoom extends Popup {
 						doCreateRoom(getPasswordString());
 						remove();
 						PartyRoom.this.remove();
+						game.savedDataHandler.save();
 					}
 				};
 			}
@@ -115,6 +116,7 @@ public class PartyRoom extends Popup {
 							doJoinRoom(getPasswordString(), getRoomID());
 							remove();
 							PartyRoom.this.remove();
+							game.savedDataHandler.save();
 						} else {
 							new OKPopup(game, "Please enter\na room number");
 						}
@@ -132,6 +134,7 @@ public class PartyRoom extends Popup {
 				doLeaveRoom();
 				remove();
 				PartyRoom.this.remove();
+				game.savedDataHandler.save();
 			}
 		});
 		popup.addActor(leaveRoom);

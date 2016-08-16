@@ -190,6 +190,7 @@ public class Inventory extends Popup implements InventoryLoadable {
 		sortButton.addListener(new InputListener(sortButton) {
 			@Override
 			public void doAction() {
+				game.savedDataHandler.save();
 				character.inventory.sortItems();
 				refresh();
 			}

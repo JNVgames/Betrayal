@@ -171,6 +171,7 @@ public class CharacterSelection extends GameState {
 			}
 		});
 		stage.addActor(playNowButton);
+		game.savedDataHandler.save();
 	}
 
 	private boolean isNameAllSpaces(String text) {
