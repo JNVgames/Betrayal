@@ -45,7 +45,7 @@ public class Room {
 	public void connectToServer() {
 		isServerOnline = true;
 		try {
-			URL url = new URL("http://localhost:8080");
+			URL url = new URL("http://betrayal-server-jnvgames.herokuapp.com/");
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
@@ -55,7 +55,7 @@ public class Room {
 		try {
 			// If socket is already connected, don't make a new socket
 			if (socket == null || !socket.connected()) {
-				socket = IO.socket("http://localhost:8080");
+				socket = IO.socket("http://betrayal-server-jnvgames.herokuapp.com/");
 				socket.connect();
 			}
 		} catch (Exception e) {
