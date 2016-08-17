@@ -153,6 +153,7 @@ public class OpeningInstructions extends UncloseablePopup{
 		exitButton.addListener(new com.jnv.betrayal.scene2d.InputListener(exitButton) {
 			@Override
 			public void doAction() {
+				game.savedDataHandler.save();
 				remove();
 			}
 		});
