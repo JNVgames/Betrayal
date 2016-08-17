@@ -50,7 +50,7 @@ public class Betrayal extends Game {
 	public void loadCharacters(List<Character> alive, List<Character> dead){
 		characters.clear();
 		fools.clear();
-		for(Character c: alive){
+		for (Character c: alive){
 			characters.add(c);
 		}
 		for (Character c : dead){

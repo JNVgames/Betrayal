@@ -74,7 +74,6 @@ public class SavedDataHandler {
         System.out.println("---------------------LOADING---------------------");
         System.out.println(alivePlayers);
         game.loadCharacters(aliveCharacters, deadCharacters);
-
     }
     public boolean retreiveOpenFirstTime(){
         FileHandle file = Gdx.files.local("game.sav");

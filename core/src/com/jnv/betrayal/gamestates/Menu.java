@@ -99,7 +99,7 @@ public class Menu extends GameState {
 	}
 
 	private void loadLoadGameButton() {
-		Actor button_loadGame = new Actor() {
+		Actor loadGameButton = new Actor() {
 			public void draw(Batch batch, float parentAlpha) {
 				if (!game.characters.isEmpty()) {
 					batch.draw(res.getTexture("load-game"),
@@ -112,17 +112,17 @@ public class Menu extends GameState {
 				}
 			}
 		};
-		button_loadGame.setBounds((Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
+		loadGameButton.setBounds((Betrayal.WIDTH - res.getTexture("load-game").getWidth()) / 2,
 				600, 512, 144);
-		if (game.characters.isEmpty()) button_loadGame.setTouchable(Touchable.disabled);
+		if (game.characters.isEmpty()) loadGameButton.setTouchable(Touchable.disabled);
 
-		button_loadGame.addListener(new InputListener(button_loadGame, true) {
+		loadGameButton.addListener(new InputListener(loadGameButton, true) {
 			@Override
 			public void doAction() {
 				gsm.setState(GameStateManager.State.LOAD_GAME);
 			}
 		});
-		stage.addActor(button_loadGame);
+		stage.addActor(loadGameButton);
 	}
 
 	private void loadInstructionsButton() {
