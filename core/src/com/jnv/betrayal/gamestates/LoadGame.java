@@ -188,6 +188,7 @@ public class LoadGame extends GameState {
 								game.characters.remove(character);
 								loadSavedSessions();
 								setLoadMode();
+								game.savedDataHandler.save();
 							}
 						};
 					}
