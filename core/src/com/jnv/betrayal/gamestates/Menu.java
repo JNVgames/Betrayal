@@ -23,10 +23,10 @@ import com.jnv.betrayal.resources.SavedDataHandler;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class Menu extends GameState {
-	private boolean firstTimeOpen;
 
 	public Menu(GameStateManager gsm) {
 		super(gsm);
+		gsm.game.savedDataHandler.load();
 		loadMenuButtons();
 		firstTimeOpenPopUps();
 	}
@@ -58,19 +58,14 @@ public class Menu extends GameState {
 	}
 
 	private void firstTimeOpenPopUps() {
-
-		//firstTimeOpen = game.savedDataHandler.retreiveOpenFirstTime();
-		firstTimeOpen = false;		//todo change back!!!
-		if(firstTimeOpen) {
+		if (game.savedDataHandler.retreiveOpenFirstTime()) {
 			new OKPopup(game, "Welcome to Betrayal") {
 				@Override
 				public void onConfirm() {
-
 					new OpeningInstructions(game);
 				}
 			};
 		}
-		//todo update JSON firstTImeOpen. when you first downlaod the game, JSON should be false
 	}
 
 	private void loadBackground() {

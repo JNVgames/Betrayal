@@ -41,7 +41,6 @@ public class LoadGame extends GameState {
 
 		createBackground();
 		loadStage();
-		gsm.game.savedDataHandler.load();
 	}
 
 	public void createBackground(){
