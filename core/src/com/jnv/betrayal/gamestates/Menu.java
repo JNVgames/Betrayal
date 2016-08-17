@@ -126,17 +126,17 @@ public class Menu extends GameState {
 	}
 
 	private void loadInstructionsButton() {
-		Image button_instructions = new Image(res.getTexture("instructions"));
-		button_instructions.layout();
-		button_instructions.setBounds((Betrayal.WIDTH - button_instructions.getImageWidth()) / 2,
+		Image instructionsButton = new Image(res.getTexture("instructions"));
+		instructionsButton.layout();
+		instructionsButton.setBounds((Betrayal.WIDTH - instructionsButton.getImageWidth()) / 2,
 				400, 512, 144);
-		button_instructions.addListener(new InputListener(button_instructions, true) {
+		instructionsButton.addListener(new InputListener(instructionsButton, true) {
 			@Override
 			public void doAction() {
 				new Instructions(game);
 			}
 		});
-		stage.addActor(button_instructions);
+		stage.addActor(instructionsButton);
 	}
 
 //	private void loadOptionsButton() {

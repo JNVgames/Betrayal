@@ -60,24 +60,27 @@ public class Betrayal extends Game {
 
 	public void addFool(Character character){
 		boolean notHere = true;
-		for(Character c : fools){
+		for (Character c : fools){
 			if( c.getId() == character.getId())
 				notHere = false;
 		}
-		if(notHere)
-			fools.add(character);
+		if (notHere) fools.add(character);
 	}
+
 	public void dispose() {
+		System.out.println("dispose");
 		stage.dispose();
-		res.clear();
+		res.dispose();
 	}
 
 	public void pause() {
+		System.out.println("pause");
 		gamePaused = true;
 		gsm.pause();
 	}
 
 	public void resume() {
+		System.out.println("resume");
 		if (gamePaused) {
 			gamePaused = false;
 			gsm.resume();

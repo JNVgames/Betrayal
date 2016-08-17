@@ -41,7 +41,6 @@ public class GameStateManager {
 	public void resume() {
 		gameStates = new Stack<GameState>();
 		gameStates.push(pauseState);
-		pauseState = null;
 	}
 
 	// Helpers
