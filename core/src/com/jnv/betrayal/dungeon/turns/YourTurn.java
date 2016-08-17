@@ -47,10 +47,10 @@ public class YourTurn extends Turn {
 	public void draw() {
 		panels.clear();
 		if (isFirstAppearance) {
-			panels.addActor(createGrayPanel("Items", FontManager.getDarkFont70(), Panel.bottomLeft));
-			panels.addActor(createGrayPanel("Attack", FontManager.getDarkFont70(), Panel.topLeft));
-			panels.addActor(createGrayPanel("Defend", FontManager.getDarkFont70(), Panel.topRight));
-			panels.addActor(createGrayPanel("Flee", FontManager.getDarkFont70(), Panel.bottomRight));
+			panels.addActor(createGrayPanel("Items", FontManager.getFont70(), Panel.bottomLeft));
+			panels.addActor(createGrayPanel("Attack", FontManager.getFont70(), Panel.topLeft));
+			panels.addActor(createGrayPanel("Defend", FontManager.getFont70(), Panel.topRight));
+			panels.addActor(createGrayPanel("Flee", FontManager.getFont70(), Panel.bottomRight));
 			panels.addAction(Actions.delay(initialDelay, Actions.run(new Runnable() {
 				@Override
 				public void run() {
@@ -120,7 +120,7 @@ public class YourTurn extends Turn {
 	public void attemptFlee(int fleeChance) {
 		panels.clear();
 		System.out.println("ATTEMPTING TO FLEE");
-		panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getDarkFont70(), Panel.full));
+		panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 		if (PlayerCard.canFlee(fleeChance)) {
 			Effect effect = new Flee(field.getCurrentCard());
 			field.roundManager.addEvent(effect, effect.getStartType());

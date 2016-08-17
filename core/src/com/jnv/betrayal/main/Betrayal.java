@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.gamestates.GameStateManager;
@@ -39,6 +38,7 @@ public class Betrayal extends Game {
 	public SavedDataHandler savedDataHandler = new SavedDataHandler(this);
 
 	public void create() {
+		System.out.println("create");
 		init();
 
 		loader = new ResourceLoader(res);
@@ -47,21 +47,21 @@ public class Betrayal extends Game {
 		resume();
 	}
 
-	public void loadCharacters(List<Character> alive, List<Character> dead){
+	public void loadCharacters(List<Character> alive, List<Character> dead) {
 		characters.clear();
 		fools.clear();
-		for (Character c: alive){
+		for (Character c : alive) {
 			characters.add(c);
 		}
-		for (Character c : dead){
+		for (Character c : dead) {
 			fools.add(c);
 		}
 	}
 
-	public void addFool(Character character){
+	public void addFool(Character character) {
 		boolean notHere = true;
-		for (Character c : fools){
-			if( c.getId() == character.getId())
+		for (Character c : fools) {
+			if (c.getId() == character.getId())
 				notHere = false;
 		}
 		if (notHere) fools.add(character);
@@ -102,6 +102,7 @@ public class Betrayal extends Game {
 
 	// Helpers
 	private void init() {
+		gamePaused = false;
 		worldCam = new OrthographicCamera();
 		stretchViewport = new StretchViewport(WIDTH, HEIGHT, worldCam);
 		stretchViewport.apply();
