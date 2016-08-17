@@ -28,6 +28,7 @@ public class Stats implements JsonSerializable {
 		baseHealth = 50;
 		baseAttack = 10;
 		baseDefense = 10;
+		System.out.println("************************************");
 		floor = 0;
 		//availablePoints = 0;
 		//todo change back
@@ -192,6 +193,9 @@ public class Stats implements JsonSerializable {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+		applyPoints.updateValues();
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	}
 
 	/**

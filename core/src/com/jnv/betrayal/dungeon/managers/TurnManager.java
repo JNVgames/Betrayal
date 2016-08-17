@@ -75,7 +75,7 @@ public class TurnManager {
 	}
 
 	public void nextTurn() {
-
+		field.refreshAllCards();
 		System.out.println("TurnManager.nextTurn");
 		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 		// If your turn is ending, decrease skill cooldown counter

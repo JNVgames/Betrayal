@@ -272,13 +272,13 @@ public abstract class Card {
 
 				}
 			};
-			getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
+			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
 			System.out.println("Current card: " + field.getCurrentCard().getName());
 			if(field.getCurrentCard().getID() == card.getID()) {
 				field.calibrateCurrentCardTurnIndex();
-				field.turnManager.nextTurn();
+				field.turnManager.nextTurn();		//todo check here!! for disconnect problems
 			}
 
 		}
@@ -372,6 +372,15 @@ public abstract class Card {
 			endSelectMode();
 			field.removeMonsterCard((MonsterCard) this);
 			if (field.isMonsterZoneEmpty()) {
+				//last hit bonus
+				field.calibrateCurrentCardTurnIndex();
+				if(field.getCurrentCard().getID() == field.getClientCharacter().getId()){
+					//you got the last hit bonus
+					int bonusReward = field.reward/4;
+					field.getClientCharacter().inventory.addGold(bonusReward);
+					new OKPopup(field.game, "Last Hit Bonus!\nYou got " + bonusReward + " gold");
+				}
+
 				field.clearActions();
 				Runnable r = new Runnable() {
 					@Override

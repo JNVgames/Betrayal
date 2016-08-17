@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
+import com.jnv.betrayal.popup.Confirmation;
+import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
@@ -100,11 +102,6 @@ public class HallOfFame extends GameState {
 			name.setY((classPreview.getY() - name.getPrefHeight()) / 2 + 5);
 			group.addActor(name);
 
-			Label netWorth = new Label("Net Worth: " + character.inventory.getNetWorth(), FontManager.getFont40());
-			name.setX(classPreview.getX());
-			name.setY((classPreview.getY() - name.getPrefHeight()) / 2 + 5 - netWorth.getPrefHeight() - 10);
-			group.addActor(netWorth);
-
 			Label floorLabel = new Label("FLOOR", FontManager.getFont40());
 			floorLabel.setX(Betrayal.WIDTH - 20 - floorLabel.getPrefWidth());
 			floorLabel.setY(group.getHeight() - floorLabel.getPrefHeight() - 20);
@@ -121,6 +118,20 @@ public class HallOfFame extends GameState {
 			group.addActor(floorNum);
 
 			verticalGroup.addActor(group);
+
+			border.addListener(new InputListener(border) {
+				@Override
+				public void doAction() {
+					new OKPopup(Betrayal.WIDTH - 300, Betrayal.HEIGHT - 850, game,
+							character.getName()+
+									"\nHealth: "+ character.stats.getTotalHealth()  +
+							"\nAttack: " + character.stats.getTotalAttack()+
+							"\nDefense: " + character.stats.getTotalDefense()+
+									"\nNet Worth: " + character.inventory.getNetWorth()
+							);
+
+				}
+			});
 		}
 	}
 

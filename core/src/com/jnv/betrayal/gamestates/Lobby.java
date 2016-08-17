@@ -89,7 +89,8 @@ public class Lobby extends GameState {
 		unReadyButton.setVisible(false);
 		new OKPopup(game, "Entering Dungeon");
 		savedTime = System.currentTimeMillis();
-		Timer.schedule(task, delay);
+		if(!task.isScheduled())
+			Timer.schedule(task, delay);
 	}
 
 	public void update(float dt) {
