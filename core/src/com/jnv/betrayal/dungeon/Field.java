@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.socket.client.Socket;
@@ -206,7 +207,6 @@ public class Field extends Group {
 	public void removePlayerCard(PlayerCard card) {
 		playerZone.remove(card);
 		card.getGroup().remove();
-		calibrateCurrentCardTurnIndex();
 		refreshAllCards();
 	}
 
@@ -279,7 +279,6 @@ public class Field extends Group {
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
 				}
 				refreshAllCards();
-				calibrateCurrentCardTurnIndex();
 			}
 		});
 	}
@@ -344,6 +343,8 @@ public class Field extends Group {
 	}
 
 	public void calibrateCurrentCardTurnIndex() {
+		System.out.println("CALIBRATE THIS BITCH");
+		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 		if (currentCardTurn != 0) currentCardTurn--;
 	}
 }

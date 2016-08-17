@@ -253,7 +253,7 @@ public abstract class Card {
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
 
-			if(field.currentCardTurn >field.getAllCards().size() && field.getCurrentCard().getID() == card.getID()) {
+			if(field.currentCardTurn >=field.getAllCards().size() && field.getCurrentCard().getID() == card.getID()) {
 				field.calibrateCurrentCardTurnIndex();
 				field.turnManager.nextTurn();
 			}
@@ -261,7 +261,7 @@ public abstract class Card {
 		}else{
 			Effect effect = new Died(card);
 			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
-
+			int diedIndex = field.playerZone.indexOf(card);
 			field.playerZone.remove(card);
 			cardAnimation.fadeOut(card);
 
@@ -276,10 +276,13 @@ public abstract class Card {
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
 			System.out.println("Current card: " + field.getCurrentCard().getName());
-			if(field.getCurrentCard().getID() == card.getID()) {
+
+			if(field.currentCardTurn >= diedIndex)
 				field.calibrateCurrentCardTurnIndex();
-				field.turnManager.nextTurn();		//todo check here!! for disconnect problems
-			}
+			field.turnManager.nextTurn();
+//			if(field.getCurrentCard().getID() == card.getID()) {
+//				field.turnManager.nextTurn();		//todo check here!! for disconnect problems
+//			}
 
 		}
 	}
@@ -361,7 +364,7 @@ public abstract class Card {
 		} else if (this instanceof PlayerCard) {
 			System.out.println("TEAMMATE");
 			//Teammate died
-			field.removePlayerCard((PlayerCard) this);
+			//field.removePlayerCard((PlayerCard) this);
 			int moneygained = ((PlayerCard)this).getNetWorth() / field.playerZone.size();
 			field.getClientCharacter().inventory.addGold(moneygained);
 			new OKPopup(field.game,this.getName() + " died\n You found " + moneygained);
