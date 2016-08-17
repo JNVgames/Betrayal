@@ -122,6 +122,7 @@ public class LoadGame extends GameState {
 		final int scale = 4;
 
 		for (Character c : game.characters) {
+			c.getRoom().setRoomID(0);
 			final Character character = c;
 			Group preview = new Group();
 
@@ -184,7 +185,7 @@ public class LoadGame extends GameState {
 							@Override
 							public void doAction() {
 								removeSavedSessions();
-								game.fools.add(character);
+								game.addFool(character);
 								game.characters.remove(character);
 								loadSavedSessions();
 								setLoadMode();
