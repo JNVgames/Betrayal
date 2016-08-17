@@ -30,20 +30,20 @@ public class BetrayalAssetManager extends AssetManager {
 		return get(resourceNames.get(name), Texture.class);
 	}
 
-	public synchronized void dispose() {
-		super.dispose();
-
-		resourceNames.clear();
-
-		ObjectMap.Keys<String> keys = items.keys();
-		for (String key : keys) {
-			items.remove(key);
-		}
-		keys = monsters.keys();
-		for (String key : keys) {
-			monsters.remove(key);
-		}
-	}
+//	public synchronized void dispose() {
+//		super.dispose();
+//
+//		resourceNames.clear();
+//
+//		ObjectMap.Keys<String> keys = items.keys();
+//		for (String key : keys) {
+//			items.remove(key);
+//		}
+//		keys = monsters.keys();
+//		for (String key : keys) {
+//			monsters.remove(key);
+//		}
+//	}
 
 	// Resource functions
 	public void loadItem(String name, Item item) {

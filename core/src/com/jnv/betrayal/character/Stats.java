@@ -132,9 +132,9 @@ public class Stats implements JsonSerializable {
 	 */
 	public void advanceFloor(Betrayal game) {
 
-//		if(floor>=25)
-// 			return;
-//		floor++; //todo add back delete other\
+		if(floor>=25)
+ 			return;
+		floor++; //todo add back delete other\
 		availablePoints += 5;
 		applyPoints.updateValues();
 		if(floor==25) {        //won the game\
