@@ -58,7 +58,7 @@ public class Menu extends GameState {
 	}
 
 	private void firstTimeOpenPopUps() {
-		if (game.savedDataHandler.retreiveOpenFirstTime()) {
+		if (!game.savedDataHandler.retreiveOpenFirstTime()) {
 			new OKPopup(game, "Welcome to Betrayal") {
 				@Override
 				public void onConfirm() {
