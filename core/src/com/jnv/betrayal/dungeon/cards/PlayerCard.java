@@ -17,8 +17,10 @@ import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
+import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.Random;
 
@@ -27,6 +29,7 @@ public class PlayerCard extends Card {
 	private Preview preview;
 	private Character character;
 	private Jobs characterJob;
+	private int netWorth;
 
 	public PlayerCard(Vector2 coords, Character character,
 					  BetrayalAssetManager res) {
@@ -42,6 +45,7 @@ public class PlayerCard extends Card {
 		baseDefense = currentDefense = character.stats.getTotalDefense();
 		characterJob = character.job.getJob();
 		preview = character.preview;
+		netWorth = character.inventory.getNetWorth();
 		cardImage = new Actor() {
 			@Override
 			public void draw(Batch batch, float parentAlpha) {
@@ -50,9 +54,18 @@ public class PlayerCard extends Card {
 			}
 		};
 		cardImage.setBounds(0, 0, group.getWidth(), group.getHeight());
+		System.out.println(this.getName() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		cardName = new Label(this.character.getName(), FontManager.getFont40());
+		cardName.setX(50);
+		cardName.setY(group.getHeight()-10);
+		group.addActor(cardName);
 		group.addActor(cardImage);
 		cardImage.toBack();
 		initializeCardListener();
+	}
+
+	public int getNetWorth() {
+		return netWorth;
 	}
 
 	public String getName() {

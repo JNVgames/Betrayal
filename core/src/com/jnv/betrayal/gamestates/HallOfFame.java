@@ -100,6 +100,11 @@ public class HallOfFame extends GameState {
 			name.setY((classPreview.getY() - name.getPrefHeight()) / 2 + 5);
 			group.addActor(name);
 
+			Label netWorth = new Label("Net Worth: " + character.inventory.getNetWorth(), FontManager.getFont40());
+			name.setX(classPreview.getX());
+			name.setY((classPreview.getY() - name.getPrefHeight()) / 2 + 5 - netWorth.getPrefHeight() - 10);
+			group.addActor(netWorth);
+
 			Label floorLabel = new Label("FLOOR", FontManager.getFont40());
 			floorLabel.setX(Betrayal.WIDTH - 20 - floorLabel.getPrefWidth());
 			floorLabel.setY(group.getHeight() - floorLabel.getPrefHeight() - 20);

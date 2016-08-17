@@ -47,7 +47,7 @@ public class Room {
 	public void connectToServer() {
 		isServerOnline = true;
 		try {
-			URL url = new URL(MY_SERVER);
+			URL url = new URL(ACTUAL_SERVER);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
@@ -57,7 +57,7 @@ public class Room {
 		try {
 			// If socket is already connected, don't make a new socket
 			if (socket == null || !socket.connected()) {
-				socket = IO.socket(MY_SERVER);
+				socket = IO.socket(ACTUAL_SERVER);
 				socket.connect();
 			}
 		} catch (Exception e) {

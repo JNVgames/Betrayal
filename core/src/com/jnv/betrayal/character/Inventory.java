@@ -23,15 +23,20 @@ import java.util.List;
  */
 public class Inventory implements JsonSerializable {
 
-	private int gold, maxItems;
+	private int gold, maxItems, netWorth;
 	private List<Item> items;
 	private BetrayalAssetManager res;
 
 	public Inventory(BetrayalAssetManager res) {
 		gold = 2000;
 		maxItems = 20;
+		netWorth = gold;
 		this.res = res;
 		items = new ArrayList<Item>();
+	}
+
+	public int getNetWorth() {
+		return netWorth;
 	}
 
 	/**
@@ -70,6 +75,7 @@ public class Inventory implements JsonSerializable {
 			throw new AssertionError("Item does not exist in the character's inventory: " + item.getTextureName());
 		items.remove(item);
 		gold += item.getSellCost();
+		netWorth -= item.getSellCost();
 	}
 
 	/**
@@ -110,6 +116,7 @@ public class Inventory implements JsonSerializable {
 	}
 
 	public void addGold(int amount){
+		netWorth+= gold;
 		gold +=amount;
 	}
 
@@ -146,6 +153,7 @@ public class Inventory implements JsonSerializable {
 		JSONArray itemData = new JSONArray();
 		try {
 			data.put("gold", gold);
+			data.put("netWorth", netWorth);
 			for( int i = 0 ; i< items.size(); i++){
 				JSONObject obj = new JSONObject();
 				obj.put("class", items.get(i).getClass().getCanonicalName());
@@ -167,6 +175,7 @@ public class Inventory implements JsonSerializable {
 
 		try {
 			gold = data.getInt("gold");
+			netWorth = data.getInt("netWorth");
 			JSONArray itemData = data.getJSONArray("items");
 			for(int i = 0; i<itemData.length(); i++) {
 				JSONObject object = itemData.getJSONObject(i);

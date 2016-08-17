@@ -19,11 +19,13 @@ import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
+import com.jnv.betrayal.scene2d.ui.Label;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,7 @@ public abstract class Card {
 	protected HealthBar healthBar;
 	protected BetrayalAssetManager res;
 	protected Actor cardImage;
+	protected Label cardName;
 	protected Group group;
 	private List<Card> defenders = new ArrayList<Card>();
 	private TextureRegion selectedTexture;
@@ -59,6 +62,10 @@ public abstract class Card {
 		group.setBounds(dimension);
 		this.res = res;
 		initialize();
+	}
+
+	public Label getCardName() {
+		return cardName;
 	}
 
 	protected Card(float x, float y, float width, float height,
@@ -226,6 +233,7 @@ public abstract class Card {
 	public void cardDeath(final Card card) {
 		// Check if card is a playercard. if it is, check for cloak. if cloak exists, burn the cloak
 		//  and set hp to
+		card.getCardName().setVisible(false);
 		if (card instanceof PlayerCard && !((PlayerCard) card).hasCloak()) {
 			cardImage.addAction(Actions.delay(1.5f, Actions.run(new Runnable() {
 				@Override
@@ -240,6 +248,7 @@ public abstract class Card {
 
 			field.monsterZone.remove(card);
 			cardAnimation.fadeOut(card);
+
 			card.died();
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
@@ -263,7 +272,7 @@ public abstract class Card {
 
 				}
 			};
-			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+			getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
 			System.out.println("Current card: " + field.getCurrentCard().getName());
@@ -333,12 +342,12 @@ public abstract class Card {
 			// You have died
 			System.out.println("YOURSELF");
 			field.removePlayerCard((PlayerCard) this);
-
+			field.game.addFool(field.game.getCurrentCharacter());
+			//field.game.characters.remove(field.game.getCurrentCharacter());
+			field.game.savedDataHandler.save();
 					new OKPopup(field.game, "You Have Died") {
 						@Override
 						public void onConfirm() {
-							field.game.addFool(field.game.getCurrentCharacter());
-							field.game.characters.remove(field.game.getCurrentCharacter());
 							field.game.gsm.setState(GameStateManager.State.MENU);
 						}};
 
@@ -353,6 +362,9 @@ public abstract class Card {
 			System.out.println("TEAMMATE");
 			//Teammate died
 			field.removePlayerCard((PlayerCard) this);
+			int moneygained = ((PlayerCard)this).getNetWorth() / field.playerZone.size();
+			field.getClientCharacter().inventory.addGold(moneygained);
+			new OKPopup(field.game,this.getName() + " died\n You found " + moneygained);
 
 		} else if (this instanceof MonsterCard) {
 			System.out.println("MONSTER");
@@ -368,11 +380,8 @@ public abstract class Card {
 						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward + " Gold") {
 							@Override
 							public void onConfirm() {
-								for (Card c : field.getAllPlayerCards()) {
-									((PlayerCard) c).levelUpCharacter(game);
-									((PlayerCard) c).getReward();
-									System.out.println("field reward" + field.reward);
-								}
+								field.getClientCharacter().inventory.addGold(field.reward);		//gets your reward
+								field.getClientCharacter().stats.advanceFloor(game);
 								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
 							}
@@ -470,6 +479,7 @@ public abstract class Card {
 		private void initialize(float x, float y) {
 			healthBarBackground.setBounds(x, y, 227, 25);
 			healthBar.setBounds(x + 10, y + 8, 200, 8);
+
 		}
 
 		public float getBackgroundHeight() {

@@ -199,6 +199,30 @@ public class LoadGame extends GameState {
 
 			stage.addActor(preview);
 
+			Actor mask = new com.jnv.betrayal.scene2d.Actor();
+			mask.setBounds(previewFrame.getX(), previewFrame.getY(), previewFrame.getWidth(), previewFrame.getHeight());
+			mask.addListener(new InputListener(previewFrame) {
+				@Override
+				public void doAction() {
+					if (!deleteMode) { // Delete mode is off
+						game.setCurrentCharacter(character);
+						gsm.setState(GameStateManager.State.LOBBY);
+					} else { // Delete mode is on
+						new Confirmation(game, "Are you sure?") {
+							@Override
+							public void doAction() {
+								removeSavedSessions();
+								game.addFool(character);
+								game.characters.remove(character);
+								loadSavedSessions();
+								setLoadMode();
+								game.savedDataHandler.save();
+							}
+						};
+					}
+				}
+			});
+			stage.addActor(mask);
 			savedSessions[counter - 1] = preview;
 			counter++;
 		}

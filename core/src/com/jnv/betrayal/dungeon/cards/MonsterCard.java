@@ -10,7 +10,9 @@ import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
+import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,10 @@ public class MonsterCard extends Card {
 		allActions = new ArrayList<EventType>();
 		allActions.add(EventType.ATTACK);
 		initializeCardListener();
+		cardName = new Label(name, FontManager.getFont40());
+		cardName.setX(50);
+		cardName.setY(group.getHeight()-10);
+		group.addActor(cardName);
 	}
 
 	public int getNumAttackTargets() {
