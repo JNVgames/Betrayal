@@ -234,10 +234,10 @@ public abstract class Card {
 				}
 			})));
 		} else {
-			//todo remove this later (WE FORGOT WHY)
-			if (card instanceof PlayerCard) {
-				return;
-			}
+			//todo remove this later (TO TEST DUNGEON SO YOU CANT DIE)
+//			if (card instanceof PlayerCard) {
+//				return;
+//			}
 			Effect effect = new Died(card);
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 		}

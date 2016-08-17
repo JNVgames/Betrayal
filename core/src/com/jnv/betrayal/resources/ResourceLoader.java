@@ -957,7 +957,7 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(25).attack(12).defense(3)
+				.health(20).attack(17).defense(2)
 				.numTargets(1).effectCooldown(3)
 				.goldReward(400)
 				.effect(new AttackDown(3, 2))

@@ -31,7 +31,7 @@ public class Stats implements JsonSerializable {
 		floor = 0;
 		//availablePoints = 0;
 		//todo change back
-		availablePoints = 500;
+		availablePoints = 50;
 		applyPoints = new ApplyPoints();
 		this.equips = equips;
 		updateStats();
@@ -142,12 +142,6 @@ public class Stats implements JsonSerializable {
 			game.gsm.setState(GameStateManager.State.HALL_OF_FAME);
 			new OKPopup(450,Betrayal.HEIGHT-1000, game, "You beat the game!\nYou can keep playing but\nyou can no longer level up");
 		}
-	}
-
-	public void advanceFloor2() {
-		floor++;
-		availablePoints += 5;
-		applyPoints.updateValues();
 	}
 
 	public int getFloor() {

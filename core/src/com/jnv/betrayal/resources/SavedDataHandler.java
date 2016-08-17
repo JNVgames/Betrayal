@@ -26,7 +26,7 @@ public class SavedDataHandler {
 		JSONArray deadPlayers = null;
 
 		String s = readFile("game.sav");
-		if ( s =="")
+		if (s == "")
 			return;
 		JSONObject data = null;
 		try {
@@ -34,6 +34,7 @@ public class SavedDataHandler {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 
 		List<Character> aliveCharacters = new ArrayList<Character>();
 		/*********************Getting Alive Players*********************/
@@ -78,24 +79,24 @@ public class SavedDataHandler {
 
 	public boolean retreiveOpenFirstTime() {
 		String s = readFile("game.sav");
+		if (s == "")
+			return false;
+
 		boolean b = false;
 
-		if (s == "" )
-			return false;
-		else {
-			JSONObject data = null;
-			try {
-				data = new JSONObject(s);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+		JSONObject data = null;
+		try {
+			data = new JSONObject(s);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-			try {
-				b = data.getBoolean("firstTimeTrue");
 
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+		try {
+			b = data.getBoolean("firstTimeTrue");
+
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		return b;
@@ -136,6 +137,7 @@ public class SavedDataHandler {
 		file.writeString(Base64Coder.encodeString(o.toString()), false);
 		System.out.println("----------SAVING--------");
 		System.out.println(alivePlayers);
+
 
 	}
 
