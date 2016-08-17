@@ -166,12 +166,13 @@ public class CharacterSelection extends GameState {
 					character.setName(fieldUsernameEnter.getText());
 					game.characters.add(character);
 					game.setCurrentCharacter(character);
+
+					game.savedDataHandler.save();
 					gsm.setState(GameStateManager.State.LOBBY);
 				}
 			}
 		});
 		stage.addActor(playNowButton);
-		game.savedDataHandler.save();
 	}
 
 	private boolean isNameAllSpaces(String text) {

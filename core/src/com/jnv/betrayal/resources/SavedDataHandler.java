@@ -76,12 +76,27 @@ public class SavedDataHandler {
         game.loadCharacters(aliveCharacters, deadCharacters);
     }
     public boolean retreiveOpenFirstTime(){
-        FileHandle file = Gdx.files.local("game.sav");
-        if(file ==null){
-            return false;
-        }
-        return true;
+        String s = readFile("game.sav");
+        Boolean b = false;
 
+        JSONObject data = null;
+        try {
+            data = new JSONObject(s);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(data == null)
+            return false;
+
+        try {
+           b = data.getBoolean("firstTImeTrue");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return b;
     }
 
     public void save(){
@@ -111,6 +126,7 @@ public class SavedDataHandler {
         try {
             o.put("alivePlayers",alivePlayers);
             o.put("deadPlayers", deadPlayers);
+            o.put("firstTImeTrue", true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
