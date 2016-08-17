@@ -28,6 +28,8 @@ public class Room {
 	private Lobby lobby;
 	private int monsterID, monsterTier;
 	private boolean isServerOnline;
+	private static final String ACTUAL_SERVER = "http://betrayal-server-jnvgames.herokuapp.com/";
+	private static final String MY_SERVER = "http://localhost:8080";
 
 	public Room(Character character) {
 		roomID = -1;
@@ -45,7 +47,7 @@ public class Room {
 	public void connectToServer() {
 		isServerOnline = true;
 		try {
-			URL url = new URL("http://betrayal-server-jnvgames.herokuapp.com/");
+			URL url = new URL(MY_SERVER);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
@@ -55,7 +57,7 @@ public class Room {
 		try {
 			// If socket is already connected, don't make a new socket
 			if (socket == null || !socket.connected()) {
-				socket = IO.socket("http://betrayal-server-jnvgames.herokuapp.com/");
+				socket = IO.socket(MY_SERVER);
 				socket.connect();
 			}
 		} catch (Exception e) {
@@ -195,18 +197,30 @@ public class Room {
 					e.printStackTrace();
 				}
 				refreshLobby();
-				socket.emit("updateServerCharacters");
+			}
+		}).on("removeCharacter", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				JSONObject data = (JSONObject) args[0];
+				try {
+					// Extract id
+					int id = data.getInt("id");
+
+					for (int i = 0; i < characters.size(); i++) {
+						if (characters.get(i).getId() == id) {
+							characters.remove(characters.get(i));
+							break;
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		}).on("stopEnterDungeon", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
 				refreshLobby();
 				new OKPopup(lobby.getGame(), "Player Left\n Enter Dungeon Canceled ");
-			}
-		}).on("syncServerCharacters", new Emitter.Listener() {
-			@Override
-			public void call(Object... args) {
-				socket.emit("updateServerCharacters");
 			}
 		});
 	}
@@ -305,7 +319,6 @@ public class Room {
 		try {
 			data.put("ready", isReady);
 			data.put("playerID", currentCharacter.getId());
-			data.put("room", roomID);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

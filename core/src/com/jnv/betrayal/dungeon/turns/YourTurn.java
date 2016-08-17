@@ -11,6 +11,7 @@ import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.effects.actions.Defend;
 import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
 import com.jnv.betrayal.dungeon.effects.actions.Flee;
+import com.jnv.betrayal.dungeon.effects.specials.KnightSpecial;
 import com.jnv.betrayal.dungeon.effects.specials.PriestAttackSpecial;
 import com.jnv.betrayal.dungeon.effects.specials.PriestDefenseSpecial;
 import com.jnv.betrayal.dungeon.effects.specials.PriestHealSpecial;
@@ -108,7 +109,8 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						attemptFlee(25);
+						// TODO CHANGE BACK TO 25
+						attemptFlee(100);
 					}
 				};
 			}
@@ -279,8 +281,8 @@ public class YourTurn extends Turn {
 						@Override
 						public void run() {
 							if (doesTargetExist()) {
-								doEvent(new Defend(field.getCurrentCard(),
-										new ArrayList<Card>(field.getCardsSelected())), EventType.PRIEST_ATTACK_SPECIAL);
+								doEvent(new KnightSpecial(field.getCurrentCard(),
+										new ArrayList<Card>(field.getCardsSelected())), EventType.KNIGHT_SPECIAL);
 								counter = SPECIAL_COOLDOWN;
 								field.endSelectMode();
 							}

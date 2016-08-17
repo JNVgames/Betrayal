@@ -21,7 +21,6 @@ public class SavedDataHandler {
 	}
 
 	public void load() {
-
 		JSONArray alivePlayers = null;
 		JSONArray deadPlayers = null;
 
