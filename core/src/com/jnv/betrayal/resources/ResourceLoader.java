@@ -204,6 +204,7 @@ public class ResourceLoader {
 		res.loadTexture("button/lobby/settings.png", "lobby-settings");
 		res.loadTexture("button/lobby/shop.png", "lobby-shop");
 		res.loadTexture("button/lobby/stats.png", "lobby-stats");
+		res.loadTexture("button/lobby/chatDescription.png", "chatDescription");
 	}
 
 	private void loadShopButtons() {
@@ -958,7 +959,7 @@ public class ResourceLoader {
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.health(25).attack(12).defense(3)
 				.numTargets(1).effectCooldown(3)
-				.goldReward(100)
+				.goldReward(400)
 				.effect(new AttackDown(3, 2))
 				.build();
 

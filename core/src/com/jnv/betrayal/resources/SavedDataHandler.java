@@ -21,11 +21,13 @@ public class SavedDataHandler {
 	}
 
 	public void load() {
+
 		JSONArray alivePlayers = null;
 		JSONArray deadPlayers = null;
 
 		String s = readFile("game.sav");
-
+		if ( s =="")
+			return;
 		JSONObject data = null;
 		try {
 			data = new JSONObject(s);
@@ -33,8 +35,6 @@ public class SavedDataHandler {
 			e.printStackTrace();
 		}
 
-		if (data == null)
-			return;
 		List<Character> aliveCharacters = new ArrayList<Character>();
 		/*********************Getting Alive Players*********************/
 		int counter = 0;
@@ -137,11 +137,6 @@ public class SavedDataHandler {
 		System.out.println("----------SAVING--------");
 		System.out.println(alivePlayers);
 
-
-		//todo put this all in key and value into the json file
-		for (int i = 0; i < game.characters.size(); i++) {
-			game.characters.remove(i);      //todo TESTING
-		}
 	}
 
 	public static String readFile(String filename) {

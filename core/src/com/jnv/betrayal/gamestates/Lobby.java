@@ -36,14 +36,14 @@ import java.util.Arrays;
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
-	private Image allPlayersBackground, chatBackground, tower;
+	private Image allPlayersBackground, chatBackground, tower, joinARoom;
 	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, unReadyTexture;
 	private Texture redT, blueT, purpleT, greenT;
 	private Image[] triangles;
 	private Actor playNowButton, readyButton, unReadyButton;
 	private Group partyMembers, bottom, buttons, middle;
 	private Room room;
-	private Label roomNum, timeTilEnter, timerValue, joinARoom;
+	private Label roomNum, timeTilEnter, timerValue;
 	private Timer.Task task;
 	private long savedTime;
 	private int delay, timeLeft;
@@ -251,10 +251,11 @@ public class Lobby extends GameState {
 	}
 
 	private void loadRoomLabel() {
-		joinARoom = new Label("Join a room?", FontManager.getFont60());
-		joinARoom.setX(chatBackground.getX() + (chatBackground.getWidth() - joinARoom.getPrefWidth()) / 2);
-		joinARoom.setY(chatBackground.getY() + (chatBackground.getHeight() / 2 - joinARoom.getPrefHeight() / 2));
+		joinARoom = new Image(res.getTexture("chatDescription"));
+		joinARoom.setX(chatBackground.getX());
+		joinARoom.setY(chatBackground.getY());
 		bottom.addActor(joinARoom);
+
 
 		roomNum = new Label("Room Number:  ", FontManager.getFont60());
 		roomNum.setX(chatBackground.getX() + (chatBackground.getWidth() - roomNum.getPrefWidth()) / 2 - 40);
