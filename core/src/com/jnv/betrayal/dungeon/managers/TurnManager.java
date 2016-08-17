@@ -21,6 +21,8 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.Arrays;
 
+import io.socket.client.Socket;
+
 /**
  * Keeps track of user/party member/monster's turns.
  */
@@ -119,6 +121,10 @@ public class TurnManager {
 					panels.clear();
 				}
 			})));
+		}
+		Socket socket = field.getClientCharacter().getRoom().getSocket();
+		if (socket != null && socket.connected()) {
+			socket.emit("dungeonEnded");
 		}
 	}
 

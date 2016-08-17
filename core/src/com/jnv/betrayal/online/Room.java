@@ -204,7 +204,7 @@ public class Room {
 				JSONObject data = (JSONObject) args[0];
 				try {
 					// Extract id
-					int id = data.getInt("id");
+					int id = data.getJSONObject("player").getInt("id");
 
 					for (int i = 0; i < characters.size(); i++) {
 						if (characters.get(i).getId() == id) {
