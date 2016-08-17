@@ -80,21 +80,22 @@ public class SavedDataHandler {
 		String s = readFile("game.sav");
 		boolean b = false;
 
-		JSONObject data = null;
-		try {
-			data = new JSONObject(s);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		if (data == null)
+		if (s == "" )
 			return false;
+		else {
+			JSONObject data = null;
+			try {
+				data = new JSONObject(s);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 
-		try {
-			b = data.getBoolean("firstTimeTrue");
+			try {
+				b = data.getBoolean("firstTimeTrue");
 
-		} catch (JSONException e) {
-			e.printStackTrace();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return b;
