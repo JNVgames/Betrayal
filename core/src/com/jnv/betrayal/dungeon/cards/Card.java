@@ -332,6 +332,7 @@ public abstract class Card {
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
+						field.reward /= field.playerZone.size();
 						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward + " Gold") {
 							@Override
 							public void onConfirm() {

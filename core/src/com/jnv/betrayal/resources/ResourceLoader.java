@@ -13,6 +13,7 @@ import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackUp;
 import com.jnv.betrayal.dungeon.effects.buffs.DefenseUp;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackAndDefenseDown;
+import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.DefenseDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.Poison;
 import com.jnv.betrayal.gameobjects.Monster;
@@ -948,30 +949,17 @@ public class ResourceLoader {
 
 	private void loadMonsterData() {
 		// Tier 0
-		// TODO REPLACE WITH REAL SKELETON KELLY
-//		new Monster.MonsterFactory()
-//				.assetManager(res)
-//				.id(0)
-//				.nickname("Skeleton Kelly")
-//				.textureName("monster-tier0-0")
-//				.skillTextureName("monsterpowerdown")
-//				.textureWidth(250).textureHeight(250).x(235).y(740)
-//				.health(25).attack(12).defense(3)
-//				.numTargets(1).effectCooldown(3)
-//				.goldReward(100)
-//				.effect(new AttackDown(3, 2))
-//				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(0)
-				.nickname("Fred")
+				.nickname("Skeleton Kelly")
 				.textureName("monster-tier0-0")
-				.skillTextureName("monsterpoison")
+				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(25).attack(999).defense(3)
+				.health(25).attack(12).defense(3)
 				.numTargets(1).effectCooldown(3)
 				.goldReward(100)
-				.effect(new Poison(2))
+				.effect(new AttackDown(3, 2))
 				.build();
 
 		// Tier 1
@@ -1037,7 +1025,7 @@ public class ResourceLoader {
 				.health(60).attack(25).defense(15)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
-				.effect(new DefenseUp(3, 3)).effectCooldown(3)
+				.effect(new DefenseUp(10, 3)).effectCooldown(3)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()

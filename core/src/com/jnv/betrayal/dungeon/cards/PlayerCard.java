@@ -64,7 +64,7 @@ public class PlayerCard extends Card {
 	}
 
 	public void getReward(){
-		character.inventory.addGold(field.reward/field.playerZone.size());
+		character.inventory.addGold(field.reward);
 	}
 
 	public boolean hasCloak() {
