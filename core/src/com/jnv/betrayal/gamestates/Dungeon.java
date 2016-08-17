@@ -47,9 +47,7 @@ public class Dungeon extends GameState {
 			int MT = game.getCurrentCharacter().getRoom().getMonsterTier();
 			MonsterManager monsterManager = new MonsterManager(MT, res, field, MID);
 		} else {
-			MonsterManager monsterManager = new MonsterManager(tier, res, field); //todo FORtesTING
-			//todo change back
-			//MonsterManager monsterManager = new MonsterManager(highestPartyMemberFloor, res, field);
+			MonsterManager monsterManager = new MonsterManager(tier, res, field);
 		}
 
 		System.out.println("All cards: " + field.getAllCards());

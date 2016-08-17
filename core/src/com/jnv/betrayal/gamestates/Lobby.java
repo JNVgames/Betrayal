@@ -297,14 +297,14 @@ public class Lobby extends GameState {
 		tower = new Image(res.getTexture("lobby-tower"));
 		tower.layout();
 		tower.setBounds(20, 510, 175, Betrayal.HEIGHT / 3 + 175);
-		tower.addListener(new InputListener(tower) {
-			@Override
-			public void doAction() {
-				Lobby.this.refresh();
-				game.getCurrentCharacter().stats.advanceFloor2();
-				game.savedDataHandler.save();
-			}
-		});
+//		tower.addListener(new InputListener(tower) {
+//			@Override
+//			public void doAction() {
+//				Lobby.this.refresh();
+//				game.getCurrentCharacter().stats.advanceFloor2();
+//				game.savedDataHandler.save();
+//			}
+//		});
 		bottom.addActor(tower);
 	}
 

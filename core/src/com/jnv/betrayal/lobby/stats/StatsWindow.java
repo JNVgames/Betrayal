@@ -7,7 +7,6 @@ package com.jnv.betrayal.lobby.stats;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.jnv.betrayal.character.Character;
@@ -18,6 +17,8 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.resources.WhiteBoxOutline;
+import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class StatsWindow extends Popup {
@@ -59,6 +60,9 @@ public class StatsWindow extends Popup {
 					hair.setText(character.preview.isShowingHead() ? showHelmetText : showHairText);
 				}
 			});
+			Group group = new Group();
+			popup.addActor(group);
+			new WhiteBoxOutline(game, group, hair.getPrefWidth() + 6, hair.getPrefHeight() + 6, 3, hair.getX() - 4, hair.getY() - 4);
 			popup.addActor(hair);
 		}
 	}
