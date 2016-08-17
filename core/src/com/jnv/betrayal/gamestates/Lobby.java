@@ -393,6 +393,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				room.ready(false);
+				unReadyButton.setVisible(false);
 			}
 		});
 		unReadyButton.setVisible(false);
@@ -413,6 +414,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				room.ready(true);
+				readyButton.setVisible(false);
 			}
 		});
 		readyButton.setVisible(false);
