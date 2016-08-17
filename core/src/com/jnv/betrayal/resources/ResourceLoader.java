@@ -960,7 +960,8 @@ public class ResourceLoader {
 				.health(20).attack(17).defense(2)
 				.numTargets(1).effectCooldown(3)
 				.goldReward(400)
-				.effect(new AttackDown(3, 2))
+				//.effect(new AttackDown(3, 2))
+				.effect(new Poison(3))		//todo change back to AttackDown
 				.build();
 
 		// Tier 1

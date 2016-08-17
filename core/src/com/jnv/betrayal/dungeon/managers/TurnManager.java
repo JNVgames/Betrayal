@@ -75,10 +75,11 @@ public class TurnManager {
 	}
 
 	public void nextTurn() {
+
 		System.out.println("TurnManager.nextTurn");
 		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 		// If your turn is ending, decrease skill cooldown counter
-		if (!dungeonEnded) {
+		if (!dungeonEnded || field.monsterZone.isEmpty()) {
 			if (currentTurn instanceof YourTurn) {
 				yourTurn.decreaseTurnsLeft();
 			}

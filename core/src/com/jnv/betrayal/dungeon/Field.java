@@ -50,7 +50,7 @@ public class Field extends Group {
 	private Image background;
 	public final Socket socket;
 	public int reward;
-	private int currentCardTurn;
+	public int currentCardTurn;
 	private Character clientCharacter;
 	private Group cardGroup = new Group();
 

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.dungeon.Field;
+import com.jnv.betrayal.dungeon.animations.CardAnimation;
 import com.jnv.betrayal.dungeon.effects.Died;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.popup.CardInfo;
@@ -233,18 +234,49 @@ public abstract class Card {
 					heal(10);
 				}
 			})));
-		} else {
-			//todo remove this later (TO TEST DUNGEON SO YOU CANT DIE)
-//			if (card instanceof PlayerCard) {
-//				return;
-//			}
+		} else if((card instanceof  MonsterCard)) {
 			Effect effect = new Died(card);
+			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
+
+			field.monsterZone.remove(card);
+			cardAnimation.fadeOut(card);
+			card.died();
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
+
+
+			if(field.currentCardTurn >field.getAllCards().size() && field.getCurrentCard().getID() == card.getID()) {
+				field.calibrateCurrentCardTurnIndex();
+				field.turnManager.nextTurn();
+			}
+
+		}else{
+			Effect effect = new Died(card);
+			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
+
+			field.playerZone.remove(card);
+			cardAnimation.fadeOut(card);
+
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					card.died();
+
+				}
+			};
+			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+			card.getField().roundManager.addEventClient(effect, effect.getStartType());
+
+			System.out.println("Current card: " + field.getCurrentCard().getName());
+			if(field.getCurrentCard().getID() == card.getID()) {
+				field.calibrateCurrentCardTurnIndex();
+				field.turnManager.nextTurn();
+			}
+
 		}
 	}
 
 	public void poison() {
-		double newhealth = Math.floor(currentHealth * .9);
+		double newhealth = Math.floor(currentHealth - baseHealth * .2);
 		currentHealth = (int) newhealth;
 		healthBar.setNewHealthPercent(currentHealth * 100 / baseHealth);
 		if (checkIfDied())
@@ -299,36 +331,36 @@ public abstract class Card {
 	public void died() {
 		if (this instanceof PlayerCard && getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
+			System.out.println("YOURSELF");
 			field.removePlayerCard((PlayerCard) this);
 
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
 					new OKPopup(field.game, "You Have Died") {
 						@Override
 						public void onConfirm() {
 							field.game.addFool(field.game.getCurrentCharacter());
 							field.game.characters.remove(field.game.getCurrentCharacter());
 							field.game.gsm.setState(GameStateManager.State.MENU);
-						}
-					};
-				}
-			};
-			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+						}};
+
+
 
 			if (field.getClientCharacter().getRoom().getSocket() != null
 					&& field.getClientCharacter().getRoom().getSocket().connected()) {
 				field.getClientCharacter().getRoom().getSocket().disconnect();
 			}
+
 		} else if (this instanceof PlayerCard) {
+			System.out.println("TEAMMATE");
 			//Teammate died
 			field.removePlayerCard((PlayerCard) this);
 
 		} else if (this instanceof MonsterCard) {
+			System.out.println("MONSTER");
 			//Monster Card
 			endSelectMode();
 			field.removeMonsterCard((MonsterCard) this);
 			if (field.isMonsterZoneEmpty()) {
+				field.clearActions();
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
@@ -350,7 +382,6 @@ public abstract class Card {
 				};
 				field.turnManager.dungeonEnded();
 				System.out.println("cleared");
-				field.clearActions();
 				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {

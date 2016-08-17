@@ -29,7 +29,6 @@ public class Died extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.died();
 	}
 
 	@Override

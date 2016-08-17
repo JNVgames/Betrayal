@@ -35,6 +35,10 @@ public class AnimationManager {
 		return totalAnimationDuration;
 	}
 
+	public CardAnimation getCardAnimation() {
+		return cardAnimation;
+	}
+
 	public void queueEventAnimation(final Event event, final Runnable eventLogic) {
 
 		Runnable runnable = null;
@@ -113,14 +117,14 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.FAILED_TO_FLEE_DURATION);
 				break;
 			case DIED:
-				runnable = new Runnable() {
-					@Override
-					public void run() {
-						cardAnimation.fadeOut(event.getSrc());
-					}
-				};
-
-				floatFinder.enterFloat(AnimationValues.FADE_OUT_DURATION);
+//				runnable = new Runnable() {
+//					@Override
+//					public void run() {
+//						cardAnimation.fadeOut(event.getSrc());
+//					}
+//				};
+//
+//				floatFinder.enterFloat(AnimationValues.FADE_OUT_DURATION);
 				break;
 
 			/********************Item and Skills*************************/
@@ -272,6 +276,7 @@ public class AnimationManager {
 //			case E_POISON:
 //				break;
 		}
+
 
 		animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable, eventLogic));
 	}
