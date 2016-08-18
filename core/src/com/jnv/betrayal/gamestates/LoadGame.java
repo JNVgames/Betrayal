@@ -182,6 +182,8 @@ public class LoadGame extends GameState {
 			floorNumLabel.setAlignment(Align.center);
 			preview.addActor(floorNumLabel);
 
+			previewFrame.setZIndex(999);
+
 			previewFrame.addListener(new InputListener(preview, true));
 
 			previewFrame.addListener(new InputListener(previewFrame) {
