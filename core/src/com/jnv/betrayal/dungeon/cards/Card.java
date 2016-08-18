@@ -277,11 +277,23 @@ public abstract class Card {
 
 			System.out.println("Current card: " + field.getCurrentCard().getName());
 
-			if(field.currentCardTurn >= diedIndex)
+//			if(field.currentCardTurn >= diedIndex) {
+//				System.out.println("CALIBRATE");
+//				field.calibrateCurrentCardTurnIndex();
+//				field.turnManager.nextTurn();
+//			}
+//			if(field.getCurrentCard() == card){
+//				field.turnManager.nextTurn();
+//			}
+			if(field.getCurrentCard().getID() == card.getID()) {
+				System.out.println("CHECKPT");
 				field.calibrateCurrentCardTurnIndex();
-			field.turnManager.nextTurn();
-//			if(field.getCurrentCard().getID() == card.getID()) {
-//				field.turnManager.nextTurn();		//todo check here!! for disconnect problems
+				field.turnManager.nextTurn();
+			}
+//			if(field.currentCardTurn >= diedIndex) {
+//				//System.out.println("CALIBRATE");
+//				field.calibrateCurrentCardTurnIndex();
+//				//field.turnManager.nextTurn();
 //			}
 
 		}
@@ -365,7 +377,13 @@ public abstract class Card {
 			System.out.println("TEAMMATE");
 			//Teammate died
 			//field.removePlayerCard((PlayerCard) this);
-			int moneygained = ((PlayerCard)this).getNetWorth() / field.playerZone.size();
+			int moneygained = 0;
+			if(field.playerZone.size()==0) {
+				moneygained = ((PlayerCard)this).getNetWorth() ;
+			}else{
+			moneygained = ((PlayerCard)this).getNetWorth() / field.playerZone.size();
+
+			}
 			field.getClientCharacter().inventory.addGold(moneygained);
 			new OKPopup(field.game,this.getName() + " died\n You found " + moneygained);
 

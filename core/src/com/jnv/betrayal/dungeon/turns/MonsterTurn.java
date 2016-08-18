@@ -38,11 +38,7 @@ public class MonsterTurn extends Turn {
 					throw new AssertionError("Current card should be a MonsterCard, " +
 							"instead it is this player's turn: " + field.getCurrentCard());
 				}
-				System.out.println("(((((((((((((((((((((("+field.getCurrentCard().getName()+")))))))))))))))))))))))))");
-				if (field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID())
-					System.out.println("MUTHAFUCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-				if(field.getCurrentCard() instanceof MonsterCard)
-					System.out.println("MONSTERFUCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
 				if (field.playerZone.size() != 0
 						&& field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()
 						&& field.getCurrentCard() instanceof MonsterCard) {

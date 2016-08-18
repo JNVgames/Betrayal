@@ -6,6 +6,7 @@ package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.cards.Card;
@@ -174,7 +175,9 @@ public class Field extends Group {
 
 	public void setNextCardIndex() {
 		refreshAllCards();
-		currentCardTurn = (currentCardTurn + 1) % getAllCards().size();
+		currentCardTurn++;
+		if(currentCardTurn>=getAllCards().size())
+		currentCardTurn=0;
 	}
 
 	public Card getCurrentCard() {
@@ -257,6 +260,7 @@ public class Field extends Group {
 			@Override
 			public void call(Object... args) {
 				//takes in character of disconnected player
+				System.out.println("DISCONNECT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				JSONObject data = (JSONObject) args[0];
 				int disconnectID = -1;
 				try {
@@ -264,19 +268,39 @@ public class Field extends Group {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				Card deleteThisCard = null;
+				Card tmp = null;
+
+				int counter = 0;
 				for (Card card : playerZone) {
+					counter++;
 					if (card.getID() == disconnectID) {
 						//checks if it's that current person's turn
 						if (getCurrentCard() == card)
 							turnManager.nextTurn();
-						deleteThisCard = card;
+						tmp = card;
 						//removes person from playerzone and perform animation
-
+						break;
 					}
 				}
+				final Card deleteThisCard = tmp;
 				if (deleteThisCard != null) {
+					System.out.println("DELETING DISCOnnECT");
+					playerZone.remove(deleteThisCard);
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
+					if(currentCardTurn >= counter)
+						calibrateCurrentCardTurnIndex();
+					Runnable r = new Runnable() {
+						@Override
+						public void run() {
+							deleteThisCard.getCardName().setVisible(false);
+							deleteThisCard.died();
+							removePlayerCard((PlayerCard) deleteThisCard);
+						}
+					};
+					deleteThisCard.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
+					animationManager.getCardAnimation().fadeOut(deleteThisCard);
+				}else{
+					System.out.println("ALREADY DELETED");
 				}
 				refreshAllCards();
 			}

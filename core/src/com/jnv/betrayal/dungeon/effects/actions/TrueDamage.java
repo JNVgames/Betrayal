@@ -17,7 +17,7 @@ public class TrueDamage extends Effect {
 	public TrueDamage(int damage) {
 		super(EventType.BUFF_ATTACK, 1, EventType.E_BUFF_ATTACK);
 		this.damage = damage;
-		isHostile = false;
+		isHostile = true;
 		description = "True Damage\n" + "deal  "+ damage + "\n"
 				+ "\n ignoring defense";
 	}

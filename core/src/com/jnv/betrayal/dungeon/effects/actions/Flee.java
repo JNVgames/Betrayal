@@ -38,6 +38,7 @@ public class Flee extends Effect {
 					@Override
 					public void run() {
 						src.getField().removePlayerCard((PlayerCard) src);
+						src.getField().calibrateCurrentCardTurnIndex();
 					}
 				})));
 			}

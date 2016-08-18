@@ -85,6 +85,7 @@ public class CardAnimation {
 	public void fadeOut(Card card) {
 		card.getCardImage().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 		card.getHealthBar().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
+		card.getCardName().addAction(Actions.delay(1.5f, Actions.fadeOut(2f)));
 	}
 
 	public void flee(Card card) {

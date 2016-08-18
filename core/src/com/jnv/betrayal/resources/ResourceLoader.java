@@ -1016,7 +1016,7 @@ public class ResourceLoader {
 				.health(43).attack(25).defense(2)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
-				.effect(new TrueDamage(25)).effectCooldown(2)
+				.effect(new TrueDamage(25)).effectCooldown(2)		//todo FIX THIX
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
