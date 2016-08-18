@@ -30,9 +30,7 @@ public class Stats implements JsonSerializable {
 		baseDefense = 10;
 		System.out.println("************************************");
 		floor = 0;
-		//availablePoints = 0;
-		//todo change back
-		availablePoints = 50;
+		availablePoints = 0;
 		applyPoints = new ApplyPoints();
 		this.equips = equips;
 		updateStats();
@@ -136,7 +134,7 @@ public class Stats implements JsonSerializable {
 		if(floor>=25)
  			return;
 		floor++; //todo add back delete other\
-		availablePoints += 5;
+		availablePoints += 3;
 		applyPoints.updateValues();
 		if(floor==25) {        //won the game\
 			game.fools.add(game.getCurrentCharacter());

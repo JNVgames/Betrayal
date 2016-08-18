@@ -392,7 +392,7 @@ public abstract class Card {
 				field.calibrateCurrentCardTurnIndex();
 				if(field.getCurrentCard().getID() == field.getClientCharacter().getId()){
 					//you got the last hit bonus
-					int bonusReward = field.reward/4;
+					int bonusReward = 150;
 					field.getClientCharacter().inventory.addGold(bonusReward);
 					new OKPopup(field.game, "Last Hit Bonus!\nYou got " + bonusReward + " gold");
 				}
