@@ -198,6 +198,10 @@ public class Equips implements JsonSerializable {
 	@Override
 	public void fromJson(JSONObject data) {
 		try {
+			for (int i = 0; i < EquipSlot.SLOTS; i++) {
+				unequip(i);
+			}
+
 			Class<?> clazz;
 			Constructor<?> constructor;
 			Object item;
@@ -209,7 +213,6 @@ public class Equips implements JsonSerializable {
 					constructor = clazz.getConstructor(String.class, BetrayalAssetManager.class);
 					item = constructor.newInstance(object.getString("textureName"), res);
 					equip((Equip) item);
-					System.out.println("Slot " + i + ": " + object.getString("textureName"));
 				}
 			}
 		} catch (Exception e) {
