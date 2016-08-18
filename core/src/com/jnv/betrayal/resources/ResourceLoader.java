@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.dungeon.effects.IncreasedAttack;
 import com.jnv.betrayal.dungeon.effects.SkipTurn;
 import com.jnv.betrayal.dungeon.effects.actions.Bomb;
 import com.jnv.betrayal.dungeon.effects.actions.Heal;
