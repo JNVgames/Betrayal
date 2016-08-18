@@ -120,12 +120,13 @@ public class YourTurn extends Turn {
 	public void attemptFlee(int fleeChance) {
 		panels.clear();
 		System.out.println("ATTEMPTING TO FLEE");
-		panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 		if (PlayerCard.canFlee(fleeChance)) {
 			Effect effect = new Flee(field.getCurrentCard());
 			field.roundManager.addEvent(effect, effect.getStartType());
 			field.playerZone.remove(field.getCurrentCard());
-			field.turnManager.nextTurn();
+			field.nextTurn();
+			panels.clear();
+			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			if (field.getClientCharacter().getRoom().getSocket() != null
 					&& field.getClientCharacter().getRoom().getSocket().connected()) {
 				field.getClientCharacter().getRoom().getSocket().emit("flee");
@@ -147,13 +148,16 @@ public class YourTurn extends Turn {
 		} else {
 			Effect effect = new FailedToFlee(field.getCurrentCard());
 			field.roundManager.addEvent(effect, effect.getStartType());
+			field.nextTurn();
+			panels.clear();
+			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
+					field.uiManager.drawUI();
 					new OKPopup(field.game, "Flee Failed");
 				}
 			};
-			field.turnManager.nextTurn();
 			field.getCurrentCard().getCardImage().addAction(Actions.delay(2f, Actions.run(r)));
 		}
 	}
@@ -399,6 +403,6 @@ public class YourTurn extends Turn {
 
 	private void doEvent(Effect effect, EventType type) {
 		field.roundManager.addEvent(effect, type);
-		field.turnManager.nextTurn();
+		field.nextTurn();
 	}
 }

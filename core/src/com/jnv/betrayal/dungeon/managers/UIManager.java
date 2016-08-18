@@ -19,14 +19,12 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
-import java.util.Arrays;
-
 import io.socket.client.Socket;
 
 /**
  * Keeps track of user/party member/monster's turns.
  */
-public class TurnManager {
+public class UIManager {
 
 	public final Group panels = new Group();
 	private Field field;
@@ -34,9 +32,8 @@ public class TurnManager {
 	private YourTurn yourTurn;
 	private TeamMemberTurn teamMemberTurn;
 	private MonsterTurn monsterTurn;
-	private boolean dungeonEnded = false;
 
-	public TurnManager(Field field) {
+	public UIManager(Field field) {
 		this.field = field;
 		Pool<Button> buttonPool = new Pool<Button>() {
 			@Override
@@ -75,22 +72,14 @@ public class TurnManager {
 	}
 
 	public void nextTurn() {
-		field.refreshAllCards();
-		System.out.println("TurnManager.nextTurn");
-		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
-		// If your turn is ending, decrease skill cooldown counter
-		if (!dungeonEnded || field.monsterZone.isEmpty()) {
-			if (currentTurn instanceof YourTurn) {
-				yourTurn.decreaseTurnsLeft();
-			}
-			field.setNextCardIndex();
-			field.roundManager.checkEvents(field.getCurrentCard());
-			drawUI(field.animationManager.getTotalAnimationDuration());
-			System.out.println("Waiting for input...");
+		if (currentTurn instanceof YourTurn) {
+			yourTurn.decreaseTurnsLeft();
 		}
+		drawUI();
+		System.out.println("Waiting for input...");
 	}
 
-	public void drawUI(float delayForYourTurn) {
+	public void drawUI() {
 		Card currentCard = field.getCurrentCard();
 
 		// Team member turn
@@ -106,13 +95,21 @@ public class TurnManager {
 		else {
 			currentTurn = yourTurn;
 			yourTurn.setFirstAppearance();
-			yourTurn.setInitialDelay(delayForYourTurn);
+			yourTurn.setInitialDelay(field.animationManager.getTotalAnimationDuration());
 		}
 		currentTurn.draw();
 	}
 
 	public void dungeonEnded() {
-		dungeonEnded = true;
+		dungeonEndedClient();
+		Socket socket = field.getClientCharacter().getRoom().getSocket();
+		if (socket != null && socket.connected()) {
+			socket.emit("dungeonEnded");
+		}
+	}
+
+	public void dungeonEndedClient() {
+		System.out.println("dungeonEndedClient");
 		for (Actor actor : panels.getChildren()) {
 			actor.setTouchable(Touchable.disabled);
 			actor.addAction(Actions.fadeOut(1));
@@ -123,11 +120,8 @@ public class TurnManager {
 				}
 			})));
 		}
-		Socket socket = field.getClientCharacter().getRoom().getSocket();
-		if (socket != null && socket.connected()) {
-			socket.emit("dungeonEnded");
-		}
 	}
+
 
 	public Turn getCurrentTurn() {
 		return currentTurn;

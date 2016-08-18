@@ -10,7 +10,6 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.managers.MonsterManager;
-import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class Dungeon extends GameState {
 					highestPartyMemberFloor = character.stats.getFloor();
 			}
 		}
-		int tier = (int) Math.ceil(highestPartyMemberFloor/5);
+		int tier = (int) Math.ceil(highestPartyMemberFloor / 5);
 		System.out.println("highestPartyMemberFloor = " + highestPartyMemberFloor);
 		System.out.println("tier = " + tier);
 		field.setBackgroundForField("map" + tier + "1");
@@ -51,12 +50,13 @@ public class Dungeon extends GameState {
 		}
 
 		System.out.println("All cards: " + field.getAllCards());
-		field.turnManager.drawUI(YourTurn.INITIAL_DELAY);
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
 		stage.addActor(field);
 
 		// Start first turn
+		field.setup();
+		field.uiManager.drawUI();
 		field.roundManager.checkEvents(field.getCurrentCard());
 	}
 

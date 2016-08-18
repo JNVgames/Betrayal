@@ -133,7 +133,7 @@ class ItemOptions extends Popup {
 						((DungeonInventory) inventory).remove();
 						if (!(effect instanceof Run)) {
 							src.getField().roundManager.addEvent(effect, effect.getStartType());
-							src.getField().turnManager.nextTurn();
+							src.getField().nextTurn();
 						} else {
 							src.getField().roundManager.addEventClient(effect, effect.getStartType());
 						}

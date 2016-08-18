@@ -1,10 +1,10 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.jnv.betrayal.dungeon.Field;
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import io.socket.client.Socket;
 public class RoundManager {
 
 	private ArrayList<Event> events;
-	private AnimationManager animation;
+	private AnimationManager animationManager;
 	private Socket socket;
 	public final Deque<Event> eventHistory;
 
-	public RoundManager(AnimationManager animation) {
+	public RoundManager(AnimationManager animationManager) {
 		events = new ArrayList<Event>();
 		eventHistory = new ArrayDeque<Event>();
-		this.animation = animation;
+		this.animationManager = animationManager;
 	}
 
 	public void setSocket(Socket socket) {
@@ -32,6 +32,7 @@ public class RoundManager {
 
 	/**
 	 * Check for events to go off during each turn
+	 *
 	 * @param card card to check events for
 	 */
 	public void checkEvents(Card card) {
@@ -43,30 +44,29 @@ public class RoundManager {
 
 			//checks if the src is still alive
 
-				if(!checkSrcAlive(event.getSrc())){
-					System.out.println("END EFFECT: bECAUSe SRC IS DEAD" + event);
-					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
-					// Perform the animation
-					animation.queueEventAnimation(tmpEvent, new Runnable() {
-						@Override
-						public void run() {
-							tmp.getEffect().doEndEffect();
-						}
-					});
-					// Add the end effect to event history
-					eventHistory.addLast(tmpEvent);
-				}
-
+			if (!checkSrcAlive(event.getSrc())) {
+				System.out.println("END EFFECT: bECAUSe SRC IS DEAD" + event);
+				Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
+				// Perform the animation
+				animationManager.queueEventAnimation(tmpEvent, new Runnable() {
+					@Override
+					public void run() {
+						tmp.getEffect().doEndEffect();
+					}
+				});
+				// Add the end effect to event history
+				eventHistory.addLast(tmpEvent);
+			}
 
 			//check if you put in that event
-			if (card == event.getSrc() ) {
+			if (card == event.getSrc()) {
 				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
 					System.out.println("END EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the animation
-					animation.queueEventAnimation(tmpEvent, new Runnable() {
+					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 						@Override
 						public void run() {
 							tmp.getEffect().doEndEffect();
@@ -81,7 +81,7 @@ public class RoundManager {
 				if (event.getEffect().isConsistent() && event.getTurnsLeft() != (event.getEffect().getTurns())) {
 					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
-					animation.queueEventAnimation(tmpEvent, new Runnable() {
+					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 						@Override
 						public void run() {
 							tmp.getEffect().doConsistentEffect();
@@ -99,12 +99,11 @@ public class RoundManager {
 		for (Event event : eventsToRemove) {
 			events.remove(event);
 		}
-		animation.animate();
 	}
 
-	public boolean checkSrcAlive(Card card){
+	public boolean checkSrcAlive(Card card) {
 		Field field = card.getField();
-		for(Card c : field.getAllCards()){
+		for (Card c : field.getAllCards()) {
 			if (c.getID() == card.getID())
 				return true;
 		}
@@ -115,7 +114,7 @@ public class RoundManager {
 		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
-		animation.queueEventAnimation(event, new Runnable() {
+		animationManager.queueEventAnimation(event, new Runnable() {
 			@Override
 			public void run() {
 				event.getEffect().doStartEffect();
@@ -128,7 +127,7 @@ public class RoundManager {
 		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
-		animation.queueEventAnimation(event, new Runnable() {
+		animationManager.queueEventAnimation(event, new Runnable() {
 			@Override
 			public void run() {
 				effect.doStartEffect();

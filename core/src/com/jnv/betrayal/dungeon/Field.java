@@ -17,8 +17,9 @@ import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.managers.AnimationManager;
+import com.jnv.betrayal.dungeon.managers.NextTurnManager;
 import com.jnv.betrayal.dungeon.managers.RoundManager;
-import com.jnv.betrayal.dungeon.managers.TurnManager;
+import com.jnv.betrayal.dungeon.managers.UIManager;
 import com.jnv.betrayal.dungeon.popup.EventLog;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.main.Betrayal;
@@ -32,7 +33,6 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.socket.client.Socket;
@@ -41,7 +41,7 @@ import io.socket.emitter.Emitter;
 public class Field extends Group {
 
 	public final RoundManager roundManager;
-	public final TurnManager turnManager;
+	public final UIManager uiManager;
 	public final AnimationManager animationManager;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
@@ -49,20 +49,23 @@ public class Field extends Group {
 	public final List<PlayerCard> playerZone;
 	public final List<MonsterCard> monsterZone;
 	public final List<Card> allCards;
-	private Image background;
 	public final Socket socket;
 	public int reward;
-	public int currentCardTurn;
+	private Image background;
 	private Character clientCharacter;
 	private Group cardGroup = new Group();
+	private NextTurnManager nextTurnManager;
+	private boolean dungeonEnded = false;
 
 	/**
 	 * Creates an empty field that utilizes a stage for its actors
 	 */
 	public Field(GameStateManager gsm) {
 		// Initialize card zones and instance variables
+		System.out.println("CONSTRUCTOR");
 		playerZone = new ArrayList<PlayerCard>();
 		monsterZone = new ArrayList<MonsterCard>();
+		allCards = new ArrayList<Card>();
 		this.gsm = gsm;
 		game = gsm.game;
 		res = gsm.game.res;
@@ -71,25 +74,46 @@ public class Field extends Group {
 		if (socket != null && socket.connected()) configSocket();
 		reward = 0;
 		background = new Image(res.getTexture("map01"));
-		currentCardTurn = 0;
-		allCards = new ArrayList<Card>();
-
 		// Add things to stage
 		addActor(background);
 		createEventLogButton();
 		addActor(cardGroup);
-		turnManager = new TurnManager(this);
+		uiManager = new UIManager(this);
 		animationManager = new AnimationManager(res, this);
+		nextTurnManager = new NextTurnManager(this);
 		roundManager = new RoundManager(animationManager);
 		roundManager.setSocket(socket);
+	}
+
+	public void setup() {
+		nextTurnManager.setup();
 	}
 
 	public void setBackgroundForField(String s) {
 		background.setDrawable(new TextureRegionDrawable(new TextureRegion(res.getTexture(s))));
 	}
 
-	public void adjustReward(){
-		reward/= playerZone.size();
+	public void adjustReward() {
+		reward /= playerZone.size();
+	}
+
+	public void nextTurn() {
+		refreshAllCards();
+
+		// If your turn is ending, decrease skill cooldown counter
+		if (!dungeonEnded) {
+			nextTurnManager.nextTurn();
+			uiManager.nextTurn();
+			roundManager.checkEvents(nextTurnManager.getCurrentCard());
+			animationManager.animate();
+			System.out.println("Waiting for input...");
+		}
+	}
+
+	public void dungeonEnded() {
+		dungeonEnded = true;
+		clearActions();
+		uiManager.dungeonEnded();
 	}
 
 	private void createEventLogButton() {
@@ -118,8 +142,6 @@ public class Field extends Group {
 		cardGroup.addActor(card.getGroup());
 		card.setField(this);
 	}
-
-
 
 	public void adjustMonsterHealth() {
 		for (MonsterCard card : monsterZone) {
@@ -173,15 +195,8 @@ public class Field extends Group {
 		}
 	}
 
-	public void setNextCardIndex() {
-		refreshAllCards();
-		currentCardTurn++;
-		if(currentCardTurn>=getAllCards().size())
-		currentCardTurn=0;
-	}
-
 	public Card getCurrentCard() {
-		return allCards.get(currentCardTurn);
+		return nextTurnManager.getCurrentCard();
 	}
 
 	// refreshed all cards incase a card died.
@@ -251,7 +266,7 @@ public class Field extends Group {
 					// Register recreated event with roundManager
 					Event event = roundManager.addEventClient(effect, EventType.valueOf(data.getString("eventType")));
 					System.out.println("RECEIVED EVENT: " + event);
-					turnManager.nextTurn();
+					nextTurn();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -275,8 +290,7 @@ public class Field extends Group {
 					counter++;
 					if (card.getID() == disconnectID) {
 						//checks if it's that current person's turn
-						if (getCurrentCard() == card)
-							turnManager.nextTurn();
+
 						tmp = card;
 						//removes person from playerzone and perform animation
 						break;
@@ -287,8 +301,7 @@ public class Field extends Group {
 					System.out.println("DELETING DISCOnnECT");
 					playerZone.remove(deleteThisCard);
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
-					if(currentCardTurn >= counter)
-						calibrateCurrentCardTurnIndex();
+					if (getCurrentCard() == deleteThisCard) nextTurn();
 					Runnable r = new Runnable() {
 						@Override
 						public void run() {
@@ -299,7 +312,7 @@ public class Field extends Group {
 					};
 					deleteThisCard.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 					animationManager.getCardAnimation().fadeOut(deleteThisCard);
-				}else{
+				} else {
 					System.out.println("ALREADY DELETED");
 				}
 				refreshAllCards();
@@ -367,11 +380,5 @@ public class Field extends Group {
 
 	public Character getClientCharacter() {
 		return clientCharacter;
-	}
-
-	public void calibrateCurrentCardTurnIndex() {
-		System.out.println("CALIBRATE THIS BITCH");
-		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
-		if (currentCardTurn != 0) currentCardTurn--;
 	}
 }

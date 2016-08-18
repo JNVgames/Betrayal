@@ -7,7 +7,6 @@ import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.EventType;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class Flee extends Effect {
 					@Override
 					public void run() {
 						src.getField().removePlayerCard((PlayerCard) src);
-						src.getField().calibrateCurrentCardTurnIndex();
 					}
 				})));
 			}

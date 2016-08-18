@@ -9,6 +9,7 @@ import com.jnv.betrayal.dungeon.animations.utils.AnimationValues;
 import com.jnv.betrayal.dungeon.animations.utils.GreatestFloatFinder;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Event;
+import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class AnimationManager {
@@ -16,7 +17,7 @@ public class AnimationManager {
 	private CardAnimation cardAnimation;
 	private GreatestFloatFinder floatFinder;
 	private AnimationQueue animationQueue;
-	private float totalAnimationDuration;
+	private float totalAnimationDuration = YourTurn.INITIAL_DELAY;
 
 	public AnimationManager(BetrayalAssetManager res, Actor eventBaseActor) {
 		cardAnimation = new CardAnimation(res);

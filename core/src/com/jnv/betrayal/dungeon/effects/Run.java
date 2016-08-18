@@ -3,7 +3,6 @@ package com.jnv.betrayal.dungeon.effects;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		if (src.getID() == src.getField().getClientCharacter().getId()) {
-			((YourTurn) src.getField().turnManager.getCurrentTurn()).attemptFlee(fleeChance);
+			((YourTurn) src.getField().uiManager.getCurrentTurn()).attemptFlee(fleeChance);
 		}
 	}
 

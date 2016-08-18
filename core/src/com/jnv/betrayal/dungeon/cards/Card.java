@@ -228,7 +228,6 @@ public abstract class Card {
 	public void cardDeath(final Card card) {
 		// Check if card is a playercard. if it is, check for cloak. if cloak exists, burn the cloak
 		//  and set hp to
-		card.getCardName().setVisible(false);
 		if (card instanceof PlayerCard && !((PlayerCard) card).hasCloak()) {
 			cardImage.addAction(Actions.delay(1.5f, Actions.run(new Runnable() {
 				@Override
@@ -237,7 +236,7 @@ public abstract class Card {
 					heal(10);
 				}
 			})));
-		} else if((card instanceof  MonsterCard)) {
+		} else if ((card instanceof MonsterCard)) {
 			Effect effect = new Died(card);
 			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
 
@@ -246,17 +245,9 @@ public abstract class Card {
 
 			card.died();
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
-
-
-			if(field.currentCardTurn >=field.getAllCards().size() && field.getCurrentCard().getID() == card.getID()) {
-				field.calibrateCurrentCardTurnIndex();
-				field.turnManager.nextTurn();
-			}
-
 		} else {
 			Effect effect = new Died(card);
 			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
-			int diedIndex = field.playerZone.indexOf(card);
 			field.playerZone.remove(card);
 			cardAnimation.fadeOut(card);
 
@@ -264,7 +255,6 @@ public abstract class Card {
 				@Override
 				public void run() {
 					card.died();
-
 				}
 			};
 			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
@@ -272,26 +262,14 @@ public abstract class Card {
 
 			System.out.println("Current card: " + field.getCurrentCard().getName());
 
-//			if(field.currentCardTurn >= diedIndex) {
-//				System.out.println("CALIBRATE");
-//				field.calibrateCurrentCardTurnIndex();
-//				field.turnManager.nextTurn();
-//			}
-//			if(field.getCurrentCard() == card){
-//				field.turnManager.nextTurn();
-//			}
-			if(field.getCurrentCard().getID() == card.getID()) {
-				System.out.println("CHECKPT");
-				field.calibrateCurrentCardTurnIndex();
-				field.turnManager.nextTurn();
+			if (field.getCurrentCard() == card) {
+				field.nextTurn();
 			}
-//			if(field.currentCardTurn >= diedIndex) {
-//				//System.out.println("CALIBRATE");
-//				field.calibrateCurrentCardTurnIndex();
-//				//field.turnManager.nextTurn();
-//			}
-
+			if (field.playerZone.size() == 0) {
+				field.dungeonEnded();
+			}
 		}
+		card.getCardName().setVisible(false);
 	}
 
 	public void poison() {
@@ -351,17 +329,16 @@ public abstract class Card {
 		if (this instanceof PlayerCard && getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
 			System.out.println("YOURSELF");
+
 			field.removePlayerCard((PlayerCard) this);
 			field.game.addFool(field.game.getCurrentCharacter());
-			//field.game.characters.remove(field.game.getCurrentCharacter());
 			field.game.savedDataHandler.save();
-					new OKPopup(field.game, "You Have Died") {
-						@Override
-						public void onConfirm() {
-							field.game.gsm.setState(GameStateManager.State.MENU);
-						}};
-
-
+			new OKPopup(field.game, "You Have Died") {
+				@Override
+				public void onConfirm() {
+					field.game.gsm.setState(GameStateManager.State.MENU);
+				}
+			};
 
 			if (field.getClientCharacter().getRoom().getSocket() != null
 					&& field.getClientCharacter().getRoom().getSocket().connected()) {
@@ -373,14 +350,14 @@ public abstract class Card {
 			//Teammate died
 			//field.removePlayerCard((PlayerCard) this);
 			int moneygained = 0;
-			if(field.playerZone.size()==0) {
-				moneygained = ((PlayerCard)this).getNetWorth() ;
-			}else{
-			moneygained = ((PlayerCard)this).getNetWorth() / field.playerZone.size();
+			if (field.playerZone.size() == 0) {
+				moneygained = ((PlayerCard) this).getNetWorth();
+			} else {
+				moneygained = ((PlayerCard) this).getNetWorth() / field.playerZone.size();
 
 			}
 			field.getClientCharacter().inventory.addGold(moneygained);
-			new OKPopup(field.game,this.getName() + " died\n You found " + moneygained);
+			new OKPopup(field.game, this.getName() + " died\n You found " + moneygained);
 
 		} else if (this instanceof MonsterCard) {
 			System.out.println("MONSTER");
@@ -389,15 +366,13 @@ public abstract class Card {
 			field.removeMonsterCard((MonsterCard) this);
 			if (field.isMonsterZoneEmpty()) {
 				//last hit bonus
-				field.calibrateCurrentCardTurnIndex();
-				if(field.getCurrentCard().getID() == field.getClientCharacter().getId()){
+				field.dungeonEnded();
+				if (field.getCurrentCard().getID() == field.getClientCharacter().getId()) {
 					//you got the last hit bonus
 					int bonusReward = 150;
 					field.getClientCharacter().inventory.addGold(bonusReward);
 					new OKPopup(field.game, "Last Hit Bonus!\nYou got " + bonusReward + " gold");
 				}
-
-				field.clearActions();
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
@@ -405,7 +380,7 @@ public abstract class Card {
 						new OKPopup(field.game, "Floor Completed!\nGained " + field.reward + " Gold") {
 							@Override
 							public void onConfirm() {
-								field.getClientCharacter().inventory.addGold(field.reward);		//gets your reward
+								field.getClientCharacter().inventory.addGold(field.reward);        //gets your reward
 								field.getClientCharacter().stats.advanceFloor(game);
 								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
@@ -414,7 +389,6 @@ public abstract class Card {
 						System.out.println("floor comp");
 					}
 				};
-				field.turnManager.dungeonEnded();
 				System.out.println("cleared");
 				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}

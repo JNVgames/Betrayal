@@ -79,13 +79,13 @@ public class MonsterTurn extends Turn {
 			}
 			event.getEffect().setDest(dst);
 			card.getField().roundManager.addEvent(event);
-			field.turnManager.nextTurn();
+			field.nextTurn();
 		} else {
 			// Make monster do normal attack
 			card.effectCounter++;
 			Effect attack = new Attack(field.getCurrentCard(), dst);
 			field.roundManager.addEvent(attack, attack.getStartType());
-			field.turnManager.nextTurn();
+			field.nextTurn();
 		}
 	}
 }
