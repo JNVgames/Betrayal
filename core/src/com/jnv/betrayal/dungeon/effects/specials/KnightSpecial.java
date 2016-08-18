@@ -52,13 +52,4 @@ public class KnightSpecial extends Effect {
 	public void consistentEffect(Card destCard) {
 
 	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
 }

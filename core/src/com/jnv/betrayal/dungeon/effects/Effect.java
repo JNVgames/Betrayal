@@ -140,6 +140,7 @@ public abstract class Effect {
 			data.put("endType", endType.toString());
 			data.put("isHostile", isHostile);
 			data.put("description", description);
+			data.put("class", getClass().getCanonicalName());
 			data.put("values", new JSONObject());
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -160,5 +161,7 @@ public abstract class Effect {
 				"}";
 	}
 
-	protected abstract void addToObject();
+	protected void addToObject() {
+		// Use this method to add extra values to json
+	}
 }

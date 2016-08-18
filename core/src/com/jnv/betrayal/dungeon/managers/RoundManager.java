@@ -111,6 +111,7 @@ public class RoundManager {
 		return false;
 	}
 	public void addEventClient(final Event event) {
+		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
 		animation.queueEventAnimation(event, new Runnable() {
@@ -123,6 +124,7 @@ public class RoundManager {
 
 	public Event addEventClient(final Effect effect, EventType eventType) {
 		Event event = new Event(effect, eventType);
+		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
 		animation.queueEventAnimation(event, new Runnable() {
