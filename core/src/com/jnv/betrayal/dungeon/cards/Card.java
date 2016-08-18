@@ -367,7 +367,10 @@ public abstract class Card {
 			if (field.isMonsterZoneEmpty()) {
 				//last hit bonus
 				field.dungeonEnded();
-				if (field.getCurrentCard().getID() == field.getClientCharacter().getId()) {
+				int i = field.playerZone.indexOf(field.getCurrentCard());
+				i--;
+				if(i<0) i = field.playerZone.size()-1;
+				if (field.playerZone.get(i).getID() == field.getClientCharacter().getId()) {
 					//you got the last hit bonus
 					int bonusReward = 150;
 					field.getClientCharacter().inventory.addGold(bonusReward);
