@@ -40,7 +40,7 @@ public class Room {
 		return roomID;
 	}
 
-	public void setRoomID(int roomID){
+	public void setRoomID(int roomID) {
 		this.roomID = roomID;
 	}
 
@@ -180,7 +180,7 @@ public class Room {
 					character.setReady(false);
 				}
 				try {
-					removeCharacter(((JSONObject) args[0]).getJSONObject("character"));
+					removeCharacter(((JSONObject) args[0]).getJSONObject("character").getInt("id"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -203,15 +203,7 @@ public class Room {
 			public void call(Object... args) {
 				JSONObject data = (JSONObject) args[0];
 				try {
-					// Extract id
-					int id = data.getJSONObject("player").getInt("id");
-
-					for (int i = 0; i < characters.size(); i++) {
-						if (characters.get(i).getId() == id) {
-							characters.remove(characters.get(i));
-							break;
-						}
-					}
+					removeCharacter(data.getJSONObject("player").getInt("id"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -225,19 +217,12 @@ public class Room {
 		});
 	}
 
-	private void removeCharacter(JSONObject data) {
-		try {
-			// Extract id
-			int id = data.getInt("id");
-
-			// Loop through and find character with id
-			for (int i = 0; i < characters.size(); i++) {
-				if (characters.get(i).getId() == id) {
-					characters.remove(i);
-				}
+	public void removeCharacter(int id) {
+		// Loop through and find character with id
+		for (int i = 0; i < characters.size(); i++) {
+			if (characters.get(i).getId() == id) {
+				characters.remove(i);
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -76,7 +76,6 @@ public class Lobby extends GameState {
 		};
 		if (gsm.game.getCurrentCharacter().getRoom().getSocket() != null
 				&& gsm.game.getCurrentCharacter().getRoom().getSocket().connected()) {
-
 			room.updateServerCharacters();
 			gsm.game.getCurrentCharacter().getRoom().refreshLobby();
 		}

@@ -303,6 +303,9 @@ public class Field extends Group {
 					System.out.println("ALREADY DELETED");
 				}
 				refreshAllCards();
+
+				// Remove from room
+				getClientCharacter().getRoom().removeCharacter(disconnectID);
 			}
 		});
 	}

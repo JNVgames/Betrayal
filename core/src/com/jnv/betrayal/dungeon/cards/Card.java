@@ -201,8 +201,7 @@ public abstract class Card {
 					// If it's selected, unselect
 					if (isSelected) {
 						unselect();
-					}
-					else {
+					} else {
 						// If limit is one, unselect all and select this one
 						if (numTargets == 1) {
 							field.unselectAll();
@@ -258,7 +257,7 @@ public abstract class Card {
 				field.turnManager.nextTurn();
 			}
 
-		}else{
+		} else {
 			Effect effect = new Died(card);
 			CardAnimation cardAnimation = field.animationManager.getCardAnimation();
 			int diedIndex = field.playerZone.indexOf(card);
