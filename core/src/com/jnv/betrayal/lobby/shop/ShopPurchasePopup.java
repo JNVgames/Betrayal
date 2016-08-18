@@ -23,11 +23,13 @@ public class ShopPurchasePopup extends Popup {
 	private Character character;
 	private Item item;
 	private Preview preview;
+	private Shop shop;
 
-	public ShopPurchasePopup(Betrayal game, Item item) {
+	public ShopPurchasePopup(Betrayal game, Item item, Shop shop) {
 		super(game);
 		character = game.getCurrentCharacter();
 		this.item = item;
+		this.shop = shop;
 		loadButtons();
 	}
 
@@ -93,6 +95,7 @@ public class ShopPurchasePopup extends Popup {
 							case 0:
 								game.savedDataHandler.save();
 								new OKPopup(game, "Item Bought");
+								shop.setGoldLabelText(Integer.toString(game.getCurrentCharacter().inventory.getGold()));
 								break;
 							case 1:
 								new OKPopup(game, "Not Enough Gold");

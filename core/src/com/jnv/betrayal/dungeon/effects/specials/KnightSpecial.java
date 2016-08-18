@@ -13,6 +13,7 @@ import java.util.List;
 public class KnightSpecial extends Effect {
 
 	private float increasedDefense;
+	private boolean isBuffed = false, isDebuffed = false;
 
 	public KnightSpecial(Card src, List<Card> dest) {
 		super(EventType.KNIGHT_SPECIAL);
@@ -31,14 +32,20 @@ public class KnightSpecial extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		destCard.addDefender((PlayerCard) src);
-		increasedDefense = src.getBaseDefense() * 1.5f;
-		src.increaseCurrentDefense(increasedDefense);
+		if (!isBuffed) {
+			increasedDefense = src.getBaseDefense() * 0.5f;
+			src.increaseCurrentDefense(increasedDefense);
+			isBuffed = true;
+		}
 	}
 
 	@Override
 	public void endEffect(Card destCard) {
 		destCard.removeDefender(src.getID());
-		src.decreaseCurrentDefense(increasedDefense);
+		if (!isDebuffed) {
+			src.decreaseCurrentDefense(increasedDefense);
+			isDebuffed = true;
+		}
 	}
 
 	@Override

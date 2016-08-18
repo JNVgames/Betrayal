@@ -332,11 +332,11 @@ public class Lobby extends GameState {
 		} else if (game.getCurrentCharacter().isReady()) {
 			playNowButton.setVisible(false);
 			readyButton.setVisible(false);
-			unReadyButton.setColor(Color.WHITE);
+			unReadyButton.setTouchable(Touchable.enabled);
 			unReadyButton.setVisible(true);
 		} else {
 			playNowButton.setVisible(false);
-			readyButton.setColor(Color.WHITE);
+			readyButton.setTouchable(Touchable.enabled);
 			readyButton.setVisible(true);
 			unReadyButton.setVisible(false);
 		}
@@ -395,8 +395,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				room.ready(false);
-				unReadyButton.setColor(Color.GRAY);
-				unReadyButton.setVisible(false);
+				unReadyButton.setTouchable(Touchable.disabled);
 			}
 		});
 		unReadyButton.setVisible(false);
@@ -417,8 +416,7 @@ public class Lobby extends GameState {
 			@Override
 			public void doAction() {
 				room.ready(true);
-				readyButton.setColor(Color.GRAY);
-				readyButton.setVisible(false);
+				readyButton.setTouchable(Touchable.disabled);
 			}
 		});
 		readyButton.setVisible(false);

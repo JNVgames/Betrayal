@@ -30,14 +30,17 @@ import com.jnv.betrayal.scene2d.InputListener;
 
 public class Shop extends Popup {
 
-	private Image leftArrow, rightArrow, cloakBuyButton;
+	private Image leftArrow;
+	private Image rightArrow;
+	private Image background;
+	private Label goldLabel;
+	private Image goldBackground;
 	private Image[] potions, ring1, ring2, run;
 	private Image[] sword1, sword2, sword3, sword4, sword5;
 	private Image[] shield1, shield2, shield3, shield4, shield5;
 	private Image[] headgear1, headgear2, headgear3, headgear4, headgear5;
 	private Image[] armor1, armor2, armor3, armor4, armor5;
 	private Label[] titleHeadgear, titleShield, titleArmor, titleSword;
-	private Label cloakPrice, comingSoon, runTitle;
 	private int currentContent, buttonHeight, buttonWidth, itemSize;
 	private Group currentGroup;
 	private Character character;
@@ -84,10 +87,6 @@ public class Shop extends Popup {
 		loadCurrentActors();
 	}
 
-	private void loadCurrentActors() {
-		popup.addActor(currentGroup);
-	}
-
 	private void loadButtons() {
 		loadBackground();
 		loadWeaponsButton();
@@ -97,10 +96,31 @@ public class Shop extends Popup {
 		loadMoneyButton();
 		loadContent();
 		loadReturnToLobbyButton();
+		loadGold();
+	}
+
+	private void loadGold() {
+		float width = 200;
+		goldBackground = new Image(res.getTexture("shop-background"));
+		goldBackground.setBounds(background.getRight() - width, background.getTop(), width, 50);
+
+		Image goldIcon = new Image(res.getTexture("icon-gold"));
+		goldIcon.setBounds(goldBackground.getX() + 5, goldBackground.getY() + 5, 40, 40);
+
+		goldLabel = new Label(Integer.toString(game.getCurrentCharacter().inventory.getGold()), FontManager.getFont40());
+		setGoldLabelText(Integer.toString(game.getCurrentCharacter().inventory.getGold()));
+
+		popup.addActor(goldBackground);
+		popup.addActor(goldIcon);
+		popup.addActor(goldLabel);
+	}
+
+	private void loadCurrentActors() {
+		popup.addActor(currentGroup);
 	}
 
 	private void loadBackground() {
-		Image background = new Image(res.getTexture("shop-background"));
+		background = new Image(res.getTexture("shop-background"));
 		background.layout();
 		background.setBounds(100, 100, Betrayal.WIDTH - 200, Betrayal.HEIGHT - 200);
 		popup.addActor(background);
@@ -209,7 +229,7 @@ public class Shop extends Popup {
 				@Override
 				public void doAction() {
 					Weapon sword = new Weapon(item1, res);
-					new ShopPurchasePopup(game, sword);
+					new ShopPurchasePopup(game, sword, Shop.this);
 				}
 			});
 			currentGroup.addActor(sword1[i - 1]);
@@ -221,7 +241,7 @@ public class Shop extends Popup {
 			sword2[i - 1].addListener(new InputListener(sword2[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Weapon(item2, res));
+					new ShopPurchasePopup(game, new Weapon(item2, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(sword2[i - 1]);
@@ -233,7 +253,7 @@ public class Shop extends Popup {
 			sword3[i - 1].addListener(new InputListener(sword3[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Weapon(item3, res));
+					new ShopPurchasePopup(game, new Weapon(item3, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(sword3[i - 1]);
@@ -245,7 +265,7 @@ public class Shop extends Popup {
 			sword4[i - 1].addListener(new InputListener(sword4[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Weapon(item4, res));
+					new ShopPurchasePopup(game, new Weapon(item4, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(sword4[i - 1]);
@@ -257,7 +277,7 @@ public class Shop extends Popup {
 			sword5[i - 1].addListener(new InputListener(sword5[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Weapon(item5, res));
+					new ShopPurchasePopup(game, new Weapon(item5, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(sword5[i - 1]);
@@ -292,7 +312,7 @@ public class Shop extends Popup {
 			shield1[i - 1].addListener(new InputListener(shield1[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Shield(item1, res));
+					new ShopPurchasePopup(game, new Shield(item1, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(shield1[i - 1]);
@@ -305,7 +325,7 @@ public class Shop extends Popup {
 			shield2[i - 1].addListener(new InputListener(shield2[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Shield(item2, res));
+					new ShopPurchasePopup(game, new Shield(item2, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(shield2[i - 1]);
@@ -317,7 +337,7 @@ public class Shop extends Popup {
 			shield3[i - 1].addListener(new InputListener(shield3[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Shield(item3, res));
+					new ShopPurchasePopup(game, new Shield(item3, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(shield3[i - 1]);
@@ -329,7 +349,7 @@ public class Shop extends Popup {
 			shield4[i - 1].addListener(new InputListener(shield2[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Shield(item4, res));
+					new ShopPurchasePopup(game, new Shield(item4, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(shield4[i - 1]);
@@ -341,7 +361,7 @@ public class Shop extends Popup {
 			shield5[i - 1].addListener(new InputListener(shield5[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Shield(item5, res));
+					new ShopPurchasePopup(game, new Shield(item5, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(shield5[i - 1]);
@@ -391,7 +411,7 @@ public class Shop extends Popup {
 			ring1[i - 1].addListener(new InputListener(ring1[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Ring(item1, res));
+					new ShopPurchasePopup(game, new Ring(item1, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(ring1[i - 1]);
@@ -403,7 +423,7 @@ public class Shop extends Popup {
 			ring2[i - 1].addListener(new InputListener(ring2[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Ring(item2, res));
+					new ShopPurchasePopup(game, new Ring(item2, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(ring2[i - 1]);
@@ -419,7 +439,7 @@ public class Shop extends Popup {
 				potions[i - 1].addListener(new InputListener(potions[i - 1], true) {
 					@Override
 					public void doAction() {
-						new ShopPurchasePopup(game, new Potion(item, res));
+						new ShopPurchasePopup(game, new Potion(item, res), Shop.this);
 					}
 				});
 				currentGroup.addActor(potions[i - 1]);
@@ -428,7 +448,7 @@ public class Shop extends Popup {
 				potions[i - 1].addListener(new InputListener(potions[i - 1], true) {
 					@Override
 					public void doAction() {
-						new ShopPurchasePopup(game, new Potion(item, res));
+						new ShopPurchasePopup(game, new Potion(item, res), Shop.this);
 					}
 				});
 				currentGroup.addActor(potions[i - 1]);
@@ -444,13 +464,13 @@ public class Shop extends Popup {
 			run[i - 1].addListener(new InputListener(run[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Run(item, res));
+					new ShopPurchasePopup(game, new Run(item, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(run[i - 1]);
 		}
 
-		runTitle = new Label("Run", FontManager.getFont40());
+		Label runTitle = new Label("Run", FontManager.getFont40());
 		runTitle.setX(110);
 		runTitle.setY(run[0].getTop() + 10);
 		currentGroup.addActor(runTitle);
@@ -488,7 +508,7 @@ public class Shop extends Popup {
 			headgear1[i - 1].addListener(new InputListener(headgear1[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Helmet(tier1, res));
+					new ShopPurchasePopup(game, new Helmet(tier1, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(headgear1[i - 1]);
@@ -501,7 +521,7 @@ public class Shop extends Popup {
 			headgear2[i - 1].addListener(new InputListener(headgear2[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Helmet(tier2, res));
+					new ShopPurchasePopup(game, new Helmet(tier2, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(headgear2[i - 1]);
@@ -513,7 +533,7 @@ public class Shop extends Popup {
 			headgear3[i - 1].addListener(new InputListener(headgear3[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Helmet(tier3, res));
+					new ShopPurchasePopup(game, new Helmet(tier3, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(headgear3[i - 1]);
@@ -525,7 +545,7 @@ public class Shop extends Popup {
 			headgear4[i - 1].addListener(new InputListener(headgear4[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Helmet(tier4, res));
+					new ShopPurchasePopup(game, new Helmet(tier4, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(headgear4[i - 1]);
@@ -537,7 +557,7 @@ public class Shop extends Popup {
 			headgear5[i - 1].addListener(new InputListener(headgear5[i - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new Helmet(tier5, res));
+					new ShopPurchasePopup(game, new Helmet(tier5, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(headgear5[i - 1]);
@@ -571,7 +591,7 @@ public class Shop extends Popup {
 			armor1[color - 1].addListener(new InputListener(armor1[color - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(tier1String, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier1String, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(armor1[color - 1]);
@@ -583,7 +603,7 @@ public class Shop extends Popup {
 			armor2[color - 1].addListener(new InputListener(armor2[color - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(tier2String, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier2String, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(armor2[color - 1]);
@@ -595,7 +615,7 @@ public class Shop extends Popup {
 			armor3[color - 1].addListener(new InputListener(armor3[color - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(tier3String, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier3String, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(armor3[color - 1]);
@@ -607,7 +627,7 @@ public class Shop extends Popup {
 			armor4[color - 1].addListener(new InputListener(armor4[color - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(tier4String, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier4String, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(armor4[color - 1]);
@@ -620,7 +640,7 @@ public class Shop extends Popup {
 			armor5[color - 1].addListener(new InputListener(armor5[color - 1], true) {
 				@Override
 				public void doAction() {
-					new ShopPurchasePopup(game, new BodyArmor(tier5String, res));
+					new ShopPurchasePopup(game, new BodyArmor(tier5String, res), Shop.this);
 				}
 			});
 			currentGroup.addActor(armor5[color - 1]);
@@ -663,7 +683,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadItems() {
-		comingSoon = new Label("Coming Soon", FontManager.getFont60());
+		Label comingSoon = new Label("Coming Soon", FontManager.getFont60());
 		comingSoon.setX(Betrayal.WIDTH / 2 - comingSoon.getPrefWidth() / 2);
 		comingSoon.setY(Betrayal.HEIGHT / 2);
 		currentGroup.addActor(comingSoon);
@@ -770,7 +790,7 @@ public class Shop extends Popup {
 	}
 
 	private void loadCloakButtons() {
-		cloakBuyButton = new Image(res.getTexture("buy"));
+		Image cloakBuyButton = new Image(res.getTexture("buy"));
 		cloakBuyButton.layout();
 		cloakBuyButton.setBounds(Betrayal.WIDTH / 2 - 75, 250, 150, 75);
 		cloakBuyButton.addListener(new InputListener(cloakBuyButton) {
@@ -782,6 +802,7 @@ public class Shop extends Popup {
 						switch (character.inventory.buyItem(new Cloak("cloak11", res))) {
 							case 0:
 								new OKPopup(game, "Item Bought");
+								goldLabel.setText(Integer.toString(game.getCurrentCharacter().inventory.getGold()));
 								break;
 							case 1:
 								new OKPopup(game, "Not Enough Gold");
@@ -798,7 +819,7 @@ public class Shop extends Popup {
 		});
 
 		currentGroup.addActor(cloakBuyButton);
-		cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont60());
+		Label cloakPrice = new Label("Price: " + Integer.toString(new Cloak("cloak11", res).getBuyCost()), FontManager.getFont60());
 		cloakPrice.setX((leftArrow.getX() + 40));
 		cloakPrice.setY(cloakBuyButton.getY() + 110);
 		currentGroup.addActor(cloakPrice);
@@ -830,5 +851,11 @@ public class Shop extends Popup {
 				Gdx.app.log("content", "should not happen");
 				break;
 		}
+	}
+
+	public void setGoldLabelText(String goldLabelText) {
+		goldLabel.setText(goldLabelText);
+		goldLabel.setPosition(goldBackground.getRight() - goldLabel.getPrefWidth() - 10,
+				(goldBackground.getTop() + background.getTop() - goldLabel.getPrefHeight()) / 2);
 	}
 }
