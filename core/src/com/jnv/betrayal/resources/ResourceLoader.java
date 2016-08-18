@@ -786,32 +786,32 @@ public class ResourceLoader {
 				.id(color + 90) // id - 91 to 96
 				.name("headgear" + color + "1")
 				.costBuy(200)
-				.defense(3)
-				.description("+3 Defense")
+				.defense(1)
+				.description("+1 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
 				.id(color + 96) // id - 97 to 102
 				.name("headgear" + color + "2")
 				.costBuy(500)
-				.defense(6)
-				.description("+6 Defense")
+				.defense(3)
+				.description("+3 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
 				.id(color + 102) // id - 103 to 108
 				.name("headgear" + color + "3")
 				.costBuy(1200)
-				.defense(9)
-				.description("+9 Defense")
+				.defense(6)
+				.description("+6 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
 				.id(color + 108) // id - 109 to 114
 				.name("headgear" + color + "4")
 				.costBuy(2000)
-				.defense(12)
-				.description("+12 Defense")
+				.defense(10)
+				.description("+10 Defense")
 				.build();
 
 		new Helmet.HelmetFactory(res)
@@ -828,40 +828,40 @@ public class ResourceLoader {
 				.id(color + 60) // id - 61 to 66
 				.name("armor" + color + "1")
 				.costBuy(200)
-				.defense(4)
-				.description("+5 Defense")
+				.defense(2)
+				.description("+2 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 66) // id - 67 to 72
 				.name("armor" + color + "2")
 				.costBuy(600)
-				.defense(8)
-				.description("+10 Defense")
+				.defense(6)
+				.description("+6 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 72) // id - 73 to 78
 				.name("armor" + color + "3")
 				.costBuy(1500)
-				.defense(12)
-				.description("+15 Defense")
+				.defense(10)
+				.description("+10 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 78) // id - 79 to 84
 				.name("armor" + color + "4")
 				.costBuy(2400)
-				.defense(16)
-				.description("+20 Defense")
+				.defense(14)
+				.description("+14 Defense")
 				.build();
 
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 84) // id - 85 to 90
 				.name("armor" + color + "5s")
 				.costBuy(4000)
-				.defense(20)
-				.description("+25 Defense")
+				.defense(18)
+				.description("+18 Defense")
 				.build();
 	}
 
@@ -870,16 +870,16 @@ public class ResourceLoader {
 				.id(color + 30) // id - 31 to 36
 				.name("shield" + color + "1")
 				.costBuy(200)
-				.defense(5)
-				.description("+8 Defense")
+				.defense(3)
+				.description("+3 Defense")
 				.build();
 
 		new Shield.ShieldFactory(res)
 				.id(color + 36) // id - 37 to 42
 				.name("shield" + color + "2")
 				.costBuy(1000)
-				.defense(10)
-				.description("+16 Defense")
+				.defense(7)
+				.description("+7 Defense")
 				.build();
 
 
@@ -887,15 +887,15 @@ public class ResourceLoader {
 				.id(color + 42) // id - 43 to 48
 				.name("shield" + color + "3")
 				.costBuy(2200)
-				.defense(15)
-				.description("+24 Defense")
+				.defense(12)
+				.description("+12 Defense")
 				.build();
 		new Shield.ShieldFactory(res)
 				.id(color + 48) // id - 49 to 54
 				.name("shield" + color + "4")
 				.costBuy(3500)
-				.defense(20)
-				.description("+32 Defense")
+				.defense(18)
+				.description("+18 Defense")
 				.build();
 
 		new Shield.ShieldFactory(res)
@@ -903,7 +903,7 @@ public class ResourceLoader {
 				.name("shield" + color + "5")
 				.costBuy(5000)
 				.defense(25)
-				.description("+40 Defense")
+				.description("+25 Defense")
 				.build();
 	}
 
@@ -912,32 +912,32 @@ public class ResourceLoader {
 				.id(color) // id - 1 to 6
 				.name("sword" + color + "1")
 				.costBuy(200)
-				.attack(5)
-				.description("+5 Attack")
+				.attack(3)
+				.description("+3 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 6) // id - 7 to 12
 				.name("sword" + color + "2")
 				.costBuy(1000)
-				.attack(10)
-				.description("+10 Attack")
+				.attack(7)
+				.description("+7 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 12) // id - 3 to 18
 				.name("sword" + color + "3")
 				.costBuy(2200)
-				.attack(15)
-				.description("+15 Attack")
+				.attack(12)
+				.description("+12 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 18) // id - 19 to 24
 				.name("sword" + color + "4")
 				.costBuy(3500)
-				.attack(20)
-				.description("+20 Attack")
+				.attack(18)
+				.description("+18 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
@@ -1049,7 +1049,7 @@ public class ResourceLoader {
 				.nickname("T Squared")
 				.textureName("monster-tier1-7").skillTextureName("monsterpowerup")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.health(58).attack(38).defense(12)
+				.health(58).attack(46).defense(12)
 				.effect(new AttackAndDefenseUp(30, 10, 3)).effectCooldown(4)
 				.goldReward(400)
 				.numTargets(1)

@@ -13,13 +13,14 @@ import java.util.List;
 public class TrueDamage extends Effect {
 
 	private int damage;
+	private String description = "True Damage\n" + "deal %d" + "\n"
+			+ "\n ignoring defense";
 
 	public TrueDamage(int damage) {
 		super(EventType.BUFF_ATTACK, 1, EventType.E_BUFF_ATTACK);
 		this.damage = damage;
 		isHostile = true;
-		description = "True Damage\n" + "deal  "+ damage + "\n"
-				+ "\n ignoring defense";
+		description = String.format(description, damage);
 	}
 
 	// JSON Constructor
@@ -31,8 +32,7 @@ public class TrueDamage extends Effect {
 			e.printStackTrace();
 		}
 		isHostile = true;
-		description = "Attack Buff\n" + "increase attack by  "+ damage + "\n"
-				+ "\nfor" + turns + " turns.";
+		description = String.format(description, damage);
 		init(src, dest);
 	}
 

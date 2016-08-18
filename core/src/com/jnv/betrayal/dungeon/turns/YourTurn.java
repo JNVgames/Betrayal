@@ -167,7 +167,7 @@ public class YourTurn extends Turn {
 				drawSelectBar(EventType.ATTACK);
 			}
 		}));
-		panels.addActor(createPanel("Special Attack", FontManager.getFont50(), Panel.topRight, new Runnable() {
+		panels.addActor(createPanel("Special Move", FontManager.getFont50(), Panel.topRight, new Runnable() {
 			@Override
 			public void run() {
 				switch (field.getClientCharacter().job.getJob()) {
