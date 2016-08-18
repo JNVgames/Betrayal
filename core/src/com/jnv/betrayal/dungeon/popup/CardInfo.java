@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.cards.Card;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
@@ -19,6 +20,9 @@ public class CardInfo extends OKPopup {
 	public CardInfo(Betrayal game, Card card) {
 		super(game, "");
 		name = "Name: " + card.getName();
+		if (card instanceof PlayerCard) {
+			stats += "\nJob: " + ((PlayerCard) card).getJob();
+		}
 		this.stats = "\nHealth: " + Integer.toString(card.getCurrentHealth()) + "/" + Integer.toString(card.getBaseHealth())
 				+ "\nAttack: " + Integer.toString(card.getCurrentAttack()) + "/" + Integer.toString(card.getBaseAttack())
 				+ "\nDefense: " + Integer.toString(card.getCurrentDefense()) + "/" + Integer.toString(card.getBaseDefense());
