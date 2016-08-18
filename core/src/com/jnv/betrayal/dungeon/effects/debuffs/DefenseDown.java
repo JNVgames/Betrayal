@@ -11,10 +11,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class DefenseDown extends Effect {
+
+	private static final EventType startType = EventType.DEBUFF_DEFENSE;
+	private static final EventType endType = EventType.E_DEBUFF_DEFENSE;
 	private int defense;
 
 	public DefenseDown(int defense, int turns) {
-		super(EventType.DEBUFF_DEFENSE, turns, EventType.E_DEBUFF_DEFENSE);
+		super(startType, turns, endType);
 		this.defense = defense;
 		isHostile = true;
 		description = "Defense Debuff\nLowers your defense by "
@@ -22,10 +25,10 @@ public class DefenseDown extends Effect {
 	}
 
 	// JSON Constructor
-	public DefenseDown(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DEBUFF_DEFENSE, turns, EventType.E_DEBUFF_DEFENSE);
+	public DefenseDown(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startType, turns, endType);
 		try {
-			this.defense = data.getInt("defense");
+			this.defense = values.getInt("defense");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -50,13 +53,7 @@ public class DefenseDown extends Effect {
 
 	}
 	@Override
-	protected void addToObject() {
-		try {
-			data.put("defense", defense);
-			data.put("description", description);
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("defense", defense);
 	}
 }

@@ -11,15 +11,17 @@ import java.util.List;
 
 public class ThiefSpecial extends Effect {
 
+	private static final EventType sType = EventType.THIEF_SPECIAL;
+
 	public ThiefSpecial(Card src, List<Card> dest) {
-		super(EventType.THIEF_SPECIAL);
+		super(sType);
 		isHostile = true;
 		init(src, dest);
 	}
 
 	// JSON Constructor
-	public ThiefSpecial(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.THIEF_SPECIAL, turns);
+	public ThiefSpecial(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		isHostile = true;
 		init(src, dest);
 	}
@@ -37,14 +39,5 @@ public class ThiefSpecial extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

@@ -1,11 +1,11 @@
 package com.jnv.betrayal.dungeon.turns;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 

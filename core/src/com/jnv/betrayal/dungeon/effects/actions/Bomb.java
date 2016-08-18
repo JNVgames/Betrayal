@@ -21,10 +21,10 @@ public class Bomb extends Effect {
 	}
 
 	// JSON constructor
-	public Bomb(JSONObject data, int turns, Card src, List<Card> dest) {
+	public Bomb(JSONObject values, int turns, Card src, List<Card> dest) {
 		super(EventType.BOMB, turns, EventType.E_BOMB);
 		try {
-			this.attack = data.getInt("attack");
+			this.attack = values.getInt("attack");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -48,13 +48,7 @@ public class Bomb extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		try {
-			data.put("attack", attack);
-			data.put("description", description);
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("attack", attack);
 	}
 }

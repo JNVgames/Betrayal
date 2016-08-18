@@ -7,6 +7,7 @@ public enum EventType {
 	FLEE("fled", false),
 	FAIL_TO_FLEE("failed to flee", false),
 	DIED("died", false),
+	TRUE_DAMAGE("dealt true damage to"),
 
 	// Class special attacks
 	WARRIOR_SPECIAL("critically smacked"),

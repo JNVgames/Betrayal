@@ -25,10 +25,9 @@ public class CardAnimation {
 
 	public void damaged(Card card) {
 		// Display shield image
-		Dimension cardDim = card.getGroup().getDimensions();
 		final Image damaged = new Image(res.getTexture("damage"));
-		damaged.setBounds(cardDim.getX() + cardDim.getWidth() / 2 - 50,
-				cardDim.getY() + cardDim.getHeight() / 2 - 50, 100, 100);
+		damaged.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		damaged.addAction(Actions.alpha(0));
 		damaged.addAction(Actions.delay(0.1f, Actions.alpha(1f)));
 		damaged.addAction(Actions.delay(0.2f, Actions.alpha(0)));
@@ -66,10 +65,9 @@ public class CardAnimation {
 
 	public void defend(Card card) {
 		// Display shield image
-		Dimension cardDim = card.getGroup().getDimensions();
 		final Image shield = new Image(res.getTexture("defense"));
-		shield.setBounds(cardDim.getX() + cardDim.getWidth() / 2 - 50,
-				cardDim.getY() + cardDim.getHeight() / 2 - 50, 100, 100);
+		shield.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
@@ -106,10 +104,9 @@ public class CardAnimation {
 
 	public void heal(Card card) {
 		// Display shield image
-		Dimension cardDim = card.getGroup().getDimensions();
 		final Image healImg = new Image(res.getTexture("heal"));
-		healImg.setBounds(cardDim.getX() + cardDim.getWidth() / 2 - 50,
-				cardDim.getY() + cardDim.getHeight() / 2 - 50, 100, 100);
+		healImg.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		healImg.addAction(Actions.alpha(0));
 		healImg.addAction(Actions.alpha(0.7f, 1f));
 		healImg.addAction(Actions.delay(1, Actions.alpha(0, 1)));
@@ -138,10 +135,9 @@ public class CardAnimation {
 
 	public void buffDefense(Card card) {
 		// Display shield image
-		Dimension cardDim = card.getGroup().getDimensions();
 		final Image shield = new Image(res.getTexture("defense-boost"));
-		shield.setBounds(cardDim.getX() + cardDim.getWidth() / 2 - 50,
-				cardDim.getY() + cardDim.getHeight() / 2 - 50, 100, 100);
+		shield.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
@@ -156,10 +152,9 @@ public class CardAnimation {
 
 	public void buffAttack(Card card) {
 		// Display shield image
-		Dimension cardDim = card.getGroup().getDimensions();
 		final Image shield = new Image(res.getTexture("attack-boost"));
-		shield.setBounds(cardDim.getX() + cardDim.getWidth() / 2 - 50,
-				cardDim.getY() + cardDim.getHeight() / 2 - 50, 100, 100);
+		shield.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		shield.addAction(Actions.alpha(0));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
 		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));

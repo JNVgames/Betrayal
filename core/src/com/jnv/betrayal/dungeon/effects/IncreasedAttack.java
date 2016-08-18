@@ -10,19 +10,20 @@ import java.util.List;
 
 public class IncreasedAttack extends Effect {
 
+	private static final EventType sType = EventType.ATTACK;
 	private int attack;
 
-	public IncreasedAttack(int attack, int turns) {
-		super(EventType.ATTACK, turns);
+	public IncreasedAttack(int attack) {
+		super(sType);
 		this.attack = attack;
 		isHostile = true;
 	}
 
 	// JSON Constructor
-	public IncreasedAttack(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.ATTACK, turns);
+	public IncreasedAttack(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		try {
-			this.attack = data.getInt("attack");
+			this.attack = values.getInt("attack");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -46,12 +47,7 @@ public class IncreasedAttack extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-			data.getJSONObject("values").put("attack", attack);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("attack", attack);
 	}
 }

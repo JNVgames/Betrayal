@@ -15,8 +15,10 @@ import java.util.List;
 
 public class Flee extends Effect {
 
+	private static final EventType startEventType = EventType.FLEE;
+
 	public Flee(Card src) {
-		super(EventType.FLEE);
+		super(startEventType);
 		isHostile = false;
 		this.src = src;
 		dest = new ArrayList<Card>();
@@ -24,8 +26,8 @@ public class Flee extends Effect {
 	}
 
 	// JSON Constructor
-	public Flee(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.FLEE, turns);
+	public Flee(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startEventType, turns);
 		isHostile = false;
 		init(src, dest);
 	}
@@ -53,14 +55,5 @@ public class Flee extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

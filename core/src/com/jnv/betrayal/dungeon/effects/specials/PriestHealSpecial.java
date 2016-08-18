@@ -11,15 +11,17 @@ import java.util.List;
 
 public class PriestHealSpecial extends Effect {
 
+	private static final EventType sType = EventType.PRIEST_HEAL_SPECIAL;
+
 	public PriestHealSpecial(Card src, List<Card> dest) {
-		super(EventType.PRIEST_HEAL_SPECIAL);
+		super(sType);
 		isHostile = true;
 		init(src, dest);
 	}
 
 	// JSON Constructor
-	public PriestHealSpecial(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.PRIEST_HEAL_SPECIAL, turns);
+	public PriestHealSpecial(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		isHostile = true;
 		init(src, dest);
 	}
@@ -37,14 +39,5 @@ public class PriestHealSpecial extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

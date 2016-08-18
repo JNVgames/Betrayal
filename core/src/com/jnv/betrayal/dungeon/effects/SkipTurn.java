@@ -3,20 +3,21 @@ package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 public class SkipTurn extends Effect {
 
+	private static final EventType sType = EventType.SKIP_TURN;
+
     public SkipTurn() {
-        super(EventType.SKIP_TURN);
+        super(sType);
     }
 
 	// JSON Constructor
 	public SkipTurn(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.SKIP_TURN, turns);
+		super(sType, turns);
 		isHostile = false;
 		this.turns = turns;
 		init(src, dest);
@@ -35,14 +36,5 @@ public class SkipTurn extends Effect {
     @Override
     public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

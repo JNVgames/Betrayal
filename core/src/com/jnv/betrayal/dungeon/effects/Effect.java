@@ -14,11 +14,9 @@ public abstract class Effect {
 	protected List<Card> dest;
 	protected boolean consistent;
 	protected int turns = 1;
-	protected final EventType startType, consistentType, endType;
 	protected boolean isHostile;
 	protected String description;
-	protected JSONObject data;
-	protected JSONArray destData;
+	private final EventType startType, consistentType, endType;
 
 	protected Effect(EventType startType) {
 		this(startType, false, EventType.NONE, 0, EventType.NONE);
@@ -124,8 +122,8 @@ public abstract class Effect {
 	public abstract void endEffect(Card destCard);
 
 	public JSONObject toJSON() {
-		data = new JSONObject();
-		destData = new JSONArray();
+		JSONObject data = new JSONObject();
+		JSONArray destData = new JSONArray();
 		if (dest != null)
 			for (Card card : dest) {
 				destData.put(card.getID());
@@ -142,10 +140,10 @@ public abstract class Effect {
 			data.put("description", description);
 			data.put("class", getClass().getCanonicalName());
 			data.put("values", new JSONObject());
+			addToObject(data.getJSONObject("values"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		addToObject();
 
 		return data;
 	}
@@ -161,7 +159,7 @@ public abstract class Effect {
 				"}";
 	}
 
-	protected void addToObject() {
+	protected void addToObject(JSONObject values) throws JSONException {
 		// Use this method to add extra values to json
 	}
 }

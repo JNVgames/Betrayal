@@ -110,6 +110,7 @@ public class RoundManager {
 		}
 		return false;
 	}
+
 	public void addEventClient(final Event event) {
 		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);

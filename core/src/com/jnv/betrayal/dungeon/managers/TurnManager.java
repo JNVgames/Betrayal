@@ -2,6 +2,7 @@ package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -15,7 +16,6 @@ import com.jnv.betrayal.dungeon.turns.TeamMemberTurn;
 import com.jnv.betrayal.dungeon.turns.Turn;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 

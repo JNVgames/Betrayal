@@ -1,9 +1,6 @@
 package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.cards.PlayerCard;
-import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
-import com.jnv.betrayal.dungeon.effects.actions.Flee;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
 
 import org.json.JSONException;
@@ -13,17 +10,18 @@ import java.util.List;
 
 public class Run extends Effect {
 
+	private static final EventType sType = EventType.RUN;
 	private int fleeChance;
 
 	public Run(int fleeChance) {
-		super(EventType.RUN);
+		super(sType);
 		this.fleeChance = fleeChance;
 		isHostile = false;
 	}
 
 	// JSON Constructor
-	public Run(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.RUN, turns);
+	public Run(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		isHostile = false;
 		init(src, dest);
 	}
@@ -43,14 +41,5 @@ public class Run extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

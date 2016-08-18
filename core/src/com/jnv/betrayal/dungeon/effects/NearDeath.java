@@ -10,19 +10,20 @@ import java.util.List;
 
 public class NearDeath extends Effect {
 
+	private static final EventType sType = EventType.ATTACK;
 	private int attack;
 
 	public NearDeath(int attack, int turns) {
-		super(EventType.ATTACK, turns);
+		super(sType, turns);
 		this.attack = attack;
 		isHostile = true;
 	}
 
 	// JSON Construction
-	public NearDeath(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.ATTACK, turns);
+	public NearDeath(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		try {
-			this.attack = data.getInt("attack");
+			this.attack = values.getInt("attack");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -46,11 +47,7 @@ public class NearDeath extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("attack", attack);
 	}
 }

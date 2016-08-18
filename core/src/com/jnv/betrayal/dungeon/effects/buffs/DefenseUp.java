@@ -11,10 +11,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class DefenseUp extends Effect {
+
+	private static final EventType startEventType = EventType.BUFF_DEFENSE;
+	private static final EventType endEventType = EventType.E_BUFF_DEFENSE;
 	private int defense;
 
 	public DefenseUp(int defense, int turns) {
-		super(EventType.BUFF_DEFENSE, turns, EventType.E_BUFF_DEFENSE);
+		super(startEventType, turns, endEventType);
 		this.defense = defense;
 		isHostile = false;
 		description = "Defense Buff\n"  +
@@ -22,10 +25,10 @@ public class DefenseUp extends Effect {
 	}
 
 	// JSON Constructor
-	public DefenseUp(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.BUFF_DEFENSE, turns, EventType.E_BUFF_DEFENSE);
+	public DefenseUp(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startEventType, turns, endEventType);
 		try {
-			this.defense = data.getInt("defense");
+			this.defense = values.getInt("defense");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -51,13 +54,7 @@ public class DefenseUp extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		try {
-			data.put("defense", defense);
-			data.put("description", description);
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("defense", defense);
 	}
 }

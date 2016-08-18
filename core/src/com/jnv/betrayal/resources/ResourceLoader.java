@@ -4,6 +4,7 @@
 
 package com.jnv.betrayal.resources;
 
+import com.jnv.betrayal.dungeon.effects.IncreasedAttack;
 import com.jnv.betrayal.dungeon.effects.SkipTurn;
 import com.jnv.betrayal.dungeon.effects.actions.Bomb;
 import com.jnv.betrayal.dungeon.effects.actions.Heal;
@@ -952,6 +953,18 @@ public class ResourceLoader {
 
 	private void loadMonsterData() {
 		// Tier 0
+//		new Monster.MonsterFactory()
+//				.assetManager(res)
+//				.id(0)
+//				.nickname("Skeleton Kelly")
+//				.textureName("monster-tier0-0")
+//				.skillTextureName("monsterpowerdown")
+//				.textureWidth(250).textureHeight(250).x(235).y(740)
+//				.health(20).attack(19).defense(2)
+//				.numTargets(1).effectCooldown(2)
+//				.goldReward(600)
+//				.effect(new AttackDown(2,2)).skillTextureName("monsterattackdown")
+//				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(0)
@@ -959,10 +972,10 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(20).attack(19).defense(2)
-				.numTargets(1).effectCooldown(2)
+				.health(20).attack(100).defense(2)
+				.numTargets(1)
 				.goldReward(600)
-				.effect(new AttackDown(2,2)).skillTextureName("monsterattackdown")
+				//.effect(new IncreasedAttack(100)).skillTextureName("monsterdeath").effectCooldown(1)
 				.build();
 
 		// Tier 1

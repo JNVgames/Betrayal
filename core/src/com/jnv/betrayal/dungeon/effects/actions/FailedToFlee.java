@@ -13,8 +13,10 @@ import java.util.List;
 
 public class FailedToFlee extends Effect {
 
+	private static final EventType startEventType = EventType.FAIL_TO_FLEE;
+
 	public FailedToFlee(Card src) {
-		super(EventType.FAIL_TO_FLEE);
+		super(startEventType);
 		isHostile = false;
 		this.src = src;
 		dest = new ArrayList<Card>();
@@ -22,8 +24,8 @@ public class FailedToFlee extends Effect {
 	}
 
 	// JSON Constructor
-	public FailedToFlee(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.FAIL_TO_FLEE, turns);
+	public FailedToFlee(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startEventType, turns);
 		isHostile = false;
 		List<Card> destCards = new ArrayList<Card>();
 		destCards.add(src);
@@ -43,14 +45,5 @@ public class FailedToFlee extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

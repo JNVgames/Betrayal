@@ -11,10 +11,13 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class AttackDown extends Effect {
+
+	private static final EventType startType = EventType.DEBUFF_ATTACK;
+	private static final EventType endType = EventType.E_DEBUFF_ATTACK;
 	private int attack;
 
 	public AttackDown(int attack, int turns) {
-		super(EventType.DEBUFF_ATTACK, turns, EventType.E_DEBUFF_ATTACK);
+		super(startType, turns, endType);
 		this.attack = attack;
 		isHostile = true;
 		description = "Attack Debuff\nLowers your attack by " + attack + "\n"
@@ -22,10 +25,10 @@ public class AttackDown extends Effect {
 	}
 
 	// JSON Constructor
-	public AttackDown(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DEBUFF_ATTACK, turns, EventType.E_DEBUFF_ATTACK);
+	public AttackDown(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startType, turns, endType);
 		try {
-			this.attack = data.getInt("attack");
+			this.attack = values.getInt("attack");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -51,15 +54,7 @@ public class AttackDown extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		JSONObject values = new JSONObject();
-		try {
-			values.put("attack", attack);
-			data.put("description", description);
-			data.put("class", getClass().getCanonicalName());
-			data.put("values", values);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("attack", attack);
 	}
 }

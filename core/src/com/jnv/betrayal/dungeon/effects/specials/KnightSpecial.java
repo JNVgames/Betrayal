@@ -12,11 +12,12 @@ import java.util.List;
 
 public class KnightSpecial extends Effect {
 
+	private static final EventType sType = EventType.KNIGHT_SPECIAL;
 	private float increasedDefense;
 	private boolean isBuffed = false, isDebuffed = false;
 
 	public KnightSpecial(Card src, List<Card> dest) {
-		super(EventType.KNIGHT_SPECIAL);
+		super(sType);
 		turns = 1;
 		isHostile = false;
 		init(src, dest);
@@ -24,7 +25,7 @@ public class KnightSpecial extends Effect {
 
 	// JSON Constructor
 	public KnightSpecial(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.KNIGHT_SPECIAL, turns);
+		super(sType, turns);
 		isHostile = false;
 		init(src, dest);
 	}

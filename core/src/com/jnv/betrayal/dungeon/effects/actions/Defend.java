@@ -13,16 +13,18 @@ import java.util.List;
 
 public class Defend extends Effect {
 
+	private static final EventType startEventType = EventType.DEFEND;
+
 	public Defend(Card src, List<Card> dst) {
-		super(EventType.DEFEND);
+		super(startEventType);
 		turns = 1;
 		isHostile = false;
 		init(src, dst);
 	}
 
 	// JSON Construction
-	public Defend(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DEFEND, turns);
+	public Defend(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(startEventType, turns);
 		isHostile = false;
 		init(src, dest);
 	}
@@ -42,14 +44,5 @@ public class Defend extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

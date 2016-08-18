@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,12 +28,8 @@ import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.LobbyOptions;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Label;
-
-import java.awt.image.ImagingOpException;
-import java.util.Arrays;
 
 public class Lobby extends GameState {
 

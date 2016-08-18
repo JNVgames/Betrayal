@@ -24,7 +24,7 @@ public class Attack extends Effect {
 	}
 
 	// JSON Constructor
-	public Attack(JSONObject data, int turns, Card src, List<Card> dest) {
+	public Attack(JSONObject values, int turns, Card src, List<Card> dest) {
 		super(EventType.ATTACK, turns);
 		isHostile = false;
 		attack = src.getCurrentAttack();
@@ -49,14 +49,7 @@ public class Attack extends Effect {
 	}
 
 	@Override
-	protected void addToObject() {
-		JSONObject values = new JSONObject();
-		try {
-			values.put("attack", attack);
-			data.put("class", getClass().getCanonicalName());
-			data.put("values", values);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	protected void addToObject(JSONObject values) throws JSONException {
+		values.put("attack", attack);
 	}
 }

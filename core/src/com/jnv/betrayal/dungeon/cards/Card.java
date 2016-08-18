@@ -7,6 +7,7 @@ package com.jnv.betrayal.dungeon.cards;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -21,7 +22,6 @@ import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 import com.jnv.betrayal.scene2d.ui.Label;
@@ -55,22 +55,14 @@ public abstract class Card {
 				}
 			}
 		};
-		group.setBounds(dimension);
+		group.setBounds(dimension.getX(), dimension.getY(), dimension.getWidth(), dimension.getHeight());
 		this.res = res;
 		initialize();
-	}
-
-	public Label getCardName() {
-		return cardName;
 	}
 
 	protected Card(float x, float y, float width, float height,
 				   BetrayalAssetManager res) {
 		this(new Dimension(x, y, width, height), res);
-	}
-
-	public Actor getCardImage() {
-		return cardImage;
 	}
 
 	private void initialize() {
@@ -85,6 +77,14 @@ public abstract class Card {
 		statusIcon.setBounds(DungeonCoords.PLAYER_WIDTH,
 				(DungeonCoords.PLAYER_HEIGHT - healthBar.getBackgroundHeight()) / 2 - 50, 100, 100);
 		group.addActor(statusIcon);
+	}
+
+	public Label getCardName() {
+		return cardName;
+	}
+
+	public Actor getCardImage() {
+		return cardImage;
 	}
 
 	public Image getStatusIcon() {

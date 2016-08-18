@@ -14,9 +14,12 @@ public class Poisoned extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"
 			+ "Take damage equivalent\nto 10% of target's\ncurrent health for ";
+	private static final EventType sEventType = EventType.NONE;
+	private static final EventType cEventType = EventType.C_POISON;
+	private static final EventType eEventType = EventType.E_POISON;
 
 	public Poisoned(int turns, Card src) {
-		super(EventType.NONE, turns, true, EventType.C_POISON, EventType.E_POISON);
+		super(sEventType, turns, true, cEventType, eEventType);
 		isHostile = true;
 		description = DESCRIPTION + turns + " turns.";
 		List<Card> dest = new ArrayList<Card>();
@@ -25,8 +28,8 @@ public class Poisoned extends Effect {
 	}
 
 	// JSON Constructor
-	public Poisoned(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.NONE, turns, true, EventType.C_POISON, EventType.E_POISON);
+	public Poisoned(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sEventType, turns, true, cEventType, eEventType);
 		isHostile = true;
 		description = DESCRIPTION + turns + " turns.";
 		init(src, dest);
@@ -43,14 +46,5 @@ public class Poisoned extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 		destCard.poison();
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

@@ -49,6 +49,7 @@ public class AnimationManager {
 			case ATTACK:
 			case WARRIOR_SPECIAL:
 			case THIEF_SPECIAL:
+			case TRUE_DAMAGE:
 				runnable = new Runnable() {
 					@Override
 					public void run() {

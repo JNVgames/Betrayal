@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -17,10 +18,8 @@ import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.character.utils.Stat;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 
 public class HallOfFame extends GameState {

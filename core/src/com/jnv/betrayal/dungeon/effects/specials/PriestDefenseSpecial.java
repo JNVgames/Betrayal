@@ -11,15 +11,17 @@ import java.util.List;
 
 public class PriestDefenseSpecial extends Effect {
 
+	private static final EventType sType = EventType.PRIEST_DEFENSE_SPECIAL;
+
 	public PriestDefenseSpecial(Card src, List<Card> dest) {
-		super(EventType.PRIEST_DEFENSE_SPECIAL, 2);
+		super(sType, 2);
 		isHostile = true;
 		init(src, dest);
 	}
 
 	// JSON Constructor
-	public PriestDefenseSpecial(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.PRIEST_DEFENSE_SPECIAL, turns);
+	public PriestDefenseSpecial(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		isHostile = true;
 		init(src, dest);
 	}
@@ -37,14 +39,5 @@ public class PriestDefenseSpecial extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }

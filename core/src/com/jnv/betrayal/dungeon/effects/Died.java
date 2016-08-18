@@ -3,7 +3,6 @@ package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -11,16 +10,18 @@ import java.util.List;
 
 public class Died extends Effect {
 
+	private static final EventType sType = EventType.DIED;
+
 	public Died(Card src) {
-		super(EventType.DIED);
+		super(sType);
 		isHostile = false;
 		this.src = src;
 		dest = new ArrayList<Card>();
 		dest.add(src);
 	}
 
-	public Died(JSONObject data, int turns, Card src, List<Card> dest) {
-		super(EventType.DIED, turns);
+	public Died(JSONObject values, int turns, Card src, List<Card> dest) {
+		super(sType, turns);
 		isHostile = false;
 		List<Card> destCards = new ArrayList<Card>();
 		destCards.add(src);
@@ -39,14 +40,5 @@ public class Died extends Effect {
 	@Override
 	public void consistentEffect(Card destCard) {
 
-	}
-
-	@Override
-	protected void addToObject() {
-		try {
-			data.put("class", getClass().getCanonicalName());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 }
