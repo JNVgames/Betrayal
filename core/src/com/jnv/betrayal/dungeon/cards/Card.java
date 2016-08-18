@@ -19,16 +19,12 @@ import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import com.jnv.betrayal.gamestates.GameStateManager;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 import com.jnv.betrayal.scene2d.ui.Label;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
-import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.LabelUtils;
@@ -15,7 +14,6 @@ import com.jnv.betrayal.scene2d.ui.LabelUtils;
 public class CardInfo extends OKPopup {
 
 	private Image okayButton, background;
-	private Label title;
 	private String stats, name;
 
 	public CardInfo(Betrayal game, Card card) {
@@ -43,7 +41,7 @@ public class CardInfo extends OKPopup {
 	private void loadTitle() {
 		Label.LabelStyle font = FontManager.getFont40();
 		font.fontColor = Color.WHITE;
-		title = new Label("", font);
+		Label title = new Label("", font);
 		LabelUtils.splitLabelString(name, new Label("", FontManager.getFont40()), title, background.getWidth());
 		title.setText(title.getText() + "\n-------" + stats);
 		title.setBounds((Betrayal.WIDTH - background.getWidth()) / 2,

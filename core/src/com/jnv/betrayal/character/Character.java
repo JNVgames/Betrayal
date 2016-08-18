@@ -168,6 +168,8 @@ public class Character implements JsonSerializable {
 	@Override
 	public void fromJson(JSONObject data) {
 		try {
+			System.out.println("-----------------------------------");
+			System.out.println("Received Character JSON (name: " + data.getString("name") + ")");
 			id = data.getInt("id");
 			name = data.getString("name");
 			isReady = data.getBoolean("isReady");

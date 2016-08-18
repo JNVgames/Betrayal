@@ -5,8 +5,8 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.Field;
+import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.OKPopup;
@@ -28,7 +28,7 @@ public class MonsterManager {
 		addDungeonMonster(tier, monsterID);
 	}
 
-	public MonsterManager(int tier, BetrayalAssetManager res, Field field, int monsterID){
+	public MonsterManager(int tier, BetrayalAssetManager res, Field field, int monsterID) {
 		this.field = field;
 		this.res = res;
 		addDungeonMonster(tier, monsterID);
@@ -107,14 +107,15 @@ public class MonsterManager {
 		}
 		return x;
 	}
-	public int generateMonsterTier(int highestTier){
-		if (highestTier ==0 || highestTier ==5) {
+
+	public int generateMonsterTier(int highestTier) {
+		if (highestTier == 0 || highestTier == 5) {
 			return highestTier;
-		}else if(highestTier>5){
+		} else if (highestTier > 5) {
 			return 5;
-		}else{
+		} else {
 			Random randomNumberGenerator = new Random();
-			return randomNumberGenerator.nextInt(highestTier+1);
+			return randomNumberGenerator.nextInt(highestTier) + 1;
 		}
 	}
 }

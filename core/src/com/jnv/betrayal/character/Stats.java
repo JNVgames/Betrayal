@@ -172,7 +172,7 @@ public class Stats implements JsonSerializable {
 			data.put("totalDefense", totalDefense);
 			data.put("floor", floor);
 		} catch (JSONException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return data;
 	}

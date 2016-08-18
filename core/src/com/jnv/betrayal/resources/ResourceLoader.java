@@ -5,7 +5,6 @@
 package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.dungeon.effects.SkipTurn;
-import com.jnv.betrayal.dungeon.effects.actions.Attack;
 import com.jnv.betrayal.dungeon.effects.actions.Bomb;
 import com.jnv.betrayal.dungeon.effects.actions.Heal;
 import com.jnv.betrayal.dungeon.effects.actions.TrueDamage;
@@ -13,7 +12,6 @@ import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackUp;
 import com.jnv.betrayal.dungeon.effects.buffs.DefenseUp;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackAndDefenseDown;
-import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.DefenseDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.Poison;
 import com.jnv.betrayal.gameobjects.Monster;
@@ -526,7 +524,7 @@ public class ResourceLoader {
 		new Cloak.CloakFactory(res)
 				.id(139)
 				.name("cloak11")
-				.costBuy(750)
+				.costBuy(2500)
 				.description("Revives the player with\n10 HP upon death for\none time only.")
 				.build();
 
@@ -545,7 +543,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(141)
 				.name("run2")
-				.costBuy(750)
+				.costBuy(1000)
 				.description("75% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(75))
 				.build();
@@ -553,7 +551,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(142)
 				.name("run3")
-				.costBuy(1000)
+				.costBuy(2000)
 				.description("100% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(100))
 				.build();
@@ -563,7 +561,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(127)
 				.name("potion1")
-				.costBuy(250)
+				.costBuy(100)
 				.description("Recover 25 health")
 				.effect(new Heal(15))
 				.build();
@@ -571,7 +569,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(128)
 				.name("potion2")
-				.costBuy(750)
+				.costBuy(500)
 				.description("Recover 50 health")
 				.effect(new Heal(30))
 				.build();
@@ -579,7 +577,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(129)
 				.name("potion3")
-				.costBuy(2000)
+				.costBuy(1250)
 				.description("Recover 100 health")
 				.effect(new Heal(60))
 				.build();
@@ -587,7 +585,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(130)
 				.name("potion4")
-				.costBuy(250)
+				.costBuy(200)
 				.description("Increase defense by 10\nLasts 3 turns")
 				.effect(new DefenseUp(10, 4))
 				.build();
@@ -611,7 +609,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(133)
 				.name("potion7")
-				.costBuy(250)
+				.costBuy(200)
 				.description("Increase attack by 10\nLasts 3 turns")
 				.effect(new AttackUp(10, 4))
 				.build();
@@ -661,7 +659,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)    //Red Health Ring
 				.id(115)
 				.name("ring11")
-				.costBuy(800)
+				.costBuy(2000)
 				.health(15)
 				.attack(0)
 				.defense(0)
@@ -671,7 +669,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(116)
 				.name("ring21")
-				.costBuy(1600)
+				.costBuy(4000)
 				.health(30)
 				.attack(0)
 				.defense(0)
@@ -681,7 +679,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(117)
 				.name("ring12")
-				.costBuy(800)
+				.costBuy(2000)
 				.health(0)
 				.attack(10)
 				.defense(0)
@@ -691,7 +689,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(118)
 				.name("ring22")
-				.costBuy(1600)
+				.costBuy(4000)
 				.health(0)
 				.attack(20)
 				.defense(0)
@@ -701,7 +699,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(119)
 				.name("ring13")
-				.costBuy(800)
+				.costBuy(2000)
 				.health(0)
 				.attack(0)
 				.defense(10)
@@ -711,7 +709,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(120)
 				.name("ring23")
-				.costBuy(1600)
+				.costBuy(2000)
 				.health(0)
 				.attack(0)
 				.defense(20)
@@ -721,7 +719,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(121)
 				.name("ring14")
-				.costBuy(800)
+				.costBuy(2250)
 				.health(5)
 				.attack(5)
 				.defense(0)
@@ -731,7 +729,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(122)
 				.name("ring24")
-				.costBuy(1600)
+				.costBuy(4500)
 				.health(10)
 				.attack(10)
 				.defense(0)
@@ -741,7 +739,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(123)
 				.name("ring15")
-				.costBuy(800)
+				.costBuy(2250)
 				.health(0)
 				.attack(0)
 				.defense(0)
@@ -751,7 +749,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(124)
 				.name("ring25")
-				.costBuy(1600)
+				.costBuy(4500)
 				.health(10)
 				.attack(0)
 				.defense(10)
@@ -761,7 +759,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(125)
 				.name("ring16")
-				.costBuy(1200)
+				.costBuy(2500)
 				.health(0)
 				.attack(0)
 				.defense(0)
@@ -771,7 +769,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(126)
 				.name("ring26")
-				.costBuy(2400)
+				.costBuy(5000)
 				.health(20)
 				.attack(20)
 				.defense(20)
@@ -783,7 +781,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 90) // id - 91 to 96
 				.name("headgear" + color + "1")
-				.costBuy(100)
+				.costBuy(200)
 				.defense(3)
 				.description("+3 Defense")
 				.build();
@@ -791,7 +789,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 96) // id - 97 to 102
 				.name("headgear" + color + "2")
-				.costBuy(300)
+				.costBuy(500)
 				.defense(6)
 				.description("+6 Defense")
 				.build();
@@ -799,7 +797,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 102) // id - 103 to 108
 				.name("headgear" + color + "3")
-				.costBuy(600)
+				.costBuy(1200)
 				.defense(9)
 				.description("+9 Defense")
 				.build();
@@ -807,7 +805,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 108) // id - 109 to 114
 				.name("headgear" + color + "4")
-				.costBuy(1000)
+				.costBuy(2000)
 				.defense(12)
 				.description("+12 Defense")
 				.build();
@@ -815,7 +813,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 114) // id - 115 to 120
 				.name("headgear" + color + "5")
-				.costBuy(1500)
+				.costBuy(3000)
 				.defense(15)
 				.description("+15 Defense")
 				.build();
@@ -833,7 +831,7 @@ public class ResourceLoader {
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 66) // id - 67 to 72
 				.name("armor" + color + "2")
-				.costBuy(400)
+				.costBuy(600)
 				.defense(10)
 				.description("+10 Defense")
 				.build();
@@ -841,7 +839,7 @@ public class ResourceLoader {
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 72) // id - 73 to 78
 				.name("armor" + color + "3")
-				.costBuy(800)
+				.costBuy(1500)
 				.defense(15)
 				.description("+15 Defense")
 				.build();
@@ -849,7 +847,7 @@ public class ResourceLoader {
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 78) // id - 79 to 84
 				.name("armor" + color + "4")
-				.costBuy(1600)
+				.costBuy(2400)
 				.defense(20)
 				.description("+20 Defense")
 				.build();
@@ -857,7 +855,7 @@ public class ResourceLoader {
 		new BodyArmor.ArmorFactory(res)
 				.id(color + 84) // id - 85 to 90
 				.name("armor" + color + "5s")
-				.costBuy(3200)
+				.costBuy(4000)
 				.defense(25)
 				.description("+25 Defense")
 				.build();
@@ -867,7 +865,7 @@ public class ResourceLoader {
 		new Shield.ShieldFactory(res)
 				.id(color + 30) // id - 31 to 36
 				.name("shield" + color + "1")
-				.costBuy(100)
+				.costBuy(200)
 				.defense(8)
 				.description("+8 Defense")
 				.build();
@@ -875,7 +873,7 @@ public class ResourceLoader {
 		new Shield.ShieldFactory(res)
 				.id(color + 36) // id - 37 to 42
 				.name("shield" + color + "2")
-				.costBuy(200)
+				.costBuy(1000)
 				.defense(16)
 				.description("+16 Defense")
 				.build();
@@ -884,14 +882,14 @@ public class ResourceLoader {
 		new Shield.ShieldFactory(res)
 				.id(color + 42) // id - 43 to 48
 				.name("shield" + color + "3")
-				.costBuy(400)
+				.costBuy(2200)
 				.defense(24)
 				.description("+24 Defense")
 				.build();
 		new Shield.ShieldFactory(res)
 				.id(color + 48) // id - 49 to 54
 				.name("shield" + color + "4")
-				.costBuy(700)
+				.costBuy(3500)
 				.defense(32)
 				.description("+32 Defense")
 				.build();
@@ -899,7 +897,7 @@ public class ResourceLoader {
 		new Shield.ShieldFactory(res)
 				.id(color + 54) // id - 55 to 60
 				.name("shield" + color + "5")
-				.costBuy(1000)
+				.costBuy(5000)
 				.defense(40)
 				.description("+40 Defense")
 				.build();
@@ -910,39 +908,39 @@ public class ResourceLoader {
 				.id(color) // id - 1 to 6
 				.name("sword" + color + "1")
 				.costBuy(200)
-				.attack(2)
+				.attack(5)
 				.description("+5 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 6) // id - 7 to 12
 				.name("sword" + color + "2")
-				.costBuy(400)
-				.attack(5)
+				.costBuy(1000)
+				.attack(10)
 				.description("+10 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 12) // id - 3 to 18
 				.name("sword" + color + "3")
-				.costBuy(800)
-				.attack(10)
+				.costBuy(2200)
+				.attack(15)
 				.description("+15 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 18) // id - 19 to 24
 				.name("sword" + color + "4")
-				.costBuy(1600)
-				.attack(15)
+				.costBuy(3500)
+				.attack(20)
 				.description("+20 Attack")
 				.build();
 
 		new Weapon.WeaponFactory(res)
 				.id(color + 24) // id - 25 to 30
 				.name("sword" + color + "5")
-				.costBuy(3200)
-				.attack(20)
+				.costBuy(5000)
+				.attack(25)
 				.description("+25 Attack")
 				.build();
 	}
