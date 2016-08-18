@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.resources;
 
-import com.jnv.betrayal.dungeon.effects.IncreasedAttack;
 import com.jnv.betrayal.dungeon.effects.SkipTurn;
 import com.jnv.betrayal.dungeon.effects.actions.Bomb;
 import com.jnv.betrayal.dungeon.effects.actions.Heal;
@@ -972,8 +971,9 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(20).attack(100).defense(2)
+				.health(20).attack(10).defense(2)
 				.numTargets(1)
+				.effect(new Bomb(20,1)).skillTextureName("monsterbomb").effectCooldown(1)
 				.goldReward(600)
 				//.effect(new IncreasedAttack(100)).skillTextureName("monsterdeath").effectCooldown(1)
 				.build();

@@ -4,7 +4,6 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.EventType;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

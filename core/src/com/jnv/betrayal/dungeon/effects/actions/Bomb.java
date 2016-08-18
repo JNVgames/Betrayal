@@ -1,9 +1,9 @@
 package com.jnv.betrayal.dungeon.effects.actions;
 
 
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,17 +12,18 @@ import java.util.List;
 
 public class Bomb extends Effect {
 
+	private static final EventType sType = EventType.BOMB;
 	private int attack;
 
 	public Bomb(int attack, int turns) {
-		super(EventType.BOMB, turns, EventType.E_BOMB);
+		super(sType, turns);
 		this.attack = attack;
 		isHostile = true;
 	}
 
 	// JSON constructor
 	public Bomb(JSONObject values, int turns, Card src, List<Card> dest) {
-		super(EventType.BOMB, turns, EventType.E_BOMB);
+		super(sType, turns);
 		try {
 			this.attack = values.getInt("attack");
 		} catch (JSONException e) {
@@ -34,12 +35,12 @@ public class Bomb extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-
+		src.getField().roundManager.addEventClient(new Bombed(attack, turns, destCard), EventType.NONE);
 	}
 
 	@Override
 	public void endEffect(Card destCard) {
-		destCard.attack(attack);
+
 	}
 
 	@Override
