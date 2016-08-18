@@ -828,7 +828,7 @@ public class ResourceLoader {
 				.id(color + 60) // id - 61 to 66
 				.name("armor" + color + "1")
 				.costBuy(200)
-				.defense(5)
+				.defense(4)
 				.description("+5 Defense")
 				.build();
 
@@ -836,7 +836,7 @@ public class ResourceLoader {
 				.id(color + 66) // id - 67 to 72
 				.name("armor" + color + "2")
 				.costBuy(600)
-				.defense(10)
+				.defense(8)
 				.description("+10 Defense")
 				.build();
 
@@ -844,7 +844,7 @@ public class ResourceLoader {
 				.id(color + 72) // id - 73 to 78
 				.name("armor" + color + "3")
 				.costBuy(1500)
-				.defense(15)
+				.defense(12)
 				.description("+15 Defense")
 				.build();
 
@@ -852,7 +852,7 @@ public class ResourceLoader {
 				.id(color + 78) // id - 79 to 84
 				.name("armor" + color + "4")
 				.costBuy(2400)
-				.defense(20)
+				.defense(16)
 				.description("+20 Defense")
 				.build();
 
@@ -860,7 +860,7 @@ public class ResourceLoader {
 				.id(color + 84) // id - 85 to 90
 				.name("armor" + color + "5s")
 				.costBuy(4000)
-				.defense(25)
+				.defense(20)
 				.description("+25 Defense")
 				.build();
 	}
@@ -870,7 +870,7 @@ public class ResourceLoader {
 				.id(color + 30) // id - 31 to 36
 				.name("shield" + color + "1")
 				.costBuy(200)
-				.defense(8)
+				.defense(5)
 				.description("+8 Defense")
 				.build();
 
@@ -878,7 +878,7 @@ public class ResourceLoader {
 				.id(color + 36) // id - 37 to 42
 				.name("shield" + color + "2")
 				.costBuy(1000)
-				.defense(16)
+				.defense(10)
 				.description("+16 Defense")
 				.build();
 
@@ -887,14 +887,14 @@ public class ResourceLoader {
 				.id(color + 42) // id - 43 to 48
 				.name("shield" + color + "3")
 				.costBuy(2200)
-				.defense(24)
+				.defense(15)
 				.description("+24 Defense")
 				.build();
 		new Shield.ShieldFactory(res)
 				.id(color + 48) // id - 49 to 54
 				.name("shield" + color + "4")
 				.costBuy(3500)
-				.defense(32)
+				.defense(20)
 				.description("+32 Defense")
 				.build();
 
@@ -902,7 +902,7 @@ public class ResourceLoader {
 				.id(color + 54) // id - 55 to 60
 				.name("shield" + color + "5")
 				.costBuy(5000)
-				.defense(40)
+				.defense(25)
 				.description("+40 Defense")
 				.build();
 	}
