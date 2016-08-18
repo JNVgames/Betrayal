@@ -169,6 +169,7 @@ public class Stats implements JsonSerializable {
 			data.put("totalAttack", totalAttack);
 			data.put("totalDefense", totalDefense);
 			data.put("floor", floor);
+			data.put("availablePoints", availablePoints);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -188,6 +189,7 @@ public class Stats implements JsonSerializable {
 			totalAttack = data.getInt("totalAttack");
 			totalDefense = data.getInt("totalDefense");
 			floor = data.getInt("floor");
+			availablePoints = data.getInt("availablePoints");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

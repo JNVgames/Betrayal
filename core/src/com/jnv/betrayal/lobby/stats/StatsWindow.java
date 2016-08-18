@@ -62,7 +62,7 @@ public class StatsWindow extends Popup {
 			});
 			Group group = new Group();
 			popup.addActor(group);
-			new WhiteBoxOutline(game, group, hair.getPrefWidth() + 6, hair.getPrefHeight() + 6, 3, hair.getX() - 4, hair.getY() - 4);
+			new WhiteBoxOutline(game, group, hair.getPrefWidth() + 15, hair.getPrefHeight() + 8, 3, hair.getX() - 7, hair.getY() - 7);
 			popup.addActor(hair);
 		}
 	}
@@ -234,6 +234,7 @@ public class StatsWindow extends Popup {
 						character.stats.updateStats();
 						character.getRoom().updateServerCharacters();
 						game.savedDataHandler.save();
+						game.getCurrentCharacter().getRoom().refreshLobby();
 					}
 				};
 			}

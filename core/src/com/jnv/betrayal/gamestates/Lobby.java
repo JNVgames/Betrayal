@@ -31,12 +31,13 @@ import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+import java.awt.image.ImagingOpException;
 import java.util.Arrays;
 
 public class Lobby extends GameState {
 
 	private int buttonWidth, buttonHeight, spacing;
-	private Image allPlayersBackground, chatBackground, tower, joinARoom;
+	private Image allPlayersBackground, chatBackground, tower, joinARoom, exc;
 	private Texture playButtonTexture, readyTexture, greenCircle, redCircle, unReadyTexture;
 	private Texture redT, blueT, purpleT, greenT;
 	private Image[] triangles;
@@ -186,6 +187,18 @@ public class Lobby extends GameState {
 			}
 		});
 		buttons.addActor(statsButton);
+
+		exc = new Image(res.getTexture("exc"));
+		exc.setWidth(40);
+		exc.setHeight(40);
+		exc.setX(statsButton.getX() + statsButton.getWidth() - exc.getWidth());
+		exc.setY(statsButton.getTop() - exc.getHeight() - 25 );
+		buttons.addActor(exc);
+		if(game.getCurrentCharacter().stats.getAvailablePoints()>0){
+			exc.setVisible(true);
+		}else{
+			exc.setVisible(false);
+		}
 	}
 
 	private void loadPartyButton() {
@@ -428,8 +441,16 @@ public class Lobby extends GameState {
 		loadRoomParty();
 		setReadyPlayButton();
 		setRoomLabel();
+		checkAvailablePointNotif();
 	}
 
+	private void checkAvailablePointNotif(){
+		if(game.getCurrentCharacter().stats.getAvailablePoints()>0){
+			exc.setVisible(true);
+		}else{
+			exc.setVisible(false);
+		}
+	}
 	private void loadRoomParty() {
 		float width = allPlayersBackground.getImageWidth() - 20;
 		float height = (allPlayersBackground.getImageHeight() - 50) / 4;

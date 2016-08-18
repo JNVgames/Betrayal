@@ -12,6 +12,7 @@ import com.jnv.betrayal.dungeon.effects.buffs.AttackAndDefenseUp;
 import com.jnv.betrayal.dungeon.effects.buffs.AttackUp;
 import com.jnv.betrayal.dungeon.effects.buffs.DefenseUp;
 import com.jnv.betrayal.dungeon.effects.debuffs.AttackAndDefenseDown;
+import com.jnv.betrayal.dungeon.effects.debuffs.AttackDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.DefenseDown;
 import com.jnv.betrayal.dungeon.effects.debuffs.Poison;
 import com.jnv.betrayal.gameobjects.Monster;
@@ -68,6 +69,7 @@ public class ResourceLoader {
 
 	private void loadBackgrounds() {
 		res.loadTexture("about/whtie.png", "gray");
+		res.loadTexture("about/exc.png", "exc");
 		res.loadTexture("about/empty.png", "empty");
 		res.loadTexture("about/player-background.png", "player-background");
 		res.loadTexture("about/start_screen720x1280.png", "start-background");
@@ -295,6 +297,8 @@ public class ResourceLoader {
 		res.loadTexture("item/skills/monsterpowerdown.png", "monsterpowerdown");
 		res.loadTexture("item/skills/monsterpowerup.png", "monsterpowerup");
 		res.loadTexture("item/skills/monstershieldbreak.png", "monstershieldbreak");
+		res.loadTexture("item/skills/monsterAttackDown.png", "monsterattackdown");
+		res.loadTexture("item/skills/increasedAttack.png", "monsterincreasedattack");
 		res.loadTexture("item/skills/run50.png", "run1");
 		res.loadTexture("item/skills/run75.png", "run2");
 		res.loadTexture("item/skills/run100.png", "run3");
@@ -956,10 +960,9 @@ public class ResourceLoader {
 				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.health(20).attack(17).defense(2)
-				.numTargets(1).effectCooldown(3)
-				.goldReward(400)
-				//.effect(new AttackDown(3, 2))
-				.effect(new Poison(3))		//todo change back to AttackDown
+				.numTargets(1).effectCooldown(2)
+				.goldReward(600)
+				.effect(new AttackDown(2,2)).skillTextureName("monsterattackdown")
 				.build();
 
 		// Tier 1
@@ -980,7 +983,7 @@ public class ResourceLoader {
 				.nickname("Muriel the Mummy")
 				.textureName("monster-tier1-1")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.health(50).attack(40).defense(0)
+				.health(50).attack(43).defense(0)
 				.goldReward(500)
 				.effect(new SkipTurn())
 				.numTargets(1).effectCooldown(2)
@@ -994,6 +997,7 @@ public class ResourceLoader {
 				.textureWidth(250).textureHeight(300).x(235).y(740)
 				.goldReward(600)
 				.numTargets(1)
+				.effect(new TrueDamage(27)).skillTextureName("monsterdeath").effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1009,46 +1013,46 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(5)
-				.nickname("Arthur")
+				.nickname("Big Joe")
 				.textureName("monster-tier1-4").skillTextureName("monsterdeath")
 				.health(60).attack(40).defense(5)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
-				.effect(new TrueDamage(25)).effectCooldown(2)		//todo FIX THIX
+				.effect(new TrueDamage(30)).effectCooldown(2)		//todo FIX THIX
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(6)
-				.nickname("Sir Cumference")
+				.nickname("Sir Vincent")
 				.textureName("monster-tier1-5").skillTextureName("monsterblock")
 				.health(50).attack(50).defense(5)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
 				.effect(new DefenseUp(10, 3)).effectCooldown(3)
-				.numTargets(2)
+				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(7)
-				.nickname("Peeping Tom")
+				.nickname("Peeping Fang")
 				.textureName("monster-tier1-6")
-				.health(40).attack(60).defense(5)
+				.health(40).attack(53).defense(0)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
-				.effect(new SkipTurn()).effectCooldown(3)
+				.effect(new AttackDown(25,2)).effectCooldown(3).skillTextureName("monsterattackdown")
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(8)
-				.nickname("Lil Toe")
+				.nickname("T Squared")
 				.textureName("monster-tier1-7").skillTextureName("monsterpowerup")
 				.textureWidth(300).textureHeight(350).x(210).y(740)
-				.health(50).attack(30).defense(10)
-				.effect(new AttackAndDefenseUp(30, 10, 3)).effectCooldown(4)
+				.health(49).attack(38).defense(12)
+				.effect(new AttackAndDefenseUp(30, 10, 3)).effectCooldown(3)
 				.goldReward(400)
-				.numTargets(2)
+				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1112,10 +1116,11 @@ public class ResourceLoader {
 				.id(14)
 				.nickname("Samurai Joe")
 				.textureName("monster-tier2-2")
-				.health(60).attack(60).defense(10)
+				.health(60).attack(30).defense(10)
 				.textureWidth(250).textureHeight(300).x(30).y(690)
 				.goldReward(700)
-				.numTargets(2).effectCooldown(3)
+				.numTargets(2).effectCooldown(1)
+				.effect(new TrueDamage(30)).skillTextureName("monsterdeath")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1192,7 +1197,7 @@ public class ResourceLoader {
 				.textureWidth(400).textureHeight(500).x(160).y(670)
 				.goldReward(900)
 				.numTargets(2).effectCooldown(3)
-				.effect(new AttackAndDefenseDown(100, 100, 2)).effectCooldown(3)
+				.effect(new AttackDown(50, 2)).effectCooldown(3).skillTextureName("monsterattackdown")
 				.build();
 
 		// Tier 2 Mob
@@ -1489,7 +1494,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(48)
-				.nickname("Merlin")
+				.nickname("Leader")
 				.textureName("monster-tier4-7")
 				.health(25).attack(45).defense(0)
 				.textureWidth(200).textureHeight(250).x(260).y(675)
@@ -1499,7 +1504,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(49)
-				.nickname("Arthur")
+				.nickname("Big Joe")
 				.textureName("monster-tier4-17")
 				.health(25).attack(45).defense(0)
 				.textureWidth(200).textureHeight(250).x(0).y(725)
@@ -1509,7 +1514,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(50)
-				.nickname("Sir Cumference")
+				.nickname("Sir Vincent")
 				.textureName("monster-tier4-27")
 				.health(25).attack(45).defense(0)
 				.textureWidth(400).textureHeight(250).x(520).y(725)
@@ -1519,7 +1524,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(51)
-				.nickname("Peeping Tom")
+				.nickname("Peeping Fang")
 				.textureName("monster-tier4-37")
 				.health(25).attack(45).defense(0)
 				.textureWidth(100).textureHeight(250).x(120).y(815)
@@ -1529,7 +1534,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(52)
-				.nickname("Lil Toe")
+				.nickname("T Squared")
 				.textureName("monster-tier4-47")
 				.health(25).attack(45).defense(0)
 				.textureWidth(200).textureHeight(250).x(400).y(815)
