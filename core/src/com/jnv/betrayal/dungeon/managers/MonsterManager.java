@@ -115,7 +115,11 @@ public class MonsterManager {
 			return 5;
 		} else {
 			Random randomNumberGenerator = new Random();
-			return randomNumberGenerator.nextInt(highestTier) + 1;
+			int chance = randomNumberGenerator.nextInt(100);
+			if(chance <=25){
+				return highestTier - 1;
+			}else
+				return highestTier;
 		}
 	}
 }

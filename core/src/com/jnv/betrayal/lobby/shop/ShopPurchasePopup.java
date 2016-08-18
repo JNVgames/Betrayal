@@ -95,6 +95,7 @@ public class ShopPurchasePopup extends Popup {
 							case 0:
 								game.savedDataHandler.save();
 								new OKPopup(game, "Item Bought");
+
 								shop.setGoldLabelText(Integer.toString(game.getCurrentCharacter().inventory.getGold()));
 								break;
 							case 1:

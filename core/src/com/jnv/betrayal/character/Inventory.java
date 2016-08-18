@@ -39,6 +39,10 @@ public class Inventory implements JsonSerializable {
 		return netWorth;
 	}
 
+	public void subtractNetWorth(int x){
+		netWorth -= x;
+	}
+
 	/**
 	 * Buys the requested item
 	 *
@@ -50,6 +54,7 @@ public class Inventory implements JsonSerializable {
 	public int buyItem(Item item) {
 		// if character doesn't have enough gold to buy item
 		if (gold < item.getBuyCost()) {
+			subtractNetWorth(item.getSellCost());
 			// fail to buy and return false
 			return 1;
 		}
@@ -75,7 +80,6 @@ public class Inventory implements JsonSerializable {
 			throw new AssertionError("Item does not exist in the character's inventory: " + item.getTextureName());
 		items.remove(item);
 		gold += item.getSellCost();
-		netWorth -= item.getSellCost();
 	}
 
 	/**
