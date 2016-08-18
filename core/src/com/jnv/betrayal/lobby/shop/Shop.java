@@ -25,6 +25,7 @@ import com.jnv.betrayal.popup.Confirmation;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
+import com.jnv.betrayal.resources.WhiteBoxOutline;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
 
@@ -113,6 +114,10 @@ public class Shop extends Popup {
 		popup.addActor(goldBackground);
 		popup.addActor(goldIcon);
 		popup.addActor(goldLabel);
+		Group group = new Group();
+		popup.addActor(group);
+		new WhiteBoxOutline(game,group, goldBackground.getWidth(),goldBackground.getHeight(),
+				3,goldBackground.getX(),goldBackground.getY());
 	}
 
 	private void loadCurrentActors() {

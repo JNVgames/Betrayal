@@ -1,8 +1,8 @@
 package com.jnv.betrayal.resources;
 
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.scene2d.Group;
 import com.jnv.betrayal.scene2d.ui.Image;
 
 public class WhiteBoxOutline {
