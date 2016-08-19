@@ -19,6 +19,7 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class HallOfFame extends GameState {
 
 	private void loadFools() {
 		List<Character> allFools = new ArrayList<Character>(game.fools);
-		allFools.sort(new Comparator<Character>() {
+		Collections.sort(allFools, new Comparator<Character>() {
 			@Override
 			public int compare(Character o1, Character o2) {
 				return o2.stats.getFloor() - o1.stats.getFloor();
