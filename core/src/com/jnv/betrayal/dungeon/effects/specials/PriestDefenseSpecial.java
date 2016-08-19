@@ -28,12 +28,12 @@ public class PriestDefenseSpecial extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
-		destCard.increaseCurrentDefense(src.getBaseDefense() * 0.25f);
+		destCard.increaseCurrentDefense(src.getBaseDefense() * 0.5f);
 	}
 
 	@Override
 	public void endEffect(Card destCard) {
-		destCard.decreaseCurrentDefense(src.getBaseDefense() * 0.25f);
+		destCard.decreaseCurrentDefense(src.getBaseDefense() * 0.5f);
 	}
 
 	@Override
