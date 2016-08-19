@@ -85,9 +85,9 @@ public class Field extends Group {
 	}
 
 	public void setup() {
+		createEventLogButton();
 		eventLogButton.toFront();
 		nextTurnManager.setup();
-		createEventLogButton();
 	}
 
 	public void setBackgroundForField(String s) {
@@ -104,9 +104,9 @@ public class Field extends Group {
 		// If your turn is ending, decrease skill cooldown counter
 		if (!dungeonEnded) {
 			nextTurnManager.nextTurn();
-			uiManager.nextTurn();
 			roundManager.checkEvents(nextTurnManager.getCurrentCard());
 			animationManager.animate();
+			uiManager.nextTurn();
 			System.out.println("Waiting for input...");
 		}
 	}

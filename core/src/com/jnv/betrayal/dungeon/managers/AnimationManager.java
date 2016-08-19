@@ -206,6 +206,18 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.BUFF_DEFENSE_DURATION);
 				break;
 			case BUFF_ATTACK_DEFENSE:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						cardAnimation.jump(event.getSrc());
+						for (Card card : event.getDest()) {
+							cardAnimation.buffAttackAndDefense(card);
+						}
+					}
+				};
+
+				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				floatFinder.enterFloat(AnimationValues.BUFF_ATTACK_DEFENSE_DURATION);
 				break;
 			case DEBUFF_ATTACK:
 				runnable = new Runnable() {

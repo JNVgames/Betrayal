@@ -974,7 +974,7 @@ public class ResourceLoader {
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.health(20).attack(10).defense(2)
 				.numTargets(1)
-				.effect(new Bomb(20,1)).skillTextureName("monsterbomb").effectCooldown(1)
+				.effect(new AttackAndDefenseUp(1,1,1)).skillTextureName("monsterbomb").effectCooldown(1)
 				.goldReward(600)
 				//.effect(new IncreasedAttack(100)).skillTextureName("monsterdeath").effectCooldown(1)
 				.build();

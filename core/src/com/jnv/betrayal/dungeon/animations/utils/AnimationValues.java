@@ -16,4 +16,5 @@ public final class AnimationValues {
 	public static final float HEALTH_BAR_ANIM_DURATION = 1.5f;
 	public static final float BOMB_DURATION = 0.7f;
 	public static final float POISON_DURATION = 0.7f;
+	public static final float BUFF_ATTACK_DEFENSE_DURATION = BUFF_ATTACK_DURATION + BUFF_DEFENSE_DURATION + 0.3f;
 }

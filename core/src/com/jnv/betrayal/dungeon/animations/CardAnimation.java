@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.jnv.betrayal.dungeon.animations.utils.AnimationValues;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
-import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.ui.Image;
 
 public class CardAnimation {
@@ -134,15 +134,20 @@ public class CardAnimation {
 	}
 
 	public void buffDefense(Card card) {
+		buffDefenseWithDelay(card, 0);
+
+	}
+
+	private void buffDefenseWithDelay(Card card, float delay) {
 		// Display shield image
 		final Image shield = new Image(res.getTexture("defense-boost"));
 		shield.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
 				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		shield.addAction(Actions.alpha(0));
-		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
-		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
+		shield.addAction(Actions.delay(delay + 0.7f, Actions.alpha(1f)));
+		shield.addAction(Actions.delay(delay + 0.7f, Actions.alpha(0, 1)));
 		card.getField().getCardGroup().addActor(shield);
-		shield.addAction(Actions.delay(0.7f + 1, Actions.run(new Runnable() {
+		shield.addAction(Actions.delay(delay + 0.7f + 1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
 				shield.remove();
@@ -151,20 +156,29 @@ public class CardAnimation {
 	}
 
 	public void buffAttack(Card card) {
+		buffAttackWithDelay(card, 0);
+	}
+
+	private void buffAttackWithDelay(Card card, float delay) {
 		// Display shield image
 		final Image shield = new Image(res.getTexture("attack-boost"));
 		shield.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
 				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
 		shield.addAction(Actions.alpha(0));
-		shield.addAction(Actions.delay(0.7f, Actions.alpha(1f)));
-		shield.addAction(Actions.delay(0.7f, Actions.alpha(0, 1)));
+		shield.addAction(Actions.delay(delay + 0.7f, Actions.alpha(1f)));
+		shield.addAction(Actions.delay(delay + 0.7f, Actions.alpha(0, 1)));
 		card.getField().getCardGroup().addActor(shield);
-		shield.addAction(Actions.delay(0.7f + 1, Actions.run(new Runnable() {
+		shield.addAction(Actions.delay(delay + 0.7f + 1, Actions.run(new Runnable() {
 			@Override
 			public void run() {
 				shield.remove();
 			}
 		})));
+	}
+
+	public void buffAttackAndDefense(Card card) {
+		buffAttackWithDelay(card, 0);
+		buffDefenseWithDelay(card, 0.3f + AnimationValues.BUFF_ATTACK_DURATION);
 	}
 
 	public void attachBomb(final Card card) {
