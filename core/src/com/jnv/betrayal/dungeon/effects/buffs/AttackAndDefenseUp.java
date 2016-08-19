@@ -22,7 +22,7 @@ public class AttackAndDefenseUp extends Effect {
 		this.attack = attack;
 		this.defense = defense;
 		isHostile = false;
-		description = "Attack Defense Buff\n" + "increase attack by  " + attack + "\n" +
+		description = "Attack Defense Buff\n" + "increase attack by " + attack + "\n" +
 				"increase defense by " + defense + "\nfor" + turns + " turns.";
 	}
 

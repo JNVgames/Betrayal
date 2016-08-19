@@ -1100,7 +1100,6 @@ public class ResourceLoader {
 				.health(54).attack(35).defense(8)
 				.goldReward(400)
 				.numTargets(1)
-				.effect(new IncreasedAttack(57)).skillTextureName("monsterincreasedattack").effectCooldown(3)
 				.build();
 
 		// Tier 2
