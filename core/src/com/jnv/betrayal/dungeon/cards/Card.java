@@ -341,7 +341,7 @@ public abstract class Card {
 		if (this instanceof PlayerCard && getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
 			System.out.println("YOURSELF");
-
+			field.game.characters.remove(field.getClientCharacter());
 			field.removePlayerCard((PlayerCard) this);
 			field.game.addFool(field.game.getCurrentCharacter());
 			field.game.savedDataHandler.save();

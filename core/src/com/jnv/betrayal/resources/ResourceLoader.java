@@ -955,19 +955,7 @@ public class ResourceLoader {
 
 
 	private void loadMonsterData() {
-		// Tier 0
-//		new Monster.MonsterFactory()
-//				.assetManager(res)
-//				.id(0)
-//				.nickname("Skeleton Kelly")
-//				.textureName("monster-tier0-0")
-//				.skillTextureName("monsterpowerdown")
-//				.textureWidth(250).textureHeight(250).x(235).y(740)
-//				.health(20).attack(19).defense(2)
-//				.numTargets(1).effectCooldown(2)
-//				.goldReward(600)
-//				.effect(new AttackDown(2,2)).skillTextureName("monsterattackdown")
-//				.build();
+		 //Tier 0
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(0)
@@ -975,12 +963,12 @@ public class ResourceLoader {
 				.textureName("monster-tier0-0")
 				.skillTextureName("monsterpowerdown")
 				.textureWidth(250).textureHeight(250).x(235).y(740)
-				.health(20).attack(59).defense(2)
-				.numTargets(1)
-				.effect(new DefenseDown(1,1)).skillTextureName("monsterbomb").effectCooldown(2)
+				.health(20).attack(19).defense(2)
+				.numTargets(4).effectCooldown(2)
 				.goldReward(600)
-				//.effect(new IncreasedAttack(100)).skillTextureName("monsterdeath").effectCooldown(1)
+				.effect(new AttackDown(2,2)).skillTextureName("monsterattackdown")
 				.build();
+
 
 		// Tier 1
 		new Monster.MonsterFactory()
@@ -1025,7 +1013,7 @@ public class ResourceLoader {
 				.textureWidth(450).textureHeight(400).x(135).y(740)
 				// todo high reward
 				.goldReward(800)
-				.numTargets(1)
+				.numTargets(4)
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1131,7 +1119,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(14)
-				.nickname("Samurai Joe")
+				.nickname("Samurai Poe")
 				.textureName("monster-tier2-2")
 				.health(89).attack(46).defense(11)
 				.textureWidth(250).textureHeight(300).x(30).y(690)
@@ -1221,7 +1209,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(22)
-				.nickname("SamuraiPoe")
+				.nickname("Samurai Poe")
 				.textureName("monster-tier2-12")
 				.health(45).attack(53).defense(8)
 				.textureWidth(250).textureHeight(300).x(230).y(760)
@@ -1245,7 +1233,7 @@ public class ResourceLoader {
 				.id(24)
 				.nickname("Pack o' Wolves")
 				.textureName("monster-tier3-0")
-				.health(120).attack(68).defense(19)
+				.health(120).attack(61).defense(19)
 				.textureWidth(350).textureHeight(300).x(340).y(670)
 				.goldReward(1700)
 				.numTargets(3).effectCooldown(3)
@@ -1287,7 +1275,7 @@ public class ResourceLoader {
 				.id(28)
 				.nickname("Chad Livingston")
 				.textureName("monster-tier3-4")
-				.health(132).attack(46).defense(26)
+				.health(132).attack(53).defense(26)
 				.textureWidth(550).textureHeight(500).x(85).y(740)
 				.goldReward(1400)
 				.effect(new DefenseUp(30,2))	.skillTextureName("monsterblock")
@@ -1319,7 +1307,7 @@ public class ResourceLoader {
 				.id(31)
 				.nickname("Terrible Terry")
 				.textureName("monster-tier3-7")
-				.health(120).attack(41).defense(18)
+				.health(126).attack(25).defense(18)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
 				.goldReward(1800)
 				.numTargets(1).effectCooldown(2)
@@ -1346,7 +1334,7 @@ public class ResourceLoader {
 				.health(80).attack(53).defense(13)
 				.textureWidth(400).textureHeight(400).x(160).y(750)
 				.goldReward(600)
-				.numTargets(4).effectCooldown(3)
+				.numTargets(4).effectCooldown(2).effect(new SkipTurn())
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1375,10 +1363,10 @@ public class ResourceLoader {
 				.id(36)
 				.nickname("Pack o' Wolves")
 				.textureName("monster-tier3-10")
-				.health(70).attack(36).defense(7)
+				.health(70).attack(52).defense(7)
 				.textureWidth(800).textureHeight(300).x(50).y(710)
 				.goldReward(750)
-				.numTargets(2)
+				.numTargets(3)
 				.build();
 
 
@@ -1389,7 +1377,7 @@ public class ResourceLoader {
 				.id(37)
 				.nickname("Tiki Ta")
 				.textureName("monster-tier3-12")
-				.health(70).attack(31).defense(21)
+				.health(70).attack(52).defense(31)
 				.textureWidth(400).textureHeight(450).x(360).y(690)
 				.goldReward(900)
 				.numTargets(1)
