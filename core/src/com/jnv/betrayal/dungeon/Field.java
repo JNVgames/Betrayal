@@ -76,7 +76,6 @@ public class Field extends Group {
 		background = new Image(res.getTexture("map01"));
 		// Add things to stage
 		addActor(background);
-		createEventLogButton();
 		addActor(cardGroup);
 		uiManager = new UIManager(this);
 		animationManager = new AnimationManager(res, this);
@@ -88,6 +87,7 @@ public class Field extends Group {
 	public void setup() {
 		eventLogButton.toFront();
 		nextTurnManager.setup();
+		createEventLogButton();
 	}
 
 	public void setBackgroundForField(String s) {

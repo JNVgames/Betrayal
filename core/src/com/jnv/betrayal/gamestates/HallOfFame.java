@@ -55,7 +55,7 @@ public class HallOfFame extends GameState {
 			group.setBounds(0, 0, Betrayal.WIDTH - 10, 202);
 
 			Image border = null;
-			int tier = c.stats.getFloor() /5;
+			int tier = (int) Math.ceil(c.stats.getFloor() /5);
 			switch(tier){
 				case 0:
 					border = new Image(res.getTexture("cpbWhite"));

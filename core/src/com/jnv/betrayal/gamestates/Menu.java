@@ -26,6 +26,7 @@ public class Menu extends GameState {
 
 	public Menu(GameStateManager gsm) {
 		super(gsm);
+		gsm.game.setCurrentCharacter(null);
 		gsm.game.savedDataHandler.load();
 		loadMenuButtons();
 		firstTimeOpenPopUps();

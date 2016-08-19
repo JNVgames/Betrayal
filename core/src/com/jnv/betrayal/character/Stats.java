@@ -135,19 +135,19 @@ public class Stats implements JsonSerializable {
 
 		int extraPoints = 0, extraGold = 0;
 		switch (floor) {
-			case 5:
+			case 6:
 				extraPoints = 5;
 				extraGold = 500;
 				break;
-			case 10:
+			case 11:
 				extraPoints = 5;
 				extraGold = 1000;
 				break;
-			case 15:
+			case 16:
 				extraPoints = 5;
 				extraGold = 1500;
 				break;
-			case 20:
+			case 21:
 				extraPoints = 5;
 				extraGold = 2000;
 				break;

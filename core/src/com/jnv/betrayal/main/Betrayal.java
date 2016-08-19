@@ -19,6 +19,8 @@ import com.jnv.betrayal.resources.SavedDataHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.Socket;
+
 public class Betrayal extends Game {
 
 	public final static int WIDTH = 720;
@@ -71,6 +73,12 @@ public class Betrayal extends Game {
 		System.out.println("dispose");
 		stage.dispose();
 		res.dispose();
+		if (currentCharacter != null
+				&& currentCharacter.getRoom() != null
+				&& currentCharacter.getRoom().getSocket() != null
+				&& currentCharacter.getRoom().getSocket().connected()) {
+			currentCharacter.getRoom().getSocket().disconnect();
+		}
 	}
 
 	public void pause() {
