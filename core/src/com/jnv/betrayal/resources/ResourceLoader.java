@@ -1010,7 +1010,7 @@ public class ResourceLoader {
 				.id(4)
 				.nickname("Big Chest")
 				.textureName("monster-tier1-3")
-				.health(6).attack(33).defense(200)
+				.health(4).attack(24).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
 				.goldReward(800)
 				.numTargets(4)
