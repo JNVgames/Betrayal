@@ -13,6 +13,7 @@ public class OKPopup extends Popup {
 	private int x = 150, y = 500, width = Betrayal.WIDTH - 300, height = Betrayal.HEIGHT - 1000;
 	private Image okayButton, background;
 	private String text;
+	private boolean isVisible = true;
 
 	public OKPopup(Betrayal game, String text) {
 		super(game);
@@ -27,19 +28,28 @@ public class OKPopup extends Popup {
 	}
 
 	public OKPopup(int width, int height, Betrayal game, String text) {
+		this(width, height, game, text, true);
+	}
+
+	public OKPopup(int width, int height, Betrayal game, String text, boolean show) {
 		super(game);
 		this.text = text;
 		this.width = width;
 		this.height = height;
+		isVisible = show;
 		x = (Betrayal.WIDTH - width) / 2;
 		y = (Betrayal.HEIGHT - height) / 2;
-		loadButtons();
+		if (show) loadButtons();
 		setMaskAction(new Runnable() {
 			@Override
 			public void run() {
 				onConfirm();
 			}
 		});
+	}
+
+	public void show() {
+		if (!isVisible)	loadButtons();
 	}
 
 	private void loadButtons() {

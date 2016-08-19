@@ -30,6 +30,7 @@ public class Died extends Effect {
 
 	@Override
 	public void startEffect(Card destCard) {
+		src.getStatusIcon().setDrawable(null);
 	}
 
 	@Override

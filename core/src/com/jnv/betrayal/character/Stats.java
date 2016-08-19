@@ -129,8 +129,9 @@ public class Stats implements JsonSerializable {
 	/**
 	 * Called when the character levels up
 	 */
-	public void advanceFloor(Betrayal game) {
-		if (floor >= 25) return;
+	public OKPopup advanceFloor(Betrayal game) {
+		OKPopup extraPointsNotif;
+		if (floor >= 25) return null;
 		floor++; //todo add back delete other\
 
 		int extraPoints = 0, extraGold = 0;
@@ -157,19 +158,24 @@ public class Stats implements JsonSerializable {
 		availablePoints += 3 + extraPoints;
 		game.getCurrentCharacter().inventory.addGold(extraGold);
 		if (extraPoints > 0 || extraGold > 0) {
-			new OKPopup(Betrayal.WIDTH - 300,
+			extraPointsNotif = new OKPopup(Betrayal.WIDTH - 300,
 					Betrayal.HEIGHT - 800,
 					game,
-					"Congrats!\nYou get an extra: \n" + extraPoints + " stat points\nand\n" + extraGold + " gold");
+					"Congrats!\nYou get an extra: \n" + extraPoints + " stat points\nand\n" + extraGold + " gold",
+					false
+			);
+		} else {
+			extraPointsNotif = null;
 		}
 		applyPoints.updateValues();
 
-
-		if (floor == 25) {        //won the game\
+		// Won the game
+		if (floor == 25) {
 			game.fools.add(game.getCurrentCharacter());
 			game.gsm.setState(GameStateManager.State.HALL_OF_FAME);
 			new OKPopup(450, Betrayal.HEIGHT - 1000, game, "You beat the game!\nYou can keep playing but\nyou can no longer level up");
 		}
+		return extraPointsNotif;
 	}
 
 	public int getFloor() {

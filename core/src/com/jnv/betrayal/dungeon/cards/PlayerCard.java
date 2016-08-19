@@ -6,16 +6,11 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.character.Job;
 import com.jnv.betrayal.character.Preview;
 import com.jnv.betrayal.character.utils.Jobs;
 import com.jnv.betrayal.character.utils.Rotation;
 import com.jnv.betrayal.dungeon.utils.DungeonCoords;
-import com.jnv.betrayal.gamestates.GameStateManager;
-import com.jnv.betrayal.main.Betrayal;
-import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.Actor;
@@ -57,7 +52,7 @@ public class PlayerCard extends Card {
 		System.out.println(this.getName() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		cardName = new Label(this.character.getName(), FontManager.getFont40());
 		cardName.setX(50);
-		cardName.setY(group.getHeight()-10);
+		cardName.setY(group.getHeight() - 10);
 		group.addActor(cardName);
 		group.addActor(cardImage);
 		cardImage.toBack();
@@ -72,11 +67,7 @@ public class PlayerCard extends Card {
 		return character.getName();
 	}
 
-	public void levelUpCharacter(Betrayal game) {
-		character.stats.advanceFloor(game);
-	}
-
-	public void getReward(){
+	public void getReward() {
 		character.inventory.addGold(field.reward);
 	}
 
@@ -88,19 +79,19 @@ public class PlayerCard extends Card {
 		character.equips.removeCloak();
 	}
 
-	public void multiplyHealth(){
+	public void multiplyHealth() {
 		baseHealth = currentHealth = (int) (Math.ceil(currentHealth * 1.25));
 	}
 
-	public void multiplyAttack(){
-		baseAttack = currentAttack = (int)(Math.ceil(currentAttack * 1.25));
+	public void multiplyAttack() {
+		baseAttack = currentAttack = (int) (Math.ceil(currentAttack * 1.25));
 	}
 
-	public void multiplyDefense(){
-		baseDefense = currentDefense = (int)(Math.ceil(currentDefense * 1.25));
+	public void multiplyDefense() {
+		baseDefense = currentDefense = (int) (Math.ceil(currentDefense * 1.25));
 	}
 
-	public Jobs getJob(){
+	public Jobs getJob() {
 		return characterJob;
 	}
 

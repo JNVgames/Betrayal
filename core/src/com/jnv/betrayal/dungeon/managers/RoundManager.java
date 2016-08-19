@@ -39,11 +39,10 @@ public class RoundManager {
 		List<Event> eventsToRemove = new ArrayList<Event>();
 		System.out.println("-----------ROUND MANAGER: " + card.getName() + "------------");
 		System.out.println("events before = " + events);
+
 		for (Event event : events) {
 			final Event tmp = event;
-
 			//checks if the src is still alive
-
 			if (!checkSrcAlive(event.getSrc())) {
 				System.out.println("END EFFECT: bECAUSe SRC IS DEAD" + event);
 				Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
@@ -57,6 +56,10 @@ public class RoundManager {
 				// Add the end effect to event history
 				eventHistory.addLast(tmpEvent);
 			}
+		}
+
+		for (Event event : events) {
+			final Event tmp = event;
 
 			//check if you put in that event
 			if (card == event.getSrc()) {

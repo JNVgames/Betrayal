@@ -226,6 +226,7 @@ public class Field extends Group {
 	 * Player card death event
 	 */
 	public void removePlayerCard(PlayerCard card) {
+		card.getStatusIcon().setDrawable(null);
 		playerZone.remove(card);
 		card.getGroup().remove();
 		refreshAllCards();

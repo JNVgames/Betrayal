@@ -268,7 +268,7 @@ public abstract class Card {
 			if (field.playerZone.size() == 0) {
 				field.dungeonEnded();
 			}
-			if(card.getID() != field.getClientCharacter().getId()){
+			if (card.getID() != field.getClientCharacter().getId()) {
 				int moneygained = 0;
 				if (field.playerZone.size() == 0) {
 					moneygained = ((PlayerCard) this).getNetWorth();
@@ -373,13 +373,15 @@ public abstract class Card {
 				field.dungeonEnded();
 				int i = field.playerZone.indexOf(field.getCurrentCard());
 				i--;
-				if(i<0) i = field.playerZone.size()-1;
+				if (i < 0) i = field.playerZone.size() - 1;
 				if (field.playerZone.get(i).getID() == field.getClientCharacter().getId()) {
 					//you got the last hit bonus
 					int bonusReward = 150;
 					field.getClientCharacter().inventory.addGold(bonusReward);
 					new OKPopup(field.game, "Last Hit Bonus!\nYou got " + bonusReward + " gold");
 				}
+				final OKPopup specialFloorPopup = field.getClientCharacter().stats.advanceFloor(field.game);
+				field.game.savedDataHandler.save();
 				Runnable r = new Runnable() {
 					@Override
 					public void run() {
@@ -388,10 +390,10 @@ public abstract class Card {
 							@Override
 							public void onConfirm() {
 								field.getClientCharacter().inventory.addGold(field.reward);        //gets your reward
-								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
-								field.getClientCharacter().stats.advanceFloor(game);
+								if (specialFloorPopup != null) specialFloorPopup.show();
 								game.getCurrentCharacter().getRoom().updateServerCharacters();
+								field.getClientCharacter().getRoom().refreshLobby();
 							}
 						};
 						System.out.println("floor comp");
