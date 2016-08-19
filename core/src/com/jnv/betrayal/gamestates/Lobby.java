@@ -81,13 +81,10 @@ public class Lobby extends GameState {
 	}
 
 	public void enterDungeonCountDown() {
-		playNowButton.setVisible(false);
-		readyButton.setVisible(false);
-		unReadyButton.setVisible(false);
+		setReadyPlayButton();
 		new OKPopup(game, "Entering Dungeon");
 		savedTime = System.currentTimeMillis();
-		if(!task.isScheduled())
-			Timer.schedule(task, delay);
+		if (!task.isScheduled()) Timer.schedule(task, delay);
 	}
 
 	public void update(float dt) {
@@ -189,11 +186,11 @@ public class Lobby extends GameState {
 		exc.setWidth(40);
 		exc.setHeight(40);
 		exc.setX(statsButton.getX() + statsButton.getWidth() - exc.getWidth());
-		exc.setY(statsButton.getTop() - exc.getHeight() - 25 );
+		exc.setY(statsButton.getTop() - exc.getHeight() - 25);
 		buttons.addActor(exc);
-		if(game.getCurrentCharacter().stats.getAvailablePoints()>0){
+		if (game.getCurrentCharacter().stats.getAvailablePoints() > 0) {
 			exc.setVisible(true);
-		}else{
+		} else {
 			exc.setVisible(false);
 		}
 	}
@@ -441,13 +438,14 @@ public class Lobby extends GameState {
 		checkAvailablePointNotif();
 	}
 
-	private void checkAvailablePointNotif(){
-		if(game.getCurrentCharacter().stats.getAvailablePoints()>0){
+	private void checkAvailablePointNotif() {
+		if (game.getCurrentCharacter().stats.getAvailablePoints() > 0) {
 			exc.setVisible(true);
-		}else{
+		} else {
 			exc.setVisible(false);
 		}
 	}
+
 	private void loadRoomParty() {
 		float width = allPlayersBackground.getImageWidth() - 20;
 		float height = (allPlayersBackground.getImageHeight() - 50) / 4;

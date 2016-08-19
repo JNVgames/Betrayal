@@ -187,6 +187,14 @@ public class Room {
 				endLobbyCountdownTimer();
 				refreshLobby();
 			}
+		}).on("stopDungeonCountdown", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				// Stop countdown
+				System.out.println("stopDungeonCountdown");
+				endLobbyCountdownTimer();
+				refreshLobby();
+			}
 		}).on("updateCharacter", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
@@ -207,12 +215,6 @@ public class Room {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-			}
-		}).on("stopEnterDungeon", new Emitter.Listener() {
-			@Override
-			public void call(Object... args) {
-				refreshLobby();
-				new OKPopup(lobby.getGame(), "Player Left\n Enter Dungeon Canceled ");
 			}
 		});
 	}
