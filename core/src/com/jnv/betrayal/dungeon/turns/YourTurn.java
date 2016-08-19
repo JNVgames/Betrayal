@@ -124,6 +124,7 @@ public class YourTurn extends Turn {
 			Effect effect = new Flee(field.getCurrentCard());
 			field.roundManager.addEvent(effect, effect.getStartType());
 			field.playerZone.remove(field.getCurrentCard());
+			field.nextTurn();
 			panels.clear();
 			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			if (field.getClientCharacter().getRoom().getSocket() != null

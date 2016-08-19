@@ -1,8 +1,6 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.jnv.betrayal.dungeon.Field;
-import com.jnv.betrayal.dungeon.animations.Timeline;
-import com.jnv.betrayal.dungeon.animations.TimelineEvent;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
@@ -20,14 +18,12 @@ public class RoundManager {
 	private ArrayList<Event> events;
 	private AnimationManager animationManager;
 	private Socket socket;
-	private Timeline timeline;
 	public final Deque<Event> eventHistory;
 
-	public RoundManager(AnimationManager animationManager, Timeline timeline) {
+	public RoundManager(AnimationManager animationManager) {
 		events = new ArrayList<Event>();
 		eventHistory = new ArrayDeque<Event>();
 		this.animationManager = animationManager;
-		this.timeline = timeline;
 	}
 
 	public void setSocket(Socket socket) {
@@ -52,7 +48,7 @@ public class RoundManager {
 				System.out.println("END EFFECT: bECAUSe SRC IS DEAD" + event);
 				Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 				// Perform the animation
-				addToTimeline(animationManager.createAnimationTimelineEvent(tmpEvent), new Runnable() {
+				animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 					@Override
 					public void run() {
 						tmp.getEffect().doEndEffect();
@@ -70,7 +66,7 @@ public class RoundManager {
 					System.out.println("END EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the animation
-					addToTimeline(animationManager.createAnimationTimelineEvent(tmpEvent), new Runnable() {
+					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 						@Override
 						public void run() {
 							tmp.getEffect().doEndEffect();
@@ -85,7 +81,7 @@ public class RoundManager {
 				if (event.getEffect().isConsistent() && event.getTurnsLeft() != (event.getEffect().getTurns())) {
 					System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
-					addToTimeline(animationManager.createAnimationTimelineEvent(tmpEvent), new Runnable() {
+					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 						@Override
 						public void run() {
 							tmp.getEffect().doConsistentEffect();
@@ -118,7 +114,7 @@ public class RoundManager {
 		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
-		addToTimeline(animationManager.createAnimationTimelineEvent(event), new Runnable() {
+		animationManager.queueEventAnimation(event, new Runnable() {
 			@Override
 			public void run() {
 				event.getEffect().doStartEffect();
@@ -131,7 +127,7 @@ public class RoundManager {
 		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
-		addToTimeline(animationManager.createAnimationTimelineEvent(event), new Runnable() {
+		animationManager.queueEventAnimation(event, new Runnable() {
 			@Override
 			public void run() {
 				effect.doStartEffect();
@@ -153,10 +149,5 @@ public class RoundManager {
 		if (socket != null && socket.connected()) {
 			socket.emit("newEvent", event.toJSON());
 		}
-	}
-
-	private void addToTimeline(TimelineEvent timelineEvent, Runnable eventLogic) {
-		timelineEvent.setEventLogic(eventLogic);
-		timeline.addTimelineEvent(timelineEvent);
 	}
 }

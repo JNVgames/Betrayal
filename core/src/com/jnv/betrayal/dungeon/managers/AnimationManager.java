@@ -1,31 +1,48 @@
 package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jnv.betrayal.dungeon.animations.AnimationQueue;
+import com.jnv.betrayal.dungeon.animations.AnimationEvent;
 import com.jnv.betrayal.dungeon.animations.CardAnimation;
-import com.jnv.betrayal.dungeon.animations.TimelineEvent;
 import com.jnv.betrayal.dungeon.animations.utils.AnimationValues;
 import com.jnv.betrayal.dungeon.animations.utils.GreatestFloatFinder;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Event;
+import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 public class AnimationManager {
 
 	private CardAnimation cardAnimation;
 	private GreatestFloatFinder floatFinder;
+	private AnimationQueue animationQueue;
+	private float totalAnimationDuration = YourTurn.INITIAL_DELAY;
 
-	public AnimationManager(BetrayalAssetManager res) {
+	public AnimationManager(BetrayalAssetManager res, Actor eventBaseActor) {
 		cardAnimation = new CardAnimation(res);
 		floatFinder = new GreatestFloatFinder();
+		animationQueue = new AnimationQueue(eventBaseActor);
+	}
+
+	/**
+	 * Initiates the process of looping through all the animations
+	 */
+	public void animate() {
+		totalAnimationDuration = animationQueue.startAnimations();
+	}
+
+	public float getTotalAnimationDuration() {
+		return totalAnimationDuration;
 	}
 
 	public CardAnimation getCardAnimation() {
 		return cardAnimation;
 	}
 
-	public TimelineEvent createAnimationTimelineEvent(final Event event) {
+	public void queueEventAnimation(final Event event, final Runnable eventLogic) {
 
-		Runnable animation = null;
+		Runnable runnable = null;
 		floatFinder.reset();
 		switch (event.getEventType()) {
 
@@ -34,7 +51,7 @@ public class AnimationManager {
 			case WARRIOR_SPECIAL:
 			case THIEF_SPECIAL:
 			case TRUE_DAMAGE:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -66,7 +83,7 @@ public class AnimationManager {
 				break;
 			case DEFEND:
 			case KNIGHT_SPECIAL:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -80,7 +97,7 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.DEFEND_DURATION);
 				break;
 			case FLEE:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						System.out.println("FLEE");
@@ -91,7 +108,7 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.FLEE_DURATION);
 				break;
 			case FAIL_TO_FLEE:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						System.out.println("FAIL");
@@ -115,7 +132,7 @@ public class AnimationManager {
 			/********************Item and Skills*************************/
 			case HEAL:
 			case PRIEST_HEAL_SPECIAL:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -130,7 +147,7 @@ public class AnimationManager {
 						AnimationValues.HEALTH_BAR_ANIM_DURATION);
 				break;
 			case BOMB:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -143,7 +160,7 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.BOMB_DURATION);
 				break;
 			case POISON:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -160,7 +177,7 @@ public class AnimationManager {
 				break;
 			case BUFF_ATTACK:
 			case PRIEST_ATTACK_SPECIAL:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -175,7 +192,7 @@ public class AnimationManager {
 				break;
 			case BUFF_DEFENSE:
 			case PRIEST_DEFENSE_SPECIAL:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -189,7 +206,7 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.BUFF_DEFENSE_DURATION);
 				break;
 			case BUFF_ATTACK_DEFENSE:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -203,7 +220,7 @@ public class AnimationManager {
 				floatFinder.enterFloat(AnimationValues.BUFF_ATTACK_DEFENSE_DURATION);
 				break;
 			case DEBUFF_ATTACK:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
@@ -220,7 +237,7 @@ public class AnimationManager {
 			/********************Consistent Effects*********************/
 			case C_POISON:
 				System.out.println("C_POISON");
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						for (Card card : event.getDest()) {
@@ -235,7 +252,7 @@ public class AnimationManager {
 
 			/**********************End Effects**************************/
 			case E_BOMB:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						for (Card card : event.getDest()) {
@@ -249,7 +266,7 @@ public class AnimationManager {
 				break;
 
 			case E_POISON:
-				animation = new Runnable() {
+				runnable = new Runnable() {
 					@Override
 					public void run() {
 						for (Card card : event.getDest()) {
@@ -274,6 +291,7 @@ public class AnimationManager {
 //				break;
 		}
 
-		return new TimelineEvent(floatFinder.highest(), animation);
+
+		animationQueue.queueAnimation(new AnimationEvent(floatFinder.highest(), runnable, eventLogic));
 	}
 }
