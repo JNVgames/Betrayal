@@ -109,7 +109,7 @@ public class MonsterManager {
 	}
 
 	public int generateMonsterTier(int highestTier) {
-		if (highestTier == 0 || highestTier == 5) {
+		if (highestTier == 0 || highestTier == 5 || highestTier ==1) {
 			return highestTier;
 		} else if (highestTier > 5) {
 			return 5;

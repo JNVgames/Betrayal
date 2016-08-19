@@ -1018,7 +1018,7 @@ public class ResourceLoader {
 				.id(4)
 				.nickname("Big Chest")
 				.textureName("monster-tier1-3")
-				.health(6).attack(30).defense(6969)
+				.health(6).attack(33).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
 				// todo high reward
 				.goldReward(800)

@@ -54,7 +54,6 @@ public class Inventory implements JsonSerializable {
 	public int buyItem(Item item) {
 		// if character doesn't have enough gold to buy item
 		if (gold < item.getBuyCost()) {
-			subtractNetWorth(item.getSellCost());
 			// fail to buy and return false
 			return 1;
 		}
