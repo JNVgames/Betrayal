@@ -1110,7 +1110,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-0").skillTextureName("monsterpowerdown")
 				.health(69).attack(49).defense(15)
 				.textureWidth(400).textureHeight(450).x(160).y(700)
-				.goldReward(550)
+				.goldReward(800)
 				.numTargets(4)
 				.effect(new AttackAndDefenseDown(20, 20, 2))
 				.build();
@@ -1121,7 +1121,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-1")
 				.health(77).attack(82).defense(6)
 				.textureWidth(350).textureHeight(450).x(185).y(700)
-				.goldReward(800)
+				.goldReward(1100)
 				.numTargets(2).effectCooldown(3)
 				.effect(new SkipTurn()).effectCooldown(2)
 				.build();
@@ -1132,7 +1132,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-2")
 				.health(67).attack(46).defense(11)
 				.textureWidth(250).textureHeight(300).x(30).y(690)
-				.goldReward(700)
+				.goldReward(850)
 				.numTargets(2).effectCooldown(1)
 				.effect(new TrueDamage(30)).skillTextureName("monsterdeath")
 				.build();
@@ -1143,7 +1143,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-3").skillTextureName("monsterpoison")
 				.health(65).attack(50).defense(12)
 				.textureWidth(500).textureHeight(450).x(110).y(680)
-				.goldReward(600)
+				.goldReward(850)
 				.numTargets(1).effectCooldown(3)
 				.effect(new Poison(3)).effectCooldown(3)
 				.build();
@@ -1154,7 +1154,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-4").skillTextureName("monstermelee")
 				.health(80).attack(30).defense(10)
 				.textureWidth(650).textureHeight(550).x(35).y(690)
-				.goldReward(300)
+				.goldReward(800)
 				.numTargets(3).effectCooldown(3)
 				.effect(new AttackUp(50, 2)).effectCooldown(2)
 				.build();
@@ -1176,7 +1176,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-6")
 				.health(62).attack(58).defense(4)
 				.textureWidth(500).textureHeight(500).x(110).y(640)
-				.goldReward(400)
+				.goldReward(900)
 				.numTargets(4).effectCooldown(2)
 				.effect(new Poison(2)).skillTextureName("monsterpoison")
 				.build();
@@ -1198,7 +1198,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-8")
 				.health(100).attack(47).defense(0)
 				.textureWidth(400).textureHeight(500).x(160).y(670)
-				.goldReward(600)
+				.goldReward(900)
 				.numTargets(1).effectCooldown(2)
 				.effect(new Bomb(60,2)).skillTextureName("monsterbomb")
 				.build();
@@ -1222,7 +1222,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-12")
 				.health(45).attack(53).defense(8)
 				.textureWidth(250).textureHeight(300).x(230).y(760)
-				.goldReward(400)
+				.goldReward(600)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1232,7 +1232,7 @@ public class ResourceLoader {
 				.textureName("monster-tier2-22")
 				.health(55).attack(38).defense(13)
 				.textureWidth(250).textureHeight(300).x(430).y(690)
-				.goldReward(400)
+				.goldReward(600)
 				.numTargets(1).effectCooldown(3)
 				.build();
 
@@ -1244,7 +1244,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-0")
 				.health(120).attack(49).defense(16)
 				.textureWidth(350).textureHeight(300).x(340).y(670)
-				.goldReward(1250)
+				.goldReward(1700)
 				.numTargets(3).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1254,7 +1254,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-1")
 				.health(150).attack(56).defense(23)
 				.textureWidth(600).textureHeight(500).x(60).y(640)
-				.goldReward(1000)
+				.goldReward(1800)
 				.numTargets(2).effectCooldown(3)
 				.effect(new Poison(3)).effectCooldown(3).skillTextureName("monsterpoison")
 				.build();
@@ -1265,7 +1265,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-2")
 				.health(89).attack(53).defense(17)
 				.textureWidth(400).textureHeight(450).x(0).y(690)
-				.goldReward(1100)
+				.goldReward(1600)
 				.numTargets(1).effectCooldown(3)
 				.effect(new DefenseDown(30,2)).skillTextureName("monstershieldbreak")
 				.build();
@@ -1276,7 +1276,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-3").skillTextureName("monsterbomb")
 				.health(72).attack(56).defense(30)
 				.textureWidth(400).textureHeight(450).x(160).y(690)
-				.goldReward(1700)
+				.goldReward(1850)
 				.numTargets(1).effectCooldown(3)
 				.effect(new Bomb(70,3)).effectCooldown(3)
 				.build();
@@ -1298,7 +1298,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-5")
 				.health(150).attack(56).defense(23)
 				.textureWidth(500).textureHeight(550).x(110).y(665)
-				.goldReward(1200)
+				.goldReward(2000)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1308,7 +1308,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-6")
 				.health(40).attack(28).defense(10)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(750)
+				.goldReward(1900)
 				.numTargets(1).effectCooldown(3)
 				.effect(new Heal(40)).skillTextureName("monsterheal")
 				.build();
@@ -1319,7 +1319,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-7")
 				.health(80).attack(41).defense(38)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(1500)
+				.goldReward(1800)
 				.numTargets(1).effectCooldown(2)
 				.effect(new AttackUp(100,2)).skillTextureName("monstermelee")
 				.build();
@@ -1330,7 +1330,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-9")
 				.health(82).attack(63).defense(30)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
-				.goldReward(1200)
+				.goldReward(2100)
 				.numTargets(1)
 				.effect(new SkipTurn()).effectCooldown(2)
 				.build();
@@ -1343,7 +1343,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-8").skillTextureName("monsterpowerdown")
 				.health(50).attack(41).defense(13)
 				.textureWidth(400).textureHeight(400).x(160).y(750)
-				.goldReward(500)
+				.goldReward(600)
 				.numTargets(4).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1353,7 +1353,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-18")
 				.health(40).attack(51).defense(2)
 				.textureWidth(250).textureHeight(300).x(20).y(660)
-				.goldReward(500)
+				.goldReward(600)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()
@@ -1363,7 +1363,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-28")
 				.health(40).attack(44).defense(5)
 				.textureWidth(250).textureHeight(300).x(480).y(680)
-				.goldReward(500)
+				.goldReward(600)
 				.numTargets(1)
 				.effect(new IncreasedAttack(100)).skillTextureName("monsterincreasedattack").effectCooldown(3)
 				.build();
@@ -1375,7 +1375,7 @@ public class ResourceLoader {
 				.nickname("Pack o' Wolves")
 				.textureName("monster-tier3-10")
 				.health(40).attack(36).defense(7)
-				.textureWidth(350).textureHeight(300).x(50).y(710)
+				.textureWidth(800).textureHeight(300).x(50).y(710)
 				.goldReward(750)
 				.numTargets(2)
 				.build();
@@ -1390,7 +1390,7 @@ public class ResourceLoader {
 				.textureName("monster-tier3-12")
 				.health(60).attack(31).defense(21)
 				.textureWidth(400).textureHeight(450).x(360).y(690)
-				.goldReward(800)
+				.goldReward(900)
 				.numTargets(1)
 				.build();
 
@@ -1402,7 +1402,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-0").skillTextureName("monsterbomb")
 				.health(120).attack(31).defense(23)
 				.textureWidth(500).textureHeight(475).x(110).y(675)
-				.goldReward(2400)
+				.goldReward(3100)
 				.numTargets(1).effectCooldown(2)
 				.effect(new Bomb(100, 3 ))
 				.build();
@@ -1413,7 +1413,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-1")
 				.health(110).attack(77).defense(19)
 				.textureWidth(350).textureHeight(400).x(185).y(665)
-				.goldReward(2000)
+				.goldReward(2800)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1423,7 +1423,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-2")
 				.health(140).attack(20).defense(5)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.goldReward(2900)
+				.goldReward(3200)
 				.effect(new AttackAndDefenseUp(10,5,15)).skillTextureName("monsterpowerup")
 				.numTargets(1).effectCooldown(2)
 				.build();
@@ -1434,7 +1434,7 @@ public class ResourceLoader {
 				.textureName("monster-tier4-3")
 				.health(100).attack(80).defense(17)
 				.textureWidth(500).textureHeight(475).x(110).y(665)
-				.goldReward(3200)
+				.goldReward(3300)
 				.numTargets(1).effectCooldown(3)
 				.effect(new AttackAndDefenseDown(25,25,3)).skillTextureName("monsterpowerdown")
 				.build();
@@ -1575,7 +1575,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-0")
 				.health(200).attack(60).defense(50)
 				.textureWidth(600).textureHeight(525).x(60).y(665)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(4)
 				.effect(new Heal(20)).skillTextureName("monsterheal")
 				.build();
@@ -1586,7 +1586,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-1")
 				.health(185).attack(78).defense(36)
 				.textureWidth(450).textureHeight(550).x(135).y(665)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(3)
 				.build();
 		new Monster.MonsterFactory()
@@ -1596,7 +1596,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-2")
 				.health(180).attack(72).defense(27)
 				.textureWidth(620).textureHeight(500).x(50).y(640)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(4)
 				.effect(new AttackUp(40,4)).skillTextureName("monstermelee")
 				.build();
@@ -1607,7 +1607,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-3")
 				.health(160).attack(10).defense(0)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(2)
 				.effect(new AttackAndDefenseUp(30,15,15)).skillTextureName("monsterpowerup")
 				.build();
@@ -1618,7 +1618,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-4")
 				.health(200).attack(45).defense(18)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(3)
 				.effect(new Heal(100))
 				.build();
@@ -1629,7 +1629,7 @@ public class ResourceLoader {
 				.textureName("monster-tier5-5")
 				.health(170).attack(71).defense(23)
 				.textureWidth(500).textureHeight(500).x(110).y(665)
-				.goldReward(6000)
+				.goldReward(7500)
 				.numTargets(1).effectCooldown(3)
 				.effect(new IncreasedAttack(89)).skillTextureName("monsterincreasedattack").effectCooldown(3)
 				.build();
