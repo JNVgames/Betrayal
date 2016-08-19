@@ -110,7 +110,7 @@ public class YourTurn extends Turn {
 					@Override
 					public void doAction() {
 						// TODO CHANGE BACK TO 25
-						attemptFlee(25, field.getCurrentCard());
+						attemptFlee(100, field.getCurrentCard());
 					}
 				};
 			}
@@ -124,7 +124,7 @@ public class YourTurn extends Turn {
 			Effect effect = new Flee(card);
 			field.roundManager.addEvent(effect, effect.getStartType());
 			field.playerZone.remove(card);
-			field.animationManager.animate();
+			field.nextTurn();
 			panels.clear();
 			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			if (field.getClientCharacter().getRoom().getSocket() != null
@@ -148,7 +148,7 @@ public class YourTurn extends Turn {
 		} else {
 			Effect effect = new FailedToFlee(card);
 			field.roundManager.addEvent(effect, effect.getStartType());
-			field.animationManager.animate();
+			field.nextTurn();
 			panels.clear();
 			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			Runnable r = new Runnable() {

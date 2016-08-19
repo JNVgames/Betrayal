@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.dungeon.animations.utils.AnimationValues;
 import com.jnv.betrayal.dungeon.cards.Card;
@@ -179,6 +180,99 @@ public class CardAnimation {
 	public void buffAttackAndDefense(Card card) {
 		buffAttackWithDelay(card, 0);
 		buffDefenseWithDelay(card, 0.3f + AnimationValues.BUFF_ATTACK_DURATION);
+	}
+
+	public void debuffAttack(Card card) {
+		debuffAttackWithDelay(card, 0);
+	}
+
+	private void debuffAttackWithDelay(final Card card, float delay) {
+		// Display shield image
+		final Image attackDebuff = new Image(res.getTexture("attack-debuff"));
+		attackDebuff.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
+		attackDebuff.addAction(Actions.alpha(0));
+		attackDebuff.addAction(Actions.delay(delay + 0.7f, Actions.alpha(1f)));
+		attackDebuff.addAction(Actions.delay(delay + 0.7f, new RunnableAction() {
+			@Override
+			public void run() {
+				card.getStatusIcon().setDrawable(new TextureRegionDrawable(
+						new TextureRegion(
+								new TextureRegion(res.getTexture("attack-debuff"))
+						)
+				));
+			}
+		}));
+		attackDebuff.addAction(Actions.delay(delay + 0.7f, Actions.alpha(0, 1)));
+		attackDebuff.addAction(Actions.delay(delay + 0.7f + 1, Actions.run(new Runnable() {
+			@Override
+			public void run() {
+				attackDebuff.remove();
+			}
+		})));
+		card.getField().getCardGroup().addActor(attackDebuff);
+	}
+
+	public void debuffDefense(Card card) {
+		debuffDefenseWithDelay(card, 0);
+	}
+
+	private void debuffDefenseWithDelay(final Card card, float delay) {
+		// Display shield image
+		final Image debuffDefense = new Image(res.getTexture("defense-debuff"));
+		debuffDefense.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
+		debuffDefense.addAction(Actions.alpha(0));
+		debuffDefense.addAction(Actions.delay(delay + 0.7f, Actions.alpha(1f)));
+		debuffDefense.addAction(Actions.delay(delay + 0.7f, new RunnableAction() {
+			@Override
+			public void run() {
+				card.getStatusIcon().setDrawable(new TextureRegionDrawable(
+						new TextureRegion(
+								new TextureRegion(res.getTexture("defense-debuff"))
+						)
+				));
+			}
+		}));
+		debuffDefense.addAction(Actions.delay(delay + 0.7f, Actions.alpha(0, 1)));
+		debuffDefense.addAction(Actions.delay(delay + 0.7f + 1, Actions.run(new Runnable() {
+			@Override
+			public void run() {
+				debuffDefense.remove();
+			}
+		})));
+		card.getField().getCardGroup().addActor(debuffDefense);
+	}
+
+	public void debuffAttackDefense(Card card) {
+		debuffAttackDefenseWithDelay(card, 0);
+	}
+
+	private void debuffAttackDefenseWithDelay(final Card card, float delay) {
+		// Display shield image
+		final Image attackDebuffDefense = new Image(res.getTexture("attack-defense-debuff"));
+		attackDebuffDefense.setBounds(card.getGroup().getX() + card.getGroup().getWidth() / 2 - 50,
+				card.getGroup().getY() + card.getGroup().getHeight() / 2 - 50, 100, 100);
+		attackDebuffDefense.addAction(Actions.alpha(0));
+		attackDebuffDefense.addAction(Actions.delay(delay + 0.7f, Actions.alpha(1f)));
+		attackDebuffDefense.addAction(Actions.delay(delay + 0.7f, new RunnableAction() {
+			@Override
+			public void run() {
+				card.getStatusIcon().setDrawable(new TextureRegionDrawable(
+						new TextureRegion(
+								new TextureRegion(res.getTexture("attack-defense-debuff"))
+						)
+				));
+			}
+		}));
+		attackDebuffDefense.addAction(Actions.delay(delay + 0.7f, Actions.alpha(0, 1)));
+		attackDebuffDefense.addAction(Actions.delay(delay + 0.7f + 1, Actions.run(new Runnable() {
+			@Override
+			public void run() {
+				attackDebuffDefense.remove();
+			}
+		})));
+		card.getField().getCardGroup().addActor(attackDebuffDefense);
 	}
 
 	public void attachBomb(final Card card) {

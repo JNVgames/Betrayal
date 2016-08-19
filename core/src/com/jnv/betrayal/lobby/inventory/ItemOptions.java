@@ -7,6 +7,7 @@ package com.jnv.betrayal.lobby.inventory;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.Run;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
@@ -27,7 +28,6 @@ class ItemOptions extends Popup {
 	public final Dimension itemBoxDimen;
 	private final int unequipSlot;
 	private InventoryLoadable inventory;
-	private Image background;
 	private Item item;
 	private boolean isEquippable, isEquipped;
 
@@ -56,6 +56,7 @@ class ItemOptions extends Popup {
 		float optionHeight = 71;
 
 		// If item is equippable, you have the option to Equip, Check item info, Sell, or Cancel
+		Image background;
 		if (isEquippable && !isEquipped) {
 			numOptions = 4;
 			background = new Image(res.getTexture("4option-background"));
@@ -131,8 +132,13 @@ class ItemOptions extends Popup {
 						remove();
 						((DungeonInventory) inventory).remove();
 
-						src.getField().roundManager.addEvent(effect, effect.getStartType());
-						src.getField().nextTurn();
+						if (!(effect instanceof Run)) {
+							src.getField().roundManager.addEvent(effect, effect.getStartType());
+							src.getField().nextTurn();
+						} else {
+							src.getField().roundManager.addEventClient(effect, effect.getStartType());
+							src.getField().animationManager.animate();
+						}
 					}
 				});
 				break;

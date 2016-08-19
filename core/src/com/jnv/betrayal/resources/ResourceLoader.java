@@ -303,6 +303,9 @@ public class ResourceLoader {
 		res.loadTexture("item/skills/run50.png", "run1");
 		res.loadTexture("item/skills/run75.png", "run2");
 		res.loadTexture("item/skills/run100.png", "run3");
+		res.loadTexture("item/skills/attackDown.png", "attack-debuff");
+		res.loadTexture("item/skills/defenseDown.png", "defense-debuff");
+		res.loadTexture("item/skills/attackdefensedown.png", "attack-defense-debuff");
 	}
 
 	private void loadRings() {
@@ -542,7 +545,7 @@ public class ResourceLoader {
 				.name("run1")
 				.costBuy(500)
 				.description("50% Chance to Flee\n")
-				.effect(new com.jnv.betrayal.dungeon.effects.Run(50))
+				.effect(new com.jnv.betrayal.dungeon.effects.Run(0)) // todo CHANGE TO 50
 				.build();
 
 		new Run.RunFactory(res)
@@ -974,8 +977,7 @@ public class ResourceLoader {
 				.textureWidth(250).textureHeight(250).x(235).y(740)
 				.health(20).attack(10).defense(2)
 				.numTargets(1)
-				.effect(new DefenseDown(10,2))
-				.skillTextureName("monsterbomb").effectCooldown(1)
+				.effect(new DefenseDown(1,1)).skillTextureName("monsterbomb").effectCooldown(1)
 				.goldReward(600)
 				//.effect(new IncreasedAttack(100)).skillTextureName("monsterdeath").effectCooldown(1)
 				.build();

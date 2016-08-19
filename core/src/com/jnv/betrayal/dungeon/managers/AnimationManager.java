@@ -224,14 +224,42 @@ public class AnimationManager {
 					@Override
 					public void run() {
 						cardAnimation.jump(event.getSrc());
+						for (Card card : event.getDest()) {
+							cardAnimation.debuffAttack(card);
+						}
 					}
 				};
 
 				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				floatFinder.enterFloat(AnimationValues.DEBUFF_ATTACK_DURATION);
 				break;
 			case DEBUFF_DEFENSE:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						cardAnimation.jump(event.getSrc());
+						for (Card card : event.getDest()) {
+							cardAnimation.debuffDefense(card);
+						}
+					}
+				};
+
+				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				floatFinder.enterFloat(AnimationValues.DEBUFF_DEFENSE_DURATION);
 				break;
 			case DEBUFF_ATTACK_DEFENSE:
+				runnable = new Runnable() {
+					@Override
+					public void run() {
+						cardAnimation.jump(event.getSrc());
+						for (Card card : event.getDest()) {
+							cardAnimation.debuffAttackDefense(card);
+						}
+					}
+				};
+
+				floatFinder.enterFloat(AnimationValues.JUMP_DURATION);
+				floatFinder.enterFloat(AnimationValues.DEBUFF_ATTACK_DEFENSE_DURATION);
 				break;
 
 			/********************Consistent Effects*********************/

@@ -1,7 +1,6 @@
 package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.turns.YourTurn;
 
 import org.json.JSONObject;
 
