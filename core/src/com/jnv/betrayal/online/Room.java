@@ -33,7 +33,7 @@ public class Room {
 	private Lobby lobby;
 	private int monsterID, monsterTier;
 	private boolean isServerOnline;
-	private static final boolean testLocal = true;
+	private static final boolean testLocal = false;
 	private static final String ACTUAL_SERVER = "http://betrayal-server-jnvgames.herokuapp.com/";
 	private static final String MY_SERVER = "http://localhost:8080";
 	private static final int appVersion = 1;
