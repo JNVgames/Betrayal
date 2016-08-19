@@ -387,6 +387,7 @@ public abstract class Card {
 								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
 								field.getClientCharacter().stats.advanceFloor(game);
+								game.getCurrentCharacter().getRoom().updateServerCharacters();
 							}
 						};
 						System.out.println("floor comp");
