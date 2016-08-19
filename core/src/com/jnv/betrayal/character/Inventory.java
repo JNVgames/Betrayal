@@ -36,7 +36,7 @@ public class Inventory implements JsonSerializable {
 	}
 
 	public int getNetWorth() {
-		return netWorth;
+		return netWorth/4;
 	}
 
 	public void subtractNetWorth(int x){
