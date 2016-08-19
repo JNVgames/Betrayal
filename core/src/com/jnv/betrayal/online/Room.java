@@ -28,9 +28,10 @@ public class Room {
 	private Lobby lobby;
 	private int monsterID, monsterTier;
 	private boolean isServerOnline;
-	private static final boolean testLocal = false;
+	private static final boolean testLocal = true;
 	private static final String ACTUAL_SERVER = "http://betrayal-server-jnvgames.herokuapp.com/";
 	private static final String MY_SERVER = "http://localhost:8080";
+	private static final int appVersion = 1;
 
 	public Room(Character character) {
 		roomID = -1;
@@ -77,7 +78,6 @@ public class Room {
 				JSONObject data = (JSONObject) args[0];
 				try {
 					roomID = data.getInt("roomID");
-					System.out.println("Room ID: " + roomID);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -88,14 +88,12 @@ public class Room {
 		}).on("joinedRoom", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				System.out.println("Someone joined the room!");
 				JSONObject data = (JSONObject) args[0];
 				List<Character> characters = new ArrayList<Character>();
 				int counter = 0;
 				try {
 					JSONArray players = data.getJSONArray("players");
 
-					System.out.println(players);
 					while (!players.isNull(counter)) {
 						Character c = new Character(currentCharacter.res);
 						c.fromJson(players.getJSONObject(counter));
@@ -123,7 +121,6 @@ public class Room {
 		}).on("readyChanged", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				System.out.println("readyChanged");
 				JSONObject data = (JSONObject) args[0];
 				try {
 					for (Character character : characters) {
@@ -179,7 +176,6 @@ public class Room {
 			@Override
 			public void call(Object... args) {
 				// Stop countdown
-				System.out.println("playerLeftRoomInLobby");
 				for (Character character : characters) {
 					character.setReady(false);
 				}
@@ -195,14 +191,12 @@ public class Room {
 			@Override
 			public void call(Object... args) {
 				// Stop countdown
-				System.out.println("stopDungeonCountdown");
 				endLobbyCountdownTimer();
 				refreshLobby();
 			}
 		}).on("updateCharacter", new Emitter.Listener() {
 			@Override
 			public void call(Object... args) {
-				System.out.println("updateCharacters");
 				try {
 					updateCharacter(((JSONObject) args[0]).getJSONObject("character"));
 				} catch (JSONException e) {
@@ -218,6 +212,13 @@ public class Room {
 					removeCharacter(data.getJSONObject("player").getInt("id"));
 				} catch (JSONException e) {
 					e.printStackTrace();
+				}
+			}
+		}).on("gameNotUpdated", new Emitter.Listener() {
+			@Override
+			public void call(Object... args) {
+				if (lobby != null) {
+					new OKPopup(lobby.getGame(), "Please update\nyour game.");
 				}
 			}
 		});
@@ -266,6 +267,7 @@ public class Room {
 		try {
 			data.put("password", password);
 			data.put("character", currentCharacter.toJson());
+			data.put("appVersion", appVersion);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -298,6 +300,7 @@ public class Room {
 			data.put("password", password);
 			data.put("roomID", roomID);
 			data.put("character", currentCharacter.toJson());
+			data.put("appVersion", appVersion);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -333,14 +336,6 @@ public class Room {
 			}
 			socket.emit("characterChanged", data);
 		}
-	}
-
-	public void printCharacters() {
-		System.out.print("Characters: ");
-		for (Character character : characters) {
-			System.out.print(character.getId() + ", ");
-		}
-		System.out.println();
 	}
 
 	public List<Character> getCharacters() {

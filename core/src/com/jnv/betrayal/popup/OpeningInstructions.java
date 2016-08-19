@@ -76,7 +76,6 @@ public class OpeningInstructions extends UncloseablePopup {
 	private void previousContent() {
 		currentContent--;
 		if (currentContent < 0) currentContent++;
-		System.out.println("currentContent = " + currentContent);
 		content.setDrawable(new TextureRegionDrawable(new TextureRegion(textures.get(currentContent))));
 	}
 

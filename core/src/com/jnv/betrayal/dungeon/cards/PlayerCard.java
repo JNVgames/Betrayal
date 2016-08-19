@@ -49,7 +49,6 @@ public class PlayerCard extends Card {
 			}
 		};
 		cardImage.setBounds(0, 0, group.getWidth(), group.getHeight());
-		System.out.println(this.getName() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		cardName = new Label(this.character.getName(), FontManager.getFont40());
 		cardName.setX(50);
 		cardName.setY(group.getHeight() - 10);

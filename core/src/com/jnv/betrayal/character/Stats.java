@@ -28,7 +28,6 @@ public class Stats implements JsonSerializable {
 		baseHealth = 50;
 		baseAttack = 10;
 		baseDefense = 10;
-		System.out.println("************************************");
 		floor = 0;
 		availablePoints = 0;
 		applyPoints = new ApplyPoints();
@@ -132,7 +131,7 @@ public class Stats implements JsonSerializable {
 	public OKPopup advanceFloor(Betrayal game) {
 		OKPopup extraPointsNotif;
 		if (floor >= 25) return null;
-		floor++; //todo add back delete other
+		floor++;
 
 		int extraPoints = 0, extraGold = 0;
 		switch (floor) {
@@ -230,7 +229,6 @@ public class Stats implements JsonSerializable {
 		}
 
 		applyPoints.updateValues();
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	}
 
 	/**

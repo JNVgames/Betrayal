@@ -34,8 +34,6 @@ public class Attack extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		destCard.attack(attack);
-		System.out.println("attack!!!!!");
-		System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 	}
 
 	@Override

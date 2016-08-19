@@ -63,7 +63,6 @@ public class Field extends Group {
 	 */
 	public Field(GameStateManager gsm) {
 		// Initialize card zones and instance variables
-		System.out.println("CONSTRUCTOR");
 		playerZone = new ArrayList<PlayerCard>();
 		monsterZone = new ArrayList<MonsterCard>();
 		allCards = new ArrayList<Card>();
@@ -108,8 +107,7 @@ public class Field extends Group {
 			roundManager.checkEvents(nextTurnManager.getCurrentCard());
 			animationManager.animate();
 			uiManager.nextTurn();
-			System.out.println("Next turn from: " + Arrays.toString(Thread.currentThread().getStackTrace()));
-			System.out.println("Waiting for input...");
+			System.out.println("Field.nextTurn(): Waiting for input...");
 		}
 	}
 
@@ -256,7 +254,6 @@ public class Field extends Group {
 					for (int i = 0; i < destArray.length(); i++) {
 						dstID.add(destArray.getInt(i));
 					}
-					System.out.println("DSTIsdasdasdffFUYCKJFUCKFSDFUFBITCHFUCKINGSHITTTffaD" + dstID);
 
 					// FInd Card corresponding to id
 					Card src = findSrcCard(srcID);
@@ -290,9 +287,7 @@ public class Field extends Group {
 				}
 				Card tmp = null;
 
-				int counter = 0;
 				for (Card card : playerZone) {
-					counter++;
 					if (card.getID() == disconnectID) {
 						//checks if it's that current person's turn
 
@@ -303,7 +298,7 @@ public class Field extends Group {
 				}
 				final Card deleteThisCard = tmp;
 				if (deleteThisCard != null) {
-					System.out.println("DELETING DISCOnnECT");
+					System.out.println("DELETING DISCONNECT");
 					playerZone.remove(deleteThisCard);
 					roundManager.addEventClient(new Died(deleteThisCard), EventType.DIED);
 					if (getCurrentCard() == deleteThisCard) nextTurn();

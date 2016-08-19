@@ -22,6 +22,10 @@ import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class HallOfFame extends GameState {
 
 	private ScrollPane scrollPane;
@@ -49,12 +53,19 @@ public class HallOfFame extends GameState {
 	}
 
 	private void loadFools() {
-		for (Character c : game.fools) {
+		List<Character> allFools = new ArrayList<Character>(game.fools);
+		allFools.sort(new Comparator<Character>() {
+			@Override
+			public int compare(Character o1, Character o2) {
+				return o2.stats.getFloor() - o1.stats.getFloor();
+			}
+		});
+		for (Character c : allFools) {
 			final Character character = c;
 			Group group = new Group();
 			group.setBounds(0, 0, Betrayal.WIDTH - 10, 202);
 
-			Image border = null;
+			Image border;
 			int tier = (int) Math.ceil(c.stats.getFloor() /5);
 			switch(tier){
 				case 0:

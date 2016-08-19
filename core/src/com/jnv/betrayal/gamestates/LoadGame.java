@@ -136,7 +136,29 @@ public class LoadGame extends GameState {
 			final Character character = c;
 			Group preview = new Group();
 
-			Image border = new Image(res.getTexture("cpb"));
+			Image border;
+			int tier = (int) Math.ceil(c.stats.getFloor() /5);
+			switch(tier){
+				case 0:
+					border = new Image(res.getTexture("cpbWhite"));
+					break;
+				case 1:
+					border = new Image(res.getTexture("cpbSilver"));
+					break;
+				case 2:
+					border = new Image(res.getTexture("cpbBronze"));
+					break;
+				case 3:
+					border = new Image(res.getTexture("cpbGold"));
+					break;
+				case 4:
+					border = new Image(res.getTexture("cpbLegendLegend"));
+					break;
+				default:
+					border = new Image(res.getTexture("cpbLegend"));
+					break;
+
+			}
 			border.setY(hintText.getY() - 230 * counter);
 			preview.addActor(border);
 
@@ -191,7 +213,6 @@ public class LoadGame extends GameState {
 				public void doAction() {
 					if (!deleteMode) { // Delete mode is off
 						game.setCurrentCharacter(character);
-						System.out.println(game.getCurrentCharacter().stats.getBaseAttack() + "++++++++++++++++++++++++++++++++++++++++++++");
 						gsm.setState(GameStateManager.State.LOBBY);
 					} else { // Delete mode is on
 						new Confirmation(game, "Are you sure?") {

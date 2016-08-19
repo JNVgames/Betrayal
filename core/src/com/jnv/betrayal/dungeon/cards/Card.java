@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.dungeon.cards;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -190,30 +189,24 @@ public abstract class Card {
 	}
 
 	public InputListener createSelectListener(final int numTargets) {
-		try {
-			return new InputListener(cardImage) {
-				@Override
-				public void doAction() {
-					// If it's selected, unselect
-					if (isSelected) {
-						unselect();
-					} else {
-						// If limit is one, unselect all and select this one
-						if (numTargets == 1) {
-							field.unselectAll();
-							select();
-							// If unselected, check if targets selected is less than the limit
-						} else { // numTarget > 1
-							if (field.getCardsSelected().size() < numTargets) select();
-						}
+		return new InputListener(cardImage) {
+			@Override
+			public void doAction() {
+				// If it's selected, unselect
+				if (isSelected) {
+					unselect();
+				} else {
+					// If limit is one, unselect all and select this one
+					if (numTargets == 1) {
+						field.unselectAll();
+						select();
+						// If unselected, check if targets selected is less than the limit
+					} else { // numTarget > 1
+						if (field.getCardsSelected().size() < numTargets) select();
 					}
 				}
-			};
-		} catch (NullPointerException e) {
-			System.out.println("Card: Actor cardImage was not created properly");
-			Gdx.app.exit();
-		}
-		return null;
+			}
+		};
 	}
 
 	public Group getGroup() {
@@ -260,8 +253,6 @@ public abstract class Card {
 			getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			card.getField().roundManager.addEventClient(effect, effect.getStartType());
 
-			System.out.println("Current card: " + field.getCurrentCard().getName());
-
 			if (field.getCurrentCard() == card) {
 				field.nextTurn();
 			}
@@ -297,12 +288,10 @@ public abstract class Card {
 			// has defenders, should split damage among defenders
 			for (Card card : defenders) {
 				card.takeTrueDamage((int) Math.ceil(damage / defenders.size()));
-				System.out.println("DEFENDER TOOK DAMAGE");
 			}
 		} else {
 			//does not have defenders, this card takes the damage
 			takeTrueDamage(damage);
-			System.out.println("I TOOK DAMAGE");
 		}
 	}
 
@@ -340,6 +329,7 @@ public abstract class Card {
 	public void died() {
 		if (this instanceof PlayerCard && getID() == field.game.getCurrentCharacter().getId()) {
 			// You have died
+
 			System.out.println("YOURSELF");
 			field.game.characters.remove(field.getClientCharacter());
 			field.removePlayerCard((PlayerCard) this);
@@ -358,13 +348,11 @@ public abstract class Card {
 			}
 
 		} else if (this instanceof PlayerCard) {
-			System.out.println("TEAMMATE");
 			//Teammate died
 			//field.removePlayerCard((PlayerCard) this);
 
 
 		} else if (this instanceof MonsterCard) {
-			System.out.println("MONSTER");
 			//Monster Card
 			endSelectMode();
 			field.removeMonsterCard((MonsterCard) this);
@@ -396,10 +384,9 @@ public abstract class Card {
 								field.getClientCharacter().getRoom().refreshLobby();
 							}
 						};
-						System.out.println("floor comp");
 					}
 				};
-				System.out.println("cleared");
+				System.out.println("Floor cleared.");
 				this.getCardImage().addAction(Actions.delay(4f, Actions.run(r)));
 			}
 		} else {

@@ -44,7 +44,7 @@ public class RoundManager {
 			final Event tmp = event;
 			//checks if the src is still alive
 			if (!checkSrcAlive(event.getSrc())) {
-				System.out.println("END EFFECT: bECAUSe SRC IS DEAD" + event);
+				System.out.println("Src card died, so flushing out event: " + event);
 				Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 				// Perform the animation
 				animationManager.queueEventAnimation(tmpEvent, new Runnable() {
@@ -63,7 +63,6 @@ public class RoundManager {
 
 			//check if you put in that event
 			if (card == event.getSrc()) {
-				System.out.println("DECREASE TURNS FOR EVENT: " + event);
 				event.decreaseTurns();
 				if (event.effectEnded()) {
 					System.out.println("END EFFECT: " + event);
@@ -114,7 +113,6 @@ public class RoundManager {
 	}
 
 	public void addEventClient(final Event event) {
-		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
 		animationManager.queueEventAnimation(event, new Runnable() {
@@ -127,7 +125,6 @@ public class RoundManager {
 
 	public Event addEventClient(final Effect effect, EventType eventType) {
 		Event event = new Event(effect, eventType);
-		System.out.println("RECEIVED EVENT: " + event.toString());
 		events.add(event);
 		eventHistory.addLast(event);
 		animationManager.queueEventAnimation(event, new Runnable() {

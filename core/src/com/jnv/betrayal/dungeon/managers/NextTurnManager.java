@@ -23,19 +23,15 @@ public class NextTurnManager {
 	}
 
 	public void nextTurn() {
-		System.out.println("nextTurn");
 		if (field.getAllCards().size() <= 1) {
-			System.out.println("FUCKER");
 			return;
 		}
 		Card nextCard;
 		while (true) {
 			for (int i = 0; i < backUpCards.size(); i++) {
 				//Finds the Current Cards turn
-				System.out.println("nextTurn SDFKL HAJSDFKJASHD KJLFHSDFJKLH");
 
 				if (backUpCards.get(i) == currentCard) {
-					System.out.println("FOUND PERSON WHO JUST DID THEIR TURN");
 					int j = (i + 1) % backUpCards.size();
 
 					//Looks for the next Cards turn, looping through and making sure
@@ -43,7 +39,6 @@ public class NextTurnManager {
 					while (true) {
 						if (field.getAllCards().contains(backUpCards.get(j))) {
 							nextCard = backUpCards.get(j);
-							System.out.println("FOUND NEW PERSON WHO SHOULD GO NEXT");
 							break;
 						}
 						j = (j + 1) % backUpCards.size();

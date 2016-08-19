@@ -109,8 +109,7 @@ public class YourTurn extends Turn {
 				new Confirmation(gsm.game, "Flee? 25% Chance") {
 					@Override
 					public void doAction() {
-						// TODO CHANGE BACK TO 25
-						attemptFlee(100, field.getCurrentCard());
+						attemptFlee(25, field.getCurrentCard());
 					}
 				};
 			}
@@ -119,7 +118,6 @@ public class YourTurn extends Turn {
 
 	public void attemptFlee(int fleeChance, Card card) {
 		panels.clear();
-		System.out.println("ATTEMPTING TO FLEE");
 		if (PlayerCard.canFlee(fleeChance)) {
 			Effect effect = new Flee(card);
 			field.roundManager.addEvent(effect, effect.getStartType());
@@ -221,7 +219,6 @@ public class YourTurn extends Turn {
 						doEvent(new WarriorSpecial(field.getCurrentCard(),
 								new ArrayList<Card>(field.getCardsSelected())), EventType.WARRIOR_SPECIAL);
 						counter = SPECIAL_COOLDOWN;
-						System.out.println("end");
 						field.endSelectMode();
 					}
 				}

@@ -545,7 +545,7 @@ public class ResourceLoader {
 				.name("run1")
 				.costBuy(500)
 				.description("50% Chance to Flee\n")
-				.effect(new com.jnv.betrayal.dungeon.effects.Run(0)) // todo CHANGE TO 50
+				.effect(new com.jnv.betrayal.dungeon.effects.Run(50))
 				.build();
 
 		new Run.RunFactory(res)
@@ -1011,7 +1011,6 @@ public class ResourceLoader {
 				.textureName("monster-tier1-3")
 				.health(6).attack(33).defense(200)
 				.textureWidth(450).textureHeight(400).x(135).y(740)
-				// todo high reward
 				.goldReward(800)
 				.numTargets(4)
 				.build();
@@ -1023,7 +1022,7 @@ public class ResourceLoader {
 				.health(60).attack(35).defense(6)
 				.textureWidth(300).textureHeight(350).x(210).y(740)
 				.goldReward(400)
-				.effect(new TrueDamage(30)).effectCooldown(2)		//todo FIX THIX
+				.effect(new TrueDamage(30)).effectCooldown(2)
 				.numTargets(1)
 				.build();
 		new Monster.MonsterFactory()

@@ -38,18 +38,15 @@ public class Dungeon extends GameState {
 			}
 		}
 		int tier = (int) Math.ceil(highestPartyMemberFloor / 5);
-		System.out.println("highestPartyMemberFloor = " + highestPartyMemberFloor);
-		System.out.println("tier = " + tier);
 		field.setBackgroundForField("map" + tier + "1");
 		if (game.getCurrentCharacter().getRoom().getRoomID() > 0) {
 			int MID = game.getCurrentCharacter().getRoom().getMonsterID();
 			int MT = game.getCurrentCharacter().getRoom().getMonsterTier();
-			MonsterManager monsterManager = new MonsterManager(MT, res, field, MID);
+			new MonsterManager(MT, res, field, MID);
 		} else {
-			MonsterManager monsterManager = new MonsterManager(tier, res, field);
+			new MonsterManager(tier, res, field);
 		}
 
-		System.out.println("All cards: " + field.getAllCards());
 		field.adjustPlayerCardStatsBasedOnJobs();
 		field.adjustMonsterHealth();        // Adjusts MonsterHealth according to number of players
 		stage.addActor(field);

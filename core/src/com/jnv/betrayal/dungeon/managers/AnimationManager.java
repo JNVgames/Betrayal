@@ -100,7 +100,6 @@ public class AnimationManager {
 				runnable = new Runnable() {
 					@Override
 					public void run() {
-						System.out.println("FLEE");
 						cardAnimation.flee(event.getSrc());
 					}
 				};
@@ -111,7 +110,6 @@ public class AnimationManager {
 				runnable = new Runnable() {
 					@Override
 					public void run() {
-						System.out.println("FAIL");
 						cardAnimation.failToFlee(event.getSrc());
 					}
 				};
@@ -264,7 +262,6 @@ public class AnimationManager {
 
 			/********************Consistent Effects*********************/
 			case C_POISON:
-				System.out.println("C_POISON");
 				runnable = new Runnable() {
 					@Override
 					public void run() {

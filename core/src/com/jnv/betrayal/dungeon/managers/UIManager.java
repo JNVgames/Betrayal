@@ -112,7 +112,6 @@ public class UIManager {
 	}
 
 	public void dungeonEndedClient() {
-		System.out.println("dungeonEndedClient");
 		for (Actor actor : panels.getChildren()) {
 			actor.setTouchable(Touchable.disabled);
 			actor.addAction(Actions.fadeOut(1));

@@ -59,7 +59,6 @@ public class SavedDataHandler {
 		try {
 			deadPlayers = data.getJSONArray("deadPlayers");
 
-			System.out.println(deadPlayers);
 			while (!deadPlayers.isNull(counter)) {
 				Character c = new Character(game.res);
 				c.fromJson(deadPlayers.getJSONObject(counter));
@@ -71,8 +70,6 @@ public class SavedDataHandler {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("---------------------LOADING---------------------");
-		System.out.println(alivePlayers);
 		game.loadCharacters(aliveCharacters, deadCharacters);
 	}
 
@@ -134,10 +131,6 @@ public class SavedDataHandler {
 		}
 		FileHandle file = Gdx.files.local("game.sav");
 		file.writeString(Base64Coder.encodeString(o.toString()), false);
-		System.out.println("----------SAVING--------");
-		System.out.println(alivePlayers);
-
-
 	}
 
 	public static String readFile(String filename) {

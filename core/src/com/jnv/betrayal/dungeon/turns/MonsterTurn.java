@@ -42,7 +42,6 @@ public class MonsterTurn extends Turn {
 				if (field.playerZone.size() != 0
 						&& field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()
 						&& field.getCurrentCard() instanceof MonsterCard) {
-					System.out.println("DOING MONSTER ATTACK");
 					monsterAttack();
 				}
 			}

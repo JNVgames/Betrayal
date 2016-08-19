@@ -40,7 +40,6 @@ public class Betrayal extends Game {
 	public SavedDataHandler savedDataHandler = new SavedDataHandler(this);
 
 	public void create() {
-		System.out.println("create");
 		init();
 
 		loader = new ResourceLoader(res);
@@ -70,7 +69,6 @@ public class Betrayal extends Game {
 	}
 
 	public void dispose() {
-		System.out.println("dispose");
 		stage.dispose();
 		res.dispose();
 		if (currentCharacter != null
@@ -82,13 +80,11 @@ public class Betrayal extends Game {
 	}
 
 	public void pause() {
-		System.out.println("pause");
 		gamePaused = true;
 		gsm.pause();
 	}
 
 	public void resume() {
-		System.out.println("resume");
 		if (gamePaused) {
 			gamePaused = false;
 			gsm.resume();
