@@ -384,9 +384,9 @@ public abstract class Card {
 							@Override
 							public void onConfirm() {
 								field.getClientCharacter().inventory.addGold(field.reward);        //gets your reward
-								field.getClientCharacter().stats.advanceFloor(game);
 								game.savedDataHandler.save();
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
+								field.getClientCharacter().stats.advanceFloor(game);
 							}
 						};
 						System.out.println("floor comp");

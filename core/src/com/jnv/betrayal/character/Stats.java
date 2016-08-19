@@ -152,7 +152,6 @@ public class Stats implements JsonSerializable {
 				extraGold = 2000;
 				break;
 			default:
-				availablePoints += 3;
 				break;
 		}
 		availablePoints += 3 + extraPoints;
