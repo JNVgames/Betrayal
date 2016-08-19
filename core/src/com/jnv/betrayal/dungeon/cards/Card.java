@@ -268,6 +268,18 @@ public abstract class Card {
 			if (field.playerZone.size() == 0) {
 				field.dungeonEnded();
 			}
+			if(card.getID() != field.getClientCharacter().getId()){
+				int moneygained = 0;
+				if (field.playerZone.size() == 0) {
+					moneygained = ((PlayerCard) this).getNetWorth();
+				} else {
+					moneygained = ((PlayerCard) this).getNetWorth() / field.playerZone.size();
+
+				}
+				field.getClientCharacter().inventory.addGold(moneygained);
+				new OKPopup(field.game, this.getName() + " died\n You found " + moneygained);
+			}
+
 		}
 		card.getCardName().setVisible(false);
 	}
@@ -349,15 +361,7 @@ public abstract class Card {
 			System.out.println("TEAMMATE");
 			//Teammate died
 			//field.removePlayerCard((PlayerCard) this);
-			int moneygained = 0;
-			if (field.playerZone.size() == 0) {
-				moneygained = ((PlayerCard) this).getNetWorth();
-			} else {
-				moneygained = ((PlayerCard) this).getNetWorth() / field.playerZone.size();
 
-			}
-			field.getClientCharacter().inventory.addGold(moneygained);
-			new OKPopup(field.game, this.getName() + " died\n You found " + moneygained);
 
 		} else if (this instanceof MonsterCard) {
 			System.out.println("MONSTER");

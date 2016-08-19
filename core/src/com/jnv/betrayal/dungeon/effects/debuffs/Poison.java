@@ -12,7 +12,7 @@ import java.util.List;
 public class Poison extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"
-			+ "Take damage equivalent\nto 10% of target's\ncurrent health for ";
+			+ "Deal true damage \nequal to 20% of target's\ntotal health for ";
 	private static final EventType startType = EventType.POISON;
 
 	public Poison(int turns) {
