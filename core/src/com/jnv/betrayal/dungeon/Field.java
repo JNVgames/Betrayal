@@ -122,7 +122,7 @@ public class Field extends Group {
 		float scale = 0.5f;
 		eventLogButton = new Image(res.getTexture("event-log-button"));
 		eventLogButton.layout();
-		eventLogButton.setBounds(444, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144 * scale);
+		eventLogButton.setBounds(10, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144 * scale);
 		eventLogButton.addListener(new InputListener(eventLogButton) {
 			@Override
 			public void doAction() {
