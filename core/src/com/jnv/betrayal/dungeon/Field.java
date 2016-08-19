@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.jnv.betrayal.character.Character;
+import com.jnv.betrayal.dungeon.animations.Timeline;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.cards.PlayerCard;
@@ -43,6 +44,7 @@ public class Field extends Group {
 	public final RoundManager roundManager;
 	public final UIManager uiManager;
 	public final AnimationManager animationManager;
+	public final Timeline timeline;
 	public final GameStateManager gsm;
 	public final BetrayalAssetManager res;
 	public final Betrayal game;
@@ -62,25 +64,31 @@ public class Field extends Group {
 	 */
 	public Field(GameStateManager gsm) {
 		// Initialize card zones and instance variables
-		System.out.println("CONSTRUCTOR");
 		playerZone = new ArrayList<PlayerCard>();
 		monsterZone = new ArrayList<MonsterCard>();
 		allCards = new ArrayList<Card>();
+
 		this.gsm = gsm;
 		game = gsm.game;
-		res = gsm.game.res;
-		socket = gsm.game.getCurrentCharacter().getRoom().getSocket();
-		clientCharacter = gsm.game.getCurrentCharacter();
+		res = game.res;
+		clientCharacter = game.getCurrentCharacter();
+
+		socket = clientCharacter.getRoom().getSocket();
 		if (socket != null && socket.connected()) configSocket();
+
 		reward = 0;
 		background = new Image(res.getTexture("map01"));
+
 		// Add things to stage
 		addActor(background);
 		addActor(cardGroup);
+
+		// Initialize managers
 		uiManager = new UIManager(this);
-		animationManager = new AnimationManager(res, this);
+		timeline = new Timeline(this);
+		animationManager = new AnimationManager(res);
 		nextTurnManager = new NextTurnManager(this);
-		roundManager = new RoundManager(animationManager);
+		roundManager = new RoundManager(animationManager, timeline);
 		roundManager.setSocket(socket);
 	}
 
@@ -105,7 +113,7 @@ public class Field extends Group {
 		if (!dungeonEnded) {
 			nextTurnManager.nextTurn();
 			roundManager.checkEvents(nextTurnManager.getCurrentCard());
-			animationManager.animate();
+			timeline.start();
 			uiManager.nextTurn();
 			System.out.println("Waiting for input...");
 		}

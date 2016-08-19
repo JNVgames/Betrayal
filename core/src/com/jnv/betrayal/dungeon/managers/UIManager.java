@@ -95,7 +95,7 @@ public class UIManager {
 		else {
 			currentTurn = yourTurn;
 			yourTurn.setFirstAppearance();
-			yourTurn.setInitialDelay(field.animationManager.getTotalAnimationDuration());
+			yourTurn.setInitialDelay(field.timeline.getTotalDuration());
 		}
 		currentTurn.draw();
 	}

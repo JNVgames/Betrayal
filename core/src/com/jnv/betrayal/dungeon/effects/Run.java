@@ -1,7 +1,9 @@
 package com.jnv.betrayal.dungeon.effects;
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.turns.YourTurn;
+import com.jnv.betrayal.dungeon.cards.PlayerCard;
+import com.jnv.betrayal.dungeon.effects.actions.FailedToFlee;
+import com.jnv.betrayal.dungeon.effects.actions.Flee;
 
 import org.json.JSONObject;
 
@@ -28,7 +30,11 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		if (src.getID() == src.getField().getClientCharacter().getId()) {
-			((YourTurn) src.getField().uiManager.getCurrentTurn()).attemptFlee(fleeChance);
+			if (PlayerCard.canFlee(fleeChance)) {
+				src.getField().roundManager.addEvent(new Flee(src), EventType.FLEE);
+			} else {
+				src.getField().roundManager.addEvent(new FailedToFlee(src), EventType.FAIL_TO_FLEE);
+			}
 		}
 	}
 
