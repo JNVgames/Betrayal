@@ -790,7 +790,7 @@ public class ResourceLoader {
 		new Helmet.HelmetFactory(res)
 				.id(color + 90) // id - 91 to 96
 				.name("headgear" + color + "1")
-				.costBuy(200)
+				.costBuy(100)
 				.defense(1)
 				.description("+1 Defense")
 				.build();
