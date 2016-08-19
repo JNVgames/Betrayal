@@ -28,6 +28,7 @@ public class Room {
 	private Lobby lobby;
 	private int monsterID, monsterTier;
 	private boolean isServerOnline;
+	private static final boolean testLocal = true;
 	private static final String ACTUAL_SERVER = "http://betrayal-server-jnvgames.herokuapp.com/";
 	private static final String MY_SERVER = "http://localhost:8080";
 
@@ -47,7 +48,9 @@ public class Room {
 	public void connectToServer() {
 		isServerOnline = true;
 		try {
-			URL url = new URL(ACTUAL_SERVER);
+			URL url;
+			if (testLocal) url = new URL(MY_SERVER);
+			else url = new URL(ACTUAL_SERVER);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
@@ -57,7 +60,8 @@ public class Room {
 		try {
 			// If socket is already connected, don't make a new socket
 			if (socket == null || !socket.connected()) {
-				socket = IO.socket(ACTUAL_SERVER);
+				if (testLocal) socket = IO.socket(MY_SERVER);
+				else socket = IO.socket(ACTUAL_SERVER);
 				socket.connect();
 			}
 		} catch (Exception e) {

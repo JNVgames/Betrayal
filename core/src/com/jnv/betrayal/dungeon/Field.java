@@ -256,6 +256,7 @@ public class Field extends Group {
 					for (int i = 0; i < destArray.length(); i++) {
 						dstID.add(destArray.getInt(i));
 					}
+					System.out.println("DSTIsdasdasdffFUYCKJFUCKFSDFUFBITCHFUCKINGSHITTTffaD" + dstID);
 
 					// FInd Card corresponding to id
 					Card src = findSrcCard(srcID);

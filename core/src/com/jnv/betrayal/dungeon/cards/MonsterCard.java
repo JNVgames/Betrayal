@@ -6,8 +6,8 @@ package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.gameobjects.Monster;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
@@ -55,7 +55,7 @@ public class MonsterCard extends Card {
 		initializeCardListener();
 		cardName = new Label(name, FontManager.getFont40());
 		cardName.setX(50);
-		cardName.setY(group.getHeight()-10);
+		cardName.setY(group.getHeight() - 10);
 		group.addActor(cardName);
 	}
 
@@ -63,7 +63,7 @@ public class MonsterCard extends Card {
 		return numAttackTargets;
 	}
 
-	public boolean hasEffect(){
+	public boolean hasEffect() {
 		return effect != null;
 	}
 
@@ -97,7 +97,7 @@ public class MonsterCard extends Card {
 
 	@Override
 	public int getID() {
-		return 0;
+		return monster.getID();
 	}
 
 	@Override

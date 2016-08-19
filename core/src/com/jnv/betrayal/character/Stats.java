@@ -132,7 +132,7 @@ public class Stats implements JsonSerializable {
 	public OKPopup advanceFloor(Betrayal game) {
 		OKPopup extraPointsNotif;
 		if (floor >= 25) return null;
-		floor++; //todo add back delete other\
+		floor++; //todo add back delete other
 
 		int extraPoints = 0, extraGold = 0;
 		switch (floor) {
