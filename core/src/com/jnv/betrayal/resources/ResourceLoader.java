@@ -727,7 +727,7 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(121)
 				.name("ring14")
-				.costBuy(2250)
+				.costBuy(2000)
 				.health(5)
 				.attack(5)
 				.defense(0)
@@ -747,10 +747,10 @@ public class ResourceLoader {
 		new Ring.RingFactory(res)
 				.id(123)
 				.name("ring15")
-				.costBuy(2250)
-				.health(0)
+				.costBuy(2000)
+				.health(5)
 				.attack(0)
-				.defense(0)
+				.defense(5)
 				.description("+5 defense, \n+5 health")
 				.build();
 
@@ -768,20 +768,20 @@ public class ResourceLoader {
 				.id(125)
 				.name("ring16")
 				.costBuy(2500)
-				.health(0)
-				.attack(0)
-				.defense(0)
-				.description("+10 attack, \n+10 defense, \n+10 health")
+				.health(5)
+				.attack(5)
+				.defense(5)
+				.description("+5 attack, \n+5 defense, \n+5 health")
 				.build();
 
 		new Ring.RingFactory(res)
 				.id(126)
 				.name("ring26")
 				.costBuy(5000)
-				.health(20)
-				.attack(20)
-				.defense(20)
-				.description("+20 attack, \n+20 defense, \n+20 health")
+				.health(10)
+				.attack(10)
+				.defense(10)
+				.description("+10 attack, \n+10 defense, \n+10 health")
 				.build();
 	}
 
@@ -892,14 +892,14 @@ public class ResourceLoader {
 				.name("shield" + color + "3")
 				.costBuy(2200)
 				.defense(12)
-				.description("+12 Defense")
+				.description("+11 Defense")
 				.build();
 		new Shield.ShieldFactory(res)
 				.id(color + 48) // id - 49 to 54
 				.name("shield" + color + "4")
 				.costBuy(3500)
 				.defense(18)
-				.description("+18 Defense")
+				.description("+15 Defense")
 				.build();
 
 		new Shield.ShieldFactory(res)
@@ -907,7 +907,7 @@ public class ResourceLoader {
 				.name("shield" + color + "5")
 				.costBuy(5000)
 				.defense(25)
-				.description("+25 Defense")
+				.description("+20 Defense")
 				.build();
 	}
 
@@ -1177,7 +1177,7 @@ public class ResourceLoader {
 				.id(18)
 				.nickname("Purple Delight")
 				.textureName("monster-tier2-6")
-				.health(72).attack(58).defense(4)
+				.health(74).attack(58).defense(9)
 				.textureWidth(500).textureHeight(500).x(110).y(640)
 				.goldReward(900)
 				.numTargets(4).effectCooldown(2)
@@ -1258,8 +1258,8 @@ public class ResourceLoader {
 				.health(160).attack(67).defense(33)
 				.textureWidth(600).textureHeight(500).x(60).y(640)
 				.goldReward(1800)
-				.numTargets(2).effectCooldown(3)
-				.effect(new Poison(3)).effectCooldown(3).skillTextureName("monsterpoison")
+				.numTargets(2).effectCooldown(2)
+				.effect(new Poison(2)).effectCooldown(2).skillTextureName("monsterpoison")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1270,7 +1270,6 @@ public class ResourceLoader {
 				.textureWidth(400).textureHeight(450).x(0).y(690)
 				.goldReward(1600)
 				.numTargets(1).effectCooldown(3)
-				.effect(new DefenseDown(30,2)).skillTextureName("monstershieldbreak")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1309,11 +1308,11 @@ public class ResourceLoader {
 				.id(30)
 				.nickname("Envious Kevin")
 				.textureName("monster-tier3-6")
-				.health(110).attack(28).defense(38)
+				.health(110).attack(71).defense(38)
 				.textureWidth(500).textureHeight(500).x(110).y(670)
 				.goldReward(1900)
 				.numTargets(1).effectCooldown(3)
-				.effect(new Heal(40)).skillTextureName("monsterheal")
+				.effect(new Heal(50)).skillTextureName("monsterheal")
 				.build();
 		new Monster.MonsterFactory()
 				.assetManager(res)
@@ -1343,7 +1342,7 @@ public class ResourceLoader {
 				.assetManager(res)
 				.id(33)
 				.nickname("Ghost Rider")
-				.textureName("monster-tier3-8").skillTextureName("monsterpowerdown")
+				.textureName("monster-tier3-8")
 				.health(80).attack(53).defense(13)
 				.textureWidth(400).textureHeight(400).x(160).y(750)
 				.goldReward(600)
