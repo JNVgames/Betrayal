@@ -18,7 +18,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class MonsterCard extends Card {
+public class MonsterCard extends Card {
 
 	private List<EventType> allActions;
 	private int actionIndex;

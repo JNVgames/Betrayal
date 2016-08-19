@@ -14,7 +14,7 @@ import org.json.JSONObject;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Manages a character's stats
  */
 public class Stats implements JsonSerializable {

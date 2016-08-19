@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Holds x, y, width, and height values. Used mainly for actor positioning. Can be used for Betrayal Actor setBounds()
  * for convenience
  */

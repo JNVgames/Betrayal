@@ -16,7 +16,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class Dungeon extends GameState {
+public class Dungeon extends GameState {
 
 	private Field field;
 

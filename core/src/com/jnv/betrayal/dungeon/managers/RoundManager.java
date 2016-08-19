@@ -18,7 +18,7 @@ import io.socket.client.Socket;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class RoundManager {
+public class RoundManager {
 
 	private ArrayList<Event> events;
 	private AnimationManager animationManager;

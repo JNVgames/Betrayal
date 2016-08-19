@@ -7,7 +7,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic abstract class Equip extends Item {
+public abstract class Equip extends Item {
 
 	protected int attack, defense, health;
 

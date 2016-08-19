@@ -15,7 +15,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class AttackUp extends Effect {
+public class AttackUp extends Effect {
 
 	private static final EventType startEventType = EventType.BUFF_ATTACK;
 	private static final EventType endEventType = EventType.E_BUFF_ATTACK;

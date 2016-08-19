@@ -14,7 +14,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class Poison extends Effect {
+public class Poison extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"
 			+ "Deal true damage \nequal to 20% of target's\ntotal health for ";

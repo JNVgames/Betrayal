@@ -1,8 +1,6 @@
 package com.jnv.betrayal.dungeon.utils;
 
 import com.jnv.betrayal.dungeon.cards.Card;
-import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.EventType;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class EventLogStringGenerator {
+public class EventLogStringGenerator {
 
 	public static String generate(Card src, List<Card> dest, EventType eventType) {
 		String generated = "";

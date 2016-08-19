@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
 import com.jnv.betrayal.character.Character;
-import com.jnv.betrayal.gamestates.Lobby;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.online.Room;
 import com.jnv.betrayal.popup.CreateRoomPopup;
@@ -26,7 +25,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class PartyRoom extends Popup {
+public class PartyRoom extends Popup {
 
 	public final Image partyBackground, lobbyButton, createRoom, leaveRoom, joinRoom;
 	public final Label partyTitle;

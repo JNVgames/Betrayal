@@ -11,7 +11,7 @@ import com.jnv.betrayal.scene2d.ui.Image;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-lass EquipLoader {
+class EquipLoader {
 
 	private Inventory inventory;
 	private Character character;

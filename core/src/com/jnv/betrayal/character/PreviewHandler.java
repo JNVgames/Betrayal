@@ -10,7 +10,7 @@ import com.jnv.betrayal.character.utils.PreviewSlot;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Helper methods for the character's preview class
  */
 class PreviewHandler {

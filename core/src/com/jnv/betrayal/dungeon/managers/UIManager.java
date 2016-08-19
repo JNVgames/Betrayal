@@ -26,7 +26,7 @@ import io.socket.client.Socket;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Keeps track of user/party member/monster's turns.
  */
 public class UIManager {

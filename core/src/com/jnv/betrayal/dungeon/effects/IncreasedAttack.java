@@ -13,7 +13,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class IncreasedAttack extends Effect {
+public class IncreasedAttack extends Effect {
 
 	private static final EventType sType = EventType.ATTACK;
 	private int attack;

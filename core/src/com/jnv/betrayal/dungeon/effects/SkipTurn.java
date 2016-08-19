@@ -12,7 +12,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class SkipTurn extends Effect {
+public class SkipTurn extends Effect {
 
 	private static final EventType sType = EventType.SKIP_TURN;
 

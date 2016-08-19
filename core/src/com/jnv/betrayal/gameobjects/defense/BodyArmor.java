@@ -11,7 +11,7 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class BodyArmor extends Equip implements Previewable {
+public class BodyArmor extends Equip implements Previewable {
 
 	private Texture preview;
 

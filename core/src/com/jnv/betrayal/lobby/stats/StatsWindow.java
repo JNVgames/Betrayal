@@ -22,7 +22,7 @@ import com.jnv.betrayal.scene2d.InputListener;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class StatsWindow extends Popup {
+public class StatsWindow extends Popup {
 
 	private Image lobbyButton, applyButton, background;
 	private Image[] icons, statPlusButtons, statMinusButtons;

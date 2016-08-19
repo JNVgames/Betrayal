@@ -13,7 +13,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class Died extends Effect {
+public class Died extends Effect {
 
 	private static final EventType sType = EventType.DIED;
 

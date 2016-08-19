@@ -7,7 +7,7 @@ import com.jnv.betrayal.scene2d.Dimension;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-inal class CharacterChart {
+final class CharacterChart {
 
 	static final int SLOTS = 7;
 	static final float LENGTH = 92;

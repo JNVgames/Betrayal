@@ -15,7 +15,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class TrueDamage extends Effect {
+public class TrueDamage extends Effect {
 
 	private static final EventType startEventType = EventType.TRUE_DAMAGE;
 	private int damage;

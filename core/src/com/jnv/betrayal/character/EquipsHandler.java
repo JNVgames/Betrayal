@@ -12,7 +12,7 @@ import com.jnv.betrayal.gameobjects.special.Ring;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Helpers for character equips class
  */
 class EquipsHandler {

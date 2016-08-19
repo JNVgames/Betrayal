@@ -16,7 +16,7 @@ import java.util.Random;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-**
+/**
  * Holds information regarding a game character's traits
  */
 public class Character implements JsonSerializable {

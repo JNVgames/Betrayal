@@ -1,9 +1,9 @@
 package com.jnv.betrayal.dungeon.effects.buffs;
 
 
-import com.jnv.betrayal.dungeon.effects.EventType;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
+import com.jnv.betrayal.dungeon.effects.EventType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +15,7 @@ import java.util.List;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class DefenseUp extends Effect {
+public class DefenseUp extends Effect {
 
 	private static final EventType startEventType = EventType.BUFF_DEFENSE;
 	private static final EventType endEventType = EventType.E_BUFF_DEFENSE;

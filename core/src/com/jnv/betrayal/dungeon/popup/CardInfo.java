@@ -17,7 +17,7 @@ import com.jnv.betrayal.scene2d.ui.LabelUtils;
  * Co-authors: Vincent Wang, Joseph Phan
  */
 
-ublic class CardInfo extends OKPopup {
+public class CardInfo extends OKPopup {
 
 	private Image okayButton, background;
 	private String stats, name;
