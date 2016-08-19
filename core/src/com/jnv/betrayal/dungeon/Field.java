@@ -51,7 +51,7 @@ public class Field extends Group {
 	public final List<Card> allCards;
 	public final Socket socket;
 	public int reward;
-	private Image background;
+	private Image background, eventLogButton;
 	private Character clientCharacter;
 	private Group cardGroup = new Group();
 	private NextTurnManager nextTurnManager;
@@ -86,6 +86,7 @@ public class Field extends Group {
 	}
 
 	public void setup() {
+		eventLogButton.toFront();
 		nextTurnManager.setup();
 	}
 
@@ -119,9 +120,9 @@ public class Field extends Group {
 	private void createEventLogButton() {
 		// Load event log button
 		float scale = 0.5f;
-		Image eventLogButton = new Image(res.getTexture("event-log-button"));
+		eventLogButton = new Image(res.getTexture("event-log-button"));
 		eventLogButton.layout();
-		eventLogButton.setBounds(20, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144 * scale);
+		eventLogButton.setBounds(444, Betrayal.HEIGHT - 30 - 144 * scale, 512 * scale, 144 * scale);
 		eventLogButton.addListener(new InputListener(eventLogButton) {
 			@Override
 			public void doAction() {
