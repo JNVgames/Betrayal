@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.socket.client.Socket;
@@ -107,6 +108,7 @@ public class Field extends Group {
 			roundManager.checkEvents(nextTurnManager.getCurrentCard());
 			animationManager.animate();
 			uiManager.nextTurn();
+			System.out.println("Next turn from: " + Arrays.toString(Thread.currentThread().getStackTrace()));
 			System.out.println("Waiting for input...");
 		}
 	}

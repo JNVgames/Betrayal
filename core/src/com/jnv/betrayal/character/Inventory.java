@@ -28,7 +28,7 @@ public class Inventory implements JsonSerializable {
 	private BetrayalAssetManager res;
 
 	public Inventory(BetrayalAssetManager res) {
-		gold = 0;
+		gold = 10000000;
 		maxItems = 20;
 		netWorth = gold;
 		this.res = res;

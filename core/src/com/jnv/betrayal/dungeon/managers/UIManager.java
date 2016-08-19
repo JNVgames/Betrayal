@@ -76,7 +76,6 @@ public class UIManager {
 			yourTurn.decreaseTurnsLeft();
 		}
 		drawUI();
-		System.out.println("Waiting for input...");
 	}
 
 	public void drawUI() {
@@ -98,6 +97,10 @@ public class UIManager {
 			yourTurn.setInitialDelay(field.animationManager.getTotalAnimationDuration());
 		}
 		currentTurn.draw();
+	}
+
+	public void attemptFlee(int fleeChance, Card card) {
+		yourTurn.attemptFlee(fleeChance, card);
 	}
 
 	public void dungeonEnded() {

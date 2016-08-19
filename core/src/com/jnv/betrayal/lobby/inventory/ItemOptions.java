@@ -7,7 +7,6 @@ package com.jnv.betrayal.lobby.inventory;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.effects.Effect;
-import com.jnv.betrayal.dungeon.effects.Run;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
@@ -131,12 +130,9 @@ class ItemOptions extends Popup {
 						effect.setDest(dest);
 						remove();
 						((DungeonInventory) inventory).remove();
-						if (!(effect instanceof Run)) {
-							src.getField().roundManager.addEvent(effect, effect.getStartType());
-							src.getField().nextTurn();
-						} else {
-							src.getField().roundManager.addEventClient(effect, effect.getStartType());
-						}
+
+						src.getField().roundManager.addEvent(effect, effect.getStartType());
+						src.getField().nextTurn();
 					}
 				});
 				break;

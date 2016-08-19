@@ -28,7 +28,7 @@ public class Run extends Effect {
 	@Override
 	public void startEffect(Card destCard) {
 		if (src.getID() == src.getField().getClientCharacter().getId()) {
-			((YourTurn) src.getField().uiManager.getCurrentTurn()).attemptFlee(fleeChance);
+			src.getField().uiManager.attemptFlee(fleeChance, src);
 		}
 	}
 
