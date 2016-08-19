@@ -8,6 +8,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public abstract class Effect {
 
 	protected Card src;

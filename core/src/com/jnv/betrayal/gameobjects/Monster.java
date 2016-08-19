@@ -4,6 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class Monster {
 
 	private Texture monsterTexture, skillTexture;

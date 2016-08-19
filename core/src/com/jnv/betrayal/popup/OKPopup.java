@@ -8,6 +8,11 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class OKPopup extends Popup {
 
 	private int x = 150, y = 500, width = Betrayal.WIDTH - 300, height = Betrayal.HEIGHT - 1000;

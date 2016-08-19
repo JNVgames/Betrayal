@@ -1,8 +1,9 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.inventory;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 enum Option {
 	Equip(" Equip"),

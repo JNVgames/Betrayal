@@ -8,6 +8,11 @@ import com.jnv.betrayal.popup.Popup;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class ShopRingPurchase extends Popup {
 
 	private Image backButton, background, goldIcon, buyButton;

@@ -14,6 +14,11 @@ import com.jnv.betrayal.scene2d.ui.LabelUtils;
 
 import java.util.Deque;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class EventLog extends Popup {
 
 	private Image okayButton;

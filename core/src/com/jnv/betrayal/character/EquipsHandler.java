@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.EquipSlot;
@@ -11,7 +7,12 @@ import com.jnv.betrayal.gameobjects.defense.Helmet;
 import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.special.Ring;
 
-/**
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+**
  * Helpers for character equips class
  */
 class EquipsHandler {

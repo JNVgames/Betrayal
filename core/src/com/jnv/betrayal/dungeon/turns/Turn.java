@@ -14,6 +14,11 @@ import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public abstract class Turn {
 
 	protected Field field;

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -18,6 +14,11 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 /**
  * Manages a character's preview

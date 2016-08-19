@@ -7,7 +7,12 @@ import com.jnv.betrayal.dungeon.effects.EventType;
 
 import java.util.List;
 
-public class EventLogStringGenerator {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class EventLogStringGenerator {
 
 	public static String generate(Card src, List<Card> dest, EventType eventType) {
 		String generated = "";

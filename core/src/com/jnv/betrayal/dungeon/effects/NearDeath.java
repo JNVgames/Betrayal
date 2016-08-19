@@ -8,6 +8,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class NearDeath extends Effect {
 
 	private static final EventType sType = EventType.ATTACK;

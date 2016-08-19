@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gameobjects;
 
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public abstract class Usables extends Item {
 

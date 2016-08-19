@@ -1,8 +1,9 @@
+package com.jnv.betrayal.character.utils;
 /*
- * Copyright (c) 2015. JNV Games, All rights reserved.
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
  */
 
-package com.jnv.betrayal.character.utils;
 //
 //public final class Jobs {
 //	public static final int WARRIOR = 0;

@@ -8,7 +8,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Died extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class Died extends Effect {
 
 	private static final EventType sType = EventType.DIED;
 

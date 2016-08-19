@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.animations;
 
 import com.badlogic.gdx.graphics.Color;
@@ -15,6 +11,11 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.ui.Image;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class CardAnimation {
 

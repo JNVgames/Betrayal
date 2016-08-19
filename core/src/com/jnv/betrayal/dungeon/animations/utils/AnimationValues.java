@@ -1,5 +1,10 @@
 package com.jnv.betrayal.dungeon.animations.utils;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public final class AnimationValues {
 
 	public static final float DAMAGED_DURATION = 1;

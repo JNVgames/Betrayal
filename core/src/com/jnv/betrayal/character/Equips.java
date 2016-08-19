@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +20,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 /**
  * Manages the character's equips

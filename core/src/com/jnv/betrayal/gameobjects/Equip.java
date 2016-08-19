@@ -1,12 +1,13 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gameobjects;
 
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
-public abstract class Equip extends Item {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic abstract class Equip extends Item {
 
 	protected int attack, defense, health;
 

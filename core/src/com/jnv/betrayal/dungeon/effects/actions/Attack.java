@@ -11,6 +11,11 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class Attack extends Effect {
 
 	private int attack;

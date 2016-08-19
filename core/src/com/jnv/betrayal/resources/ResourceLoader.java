@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.resources;
 
 import com.jnv.betrayal.dungeon.effects.IncreasedAttack;
@@ -25,6 +21,11 @@ import com.jnv.betrayal.gameobjects.special.Cloak;
 import com.jnv.betrayal.gameobjects.special.Ring;
 import com.jnv.betrayal.gameobjects.usables.Potion;
 import com.jnv.betrayal.gameobjects.usables.Run;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class ResourceLoader {
 

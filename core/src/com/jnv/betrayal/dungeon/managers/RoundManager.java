@@ -13,7 +13,12 @@ import java.util.List;
 
 import io.socket.client.Socket;
 
-public class RoundManager {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class RoundManager {
 
 	private ArrayList<Event> events;
 	private AnimationManager animationManager;

@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.utils;
 
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.scene2d.Dimension;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public final class Panel {
 

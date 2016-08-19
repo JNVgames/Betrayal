@@ -5,6 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.scene2d.ui.Image;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class WhiteBoxOutline {
     protected Betrayal game;
     protected BetrayalAssetManager res;

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,6 +7,11 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class GameOver extends GameState {
 

@@ -31,6 +31,11 @@ import com.jnv.betrayal.scene2d.ui.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class YourTurn extends Turn {
 
 	public static final float INITIAL_DELAY = 1.5f;

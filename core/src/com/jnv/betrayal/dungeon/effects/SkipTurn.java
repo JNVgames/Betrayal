@@ -7,7 +7,12 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class SkipTurn extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class SkipTurn extends Effect {
 
 	private static final EventType sType = EventType.SKIP_TURN;
 

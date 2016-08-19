@@ -21,7 +21,12 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import io.socket.client.Socket;
 
-/**
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+**
  * Keeps track of user/party member/monster's turns.
  */
 public class UIManager {

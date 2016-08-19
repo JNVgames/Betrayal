@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.inventory;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +9,11 @@ import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.scene2d.Dimension;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 class ItemLoader {
 

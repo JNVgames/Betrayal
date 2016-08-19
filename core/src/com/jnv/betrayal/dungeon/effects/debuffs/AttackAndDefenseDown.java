@@ -10,6 +10,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class AttackAndDefenseDown extends Effect {
 
 	private static final EventType startEventType = EventType.DEBUFF_ATTACK_DEFENSE;

@@ -9,6 +9,11 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class Cloak extends Equip implements Previewable {
 
 	private Texture preview;

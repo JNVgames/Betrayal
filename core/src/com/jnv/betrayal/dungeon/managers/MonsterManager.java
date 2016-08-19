@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.managers;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -14,6 +10,11 @@ import com.jnv.betrayal.resources.BetrayalAssetManager;
 import com.jnv.betrayal.scene2d.InputListener;
 
 import java.util.Random;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class MonsterManager {
 

@@ -1,5 +1,10 @@
 package com.jnv.betrayal.dungeon.effects;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public enum EventType {
 	NONE(),
 	ATTACK("attacked"),

@@ -8,7 +8,12 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class IncreasedAttack extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class IncreasedAttack extends Effect {
 
 	private static final EventType sType = EventType.ATTACK;
 	private int attack;

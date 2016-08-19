@@ -11,6 +11,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class FailedToFlee extends Effect {
 
 	private static final EventType startEventType = EventType.FAIL_TO_FLEE;

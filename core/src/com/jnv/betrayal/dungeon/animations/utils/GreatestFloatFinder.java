@@ -1,6 +1,11 @@
 package com.jnv.betrayal.dungeon.animations.utils;
 
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 /**
  * Finds the Largest value from a set of values
  */

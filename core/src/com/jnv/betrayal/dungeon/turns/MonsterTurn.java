@@ -19,6 +19,11 @@ import com.jnv.betrayal.scene2d.ui.Label;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class MonsterTurn extends Turn {
 
 	public MonsterTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {

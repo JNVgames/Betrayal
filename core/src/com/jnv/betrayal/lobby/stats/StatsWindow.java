@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.stats;
 
 import com.badlogic.gdx.graphics.Color;
@@ -21,7 +17,12 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.WhiteBoxOutline;
 import com.jnv.betrayal.scene2d.InputListener;
 
-public class StatsWindow extends Popup {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class StatsWindow extends Popup {
 
 	private Image lobbyButton, applyButton, background;
 	private Image[] icons, statPlusButtons, statMinusButtons;

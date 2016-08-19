@@ -6,6 +6,11 @@ import com.jnv.betrayal.dungeon.cards.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class NextTurnManager {
 
 	private Field field;

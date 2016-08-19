@@ -6,6 +6,11 @@ import com.jnv.betrayal.character.Character;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.scene2d.ui.Image;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public interface InventoryLoadable {
 
 	Label getTitleActor();

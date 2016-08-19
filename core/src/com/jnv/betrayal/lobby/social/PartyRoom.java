@@ -21,7 +21,12 @@ import com.jnv.betrayal.scene2d.ui.ScrollPane;
 
 import java.util.List;
 
-public class PartyRoom extends Popup {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class PartyRoom extends Popup {
 
 	public final Image partyBackground, lobbyButton, createRoom, leaveRoom, joinRoom;
 	public final Label partyTitle;

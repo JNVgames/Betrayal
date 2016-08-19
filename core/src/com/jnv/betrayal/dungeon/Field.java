@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -38,6 +34,11 @@ import java.util.List;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Field extends Group {
 

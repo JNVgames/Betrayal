@@ -9,6 +9,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class Poisoned extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"

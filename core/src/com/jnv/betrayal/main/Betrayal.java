@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.main;
 
 import com.badlogic.gdx.Game;
@@ -20,6 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.socket.client.Socket;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Betrayal extends Game {
 

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -25,6 +21,11 @@ import com.jnv.betrayal.scene2d.InputListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class HallOfFame extends GameState {
 

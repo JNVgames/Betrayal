@@ -9,7 +9,12 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class Poison extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class Poison extends Effect {
 
 	private static final String DESCRIPTION = "Poison\n"
 			+ "Deal true damage \nequal to 20% of target's\ntotal health for ";

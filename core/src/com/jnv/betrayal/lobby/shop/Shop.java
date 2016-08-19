@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.shop;
 
 import com.badlogic.gdx.Gdx;
@@ -28,6 +24,11 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.WhiteBoxOutline;
 import com.jnv.betrayal.scene2d.Actor;
 import com.jnv.betrayal.scene2d.InputListener;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Shop extends Popup {
 

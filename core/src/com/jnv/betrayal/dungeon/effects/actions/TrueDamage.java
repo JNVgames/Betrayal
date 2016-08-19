@@ -10,7 +10,12 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class TrueDamage extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class TrueDamage extends Effect {
 
 	private static final EventType startEventType = EventType.TRUE_DAMAGE;
 	private int damage;

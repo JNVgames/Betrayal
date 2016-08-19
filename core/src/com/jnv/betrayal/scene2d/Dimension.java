@@ -1,12 +1,13 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.scene2d;
 
 import com.badlogic.gdx.math.Vector2;
 
-/**
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+**
  * Holds x, y, width, and height values. Used mainly for actor positioning. Can be used for Betrayal Actor setBounds()
  * for convenience
  */

@@ -10,7 +10,12 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class DefenseUp extends Effect {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class DefenseUp extends Effect {
 
 	private static final EventType startEventType = EventType.BUFF_DEFENSE;
 	private static final EventType endEventType = EventType.E_BUFF_DEFENSE;

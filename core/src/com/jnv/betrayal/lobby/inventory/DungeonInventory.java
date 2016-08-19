@@ -11,6 +11,11 @@ import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class DungeonInventory extends Popup implements InventoryLoadable {
 
 	private Field field;

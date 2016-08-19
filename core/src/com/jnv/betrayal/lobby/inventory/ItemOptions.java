@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -22,6 +18,11 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 class ItemOptions extends Popup {
 

@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.jnv.betrayal.main.Betrayal;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public final class DungeonCoords {
 

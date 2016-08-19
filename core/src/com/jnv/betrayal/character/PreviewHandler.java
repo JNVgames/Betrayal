@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.character;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -9,7 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.jnv.betrayal.character.utils.Gender;
 import com.jnv.betrayal.character.utils.PreviewSlot;
 
-/**
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+**
  * Helper methods for the character's preview class
  */
 class PreviewHandler {

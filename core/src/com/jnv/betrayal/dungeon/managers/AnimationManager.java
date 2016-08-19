@@ -12,6 +12,11 @@ import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.turns.YourTurn;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class AnimationManager {
 
 	private CardAnimation cardAnimation;

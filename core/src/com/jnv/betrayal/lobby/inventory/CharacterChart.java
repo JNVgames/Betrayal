@@ -1,12 +1,13 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.inventory;
 
 import com.jnv.betrayal.scene2d.Dimension;
 
-final class CharacterChart {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+inal class CharacterChart {
 
 	static final int SLOTS = 7;
 	static final float LENGTH = 92;

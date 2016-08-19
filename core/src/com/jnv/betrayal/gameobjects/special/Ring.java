@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gameobjects.special;
 
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Ring extends Equip {
 

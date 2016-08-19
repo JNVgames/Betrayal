@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.popup;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +15,11 @@ import com.jnv.betrayal.resources.WhiteBoxOutline;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Instructions extends Popup {
 

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.character;
 
 import com.jnv.betrayal.character.utils.Gender;
@@ -15,7 +11,12 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-/**
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+**
  * Holds information regarding a game character's traits
  */
 public class Character implements JsonSerializable {

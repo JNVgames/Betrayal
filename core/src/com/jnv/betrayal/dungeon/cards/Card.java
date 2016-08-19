@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -27,6 +23,11 @@ import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public abstract class Card {
 

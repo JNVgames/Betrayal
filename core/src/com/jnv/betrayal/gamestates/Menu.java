@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -21,6 +17,11 @@ import com.jnv.betrayal.popup.Options;
 import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.resources.SavedDataHandler;
 import com.jnv.betrayal.scene2d.InputListener;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Menu extends GameState {
 

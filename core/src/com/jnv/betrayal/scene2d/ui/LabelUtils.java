@@ -1,5 +1,10 @@
 package com.jnv.betrayal.scene2d.ui;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public final class LabelUtils {
 
 	public static void splitLabelString(String string,

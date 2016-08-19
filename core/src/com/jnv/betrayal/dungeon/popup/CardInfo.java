@@ -12,7 +12,12 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.LabelUtils;
 
-public class CardInfo extends OKPopup {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class CardInfo extends OKPopup {
 
 	private Image okayButton, background;
 	private String stats, name;

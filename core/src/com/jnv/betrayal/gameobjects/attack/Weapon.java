@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gameobjects.attack;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +5,11 @@ import com.jnv.betrayal.gameobjects.DualWieldable;
 import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.ItemNaming;
 import com.jnv.betrayal.resources.BetrayalAssetManager;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class Weapon extends Equip implements DualWieldable {
 

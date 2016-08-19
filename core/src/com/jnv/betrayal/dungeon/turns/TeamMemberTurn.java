@@ -9,6 +9,11 @@ import com.jnv.betrayal.resources.FontManager;
 import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
 public class TeamMemberTurn extends Turn {
 
 	public TeamMemberTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {

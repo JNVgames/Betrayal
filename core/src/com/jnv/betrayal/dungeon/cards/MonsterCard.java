@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.dungeon.cards;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -17,7 +13,12 @@ import com.jnv.betrayal.scene2d.ui.Label;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonsterCard extends Card {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class MonsterCard extends Card {
 
 	private List<EventType> allActions;
 	private int actionIndex;

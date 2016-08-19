@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.resources;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -9,6 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Monster;
+
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
 
 public class BetrayalAssetManager extends AssetManager {
 

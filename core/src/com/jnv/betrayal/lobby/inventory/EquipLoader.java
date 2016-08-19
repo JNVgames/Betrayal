@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.lobby.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -10,7 +6,12 @@ import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.scene2d.InputListener;
 import com.jnv.betrayal.scene2d.ui.Image;
 
-class EquipLoader {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+lass EquipLoader {
 
 	private Inventory inventory;
 	private Character character;

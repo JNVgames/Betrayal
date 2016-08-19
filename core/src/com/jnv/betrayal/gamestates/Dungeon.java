@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015. JNV Games, All rights reserved.
- */
-
 package com.jnv.betrayal.gamestates;
 
 import com.badlogic.gdx.Gdx;
@@ -15,7 +11,12 @@ import com.jnv.betrayal.dungeon.utils.DungeonCoords;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dungeon extends GameState {
+/*
+ * Copyright (c) 2016. JNV Games.
+ * Co-authors: Vincent Wang, Joseph Phan
+ */
+
+ublic class Dungeon extends GameState {
 
 	private Field field;
 
