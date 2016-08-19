@@ -4,7 +4,6 @@
 
 package com.jnv.betrayal.character;
 
-import com.jnv.betrayal.gameobjects.Equip;
 import com.jnv.betrayal.gameobjects.Item;
 import com.jnv.betrayal.gameobjects.Usables;
 import com.jnv.betrayal.online.JsonSerializable;
@@ -28,7 +27,7 @@ public class Inventory implements JsonSerializable {
 	private BetrayalAssetManager res;
 
 	public Inventory(BetrayalAssetManager res) {
-		gold = 10000000;
+		gold = 0;
 		maxItems = 20;
 		netWorth = gold;
 		this.res = res;
