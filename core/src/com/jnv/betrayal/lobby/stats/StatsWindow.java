@@ -63,7 +63,7 @@ public class StatsWindow extends Popup {
 			});
 			Group group = new Group();
 			popup.addActor(group);
-			new WhiteBoxOutline(game, group, hair.getPrefWidth() + 15, hair.getPrefHeight() + 8, 3, hair.getX() - 7, hair.getY() - 7);
+			new WhiteBoxOutline(game, group, hair.getPrefWidth() + 35, hair.getPrefHeight() + 8, 3, hair.getX() - 7, hair.getY() - 7);
 			popup.addActor(hair);
 		}
 	}
