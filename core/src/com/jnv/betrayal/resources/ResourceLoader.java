@@ -544,7 +544,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(140)
 				.name("run1")
-				.costBuy(500)
+				.costBuy(250)
 				.description("50% Chance to Flee\n")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(50))
 				.build();
@@ -552,7 +552,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(141)
 				.name("run2")
-				.costBuy(1000)
+				.costBuy(750)
 				.description("75% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(75))
 				.build();
@@ -560,7 +560,7 @@ public class ResourceLoader {
 		new Run.RunFactory(res)
 				.id(142)
 				.name("run3")
-				.costBuy(2000)
+				.costBuy(1250)
 				.description("100% Chance to Flee")
 				.effect(new com.jnv.betrayal.dungeon.effects.Run(100))
 				.build();
@@ -571,46 +571,46 @@ public class ResourceLoader {
 				.id(127)
 				.name("potion1")
 				.costBuy(100)
-				.description("Recover 25 health")
-				.effect(new Heal(25))
+				.description("Recover 40 health")
+				.effect(new Heal(40))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(128)
 				.name("potion2")
 				.costBuy(500)
-				.description("Recover 50 health")
-				.effect(new Heal(50))
+				.description("Recover 60 health")
+				.effect(new Heal(60))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(129)
 				.name("potion3")
-				.costBuy(1250)
-				.description("Recover 100 health")
-				.effect(new Heal(100))
+				.costBuy(1000)
+				.description("Recover 80 health")
+				.effect(new Heal(80))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(130)
 				.name("potion4")
 				.costBuy(200)
-				.description("Increase defense by 10\nLasts 3 turns")
-				.effect(new DefenseUp(10, 4))
+				.description("Increase defense by 15\nLasts 3 turns")
+				.effect(new DefenseUp(15, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(131)
 				.name("potion5")
-				.costBuy(750)
-				.description("Increase defense by 20\nLasts 3 turns")
-				.effect(new DefenseUp(20, 4))
+				.costBuy(500)
+				.description("Increase defense by 30\nLasts 3 turns")
+				.effect(new DefenseUp(30, 4))
 				.build();
 
 		new Potion.PotionFactory(res)
 				.id(132)
 				.name("potion6")
-				.costBuy(1500)
+				.costBuy(1250)
 				.description("Increase defense by 30\nLasts 3 turns")
 				.effect(new DefenseUp(30, 4))
 				.build();
@@ -634,7 +634,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(135)
 				.name("potion9")
-				.costBuy(1500)
+				.costBuy(1250)
 				.description("Increase attack by 30\nLasts 3 turns")
 				.effect(new AttackUp(30, 4))
 				.build();
@@ -650,7 +650,7 @@ public class ResourceLoader {
 		new Potion.PotionFactory(res)
 				.id(137)
 				.name("potion11")
-				.costBuy(1250)
+				.costBuy(1500)
 				.description("Increase attack by 20,\nIncrease def by 20\nLasts 3 turns")
 				.effect(new AttackAndDefenseUp(20, 20, 4))
 				.build();
@@ -1113,7 +1113,7 @@ public class ResourceLoader {
 				.health(104).attack(87).defense(14)
 				.textureWidth(350).textureHeight(450).x(185).y(700)
 				.goldReward(1100)
-				.numTargets(2).effectCooldown(3)
+				.numTargets(1).effectCooldown(3)
 				.effect(new SkipTurn()).effectCooldown(2)
 				.build();
 		new Monster.MonsterFactory()
