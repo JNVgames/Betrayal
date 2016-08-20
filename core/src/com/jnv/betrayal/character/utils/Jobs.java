@@ -39,9 +39,9 @@ public enum Jobs {
 		return name;
 	}
 
-	public Jobs getNextJob() {
-		serial = (serial + 1) % 4;
-		switch (serial) {
+	public static Jobs getNextJob(Jobs job) {
+		int newSerial = (job.serial + 1) % 4;
+		switch (newSerial) {
 			case 0:
 				return WARRIOR;
 			case 1:
@@ -55,9 +55,9 @@ public enum Jobs {
 		}
 	}
 
-	public Jobs getPrevJob() {
-		serial = (serial + 3) % 4;
-		switch (serial) {
+	public static Jobs getPrevJob(Jobs job) {
+		int newSerial = (job.serial + 3) % 4;
+		switch (newSerial) {
 			case 0:
 				return WARRIOR;
 			case 1:

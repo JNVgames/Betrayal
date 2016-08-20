@@ -29,11 +29,11 @@ public class Job {
 	}
 
 	public void setNextJob() {
-		job = job.getNextJob();
+		job = Jobs.getNextJob(job);
 	}
 
 	public void setPreviousJob() {
-		job = job.getPrevJob();
+		job = Jobs.getPrevJob(job);
 	}
 
 	public void setJob(String job) {
