@@ -13,9 +13,7 @@ import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.popup.Instructions;
 import com.jnv.betrayal.popup.OKPopup;
 import com.jnv.betrayal.popup.OpeningInstructions;
-import com.jnv.betrayal.popup.Options;
 import com.jnv.betrayal.resources.FontManager;
-import com.jnv.betrayal.resources.SavedDataHandler;
 import com.jnv.betrayal.scene2d.InputListener;
 
 /*
@@ -27,6 +25,12 @@ public class Menu extends GameState {
 
 	public Menu(GameStateManager gsm) {
 		super(gsm);
+		if (game.getCurrentCharacter() != null
+				&& game.getCurrentCharacter().getRoom() != null
+				&& game.getCurrentCharacter().getRoom().getSocket() != null
+				&& game.getCurrentCharacter().getRoom().getSocket().connected()) {
+			game.getCurrentCharacter().getRoom().getSocket().disconnect();
+		}
 		gsm.game.setCurrentCharacter(null);
 		gsm.game.savedDataHandler.load();
 		loadMenuButtons();

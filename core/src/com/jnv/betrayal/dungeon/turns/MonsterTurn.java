@@ -4,12 +4,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.Pool;
+import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.Card;
 import com.jnv.betrayal.dungeon.cards.MonsterCard;
 import com.jnv.betrayal.dungeon.effects.Effect;
 import com.jnv.betrayal.dungeon.effects.Event;
 import com.jnv.betrayal.dungeon.effects.actions.Attack;
-import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.utils.Panel;
 import com.jnv.betrayal.main.Betrayal;
 import com.jnv.betrayal.resources.FontManager;
@@ -34,20 +34,24 @@ public class MonsterTurn extends Turn {
 	public void draw() {
 		panels.clear();
 		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
+		final Card currentCard = field.getCurrentCard();
 		field.addAction(Actions.delay(3f, new RunnableAction() {
 			@Override
 			public void run() {
-				if (!(field.getCurrentCard() instanceof MonsterCard)
+				if (!(currentCard instanceof MonsterCard)
 						&& Betrayal.DEBUG
-						&& field.getCurrentCard() != null) {
+						&& currentCard != null) {
 					throw new AssertionError("Current card should be a MonsterCard, " +
 							"instead it is this player's turn: " + field.getCurrentCard());
 				}
 
 				if (field.playerZone.size() != 0
 						&& field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()
-						&& field.getCurrentCard() instanceof MonsterCard) {
+						&& currentCard instanceof MonsterCard
+						&& field.roundManager.checkSrcAlive(currentCard)) {
 					monsterAttack();
+				} else {
+					field.nextTurn();
 				}
 			}
 		}));

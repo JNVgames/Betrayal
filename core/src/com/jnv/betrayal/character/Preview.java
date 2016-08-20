@@ -235,6 +235,7 @@ public class Preview implements JsonSerializable {
 			data.put("maleHair", maleHair);
 			data.put("femaleHair", femaleHair);
 			data.put("hairColor", hairColor);
+			data.put("isShowingHead", isShowingHead);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -248,6 +249,7 @@ public class Preview implements JsonSerializable {
 			maleHair = data.getInt("maleHair");
 			femaleHair = data.getInt("femaleHair");
 			hairColor = data.getInt("hairColor");
+			isShowingHead = data.getBoolean("isShowingHead");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

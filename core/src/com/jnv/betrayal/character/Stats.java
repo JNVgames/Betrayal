@@ -171,6 +171,12 @@ public class Stats implements JsonSerializable {
 
 		// Won the game
 		if (floor == 25) {
+			if (game.getCurrentCharacter() != null
+					&& game.getCurrentCharacter().getRoom() != null
+					&& game.getCurrentCharacter().getRoom().getSocket() != null
+					&& game.getCurrentCharacter().getRoom().getSocket().connected()) {
+				game.getCurrentCharacter().getRoom().getSocket().disconnect();
+			}
 			game.fools.add(game.getCurrentCharacter());
 			game.gsm.setState(GameStateManager.State.HALL_OF_FAME);
 			new OKPopup(450, Betrayal.HEIGHT - 1000, game, "You beat the game!\nYou can keep playing but\nyou can no longer level up");

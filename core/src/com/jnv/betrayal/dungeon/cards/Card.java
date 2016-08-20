@@ -380,9 +380,12 @@ public abstract class Card {
 							public void onConfirm() {
 								field.getClientCharacter().inventory.addGold(field.reward);        //gets your reward
 								field.game.gsm.setState(GameStateManager.State.LOBBY);
-								if (specialFloorPopup != null) specialFloorPopup.show();
 								game.getCurrentCharacter().getRoom().updateServerCharacters();
 								field.getClientCharacter().getRoom().refreshLobby();
+								if (specialFloorPopup != null) {
+									specialFloorPopup.show();
+									game.getStage().addActor(specialFloorPopup.getGroup());
+								}
 							}
 						};
 					}

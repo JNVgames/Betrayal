@@ -23,13 +23,7 @@ public class OKPopup extends Popup {
 	public OKPopup(Betrayal game, String text) {
 		super(game);
 		this.text = text;
-		loadButtons();
-		setMaskAction(new Runnable() {
-			@Override
-			public void run() {
-				onConfirm();
-			}
-		});
+		init();
 	}
 
 	public OKPopup(int width, int height, Betrayal game, String text) {
@@ -44,7 +38,13 @@ public class OKPopup extends Popup {
 		isVisible = show;
 		x = (Betrayal.WIDTH - width) / 2;
 		y = (Betrayal.HEIGHT - height) / 2;
-		if (show) loadButtons();
+		if (show) {
+			init();
+		}
+	}
+
+	private void init() {
+		loadButtons();
 		setMaskAction(new Runnable() {
 			@Override
 			public void run() {
@@ -54,7 +54,10 @@ public class OKPopup extends Popup {
 	}
 
 	public void show() {
-		if (!isVisible)	loadButtons();
+		if (!isVisible) {
+			loadButtons();
+			isVisible = true;
+		}
 	}
 
 	private void loadButtons() {

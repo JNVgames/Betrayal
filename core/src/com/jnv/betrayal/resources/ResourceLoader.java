@@ -1521,7 +1521,7 @@ public class ResourceLoader {
 				.nickname("Sir Vincent")
 				.textureName("monster-tier4-27")
 				.health(40).attack(61).defense(13)
-				.textureWidth(400).textureHeight(250).x(520).y(725)
+				.textureWidth(200).textureHeight(250).x(520).y(725)
 				.goldReward(500)
 				.numTargets(1).effectCooldown(3)
 				.build();
@@ -1531,7 +1531,7 @@ public class ResourceLoader {
 				.nickname("Peeping Fang")
 				.textureName("monster-tier4-37")
 				.health(40).attack(69).defense(13)
-				.textureWidth(100).textureHeight(250).x(120).y(815)
+				.textureWidth(200).textureHeight(250).x(120).y(815)
 				.goldReward(500)
 				.numTargets(1).effectCooldown(3)
 				.build();
