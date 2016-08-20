@@ -1398,7 +1398,7 @@ public class ResourceLoader {
 		new Monster.MonsterFactory()
 				.assetManager(res)
 				.id(39)
-				.nickname("Ghost Rider")
+				.nickname("Prince Charming")
 				.textureName("monster-tier4-1")
 				.health(160).attack(77).defense(19)
 				.textureWidth(350).textureHeight(400).x(185).y(665)
