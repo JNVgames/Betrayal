@@ -152,13 +152,13 @@ public class YourTurn extends Turn {
 			Effect effect = new FailedToFlee(card);
 			field.roundManager.addEvent(effect, effect.getStartType());
 			System.out.println("PLAYER!");
-			field.nextTurn();
 			panels.clear();
 			panels.addActor(createGrayPanel("Attempting to flee...", FontManager.getFont70(), Panel.full));
 			Runnable r = new Runnable() {
 				@Override
 				public void run() {
 					field.uiManager.drawUI();
+					field.nextTurn();
 					new OKPopup(field.game, "Flee Failed");
 				}
 			};

@@ -2,7 +2,6 @@ package com.jnv.betrayal.dungeon.turns;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.utils.Pool;
 import com.jnv.betrayal.dungeon.Field;
 import com.jnv.betrayal.dungeon.cards.Card;
@@ -27,6 +26,8 @@ import java.util.Random;
 
 public class MonsterTurn extends Turn {
 
+	private Card currentCard;
+
 	public MonsterTurn(Field field, Pool<Label> panelPool, Pool<Button> buttonPool, Group panels, Betrayal game) {
 		super(field, panelPool, buttonPool, panels, game);
 	}
@@ -36,9 +37,12 @@ public class MonsterTurn extends Turn {
 		panels.clear();
 		System.out.println("DRAWING MONSTEr PANEL");
 		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
-		Card currentCard = field.getCurrentCard();
+		currentCard = field.getCurrentCard();
 		System.out.println("!!!!!!!Monster's turn current card : " + currentCard.getName());
 
+		currentCard.getField().addAction(Actions.delay(3, Actions.run(new Runnable() {
+			@Override
+			public void run() {
 				if (!(currentCard instanceof MonsterCard)
 						&& Betrayal.DEBUG
 						&& currentCard != null) {
@@ -54,7 +58,8 @@ public class MonsterTurn extends Turn {
 				} else {
 					field.nextTurn();
 				}
-
+			}
+		})));
 	}
 
 	private void monsterAttack(MonsterCard currentCard) {
