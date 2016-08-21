@@ -49,7 +49,7 @@ public class MonsterTurn extends Turn {
 						&& field.gsm.game.getCurrentCharacter().getId() == field.playerZone.get(0).getID()
 						&& currentCard instanceof MonsterCard
 						&& field.roundManager.checkSrcAlive(currentCard)) {
-					monsterAttack();
+					monsterAttack((MonsterCard) currentCard);
 				} else {
 					field.nextTurn();
 				}
@@ -57,9 +57,8 @@ public class MonsterTurn extends Turn {
 		}));
 	}
 
-	private void monsterAttack() {
-		MonsterCard card = ((MonsterCard) field.getCurrentCard());
-		int numTargets = ((MonsterCard) field.getCurrentCard()).getNumAttackTargets();
+	private void monsterAttack(MonsterCard currentCard) {
+		int numTargets = currentCard.getNumAttackTargets();
 		int max = field.playerZone.size();
 		int x;
 
@@ -76,22 +75,22 @@ public class MonsterTurn extends Turn {
 			dst.add(field.playerZone.get(i));
 		}
 
-		if (card.hasEffect() && card.effectCounter == card.getMonster().getEffectCD()) {
-			card.effectCounter = 1;
+		if (currentCard.hasEffect() && currentCard.effectCounter == currentCard.getMonster().getEffectCD()) {
+			currentCard.effectCounter = 1;
 			// Make monster do effect
-			Event event = new Event(card.getEffect(), card.getEffect().getStartType());
-			event.getEffect().setSrc(card);
+			Event event = new Event(currentCard.getEffect(), currentCard.getEffect().getStartType());
+			event.getEffect().setSrc(currentCard);
 			if (!event.getEffect().isHostile()) {
 				dst.clear();
-				dst.add(card);
+				dst.add(currentCard);
 			}
 			event.getEffect().setDest(dst);
-			card.getField().roundManager.addEvent(event);
+			currentCard.getField().roundManager.addEvent(event);
 			field.nextTurn();
 		} else {
 			// Make monster do normal attack
-			card.effectCounter++;
-			Effect attack = new Attack(field.getCurrentCard(), dst);
+			currentCard.effectCounter++;
+			Effect attack = new Attack(currentCard, dst);
 			field.roundManager.addEvent(attack, attack.getStartType());
 			field.nextTurn();
 		}
