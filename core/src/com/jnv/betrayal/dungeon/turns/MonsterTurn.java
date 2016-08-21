@@ -17,6 +17,7 @@ import com.jnv.betrayal.scene2d.ui.Button;
 import com.jnv.betrayal.scene2d.ui.Label;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -33,11 +34,11 @@ public class MonsterTurn extends Turn {
 	@Override
 	public void draw() {
 		panels.clear();
+		System.out.println("DRAWING MONSTEr PANEL");
 		createGrayPanel("Monster's Turn", FontManager.getFont80(), Panel.full);
-		final Card currentCard = field.getCurrentCard();
-		field.addAction(Actions.delay(3f, new RunnableAction() {
-			@Override
-			public void run() {
+		Card currentCard = field.getCurrentCard();
+		System.out.println("!!!!!!!Monster's turn current card : " + currentCard.getName());
+
 				if (!(currentCard instanceof MonsterCard)
 						&& Betrayal.DEBUG
 						&& currentCard != null) {
@@ -53,8 +54,7 @@ public class MonsterTurn extends Turn {
 				} else {
 					field.nextTurn();
 				}
-			}
-		}));
+
 	}
 
 	private void monsterAttack(MonsterCard currentCard) {
@@ -87,12 +87,16 @@ public class MonsterTurn extends Turn {
 			event.getEffect().setDest(dst);
 			currentCard.getField().roundManager.addEvent(event);
 			field.nextTurn();
+			System.out.println("MONSTERSPECIAL");
 		} else {
+			System.out.println(Arrays.asList(Thread.currentThread().getStackTrace()));
+
 			// Make monster do normal attack
 			currentCard.effectCounter++;
 			Effect attack = new Attack(currentCard, dst);
 			field.roundManager.addEvent(attack, attack.getStartType());
 			field.nextTurn();
+			System.out.println("MONSTERNORMALATTACK");
 		}
 	}
 }

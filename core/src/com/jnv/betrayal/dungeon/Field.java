@@ -100,7 +100,9 @@ public class Field extends Group {
 	}
 
 	public void nextTurn() {
+		System.out.println("----NEXT TURN----");
 		refreshAllCards();
+		//System.out.println(Arrays.asList(Thread.currentThread().getStackTrace()));
 
 		// If your turn is ending, decrease skill cooldown counter
 		if (!dungeonEnded) {
@@ -108,7 +110,8 @@ public class Field extends Group {
 			roundManager.checkEvents(nextTurnManager.getCurrentCard());
 			animationManager.animate();
 			uiManager.nextTurn();
-			System.out.println("Field.nextTurn(): Waiting for input...");
+			System.out.println("CURRENT CARD: "  + getCurrentCard().getName());
+			//System.out.println("Field.nextTurn(): Waiting for input...");
 		}
 	}
 

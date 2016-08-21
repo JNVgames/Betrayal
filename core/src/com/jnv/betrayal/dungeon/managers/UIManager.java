@@ -93,10 +93,12 @@ public class UIManager {
 		}
 		// Monster turn
 		else if (currentCard instanceof MonsterCard) {
+			System.out.println("MONSTERTURN");
 			currentTurn = monsterTurn;
 		}
 		// Your turn
 		else {
+			System.out.println("YOURTURN");
 			currentTurn = yourTurn;
 			yourTurn.setFirstAppearance();
 			yourTurn.setInitialDelay(field.animationManager.getTotalAnimationDuration());

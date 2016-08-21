@@ -42,14 +42,14 @@ public class RoundManager {
 	 */
 	public void checkEvents(Card card) {
 		List<Event> eventsToRemove = new ArrayList<Event>();
-		System.out.println("-----------ROUND MANAGER: " + card.getName() + "------------");
-		System.out.println("events before = " + events);
+		//System.out.println("-----------ROUND MANAGER: " + card.getName() + "------------");
+		//System.out.println("events before = " + events);
 
 		for (Event event : events) {
 			final Event tmp = event;
 			//checks if the src is still alive
 			if (!checkSrcAlive(event.getSrc())) {
-				System.out.println("Src card died, so flushing out event: " + event);
+				//System.out.println("Src card died, so flushing out event: " + event);
 				Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 				// Perform the animation
 				animationManager.queueEventAnimation(tmpEvent, new Runnable() {
@@ -70,7 +70,7 @@ public class RoundManager {
 			if (card == event.getSrc()) {
 				event.decreaseTurns();
 				if (event.effectEnded()) {
-					System.out.println("END EFFECT: " + event);
+					//System.out.println("END EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getEndType());
 					// Perform the animation
 					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
@@ -86,7 +86,7 @@ public class RoundManager {
 				// 	and it didn't get its turns decreased for the first time
 				// 	(Basically a check that startEffect() and consistentEffect() weren't called on the same turn)
 				if (event.getEffect().isConsistent() && event.getTurnsLeft() != (event.getEffect().getTurns())) {
-					System.out.println("CONSISTENT EFFECT: " + event);
+				//	System.out.println("CONSISTENT EFFECT: " + event);
 					Event tmpEvent = new Event(event.getEffect(), event.getEffect().getConsistentType());
 					animationManager.queueEventAnimation(tmpEvent, new Runnable() {
 						@Override
@@ -100,7 +100,7 @@ public class RoundManager {
 			// Flush out all ended effects
 			if (event.effectEnded()) {
 				eventsToRemove.add(event);
-				System.out.println("Flushing event: " + event);
+				//System.out.println("Flushing event: " + event);
 			}
 		}
 		for (Event event : eventsToRemove) {
