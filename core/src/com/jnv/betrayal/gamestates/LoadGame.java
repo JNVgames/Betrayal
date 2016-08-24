@@ -184,7 +184,7 @@ public class LoadGame extends GameState {
 			classPreview.setColor(Color.WHITE);
 			preview.addActor(classPreview);
 
-			Label name = new Label(c.getName(), FontManager.getFont70());
+			Label name = new Label(c.getName(), FontManager.getFont50());
 			name.setX(characterPreview.getX() + characterPreview.getWidth() + 30);
 			name.setY((characterPreview.getY() + classPreview.getY() - name.getPrefHeight()) / 2 + 5);
 			preview.addActor(name);

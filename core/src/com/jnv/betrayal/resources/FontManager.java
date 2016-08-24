@@ -1,7 +1,7 @@
 package com.jnv.betrayal.resources;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /*
@@ -11,47 +11,56 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class FontManager {
 
-	private static FreeTypeFontGenerator generator =
-			new FreeTypeFontGenerator(Gdx.files.internal("fonts/Rajdhani-Regular.ttf"));
-
-	private static FreeTypeFontGenerator.FreeTypeFontParameter fontDetails =
-			new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-	private static Label.LabelStyle labelStyle45, labelStyle40, labelStyle50;
+	private static Label.LabelStyle labelStyle35, labelStyle45, labelStyle40, labelStyle50;
 	private static Label.LabelStyle labelStyle60, labelStyle70, labelStyle80, labelStyle100, labelStyle120;
 
 	public static void loadFonts() {
-		fontDetails.size = 45;
+		// Font size 35
+		labelStyle35 = new Label.LabelStyle();
+		labelStyle35.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle35.font.getData().scale(-0.55f);
+
+		// Font size 45
 		labelStyle45 = new Label.LabelStyle();
-		labelStyle45.font = generator.generateFont(fontDetails);
+		labelStyle45.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle45.font.getData().scale(-0.45f);
 
-		fontDetails.size = 40;
+		// Font size 40
 		labelStyle40 = new Label.LabelStyle();
-		labelStyle40.font = generator.generateFont(fontDetails);
+		labelStyle40.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle40.font.getData().scale(-0.5f);
 
-		fontDetails.size = 60;
+		// Font size 60
 		labelStyle60 = new Label.LabelStyle();
-		labelStyle60.font = generator.generateFont(fontDetails);
+		labelStyle60.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle60.font.getData().scale(-0.3f);
 
-		fontDetails.size = 70;
+		// Font size 70
 		labelStyle70 = new Label.LabelStyle();
-		labelStyle70.font = generator.generateFont(fontDetails);
+		labelStyle70.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle70.font.getData().scale(-0.15f);
 
-		fontDetails.size = 50;
+		// Font size 50
 		labelStyle50 = new Label.LabelStyle();
-		labelStyle50.font = generator.generateFont(fontDetails);
+		labelStyle50.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle50.font.getData().scale(-0.4f);
 
-		fontDetails.size = 80;
+		// Font size 80
 		labelStyle80 = new Label.LabelStyle();
-		labelStyle80.font = generator.generateFont(fontDetails);
+		labelStyle80.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+		labelStyle80.font.getData().scale(-0.05f);
 
-		fontDetails.size = 100;
+		// Font size 100
 		labelStyle100 = new Label.LabelStyle();
-		labelStyle100.font = generator.generateFont(fontDetails);
+		labelStyle100.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
 
-		fontDetails.size = 120;
+		// Font size 120
 		labelStyle120 = new Label.LabelStyle();
-		labelStyle120.font = generator.generateFont(fontDetails);
+		labelStyle120.font = new BitmapFont(Gdx.files.internal("fonts/Rajdhani-Regular.fnt"));
+	}
+
+	public static Label.LabelStyle getFont35() {
+		return labelStyle35;
 	}
 
 	public static Label.LabelStyle getFont45() {

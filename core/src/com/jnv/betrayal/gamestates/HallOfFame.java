@@ -109,7 +109,7 @@ public class HallOfFame extends GameState {
 			classPreview.setColor(Color.WHITE);
 			group.addActor(classPreview);
 
-			Label name = new Label(character.getName(), FontManager.getFont70());
+			Label name = new Label(character.getName(), FontManager.getFont50());
 			name.setX(classPreview.getX());
 			name.setY((classPreview.getY() - name.getPrefHeight()) / 2 + 5);
 			group.addActor(name);
