@@ -40,7 +40,7 @@ public class CreateRoomPopup extends Popup {
 
 	private void loadInputFields() {
 		TextField.TextFieldStyle tfs = new TextField.TextFieldStyle();
-		tfs.font = FontManager.getFont60().font;
+		tfs.font = FontManager.getFont50().font;
 		tfs.messageFont = tfs.font;
 		tfs.fontColor = Color.LIGHT_GRAY;
 		tfs.messageFontColor = Color.GRAY;
