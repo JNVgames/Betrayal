@@ -534,7 +534,7 @@ public class ResourceLoader {
 				.id(139)
 				.name("cloak11")
 				.costBuy(2500)
-				.description("Revives the player\nwith 10 HP upon death\nfor one time only.")
+				.description("Revives the player with\n10 HP upon death for\none time only.")
 				.build();
 
 		loadRunUsables();

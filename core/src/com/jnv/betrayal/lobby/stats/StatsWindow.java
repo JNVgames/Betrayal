@@ -168,7 +168,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(classLabel);
 
 		// SET HEALTH LABEL INITIALLY
-		healthLabel = new Label("", FontManager.getFont35());
+		healthLabel = new Label("", FontManager.getFont40());
 		healthLabel.setX(background.getX() + 60);
 		healthLabel.setY(yRef - fontSize - 50);
 		yRef = healthLabel.getY();
@@ -177,7 +177,7 @@ public class StatsWindow extends Popup {
 		popup.addActor(healthLabel);
 
 		// SET ATTACK LABEL INITIALLY
-		attackLabel = new Label("", FontManager.getFont35());
+		attackLabel = new Label("", FontManager.getFont40());
 		attackLabel.setX(background.getX() + 60);
 		attackLabel.setY(yRef - fontSize - 50);
 		yRef = attackLabel.getY();
@@ -186,7 +186,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(attackLabel);
 
 		// SET DEFENSE LABEL INITIALLY
-		defenseLabel = new Label("", FontManager.getFont35());
+		defenseLabel = new Label("", FontManager.getFont40());
 		defenseLabel.setX(background.getX() + 60);
 		defenseLabel.setY(yRef - fontSize - 50);
 		yRef = defenseLabel.getY();
@@ -195,7 +195,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(defenseLabel);
 
 		// SET EQUIP HEALTH LABEL
-		equipHealthLabel = new Label("", FontManager.getFont35());
+		equipHealthLabel = new Label("", FontManager.getFont40());
 		equipHealthLabel.setColor(Color.GREEN);
 		equipHealthLabel.setX(healthLabel.getRight());
 		equipHealthLabel.setY(healthLabel.getY());
@@ -204,7 +204,7 @@ public class StatsWindow extends Popup {
 		popup.addActor(equipHealthLabel);
 
 		// SET EQUIP ATTACK LABEL
-		equipAttackLabel = new Label("", FontManager.getFont35());
+		equipAttackLabel = new Label("", FontManager.getFont40());
 		equipAttackLabel.setColor(Color.GREEN);
 		equipAttackLabel.setX(attackLabel.getRight());
 		equipAttackLabel.setY(attackLabel.getY());
@@ -213,7 +213,7 @@ public class StatsWindow extends Popup {
 		characterStats.addActor(equipAttackLabel);
 
 		// SET EQUIP DEFENSE LABEL
-		equipDefenseLabel = new Label("", FontManager.getFont35());
+		equipDefenseLabel = new Label("", FontManager.getFont40());
 		equipDefenseLabel.setColor(Color.GREEN);
 		equipDefenseLabel.setX(defenseLabel.getRight());
 		equipDefenseLabel.setY(defenseLabel.getY());

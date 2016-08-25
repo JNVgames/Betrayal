@@ -202,7 +202,7 @@ public class CharacterSelection extends GameState {
 		fieldUsernameEnter.setMessageText("Enter name here");
 		fieldUsernameEnter.setBounds(10 + usernameTextField.getWidth() + 10, usernameTextField.getY(),
 				Betrayal.WIDTH - 20 - usernameTextField.getWidth(), usernameTextField.getHeight());
-		fieldUsernameEnter.setMaxLength(10);
+		fieldUsernameEnter.setMaxLength(12);
 		stage.addActor(fieldUsernameEnter);
 
 		// Removes keyboard focus if tap isn't on a TextField
